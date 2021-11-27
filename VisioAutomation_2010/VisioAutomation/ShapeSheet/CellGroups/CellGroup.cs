@@ -45,7 +45,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return new CellMetadataItem(name, src, value.Value);
         }
 
-        internal static System.Func<string,string> row_to_cellgroup(Query.Row<string> row, Query.Columns cols)
+        internal static System.Func<string,string> queryrow_to_cellgroup(Query.Row<string> row, Query.Columns cols)
         {
             return (s) => row[cols[s].Ordinal];
         }

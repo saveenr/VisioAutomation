@@ -101,7 +101,7 @@ namespace VisioAutomation.Shapes
             {
 
                 var cells = new FormatCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 cells.FillBackground = getcellvalue(nameof(FillBackground));
                 cells.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));

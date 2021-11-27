@@ -50,7 +50,7 @@ namespace VisioAutomation.Text
             public override TextXFormCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new TextXFormCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 cells.PinX = getcellvalue(nameof(PinX));
                 cells.PinY = getcellvalue(nameof(PinY));

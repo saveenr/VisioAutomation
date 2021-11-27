@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes
             public override XFormCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new XFormCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 cells.PinX = getcellvalue(nameof(PinX));
                 cells.PinY = getcellvalue(nameof(PinY));

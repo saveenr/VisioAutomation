@@ -55,7 +55,7 @@ namespace VisioAutomation.Shapes
             public override HyperlinkCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new HyperlinkCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 
                 cells.Address = getcellvalue(nameof(Address));

@@ -67,7 +67,7 @@ namespace VisioAutomation.Text
 
             public override ParagraphFormatCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
                 var cells = new ParagraphFormatCells();
 
                 cells.IndentFirst = getcellvalue(nameof(IndentFirst));

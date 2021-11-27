@@ -184,7 +184,7 @@ namespace VisioAutomation.Shapes
             public override CustomPropertyCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new CustomPropertyCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 cells.Value = getcellvalue(nameof(Value));
                 cells.Calendar = getcellvalue(nameof(Calendar));

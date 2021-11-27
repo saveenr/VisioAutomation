@@ -46,7 +46,7 @@ namespace VisioAutomation.Shapes
             public override ConnectionPointCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new ConnectionPointCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 cells.X = getcellvalue(nameof(X));
                 cells.Y = getcellvalue(nameof(Y));

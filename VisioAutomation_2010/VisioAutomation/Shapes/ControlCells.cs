@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes
             public override ControlCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new ControlCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 cells.CanGlue = getcellvalue(nameof(CanGlue));
                 cells.Tip = getcellvalue(nameof(Tip));

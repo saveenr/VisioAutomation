@@ -49,7 +49,7 @@ namespace VisioAutomation.Pages
             public override RulerAndGridCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new RulerAndGridCells();
-                var getcellvalue = row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 cells.XGridDensity = getcellvalue(nameof(XGridDensity));
                 cells.XGridOrigin = getcellvalue(nameof(XGridOrigin));
