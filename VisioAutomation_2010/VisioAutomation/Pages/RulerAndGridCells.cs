@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class RulerAndGridCells : CellGroup
+    public class RulerAndGridCells : VACG.CellGroup
     {
         public Core.CellValue XGridDensity { get; set; }
         public Core.CellValue YGridDensity { get; set; }
@@ -18,7 +18,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue YRulerDensity { get; set; }
         public Core.CellValue YRulerOrigin { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.XGridDensity), Core.SrcConstants.XGridDensity, this.XGridDensity);
             yield return this._create(nameof(this.XGridOrigin), Core.SrcConstants.XGridOrigin, this.XGridOrigin);
@@ -40,9 +40,9 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<RulerAndGridCells>
+        class Builder : VACG.CellGroupBuilder<RulerAndGridCells>
         {
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 

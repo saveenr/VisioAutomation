@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class FormatCells : CellGroup
+    public class FormatCells : VACG.CellGroup
     {
         public Core.CellValue DrawingScale { get; set; }
         public Core.CellValue DrawingScaleType { get; set; }
@@ -23,7 +23,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue UIVisibility { get; set; }
         public Core.CellValue DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.DrawingScale), Core.SrcConstants.PageDrawingScale, this.DrawingScale);
             yield return this._create(nameof(this.DrawingScaleType), Core.SrcConstants.PageDrawingScaleType,
@@ -54,9 +54,9 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<FormatCells>
+        class Builder : VACG.CellGroupBuilder<FormatCells>
         {
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class LayoutCells : CellGroup
+    public class LayoutCells : VACG.CellGroup
     {
         public Core.CellValue AvenueSizeX { get; set; }
         public Core.CellValue AvenueSizeY { get; set; }
@@ -36,7 +36,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue RouteStyle { get; set; }
         public Core.CellValue AvoidPageBreaks { get; set; } // new in visio 2010
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
             yield return this._create(nameof(this.AvenueSizeY), Core.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
@@ -81,9 +81,9 @@ namespace VisioAutomation.Pages
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<LayoutCells>
+        class Builder : VACG.CellGroupBuilder<LayoutCells>
         {
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 
