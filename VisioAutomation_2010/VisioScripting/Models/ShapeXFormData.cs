@@ -28,12 +28,12 @@ namespace VisioScripting.Models
             {
                 _static_query = new VASS.Query.CellQuery();
                 var cols = _static_query.Columns;
-                _static_col_x_form_pin_x = cols.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(ShapeXFormData.XFormPinX));
-                _static_col_x_form_pin_y = cols.Add(VisioAutomation.Core.SrcConstants.XFormPinY, nameof(ShapeXFormData.XFormPinY));
-                _static_col_x_form_loc_pin_x = cols.Add(VisioAutomation.Core.SrcConstants.XFormLocPinX, nameof(ShapeXFormData.XFormLocPinX));
-                _static_col_x_form_loc_pin_y = cols.Add(VisioAutomation.Core.SrcConstants.XFormLocPinY, nameof(ShapeXFormData.XFormLocPinY));
-                _static_col_x_form_width = cols.Add(VisioAutomation.Core.SrcConstants.XFormWidth, nameof(ShapeXFormData.XFormWidth));
-                _static_col_x_form_height = cols.Add(VisioAutomation.Core.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
+                _static_col_x_form_pin_x = cols.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
+                _static_col_x_form_pin_y = cols.Add(VisioAutomation.Core.SrcConstants.XFormPinY);
+                _static_col_x_form_loc_pin_x = cols.Add(VisioAutomation.Core.SrcConstants.XFormLocPinX);
+                _static_col_x_form_loc_pin_y = cols.Add(VisioAutomation.Core.SrcConstants.XFormLocPinY);
+                _static_col_x_form_width = cols.Add(VisioAutomation.Core.SrcConstants.XFormWidth);
+                _static_col_x_form_height = cols.Add(VisioAutomation.Core.SrcConstants.XFormHeight);
             }
 
             var results = _static_query.GetResults<double>(page, shapeids);

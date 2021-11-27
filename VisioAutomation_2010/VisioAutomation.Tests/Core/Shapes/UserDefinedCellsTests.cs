@@ -116,8 +116,8 @@ namespace VisioAutomation_Tests.Core.Shapes
             // build query
             var sec_query = new VASS.Query.SectionQuery();
             var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionUser);
-            var value = sec_cols.Add(VisioAutomation.Core.SrcConstants.UserDefCellValue,"Value");
-            var prompt = sec_cols.Add(VisioAutomation.Core.SrcConstants.UserDefCellPrompt,"Prompt");
+            var value = sec_cols.Add(VisioAutomation.Core.SrcConstants.UserDefCellValue);
+            var prompt = sec_cols.Add(VisioAutomation.Core.SrcConstants.UserDefCellPrompt);
 
             // run query on the two shapes
             var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes(shapes);

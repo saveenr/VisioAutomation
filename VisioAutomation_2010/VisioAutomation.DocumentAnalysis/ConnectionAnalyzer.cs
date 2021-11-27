@@ -40,8 +40,8 @@ namespace VisioAutomation.DocumentAnalysis
             var src_endarrow = VisioAutomation.Core.SrcConstants.LineEndArrow;
 
             var query = new VASS.Query.CellQuery();
-            var col_beginarrow = query.Columns.Add(src_beginarrow, nameof(VisioAutomation.Core.SrcConstants.LineBeginArrow));
-            var col_endarrow = query.Columns.Add(src_endarrow, nameof(VisioAutomation.Core.SrcConstants.LineEndArrow));
+            var col_beginarrow = query.Columns.Add(src_beginarrow);
+            var col_endarrow = query.Columns.Add(src_endarrow);
             var listof_connectorinfo = query.GetResults<int>(page , connnector_ids);
             
             var directed_edges = new List<ConnectorEdge>();

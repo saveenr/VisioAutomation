@@ -33,8 +33,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Verify that the formulas were set
             var query = new VASS.Query.CellQuery();
-            var col_pinx = query.Columns.Add(XFormPinX, nameof(XFormPinX));
-            var col_piny = query.Columns.Add(XFormPinY, nameof(XFormPinY));
+            var col_pinx = query.Columns.Add(XFormPinX);
+            var col_piny = query.Columns.Add(XFormPinY);
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -65,7 +65,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Build the query
             var query = new VASS.Query.CellQuery();
-            var col_linepat = query.Columns.Add(LinePattern,nameof(LinePattern));
+            var col_linepat = query.Columns.Add(LinePattern);
 
             // Retrieve the values
             var data_formulas = query.GetFormulas(shape1);
@@ -104,7 +104,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Build the query
             var query = new VASS.Query.CellQuery();
-            var col_linepat = query.Columns.Add(LinePattern, nameof(LinePattern));
+            var col_linepat = query.Columns.Add(LinePattern);
 
             // Retrieve the values
             var data_formulas = query.GetFormulas(shape1);
@@ -140,8 +140,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Verify that the formulas were set
             var query = new VASS.Query.CellQuery();
-            var col_pinx = query.Columns.Add(XFormPinX, nameof(XFormPinX));
-            var col_piny = query.Columns.Add(XFormPinY, nameof(XFormPinY));
+            var col_pinx = query.Columns.Add(XFormPinX);
+            var col_piny = query.Columns.Add(XFormPinY);
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -179,8 +179,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
 
             // Build the query
             var query = new VASS.Query.CellQuery();
-            var col_linepat = query.Columns.Add(LinePattern, nameof(LinePattern));
-            var col_pinx = query.Columns.Add(XFormPinX, nameof(XFormPinX));
+            var col_linepat = query.Columns.Add(LinePattern);
+            var col_pinx = query.Columns.Add(XFormPinX);
 
             // Retrieve the values
             var data_formulas = query.GetFormulas(shape1);

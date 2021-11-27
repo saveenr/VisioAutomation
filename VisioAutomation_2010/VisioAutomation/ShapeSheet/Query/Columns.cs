@@ -64,6 +64,12 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
+        public Column Add(Core.Src src)
+        {
+            string name = string.Format("Column{0}", this.Count);
+            var col = this.Add(src, name);
+            return col;
+        }
 
         public Column Add(Core.Src src, string name)
         {

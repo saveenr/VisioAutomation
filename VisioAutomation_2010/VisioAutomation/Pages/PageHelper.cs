@@ -166,8 +166,8 @@ namespace VisioAutomation.Pages
         public static Core.Size GetSize(IVisio.Page page)
         {
             var query = new VASS.Query.CellQuery();
-            var col_height = query.Columns.Add(Core.SrcConstants.PageHeight,nameof(Core.SrcConstants.PageHeight));
-            var col_width = query.Columns.Add(Core.SrcConstants.PageWidth,nameof(Core.SrcConstants.PageWidth));
+            var col_height = query.Columns.Add(Core.SrcConstants.PageHeight);
+            var col_width = query.Columns.Add(Core.SrcConstants.PageWidth);
 
             var cellqueryresult = query.GetResults<double>(page.PageSheet);
             var row = cellqueryresult[0];

@@ -34,9 +34,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // now retrieve the formulas with GetFormulas
 
             var query = new VASS.Query.CellQuery();
-            var col_fg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillForeground, nameof(VisioAutomation.Core.SrcConstants.FillForeground));
-            var col_bg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillBackground, nameof(VisioAutomation.Core.SrcConstants.FillBackground));
-            var col_filpat = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillPattern, nameof(VisioAutomation.Core.SrcConstants.FillPattern));
+            var col_fg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillForeground);
+            var col_bg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillBackground);
+            var col_filpat = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillPattern);
 
             var shapeids = new[] {s1_id};
 
@@ -89,9 +89,9 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // now retrieve the formulas with GetFormulas
 
             var query = new VASS.Query.CellQuery();
-            var col_fg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillForeground, nameof(VisioAutomation.Core.SrcConstants.FillForeground));
-            var col_bg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillBackground, nameof(VisioAutomation.Core.SrcConstants.FillBackground));
-            var col_filpat = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillPattern, nameof(VisioAutomation.Core.SrcConstants.FillPattern));
+            var col_fg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillForeground );
+            var col_bg = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillBackground );
+            var col_filpat = query.Columns.Add(VisioAutomation.Core.SrcConstants.FillPattern);
 
             var shapeids = new[] {s1_id};
 
@@ -146,7 +146,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var sec_query = new VASS.Query.SectionQuery();
 
             var sec_cols = sec_query.Add(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = sec_cols.Add(VisioAutomation.Core.SrcConstants.CustomPropValue,nameof(VisioAutomation.Core.SrcConstants.CustomPropValue));
+            var value_col = sec_cols.Add(VisioAutomation.Core.SrcConstants.CustomPropValue);
 
             var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes( s1, s2, s3, s4 );
 
@@ -199,8 +199,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new VASS.Query.CellQuery();
-            var col_pinx = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(VisioAutomation.Core.SrcConstants.XFormPinX));
-            var col_piny = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinY, nameof(VisioAutomation.Core.SrcConstants.XFormPinY));
+            var col_pinx = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
+            var col_piny = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinY);
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -251,8 +251,8 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             Assert.AreEqual(5, page1.Shapes.Count);
 
             var query = new VASS.Query.CellQuery();
-            var col_pinx = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(VisioAutomation.Core.SrcConstants.XFormPinX));
-            var col_piny = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinY, nameof(VisioAutomation.Core.SrcConstants.XFormPinY));
+            var col_pinx = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
+            var col_piny = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinY);
 
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
@@ -411,12 +411,12 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         {
             // Ensure that duplicate cells are caught
             var cell_query_1 = new VASS.Query.CellQuery();
-            cell_query_1.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(VisioAutomation.Core.SrcConstants.XFormPinX));
+            cell_query_1.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
 
             bool caught_exc1 = false;
             try
             {
-                cell_query_1.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(VisioAutomation.Core.SrcConstants.XFormPinX));
+                cell_query_1.Columns.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
             }
             catch (System.ArgumentException)
             {
@@ -445,11 +445,11 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             // Ensure that Duplicates in Section Queries Are caught - 
             var sec_query_3 = new VASS.Query.SectionQuery();
             var sec_cols = sec_query_3.Add(IVisio.VisSectionIndices.visSectionObject);
-            sec_cols.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(VisioAutomation.Core.SrcConstants.XFormPinX));
+            sec_cols.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
             bool caught_exc3 = false;
             try
             {
-                sec_cols.Add(VisioAutomation.Core.SrcConstants.XFormPinX, nameof(VisioAutomation.Core.SrcConstants.XFormPinX));
+                sec_cols.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
             }
             catch (System.ArgumentException)
             {

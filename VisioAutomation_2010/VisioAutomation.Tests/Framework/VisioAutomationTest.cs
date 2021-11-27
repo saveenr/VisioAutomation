@@ -86,8 +86,8 @@ namespace VisioAutomation_Tests
         public static VisioAutomation.Core.Size GetSize(IVisio.Shape shape)
         {
             var query = new CellQuery();
-            var col_w = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormWidth,"Width");
-            var col_h = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormHeight,"Height");
+            var col_w = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormWidth);
+            var col_h = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormHeight);
 
             var cellqueryresult = query.GetResults<double>(shape);
 
@@ -161,8 +161,8 @@ namespace VisioAutomation_Tests
             }
 
             var query = new CellQuery();
-            var col_height = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageHeight, "PageHeight");
-            var col_width = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageWidth, "PageWidth");
+            var col_height = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageHeight);
+            var col_width = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageWidth);
 
             var cellqueryresults = query.GetResults<double>(page.PageSheet);
             var row = cellqueryresults[0];
