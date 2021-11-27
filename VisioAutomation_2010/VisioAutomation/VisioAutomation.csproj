@@ -121,8 +121,8 @@
     <Compile Include="ShapeSheet\Streams\StreamArray.cs" />
     <Compile Include="Shapes\CustomPropertyNameCellsPair.cs" />
     <Compile Include="Shapes\CustomPropertyType.cs" />
-    <Compile Include="Extensions\ArraySegmentEnumerator.cs" />
-    <Compile Include="Extensions\ArraySegment.cs" />
+    <Compile Include="Internal\ArraySegmentEnumerator.cs" />
+    <Compile Include="Internal\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
     <Compile Include="ShapeSheet\Query\Rows.cs" />
     <Compile Include="ShapeSheet\Query\Columns.cs" />
