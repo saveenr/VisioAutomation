@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
 
 
-        public SrcWriter() : base(StreamType.Src)
+        public SrcWriter() : base(VisioAutomation.ShapeSheet.Streams.StreamType.Src)
         {
         }
 
@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this._records == null)
             {
-                this._records = new WriteRecordList(StreamType.Src);
+                this._records = new WriteRecordList(VisioAutomation.ShapeSheet.Streams.StreamType.Src);
             }
 
             if (formula.HasValue)
@@ -64,7 +64,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildStreamArray(StreamType.Src);
+            var stream = this._records.BuildStreamArray(VisioAutomation.ShapeSheet.Streams.StreamType.Src);
 
             if (stream.Array.Length == 0)
             {
