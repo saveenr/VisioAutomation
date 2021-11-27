@@ -74,11 +74,11 @@ namespace VisioAutomation.Pages
 
         public static LayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = PageLayoutCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<Builder> PageLayoutCells_lazy_builder = new System.Lazy<Builder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
         class Builder : CellGroupBuilder<LayoutCells>

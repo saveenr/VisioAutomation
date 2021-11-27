@@ -45,11 +45,11 @@ namespace VisioAutomation.Pages
 
         public static PrintCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = PagePrintCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<Builder> PagePrintCells_lazy_builder = new System.Lazy<Builder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
         class Builder : CellGroupBuilder<PrintCells>
         {

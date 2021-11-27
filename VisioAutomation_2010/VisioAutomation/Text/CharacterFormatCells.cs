@@ -63,17 +63,17 @@ namespace VisioAutomation.Text
 
         public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
         {
-            var reader = CharacterFormatCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(page, pairs, type);
         }
 
         public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = CharacterFormatCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<Builder> CharacterFormatCells_lazy_builder = new System.Lazy<Builder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
         class Builder : VACG.CellGroupBuilder<CharacterFormatCells>

@@ -29,17 +29,17 @@ namespace VisioAutomation.Shapes
 
         public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var reader = UserDefinedCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
         public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = UserDefinedCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<Builder> UserDefinedCells_lazy_builder = new System.Lazy<Builder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
 

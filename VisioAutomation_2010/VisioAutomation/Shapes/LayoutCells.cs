@@ -64,17 +64,17 @@ namespace VisioAutomation.Shapes
 
         public static List<LayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
-            var reader = ShapeLayoutCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsSingleRow(page, shapeids, type);
         }
 
         public static LayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = ShapeLayoutCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsSingleRow(shape, type);
         }
 
-        private static readonly System.Lazy<Builder> ShapeLayoutCells_lazy_builder = new System.Lazy<Builder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
         class Builder : VACG.CellGroupBuilder<LayoutCells>
         {

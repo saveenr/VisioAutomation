@@ -161,17 +161,17 @@ namespace VisioAutomation.Shapes
 
         public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var reader = Custom_Property_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
         public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = Custom_Property_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<Builder> Custom_Property_lazy_builder = new System.Lazy<Builder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
         public class Builder : VACG.CellGroupBuilder<CustomPropertyCells>

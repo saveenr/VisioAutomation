@@ -30,18 +30,18 @@ namespace VisioAutomation.Shapes
 
         public static List<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = ControlCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
         public static List<List<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var reader = ControlCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
 
-        private static readonly System.Lazy<Builder> ControlCells_lazy_builder = new System.Lazy<Builder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
         class Builder : VACG.CellGroupBuilder<ControlCells>
         {
