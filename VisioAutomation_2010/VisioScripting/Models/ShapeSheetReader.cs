@@ -6,13 +6,13 @@ namespace VisioScripting.Models
     public class ShapeSheetReader
     {
         public Client Client;
-        public VisioAutomation.Core.SurfaceTarget Surface;
+        public VisioAutomation.Core.VisioObjectTarget visobjtarget;
         public List<VisioAutomation.Core.SidSrc> SidSrcs;
         
         public ShapeSheetReader(Client client, IVisio.Page page)
         {
             this.Client = client;
-            this.Surface = new VisioAutomation.Core.SurfaceTarget(page);
+            this.visobjtarget = new VisioAutomation.Core.VisioObjectTarget(page);
             this.SidSrcs = new List<VisioAutomation.Core.SidSrc>();
         }
 
@@ -25,7 +25,7 @@ namespace VisioScripting.Models
         public string[] GetFormulas()
         {
             var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.FromSidSrc(this.SidSrcs);
-            var formulas = this.Surface.GetFormulasU(stream);
+            var formulas = this.visobjtarget.GetFormulasU(stream);
             return formulas;
         }
 
@@ -33,7 +33,7 @@ namespace VisioScripting.Models
         {
             const object [] unitcodes = null;
             var stream = VisioAutomation.ShapeSheet.Streams.StreamArray.FromSidSrc(this.SidSrcs);
-            var formulas = this.Surface.GetResults<string>( stream, unitcodes);
+            var formulas = this.visobjtarget.GetResults<string>( stream, unitcodes);
             return formulas;
         }
     }

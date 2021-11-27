@@ -7,14 +7,14 @@ namespace VisioScripting.Models
     {
         internal readonly SidSrcWriter Writer;
         public Client Client;
-        public VisioAutomation.Core.SurfaceTarget Surface;
+        public VisioAutomation.Core.VisioObjectTarget visobjtarget;
         public bool BlastGuards;
         public bool TestCircular;
 
         public ShapeSheetWriter(Client client, IVisio.Page page)
         {
             this.Client = client;
-            this.Surface = new VisioAutomation.Core.SurfaceTarget(page);
+            this.visobjtarget = new VisioAutomation.Core.VisioObjectTarget(page);
             this.Writer = new SidSrcWriter();
         }
 
@@ -30,7 +30,7 @@ namespace VisioScripting.Models
             {
                 this.Writer.BlastGuards = this.BlastGuards;
                 this.Writer.TestCircular = this.TestCircular;
-                this.Writer.CommitFormulas(this.Surface);
+                this.Writer.CommitFormulas(this.visobjtarget);
             }
         }
     }

@@ -42,12 +42,12 @@ namespace VisioPowerShell.Internal
             VisioAutomation.Core.CellValueType value_type,
             Models.ResultType result_type,
             IList<int> shapeids, 
-            VisioAutomation.Core.SurfaceTarget surface)
+            VisioAutomation.Core.VisioObjectTarget visobjtarget)
         {
 
             if (value_type == VisioAutomation.Core.CellValueType.Formula)
             {
-                var output = query.GetFormulas(surface, shapeids);
+                var output = query.GetFormulas(visobjtarget, shapeids);
                 var dt = DataTableHelpers.querytable_to_datatable(query, output);
                 return dt;
             }
@@ -59,22 +59,22 @@ namespace VisioPowerShell.Internal
 
             if (result_type == ResultType.String)
             {
-                var output = query.GetResults<string>(surface, shapeids);
+                var output = query.GetResults<string>(visobjtarget, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
             else if (result_type == ResultType.Bool)
             {
-                var output = query.GetResults<string>(surface, shapeids);
+                var output = query.GetResults<string>(visobjtarget, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
             else if (result_type == ResultType.Double)
             {
-                var output = query.GetResults<double>(surface, shapeids);
+                var output = query.GetResults<double>(visobjtarget, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
             else if(result_type == ResultType.Int)
             {
-                var output = query.GetResults<int>(surface, shapeids);
+                var output = query.GetResults<int>(visobjtarget, shapeids);
                 return DataTableHelpers.querytable_to_datatable(query, output);
             }
             else

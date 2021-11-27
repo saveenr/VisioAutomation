@@ -131,7 +131,7 @@
     <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
     <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
     <Compile Include="Shapes\UserDefinedCellNameCellsPair.cs" />
-    <Compile Include="Core\SurfaceTarget.cs" />
+    <Compile Include="Core\VisioObjectTarget.cs" />
     <Compile Include="Shapes\CustomPropertyDictionary.cs" />
     <Compile Include="Shapes\HyperlinkCells.cs" />
     <Compile Include="Shapes\HyperlinkHelper.cs" />

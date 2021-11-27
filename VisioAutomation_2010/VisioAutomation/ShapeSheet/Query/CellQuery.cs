@@ -14,19 +14,19 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Shape shape)
         {
-            var surface = new Core.SurfaceTarget(shape);
+            var surface = new Core.VisioObjectTarget(shape);
             return GetFormulas(surface);
         }
 
 
-        public CellQueryResults<string> GetFormulas(Core.SurfaceTarget surface)
+        public CellQueryResults<string> GetFormulas(Core.VisioObjectTarget visobjtarget)
         {
-            _restrict_to_shapes_only(surface);
+            _restrict_to_shapes_only(visobjtarget);
 
             var srcstream = this._build_src_stream();
-            var values = surface.GetFormulasU(srcstream);
+            var values = visobjtarget.GetFormulasU(srcstream);
             var reader = new Collections.ArraySegmentEnumerator<string>(values);
-            var row = this._shapedata_to_row(surface.ID16, reader);
+            var row = this._shapedata_to_row(visobjtarget.ID16, reader);
 
             var cellqueryresults = new CellQueryResults<string>(1);
             cellqueryresults.Add(row);
@@ -36,19 +36,19 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
-            var surface = new Core.SurfaceTarget(shape);
+            var surface = new Core.VisioObjectTarget(shape);
             return GetResults<TResult>(surface);
         }
 
-        public CellQueryResults<TResult> GetResults<TResult>(Core.SurfaceTarget surface)
+        public CellQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget)
         {
-            _restrict_to_shapes_only(surface);
+            _restrict_to_shapes_only(visobjtarget);
 
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
-            var values = surface.GetResults<TResult>(srcstream, unitcodes);
+            var values = visobjtarget.GetResults<TResult>(srcstream, unitcodes);
             var reader = new Collections.ArraySegmentEnumerator<TResult>(values);
-            var row = this._shapedata_to_row(surface.ID16, reader);
+            var row = this._shapedata_to_row(visobjtarget.ID16, reader);
 
 
             var cellqueryresults = new CellQueryResults<TResult>(1);
@@ -59,15 +59,15 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new Core.SurfaceTarget(page);
+            var surface = new Core.VisioObjectTarget(page);
             return this.GetFormulas(surface, shapeids);
         }
 
 
-        public CellQueryResults<string> GetFormulas(Core.SurfaceTarget surface, IList<int> shapeids)
+        public CellQueryResults<string> GetFormulas(Core.VisioObjectTarget visobjtarget, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
-            var values = surface.GetFormulasU(srcstream);
+            var values = visobjtarget.GetFormulasU(srcstream);
             var reader = new Collections.ArraySegmentEnumerator<string>(values);
             var rows = this._shapesid_to_rows(shapeids, reader);
 
@@ -79,15 +79,15 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new Core.SurfaceTarget(page);
+            var surface = new Core.VisioObjectTarget(page);
             return this.GetResults<TResult>(surface, shapeids);
         }
 
-        public CellQueryResults<TResult> GetResults<TResult>(Core.SurfaceTarget surface, IList<int> shapeids)
+        public CellQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
-            var values = surface.GetResults<TResult>(srcstream, unitcodes);
+            var values = visobjtarget.GetResults<TResult>(srcstream, unitcodes);
             var reader = new Collections.ArraySegmentEnumerator<TResult>(values);
             var rows = this._shapesid_to_rows(shapeids, reader);
 
@@ -166,9 +166,9 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static void _restrict_to_shapes_only(Core.SurfaceTarget surface)
+        private static void _restrict_to_shapes_only(Core.VisioObjectTarget visobjtarget)
         {
-            if (surface.Shape == null)
+            if (visobjtarget.Shape == null)
             {
                 string msg = "Target must be Shape not Page or Master";
                 throw new System.ArgumentException(msg);

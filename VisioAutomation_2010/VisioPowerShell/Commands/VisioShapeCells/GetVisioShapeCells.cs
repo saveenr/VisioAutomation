@@ -47,7 +47,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             var query = _create_query(dicof_name_to_cell, desired_cells);
             var page = target_shapes.Shapes[0].ContainingPage;
-            var surface = new VisioAutomation.Core.SurfaceTarget(page);
+            var surface = new VisioAutomation.Core.VisioObjectTarget(page);
             var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
             var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, surface);
 

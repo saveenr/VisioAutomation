@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Page page, Core.CellValueType type)
         {
-            var surface = new Core.SurfaceTarget(page);
+            var surface = new Core.VisioObjectTarget(page);
             this.Commit(surface, type);
         }
         public void SetValue(short id, Core.Src src, Core.CellValue formula)
@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        public void CommitFormulas(Core.SurfaceTarget surface)
+        public void CommitFormulas(Core.VisioObjectTarget visobjtarget)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -77,10 +77,10 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             var flags = this._compute_setformula_flags();
 
-            int c = surface.SetFormulas(stream, formulas, (short)flags);
+            int c = visobjtarget.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void Commit(Core.SurfaceTarget surface, Core.CellValueType type)
+        public void Commit(Core.VisioObjectTarget visobjtarget, Core.CellValueType type)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -98,13 +98,13 @@ namespace VisioAutomation.ShapeSheet.Writers
             if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                int c = surface.SetFormulas(stream, items, (short)flags);
+                int c = visobjtarget.SetFormulas(stream, items, (short)flags);
             }
             else
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-                surface.SetResults(stream, unitcodes, items, (short)flags);
+                visobjtarget.SetResults(stream, unitcodes, items, (short)flags);
             }
         }
     }

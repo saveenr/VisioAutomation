@@ -53,7 +53,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             }
 
             var page = targetshapes.Shapes[0].ContainingPage;
-            var surface = new VisioAutomation.Core.SurfaceTarget(page);
+            var surface = new VisioAutomation.Core.VisioObjectTarget(page);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);

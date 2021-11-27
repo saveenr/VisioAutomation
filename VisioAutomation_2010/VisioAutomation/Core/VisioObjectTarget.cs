@@ -5,14 +5,14 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Core
 {
-    public readonly struct SurfaceTarget
+    public readonly struct VisioObjectTarget
     {
         public readonly IVisio.Page Page;
         public readonly IVisio.Master Master;
         public readonly IVisio.Shape Shape;
         public readonly SurfaceTargetType TargetType;
 
-        public SurfaceTarget(IVisio.Page page)
+        public VisioObjectTarget(IVisio.Page page)
         {
             this.Page = page ?? throw new System.ArgumentNullException(nameof(page));
             this.Master = null;
@@ -20,7 +20,7 @@ namespace VisioAutomation.Core
             this.TargetType = SurfaceTargetType.Page;
         }
 
-        public SurfaceTarget(IVisio.Master master)
+        public VisioObjectTarget(IVisio.Master master)
         {
             this.Page = null;
             this.Master = master ?? throw new System.ArgumentNullException(nameof(master));
@@ -28,7 +28,7 @@ namespace VisioAutomation.Core
             this.TargetType = SurfaceTargetType.Master;
         }
 
-        public SurfaceTarget(IVisio.Shape shape)
+        public VisioObjectTarget(IVisio.Shape shape)
         {
             this.Page = null;
             this.Master = null;
