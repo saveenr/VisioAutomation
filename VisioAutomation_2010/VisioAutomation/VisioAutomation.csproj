@@ -104,7 +104,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilderType.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellMetadataItem.cs" />
     <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
-    <Compile Include="ShapeSheet\CellValueType.cs" />
+    <Compile Include="Core\CellValueType.cs" />
     <Compile Include="Core\ShapeIDPairs.cs" />
     <Compile Include="Core\ShapeIDPair.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
@@ -162,13 +162,13 @@
     <Compile Include="Shapes\XFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="Shapes\CustomPropertyCells.cs" />
-    <Compile Include="ShapeSheet\CellValue.cs" />
+    <Compile Include="Core\CellValue.cs" />
     <Compile Include="Core\Point.cs" />
     <Compile Include="Core\Rectangle.cs" />
-    <Compile Include="ShapeSheet\SidSrc.cs" />
+    <Compile Include="Core\SidSrc.cs" />
     <Compile Include="Core\Size.cs" />
-    <Compile Include="ShapeSheet\SrcConstants.cs" />
-    <Compile Include="ShapeSheet\Src.cs" />
+    <Compile Include="Core\SrcConstants.cs" />
+    <Compile Include="Core\Src.cs" />
     <Compile Include="Shapes\ConnectionPointCells.cs" />
     <Compile Include="Shapes\UserDefinedCellHelper.cs" />
     <Compile Include="Shapes\UserDefinedCellCells.cs" />
