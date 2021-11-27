@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 using VisioAutomation.Core;
 using VisioScripting.Models;
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [MUT.TestClass]
     public class ScriptingPageTests : VTest.VisioAutomationTest

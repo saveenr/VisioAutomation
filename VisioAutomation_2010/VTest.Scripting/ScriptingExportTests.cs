@@ -1,7 +1,7 @@
 using System.IO;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [MUT.TestClass]
     public class ScriptingExportTests : VTest.VisioAutomationTest

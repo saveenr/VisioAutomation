@@ -1,7 +1,7 @@
-using UT = Microsoft.VisualStudio.TestTools.UnitTesting;
+using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [MUT.TestClass]
     public class ScriptingHyperlinkTests : VTest.VisioAutomationTest

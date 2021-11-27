@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 using VTest.Extensions;
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [MUT.TestClass]
     public class ScriptingArrangeTests : VTest.VisioAutomationTest

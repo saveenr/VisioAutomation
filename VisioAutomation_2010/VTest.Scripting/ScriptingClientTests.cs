@@ -1,6 +1,6 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [MUT.TestClass]
     public class ScriptingClientTests : VTest.VisioAutomationTest

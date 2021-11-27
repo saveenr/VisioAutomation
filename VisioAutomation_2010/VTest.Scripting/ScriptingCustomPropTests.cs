@@ -3,7 +3,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
 using VA = VisioAutomation;
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [MUT.TestClass]
     public class ScriptingCustomPropTests : VTest.VisioAutomationTest

@@ -2,7 +2,7 @@ using System.Linq;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [MUT.TestClass]
     public class ScriptingShapeSheetTests : VTest.VisioAutomationTest
