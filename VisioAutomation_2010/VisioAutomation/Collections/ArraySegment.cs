@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Collections
 {
-    public struct ArraySegment<T> : IEnumerable<T>
+    public readonly struct ArraySegment<T> : IEnumerable<T>
     {
         private readonly T[] _array;
         private readonly int _offset;
