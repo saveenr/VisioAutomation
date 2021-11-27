@@ -26,7 +26,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue ShapeDisplayLevel { get; set; } // new in visio 2010
         public Core.CellValue Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.ConnectorFixedCode), Core.SrcConstants.ShapeLayoutConnectorFixedCode,
                 this.ConnectorFixedCode);

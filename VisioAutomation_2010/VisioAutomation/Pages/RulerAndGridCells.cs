@@ -18,7 +18,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue YRulerDensity { get; set; }
         public Core.CellValue YRulerOrigin { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.XGridDensity), Core.SrcConstants.XGridDensity, this.XGridDensity);
             yield return this._create(nameof(this.XGridOrigin), Core.SrcConstants.XGridOrigin, this.XGridOrigin);

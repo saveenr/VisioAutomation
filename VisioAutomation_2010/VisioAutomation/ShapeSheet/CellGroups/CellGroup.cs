@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     public class CellGroup
     {
 
-        public virtual IEnumerable<CellMetadataItem> GetCellMetadata()
+        public virtual IEnumerable<CellMetadata> GetCellMetadata()
         {
             throw new System.NotImplementedException();
         }
@@ -40,9 +40,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        protected CellMetadataItem _create(string name, Core.Src src, Core.CellValue value)
+        protected CellMetadata _create(string name, Core.Src src, Core.CellValue value)
         {
-            return new CellMetadataItem(name, src, value.Value);
+            return new CellMetadata(name, src, value.Value);
         }
 
         internal static System.Func<string,string> queryrow_to_cellgroup(Query.Row<string> row, Query.Columns cols)

@@ -13,7 +13,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue DirY { get; set; }
         public Core.CellValue Type { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.X), Core.SrcConstants.ConnectionPointX, this.X);
             yield return this._create(nameof(this.Y), Core.SrcConstants.ConnectionPointY, this.Y);

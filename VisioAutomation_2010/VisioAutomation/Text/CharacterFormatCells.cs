@@ -30,7 +30,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Strikethru { get; set; }
         public Core.CellValue UseVertical { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Color), Core.SrcConstants.CharColor, this.Color);
             yield return this._create(nameof(this.Font), Core.SrcConstants.CharFont, this.Font);

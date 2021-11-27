@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Height { get; set; }
         public Core.CellValue Angle { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);

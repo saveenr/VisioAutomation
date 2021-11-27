@@ -16,7 +16,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue XDynamics { get; set; }
         public Core.CellValue YDynamics { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.CanGlue), Core.SrcConstants.ControlCanGlue, this.CanGlue);
             yield return this._create(nameof(this.Tip), Core.SrcConstants.ControlTip, this.Tip);

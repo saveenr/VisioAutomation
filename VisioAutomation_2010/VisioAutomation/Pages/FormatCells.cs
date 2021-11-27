@@ -23,7 +23,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue UIVisibility { get; set; }
         public Core.CellValue DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.DrawingScale), Core.SrcConstants.PageDrawingScale, this.DrawingScale);
             yield return this._create(nameof(this.DrawingScaleType), Core.SrcConstants.PageDrawingScaleType,

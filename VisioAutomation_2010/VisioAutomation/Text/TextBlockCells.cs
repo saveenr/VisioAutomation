@@ -15,7 +15,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Direction { get; set; }
         public Core.CellValue VerticalAlign { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.BottomMargin), Core.SrcConstants.TextBlockBottomMargin, this.BottomMargin);
             yield return this._create(nameof(this.LeftMargin), Core.SrcConstants.TextBlockLeftMargin, this.LeftMargin);

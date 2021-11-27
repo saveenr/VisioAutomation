@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Default { get; set; }
         public Core.CellValue Invisible { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
             yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription, this.Description);

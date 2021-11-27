@@ -23,7 +23,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue ScaleY { get; set; }
         public Core.CellValue PaperSource { get; set; }
 
-        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.LeftMargin), Core.SrcConstants.PrintLeftMargin, this.LeftMargin);
             yield return this._create(nameof(this.CenterX), Core.SrcConstants.PrintCenterX, this.CenterX);
