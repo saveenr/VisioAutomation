@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellCells : CellGroup
+    public class UserDefinedCellCells : VACG.CellGroup
     {
         public Core.CellValue Value { get; set; }
         public Core.CellValue Prompt { get; set; }
@@ -15,7 +15,7 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.Value), Core.SrcConstants.UserDefCellValue, this.Value);
             yield return this._create(nameof(this.Prompt), Core.SrcConstants.UserDefCellPrompt, this.Prompt);
@@ -44,10 +44,10 @@ namespace VisioAutomation.Shapes
 
 
 
-        class Builder : CellGroupBuilder<UserDefinedCellCells>
+        class Builder : VACG.CellGroupBuilder<UserDefinedCellCells>
         {
 
-            public Builder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 

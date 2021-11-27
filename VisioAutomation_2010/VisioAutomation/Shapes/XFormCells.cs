@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -7,7 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : CellGroup
+    public class XFormCells : VACG.CellGroup
     {
         public Core.CellValue PinX { get; set; }
         public Core.CellValue PinY { get; set; }
@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Height { get; set; }
         public Core.CellValue Angle { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);
@@ -43,9 +43,9 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> ShapeXFormCells_lazy_builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<XFormCells>
+        class Builder : VACG.CellGroupBuilder<XFormCells>
         {
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 

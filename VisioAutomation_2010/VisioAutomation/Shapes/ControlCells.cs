@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ControlCells : CellGroup
+    public class ControlCells : VACG.CellGroup
     {
         public Core.CellValue CanGlue { get; set; }
         public Core.CellValue Tip { get; set; }
@@ -16,7 +16,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue XDynamics { get; set; }
         public Core.CellValue YDynamics { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.CanGlue), Core.SrcConstants.ControlCanGlue, this.CanGlue);
             yield return this._create(nameof(this.Tip), Core.SrcConstants.ControlTip, this.Tip);
@@ -43,9 +43,9 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> ControlCells_lazy_builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<ControlCells>
+        class Builder : VACG.CellGroupBuilder<ControlCells>
         {
-            public Builder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 

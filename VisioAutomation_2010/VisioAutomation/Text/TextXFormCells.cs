@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class TextXFormCells : CellGroup
+    public class TextXFormCells : VACG.CellGroup
     {
         public Core.CellValue Angle { get; set; }
         public Core.CellValue Width { get; set; }
@@ -15,7 +15,7 @@ namespace VisioAutomation.Text
         public Core.CellValue LocPinX { get; set; }
         public Core.CellValue LocPinY { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.TextXFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.TextXFormPinY, this.PinY);
@@ -41,9 +41,9 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> TextXFormCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<TextXFormCells>
+        class Builder : VACG.CellGroupBuilder<TextXFormCells>
         {
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 

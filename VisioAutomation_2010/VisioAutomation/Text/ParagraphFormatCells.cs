@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells : CellGroup
+    public class ParagraphFormatCells : VACG.CellGroup
     {
         public Core.CellValue IndentFirst { get; set; }
         public Core.CellValue IndentRight { get; set; }
@@ -22,7 +22,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Flags { get; set; }
         public Core.CellValue BulletString { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.IndentLeft), Core.SrcConstants.ParaIndentLeft, this.IndentLeft);
             yield return this._create(nameof(this.IndentFirst), Core.SrcConstants.ParaIndentFirst, this.IndentFirst);
@@ -59,9 +59,9 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> ParagraphFormatCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<ParagraphFormatCells>
+        class Builder : VACG.CellGroupBuilder<ParagraphFormatCells>
         {
-            public Builder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 

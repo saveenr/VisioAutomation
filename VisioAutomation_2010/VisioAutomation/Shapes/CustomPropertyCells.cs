@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCells : CellGroup
+    public class CustomPropertyCells : VACG.CellGroup
     {
         public Core.CellValue Ask { get; set; }
         public Core.CellValue Calendar { get; set; }
@@ -23,7 +23,7 @@ namespace VisioAutomation.Shapes
 
         }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.Label), Core.SrcConstants.CustomPropLabel, this.Label);
             yield return this._create(nameof(this.Value), Core.SrcConstants.CustomPropValue, this.Value);
@@ -174,10 +174,10 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<Builder> Custom_Property_lazy_builder = new System.Lazy<Builder>();
 
 
-        public class Builder : CellGroupBuilder<CustomPropertyCells>
+        public class Builder : VACG.CellGroupBuilder<CustomPropertyCells>
         {
 
-            public Builder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 

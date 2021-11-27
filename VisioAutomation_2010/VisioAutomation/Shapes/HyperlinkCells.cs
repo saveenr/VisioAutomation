@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class HyperlinkCells : CellGroup
+    public class HyperlinkCells : VACG.CellGroup
     {
         public Core.CellValue Address { get; set; }
         public Core.CellValue Description { get; set; }
@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Default { get; set; }
         public Core.CellValue Invisible { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
             yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription, this.Description);
@@ -45,10 +45,10 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<Builder> HyperLinkCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<HyperlinkCells>
+        class Builder : VACG.CellGroupBuilder<HyperlinkCells>
         {
 
-            public Builder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 

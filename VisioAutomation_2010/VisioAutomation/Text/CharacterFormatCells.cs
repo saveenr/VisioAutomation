@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterFormatCells : CellGroup
+    public class CharacterFormatCells : VACG.CellGroup
     {
         public Core.CellValue Color { get; set; }
         public Core.CellValue Font { get; set; }
@@ -30,7 +30,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Strikethru { get; set; }
         public Core.CellValue UseVertical { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.Color), Core.SrcConstants.CharColor, this.Color);
             yield return this._create(nameof(this.Font), Core.SrcConstants.CharFont, this.Font);
@@ -76,9 +76,9 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> CharacterFormatCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<CharacterFormatCells>
+        class Builder : VACG.CellGroupBuilder<CharacterFormatCells>
         {
-            public Builder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 

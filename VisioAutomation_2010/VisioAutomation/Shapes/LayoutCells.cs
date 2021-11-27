@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LayoutCells : CellGroup
+    public class LayoutCells : VACG.CellGroup
     {
         public Core.CellValue ConnectorFixedCode { get; set; }
         public Core.CellValue LineJumpCode { get; set; }
@@ -26,7 +26,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue ShapeDisplayLevel { get; set; } // new in visio 2010
         public Core.CellValue Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.ConnectorFixedCode), Core.SrcConstants.ShapeLayoutConnectorFixedCode,
                 this.ConnectorFixedCode);
@@ -76,10 +76,10 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> ShapeLayoutCells_lazy_builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<LayoutCells>
+        class Builder : VACG.CellGroupBuilder<LayoutCells>
         {
 
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 

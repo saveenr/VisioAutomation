@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : CellGroup
+    public class LockCells : VACG.CellGroup
     {
         public Core.CellValue Aspect { get; set; }
         public Core.CellValue Begin { get; set; }
@@ -28,7 +28,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue VertexEdit { get; set; }
         public Core.CellValue Width { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.Aspect), Core.SrcConstants.LockAspect, this.Aspect);
             yield return this._create(nameof(this.Begin), Core.SrcConstants.LockBegin, this.Begin);
@@ -67,9 +67,9 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<Builder> LockCells_lazy_builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<LockCells>
+        class Builder : VACG.CellGroupBuilder<LockCells>
         {
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 

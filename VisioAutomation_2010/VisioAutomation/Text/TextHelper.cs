@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VASS=VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
@@ -199,10 +199,10 @@ namespace VisioAutomation.Text
 
         private static readonly System.Lazy<Builder> TextBlockCells_lazy_builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<TextBlockCells>
+        class Builder : VACG.CellGroupBuilder<TextBlockCells>
         {
 
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 

@@ -1,11 +1,11 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
-    public class ConnectionPointCells : CellGroup
+    public class ConnectionPointCells : VACG.CellGroup
     {
         public Core.CellValue X { get; set; }
         public Core.CellValue Y { get; set; }
@@ -13,7 +13,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue DirY { get; set; }
         public Core.CellValue Type { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.X), Core.SrcConstants.ConnectionPointX, this.X);
             yield return this._create(nameof(this.Y), Core.SrcConstants.ConnectionPointY, this.Y);
@@ -36,10 +36,10 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> ConnectionPointCells_lazy_builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<ConnectionPointCells>
+        class Builder : VACG.CellGroupBuilder<ConnectionPointCells>
         {
 
-            public Builder() : base(CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 

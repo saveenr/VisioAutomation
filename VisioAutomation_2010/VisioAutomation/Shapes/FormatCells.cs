@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class FormatCells : CellGroup
+    public class FormatCells : VACG.CellGroup
     {
         public Core.CellValue FillBackground { get; set; }
         public Core.CellValue FillBackgroundTransparency { get; set; }
@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue LineWeight { get; set; }
         public Core.CellValue LineRounding { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadataItem> GetCellMetadata()
         {
             yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground, this.FillBackground);
             yield return this._create(nameof(this.FillBackgroundTransparency), Core.SrcConstants.FillBackgroundTransparency,
@@ -90,10 +90,10 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> shape_format_lazy_builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<FormatCells>
+        class Builder : VACG.CellGroupBuilder<FormatCells>
         {
 
-            public Builder() : base(CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 
