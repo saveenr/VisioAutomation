@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -74,7 +73,7 @@ namespace VisioAutomationSamples
             Properties.Settings.Default.Save();
         }
 
-        private void buttonRun_Click(object sender, EventArgs e)
+        private void buttonRun_Click(object sender, System.EventArgs e)
         {
             this.RunSelectedSamples();
         }
@@ -93,9 +92,9 @@ namespace VisioAutomationSamples
                 {
                     selectedMethod.Run();
                 }
-                catch (Exception)
+                catch (System.Exception)
                 {
-                    Console.WriteLine("Caught Exception for {0}", selectedMethod.Name);
+                    System.Console.WriteLine("Caught Exception for {0}", selectedMethod.Name);
                     break;
                 }
             }
@@ -111,7 +110,7 @@ namespace VisioAutomationSamples
             return selected_names;
         }
 
-        private void buttonSelectAll_Click(object sender, EventArgs e)
+        private void buttonSelectAll_Click(object sender, System.EventArgs e)
         {
             for (int i = 0; i < this.checkedListBox1.Items.Count; i++)
             {
@@ -119,7 +118,7 @@ namespace VisioAutomationSamples
             }
         }
 
-        private void buttonSelectNone_Click(object sender, EventArgs e)
+        private void buttonSelectNone_Click(object sender, System.EventArgs e)
         {
             for (int i = 0; i < this.checkedListBox1.Items.Count; i++)
             {

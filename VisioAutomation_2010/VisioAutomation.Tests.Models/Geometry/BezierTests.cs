@@ -1,4 +1,3 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VisioAutomation_Tests.Models.Geometry
@@ -7,9 +6,9 @@ namespace VisioAutomation_Tests.Models.Geometry
     public class BezierTests : VisioAutomationTest
     {
         private double delta = 0.00000000001;
-        private double pi2 = Math.PI*2;
-        private double pihalf = Math.PI/2;
-        private double piquarter = Math.PI/4;
+        private double pi2 = System.Math.PI*2;
+        private double pihalf = System.Math.PI/2;
+        private double piquarter = System.Math.PI/4;
 
         [TestMethod]
         public void TestBezierFromArcs()
@@ -41,15 +40,15 @@ namespace VisioAutomation_Tests.Models.Geometry
             Assert.AreEqual(2, s4.Length);
 
             // half circle - top
-            var s5 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(0.0, Math.PI);
+            var s5 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(0.0, System.Math.PI);
             Assert.AreEqual(2, s5.Length);
 
             // half circle - bottom
-            var s6 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(Math.PI, this.pi2);
+            var s6 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(System.Math.PI, this.pi2);
             Assert.AreEqual(2, s6.Length);
 
             // half circle - bottom
-            var s7 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(this.pihalf, Math.PI + this.pihalf);
+            var s7 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(this.pihalf, System.Math.PI + this.pihalf);
             Assert.AreEqual(2, s7.Length);
 
             // partial all quadrants

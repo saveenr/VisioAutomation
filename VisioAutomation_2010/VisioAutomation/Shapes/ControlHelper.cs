@@ -1,4 +1,3 @@
-using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -9,7 +8,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var ctrl = new ControlCells();
@@ -21,7 +20,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             short row = shape.AddRow((short)IVisio.VisSectionIndices.visSectionControls,
@@ -37,7 +36,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
 
@@ -63,12 +62,12 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new System.ArgumentOutOfRangeException(nameof(index));
             }
 
             var row = (IVisio.VisRowIndices)index;
@@ -79,7 +78,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];

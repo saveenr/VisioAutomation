@@ -1,4 +1,3 @@
-using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -12,17 +11,17 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (hyperlink == null)
             {
-                throw new ArgumentNullException(nameof(hyperlink));
+                throw new System.ArgumentNullException(nameof(hyperlink));
             }
 
             if (hyperlink.Address.Value == null)
             {
-                throw new ArgumentException("Address is null",nameof(hyperlink));
+                throw new System.ArgumentException("Address is null",nameof(hyperlink));
             }
 
             /*
@@ -57,7 +56,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var writer = new ShapeSheet.Writers.SrcWriter();
@@ -72,12 +71,12 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new System.ArgumentOutOfRangeException(nameof(index));
             }
 
             var row = (IVisio.VisRowIndices)index;
@@ -88,7 +87,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionHyperlink];

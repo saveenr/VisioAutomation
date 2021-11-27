@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -17,7 +16,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             __CheckValidCustomPropertyName(name);
@@ -53,7 +52,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var writer = new ShapeSheet.Writers.SrcWriter();
@@ -100,7 +99,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var exists_flag = (short)IVisio.VisExistsFlags.visExistsAnywhere;
@@ -115,7 +114,7 @@ namespace VisioAutomation.Shapes
 
             if (section == null)
             {
-                throw new NullReferenceException(nameof(section));
+                throw new System.NullReferenceException(nameof(section));
             }
 
             int row_count = section.Shape.RowCount[vis_sec_prop];
@@ -127,7 +126,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             int custom_prop_row_count = GetCount(shape);
@@ -160,12 +159,12 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (name == null)
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             __CheckValidCustomPropertyName(name);
@@ -181,12 +180,12 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (name == null)
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             __CheckValidCustomPropertyName(name);
@@ -201,14 +200,14 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             __CheckValidCustomPropertyName(name);
 
             if (value == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                throw new System.ArgumentNullException(nameof(value));
             }
 
             // create a new property
@@ -333,7 +332,7 @@ namespace VisioAutomation.Shapes
             if (!__IsValidName(name, out errmsg))
             {
                 string msg = string.Format("Invalid Property Name: \"{0}\". {1}", name, errmsg);
-                throw new ArgumentException(msg);
+                throw new System.ArgumentException(msg);
             }
         }
 

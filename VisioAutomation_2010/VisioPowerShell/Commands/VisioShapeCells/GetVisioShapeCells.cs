@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
@@ -73,7 +72,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             if (invalid_names.Count > 0)
             {
                 string msg = "Invalid cell names: " + string.Join(",", invalid_names);
-                throw new ArgumentException(msg);
+                throw new System.ArgumentException(msg);
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();

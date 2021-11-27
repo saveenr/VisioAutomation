@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
@@ -23,7 +22,7 @@ namespace VisioAutomation_Tests.Models.Documents
                 var application = page1.Application;
                 orgcgart.Render(application);
             }
-            catch (Exception)
+            catch (System.Exception)
             {
                 page1.Delete(0);
                 caught = true;

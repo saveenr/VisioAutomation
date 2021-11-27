@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -304,7 +303,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             }
             else
             {
-                throw new ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
             }
 
             node.Position = this.Options.Alignment switch
@@ -312,7 +311,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
                 AlignmentVertical.Top => temp_point,
                 AlignmentVertical.Center => temp_point.Add(0, (maxsize_tmp - nodesize_tmp) / 2.0),
                 AlignmentVertical.Bottom => temp_point.Add(0, maxsize_tmp - nodesize_tmp),
-                _ => throw new ArgumentOutOfRangeException(),
+                _ => throw new System.ArgumentOutOfRangeException(),
             };
 
             if (flag)

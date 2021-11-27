@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace VisioAutomation_Tests
 {
@@ -11,10 +10,10 @@ namespace VisioAutomation_Tests
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("name is null or empty", nameof(name));
+                throw new System.ArgumentException("name is null or empty", nameof(name));
             }
 
-            string mydocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string mydocs = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
             this._output_path = Path.Combine(mydocs, name);
 
             if (!Directory.Exists(this._output_path))
@@ -42,7 +41,7 @@ namespace VisioAutomation_Tests
 
             string abs_path = this._output_path;
             var culture = System.Globalization.CultureInfo.InvariantCulture;
-            var datetime_str = DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss", culture);
+            var datetime_str = System.DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss", culture);
             var basename = method + "_" + datetime_str + ext;
             string abs_filename = Path.Combine(abs_path, basename);
             return abs_filename;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -133,7 +132,7 @@ namespace VisioAutomation.Models.Layouts.Grid
         {
             if (page == null)
             {
-                throw new ArgumentNullException(nameof(page));
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             var nodes_to_draw = this.Nodes.Where(n => n.Draw).ToList();

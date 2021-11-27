@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MG = Microsoft.Msagl;
 
 namespace VisioAutomation.Models.Layouts.DirectedGraph
@@ -45,7 +44,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                     }
                     else
                     {
-                        throw new InvalidOperationException("Unsupported Curve Segment type");
+                        throw new System.InvalidOperationException("Unsupported Curve Segment type");
                     }
                 }
 

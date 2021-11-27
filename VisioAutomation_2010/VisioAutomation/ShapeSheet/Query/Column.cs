@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VisioAutomation.ShapeSheet.Query
+﻿namespace VisioAutomation.ShapeSheet.Query
 {
     public class Column
     {
@@ -13,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("name");
+                throw new System.ArgumentException("name");
             }
 
             this.Src = src;

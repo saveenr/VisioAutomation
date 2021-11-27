@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -106,12 +105,12 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             {
                 if (layout_connector.From == null)
                 {
-                    throw new ArgumentException("Connector's From node is null");
+                    throw new System.ArgumentException("Connector's From node is null");
                 }
 
                 if (layout_connector.To == null)
                 {
-                    throw new ArgumentException("Connector's To node is null");
+                    throw new System.ArgumentException("Connector's To node is null");
                 }
 
                 var from_node = map_id_to_ud[layout_connector.From.ID];
@@ -135,15 +134,15 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
             else if (this.LayoutOptions.Direction == MsaglDirection.BottomToTop)
             {
-                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI);
+                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(System.Math.PI);
             }
             else if (this.LayoutOptions.Direction == MsaglDirection.LeftToRight)
             {
-                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(Math.PI / 2);
+                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(System.Math.PI / 2);
             }
             else if (this.LayoutOptions.Direction == MsaglDirection.RightToLeft)
             {
-                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(-Math.PI / 2);
+                msagl_sugiyamasettings.Transformation = MSAGL.Core.Geometry.Curves.PlaneTransformation.Rotation(-System.Math.PI / 2);
             }
             else
             {
@@ -290,7 +289,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             var stencilnames0 = shapes.Select(s => s.StencilName).ToList();
             var stencil_names = stencilnames0.Distinct().ToList();
 
-            var compare = StringComparer.InvariantCultureIgnoreCase;
+            var compare = System.StringComparer.InvariantCultureIgnoreCase;
 
             var stencil_map = new Dictionary<string, IVisio.Document>(compare);
             foreach (var stencil_name in stencil_names)

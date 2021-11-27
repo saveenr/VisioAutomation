@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace VisioScripting.Helpers
@@ -52,7 +51,7 @@ namespace VisioScripting.Helpers
             Exclude
         }
 
-        public static IEnumerable<T> FilterObjectsByNames<T>(IEnumerable<T> items, IList<string> patterns, Func<T, string> get_name, bool ignorecase, FilterAction action)
+        public static IEnumerable<T> FilterObjectsByNames<T>(IEnumerable<T> items, IList<string> patterns, System.Func<T, string> get_name, bool ignorecase, FilterAction action)
         {
             if (patterns == null || patterns.Count < 1)
             {
@@ -67,7 +66,7 @@ namespace VisioScripting.Helpers
                 // Create the caches for fast matches of regexes
                 var regexes = new List<System.Text.RegularExpressions.Regex>();
 
-                var compare = ignorecase ? StringComparer.InvariantCultureIgnoreCase : StringComparer.InvariantCulture;
+                var compare = ignorecase ? System.StringComparer.InvariantCultureIgnoreCase : System.StringComparer.InvariantCulture;
                 var nonregexes = new HashSet<string>(compare);
 
                 foreach (var pattern in patterns)

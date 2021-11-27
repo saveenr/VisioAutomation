@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VADOC=VisioAutomation.Models.Documents;
@@ -16,7 +15,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public static List<Type> GetTypes()
+        public static List<System.Type> GetTypes()
         {
             // TODO: Consider filtering out types that should *not* be exposed despite being public
             var va_type = typeof(VisioAutomation.Application.ApplicationHelper);
@@ -25,7 +24,7 @@ namespace VisioScripting.Commands
             var va_types = va_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
             var vas_types = vas_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
             
-            var types = new List<Type>();
+            var types = new List<System.Type>();
             types.AddRange(va_types);
             types.AddRange(vas_types);
             
@@ -172,7 +171,7 @@ namespace VisioScripting.Commands
             public readonly List<string> Roots;
             public readonly string Separator;
             private readonly string[] _seps;
-            private StringSplitOptions options = StringSplitOptions.None;
+            private System.StringSplitOptions options = System.StringSplitOptions.None;
 
             public PathTreeBuilder()
             {
@@ -220,7 +219,7 @@ namespace VisioScripting.Commands
             return this.DrawNamespaces(DeveloperCommands.GetTypes());
         }
 
-        public IVisio.Document DrawNamespaces(IList<Type> types)
+        public IVisio.Document DrawNamespaces(IList<System.Type> types)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
@@ -252,7 +251,7 @@ namespace VisioScripting.Commands
             foreach (string ns in namespaces)
             {
                 string label = ns;
-                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, StringComparison.Ordinal);
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, System.StringComparison.Ordinal);
                 if (index_of_last_sep > 0)
                 {
                     label = ns.Substring(index_of_last_sep+1);
@@ -340,7 +339,7 @@ namespace VisioScripting.Commands
             return VisioScripting.Helpers.InteropHelper.GetEnum(name);
         }
 
-        public Models.EnumType GetEnum(Type type)
+        public Models.EnumType GetEnum(System.Type type)
         {
             return new Models.EnumType(type);
         }
@@ -356,11 +355,11 @@ namespace VisioScripting.Commands
 
         private class TypeInfo
         {
-            public readonly Type Type;
+            public readonly System.Type Type;
             public Helpers.ReflectionHelper.TypeCategory TypeCategory ;
             public readonly string Label;
 
-            public TypeInfo(Type type)
+            public TypeInfo(System.Type type)
             {
                 this.Type = type;
                 this.TypeCategory = VisioScripting.Helpers.ReflectionHelper.GetTypeCategory(type);
@@ -374,7 +373,7 @@ namespace VisioScripting.Commands
             return this.DrawNamespacesAndClasses(DeveloperCommands.GetTypes());
         }
 
-        public IVisio.Document DrawNamespacesAndClasses(IList<Type> types_)
+        public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
@@ -413,7 +412,7 @@ namespace VisioScripting.Commands
             foreach (string ns in namespaces)
             {
                 string label = ns;
-                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, StringComparison.Ordinal);
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, System.StringComparison.Ordinal);
                 if (index_of_last_sep > 0)
                 {
                     label = ns.Substring(index_of_last_sep + 1);

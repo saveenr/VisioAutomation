@@ -1,5 +1,4 @@
-﻿ using System;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
@@ -36,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Page page, object formula)
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
         public void SetValues(short id, CellGroups.CellGroup cellgroup)

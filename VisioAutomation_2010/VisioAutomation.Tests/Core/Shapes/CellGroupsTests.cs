@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,7 +11,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
         [TestMethod]
         public void VerifyAllCellsAreEnumerated()
         {
-            var types = new List<Type>();
+            var types = new List<System.Type>();
             types.Add(typeof(VisioAutomation.Shapes.ControlCells));
             types.Add(typeof(VisioAutomation.Shapes.ConnectionPointCells));
             types.Add(typeof(VisioAutomation.Shapes.CustomPropertyCells));
@@ -29,7 +28,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             var cvt_ctor = typeof(VisioAutomation.Core.CellValue).GetConstructor(new []{typeof(string)});
             foreach (var cellgroup_type in types)
             {
-                var cellgroup_ctor = cellgroup_type.GetConstructor(Type.EmptyTypes);
+                var cellgroup_ctor = cellgroup_type.GetConstructor(System.Type.EmptyTypes);
                 var cellgroup_obj = cellgroup_ctor.Invoke(new object[] { });
                 var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroup) cellgroup_obj;
 
@@ -79,7 +78,7 @@ namespace VisioAutomation_Tests.Core.ShapeSheet
             }
         }
 
-        private static List<PropertyInfo> _get_cell_data_props(Type t)
+        private static List<PropertyInfo> _get_cell_data_props(System.Type t)
         {
             var props = t.GetProperties().Where(p => p.MemberType == MemberTypes.Property).ToList();
             var cellprops = props.Where(p => p.PropertyType == typeof(VisioAutomation.Core.CellValue)).ToList();
