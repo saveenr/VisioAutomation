@@ -7,8 +7,8 @@
     <ProjectGuid>{669CDDEB-7609-4294-9D0E-721F47129D0F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VisioPowerShell_Tests</RootNamespace>
-    <AssemblyName>VisioPowerShell_Tests</AssemblyName>
+    <RootNamespace>VTest.PowerShell</RootNamespace>
+    <AssemblyName>VTest.PowerShell</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

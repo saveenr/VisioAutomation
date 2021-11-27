@@ -1,7 +1,7 @@
 using UT = Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
-namespace VisioScripting_Tests
+namespace VTest.Scripting
 {
     [UT.TestClass]
     public class ScriptingApplicationTests : VTest.VisioAutomationTest

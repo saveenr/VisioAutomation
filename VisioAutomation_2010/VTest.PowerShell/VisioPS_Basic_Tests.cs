@@ -1,8 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioPowerShell.Commands.VisioApplication;
+using VisioPowerShell_Tests;
 using VisioPowerShell_Tests.Framework;
 
-namespace VisioPowerShell_Tests
+namespace VTest.PowerShell
 {
     [TestClass]
     public class VisioPS_Basic_Tests
