@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace VisioPowerShell_Tests.Framework.Extensions
+namespace VTest.PowerShell.Framework.Extensions
 {
     public static class CmdletExtensions
     {

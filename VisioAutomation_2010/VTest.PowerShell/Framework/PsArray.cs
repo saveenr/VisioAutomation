@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioPowerShell_Tests.Framework
+namespace VTest.PowerShell.Framework
 {
     public static class PsArray
     {

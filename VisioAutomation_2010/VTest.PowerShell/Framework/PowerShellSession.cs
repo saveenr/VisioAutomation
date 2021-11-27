@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell_Tests.Framework
+namespace VTest.PowerShell.Framework
 {
     public class PowerShellSession : System.IDisposable 
     {

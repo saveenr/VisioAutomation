@@ -1,7 +1,6 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioPowerShell.Commands.VisioApplication;
-using VisioPowerShell_Tests;
-using VisioPowerShell_Tests.Framework;
+using VTest.PowerShell.Framework;
 
 namespace VTest.PowerShell
 {

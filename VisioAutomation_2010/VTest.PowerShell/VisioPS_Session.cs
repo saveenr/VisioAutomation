@@ -1,12 +1,12 @@
-using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
-using VisioPowerShell_Tests.Framework.Extensions;
-using VisioPowerShell_Tests.Framework;
+using VTest.PowerShell.Framework;
+using VTest.PowerShell.Framework.Extensions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell_Tests
+namespace VTest.PowerShell
 {
-    public class VisioPS_Session : VisioPowerShell_Tests.Framework.PowerShellSession
+    public class VisioPS_Session : PowerShellSession
     {
         public VisioPS_Session()
         {
