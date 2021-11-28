@@ -1,6 +1,6 @@
 namespace VisioAutomation.Analyzers
 {
-    public enum DirectionSource
+    public enum EdgeDirectionSource
     {
         UseConnectionOrder,
         UseConnectorArrows

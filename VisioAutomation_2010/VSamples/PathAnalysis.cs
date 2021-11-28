@@ -39,7 +39,7 @@ namespace VSamples
             s5.AutoConnect(s6, dir, null);
 
             var options0 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
-            options0.DirectionSource = VisioAutomation.Analyzers.DirectionSource.UseConnectionOrder;
+            options0.EdgeDirectionSource = VisioAutomation.Analyzers.EdgeDirectionSource.UseConnectionOrder;
 
             var normal_edges = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page, options0);
 

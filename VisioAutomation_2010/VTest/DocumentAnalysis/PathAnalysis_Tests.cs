@@ -64,7 +64,7 @@ namespace VTest.DocumentAnalysis
             this.connect(shapes[1], shapes[2], false, false);
 
             var options = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options.DirectionSource = VA.Analyzers.DirectionSource.UseConnectionOrder;
+            options.EdgeDirectionSource = VA.Analyzers.EdgeDirectionSource.UseConnectionOrder;
 
             var edges = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page1, options);
             var map = new ConnectivityMap(edges);

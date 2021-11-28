@@ -26,7 +26,7 @@ namespace VisioAutomation.Analyzers
 
             var edges = ConnectionAnalyzer._get_directed_edges_raw(page);
 
-            if (options.DirectionSource == DirectionSource.UseConnectionOrder)
+            if (options.EdgeDirectionSource == EdgeDirectionSource.UseConnectionOrder)
             {
                 return edges;
             }

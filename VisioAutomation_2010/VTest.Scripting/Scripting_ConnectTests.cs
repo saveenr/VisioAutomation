@@ -53,7 +53,7 @@ namespace VTest.Scripting
             writer.Commit();
 
             var options0 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options0.DirectionSource = DirectionSource.UseConnectionOrder;
+            options0.EdgeDirectionSource = EdgeDirectionSource.UseConnectionOrder;
             var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(VisioScripting.TargetPage.Auto, options0);
             MUT.Assert.AreEqual(2, undirected_edges0.Count);
 
@@ -112,7 +112,7 @@ namespace VTest.Scripting
             MUT.Assert.AreEqual(4, directed_edges1.Count);
 
             var options3 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options3.DirectionSource = DirectionSource.UseConnectionOrder;
+            options3.EdgeDirectionSource = EdgeDirectionSource.UseConnectionOrder;
 
             var undirected_edges0 = client.Connection.GetDirectedEdgesOnPage(targetpage, options3);
             MUT.Assert.AreEqual(2, undirected_edges0.Count);

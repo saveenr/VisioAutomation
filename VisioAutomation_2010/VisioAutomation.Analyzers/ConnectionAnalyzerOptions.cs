@@ -2,7 +2,7 @@ namespace VisioAutomation.Analyzers
 {
     public class ConnectionAnalyzerOptions
     {
-        public DirectionSource DirectionSource = DirectionSource.UseConnectorArrows;
+        public EdgeDirectionSource EdgeDirectionSource = EdgeDirectionSource.UseConnectorArrows;
         public EdgeNoArrowsHandling EdgeNoArrowsHandling = EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
     }
 }
