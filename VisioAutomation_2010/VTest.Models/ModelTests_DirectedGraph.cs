@@ -6,7 +6,7 @@ using SXL = System.Xml.Linq;
 
 namespace VTest.Models
 {
-    public partial class ModelTests : Framework.VTest
+    public class ModelTests_DirectedGraph : Framework.VTest
     {
 
         [MUT.TestMethod]
@@ -80,17 +80,6 @@ namespace VTest.Models
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        public string get_datafile_content(string name)
-        {
-            string inputfilename = this._get_test_results_out_path( name );
-
-            if (!File.Exists(inputfilename))
-            {
-                MUT.Assert.Fail("Could not locate " + inputfilename);
-            }
-            string text = File.ReadAllText(inputfilename);
-            return text;
-        }
 
         private void draw_directed_graph(VisioScripting.Client client, string dg_text)
         {
@@ -120,6 +109,19 @@ namespace VTest.Models
 
             client.Model.DrawDirectedGraphDocument(dgdoc,dgstyling);
         }
-        
+
+
+        public string get_datafile_content(string name)
+        {
+            string inputfilename = this._get_test_results_out_path(name);
+
+            if (!System.IO.File.Exists(inputfilename))
+            {
+                MUT.Assert.Fail("Could not locate " + inputfilename);
+            }
+            string text = System.IO.File.ReadAllText(inputfilename);
+            return text;
+        }
+
     }
 }

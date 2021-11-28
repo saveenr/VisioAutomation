@@ -3,7 +3,7 @@ using SXL = System.Xml.Linq;
 
 namespace VTest.Models
 {
-    public partial class ModelTests : Framework.VTest
+    public class ModelTests_OrgChart: Framework.VTest
     {
         [MUT.TestMethod]
         [MUT.DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]
@@ -27,6 +27,18 @@ namespace VTest.Models
             var orgchart = VisioScripting.Builders.OrgChartDocumentLoader.LoadFromXml(client, xmldoc);
 
             client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
+        }
+
+        public string get_datafile_content(string name)
+        {
+            string inputfilename = this._get_test_results_out_path(name);
+
+            if (!System.IO.File.Exists(inputfilename))
+            {
+                MUT.Assert.Fail("Could not locate " + inputfilename);
+            }
+            string text = System.IO.File.ReadAllText(inputfilename);
+            return text;
         }
 
     }

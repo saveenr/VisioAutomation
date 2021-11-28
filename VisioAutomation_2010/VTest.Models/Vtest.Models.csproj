@@ -74,7 +74,7 @@
     <Compile Include="Geometry\DrawingHelper.cs" />
     <Compile Include="Documents\OrgChart_Tests.cs" />
     <Compile Include="Layouts\Tree_Tests.cs" />
-    <Compile Include="ModelTests_Drop_Master.cs" />
+    <Compile Include="ModelTests_DropMaster.cs" />
     <Compile Include="ModelTests_DirectedGraph.cs" />
     <Compile Include="ModelTests_ManualGeometry.cs" />
     <Compile Include="ModelTests_Grid.cs" />
