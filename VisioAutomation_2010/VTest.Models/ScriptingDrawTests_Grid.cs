@@ -1,4 +1,3 @@
-using System.Linq;
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using GRID = VisioAutomation.Models.Layouts.Grid;

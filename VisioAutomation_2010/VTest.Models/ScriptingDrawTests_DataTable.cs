@@ -1,7 +1,6 @@
 using System.Data;
 using System.Linq;
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Extensions;
 
 namespace VTest.Scripting
 {
