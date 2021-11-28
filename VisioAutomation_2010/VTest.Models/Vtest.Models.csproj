@@ -76,7 +76,6 @@
     <Compile Include="Layouts\Tree_Tests.cs" />
     <Compile Include="ModelTests_DropMaster.cs" />
     <Compile Include="ModelTests_DirectedGraph.cs" />
-    <Compile Include="ModelTests_ManualGeometry.cs" />
     <Compile Include="ModelTests_Grid.cs" />
     <Compile Include="ModelTests_DataTable.cs" />
     <Compile Include="ModelTests_OrgChart.cs" />

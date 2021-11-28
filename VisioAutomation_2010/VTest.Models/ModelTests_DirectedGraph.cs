@@ -109,19 +109,5 @@ namespace VTest.Models
 
             client.Model.DrawDirectedGraphDocument(dgdoc,dgstyling);
         }
-
-
-        public string get_datafile_content(string name)
-        {
-            string inputfilename = this._get_test_results_out_path(name);
-
-            if (!System.IO.File.Exists(inputfilename))
-            {
-                MUT.Assert.Fail("Could not locate " + inputfilename);
-            }
-            string text = System.IO.File.ReadAllText(inputfilename);
-            return text;
-        }
-
     }
 }
