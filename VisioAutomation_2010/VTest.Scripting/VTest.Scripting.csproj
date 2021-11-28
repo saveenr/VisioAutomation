@@ -57,7 +57,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelTests_DropMaster.cs" />
+    <Compile Include="Scripting_DropMasterTests.cs" />
     <Compile Include="Scripting_DrawManualShapes.cs" />
     <Compile Include="Scripting_ApplicationTests.cs" />
     <Compile Include="Scripting_ArrangeTests.cs" />

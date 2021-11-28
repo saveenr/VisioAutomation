@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Scripting
 {
-    public class ScriptingDropMasterTests : Framework.VTest
+    public class Scripting_DropMasterTests : Framework.VTest
     {
 
       
