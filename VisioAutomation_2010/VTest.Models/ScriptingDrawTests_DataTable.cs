@@ -2,7 +2,7 @@ using System.Data;
 using System.Linq;
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VTest.Scripting
+namespace VTest.Models
 {
     public partial class ScriptingDrawTests : Framework.VTest
     {

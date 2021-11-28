@@ -1,10 +1,10 @@
 using System.IO;
-using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VTest.Framework;
+using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 
-namespace VTest.Scripting
+namespace VTest.Models
 {
     public partial class ScriptingDrawTests : Framework.VTest
     {

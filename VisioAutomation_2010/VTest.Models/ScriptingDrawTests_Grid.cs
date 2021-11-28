@@ -1,8 +1,8 @@
-using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using GRID = VisioAutomation.Models.Layouts.Grid;
 
-namespace VTest.Scripting
+namespace VTest.Models
 {
     public partial class ScriptingDrawTests : Framework.VTest
     {

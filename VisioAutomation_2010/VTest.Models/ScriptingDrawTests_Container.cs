@@ -1,7 +1,7 @@
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
-namespace VTest.Scripting
+namespace VTest.Models
 {
     public partial class ScriptingDrawTests : Framework.VTest
     {
