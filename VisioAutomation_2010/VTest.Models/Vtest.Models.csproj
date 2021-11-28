@@ -73,7 +73,6 @@
     <Compile Include="DrawModel_DirectedGraph.cs" />
     <Compile Include="BoundingBoxHelperTests.cs" />
     <Compile Include="Tree_Tests.cs" />
-    <Compile Include="ModelTests_DropMaster2.cs" />
     <Compile Include="DrawModel_Grid.cs" />
     <Compile Include="DrawModel_DataTable.cs" />
     <Compile Include="DrawModel_OrgChartTests.cs" />
