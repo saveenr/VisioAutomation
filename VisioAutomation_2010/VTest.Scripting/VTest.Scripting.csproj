@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelTests_DropMaster.cs" />
-    <Compile Include="ModelTests_DropMaster2.cs" />
     <Compile Include="Scripting_DrawManualShapes.cs" />
     <Compile Include="Scripting_ApplicationTests.cs" />
     <Compile Include="Scripting_ArrangeTests.cs" />
