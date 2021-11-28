@@ -4,6 +4,7 @@ using VADOC=VisioAutomation.Models.Documents;
 using VADOM=VisioAutomation.Models.Dom;
 using VATREE=VisioAutomation.Models.Layouts.Tree;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA = VisioAutomation;
 
 namespace VisioScripting.Commands
 {
@@ -136,17 +137,9 @@ namespace VisioScripting.Commands
                         formpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
                     }
 
-                    //docbuilder.BodyParaSpacingAfter = 2.0;
-
                     formpage.BodyTextSize = 8.0;
                     formdoc.Pages.Add(formpage);
-            
-                    var tabstops = new[]
-                                 {
-                                     new VisioAutomation.Text.TabStop(1.5, VisioAutomation.Text.TabStopAlignment.Left)
-                                 };
-
-                    //VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
+           
                     
                     chunkcount++;
                 }
@@ -156,9 +149,6 @@ namespace VisioScripting.Commands
             formdoc.Title = "Visio Interop Enum Documenation";
             formdoc.Creator = "";
             formdoc.Company = "";
-
-            //hide_ui_stuff(docbuilder.VisioDocument);
-
 
             var application = cmdtarget.Application;
             var doc = formdoc.Render(application);

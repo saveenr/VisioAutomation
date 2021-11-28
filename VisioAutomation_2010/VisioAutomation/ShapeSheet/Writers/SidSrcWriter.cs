@@ -1,10 +1,11 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
+using VA= VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SidSrcWriter : WriterBase
     {
-        public SidSrcWriter() : base(VisioAutomation.ShapeSheet.Streams.StreamType.SidSrc)
+        public SidSrcWriter() : base(VA.ShapeSheet.Streams.StreamType.SidSrc)
         {
         }
 
@@ -50,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this._records == null)
             {
-                this._records = new WriteRecordList(VisioAutomation.ShapeSheet.Streams.StreamType.SidSrc);
+                this._records = new WriteRecordList(VA.ShapeSheet.Streams.StreamType.SidSrc);
             }
 
             if (formula.HasValue)
@@ -66,7 +67,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildStreamArray(VisioAutomation.ShapeSheet.Streams.StreamType.SidSrc);
+            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
             var formulas = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
@@ -86,7 +87,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 return;
             }
 
-            var stream = this._records.BuildStreamArray(VisioAutomation.ShapeSheet.Streams.StreamType.SidSrc);
+            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
             var items = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
