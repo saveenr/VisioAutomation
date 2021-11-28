@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
-using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VTest.Analyzers
 {
-    [MUT.TestClass]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
     public class Path_Test
     {
-        [MUT.TestMethod]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void Path_TestTransitiveClosure0()
         {
             // v0->v0
@@ -17,10 +16,10 @@ namespace VTest.Analyzers
                     new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v0", null)
                 };
             var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
-            MUT.Assert.AreEqual(0,output.Count);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(0,output.Count);
         }
 
-        [MUT.TestMethod]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void Path_TestTransitiveClosure1()
         {
             // v0->v0
@@ -30,10 +29,10 @@ namespace VTest.Analyzers
             input.Add(new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v0", null));
             input.Add(new VisioAutomation.Analyzers.DirectedEdge<string, object>("v1", "v1", null));
             var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
-            MUT.Assert.AreEqual(0, output.Count);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(0, output.Count);
         }
 
-        [MUT.TestMethod]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void Path_TestTransitiveClosure2()
         {
             // v0->v1
@@ -43,13 +42,13 @@ namespace VTest.Analyzers
                     new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v1", null)
                 };
             var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
-            MUT.Assert.AreEqual(1, output.Count);
-            MUT.Assert.AreEqual("v0",output[0].From);
-            MUT.Assert.AreEqual("v1", output[0].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(1, output.Count);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v0",output[0].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v1", output[0].To);
         }
 
 
-        [MUT.TestMethod]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void Path_TestTransitiveClosure3()
         {
             var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
@@ -58,19 +57,19 @@ namespace VTest.Analyzers
                     new VisioAutomation.Analyzers.DirectedEdge<string, object>("v1", "v2", null)
                 };
             var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
-            MUT.Assert.AreEqual(3, output.Count);
-            MUT.Assert.AreEqual("v0", output[0].From);
-            MUT.Assert.AreEqual("v1", output[0].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(3, output.Count);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v0", output[0].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v1", output[0].To);
 
-            MUT.Assert.AreEqual("v0", output[1].From);
-            MUT.Assert.AreEqual("v2", output[1].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v0", output[1].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v2", output[1].To);
 
-            MUT.Assert.AreEqual("v1", output[2].From);
-            MUT.Assert.AreEqual("v2", output[2].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v1", output[2].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v2", output[2].To);
             
         }
 
-        [MUT.TestMethod]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void Path_TestTransitiveClosure4()
         {
             var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
@@ -80,24 +79,24 @@ namespace VTest.Analyzers
                     new VisioAutomation.Analyzers.DirectedEdge<string, object>("v2", "v0", null)
                 };
             var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
-            MUT.Assert.AreEqual(6, output.Count);
-            MUT.Assert.AreEqual("v0", output[0].From);
-            MUT.Assert.AreEqual("v1", output[0].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(6, output.Count);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v0", output[0].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v1", output[0].To);
 
-            MUT.Assert.AreEqual("v0", output[1].From);
-            MUT.Assert.AreEqual("v2", output[1].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v0", output[1].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v2", output[1].To);
 
-            MUT.Assert.AreEqual("v1", output[2].From);
-            MUT.Assert.AreEqual("v0", output[2].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v1", output[2].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v0", output[2].To);
 
-            MUT.Assert.AreEqual("v1", output[3].From);
-            MUT.Assert.AreEqual("v2", output[3].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v1", output[3].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v2", output[3].To);
 
-            MUT.Assert.AreEqual("v2", output[4].From);
-            MUT.Assert.AreEqual("v0", output[4].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v2", output[4].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v0", output[4].To);
 
-            MUT.Assert.AreEqual("v2", output[5].From);
-            MUT.Assert.AreEqual("v1", output[5].To);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v2", output[5].From);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("v1", output[5].To);
 
         }
     }

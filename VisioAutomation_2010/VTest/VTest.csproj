@@ -106,8 +106,8 @@
     <Compile Include="Utilities\ArraySegmentTests.cs" />
     <Compile Include="Core\Shapes\CellGroupsTests.cs" />
     <Compile Include="Core\Shapes\ConnectorTests.cs" />
-    <Compile Include="DocumentAnalysis\ConnectivityMap.cs" />
-    <Compile Include="DocumentAnalysis\ConnectionTests.cs" />
+    <Compile Include="Analyzers\ConnectivityMap.cs" />
+    <Compile Include="Analyzers\ConnectionAnalysisTests.cs" />
     <Compile Include="Framework\AssertUtil.cs" />
     <Compile Include="Core\Shapes\HyperlinkTests.cs" />
     <Compile Include="Framework\VTestScriptingClient.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Core\Text\TextFormatTests.cs" />
     <Compile Include="Core\Shapes\CustomPropertiesTest.cs" />
     <Compile Include="Core\Extensions\SelectionTests.cs" />
-    <Compile Include="DocumentAnalysis\Path_Test.cs" />
+    <Compile Include="Analyzers\Path_Test.cs" />
     <Compile Include="Core\Shapes\UserDefinedCellsTests.cs" />
     <Compile Include="Core\ShapeSheet\ShapeSheetWriterTests.cs" />
     <Compile Include="Core\Extensions\ApplicationTests.cs" />
@@ -138,7 +138,7 @@
     <Compile Include="Core\Extensions\PageDrawTests.cs" />
     <Compile Include="Core\Extensions\PageTests.cs" />
     <Compile Include="Core\Text\TextUtilTests.cs" />
-    <Compile Include="DocumentAnalysis\ConnectionPoint_Tests.cs" />
+    <Compile Include="Core\ConnectionPoint_Tests.cs" />
     <Compile Include="Core\Shapes\ControlTests.cs" />
     <Compile Include="Core\PageHelperTests.cs" />
     <Compile Include="Core\Shapes\ShapeHelperTests.cs" />
@@ -224,6 +224,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
