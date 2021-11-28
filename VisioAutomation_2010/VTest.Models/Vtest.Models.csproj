@@ -70,14 +70,13 @@
     <Compile Include="Dom_Text_Tests.cs" />
     <Compile Include="Layout_BoxTests.cs" />
     <Compile Include="Layout_ContainerTests.cs" />
-    <Compile Include="DrawModekDirectedGraph2.cs" />
+    <Compile Include="DrawModel_DirectedGraph.cs" />
     <Compile Include="BoundingBoxHelperTests.cs" />
     <Compile Include="DrawModel_OrgChart2.cs" />
     <Compile Include="Tree_Tests.cs" />
     <Compile Include="ModelTests_DropMaster2.cs" />
-    <Compile Include="DrawDirectedGraphTests.cs" />
     <Compile Include="DrawModel_Grid.cs" />
-    <Compile Include="DrawModel_DataTableTests.cs" />
+    <Compile Include="DrawModel_DataTable.cs" />
     <Compile Include="DrawModel_OrgChart.cs" />
     <Compile Include="Scripting_DropContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

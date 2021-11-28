@@ -4,7 +4,7 @@ using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VTest.Models
 {
-    public class DrawModel_DataTableTests : Framework.VTest
+    public class DrawModel_DataTable : Framework.VTest
     {
 
         [MUT.TestMethod]
