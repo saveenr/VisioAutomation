@@ -6,7 +6,7 @@ using SXL = System.Xml.Linq;
 
 namespace VTest.Models
 {
-    public class ModelTests_DirectedGraph : Framework.VTest
+    public class DrawDirectedGraphTests : Framework.VTest
     {
 
         [MUT.TestMethod]

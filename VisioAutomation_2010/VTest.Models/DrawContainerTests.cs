@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VTest.Models
 {
-    public class ModelContainerTests : Framework.VTest
+    public class DrawContainerTests : Framework.VTest
     {
 
 

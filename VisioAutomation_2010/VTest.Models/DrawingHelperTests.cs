@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 namespace VTest.Models.Geometry
 {
     [MUT.TestClass]
-    public class DrawingHelper : Framework.VTest
+    public class DrawingHelperTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Drawing_CreateBoundingBox_0Points()

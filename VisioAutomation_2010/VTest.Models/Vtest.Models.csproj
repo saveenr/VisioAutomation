@@ -65,22 +65,22 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Geometry\BezierTests.cs" />
-    <Compile Include="Dom\Dom_Tests.cs" />
-    <Compile Include="Dom\Dom_Text.cs" />
-    <Compile Include="Layouts\BoxLayout_Tests.cs" />
-    <Compile Include="Layouts\CointainerLayout_Tests.cs" />
-    <Compile Include="Layouts\DirectedGraph_Tests.cs" />
-    <Compile Include="Geometry\DrawingHelper.cs" />
-    <Compile Include="Documents\OrgChart_Tests.cs" />
-    <Compile Include="Layouts\Tree_Tests.cs" />
+    <Compile Include="BezierTests.cs" />
+    <Compile Include="Dom_Tests.cs" />
+    <Compile Include="Dom_Text_Tests.cs" />
+    <Compile Include="BoxLayout_Tests.cs" />
+    <Compile Include="CointainerLayout_Tests.cs" />
+    <Compile Include="DirectedGraph_Tests.cs" />
+    <Compile Include="DrawingHelperTests.cs" />
+    <Compile Include="OrgChart_Tests.cs" />
+    <Compile Include="Tree_Tests.cs" />
     <Compile Include="ModelTests_DropMaster.cs" />
-    <Compile Include="ModelTests_DirectedGraph.cs" />
+    <Compile Include="DrawDirectedGraphTests.cs" />
     <Compile Include="ModelTests_Grid.cs" />
-    <Compile Include="ModelTests_DataTable.cs" />
+    <Compile Include="DrawDataTableTests.cs" />
     <Compile Include="ModelTests_OrgChart.cs" />
     <Compile Include="ModelTests_Main.cs" />
-    <Compile Include="ModelTests_Container.cs" />
+    <Compile Include="DrawContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
