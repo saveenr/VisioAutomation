@@ -2,6 +2,7 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
+using VA=VisioAutomation;
 
 namespace VTest.Core.Shapes
 {
@@ -11,13 +12,13 @@ namespace VTest.Core.Shapes
         [MUT.TestMethod]
         public void CustomProps_Names()
         {
-            MUT.Assert.IsFalse(CustomPropertyHelper.IsValidName(null));
-            MUT.Assert.IsFalse(CustomPropertyHelper.IsValidName(string.Empty));
-            MUT.Assert.IsFalse(CustomPropertyHelper.IsValidName(" foo "));
-            MUT.Assert.IsFalse(CustomPropertyHelper.IsValidName("foo "));
-            MUT.Assert.IsFalse(CustomPropertyHelper.IsValidName("foo\t"));
-            MUT.Assert.IsFalse(CustomPropertyHelper.IsValidName("fo bar"));
-            MUT.Assert.IsTrue(CustomPropertyHelper.IsValidName("foobar"));
+            MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName(null));
+            MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName(string.Empty));
+            MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName(" foo "));
+            MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName("foo "));
+            MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName("foo\t"));
+            MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName("fo bar"));
+            MUT.Assert.IsTrue(VA.Shapes.CustomPropertyHelper.IsValidName("foobar"));
         }
 
         [MUT.TestMethod]
@@ -31,18 +32,18 @@ namespace VTest.Core.Shapes
             int cp_type = 0; // string type
 
             // Set some properties on it
-            CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
-            CustomPropertyHelper.Set(s1, "FOO2", "\"BAR2\"", cp_type);
-            CustomPropertyHelper.Set(s1, "FOO3", "\"BAR3\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "FOO1", "\"BAR1\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "FOO2", "\"BAR2\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "FOO3", "\"BAR3\"", cp_type);
 
             // Delete one of those properties
-            CustomPropertyHelper.Delete(s1, "FOO2");
+            VA.Shapes.CustomPropertyHelper.Delete(s1, "FOO2");
 
             // Set the value of an existing properties
-            CustomPropertyHelper.Set(s1, "FOO3", "\"BAR3updated\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "FOO3", "\"BAR3updated\"", cp_type);
 
             // retrieve all the properties
-            var props = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
+            var props = VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
 
             var cp_foo1 = props["FOO1"];
             // var cp_foo2 = props["FOO2"]; there is no prop called FOO2
@@ -65,7 +66,7 @@ namespace VTest.Core.Shapes
             s1.Text = "Checking for Custom Properties";
 
             // A new rectangle should have zero props
-            var c0 = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
+            var c0 = VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
             MUT.Assert.AreEqual(0, c0.Count);
 
 
@@ -73,17 +74,17 @@ namespace VTest.Core.Shapes
 
             // Set one property
             // Notice that the properties some back double-quoted
-            CustomPropertyHelper.Set(s1, "PROP1", "\"VAL1\"", cp_type);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "PROP1", "\"VAL1\"", cp_type);
 
-            var c1 = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
+            var c1 = VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
 
             MUT.Assert.AreEqual(1, c1.Count);
             MUT.Assert.IsTrue(c1.ContainsKey("PROP1"));
             MUT.Assert.AreEqual("\"VAL1\"", c1["PROP1"].Value.Value);
 
             // Add another property
-            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2\"", cp_type);
-            var c2 = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2\"", cp_type);
+            var c2 = VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
 
             MUT.Assert.AreEqual(2, c2.Count);
             MUT.Assert.IsTrue(c2.ContainsKey("PROP1"));
@@ -92,8 +93,8 @@ namespace VTest.Core.Shapes
             MUT.Assert.AreEqual("\"VAL 2\"", c2["PROP2"].Value.Value);
 
             // Modify the value of the second property
-            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"", cp_type);
-            var c3 = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"", cp_type);
+            var c3 = VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
   
             MUT.Assert.AreEqual(2, c3.Count);
             MUT.Assert.IsTrue(c3.ContainsKey("PROP1"));
@@ -104,10 +105,10 @@ namespace VTest.Core.Shapes
             // Now delete all the custom properties
             foreach (string name in c3.Keys)
             {
-                CustomPropertyHelper.Delete(s1, name);
+                VA.Shapes.CustomPropertyHelper.Delete(s1, name);
             }
 
-            var c4 = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
+            var c4 = VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
 
 
             MUT.Assert.AreEqual(0, c4.Count);
@@ -161,12 +162,12 @@ namespace VTest.Core.Shapes
             prop_number_in.Type = CustomPropertyCells.CustomPropertyTypeToInt(CustomPropertyType.Number);
             prop_number_in.Value = "3.14";
 
-            CustomPropertyHelper.Set(s1, "PROP_STRING", prop_string_in);
-            CustomPropertyHelper.Set(s1, "PROP_BOOLEAN", prop_bool_in);
-            CustomPropertyHelper.Set(s1, "PROP_DATE", prop_date_in);
-            CustomPropertyHelper.Set(s1, "PROP_NUMBER", prop_number_in);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "PROP_STRING", prop_string_in);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "PROP_BOOLEAN", prop_bool_in);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "PROP_DATE", prop_date_in);
+            VA.Shapes.CustomPropertyHelper.Set(s1, "PROP_NUMBER", prop_number_in);
 
-            var props_dic = CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
+            var props_dic = VA.Shapes.CustomPropertyHelper.GetDictionary(s1, VisioAutomation.Core.CellValueType.Formula);
 
 
             var prop_string_out = props_dic["PROP_STRING"];
