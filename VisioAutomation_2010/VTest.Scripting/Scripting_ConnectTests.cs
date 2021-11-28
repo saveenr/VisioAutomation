@@ -58,10 +58,10 @@ namespace VTest.Scripting
             MUT.Assert.AreEqual(2, undirected_edges0.Count);
 
             var options1 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options1.NoArrowsHandling = NoArrowsHandling.ExcludeEdge;
+            options1.EdgeNoArrowsHandling = EdgeNoArrowsHandling.ExcludeEdge;
 
             var options2 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options2.NoArrowsHandling = NoArrowsHandling.TreatEdgeAsBidirectional;
+            options2.EdgeNoArrowsHandling = EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
 
             var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(VisioScripting.TargetPage.Auto, options1);
             MUT.Assert.AreEqual(2, directed_edges0.Count);
@@ -100,13 +100,13 @@ namespace VTest.Scripting
             var undirected_connectors = client.Connection.ConnectShapes(targetpage, new [] { s1,s2},new [] { s2,s3}, master);
 
             var options1 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
-            options1.NoArrowsHandling = NoArrowsHandling.ExcludeEdge;
+            options1.EdgeNoArrowsHandling = EdgeNoArrowsHandling.ExcludeEdge;
 
             var directed_edges0 = client.Connection.GetDirectedEdgesOnPage(targetpage, options1);
             MUT.Assert.AreEqual(0, directed_edges0.Count);
 
             var options2 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options2.NoArrowsHandling = NoArrowsHandling.TreatEdgeAsBidirectional;
+            options2.EdgeNoArrowsHandling = EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
 
             var directed_edges1 = client.Connection.GetDirectedEdgesOnPage(targetpage, options2);
             MUT.Assert.AreEqual(4, directed_edges1.Count);

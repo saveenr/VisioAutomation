@@ -44,10 +44,10 @@ namespace VSamples
             var normal_edges = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page, options0);
 
             var options1 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
-            options1.NoArrowsHandling =  VisioAutomation.Analyzers.NoArrowsHandling.ExcludeEdge;
+            options1.EdgeNoArrowsHandling =  VisioAutomation.Analyzers.EdgeNoArrowsHandling.ExcludeEdge;
 
             var options2 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
-            options2.NoArrowsHandling=VisioAutomation.Analyzers.NoArrowsHandling.TreatEdgeAsBidirectional;
+            options2.EdgeNoArrowsHandling=VisioAutomation.Analyzers.EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
 
             var tc_edges_0 = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options1);
             var tc_edges_1 = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options2);

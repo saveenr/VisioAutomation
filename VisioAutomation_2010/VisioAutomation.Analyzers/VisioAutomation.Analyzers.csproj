@@ -48,7 +48,7 @@
     <Compile Include="DirectedEdge.cs" />
     <Compile Include="ConnectionAnalyzer.cs" />
     <Compile Include="DirectionSource.cs" />
-    <Compile Include="NoArrowsHandling.cs" />
+    <Compile Include="EdgeNoArrowsHandling.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

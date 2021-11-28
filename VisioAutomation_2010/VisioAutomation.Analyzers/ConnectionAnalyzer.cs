@@ -56,7 +56,7 @@ namespace VisioAutomation.Analyzers
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
                     // the line has no arrows
-                    if (options.NoArrowsHandling == NoArrowsHandling.TreatEdgeAsBidirectional)
+                    if (options.EdgeNoArrowsHandling == EdgeNoArrowsHandling.IncludeEdgesForBothDirections)
                     {
                         // in this case treat the connector as pointing in both directions
                         var de1 = new ConnectorEdge(edge.Connector, edge.To, edge.From);
@@ -64,7 +64,7 @@ namespace VisioAutomation.Analyzers
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
-                    else if (options.NoArrowsHandling == NoArrowsHandling.ExcludeEdge)
+                    else if (options.EdgeNoArrowsHandling == EdgeNoArrowsHandling.ExcludeEdge)
                     {
                         // in this case ignore the connector completely
                     }

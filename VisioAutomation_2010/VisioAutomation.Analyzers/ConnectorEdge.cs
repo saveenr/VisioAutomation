@@ -2,7 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Analyzers
 {
-    public struct ConnectorEdge
+    public readonly struct ConnectorEdge
     {
         public IVisio.Shape Connector { get; }
         public IVisio.Shape From { get; }

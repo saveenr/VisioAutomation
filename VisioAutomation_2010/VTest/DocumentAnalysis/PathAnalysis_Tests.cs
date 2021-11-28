@@ -86,7 +86,7 @@ namespace VTest.DocumentAnalysis
             this.connect(shapes[1], shapes[2], false, false);
 
             var options1 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options1.NoArrowsHandling = VA.Analyzers.NoArrowsHandling.TreatEdgeAsBidirectional;
+            options1.EdgeNoArrowsHandling = VA.Analyzers.EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
             var edges1 = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
             MUT.Assert.AreEqual(3, map1.CountFromNodes());
@@ -99,7 +99,7 @@ namespace VTest.DocumentAnalysis
             MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var options2 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options2.NoArrowsHandling = VA.Analyzers.NoArrowsHandling.TreatEdgeAsBidirectional;
+            options2.EdgeNoArrowsHandling = VA.Analyzers.EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
 
             var edges2 = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges2);
@@ -129,7 +129,7 @@ namespace VTest.DocumentAnalysis
             this.connect(shapes[1], shapes[2], false, false);
 
             var options = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options.NoArrowsHandling = VA.Analyzers.NoArrowsHandling.ExcludeEdge;
+            options.EdgeNoArrowsHandling = VA.Analyzers.EdgeNoArrowsHandling.ExcludeEdge;
 
             var edges1 = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page1, options);
             var map1 = new ConnectivityMap(edges1);
@@ -152,7 +152,7 @@ namespace VTest.DocumentAnalysis
             this.connect(shapes[1], shapes[2], true, false);
 
             var options1 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options1.NoArrowsHandling = VA.Analyzers.NoArrowsHandling.ExcludeEdge;
+            options1.EdgeNoArrowsHandling = VA.Analyzers.EdgeNoArrowsHandling.ExcludeEdge;
 
             var edges1 = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
@@ -163,7 +163,7 @@ namespace VTest.DocumentAnalysis
             MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var options2 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options2.NoArrowsHandling = VA.Analyzers.NoArrowsHandling.TreatEdgeAsBidirectional;
+            options2.EdgeNoArrowsHandling = VA.Analyzers.EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
 
 
             var edges2 = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
@@ -188,7 +188,7 @@ namespace VTest.DocumentAnalysis
             this.connect(shapes[1], shapes[2], true, true);
 
             var options1 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options1.NoArrowsHandling = VA.Analyzers.NoArrowsHandling.ExcludeEdge;
+            options1.EdgeNoArrowsHandling = VA.Analyzers.EdgeNoArrowsHandling.ExcludeEdge;
 
             var edges1 = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page1, options1);
             var map1 = new ConnectivityMap(edges1);
@@ -202,7 +202,7 @@ namespace VTest.DocumentAnalysis
             MUT.Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
             var options2 = new VA.Analyzers.ConnectionAnalyzerOptions();
-            options2.NoArrowsHandling = VA.Analyzers.NoArrowsHandling.TreatEdgeAsBidirectional;
+            options2.EdgeNoArrowsHandling = VA.Analyzers.EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
 
             var edges2 = VA.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page1, options2);
             var map2 = new ConnectivityMap(edges2);
