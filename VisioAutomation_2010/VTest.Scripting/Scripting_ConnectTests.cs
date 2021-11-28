@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingConnectTests : Framework.VTest
+    public class Scripting_ConnectTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Connects_Scenario_0()

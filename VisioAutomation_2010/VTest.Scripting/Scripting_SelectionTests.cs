@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingSelectionTests : Framework.VTest
+    public class Scripting_SelectionTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Selection_Scenarios()

@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VTest.Models
 {
-    public class ScriptingDrawManualShapes : Framework.VTest
+    public class Scripting_DrawManualShapes : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Draw_RectangleLineOval_0()

@@ -58,25 +58,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelTests_DropMaster.cs" />
-    <Compile Include="ScriptingDrawManualShapes.cs" />
-    <Compile Include="ScriptingApplicationTests.cs" />
-    <Compile Include="ScriptingArrangeTests.cs" />
-    <Compile Include="ScriptingClientTests.cs" />
-    <Compile Include="ScriptingConnectionPointTests.cs" />
-    <Compile Include="ScriptingConnectTests.cs" />
-    <Compile Include="ScriptingControlTests.cs" />
-    <Compile Include="ScriptingCustomPropTests.cs" />
-    <Compile Include="ScriptingDevTests.cs" />
-    <Compile Include="ScriptingDocumentTests.cs" />
-    <Compile Include="ScriptingModelTests.cs" />
-    <Compile Include="ScriptingExportTests.cs" />
-    <Compile Include="ScriptingGroupTests.cs" />
-    <Compile Include="ScriptingHyperlinkTests.cs" />
-    <Compile Include="ScriptingPageTests.cs" />
-    <Compile Include="ScriptingSelectionTests.cs" />
-    <Compile Include="ScriptingShapeSheetTests.cs" />
-    <Compile Include="ScriptingShapeText_Tests.cs" />
+    <Compile Include="ModelTests_DropMaster2.cs" />
+    <Compile Include="Scripting_DrawManualShapes.cs" />
+    <Compile Include="Scripting_ApplicationTests.cs" />
+    <Compile Include="Scripting_ArrangeTests.cs" />
+    <Compile Include="Scripting_ClientTests.cs" />
+    <Compile Include="Scripting_ConnectionPointTests.cs" />
+    <Compile Include="Scripting_ConnectTests.cs" />
+    <Compile Include="Scripting_ControlTests.cs" />
+    <Compile Include="Scripting_CustomPropTests.cs" />
+    <Compile Include="Scripting_DevTests.cs" />
+    <Compile Include="Scripting_DocumentTests.cs" />
+    <Compile Include="Scripting_ModelTests.cs" />
+    <Compile Include="Scripting_ExportTests.cs" />
+    <Compile Include="Scripting_GroupTests.cs" />
+    <Compile Include="Scripting_HyperlinkTests.cs" />
+    <Compile Include="Scripting_PageTests.cs" />
+    <Compile Include="Scripting_SelectionTests.cs" />
+    <Compile Include="Scripting_ShapeSheetTests.cs" />
+    <Compile Include="Scripting_ShapeText_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripting_DropContainerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

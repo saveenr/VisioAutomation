@@ -3,7 +3,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VABOX = VisioAutomation.Models.Layouts.Box;
 using VA=VisioAutomation;
 
-namespace VTest.Models.Dom
+namespace VTest.Models
 {
     [MUT.TestClass]
     public class Dom_Text_Tests : Framework.VTest

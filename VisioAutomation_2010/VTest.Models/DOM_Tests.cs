@@ -1,11 +1,11 @@
-﻿using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Exceptions;
+﻿using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VADOM = VisioAutomation.Models.Dom;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VTest.Models.Dom
+namespace VTest.Models
 {
     [MUT.TestClass]
     public class Dom_Tests : Framework.VTest

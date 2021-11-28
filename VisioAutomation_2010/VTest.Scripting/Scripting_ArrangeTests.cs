@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingArrangeTests : Framework.VTest
+    public class Scripting_ArrangeTests : Framework.VTest
     {     
         [MUT.TestMethod]
         public void Scripting_Distribute()

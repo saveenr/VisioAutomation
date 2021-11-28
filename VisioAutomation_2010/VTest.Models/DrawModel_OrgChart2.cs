@@ -1,14 +1,14 @@
 using System.Linq;
-using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 
-namespace VTest.Models.Documents
+namespace VTest.Models
 {
     [MUT.TestClass]
-    public class OrgChart_Tests : Framework.VTest
+    public class DrawModel_OrgChart2 : Framework.VTest
     {
         [MUT.TestMethod]
         public void OrgChart_MustHaveContent()

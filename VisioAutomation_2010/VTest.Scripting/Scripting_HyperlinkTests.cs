@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingHyperlinkTests : Framework.VTest
+    public class Scripting_HyperlinkTests : Framework.VTest
     {
 
 

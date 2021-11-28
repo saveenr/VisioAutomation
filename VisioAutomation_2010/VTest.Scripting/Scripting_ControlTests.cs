@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingControlTests : Framework.VTest
+    public class Scripting_ControlTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Controls_Scenarios()

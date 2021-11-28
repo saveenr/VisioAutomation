@@ -1,14 +1,14 @@
-using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
-using VADG = VisioAutomation.Models.Layouts.DirectedGraph;
 using VisioAutomation.Shapes;
 using VTest.Framework;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using VADG = VisioAutomation.Models.Layouts.DirectedGraph;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VTest.Models.Layouts
+namespace VTest.Models
 {
     [MUT.TestClass]
-    public class DirectedGraph_Tests : Framework.VTest
+    public class DrawModekDirectedGraph2 : Framework.VTest
     {
         [MUT.TestMethod]
         public void DirectedGraph_WithBezierConnectors()

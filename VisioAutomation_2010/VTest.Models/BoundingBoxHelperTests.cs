@@ -1,10 +1,10 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
-namespace VTest.Models.Geometry
+namespace VTest.Models
 {
     [MUT.TestClass]
-    public class DrawingHelperTests : Framework.VTest
+    public class BoundingBoxHelperTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Drawing_CreateBoundingBox_0Points()

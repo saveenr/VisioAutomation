@@ -1,6 +1,6 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VTest.Models.Geometry
+namespace VTest.Models
 {
     [MUT.TestClass]
     public class BezierTests : Framework.VTest

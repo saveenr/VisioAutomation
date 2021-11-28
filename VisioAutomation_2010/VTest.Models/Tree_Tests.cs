@@ -4,7 +4,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VATREE = VisioAutomation.Models.Layouts.Tree;
 using VA = VisioAutomation;
 
-namespace VTest.Models.Layouts
+namespace VTest.Models
 {
     [MUT.TestClass]
     public class Tree_Tests : Framework.VTest

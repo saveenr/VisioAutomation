@@ -6,7 +6,7 @@ using VisioScripting.Models;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingPageTests : Framework.VTest
+    public class Scripting_PageTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Page_NewPage()

@@ -3,7 +3,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingConnectionPointTests : Framework.VTest
+    public class Scripting_ConnectionPointTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_ConnectionPoints_Scenarios()

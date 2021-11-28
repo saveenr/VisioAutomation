@@ -4,7 +4,7 @@ using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingApplicationTests : Framework.VTest
+    public class Scripting_ApplicationTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Test_Resize_Application_Window1()

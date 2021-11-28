@@ -1,12 +1,12 @@
-using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACONT = VisioAutomation.Models.Layouts.Container;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VTest.Models.Layouts
+namespace VTest.Models
 {
     [MUT.TestClass]
-    public class CointainerLayout_Tests : Framework.VTest
+    public class Layout_ContainerTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Container_PerformLayoutBeforeRender()

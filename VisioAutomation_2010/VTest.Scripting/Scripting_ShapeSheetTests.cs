@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingShapeSheetTests : Framework.VTest
+    public class Scripting_ShapeSheetTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void QueryPage()

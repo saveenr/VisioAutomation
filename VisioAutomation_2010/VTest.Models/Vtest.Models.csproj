@@ -68,19 +68,18 @@
     <Compile Include="BezierTests.cs" />
     <Compile Include="Dom_Tests.cs" />
     <Compile Include="Dom_Text_Tests.cs" />
-    <Compile Include="BoxLayout_Tests.cs" />
-    <Compile Include="CointainerLayout_Tests.cs" />
-    <Compile Include="DirectedGraph_Tests.cs" />
-    <Compile Include="DrawingHelperTests.cs" />
-    <Compile Include="OrgChart_Tests.cs" />
+    <Compile Include="Layout_BoxTests.cs" />
+    <Compile Include="Layout_ContainerTests.cs" />
+    <Compile Include="DrawModekDirectedGraph2.cs" />
+    <Compile Include="BoundingBoxHelperTests.cs" />
+    <Compile Include="DrawModel_OrgChart2.cs" />
     <Compile Include="Tree_Tests.cs" />
-    <Compile Include="ModelTests_DropMaster.cs" />
+    <Compile Include="ModelTests_DropMaster2.cs" />
     <Compile Include="DrawDirectedGraphTests.cs" />
-    <Compile Include="ModelTests_Grid.cs" />
-    <Compile Include="DrawDataTableTests.cs" />
-    <Compile Include="ModelTests_OrgChart.cs" />
-    <Compile Include="ModelTests_Main.cs" />
-    <Compile Include="DrawContainerTests.cs" />
+    <Compile Include="DrawModel_Grid.cs" />
+    <Compile Include="DrawModel_DataTableTests.cs" />
+    <Compile Include="DrawModel_OrgChart.cs" />
+    <Compile Include="Scripting_DropContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

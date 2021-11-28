@@ -2,10 +2,10 @@ using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VABOX = VisioAutomation.Models.Layouts.Box;
 
-namespace VTest.Models.Layouts
+namespace VTest.Models
 {
     [MUT.TestClass]
-    public class BoxLayout_Tests : Framework.VTest
+    public class Layout_BoxTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void BoxLayout_Test_empty()
