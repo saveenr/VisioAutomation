@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VTest.Framework;
 using GRID = VisioAutomation.Models.Layouts.Grid;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
@@ -11,7 +12,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingDrawTests : VisioAutomationTest
+    public class ScriptingDrawTests : Framework.VTest
     {
         [MUT.TestMethod]
         [MUT.DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]

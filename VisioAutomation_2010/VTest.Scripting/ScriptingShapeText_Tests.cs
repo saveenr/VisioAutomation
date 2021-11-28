@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingShapeText_Tests : VTest.VisioAutomationTest
+    public class ScriptingShapeText_Tests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Shape_Text_Set()

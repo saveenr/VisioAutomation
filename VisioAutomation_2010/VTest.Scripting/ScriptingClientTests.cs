@@ -3,7 +3,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingClientTests : VTest.VisioAutomationTest
+    public class ScriptingClientTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_DevDocumentationScenarios

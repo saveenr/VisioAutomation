@@ -1,13 +1,12 @@
 using System.Linq;
+using VTest.Framework;
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
-
-using VTest.Extensions;
 
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingArrangeTests : VTest.VisioAutomationTest
+    public class ScriptingArrangeTests : Framework.VTest
     {     
         [MUT.TestMethod]
         public void Scripting_Distribute()
@@ -75,9 +74,9 @@ namespace VTest.Scripting
             var shapeids = shapes.Select(s => (int) s.ID16).ToList();
             var xforms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.GetActivePage(), shapeids, VA.Core.CellValueType.Result);
 
-            VTest.AssertUtil.AreEqual( (1.75, 1), xforms[0].GetPinPosResult(), 0.00001);
-            VTest.AssertUtil.AreEqual( (3, 2.25), xforms[1].GetPinPosResult(), 0.00001);
-            VTest.AssertUtil.AreEqual( (5.25, 4.5), xforms[2].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual( (1.75, 1), xforms[0].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual( (3, 2.25), xforms[1].GetPinPosResult(), 0.00001);
+            AssertUtil.AreEqual( (5.25, 4.5), xforms[2].GetPinPosResult(), 0.00001);
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }

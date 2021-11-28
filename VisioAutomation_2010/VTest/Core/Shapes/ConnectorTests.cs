@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 namespace VTest.Core.Shapes
 {
     [MUT.TestClass]
-    public class ConnectorTests : VisioAutomationTest
+    public class ConnectorTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Connect1()

@@ -4,7 +4,7 @@ using VisioAutomation.Shapes;
 namespace VTest.Core.Shapes
 {
     [MUT.TestClass]
-    public class ControlTests : VisioAutomationTest
+    public class ControlTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Controls_AddRemove()

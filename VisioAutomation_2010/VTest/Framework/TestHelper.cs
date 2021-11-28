@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace VTest
+namespace VTest.Framework
 {
     public class TestHelper
     {

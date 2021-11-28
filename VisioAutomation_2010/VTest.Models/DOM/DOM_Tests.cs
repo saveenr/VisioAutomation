@@ -8,7 +8,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VTest.Models.Dom
 {
     [MUT.TestClass]
-    public class Dom_Tests : VisioAutomationTest
+    public class Dom_Tests : Framework.VTest
     {
         public string node_stencil_name = "basic_u.vss";
         public string edge_stencil_name = "connec_u.vss";
@@ -73,7 +73,7 @@ namespace VTest.Models.Dom
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             this._pagesize = new VA.Core.Size(10, 10);
-            VisioAutomationTest.SetPageSize(app.ActivePage, this._pagesize);
+            Framework.VTest.SetPageSize(app.ActivePage, this._pagesize);
             var page = page_node.Render(app.ActiveDocument);
 
             // Verify
@@ -183,7 +183,7 @@ namespace VTest.Models.Dom
             var page = page_node.Render(doc);
 
             MUT.Assert.AreEqual(0, page.Shapes.Count);
-            var actual_page_size = VisioAutomationTest.GetPageSize(page);
+            var actual_page_size = Framework.VTest.GetPageSize(page);
             var expected_page_size = new VA.Core.Size(5, 5);
             MUT.Assert.AreEqual(expected_page_size, actual_page_size);
 

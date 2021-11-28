@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingCustomPropTests : VTest.VisioAutomationTest
+    public class ScriptingCustomPropTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_ShapeSheet_SetNoShapes()

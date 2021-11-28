@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace VTest.Core.ShapeSheet
 {
     [MUT.TestClass]
-    public class CellGroupTests : VisioAutomationTest
+    public class CellGroupTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void VerifyAllCellsAreEnumerated()

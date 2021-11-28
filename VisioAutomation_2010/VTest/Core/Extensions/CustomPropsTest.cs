@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class CustomPropsTest : VisioAutomationTest
+    public class CustomPropsTest : Framework.VTest
     {
 
         [MUT.TestMethod]

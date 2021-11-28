@@ -8,7 +8,7 @@ using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
 namespace VTest.Models.Documents
 {
     [MUT.TestClass]
-    public class OrgChart_Tests : VisioAutomationTest
+    public class OrgChart_Tests : Framework.VTest
     {
         [MUT.TestMethod]
         public void OrgChart_MustHaveContent()
@@ -100,8 +100,8 @@ namespace VTest.Models.Documents
             MUT.Assert.AreEqual("D", n_d.VisioShape.Text.Trim());
             MUT.Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
-            MUT.Assert.AreEqual(new VA.Core.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
-            MUT.Assert.AreEqual(orgchart_doc.OrgChartLayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
+            MUT.Assert.AreEqual(new VA.Core.Size(4, 2), Framework.VTest.GetSize(n_a.VisioShape));
+            MUT.Assert.AreEqual(orgchart_doc.OrgChartLayoutOptions.DefaultNodeSize,  Framework.VTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
         }

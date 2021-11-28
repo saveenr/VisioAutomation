@@ -4,7 +4,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Core.Application
 {
     [MUT.TestClass]
-    public class ApplicationHelperTests : VisioAutomationTest
+    public class ApplicationHelperTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void TestStencilLocation()

@@ -6,7 +6,7 @@ using VisioAutomation.Shapes;
 namespace VTest.Core.Shapes
 {
     [MUT.TestClass]
-    public class CustomPropertiesTest : VisioAutomationTest
+    public class CustomPropertiesTest : Framework.VTest
     {
         [MUT.TestMethod]
         public void CustomProps_Names()

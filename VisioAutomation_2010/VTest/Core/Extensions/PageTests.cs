@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class PageTests : VisioAutomationTest
+    public class PageTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Page_CreatePage()

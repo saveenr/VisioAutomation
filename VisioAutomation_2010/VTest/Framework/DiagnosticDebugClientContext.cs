@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace VTest
+namespace VTest.Framework
 {
     public class DiagnosticDebugClientContext : VisioScripting.ClientContext
     {

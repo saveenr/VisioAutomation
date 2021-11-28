@@ -7,7 +7,7 @@ using VA=VisioAutomation;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class PageDrawTests : VisioAutomationTest
+    public class PageDrawTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Page_Draw_Line()

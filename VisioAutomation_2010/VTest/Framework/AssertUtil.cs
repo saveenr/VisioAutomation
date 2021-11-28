@@ -1,7 +1,7 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VADRAW = VisioAutomation.Core;
 
-namespace VTest
+namespace VTest.Framework
 {
     public static class AssertUtil
     {

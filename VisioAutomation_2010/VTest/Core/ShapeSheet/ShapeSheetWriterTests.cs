@@ -1,10 +1,11 @@
+using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VASS = VisioAutomation.ShapeSheet;
 
 namespace VTest.Core.ShapeSheet
 {
     [MUT.TestClass]
-    public class ShapeSheetWriterTests : VisioAutomationTest
+    public class ShapeSheetWriterTests : Framework.VTest
     {
         private static readonly VisioAutomation.Core.Src XFormPinX = VisioAutomation.Core.SrcConstants.XFormPinX;
         private static readonly VisioAutomation.Core.Src XFormPinY = VisioAutomation.Core.SrcConstants.XFormPinY;

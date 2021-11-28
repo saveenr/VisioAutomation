@@ -4,7 +4,7 @@ using VisioAutomation.Shapes;
 namespace VTest.Core.Shapes
 {
     [MUT.TestClass]
-    public class GeometryTests : VisioAutomationTest
+    public class GeometryTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Geometry_AddGeometrySection()

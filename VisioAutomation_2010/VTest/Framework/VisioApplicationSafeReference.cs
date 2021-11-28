@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VTest
+namespace VTest.Framework
 {
     public class VisioApplicationSafeReference
     {

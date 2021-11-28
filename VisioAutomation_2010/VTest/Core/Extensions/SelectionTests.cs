@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class SelectionTests : VisioAutomationTest
+    public class SelectionTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Selection_GetShapeIDs()

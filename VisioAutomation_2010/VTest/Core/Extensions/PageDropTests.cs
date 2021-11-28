@@ -6,7 +6,7 @@ using VA=VisioAutomation;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class PageDropTests : VisioAutomationTest
+    public class PageDropTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Page_Drop_ManyU()

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VASS=VisioAutomation.ShapeSheet;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VTest
+namespace VTest.Framework
 {
     [MUT.TestClass]
-    public class VisioAutomationTest
+    public class VTest
     {
         private static readonly VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();
         public readonly VisioAutomation.Core.Size StandardPageSize = new VisioAutomation.Core.Size(8.5, 11);
@@ -85,7 +85,7 @@ namespace VTest
 
         public static VisioAutomation.Core.Size GetSize(IVisio.Shape shape)
         {
-            var query = new CellQuery();
+            var query = new VASS.Query.CellQuery();
             var col_w = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormWidth);
             var col_h = query.Columns.Add(VisioAutomation.Core.SrcConstants.XFormHeight);
 
@@ -160,7 +160,7 @@ namespace VTest
                 throw new System.ArgumentNullException(nameof(page));
             }
 
-            var query = new CellQuery();
+            var query = new VASS.Query.CellQuery();
             var col_height = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageHeight);
             var col_width = query.Columns.Add(VisioAutomation.Core.SrcConstants.PageWidth);
 

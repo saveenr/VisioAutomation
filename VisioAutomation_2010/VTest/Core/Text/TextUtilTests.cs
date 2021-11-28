@@ -3,7 +3,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Core.Text
 {
     [MUT.TestClass]
-    public class TextUtilTests : VisioAutomationTest
+    public class TextUtilTests : Framework.VTest
     {
         public bool Match(string pat, string text)
         {

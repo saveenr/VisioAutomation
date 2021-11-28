@@ -1,15 +1,14 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Shapes;
-using VisioAutomation.ShapeSheet.Writers;
+using VA=VisioAutomation;
+using VASS=VisioAutomation.ShapeSheet;
 using VADRAW = VisioAutomation.Core;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 
 namespace VTest.DocumentAnalysis
 {
     [MUT.TestClass]
-    public class PathAnalysis_Tests : VisioAutomationTest
+    public class PathAnalysis_Tests : Framework.VTest
     {
         private void connect(IVisio.Shape a, IVisio.Shape b, bool a_arrow, bool b_arrow)
         {
@@ -21,13 +20,13 @@ namespace VTest.DocumentAnalysis
 
             var drop_point = new VADRAW.Point(-2, -2);
             var c1 = page.Drop(dcm, drop_point);
-            ConnectorHelper.ConnectShapes(a, b, c1);
+            VA.Shapes.ConnectorHelper.ConnectShapes(a, b, c1);
 
             //a.AutoConnect(b, connect_dir_none, null);
 
             if (a_arrow || b_arrow)
             {
-                var writer = new SidSrcWriter();
+                var writer = new VASS.Writers.SidSrcWriter();
                 if (a_arrow)
                 {
                     writer.SetValue(c1.ID16, VisioAutomation.Core.SrcConstants.LineBeginArrow, "13");                    

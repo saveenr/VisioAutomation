@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VTest.Core.Shapes
 {
     [MUT.TestClass]
-    public class UserDefinedCellsTests : VisioAutomationTest
+    public class UserDefinedCellsTests : Framework.VTest
     {
 
         public static void SetCP(IVisio.Shape shape, string name, string value, string prompt)

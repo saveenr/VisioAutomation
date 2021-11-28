@@ -134,7 +134,7 @@
     <Compile Include="Core\Extensions\ApplicationTests.cs" />
     <Compile Include="Core\ShapeSheet\ShapeSheetQueryTests.cs" />
     <Compile Include="Core\Extensions\DocumentTests.cs" />
-    <Compile Include="Framework\VisioAutomationTest.cs" />
+    <Compile Include="Framework\VTest.cs" />
     <Compile Include="Core\Extensions\PageDrawTests.cs" />
     <Compile Include="Core\Extensions\PageTests.cs" />
     <Compile Include="Core\Text\TextUtilTests.cs" />

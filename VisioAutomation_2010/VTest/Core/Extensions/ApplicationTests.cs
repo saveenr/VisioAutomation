@@ -4,7 +4,7 @@ using VA=VisioAutomation;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class ApplicationTests : VisioAutomationTest
+    public class ApplicationTests : Framework.VTest
     {
         /*
         

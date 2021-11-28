@@ -1,4 +1,4 @@
-﻿namespace VTest
+﻿namespace VTest.Framework
 {
     public static class TestGlobals
     {

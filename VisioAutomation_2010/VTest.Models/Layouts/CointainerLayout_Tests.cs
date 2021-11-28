@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VTest.Models.Layouts
 {
     [MUT.TestClass]
-    public class CointainerLayout_Tests : VisioAutomationTest
+    public class CointainerLayout_Tests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Container_PerformLayoutBeforeRender()

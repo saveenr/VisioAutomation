@@ -1,4 +1,4 @@
-namespace VTest.Extensions
+namespace VTest.Framework
 {
     public static class TestExtensions
     {

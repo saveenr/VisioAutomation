@@ -2,12 +2,12 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VTest.Extensions;
+using VTest.Framework;
 
 namespace VTest.Core.Page
 {
     [MUT.TestClass]
-    public class PageHelperTests : VisioAutomationTest
+    public class PageHelperTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Page_Query()

@@ -1,10 +1,11 @@
 using System.IO;
+using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingExportTests : VTest.VisioAutomationTest
+    public class ScriptingExportTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Scripting_Test_Export_Selection_SVGHTML()
@@ -23,7 +24,7 @@ namespace VTest.Scripting
 
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
-            string output_filename = VTest.TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
+            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
 
             if (File.Exists(output_filename))
             {
@@ -33,7 +34,7 @@ namespace VTest.Scripting
 
             client.Export.ExportSelectionToHtml(VisioScripting.TargetSelection.Auto, output_filename);
 
-            VTest.AssertUtil.FileExists(output_filename);
+            AssertUtil.FileExists(output_filename);
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
     }

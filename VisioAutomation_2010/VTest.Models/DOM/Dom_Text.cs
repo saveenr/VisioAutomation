@@ -1,11 +1,12 @@
-﻿using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using VTest.Framework;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VABOX = VisioAutomation.Models.Layouts.Box;
 using VA=VisioAutomation;
 
 namespace VTest.Dom
 {
     [MUT.TestClass]
-    public class Dom_Text : VisioAutomationTest
+    public class Dom_Text : Framework.VTest
     {
         [MUT.TestMethod]
         public void DomText_CharacterFormatting()

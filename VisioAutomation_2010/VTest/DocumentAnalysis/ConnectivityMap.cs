@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VTest
+namespace VTest.DocumentAnalysis
 {
     public class ConnectivityMap
     {

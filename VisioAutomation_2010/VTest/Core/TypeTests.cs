@@ -3,7 +3,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Core.Internal
 {
     [MUT.TestClass]
-    public class TypeTests : VisioAutomationTest
+    public class TypeTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void VerifySrcSize()

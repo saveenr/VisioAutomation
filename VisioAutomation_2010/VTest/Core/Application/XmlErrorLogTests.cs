@@ -6,7 +6,7 @@ namespace VTest.Core.Application
 {
 
     [MUT.TestClass]
-    public class XmlErrorLogTests : VisioAutomationTest
+    public class XmlErrorLogTests : Framework.VTest
     {
         [MUT.TestMethod]
         [MUT.DeploymentItem(@"datafiles\VSDX_Log_Visio_2013.txt", "datafiles")]

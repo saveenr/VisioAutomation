@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 namespace VTest.Core.Shapes
 {
     [MUT.TestClass]
-    public class HyperlinkTests : VisioAutomationTest
+    public class HyperlinkTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Hyperlinks_AddRemove()

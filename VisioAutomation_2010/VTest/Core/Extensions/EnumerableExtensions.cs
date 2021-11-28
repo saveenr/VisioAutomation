@@ -7,7 +7,7 @@ using VA=VisioAutomation;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class EnumerableExtensions : VisioAutomationTest
+    public class EnumerableExtensions : Framework.VTest
     {
         [MUT.TestMethod]
         public void Extensions_TestEnumerables()

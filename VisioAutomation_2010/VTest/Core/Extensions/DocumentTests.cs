@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 namespace VTest.Core.Extensions
 {
     [MUT.TestClass]
-    public class DocumentTests : VisioAutomationTest
+    public class DocumentTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Document_ForceClose()

@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 namespace VTest.Scripting
 {
     [MUT.TestClass]
-    public class ScriptingDocumentTests : VTest.VisioAutomationTest
+    public class ScriptingDocumentTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Document_Activation()

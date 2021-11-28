@@ -9,7 +9,7 @@ using VASS = VisioAutomation.ShapeSheet;
 namespace VTest.Core.ShapeSheet
 {
     [MUT.TestClass]
-    public class ShapeSheetQueryTests : VisioAutomationTest
+    public class ShapeSheetQueryTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void ShapeSheet_Query_GetResults_SingleShape()

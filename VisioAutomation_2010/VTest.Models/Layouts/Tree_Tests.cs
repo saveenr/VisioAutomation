@@ -1,12 +1,13 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VTest.Framework;
 using VATREE = VisioAutomation.Models.Layouts.Tree;
 using VA = VisioAutomation;
 
 namespace VTest.Models.TreeLayout.Layouts
 {
     [MUT.TestClass]
-    public class Tree_Tests : VisioAutomationTest
+    public class Tree_Tests : Framework.VTest
     {
         [MUT.TestMethod]
         public void TreeLayout_SingleNode()
@@ -21,7 +22,7 @@ namespace VTest.Models.TreeLayout.Layouts
 
             t.Render(page);
 
-            AssertUtil.AreEqual((3.0, 1.5), VisioAutomationTest.GetPageSize(page), 0.05);
+            AssertUtil.AreEqual((3.0, 1.5), Framework.VTest.GetPageSize(page), 0.05);
 
             doc.Close(true);
         }
@@ -62,7 +63,7 @@ namespace VTest.Models.TreeLayout.Layouts
 
             t.Render(page);
 
-            AssertUtil.AreEqual((5.25, 8.0), VisioAutomationTest.GetPageSize(page), 0.05);
+            AssertUtil.AreEqual((5.25, 8.0), Framework.VTest.GetPageSize(page), 0.05);
 
             MUT.Assert.AreEqual("Root", t.Root.VisioShape.Text);
             MUT.Assert.AreEqual("A", na.VisioShape.Text);

@@ -4,7 +4,7 @@ using VATEXT = VisioAutomation.Text;
 namespace VTest.Core.Text
 {
     [MUT.TestClass]
-    public class TextFormatTests : VisioAutomationTest
+    public class TextFormatTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void Text_TabStops_Set()

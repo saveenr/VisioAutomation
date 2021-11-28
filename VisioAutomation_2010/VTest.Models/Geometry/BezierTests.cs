@@ -3,7 +3,7 @@ using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Models.Geometry
 {
     [MUT.TestClass]
-    public class BezierTests : VisioAutomationTest
+    public class BezierTests : Framework.VTest
     {
         private double delta = 0.00000000001;
         private double pi2 = System.Math.PI*2;
