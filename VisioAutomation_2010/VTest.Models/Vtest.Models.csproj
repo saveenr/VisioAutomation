@@ -74,14 +74,14 @@
     <Compile Include="Geometry\DrawingHelper.cs" />
     <Compile Include="Documents\OrgChart_Tests.cs" />
     <Compile Include="Layouts\Tree_Tests.cs" />
-    <Compile Include="ScriptingDrawTests_Drop_Master.cs" />
-    <Compile Include="ScriptingDrawTests_DirectedGraph.cs" />
-    <Compile Include="ScriptingDrawTests_ManualGeometry.cs" />
-    <Compile Include="ScriptingDrawTests_Grid.cs" />
-    <Compile Include="ScriptingDrawTests_DataTable.cs" />
-    <Compile Include="ScriptingDrawTests_OrgChart.cs" />
-    <Compile Include="ScriptingDrawTests_Main.cs" />
-    <Compile Include="ScriptingDrawTests_Container.cs" />
+    <Compile Include="ModelTests_Drop_Master.cs" />
+    <Compile Include="ModelTests_DirectedGraph.cs" />
+    <Compile Include="ModelTests_ManualGeometry.cs" />
+    <Compile Include="ModelTests_Grid.cs" />
+    <Compile Include="ModelTests_DataTable.cs" />
+    <Compile Include="ModelTests_OrgChart.cs" />
+    <Compile Include="ModelTests_Main.cs" />
+    <Compile Include="ModelTests_Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

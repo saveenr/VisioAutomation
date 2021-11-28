@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Models
 {
-    public partial class ScriptingDrawTests : Framework.VTest
+    public partial class ModelTests : Framework.VTest
     {
 
       

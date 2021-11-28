@@ -6,7 +6,7 @@ using SXL = System.Xml.Linq;
 
 namespace VTest.Models
 {
-    public partial class ScriptingDrawTests : Framework.VTest
+    public partial class ModelTests : Framework.VTest
     {
 
         [MUT.TestMethod]
