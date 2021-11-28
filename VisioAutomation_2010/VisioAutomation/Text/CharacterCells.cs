@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterFormatCells : VACG.CellGroup
+    public class CharacterCells : VACG.CellGroup
     {
         public Core.CellValue Color { get; set; }
         public Core.CellValue Font { get; set; }
@@ -61,13 +61,13 @@ namespace VisioAutomation.Text
         }
 
 
-        public static List<List<CharacterFormatCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
+        public static List<List<CharacterCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultiRow(page, pairs, type);
         }
 
-        public static List<CharacterFormatCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static List<CharacterCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
@@ -76,15 +76,15 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : VACG.CellGroupBuilder<CharacterFormatCells>
+        class Builder : VACG.CellGroupBuilder<CharacterCells>
         {
             public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 
-            public override CharacterFormatCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
+            public override CharacterCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
-                var cells = new CharacterFormatCells();
+                var cells = new CharacterCells();
 
                 string getcellvalue(string name)
                 {

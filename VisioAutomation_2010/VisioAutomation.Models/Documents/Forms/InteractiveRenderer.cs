@@ -105,8 +105,8 @@ namespace VisioAutomation.Models.Documents.Forms
                 writer.SetValues((short)block.VisioShapeID , block.FormatCells);
                 writer.SetValues((short)block.VisioShapeID, block.TextBlockCells);
 
-                writer.SetValues((short)block.VisioShapeID, block.ParagraphFormatCells, 0);
-                writer.SetValues((short)block.VisioShapeID, block.CharacterFormatCells, 0);
+                writer.SetValues((short)block.VisioShapeID, block.ParagraphCells, 0);
+                writer.SetValues((short)block.VisioShapeID, block.CharacterCells, 0);
             }
 
             writer.Commit(this._page, Core.CellValueType.Formula);

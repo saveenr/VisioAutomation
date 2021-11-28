@@ -6,8 +6,8 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        public List<CharacterFormatCells> CharacterFormats { get; private set; }
-        public List<ParagraphFormatCells> ParagraphFormats { get; private set; }
+        public List<CharacterCells> CharacterFormats { get; private set; }
+        public List<ParagraphCells> ParagraphFormats { get; private set; }
         public TextBlockCells TextBlock { get; private set; }
         public TextXFormCells TextXForm { get; private set; }
         public List<TextRun> CharacterTextRuns { get; private set; }
@@ -69,8 +69,8 @@ namespace VisioAutomation.Text
         public static TextFormat GetFormat(IVisio.Shape shape, Core.CellValueType type)
         {
             var cells = new TextFormat();
-            cells.CharacterFormats = CharacterFormatCells.GetCells(shape, type);
-            cells.ParagraphFormats = ParagraphFormatCells.GetCells(shape, type);
+            cells.CharacterFormats = CharacterCells.GetCells(shape, type);
+            cells.ParagraphFormats = ParagraphCells.GetCells(shape, type);
             cells.TextBlock = TextHelper.GetTextBlockCells(shape, type);
             if (HasTextXFormCells(shape))
             {
@@ -95,8 +95,8 @@ namespace VisioAutomation.Text
         {
             var shapeids = shapeidpairs.Select( s=>s.ShapeID).ToList();
 
-            var charcells = CharacterFormatCells.GetCells(page, shapeidpairs, type);
-            var paracells = ParagraphFormatCells.GetCells(page, shapeidpairs, type);
+            var charcells = CharacterCells.GetCells(page, shapeidpairs, type);
+            var paracells = ParagraphCells.GetCells(page, shapeidpairs, type);
             var textblockcells = TextHelper.GetTextBlockCells(page, shapeids, type);
 
             var page_shapes = page.Shapes;

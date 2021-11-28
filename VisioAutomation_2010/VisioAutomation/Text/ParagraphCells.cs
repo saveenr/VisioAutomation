@@ -5,7 +5,7 @@ using VACG=VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells : VACG.CellGroup
+    public class ParagraphCells : VACG.CellGroup
     {
         public Core.CellValue IndentFirst { get; set; }
         public Core.CellValue IndentRight { get; set; }
@@ -42,14 +42,14 @@ namespace VisioAutomation.Text
             yield return this._create(nameof(this.BulletString), Core.SrcConstants.ParaBulletString, this.BulletString);
         }
 
-        public static List<List<ParagraphFormatCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static List<List<ParagraphCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
 
         {
             var reader = builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<ParagraphFormatCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static List<ParagraphCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
@@ -59,16 +59,16 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : VACG.CellGroupBuilder<ParagraphFormatCells>
+        class Builder : VACG.CellGroupBuilder<ParagraphCells>
         {
             public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 
-            public override ParagraphFormatCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
+            public override ParagraphCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var getcellvalue = queryrow_to_cellgroup(row, cols);
-                var cells = new ParagraphFormatCells();
+                var cells = new ParagraphCells();
 
                 cells.IndentFirst = getcellvalue(nameof(IndentFirst));
                 cells.IndentLeft = getcellvalue(nameof(IndentLeft));
