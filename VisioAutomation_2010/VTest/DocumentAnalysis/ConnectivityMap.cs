@@ -6,7 +6,7 @@ namespace VTest.DocumentAnalysis
     {
         private readonly Dictionary<string, List<string>> _dic;
 
-        public ConnectivityMap(IList<VisioAutomation.DocumentAnalysis.ConnectorEdge> edges)
+        public ConnectivityMap(IList<VisioAutomation.Analyzers.ConnectorEdge> edges)
         {
             this._dic = new Dictionary<string, List<string>>();
             foreach (var e in edges)

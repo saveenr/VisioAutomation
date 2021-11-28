@@ -38,19 +38,19 @@ namespace VSamples
             s3.AutoConnect(s4, dir, null);
             s5.AutoConnect(s6, dir, null);
 
-            var options0 = new VisioAutomation.DocumentAnalysis.ConnectionAnalyzerOptions();
-            options0.DirectionSource = VisioAutomation.DocumentAnalysis.DirectionSource.UseConnectionOrder;
+            var options0 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
+            options0.DirectionSource = VisioAutomation.Analyzers.DirectionSource.UseConnectionOrder;
 
-            var normal_edges = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdges(page, options0);
+            var normal_edges = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page, options0);
 
-            var options1 = new VisioAutomation.DocumentAnalysis.ConnectionAnalyzerOptions();
-            options1.NoArrowsHandling =  VisioAutomation.DocumentAnalysis.NoArrowsHandling.ExcludeEdge;
+            var options1 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
+            options1.NoArrowsHandling =  VisioAutomation.Analyzers.NoArrowsHandling.ExcludeEdge;
 
-            var options2 = new VisioAutomation.DocumentAnalysis.ConnectionAnalyzerOptions();
-            options2.NoArrowsHandling=VisioAutomation.DocumentAnalysis.NoArrowsHandling.TreatEdgeAsBidirectional;
+            var options2 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
+            options2.NoArrowsHandling=VisioAutomation.Analyzers.NoArrowsHandling.TreatEdgeAsBidirectional;
 
-            var tc_edges_0 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options1);
-            var tc_edges_1 = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options2);
+            var tc_edges_0 = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options1);
+            var tc_edges_1 = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options2);
 
             var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
             var sb0 = new System.Text.StringBuilder();

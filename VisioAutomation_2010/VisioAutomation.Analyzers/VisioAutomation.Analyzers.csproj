@@ -7,8 +7,8 @@
     <ProjectGuid>{D0EDA4F5-BB56-45CD-B95A-D061E90F1160}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VisioAutomation.DocumentAnalysis</RootNamespace>
-    <AssemblyName>VisioAutomation.DocumentAnalysis</AssemblyName>
+    <RootNamespace>VisioAutomation.Analyzers</RootNamespace>
+    <AssemblyName>VisioAutomation.Analyzers</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

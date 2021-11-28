@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.DocumentAnalysis
+namespace VisioAutomation.Analyzers
 {
     public struct ConnectorEdge
     {

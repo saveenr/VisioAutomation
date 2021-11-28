@@ -1,4 +1,4 @@
-namespace VisioAutomation.DocumentAnalysis
+namespace VisioAutomation.Analyzers
 {
     public enum DirectionSource
     {

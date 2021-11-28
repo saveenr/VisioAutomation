@@ -12,11 +12,11 @@ namespace VTest.DocumentAnalysis
         {
             // v0->v0
             // doesn't yield any edges (nodes are implictly connected to themselves)
-            var input = new List<VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>>
+            var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
                 {
-                    new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v0", null)
+                    new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v0", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
             MUT.Assert.AreEqual(0,output.Count);
         }
 
@@ -26,10 +26,10 @@ namespace VTest.DocumentAnalysis
             // v0->v0
             // v1->v1
             // doesn't yield any edges (nodes are implictly connected to themselves)
-            var input = new List<VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>>();
-            input.Add(new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v0", null));
-            input.Add(new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v1", "v1", null));
-            var output = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
+            var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>();
+            input.Add(new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v0", null));
+            input.Add(new VisioAutomation.Analyzers.DirectedEdge<string, object>("v1", "v1", null));
+            var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
             MUT.Assert.AreEqual(0, output.Count);
         }
 
@@ -38,11 +38,11 @@ namespace VTest.DocumentAnalysis
         {
             // v0->v1
             // doesn't yield any edges (nodes are implictly connected to themselves)
-            var input = new List<VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>>
+            var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
                 {
-                    new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v1", null)
+                    new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v1", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
             MUT.Assert.AreEqual(1, output.Count);
             MUT.Assert.AreEqual("v0",output[0].From);
             MUT.Assert.AreEqual("v1", output[0].To);
@@ -52,12 +52,12 @@ namespace VTest.DocumentAnalysis
         [MUT.TestMethod]
         public void Path_TestTransitiveClosure3()
         {
-            var input = new List<VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>>
+            var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
                 {
-                    new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v1", null),
-                    new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v1", "v2", null)
+                    new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v1", null),
+                    new VisioAutomation.Analyzers.DirectedEdge<string, object>("v1", "v2", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
             MUT.Assert.AreEqual(3, output.Count);
             MUT.Assert.AreEqual("v0", output[0].From);
             MUT.Assert.AreEqual("v1", output[0].To);
@@ -73,13 +73,13 @@ namespace VTest.DocumentAnalysis
         [MUT.TestMethod]
         public void Path_TestTransitiveClosure4()
         {
-            var input = new List<VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>>
+            var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
                 {
-                    new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v0", "v1", null),
-                    new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v1", "v2", null),
-                    new VisioAutomation.DocumentAnalysis.DirectedEdge<string, object>("v2", "v0", null)
+                    new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v1", null),
+                    new VisioAutomation.Analyzers.DirectedEdge<string, object>("v1", "v2", null),
+                    new VisioAutomation.Analyzers.DirectedEdge<string, object>("v2", "v0", null)
                 };
-            var output = VisioAutomation.DocumentAnalysis.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
+            var output = VisioAutomation.Analyzers.ConnectionAnalyzer.GetClosureFromEdges(input).ToList();
             MUT.Assert.AreEqual(6, output.Count);
             MUT.Assert.AreEqual("v0", output[0].From);
             MUT.Assert.AreEqual("v1", output[0].To);
