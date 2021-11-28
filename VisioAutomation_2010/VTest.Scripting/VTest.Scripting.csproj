@@ -68,7 +68,6 @@
     <Compile Include="Scripting_CustomPropTests.cs" />
     <Compile Include="Scripting_DevTests.cs" />
     <Compile Include="Scripting_DocumentTests.cs" />
-    <Compile Include="Scripting_ModelTests.cs" />
     <Compile Include="Scripting_ExportTests.cs" />
     <Compile Include="Scripting_GroupTests.cs" />
     <Compile Include="Scripting_HyperlinkTests.cs" />
