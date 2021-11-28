@@ -72,7 +72,6 @@
     <Compile Include="Layout_ContainerTests.cs" />
     <Compile Include="DrawModel_DirectedGraph.cs" />
     <Compile Include="BoundingBoxHelperTests.cs" />
-    <Compile Include="DrawModel_OrgChart2.cs" />
     <Compile Include="Tree_Tests.cs" />
     <Compile Include="ModelTests_DropMaster2.cs" />
     <Compile Include="DrawModel_Grid.cs" />
