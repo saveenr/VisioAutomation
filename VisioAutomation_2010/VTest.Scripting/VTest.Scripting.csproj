@@ -57,6 +57,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScriptingDrawManualShapes.cs" />
     <Compile Include="ScriptingApplicationTests.cs" />
     <Compile Include="ScriptingArrangeTests.cs" />
     <Compile Include="ScriptingClientTests.cs" />
