@@ -62,10 +62,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\PowerShellSession.cs" />
-    <Compile Include="Framework\Extensions\CmdletExtensions.cs" />
+    <Compile Include="Framework\VTestPowerShellSession.cs" />
+    <Compile Include="Framework\Extensions\VTestCmdletExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Framework\PsArray.cs" />
+    <Compile Include="Framework\VTestPsArray.cs" />
     <Compile Include="VisioPS_Basic_Tests.cs" />
     <Compile Include="VisioPS_Session.cs" />
   </ItemGroup>

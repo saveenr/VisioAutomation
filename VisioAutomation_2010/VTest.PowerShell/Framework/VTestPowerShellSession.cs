@@ -2,14 +2,14 @@ using SMA = System.Management.Automation;
 
 namespace VTest.PowerShell.Framework
 {
-    public class PowerShellSession : System.IDisposable 
+    public class VTestPowerShellSession : System.IDisposable 
     {
         protected SMA.PowerShell _powershell;
         protected SMA.Runspaces.InitialSessionState _sessionstate;
         protected SMA.Runspaces.Runspace _runspace;
         protected SMA.RunspaceInvoke _invoker;
 
-        public PowerShellSession()
+        public VTestPowerShellSession()
         {
             this._sessionstate = SMA.Runspaces.InitialSessionState.CreateDefault();
             this._runspace = SMA.Runspaces.RunspaceFactory.CreateRunspace(this._sessionstate);

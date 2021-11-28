@@ -10,7 +10,7 @@ namespace VTest.Framework
     [MUT.TestClass]
     public class VTest
     {
-        private static readonly VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();
+        private static readonly VTestAppRef app_ref = new VTestAppRef();
         public readonly VisioAutomation.Core.Size StandardPageSize = new VisioAutomation.Core.Size(8.5, 11);
         public readonly VisioAutomation.Core.Rectangle StandardPageSizeRect = new VisioAutomation.Core.Rectangle(new VisioAutomation.Core.Point(0, 0), new VisioAutomation.Core.Size(8.5, 11));
 
@@ -78,7 +78,7 @@ namespace VTest.Framework
             var app = this.GetVisioApplication();
             // this ensures that any debug, verbose, user , etc. messages are 
             // sent to a useful place in the unit tests
-            var context = new DiagnosticDebugClientContext(); 
+            var context = new VTestScriptingClient(); 
             var client = new VisioScripting.Client(app,context);
             return client;
         }

@@ -32,21 +32,21 @@ namespace VTest.PowerShell
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
             var stencil_basic = VisioPS_Basic_Tests.Session.Cmd_Open_VisioDocument("basic_u.vss");
-            var master_roundrect = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(PsArray.From("Rectangle"), stencil_basic);
-            var shapes = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape(PsArray.From(master_roundrect), new [] {new VisioAutomation.Core.Point( 2.0, 3.0) });
+            var master_roundrect = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(VTestPsArray.From("Rectangle"), stencil_basic);
+            var shapes = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape(VTestPsArray.From(master_roundrect), new [] {new VisioAutomation.Core.Point( 2.0, 3.0) });
 
             var shapecells = VisioPS_Basic_Tests.Session.Cmd_New_VisioShapeCells();
             shapecells.XFormPinX= "4 in";
             shapecells.XFormPinY = "6 in";
 
-            VisioPS_Basic_Tests.Session.Cmd_Set_VisioShapeCells(PsArray.From(shapecells), PsArray.From(shapes));
+            VisioPS_Basic_Tests.Session.Cmd_Set_VisioShapeCells(VTestPsArray.From(shapecells), VTestPsArray.From(shapes));
 
-            var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioShapeCells(PsArray.From(shapes));
+            var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioShapeCells(VTestPsArray.From(shapes));
 
             MUT.Assert.IsNotNull(dt);
             MUT.Assert.AreEqual("4 in", dt.Rows[0]["XFormPinX"]);
             MUT.Assert.AreEqual("6 in", dt.Rows[0]["XFormPinY"]);
-            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(PsArray.From(doc), true);
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
         }
 
         [MUT.TestMethod]
@@ -59,14 +59,14 @@ namespace VTest.PowerShell
             pagecells.PageHeight = "4 in";
             pagecells.PageWidth= "3 in";
 
-            VisioPS_Basic_Tests.Session.Cmd_Set_VisioPageCells( PsArray.From(pagecells), PsArray.From(page));
+            VisioPS_Basic_Tests.Session.Cmd_Set_VisioPageCells( VTestPsArray.From(pagecells), VTestPsArray.From(page));
             
-            var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioPageCells(PsArray.From(page));
+            var dt = VisioPS_Basic_Tests.Session.Cmd_Get_VisioPageCells(VTestPsArray.From(page));
 
             MUT.Assert.IsNotNull(dt);
             MUT.Assert.AreEqual("3 in", dt.Rows[0]["PageWidth"]);
             MUT.Assert.AreEqual("4 in", dt.Rows[0]["PageHeight"]);
-            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(PsArray.From(doc), true);
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
         }
 
         [MUT.TestMethod]
@@ -78,14 +78,14 @@ namespace VTest.PowerShell
                 new VisioAutomation.Core.Point( 0.0, 1.0),
                 new VisioAutomation.Core.Point( 2.0, 3.0)
             });
-            Session.Cmd_Set_VisioText( PsArray.From("Hello World"), PsArray.From(s));
+            Session.Cmd_Set_VisioText( VTestPsArray.From("Hello World"), VTestPsArray.From(s));
 
             var r = Session.Cmd_Get_VisioText();
 
             MUT.Assert.AreEqual(1,r.Length);
             MUT.Assert.AreEqual("Hello World", r[0]);
             bool force = true;
-            Session.Cmd_Close_VisioDocument( PsArray.From(d), force);
+            Session.Cmd_Close_VisioDocument( VTestPsArray.From(d), force);
         }
 
         [MUT.TestMethod]
@@ -101,10 +101,10 @@ namespace VTest.PowerShell
             var rectangle = "Rectangle";
             var basic_u_vss = "BASIC_U.VSS";
 
-            var master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(PsArray.From(rectangle), basic_u_vss);
+            var master = VisioPS_Basic_Tests.Session.Cmd_Get_VisioMaster(VTestPsArray.From(rectangle), basic_u_vss);
 
 
-            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( PsArray.From(master) , new[] { new VisioAutomation.Core.Point(1.0, 1.0) });
+            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape( VTestPsArray.From(master) , new[] { new VisioAutomation.Core.Point(1.0, 1.0) });
 
             // Drop a container on the page... the rectangle we created above should be selected by default. 
             // Since it is selected it will be added as a member to the container.
@@ -113,7 +113,7 @@ namespace VTest.PowerShell
 
             MUT.Assert.IsNotNull(container);
 
-            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(PsArray.From(doc), true);
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
         }
     }
 }

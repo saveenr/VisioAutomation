@@ -24,7 +24,7 @@ namespace VTest.Scripting
 
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
-            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
 
             if (File.Exists(output_filename))
             {

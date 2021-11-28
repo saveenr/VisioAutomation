@@ -2,9 +2,9 @@
 
 namespace VTest.Framework
 {
-    public class DiagnosticDebugClientContext : VisioScripting.ClientContext
+    public class VTestScriptingClient : VisioScripting.ClientContext
     {
-        public DiagnosticDebugClientContext()
+        public VTestScriptingClient()
         {
         }
 

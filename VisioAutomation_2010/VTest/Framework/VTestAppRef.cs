@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Framework
 {
-    public class VisioApplicationSafeReference
+    public class VTestAppRef
     {
         // this class ensures that a valid application instance is always available
 

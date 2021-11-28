@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace VTest.PowerShell.Framework
 {
-    public static class PsArray
+    public static class VTestPsArray
     {
         public static T[] From<T>(params T[] items)
         {

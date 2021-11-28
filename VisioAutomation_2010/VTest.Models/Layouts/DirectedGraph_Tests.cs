@@ -24,7 +24,7 @@ namespace VTest.Models.Layouts
             renderer.LayoutOptions.UseDynamicConnectors = false;
             renderer.Render(page, directed_graph_drawing);
             
-            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithBezierConnectors),".vsd");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(DirectedGraph_WithBezierConnectors),".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -42,7 +42,7 @@ namespace VTest.Models.Layouts
             renderer.LayoutOptions.UseDynamicConnectors = true;
             renderer.Render(page1, directed_graph_drawing);
 
-            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(DirectedGraph_WithDynamicConnectors),".vsd");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(DirectedGraph_WithDynamicConnectors),".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -78,7 +78,7 @@ namespace VTest.Models.Layouts
 
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 
-            string output_filename = TestGlobals.TestHelper.GetOutputFilename(nameof(RenderDirectedGraphWithCustomProps),".vsd");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(RenderDirectedGraphWithCustomProps),".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }

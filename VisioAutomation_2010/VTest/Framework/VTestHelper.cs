@@ -2,11 +2,11 @@
 
 namespace VTest.Framework
 {
-    public class TestHelper
+    public class VTestHelper
     {
         private readonly string _output_path;
 
-        public TestHelper(string name)
+        public VTestHelper(string name)
         {
             if (string.IsNullOrEmpty(name))
             {

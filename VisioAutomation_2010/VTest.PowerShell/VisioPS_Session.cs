@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.PowerShell
 {
-    public class VisioPS_Session : VTest.PowerShell.Framework.PowerShellSession
+    public class VisioPS_Session : VTest.PowerShell.Framework.VTestPowerShellSession
     {
         public VisioPS_Session()
         {
@@ -20,7 +20,7 @@ namespace VTest.PowerShell
             string cont_doc)
         {
             var doc = this.Cmd_Open_VisioDocument(cont_doc);
-            var master = this.Cmd_Get_VisioMaster(VTest.PowerShell.Framework.PsArray.From(cont_master_name),cont_doc);
+            var master = this.Cmd_Get_VisioMaster(VTest.PowerShell.Framework.VTestPsArray.From(cont_master_name),cont_doc);
 
             var cmd = new VisioPowerShell.Commands.VisioContainer.NewVisioContainer();
             cmd.Master = master[0];

@@ -1,6 +1,6 @@
 namespace VTest.Framework
 {
-    public static class TestExtensions
+    public static class VTestExtensions
     {
         public static VisioAutomation.Core.Point GetPinPosResult(this VisioAutomation.Shapes.XFormCells xform)
         {
