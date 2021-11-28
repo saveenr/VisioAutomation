@@ -195,61 +195,76 @@ namespace VisioAutomation.Analyzers
                 throw new System.ArgumentNullException(nameof(edges));
             }
 
-            var dicof_obj_to_id = new Dictionary<TNode, int>();
-            var dicof_id_to_obj = new Dictionary<int, TNode>();
+            // First cache how objects and ids relate
+            // because we will be looking this up a lot later
+
+            var obj_to_id = new Dictionary<TNode, int>();
+            var id_to_obj = new Dictionary<int, TNode>();
 
             foreach (var edge in edges)
             {
-                if (!dicof_obj_to_id.ContainsKey(edge.From))
+                if (!obj_to_id.ContainsKey(edge.From))
                 {
-                    dicof_obj_to_id[edge.From] = dicof_obj_to_id.Count;
+                    obj_to_id[edge.From] = obj_to_id.Count;
                 }
 
-                if (!dicof_obj_to_id.ContainsKey(edge.To))
+                if (!obj_to_id.ContainsKey(edge.To))
                 {
-                    dicof_obj_to_id[edge.To] = dicof_obj_to_id.Count;
+                    obj_to_id[edge.To] = obj_to_id.Count;
                 }
             }
 
-            foreach (var kv in dicof_obj_to_id)
+            foreach (var kv in obj_to_id)
             {
-                dicof_id_to_obj[kv.Value] = kv.Key;
+                id_to_obj[kv.Value] = kv.Key;
             }
+
+            // Create a collection to store all the edges we will discover
 
             var internal_edges = new List<DirectedEdge<int, object>>();
 
+            // Add the initial input edges to the collection
+
             foreach (var edge in edges)
             {
-                int fromid = dicof_obj_to_id[edge.From];
-                int toid = dicof_obj_to_id[edge.To];
+                int fromid = obj_to_id[edge.From];
+                int toid = obj_to_id[edge.To];
                 object data = null;
                 var directed_edge = new DirectedEdge<int, object>(fromid, toid, data);
                 internal_edges.Add(directed_edge);
             }
+
+            // If there are are no edges at at this point, there is nothing left to do
 
             if (internal_edges.Count == 0)
             {
                 yield break;
             }
 
-            int num_vertices = dicof_obj_to_id.Count;
+            // Construct the initial adjacency matrix
+
+            int num_vertices = obj_to_id.Count;
             var adj_matrix = new BitArray2D(num_vertices, num_vertices);
             foreach (var internal_edge in internal_edges)
             {
                 adj_matrix[internal_edge.From, internal_edge.To] = true;
             }
 
-            var warshall_result = adj_matrix.Clone();
+            // Clone the adjacency matrix, and fill it in 
+            // with the transitive closure as specified from the Warshall algortihm
 
+            var warshall_result = adj_matrix.Clone();
             ConnectionAnalyzer.PerformWarshall(warshall_result);
 
+            // For each item in the where an transitive closure is indicated
+            // create a directed edge object
             for (int row = 0; row < adj_matrix.Width; row++)
             {
                 for (int col = 0; col < adj_matrix.Height; col++)
                 {
                     if (warshall_result.Get(row, col) && (row!=col))
                     {
-                        var de = new DirectedEdge<TNode, object>(dicof_id_to_obj[row], dicof_id_to_obj[col], null);
+                        var de = new DirectedEdge<TNode, object>(id_to_obj[row], id_to_obj[col], null);
                         yield return de;
                     }
                 }
