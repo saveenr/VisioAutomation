@@ -8,7 +8,7 @@ using SXL = System.Xml.Linq;
 
 namespace VTest.Models
 {
-    public class DrawModel_OrgChart: Framework.VTest
+    public class DrawModel_OrgChartTests: Framework.VTest
     {
         [MUT.TestMethod]
         [MUT.DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]

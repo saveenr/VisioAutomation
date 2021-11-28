@@ -76,7 +76,7 @@
     <Compile Include="ModelTests_DropMaster2.cs" />
     <Compile Include="DrawModel_Grid.cs" />
     <Compile Include="DrawModel_DataTable.cs" />
-    <Compile Include="DrawModel_OrgChart.cs" />
+    <Compile Include="DrawModel_OrgChartTests.cs" />
     <Compile Include="Scripting_DropContainerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
