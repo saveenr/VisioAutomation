@@ -82,10 +82,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Analyzers\VisioAutomation.Analyzers.csproj">
-      <Project>{d0eda4f5-bb56-45cd-b95a-d061e90f1160}</Project>
-      <Name>VisioAutomation.Analyzers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj">
       <Project>{29cb2b65-8e8d-4b2c-935c-453b2b371143}</Project>
       <Name>VisioAutomation.Models</Name>

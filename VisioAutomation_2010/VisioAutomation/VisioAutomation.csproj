@@ -76,6 +76,13 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzers\BitArray2D.cs" />
+    <Compile Include="Analyzers\ConnectionAnalyzer.cs" />
+    <Compile Include="Analyzers\ConnectionAnalyzerOptions.cs" />
+    <Compile Include="Analyzers\ConnectorEdge.cs" />
+    <Compile Include="Analyzers\DirectedEdge.cs" />
+    <Compile Include="Analyzers\EdgeDirectionSource.cs" />
+    <Compile Include="Analyzers\EdgeNoArrowsHandling.cs" />
     <Compile Include="Application\Logging\LoggingHelper.cs" />
     <Compile Include="Application\Logging\XmlErrorLog.cs" />
     <Compile Include="Application\Logging\LogRecord.cs" />
