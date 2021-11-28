@@ -5,10 +5,10 @@ using VASS=VisioAutomation.ShapeSheet;
 using VADRAW = VisioAutomation.Core;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VTest.DocumentAnalysis
+namespace VTest.Analyzers
 {
     [MUT.TestClass]
-    public class PathAnalysis_Tests : Framework.VTest
+    public class ConnectionTests : Framework.VTest
     {
         private void connect(IVisio.Shape a, IVisio.Shape b, bool a_arrow, bool b_arrow)
         {

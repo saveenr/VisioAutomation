@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VTest.DocumentAnalysis
+namespace VTest.Analyzers
 {
     [MUT.TestClass]
     public class Path_Test

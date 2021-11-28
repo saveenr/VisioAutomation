@@ -107,7 +107,7 @@
     <Compile Include="Core\Shapes\CellGroupsTests.cs" />
     <Compile Include="Core\Shapes\ConnectorTests.cs" />
     <Compile Include="DocumentAnalysis\ConnectivityMap.cs" />
-    <Compile Include="DocumentAnalysis\PathAnalysis_Tests.cs" />
+    <Compile Include="DocumentAnalysis\ConnectionTests.cs" />
     <Compile Include="Framework\AssertUtil.cs" />
     <Compile Include="Core\Shapes\HyperlinkTests.cs" />
     <Compile Include="Framework\VTestScriptingClient.cs" />
