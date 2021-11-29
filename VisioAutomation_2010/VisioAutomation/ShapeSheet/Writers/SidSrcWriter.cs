@@ -1,5 +1,6 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA= VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
@@ -78,6 +79,46 @@ namespace VisioAutomation.ShapeSheet.Writers
             var flags = this._compute_setformula_flags();
 
             int c = visobjtarget.SetFormulas(stream, formulas, (short)flags);
+        }
+
+        public void CommitFormulas(IVisio.Shape shape)
+        {
+            if ((this._records == null || this._records.Count < 1))
+            {
+                return;
+            }
+
+            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
+            var formulas = this._records.BuildValuesArray();
+
+            if (stream.Array.Length == 0)
+            {
+                throw new Exceptions.InternalAssertionException();
+            }
+
+            var flags = this._compute_setformula_flags();
+
+            int c = shape.SetFormulas(stream, formulas, (short)flags);
+        }
+
+        public void CommitFormulas(IVisio.Page page)
+        {
+            if ((this._records == null || this._records.Count < 1))
+            {
+                return;
+            }
+
+            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
+            var formulas = this._records.BuildValuesArray();
+
+            if (stream.Array.Length == 0)
+            {
+                throw new Exceptions.InternalAssertionException();
+            }
+
+            var flags = this._compute_setformula_flags();
+
+            int c = page.SetFormulas(stream, formulas, (short)flags);
         }
 
         public void Commit(Core.VisioObjectTarget visobjtarget, Core.CellValueType type)
