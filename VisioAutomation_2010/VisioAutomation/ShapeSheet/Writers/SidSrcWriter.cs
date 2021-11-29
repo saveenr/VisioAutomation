@@ -57,20 +57,20 @@ namespace VisioAutomation.ShapeSheet.Writers
         public void Commit(IVisio.Page page, Core.CellValueType type)
         {
             var visobjtarget = new VisioObjectTarget(page);
-            this.Commit(visobjtarget, type);
+            this._commit(visobjtarget, type);
         }
         public void Commit(IVisio.Shape shape, Core.CellValueType type)
         {
             var visobjtarget = new VisioObjectTarget(shape);
-            this.Commit(visobjtarget, type);
+            this._commit(visobjtarget, type);
         }
         public void Commit(IVisio.Master master, Core.CellValueType type)
         {
             var visobjtarget = new VisioObjectTarget(master);
-            this.Commit(visobjtarget, type);
+            this._commit(visobjtarget, type);
         }
 
-        public void Commit(VisioObjectTarget visobjtarget, Core.CellValueType type)
+        private void _commit(VisioObjectTarget visobjtarget, Core.CellValueType type)
         {
             if ((this._records == null || this._records.Count < 1))
             {
