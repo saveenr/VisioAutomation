@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Internal;
 using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Internal.Extensions
+namespace VisioAutomation.Extensions
 {
     internal static class ExtensionHelpers
     {
@@ -29,7 +30,9 @@ namespace VisioAutomation.Internal.Extensions
             return list;
         }
 
-        public static string[] _GetFormulas(VisioObjectTarget visobjtarget , ShapeSheet.Streams.StreamArray stream)
+        public static string[] _GetFormulas(
+            this Internal.VisioObjectTarget visobjtarget, 
+            ShapeSheet.Streams.StreamArray stream)
         {
             if (stream.Array.Length == 0)
             {
@@ -38,15 +41,15 @@ namespace VisioAutomation.Internal.Extensions
 
             System.Array formulas_sa = null;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (visobjtarget.Category == Internal.VisioObjectCategory.Shape)
             {
                 visobjtarget.Shape.GetFormulasU(stream.Array, out formulas_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Master)
             {
                 visobjtarget.Master.GetFormulasU(stream.Array, out formulas_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Page)
             {
                 visobjtarget.Page.GetFormulasU(stream.Array, out formulas_sa);
             }
@@ -59,8 +62,10 @@ namespace VisioAutomation.Internal.Extensions
             return formulas;
         }
 
-        public static TResult[] _GetResults<TResult>(VisioObjectTarget visobjtarget,
-            ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
+        public static TResult[] _GetResults<TResult>(
+            this Internal.VisioObjectTarget visobjtarget,
+            ShapeSheet.Streams.StreamArray stream, 
+            object[] unitcodes)
         {
             if (stream.Array.Length == 0)
             {
@@ -71,15 +76,15 @@ namespace VisioAutomation.Internal.Extensions
             var flags = Internal.Helpers.GetVisGetSetArgsFromType(typeof(TResult));
             System.Array results_sa = null;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (visobjtarget.Category == Internal.VisioObjectCategory.Shape)
             {
                 visobjtarget.Shape.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Master)
             {
                 visobjtarget.Master.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Page)
             {
                 visobjtarget.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             }
@@ -92,8 +97,10 @@ namespace VisioAutomation.Internal.Extensions
             return results;
         }
 
-        public static int _SetFormulas(VisioObjectTarget visobjtarget,
-            ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
+        public static int _SetFormulas(
+            this VisioObjectTarget visobjtarget,
+            ShapeSheet.Streams.StreamArray stream, 
+            object[] formulas, short flags)
         {
             Internal.Helpers.ValidateStreamLengthFormulas(stream, formulas);
 
@@ -118,7 +125,8 @@ namespace VisioAutomation.Internal.Extensions
             return val;
         }
 
-        public static int _SetResults(VisioObjectTarget visobjtarget,
+        public static int _SetResults(
+            this VisioObjectTarget visobjtarget,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
             Internal.Helpers.ValidateStreamLengthResults(stream, results);
@@ -146,7 +154,7 @@ namespace VisioAutomation.Internal.Extensions
 
 
         public static IVisio.Shape _Drop(
-            VisioObjectTarget visobjtarget,
+            this VisioObjectTarget visobjtarget,
             IVisio.Master master,
             Core.Point point)
         {
@@ -173,7 +181,7 @@ namespace VisioAutomation.Internal.Extensions
         }
 
         public static short[] _DropManyU(
-            VisioObjectTarget visobjtarget,
+            this VisioObjectTarget visobjtarget,
             IList<IVisio.Master> masters,
             IEnumerable<Core.Point> points)
         {

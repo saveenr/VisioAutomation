@@ -6,7 +6,7 @@
             ShapeSheet.Streams.StreamArray stream)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers._GetFormulas(visobjtarget, stream);
+            return visobjtarget._GetFormulas(stream);
         }
 
 
@@ -14,21 +14,21 @@
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers._GetResults<TResult>(visobjtarget, stream, unitcodes);
+            return visobjtarget._GetResults<TResult>(stream, unitcodes);
         }
 
         public static int SetFormulas(this Microsoft.Office.Interop.Visio.Master master,
             ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers._SetFormulas(visobjtarget, stream, formulas, flags);
+            return visobjtarget._SetFormulas(stream, formulas, flags);
         }
 
         public static int SetResults(this Microsoft.Office.Interop.Visio.Master master,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return VisioAutomation.Internal.Extensions.ExtensionHelpers._SetResults(visobjtarget, stream, unitcodes, results, flags);
+            return visobjtarget._SetResults(stream, unitcodes, results, flags);
         }
     }
 }

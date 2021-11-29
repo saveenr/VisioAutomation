@@ -88,13 +88,13 @@ namespace VisioAutomation.ShapeSheet.Writers
             if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                var c = VisioAutomation.Internal.Extensions.ExtensionHelpers._SetFormulas(visobjtarget, stream, values, (short) flags);
+                var c = visobjtarget._SetFormulas(stream, values, (short) flags);
             }
             else
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-                var c = VisioAutomation.Internal.Extensions.ExtensionHelpers._SetResults(visobjtarget, stream, unitcodes, values, (short)flags);
+                var c = visobjtarget._SetResults(stream, unitcodes, values, (short)flags);
             }
         }
     }
