@@ -138,11 +138,11 @@ namespace VisioPowerShell.Commands.VisioShape
                     shape_cells.Apply(writer, (short)shapeid);
                 }
 
-                var surface = new VisioAutomation.Core.VisioObjectTarget(targetpage.Page);
+                var visobjtarget = new VisioAutomation.Core.VisioObjectTarget(targetpage.Page);
 
                 using (var undoscope = this.Client.Undo.NewUndoScope(nameof(NewVisioShape) +":CommitCells"))
                 {
-                    writer.CommitFormulas(surface);
+                    writer.CommitFormulas(visobjtarget);
                 }
 
             }

@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Core
 {
-    public enum SurfaceTargetType
+    public enum VisioObjectCategory
     {
         Page,
         Master,

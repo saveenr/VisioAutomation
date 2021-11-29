@@ -13,14 +13,14 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Shape shape, Core.CellValueType type)
         {
-            var surface = new Core.VisioObjectTarget(shape);
-            this._commit(surface, type);
+            var visobjtarget = new Core.VisioObjectTarget(shape);
+            this._commit(visobjtarget, type);
         }
 
         public void Commit(IVisio.Page page, Core.CellValueType type)
         {
-            var surface = new Core.VisioObjectTarget(page);
-            this._commit(surface, type);
+            var visobjtarget = new Core.VisioObjectTarget(page);
+            this._commit(visobjtarget, type);
         }
 
         public void SetValue(Core.Src src, Core.CellValue formula)

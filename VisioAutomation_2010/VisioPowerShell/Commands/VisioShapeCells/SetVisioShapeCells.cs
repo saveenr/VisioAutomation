@@ -53,7 +53,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             }
 
             var page = targetshapes.Shapes[0].ContainingPage;
-            var surface = new VisioAutomation.Core.VisioObjectTarget(page);
+            var visobjtarget = new VisioAutomation.Core.VisioObjectTarget(page);
 
             this.Client.Output.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.Client.Output.WriteVerbose("TestCircular: {0}", this.TestCircular);
@@ -62,7 +62,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             using (var undoscope = this.Client.Undo.NewUndoScope(nameof(SetVisioShapeCells)))
             {
                 this.Client.Output.WriteVerbose("Start Update");
-                writer.CommitFormulas(surface);
+                writer.CommitFormulas(visobjtarget);
                 this.Client.Output.WriteVerbose("End Update");
             }
         }

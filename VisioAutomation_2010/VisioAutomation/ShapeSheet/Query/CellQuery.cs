@@ -14,8 +14,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Shape shape)
         {
-            var surface = new Core.VisioObjectTarget(shape);
-            return GetFormulas(surface);
+            var visobjtarget = new Core.VisioObjectTarget(shape);
+            return GetFormulas(visobjtarget);
         }
 
 
@@ -36,8 +36,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
-            var surface = new Core.VisioObjectTarget(shape);
-            return GetResults<TResult>(surface);
+            var visobjtarget = new Core.VisioObjectTarget(shape);
+            return GetResults<TResult>(visobjtarget);
         }
 
         public CellQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget)
@@ -59,8 +59,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new Core.VisioObjectTarget(page);
-            return this.GetFormulas(surface, shapeids);
+            var visobjtarget = new Core.VisioObjectTarget(page);
+            return this.GetFormulas(visobjtarget, shapeids);
         }
 
 
@@ -79,8 +79,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new Core.VisioObjectTarget(page);
-            return this.GetResults<TResult>(surface, shapeids);
+            var visobjtarget = new Core.VisioObjectTarget(page);
+            return this.GetResults<TResult>(visobjtarget, shapeids);
         }
 
         public CellQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget, IList<int> shapeids)

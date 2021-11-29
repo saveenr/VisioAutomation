@@ -48,7 +48,6 @@ namespace VisioAutomation.Extensions
         
         public static IVisio.Shape DrawPolyline(this IVisio.Page page, IList<Core.Point> points)
         {
-            var surface = new Core.VisioObjectTarget(page);
             var shape = page.DrawBezier(points);
             return shape;
         }
@@ -79,8 +78,8 @@ namespace VisioAutomation.Extensions
             IVisio.Master master,
             Core.Point point)
         {
-            var surface = new Core.VisioObjectTarget(page);
-            return surface.Drop(master, point);
+            var visobjtarget = new Core.VisioObjectTarget(page);
+            return visobjtarget.Drop(master, point);
         }
 
         public static short[] DropManyU(

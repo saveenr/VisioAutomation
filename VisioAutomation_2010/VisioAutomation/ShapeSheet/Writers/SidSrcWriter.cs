@@ -11,8 +11,8 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Page page, Core.CellValueType type)
         {
-            var surface = new Core.VisioObjectTarget(page);
-            this.Commit(surface, type);
+            var visobjtarget = new Core.VisioObjectTarget(page);
+            this.Commit(visobjtarget, type);
         }
         public void SetValue(short id, Core.Src src, Core.CellValue formula)
         {

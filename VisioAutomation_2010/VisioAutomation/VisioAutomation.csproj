@@ -143,7 +143,7 @@
     <Compile Include="Shapes\HyperlinkCells.cs" />
     <Compile Include="Shapes\HyperlinkHelper.cs" />
     <Compile Include="Shapes\LayoutCells.cs" />
-    <Compile Include="Core\SurfaceTargetType.cs" />
+    <Compile Include="Core\VisioObjectCategory.cs" />
     <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Text\TextXFormCells.cs" />
     <Compile Include="Shapes\ConnectionPointHelper.cs" />

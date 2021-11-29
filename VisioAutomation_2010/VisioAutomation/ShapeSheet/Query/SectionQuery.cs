@@ -43,8 +43,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQueryShapeResults<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
-            var surface = new Core.VisioObjectTarget(shape);
-            return GetResults<TResult>(surface);
+            var visobjtarget = new Core.VisioObjectTarget(shape);
+            return GetResults<TResult>(visobjtarget);
         }
 
         public SectionQueryShapeResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget)
@@ -66,15 +66,15 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQueryResults<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
-            var surface = new Core.VisioObjectTarget(page);
-            return this.GetFormulas(surface, shapeidpairs);
+            var visobjtarget = new Core.VisioObjectTarget(page);
+            return this.GetFormulas(visobjtarget, shapeidpairs);
         }
 
 
         public SectionQueryResults<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
-            var surface = new Core.VisioObjectTarget(page);
-            return this.GetResults<TResult>(surface, shapeidpairs);
+            var visobjtarget = new Core.VisioObjectTarget(page);
+            return this.GetResults<TResult>(visobjtarget, shapeidpairs);
         }
 
         public SectionQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget, Core.ShapeIDPairs shapeidpairs)
