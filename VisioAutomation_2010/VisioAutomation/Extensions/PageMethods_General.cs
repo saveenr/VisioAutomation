@@ -45,8 +45,8 @@ namespace VisioAutomation.Extensions
             IVisio.Master master,
             Core.Point point)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
-            return visobjtarget.Drop(master, point);
+            var output = page.Drop(master, point.X, point.Y);
+            return output;
         }
 
         public static short[] DropManyU(

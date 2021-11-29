@@ -24,5 +24,14 @@ namespace VisioAutomation.Extensions
             return Internal.Extensions.ExtensionHelpers.ToList(() => masters.Count,
                 i => masters[i + 1]);
         }
+
+        public static IVisio.Shape Drop(
+            this IVisio.Master master1,
+            IVisio.Master master2,
+            Core.Point point)
+        {
+            var output = master1.Drop(master2, point.X, point.Y);
+            return output;
+        }
     }
 }

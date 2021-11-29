@@ -108,27 +108,6 @@ namespace VisioAutomation.Core
             return outids;
         }
 
-        public IVisio.Shape Drop(
-            IVisio.Master master,
-            Point point)
-        {
-            if (master == null)
-            {
-                throw new System.ArgumentNullException(nameof(master));
-            }
-
-            var shape = this.Category switch
-            {
-                VisioObjectCategory.Master => this.Master.Drop(master, point.X, point.Y),
-                VisioObjectCategory.Page => this.Page.Drop(master, point.X, point.Y),
-                VisioObjectCategory.Shape => this.Shape.Drop(master, point.X, point.Y),
-                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-            };
-
-            return shape;
-
-        }
-
         public int SetFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
         {
             var val = this.Category switch
