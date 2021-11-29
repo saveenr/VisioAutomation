@@ -19,6 +19,12 @@ namespace VisioAutomation.ShapeSheet.Writers
             this._commit(visobjtarget, type);
         }
 
+        public void Commit(IVisio.Master master, Core.CellValueType type)
+        {
+            var visobjtarget = new VisioObjectTarget(master);
+            this._commit(visobjtarget, type);
+        }
+
         public void Commit(IVisio.Page page, Core.CellValueType type)
         {
             var visobjtarget = new VisioObjectTarget(page);
