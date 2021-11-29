@@ -40,6 +40,8 @@
         public static int SetResults(this Microsoft.Office.Interop.Visio.Shape shape,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
+            Internal.TempHelper.ValidateStreamLengthResults(stream, results);
+
             int val = shape.SetResults(stream.Array, unitcodes, results, flags);
             return val;
         }

@@ -44,6 +44,8 @@ namespace VisioAutomation.Extensions
         public static int SetResults(this Microsoft.Office.Interop.Visio.Page page,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
+            Internal.TempHelper.ValidateStreamLengthResults(stream, results);
+
             int val = page.SetResults(stream.Array, unitcodes, results, flags);
             return val;
         }

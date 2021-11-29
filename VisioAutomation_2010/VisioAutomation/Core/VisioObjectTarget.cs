@@ -148,8 +148,6 @@ namespace VisioAutomation.Core
 
         public int SetResults(ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
-            Internal.TempHelper.ValidateStreamLengthResults(stream, results);
-
             var val = this.Category switch
             {
                 VisioObjectCategory.Master => this.Master.SetResults(stream, unitcodes, results, flags),
@@ -163,8 +161,6 @@ namespace VisioAutomation.Core
 
         public TResult[] GetResults<TResult>(ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
         {
-            Internal.TempHelper._enforce_valid_result_type(typeof(TResult));
-
             var val = this.Category switch
             {
                 VisioObjectCategory.Master => this.Master.GetResults<TResult>(stream, unitcodes),
