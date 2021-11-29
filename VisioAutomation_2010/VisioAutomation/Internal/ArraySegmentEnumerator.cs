@@ -1,10 +1,14 @@
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("VTest")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("VTest.Scripting")]
 namespace VisioAutomation.Internal
 {
     /// <summary>
     /// Allows the incremental building up of segments from an array
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ArraySegmentEnumerator<T>
+    ///
+    ///
+    internal class ArraySegmentEnumerator<T>
     {
         private readonly T[] _array;
         private int _pos;

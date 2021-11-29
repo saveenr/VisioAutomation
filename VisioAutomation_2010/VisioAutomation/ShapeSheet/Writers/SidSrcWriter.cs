@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.Core;
+using IVisio = Microsoft.Office.Interop.Visio;
 using VA= VisioAutomation;
 using VisioAutomation.Extensions;
 using VisioAutomation.Internal;
@@ -11,11 +12,6 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
         }
 
-        public void Commit(IVisio.Page page, Core.CellValueType type)
-        {
-            var visobjtarget = new VisioObjectTarget(page);
-            this.Commit(visobjtarget, type);
-        }
         public void SetValue(short id, Core.Src src, Core.CellValue formula)
         {
             var sidsrc = new Core.SidSrc(id, src);
@@ -34,11 +30,6 @@ namespace VisioAutomation.ShapeSheet.Writers
             {
                 this.SetValue(pair.ShapeID, pair.Src, pair.Value);
             }
-        }
-
-        public void Commit(IVisio.Page page, object formula)
-        {
-            throw new System.NotImplementedException();
         }
 
         public void SetValues(short id, CellGroups.CellGroup cellgroup)
@@ -62,70 +53,24 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        public void CommitFormulas(VisioObjectTarget visobjtarget)
+
+        public void Commit(IVisio.Page page, Core.CellValueType type)
         {
-            if ((this._records == null || this._records.Count < 1))
-            {
-                return;
-            }
-
-            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
-            var formulas = this._records.BuildValuesArray();
-
-            if (stream.Array.Length == 0)
-            {
-                throw new Exceptions.InternalAssertionException();
-            }
-
-            var flags = this._compute_setformula_flags();
-
-            var c = visobjtarget.Dispatch_Func<int>(
-                (shape) => (shape.SetFormulas(stream, formulas, (short)flags)),
-                (master) => (master.SetFormulas(stream, formulas, (short)flags)),
-                (page) => (page.SetFormulas(stream, formulas, (short)flags)));
+            var visobjtarget = new VisioObjectTarget(page);
+            this._commit(visobjtarget, type);
+        }
+        public void Commit(IVisio.Shape shape, Core.CellValueType type)
+        {
+            var visobjtarget = new VisioObjectTarget(shape);
+            this._commit(visobjtarget, type);
+        }
+        public void Commit(IVisio.Master master, Core.CellValueType type)
+        {
+            var visobjtarget = new VisioObjectTarget(master);
+            this._commit(visobjtarget, type);
         }
 
-        public void CommitFormulas(IVisio.Shape shape)
-        {
-            if ((this._records == null || this._records.Count < 1))
-            {
-                return;
-            }
-
-            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
-            var formulas = this._records.BuildValuesArray();
-
-            if (stream.Array.Length == 0)
-            {
-                throw new Exceptions.InternalAssertionException();
-            }
-
-            var flags = this._compute_setformula_flags();
-
-            int c = shape.SetFormulas(stream, formulas, (short)flags);
-        }
-
-        public void CommitFormulas(IVisio.Page page)
-        {
-            if ((this._records == null || this._records.Count < 1))
-            {
-                return;
-            }
-
-            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
-            var formulas = this._records.BuildValuesArray();
-
-            if (stream.Array.Length == 0)
-            {
-                throw new Exceptions.InternalAssertionException();
-            }
-
-            var flags = this._compute_setformula_flags();
-
-            int c = page.SetFormulas(stream, formulas, (short)flags);
-        }
-
-        public void Commit(VisioObjectTarget visobjtarget, Core.CellValueType type)
+        private void _commit(VisioObjectTarget visobjtarget, Core.CellValueType type)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -143,20 +88,13 @@ namespace VisioAutomation.ShapeSheet.Writers
             if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                var c = visobjtarget.Dispatch_Func<int>(
-                    (shape) => (shape.SetFormulas(stream, values, (short)flags)),
-                    (master) => (master.SetFormulas(stream, values, (short)flags)),
-                    (page) => (page.SetFormulas(stream, values, (short)flags)));
+                var c = VisioAutomation.Internal.Extensions.ExtensionHelpers._SetFormulas(visobjtarget, stream, values, (short) flags);
             }
             else
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-
-                var res = visobjtarget.Dispatch_Func<int>(
-                    (shape) => (shape.SetResults(stream, unitcodes, values, (short)flags)),
-                    (master) => (master.SetResults(stream, unitcodes, values, (short)flags)),
-                    (page) => (page.SetResults(stream, unitcodes, values, (short)flags)));
+                var c = VisioAutomation.Internal.Extensions.ExtensionHelpers._SetResults(visobjtarget, stream, unitcodes, values, (short)flags);
             }
         }
     }
