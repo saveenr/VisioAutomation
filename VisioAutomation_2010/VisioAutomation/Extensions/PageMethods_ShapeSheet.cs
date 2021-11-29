@@ -12,7 +12,7 @@ namespace VisioAutomation.Extensions
 
             System.Array formulas_sa = null;
             page.GetFormulasU(stream.Array, out formulas_sa);
-            var formulas = Internal.Helpers.system_array_to_typed_array<string>(formulas_sa);
+            var formulas = Internal.Helpers.SystemArrayToTypedArray<string>(formulas_sa);
             return formulas;
         }
 
@@ -24,11 +24,11 @@ namespace VisioAutomation.Extensions
             {
                 return new TResult[0];
             }
-            Internal.Helpers._enforce_valid_result_type(typeof(TResult));
-            var flags = Internal.Helpers._type_to_vis_get_set_args(typeof(TResult));
+            Internal.Helpers.EnforceValid_ResultType(typeof(TResult));
+            var flags = Internal.Helpers.GetVisGetSetArgsFromType(typeof(TResult));
             System.Array results_sa = null;
             page.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
-            var results = Internal.Helpers.system_array_to_typed_array<TResult>(results_sa);
+            var results = Internal.Helpers.SystemArrayToTypedArray<TResult>(results_sa);
             return results;
         }
 

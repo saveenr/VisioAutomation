@@ -5,16 +5,16 @@ namespace VisioAutomation.Internal
 {
     internal class Helpers
     {
-        public static void _enforce_valid_result_type(System.Type result_type)
+        public static void EnforceValid_ResultType(System.Type result_type)
         {
-            if (!_is_valid_result_type(result_type))
+            if (!IsValidResultType(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
                 throw new Exceptions.InternalAssertionException(msg);
             }
         }
 
-        public static bool _is_valid_result_type(System.Type result_type)
+        public static bool IsValidResultType(System.Type result_type)
         {
             return (result_type == typeof(int)
                     || result_type == typeof(double)
@@ -43,14 +43,14 @@ namespace VisioAutomation.Internal
         }
 
 
-        public static T[] system_array_to_typed_array<T>(System.Array results_sa)
+        public static T[] SystemArrayToTypedArray<T>(System.Array results_sa)
         {
             var results = new T[results_sa.Length];
             results_sa.CopyTo(results, 0);
             return results;
         }
 
-        public static IVisio.VisGetSetArgs _type_to_vis_get_set_args(System.Type type)
+        public static IVisio.VisGetSetArgs GetVisGetSetArgsFromType(System.Type type)
         {
             IVisio.VisGetSetArgs flags;
 
