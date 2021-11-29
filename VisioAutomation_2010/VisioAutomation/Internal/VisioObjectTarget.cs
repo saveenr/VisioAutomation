@@ -50,7 +50,7 @@ namespace VisioAutomation.Internal
             return res;
         }
 
-        public T Dispatch_Func<P1,T>(
+        public T DispatchFunction<P1,T>(
             System.Func<IVisio.Shape, P1, T> fshape,
             System.Func<IVisio.Master, P1, T> fmaster,
             System.Func<IVisio.Page, P1, T> fpage,
