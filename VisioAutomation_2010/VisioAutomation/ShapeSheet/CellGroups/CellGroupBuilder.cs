@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
@@ -117,7 +118,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
-            var objtarget = new Core.VisioObjectTarget(shape);
+            var objtarget = new VisioObjectTarget(shape);
             var results = type switch
             {
                 Core.CellValueType.Formula => query.GetFormulas(shape),
@@ -129,7 +130,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
+            var visobjtarget = new VisioObjectTarget(page);
             var results = type switch
             {
                 Core.CellValueType.Formula => query.GetFormulas(visobjtarget, shapeidpairs),
@@ -141,7 +142,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
-            var visobjtarget = new Core.VisioObjectTarget(shape);
+            var visobjtarget = new VisioObjectTarget(shape);
             var results = type switch
             {
                 Core.CellValueType.Formula => query.GetFormulas(visobjtarget),
@@ -153,7 +154,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
+            var visobjtarget = new VisioObjectTarget(page);
             var results = type switch
             {
                 Core.CellValueType.Formula => query.GetFormulas(visobjtarget, shapeids),

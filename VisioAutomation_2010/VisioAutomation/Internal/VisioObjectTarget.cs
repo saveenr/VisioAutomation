@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Core;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Streams;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Core
+namespace VisioAutomation.Internal
 {
     public readonly struct VisioObjectTarget
     {

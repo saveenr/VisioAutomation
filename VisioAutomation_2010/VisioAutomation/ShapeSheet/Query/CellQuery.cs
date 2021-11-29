@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
@@ -14,12 +15,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Shape shape)
         {
-            var visobjtarget = new Core.VisioObjectTarget(shape);
+            var visobjtarget = new VisioObjectTarget(shape);
             return GetFormulas(visobjtarget);
         }
 
 
-        public CellQueryResults<string> GetFormulas(Core.VisioObjectTarget visobjtarget)
+        public CellQueryResults<string> GetFormulas(VisioObjectTarget visobjtarget)
         {
             _restrict_to_shapes_only(visobjtarget);
 
@@ -36,11 +37,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
-            var visobjtarget = new Core.VisioObjectTarget(shape);
+            var visobjtarget = new VisioObjectTarget(shape);
             return GetResults<TResult>(visobjtarget);
         }
 
-        public CellQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget)
+        public CellQueryResults<TResult> GetResults<TResult>(VisioObjectTarget visobjtarget)
         {
             _restrict_to_shapes_only(visobjtarget);
 
@@ -59,12 +60,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
+            var visobjtarget = new VisioObjectTarget(page);
             return this.GetFormulas(visobjtarget, shapeids);
         }
 
 
-        public CellQueryResults<string> GetFormulas(Core.VisioObjectTarget visobjtarget, IList<int> shapeids)
+        public CellQueryResults<string> GetFormulas(VisioObjectTarget visobjtarget, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = visobjtarget.GetFormulasU(srcstream);
@@ -79,11 +80,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQueryResults<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
+            var visobjtarget = new VisioObjectTarget(page);
             return this.GetResults<TResult>(visobjtarget, shapeids);
         }
 
-        public CellQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget, IList<int> shapeids)
+        public CellQueryResults<TResult> GetResults<TResult>(VisioObjectTarget visobjtarget, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
@@ -166,7 +167,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static void _restrict_to_shapes_only(Core.VisioObjectTarget visobjtarget)
+        private static void _restrict_to_shapes_only(VisioObjectTarget visobjtarget)
         {
             if (visobjtarget.Shape == null)
             {
