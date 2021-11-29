@@ -1,3 +1,4 @@
+using System.Diagnostics.Eventing.Reader;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
@@ -35,7 +36,81 @@ namespace VisioAutomation.Internal
             this.Category = VisioObjectCategory.Shape;
         }
 
-        public T Dispatch_Func<T>(
+        public void DispatchAction(
+            System.Action<IVisio.Shape> fshape,
+            System.Action<IVisio.Master> fmaster,
+            System.Action<IVisio.Page> fpage)
+        {
+            if (this.Category == VisioObjectCategory.Shape)
+            {
+                fshape(this.Shape);
+            }
+            else if (this.Category == VisioObjectCategory.Master)
+            {
+                fmaster(this.Master);
+            }
+            else if (this.Category == VisioObjectCategory.Page)
+            {
+                fpage(this.Page);
+            }
+            else
+            {
+                throw new System.ArgumentException(_unhandled_category_exc_msg);
+            }
+        }
+
+        public void DispatchAction<P1>(
+            System.Action<IVisio.Shape,P1> fshape,
+            System.Action<IVisio.Master, P1> fmaster,
+            System.Action<IVisio.Page, P1> fpage,
+            P1 p1)
+        {
+            if (this.Category == VisioObjectCategory.Shape)
+            {
+                fshape(this.Shape,p1);
+            }
+            else if (this.Category == VisioObjectCategory.Master)
+            {
+                fmaster(this.Master,p1);
+            }
+            else if (this.Category == VisioObjectCategory.Page)
+            {
+                fpage(this.Page,p1);
+            }
+            else
+            {
+                throw new System.ArgumentException(_unhandled_category_exc_msg);
+            }
+        }
+
+        public void DispatchAction<P1,P2>(
+            System.Action<IVisio.Shape, P1, P2> fshape,
+            System.Action<IVisio.Master, P1, P2> fmaster,
+            System.Action<IVisio.Page, P1, P2> fpage,
+            P1 p1,
+            P2 p2)
+        {
+            if (this.Category == VisioObjectCategory.Shape)
+            {
+                fshape(this.Shape, p1, p2);
+            }
+            else if (this.Category == VisioObjectCategory.Master)
+            {
+                fmaster(this.Master, p1, p2);
+            }
+            else if (this.Category == VisioObjectCategory.Page)
+            {
+                fpage(this.Page, p1, p2);
+            }
+            else
+            {
+                throw new System.ArgumentException(_unhandled_category_exc_msg);
+            }
+        }
+
+
+
+        public T DispatchFunction<T>(
             System.Func<IVisio.Shape, T> fshape,
             System.Func<IVisio.Master, T> fmaster, 
             System.Func<IVisio.Page, T> fpage)
@@ -67,7 +142,7 @@ namespace VisioAutomation.Internal
         }
 
 
-        public T Dispatch_Func<P1, P2, T>(
+        public T DispatchFunction<P1, P2, T>(
             System.Func<IVisio.Shape, P1, P2, T> fshape,
             System.Func<IVisio.Master, P1, P2, T> fmaster,
             System.Func<IVisio.Page, P1, P2, T> fpage,
@@ -84,7 +159,7 @@ namespace VisioAutomation.Internal
             return res;
         }
 
-        public T Dispatch_Func<P1, P2, P3, T>(
+        public T DispatchFunction<P1, P2, P3, T>(
             System.Func<IVisio.Shape, P1, P2, P3, T> fshape,
             System.Func<IVisio.Master, P1, P2, P3, T> fmaster,
             System.Func<IVisio.Page, P1, P2, P3, T> fpage,
@@ -102,7 +177,7 @@ namespace VisioAutomation.Internal
             return res;
         }
 
-        public T Dispatch_Func<P1, P2, P3, P4, T>(
+        public T DispatchFunction<P1, P2, P3, P4, T>(
             System.Func<IVisio.Shape, P1, P2, P3, P4, T> fshape,
             System.Func<IVisio.Master, P1, P2, P3, P4, T> fmaster,
             System.Func<IVisio.Page, P1, P2, P3, P4, T> fpage,
