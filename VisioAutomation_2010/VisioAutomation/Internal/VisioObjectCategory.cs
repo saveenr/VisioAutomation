@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Internal
 {
-    public enum VisioObjectCategory
+    internal enum VisioObjectCategory
     {
         Page,
         Master,
