@@ -140,9 +140,9 @@ namespace VisioAutomation.Core
 
             var val = this.Category switch
             {
-                VisioObjectCategory.Master => this.Master.SetFormulas(stream.Array, formulas, flags),
-                VisioObjectCategory.Page => this.Page.SetFormulas(stream.Array, formulas, flags),
-                VisioObjectCategory.Shape => this.Shape.SetFormulas(stream.Array, formulas, flags),
+                VisioObjectCategory.Master => this.Master.SetFormulas(stream, formulas, flags),
+                VisioObjectCategory.Page => this.Page.SetFormulas(stream, formulas, flags),
+                VisioObjectCategory.Shape => this.Shape.SetFormulas(stream, formulas, flags),
                 _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
             };
 
@@ -161,9 +161,9 @@ namespace VisioAutomation.Core
 
             var val = this.Category switch
             {
-                VisioObjectCategory.Master => this.Master.SetResults(stream.Array, unitcodes, results, flags),
-                VisioObjectCategory.Page => this.Page.SetResults(stream.Array, unitcodes, results, flags),
-                VisioObjectCategory.Shape => this.Shape.SetResults(stream.Array, unitcodes, results, flags),
+                VisioObjectCategory.Master => this.Master.SetResults(stream, unitcodes, results, flags),
+                VisioObjectCategory.Page => this.Page.SetResults(stream, unitcodes, results, flags),
+                VisioObjectCategory.Shape => this.Shape.SetResults(stream, unitcodes, results, flags),
                 _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
             };
 

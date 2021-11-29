@@ -2,7 +2,8 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods_ShapeSheet
     {
-        public static string[] GetFormulasU(this Microsoft.Office.Interop.Visio.Page page, ShapeSheet.Streams.StreamArray stream)
+        public static string[] GetFormulasU(this Microsoft.Office.Interop.Visio.Page page,
+            ShapeSheet.Streams.StreamArray stream)
         {
             System.Array formulas_sa = null;
             page.GetFormulasU(stream.Array, out formulas_sa);
@@ -10,16 +11,30 @@ namespace VisioAutomation.Extensions
             return formulas;
         }
 
-        public static TResult[] GetResults<TResult>(this Microsoft.Office.Interop.Visio.Page page, ShapeSheet.Streams.StreamArray stream,
+        public static TResult[] GetResults<TResult>(this Microsoft.Office.Interop.Visio.Page page,
+            ShapeSheet.Streams.StreamArray stream,
             object[] unitcodes)
         {
 
             var flags = Core.VisioObjectTarget._type_to_vis_get_set_args(typeof(TResult));
             System.Array results_sa = null;
-            page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+            page.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
             var results = Core.VisioObjectTarget.system_array_to_typed_array<TResult>(results_sa);
             return results;
         }
 
+        public static int SetFormulas(this Microsoft.Office.Interop.Visio.Page page,
+            ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
+        {
+            int val = page.SetFormulas(stream.Array, formulas, flags);
+            return val;
+        }
+
+        public static int SetResults(this Microsoft.Office.Interop.Visio.Page page,
+            ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
+        {
+            int val = page.SetResults(stream.Array, unitcodes, results, flags);
+            return val;
+        }
     }
 }

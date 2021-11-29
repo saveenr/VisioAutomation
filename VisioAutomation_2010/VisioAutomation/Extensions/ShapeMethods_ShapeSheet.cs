@@ -18,5 +18,18 @@
             var results = Core.VisioObjectTarget.system_array_to_typed_array<TResult>(results_sa);
             return results;
         }
+        public static int SetFormulas(this Microsoft.Office.Interop.Visio.Shape shape,
+            ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
+        {
+            int val = shape.SetFormulas(stream.Array, formulas, flags);
+            return val;
+        }
+
+        public static int SetResults(this Microsoft.Office.Interop.Visio.Shape shape,
+            ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
+        {
+            int val = shape.SetResults(stream.Array, unitcodes, results, flags);
+            return val;
+        }
     }
 }
