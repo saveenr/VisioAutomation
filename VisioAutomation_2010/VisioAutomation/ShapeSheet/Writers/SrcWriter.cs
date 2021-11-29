@@ -1,5 +1,6 @@
 ﻿using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
@@ -77,14 +78,21 @@ namespace VisioAutomation.ShapeSheet.Writers
             if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                int c = visobjtarget.SetFormulas(stream, values, (short)flags);
+                var c = visobjtarget.Dispatch_Func<int>(
+                    (shape) => (shape.SetFormulas(stream, values, (short)flags)),
+                    (master) => (master.SetFormulas(stream, values, (short)flags)),
+                    (page) => (page.SetFormulas(stream, values, (short)flags)));
 
             }
             else
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-                visobjtarget.SetResults(stream, unitcodes, values, (short)flags);
+
+                var res = visobjtarget.Dispatch_Func<int>(
+                    (shape) => (shape.SetResults(stream, unitcodes, values, (short)flags)),
+                    (master) => (master.SetResults(stream, unitcodes, values, (short)flags)),
+                    (page) => (page.SetResults(stream, unitcodes, values, (short)flags)));
             }
         }
     }

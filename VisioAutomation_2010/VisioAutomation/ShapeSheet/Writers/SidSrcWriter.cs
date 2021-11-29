@@ -79,7 +79,10 @@ namespace VisioAutomation.ShapeSheet.Writers
 
             var flags = this._compute_setformula_flags();
 
-            int c = visobjtarget.SetFormulas(stream, formulas, (short)flags);
+            var c = visobjtarget.Dispatch_Func<int>(
+                (shape) => (shape.SetFormulas(stream, formulas, (short)flags)),
+                (master) => (master.SetFormulas(stream, formulas, (short)flags)),
+                (page) => (page.SetFormulas(stream, formulas, (short)flags)));
         }
 
         public void CommitFormulas(IVisio.Shape shape)
@@ -130,7 +133,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
 
             var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
-            var items = this._records.BuildValuesArray();
+            var values = this._records.BuildValuesArray();
 
             if (stream.Array.Length == 0)
             {
@@ -140,13 +143,20 @@ namespace VisioAutomation.ShapeSheet.Writers
             if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                int c = visobjtarget.SetFormulas(stream, items, (short)flags);
+                var c = visobjtarget.Dispatch_Func<int>(
+                    (shape) => (shape.SetFormulas(stream, values, (short)flags)),
+                    (master) => (master.SetFormulas(stream, values, (short)flags)),
+                    (page) => (page.SetFormulas(stream, values, (short)flags)));
             }
             else
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-                visobjtarget.SetResults(stream, unitcodes, items, (short)flags);
+
+                var res = visobjtarget.Dispatch_Func<int>(
+                    (shape) => (shape.SetResults(stream, unitcodes, values, (short)flags)),
+                    (master) => (master.SetResults(stream, unitcodes, values, (short)flags)),
+                    (page) => (page.SetResults(stream, unitcodes, values, (short)flags)));
             }
         }
     }

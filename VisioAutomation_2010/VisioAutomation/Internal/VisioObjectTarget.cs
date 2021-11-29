@@ -35,28 +35,6 @@ namespace VisioAutomation.Internal
             this.Category = VisioObjectCategory.Shape;
         }
 
-
-        public int SetResults(ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
-        {
-            var res = this.Dispatch_Func<int>(
-                (shape) => (shape.SetResults(stream,unitcodes,results,flags)),
-                (master) => (master.SetResults(stream, unitcodes, results, flags)),
-                (page) => (page.SetResults(stream, unitcodes, results, flags)));
-            return res;
-
-        }
-
-        public int SetFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
-        {
-            var res = this.Dispatch_Func<int>(
-                (shape) => (shape.SetFormulas(stream, formulas, flags)),
-                (master) => (master.SetFormulas(stream, formulas, flags)),
-                (page) => (page.SetFormulas(stream, formulas, flags)));
-            return res;
-
-        }
-
-
         public T Dispatch_Func<T>(
             System.Func<IVisio.Shape, T> fshape,
             System.Func<IVisio.Master, T> fmaster, 
@@ -141,31 +119,6 @@ namespace VisioAutomation.Internal
                 _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
             };
             return res;
-        }
-
-        public short ID16
-        {
-            get
-            {
-                var res = this.Dispatch_Func<short>(
-                    (shape) => (shape.ID16),
-                    (master) => (master.ID16),
-                    (page) => (page.ID16));
-                return res;
-            }
-        }
-
-        public IVisio.Shapes Shapes
-        {
-            get
-            {
-                var res = this.Dispatch_Func<IVisio.Shapes>(
-                    (shape) => (shape.Shapes),
-                    (master) => (master.Shapes),
-                    (page) => (page.Shapes));
-                return res;
-
-            }
         }
     }
 }
