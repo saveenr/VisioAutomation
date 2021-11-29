@@ -30,7 +30,7 @@ namespace VisioAutomation.Extensions
             return list;
         }
 
-        public static string[] _GetFormulas(
+        public static string[] GetFormulas(
             this Internal.VisioObjectTarget visobjtarget, 
             ShapeSheet.Streams.StreamArray stream)
         {
@@ -62,7 +62,7 @@ namespace VisioAutomation.Extensions
             return formulas;
         }
 
-        public static TResult[] _GetResults<TResult>(
+        public static TResult[] GetResults<TResult>(
             this Internal.VisioObjectTarget visobjtarget,
             ShapeSheet.Streams.StreamArray stream, 
             object[] unitcodes)
@@ -97,7 +97,7 @@ namespace VisioAutomation.Extensions
             return results;
         }
 
-        public static int _SetFormulas(
+        public static int SetFormulas(
             this VisioObjectTarget visobjtarget,
             ShapeSheet.Streams.StreamArray stream, 
             object[] formulas, short flags)
@@ -125,7 +125,7 @@ namespace VisioAutomation.Extensions
             return val;
         }
 
-        public static int _SetResults(
+        public static int SetResults(
             this VisioObjectTarget visobjtarget,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
@@ -153,7 +153,7 @@ namespace VisioAutomation.Extensions
         }
 
 
-        public static IVisio.Shape _Drop(
+        public static IVisio.Shape Drop(
             this VisioObjectTarget visobjtarget,
             IVisio.Master master,
             Core.Point point)
@@ -180,7 +180,7 @@ namespace VisioAutomation.Extensions
             return output;
         }
 
-        public static short[] _DropManyU(
+        public static short[] DropManyU(
             this VisioObjectTarget visobjtarget,
             IList<IVisio.Master> masters,
             IEnumerable<Core.Point> points)
