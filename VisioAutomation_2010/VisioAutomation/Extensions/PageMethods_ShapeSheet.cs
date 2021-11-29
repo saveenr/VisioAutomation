@@ -5,6 +5,11 @@ namespace VisioAutomation.Extensions
         public static string[] GetFormulasU(this Microsoft.Office.Interop.Visio.Page page,
             ShapeSheet.Streams.StreamArray stream)
         {
+            if (stream.Array.Length == 0)
+            {
+                return new string[0];
+            }
+
             System.Array formulas_sa = null;
             page.GetFormulasU(stream.Array, out formulas_sa);
             var formulas = Core.VisioObjectTarget.system_array_to_typed_array<string>(formulas_sa);

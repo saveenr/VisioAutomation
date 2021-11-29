@@ -5,6 +5,11 @@
         public static string[] GetFormulasU(this Microsoft.Office.Interop.Visio.Master master,
             ShapeSheet.Streams.StreamArray stream)
         {
+            if (stream.Array.Length == 0)
+            {
+                return new string[0];
+            }
+
             System.Array formulas_sa = null;
             master.GetFormulasU(stream.Array, out formulas_sa);
             var formulas = Core.VisioObjectTarget.system_array_to_typed_array<string>(formulas_sa);

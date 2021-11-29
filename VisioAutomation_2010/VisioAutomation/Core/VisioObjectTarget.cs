@@ -178,11 +178,6 @@ namespace VisioAutomation.Core
 
         public string[] GetFormulasU(ShapeSheet.Streams.StreamArray stream)
         {
-            if (stream.Array.Length == 0)
-            {
-                return new string[0];
-            }
-
             var val = this.Category switch
             {
                 VisioObjectCategory.Master => this.Master.GetFormulasU(stream),
