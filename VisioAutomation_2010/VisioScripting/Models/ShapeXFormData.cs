@@ -28,12 +28,12 @@ namespace VisioScripting.Models
             {
                 _static_query = new VASS.Query.CellQuery();
                 var cols = _static_query.Columns;
-                _static_col_x_form_pin_x = cols.Add(VASS.SrcConstants.XFormPinX, nameof(ShapeXFormData.XFormPinX));
-                _static_col_x_form_pin_y = cols.Add(VASS.SrcConstants.XFormPinY, nameof(ShapeXFormData.XFormPinY));
-                _static_col_x_form_loc_pin_x = cols.Add(VASS.SrcConstants.XFormLocPinX, nameof(ShapeXFormData.XFormLocPinX));
-                _static_col_x_form_loc_pin_y = cols.Add(VASS.SrcConstants.XFormLocPinY, nameof(ShapeXFormData.XFormLocPinY));
-                _static_col_x_form_width = cols.Add(VASS.SrcConstants.XFormWidth, nameof(ShapeXFormData.XFormWidth));
-                _static_col_x_form_height = cols.Add(VASS.SrcConstants.XFormHeight, nameof(ShapeXFormData.XFormHeight));
+                _static_col_x_form_pin_x = cols.Add(VisioAutomation.Core.SrcConstants.XFormPinX);
+                _static_col_x_form_pin_y = cols.Add(VisioAutomation.Core.SrcConstants.XFormPinY);
+                _static_col_x_form_loc_pin_x = cols.Add(VisioAutomation.Core.SrcConstants.XFormLocPinX);
+                _static_col_x_form_loc_pin_y = cols.Add(VisioAutomation.Core.SrcConstants.XFormLocPinY);
+                _static_col_x_form_width = cols.Add(VisioAutomation.Core.SrcConstants.XFormWidth);
+                _static_col_x_form_height = cols.Add(VisioAutomation.Core.SrcConstants.XFormHeight);
             }
 
             var results = _static_query.GetResults<double>(page, shapeids);
@@ -56,25 +56,25 @@ namespace VisioScripting.Models
             return list;
         }
 
-        public VisioAutomation.Geometry.Rectangle GetRectangle()
+        public VisioAutomation.Core.Rectangle GetRectangle()
         {
-            var pin = new VisioAutomation.Geometry.Point(this.XFormPinX, this.XFormPinY);
-            var locpin = new VisioAutomation.Geometry.Point(this.XFormLocPinX, this.XFormLocPinY);
-            var size = new VisioAutomation.Geometry.Size(this.XFormWidth, this.XFormHeight);
-            return new VisioAutomation.Geometry.Rectangle(pin - locpin, size);
+            var pin = new VisioAutomation.Core.Point(this.XFormPinX, this.XFormPinY);
+            var locpin = new VisioAutomation.Core.Point(this.XFormLocPinX, this.XFormLocPinY);
+            var size = new VisioAutomation.Core.Size(this.XFormWidth, this.XFormHeight);
+            return new VisioAutomation.Core.Rectangle(pin - locpin, size);
         }
 
         public void SetFormulas(VASS.Writers.SidSrcWriter writer, short id)
         {
-            writer.SetValue(id, VASS.SrcConstants.XFormPinX, this.XFormPinX);
-            writer.SetValue(id, VASS.SrcConstants.XFormPinY, this.XFormPinY);
-            writer.SetValue(id, VASS.SrcConstants.XFormLocPinX, this.XFormLocPinX);
-            writer.SetValue(id, VASS.SrcConstants.XFormLocPinY, this.XFormLocPinY);
-            writer.SetValue(id, VASS.SrcConstants.XFormWidth, this.XFormWidth);
-            writer.SetValue(id, VASS.SrcConstants.XFormHeight, this.XFormHeight);
+            writer.SetValue(id, VisioAutomation.Core.SrcConstants.XFormPinX, this.XFormPinX);
+            writer.SetValue(id, VisioAutomation.Core.SrcConstants.XFormPinY, this.XFormPinY);
+            writer.SetValue(id, VisioAutomation.Core.SrcConstants.XFormLocPinX, this.XFormLocPinX);
+            writer.SetValue(id, VisioAutomation.Core.SrcConstants.XFormLocPinY, this.XFormLocPinY);
+            writer.SetValue(id, VisioAutomation.Core.SrcConstants.XFormWidth, this.XFormWidth);
+            writer.SetValue(id, VisioAutomation.Core.SrcConstants.XFormHeight, this.XFormHeight);
         }
 
-        public static VisioAutomation.Geometry.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)
+        public static VisioAutomation.Core.Rectangle GetBoundingBox(IEnumerable<ShapeXFormData> xfrms)
         {
             var bb = VisioAutomation.Models.Geometry.BoundingBoxBuilder.FromRectangles(xfrms.Select(x => x.GetRectangle()));
             if (!bb.HasValue)

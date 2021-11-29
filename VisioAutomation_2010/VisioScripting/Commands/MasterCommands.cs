@@ -71,7 +71,7 @@ namespace VisioScripting.Commands
             }
         }
 
-        public IVisio.Shape DropMaster(TargetPage targetpage, IVisio.Master master, VisioAutomation.Geometry.Point p)
+        public IVisio.Shape DropMaster(TargetPage targetpage, IVisio.Master master, VisioAutomation.Core.Point p)
         {
             targetpage = targetpage.ResolveToPage(this._client);
 
@@ -82,7 +82,7 @@ namespace VisioScripting.Commands
         public short[] DropMasters(
             TargetPage targetpage,
             IList<IVisio.Master> masters, 
-            IList<VisioAutomation.Geometry.Point> points)
+            IList<VisioAutomation.Core.Point> points)
         {
             targetpage = targetpage.ResolveToPage(this._client);
 

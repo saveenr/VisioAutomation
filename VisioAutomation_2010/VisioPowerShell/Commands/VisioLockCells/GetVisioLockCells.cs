@@ -1,4 +1,3 @@
-using VisioAutomation.ShapeSheet;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -14,7 +13,7 @@ namespace VisioPowerShell.Commands.VisioLockCells
         protected override void ProcessRecord()
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-            var dic = this.Client.Lock.GetLockCells(targetshapes, CellValueType.Formula);
+            var dic = this.Client.Lock.GetLockCells(targetshapes, VisioAutomation.Core.CellValueType.Formula);
             this.WriteObject(dic, true);
         }
     }

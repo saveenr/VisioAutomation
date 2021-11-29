@@ -31,12 +31,12 @@ namespace VisioScripting.Commands
 
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(SetLockCells)))
             {
-                writer.Commit(page, VASS.CellValueType.Formula);
+                writer.Commit(page, VisioAutomation.Core.CellValueType.Formula);
             }
         }
 
 
-        public Dictionary<int, VA.Shapes.LockCells> GetLockCells(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<int, VA.Shapes.LockCells> GetLockCells(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
         {
 
             targetshapes = targetshapes.ResolveToShapes(this._client);

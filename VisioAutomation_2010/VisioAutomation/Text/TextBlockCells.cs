@@ -1,34 +1,33 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
-    public class TextBlockCells : VASS.CellGroups.CellGroup
+    public class TextBlockCells : VACG.CellGroup
     {
-        public VASS.CellValue BottomMargin { get; set; }
-        public VASS.CellValue LeftMargin { get; set; }
-        public VASS.CellValue RightMargin { get; set; }
-        public VASS.CellValue TopMargin { get; set; }
-        public VASS.CellValue DefaultTabStop { get; set; }
-        public VASS.CellValue Background { get; set; }
-        public VASS.CellValue BackgroundTransparency { get; set; }
-        public VASS.CellValue Direction { get; set; }
-        public VASS.CellValue VerticalAlign { get; set; }
+        public Core.CellValue BottomMargin { get; set; }
+        public Core.CellValue LeftMargin { get; set; }
+        public Core.CellValue RightMargin { get; set; }
+        public Core.CellValue TopMargin { get; set; }
+        public Core.CellValue DefaultTabStop { get; set; }
+        public Core.CellValue Background { get; set; }
+        public Core.CellValue BackgroundTransparency { get; set; }
+        public Core.CellValue Direction { get; set; }
+        public Core.CellValue VerticalAlign { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.BottomMargin), VASS.SrcConstants.TextBlockBottomMargin, this.BottomMargin);
-            yield return this.Create(nameof(this.LeftMargin), VASS.SrcConstants.TextBlockLeftMargin, this.LeftMargin);
-            yield return this.Create(nameof(this.RightMargin), VASS.SrcConstants.TextBlockRightMargin, this.RightMargin);
-            yield return this.Create(nameof(this.TopMargin), VASS.SrcConstants.TextBlockTopMargin, this.TopMargin);
-            yield return this.Create(nameof(this.DefaultTabStop), VASS.SrcConstants.TextBlockDefaultTabStop,
+            yield return this._create(nameof(this.BottomMargin), Core.SrcConstants.TextBlockBottomMargin, this.BottomMargin);
+            yield return this._create(nameof(this.LeftMargin), Core.SrcConstants.TextBlockLeftMargin, this.LeftMargin);
+            yield return this._create(nameof(this.RightMargin), Core.SrcConstants.TextBlockRightMargin, this.RightMargin);
+            yield return this._create(nameof(this.TopMargin), Core.SrcConstants.TextBlockTopMargin, this.TopMargin);
+            yield return this._create(nameof(this.DefaultTabStop), Core.SrcConstants.TextBlockDefaultTabStop,
                 this.DefaultTabStop);
-            yield return this.Create(nameof(this.Background), VASS.SrcConstants.TextBlockBackground, this.Background);
-            yield return this.Create(nameof(this.BackgroundTransparency), VASS.SrcConstants.TextBlockBackgroundTransparency,
+            yield return this._create(nameof(this.Background), Core.SrcConstants.TextBlockBackground, this.Background);
+            yield return this._create(nameof(this.BackgroundTransparency), Core.SrcConstants.TextBlockBackgroundTransparency,
                 this.BackgroundTransparency);
-            yield return this.Create(nameof(this.Direction), VASS.SrcConstants.TextBlockDirection, this.Direction);
-            yield return this.Create(nameof(this.VerticalAlign), VASS.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
+            yield return this._create(nameof(this.Direction), Core.SrcConstants.TextBlockDirection, this.Direction);
+            yield return this._create(nameof(this.VerticalAlign), Core.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
         }
     }
 }

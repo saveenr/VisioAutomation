@@ -1,6 +1,4 @@
-using System;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -10,26 +8,26 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var ctrl = new ControlCells();
 
-            return ControlHelper.Add(shape, ctrl);
+            return Add(shape, ctrl);
         }
 
         public static int Add(IVisio.Shape shape, ControlCells ctrl)
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             short row = shape.AddRow((short)IVisio.VisSectionIndices.visSectionControls,
                                      (short)IVisio.VisRowIndices.visRowLast,
                                      (short)IVisio.VisRowTags.visTagDefault);
 
-            ControlHelper.Set(shape, row, ctrl);
+            Set(shape, row, ctrl);
 
             return row;
         }
@@ -38,7 +36,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
 
@@ -52,10 +50,10 @@ namespace VisioAutomation.Shapes
                 ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new ShapeSheet.Writers.SrcWriter();
             writer.SetValues(ctrl, row);
 
-            writer.Commit(shape, VASS.CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
 
             return row;
         }
@@ -64,12 +62,12 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new System.ArgumentOutOfRangeException(nameof(index));
             }
 
             var row = (IVisio.VisRowIndices)index;
@@ -80,7 +78,7 @@ namespace VisioAutomation.Shapes
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];

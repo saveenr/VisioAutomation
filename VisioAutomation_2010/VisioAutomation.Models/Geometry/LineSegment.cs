@@ -2,10 +2,10 @@
 {
     public struct LineSegment
     {
-        public VisioAutomation.Geometry.Point Start { get; }
-        public VisioAutomation.Geometry.Point End { get; }
+        public VisioAutomation.Core.Point Start { get; }
+        public VisioAutomation.Core.Point End { get; }
 
-        public LineSegment(VisioAutomation.Geometry.Point start, VisioAutomation.Geometry.Point end)
+        public LineSegment(VisioAutomation.Core.Point start, VisioAutomation.Core.Point end)
         {
             this.Start = start;
             this.End = end;

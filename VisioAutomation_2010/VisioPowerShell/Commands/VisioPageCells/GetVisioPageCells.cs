@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
@@ -28,8 +27,8 @@ namespace VisioPowerShell.Commands.VisioPageCells
         protected override void ProcessRecord()
         {
             var valuetype = this.Results
-                ? VisioAutomation.ShapeSheet.CellValueType.Result
-                : VisioAutomation.ShapeSheet.CellValueType.Formula;
+                ? VisioAutomation.Core.CellValueType.Result
+                : VisioAutomation.Core.CellValueType.Formula;
 
             var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
 
@@ -49,8 +48,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
             {
                 var shapesheet = page.PageSheet;
                 var shapeids = new List<int> { shapesheet.ID };
-                var surface = new VisioAutomation.SurfaceTarget(page);
-                var temp_datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, surface);
+                var temp_datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, page);
                 datatable.Merge(temp_datatable);
             }
 
@@ -77,7 +75,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
             {
                 var quoted_names = invalid_names.Select( s=> string.Format("\"{0}\"",s));
                 string msg = "Invalid cell names: " + string.Join(",", quoted_names);
-                throw new ArgumentException(nameof(cellnames),msg);
+                throw new System.ArgumentException(nameof(cellnames),msg);
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();

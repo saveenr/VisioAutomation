@@ -8,11 +8,11 @@ namespace VisioAutomation.Models.Dom
     public class Page : Node
     {
         public ShapeList Shapes { get; }
-        public VisioAutomation.Geometry.Size? Size;
+        public VisioAutomation.Core.Size? Size;
         public bool ResizeToFit;
-        public VisioAutomation.Geometry.Size? ResizeToFitMargin;
-        public Pages.PageFormatCells PageFormatCells;
-        public Pages.PageLayoutCells PageLayoutCells;
+        public VisioAutomation.Core.Size? ResizeToFitMargin;
+        public Pages.FormatCells FormatCells;
+        public Pages.LayoutCells LayoutCells;
         public string Name;
         public VisioAutomation.Models.LayoutStyles.LayoutStyleBase Layout;
         public IVisio.Page VisioPage;
@@ -21,8 +21,8 @@ namespace VisioAutomation.Models.Dom
         public Page()
         {
             this.Shapes = new ShapeList();
-            this.PageFormatCells = new Pages.PageFormatCells();
-            this.PageLayoutCells = new VA.Pages.PageLayoutCells();
+            this.FormatCells = new Pages.FormatCells();
+            this.LayoutCells = new VA.Pages.LayoutCells();
 
             this.RenderPerformanceSettings = new RenderPerformanceSettings();
             this.RenderPerformanceSettings.DeferRecalc = 0;
@@ -72,14 +72,14 @@ namespace VisioAutomation.Models.Dom
             {
                 if (this.Size.HasValue)
                 {
-                    this.PageFormatCells.Height = this.Size.Value.Height;
-                    this.PageFormatCells.Width = this.Size.Value.Width;
+                    this.FormatCells.Height = this.Size.Value.Height;
+                    this.FormatCells.Width = this.Size.Value.Width;
                 }
 
                 var writer = new VASS.Writers.SidSrcWriter();
-                writer.SetValues((short)page_sheet.ID, this.PageFormatCells);
-                writer.SetValues((short)page_sheet.ID, this.PageLayoutCells);
-                writer.Commit(page, ShapeSheet.CellValueType.Formula);
+                writer.SetValues((short)page_sheet.ID, this.FormatCells);
+                writer.SetValues((short)page_sheet.ID, this.LayoutCells);
+                writer.Commit(page, Core.CellValueType.Formula);
                 
                 // Then render the shapes
                 this.Shapes.Render(page);

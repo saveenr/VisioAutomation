@@ -39,11 +39,11 @@ namespace VisioAutomation.Documents
 
         internal static IVisio.Document OpenStencil(this IVisio.Documents documents, string filename)
         {
-            var stencil = VisioAutomation.Documents.DocumentHelper.TryOpenStencil(documents, filename);
+            var stencil = TryOpenStencil(documents, filename);
             if (stencil == null)
             {
                 string msg = string.Format("Could not open stencil \"{0}\"", filename);
-                throw new VisioAutomation.Exceptions.VisioOperationException(msg);
+                throw new Exceptions.VisioOperationException(msg);
             }
             return stencil;
         }

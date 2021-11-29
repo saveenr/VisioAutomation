@@ -5,33 +5,33 @@ namespace VisioAutomation.Models.Documents.Forms
 {
     public class TextBlock
     {
-        public VisioAutomation.Geometry.Size Size;
+        public VisioAutomation.Core.Size Size;
         public string Font = "SegoeUI";
         public VisioAutomation.Text.TextBlockCells TextBlockCells;
-        public VisioAutomation.Text.ParagraphFormatCells ParagraphFormatCells;
-        public Shapes.ShapeFormatCells FormatCells;
-        public VisioAutomation.Text.CharacterFormatCells CharacterFormatCells;
+        public VisioAutomation.Text.ParagraphCells ParagraphCells;
+        public Shapes.FormatCells FormatCells;
+        public VisioAutomation.Text.CharacterCells CharacterCells;
         public string Text;
         public IVisio.Shape VisioShape;
         public int VisioShapeID;
-        public VisioAutomation.Geometry.Rectangle Rectangle;
+        public VisioAutomation.Core.Rectangle Rectangle;
 
-        public TextBlock(VisioAutomation.Geometry.Size size, string text)
+        public TextBlock(VisioAutomation.Core.Size size, string text)
         {
             this.Text = text;
             this.Size = size;
             this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
-            this.ParagraphFormatCells = new VisioAutomation.Text.ParagraphFormatCells();
-            this.FormatCells = new Shapes.ShapeFormatCells();
-            this.CharacterFormatCells = new VisioAutomation.Text.CharacterFormatCells();
+            this.ParagraphCells = new VisioAutomation.Text.ParagraphCells();
+            this.FormatCells = new Shapes.FormatCells();
+            this.CharacterCells = new VisioAutomation.Text.CharacterCells();
         }
 
         public void ApplyFormus(SidSrcWriter writer)
         {
             short title_shapeid = this.VisioShape.ID16;
             writer.SetValues(title_shapeid, this.TextBlockCells);
-            writer.SetValues(title_shapeid, this.ParagraphFormatCells, 0);
-            writer.SetValues(title_shapeid, this.CharacterFormatCells, 0);
+            writer.SetValues(title_shapeid, this.ParagraphCells, 0);
+            writer.SetValues(title_shapeid, this.CharacterCells, 0);
             writer.SetValues(title_shapeid, this.FormatCells);
         }
     }

@@ -1,19 +1,17 @@
-﻿using System;
-
-namespace VisioAutomation.ShapeSheet.Query
+﻿namespace VisioAutomation.ShapeSheet.Query
 {
     public class Column
     {
         public string Name { get; protected set; }
         public int Ordinal { get; protected set; }
 
-        public ShapeSheet.Src Src { get; }
+        public Core.Src Src { get; }
 
-        public Column(int ordinal, string name, ShapeSheet.Src src) 
+        public Column(int ordinal, string name, Core.Src src) 
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("name");
+                throw new System.ArgumentException("name");
             }
 
             this.Src = src;

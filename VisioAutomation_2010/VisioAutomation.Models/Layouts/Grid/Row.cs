@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VisioAutomation.Models.Layouts.Grid
+﻿namespace VisioAutomation.Models.Layouts.Grid
 {
     public class Row
     {
@@ -14,7 +12,7 @@ namespace VisioAutomation.Models.Layouts.Grid
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new System.ArgumentOutOfRangeException();
                 }
                 this._height = value;
             }

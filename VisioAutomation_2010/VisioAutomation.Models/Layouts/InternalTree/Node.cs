@@ -18,11 +18,11 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         public int Id { get; set; }
 
-        public VisioAutomation.Geometry.Size Size { get; set; }
+        public VisioAutomation.Core.Size Size { get; set; }
 
-        public VisioAutomation.Geometry.Rectangle Rect => new VisioAutomation.Geometry.Rectangle(this.Position, this.Size);
+        public VisioAutomation.Core.Rectangle Rect => new VisioAutomation.Core.Rectangle(this.Position, this.Size);
 
-        internal void Init(int id, Node<T> parent, VisioAutomation.Geometry.Size size, T data)
+        internal void Init(int id, Node<T> parent, VisioAutomation.Core.Size size, T data)
         {
             this.Id = id;
             this.Size = size;
@@ -32,16 +32,16 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             this._child_list = new List<Node<T>>();
             this.LeftNeighbor = null;
             this.RightNeighbor = null;
-            this.Position = new VisioAutomation.Geometry.Point(0, 0);
+            this.Position = new VisioAutomation.Core.Point(0, 0);
             this._is_collapsed = false;
         }
 
-        internal Node(int id, Node<T> parent, VisioAutomation.Geometry.Size size)
+        internal Node(int id, Node<T> parent, VisioAutomation.Core.Size size)
         {
             this.Init(id, parent, size, default(T));
         }
 
-        public Node(VisioAutomation.Geometry.Size size, T data)
+        public Node(VisioAutomation.Core.Size size, T data)
         {
             this.Init(Node<T>._nodeSeqNum++, null, size, data);
         }
@@ -102,7 +102,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
             return child;
         }
 
-        public Node<T> AddNewChild(VisioAutomation.Geometry.Size size)
+        public Node<T> AddNewChild(VisioAutomation.Core.Size size)
         {
             var new_child = new Node<T>(Node<T>._nodeSeqNum++, null, size);
             this.add_child(new_child);
@@ -125,7 +125,7 @@ namespace VisioAutomation.Models.Layouts.InternalTree
 
         public T Data { get; set; }
 
-        public VisioAutomation.Geometry.Point Position { get; set; }
+        public VisioAutomation.Core.Point Position { get; set; }
 
         public bool GetIsAncestorCollapsed()
         {

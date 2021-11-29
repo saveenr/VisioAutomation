@@ -1,5 +1,4 @@
 using IVisio = Microsoft.Office.Interop.Visio;
-using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
@@ -30,10 +29,10 @@ namespace VisioAutomation.Shapes
                                  (short)IVisio.VisRowIndices.visRowLast,
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new ShapeSheet.Writers.SrcWriter();
             writer.SetValues(connection_point_cells, n);
 
-            writer.Commit(shape, VASS.CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
 
             return n;
         }
@@ -48,10 +47,10 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
+            var writer = new ShapeSheet.Writers.SrcWriter();
             writer.SetValues(cpcells, row);
 
-            writer.Commit(shape, VASS.CellValueType.Formula);
+            writer.Commit(shape, Core.CellValueType.Formula);
 
             return row;
         }
@@ -79,10 +78,10 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            int n = ConnectionPointHelper.GetCount(shape);
+            int n = GetCount(shape);
             for (int i = n - 1; i >= 0; i--)
             {
-                ConnectionPointHelper.Delete(shape, i);
+                Delete(shape, i);
             }
 
             return n;

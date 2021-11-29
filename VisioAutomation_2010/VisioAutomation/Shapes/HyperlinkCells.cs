@@ -1,72 +1,72 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class HyperlinkCells : VASS.CellGroups.CellGroup
+    public class HyperlinkCells : VACG.CellGroup
     {
-        public VASS.CellValue Address { get; set; }
-        public VASS.CellValue Description { get; set; }
-        public VASS.CellValue ExtraInfo { get; set; }
-        public VASS.CellValue Frame { get; set; }
-        public VASS.CellValue SortKey { get; set; }
-        public VASS.CellValue SubAddress { get; set; }
-        public VASS.CellValue NewWindow { get; set; }
-        public VASS.CellValue Default { get; set; }
-        public VASS.CellValue Invisible { get; set; }
+        public Core.CellValue Address { get; set; }
+        public Core.CellValue Description { get; set; }
+        public Core.CellValue ExtraInfo { get; set; }
+        public Core.CellValue Frame { get; set; }
+        public Core.CellValue SortKey { get; set; }
+        public Core.CellValue SubAddress { get; set; }
+        public Core.CellValue NewWindow { get; set; }
+        public Core.CellValue Default { get; set; }
+        public Core.CellValue Invisible { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.Address), VASS.SrcConstants.HyperlinkAddress, this.Address);
-            yield return this.Create(nameof(this.Description), VASS.SrcConstants.HyperlinkDescription, this.Description);
-            yield return this.Create(nameof(this.ExtraInfo), VASS.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
-            yield return this.Create(nameof(this.Frame), VASS.SrcConstants.HyperlinkFrame, this.Frame);
-            yield return this.Create(nameof(this.SortKey), VASS.SrcConstants.HyperlinkSortKey, this.SortKey);
-            yield return this.Create(nameof(this.SubAddress), VASS.SrcConstants.HyperlinkSubAddress, this.SubAddress);
-            yield return this.Create(nameof(this.NewWindow), VASS.SrcConstants.HyperlinkNewWindow, this.NewWindow);
-            yield return this.Create(nameof(this.Default), VASS.SrcConstants.HyperlinkDefault, this.Default);
-            yield return this.Create(nameof(this.Invisible), VASS.SrcConstants.HyperlinkInvisible, this.Invisible);
+            yield return this._create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
+            yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription, this.Description);
+            yield return this._create(nameof(this.ExtraInfo), Core.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
+            yield return this._create(nameof(this.Frame), Core.SrcConstants.HyperlinkFrame, this.Frame);
+            yield return this._create(nameof(this.SortKey), Core.SrcConstants.HyperlinkSortKey, this.SortKey);
+            yield return this._create(nameof(this.SubAddress), Core.SrcConstants.HyperlinkSubAddress, this.SubAddress);
+            yield return this._create(nameof(this.NewWindow), Core.SrcConstants.HyperlinkNewWindow, this.NewWindow);
+            yield return this._create(nameof(this.Default), Core.SrcConstants.HyperlinkDefault, this.Default);
+            yield return this._create(nameof(this.Invisible), Core.SrcConstants.HyperlinkInvisible, this.Invisible);
         }
 
-        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var reader = HyperLinkCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
-        public static List<HyperlinkCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static List<HyperlinkCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = HyperLinkCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        private static readonly System.Lazy<HyperlinkCellsBuilder> HyperLinkCells_lazy_builder = new System.Lazy<HyperlinkCellsBuilder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class HyperlinkCellsBuilder : VASS.CellGroups.CellGroupBuilder<HyperlinkCells>
+        class Builder : VACG.CellGroupBuilder<HyperlinkCells>
         {
 
-            public HyperlinkCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 
             public override HyperlinkCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new HyperlinkCells();
-                var getcellvalue = VASS.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
                 
-                cells.Address = getcellvalue(nameof(HyperlinkCells.Address));
-                cells.Description = getcellvalue(nameof(HyperlinkCells.Description));
-                cells.ExtraInfo = getcellvalue(nameof(HyperlinkCells.ExtraInfo));
-                cells.Frame = getcellvalue(nameof(HyperlinkCells.Frame));
-                cells.SortKey = getcellvalue(nameof(HyperlinkCells.SortKey));
-                cells.SubAddress = getcellvalue(nameof(HyperlinkCells.SubAddress));
-                cells.NewWindow = getcellvalue(nameof(HyperlinkCells.NewWindow));
-                cells.Default = getcellvalue(nameof(HyperlinkCells.Default));
-                cells.Invisible = getcellvalue(nameof(HyperlinkCells.Invisible));
+                cells.Address = getcellvalue(nameof(Address));
+                cells.Description = getcellvalue(nameof(Description));
+                cells.ExtraInfo = getcellvalue(nameof(ExtraInfo));
+                cells.Frame = getcellvalue(nameof(Frame));
+                cells.SortKey = getcellvalue(nameof(SortKey));
+                cells.SubAddress = getcellvalue(nameof(SubAddress));
+                cells.NewWindow = getcellvalue(nameof(NewWindow));
+                cells.Default = getcellvalue(nameof(Default));
+                cells.Invisible = getcellvalue(nameof(Invisible));
 
                 return cells;
             }

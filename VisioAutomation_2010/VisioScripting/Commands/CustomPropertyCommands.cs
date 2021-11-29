@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Shapes;
-using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -14,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomPropertiesAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType type)
+        public IDictionary<IVisio.Shape, CustomPropertyDictionary> GetCustomPropertiesAsShapeDictionary(TargetShapes targetshapes, VisioAutomation.Core.CellValueType type)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
             var dicof_shape_to_cpdic = new Dictionary<IVisio.Shape, CustomPropertyDictionary>();
@@ -30,7 +29,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_cpdic;
         }
 
-        public List<CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes, VASS.CellValueType type)
+        public List<CustomPropertyDictionary> GetCustomProperties(TargetShapes targetshapes, VisioAutomation.Core.CellValueType type)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
 

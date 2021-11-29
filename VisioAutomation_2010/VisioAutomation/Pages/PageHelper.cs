@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Core;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -7,7 +8,7 @@ namespace VisioAutomation.Pages
 {
     public static class PageHelper
     {
-        private static List<VASS.Src> _static_page_srcs;
+        private static List<Core.Src> _static_page_srcs;
 
         public static void Duplicate(
             IVisio.Page src_page,
@@ -72,7 +73,7 @@ namespace VisioAutomation.Pages
                 writer.SetValue(_static_page_srcs[i],src_formulas[row][i]);
             }
 
-            writer.Commit(dest_page.PageSheet, VASS.CellValueType.Formula);
+            writer.Commit(dest_page.PageSheet, Core.CellValueType.Formula);
 
             // make sure the new page looks like the old page
             dest_page.Background = src_page.Background;
@@ -88,107 +89,107 @@ namespace VisioAutomation.Pages
         {
             if (_static_page_srcs == null)
             {
-                _static_page_srcs = new List<VASS.Src>();
+                _static_page_srcs = new List<Core.Src>();
 
-                _static_page_srcs.Add(VASS.SrcConstants.PrintLeftMargin);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintCenterX);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintCenterY);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintOnPage);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintBottomMargin);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintRightMargin);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintPagesX);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintPagesY);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintTopMargin);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintPaperKind);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintGrid);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintPageOrientation);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintScaleX);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintScaleY);
-                _static_page_srcs.Add(VASS.SrcConstants.PrintPaperSource);
+                _static_page_srcs.Add(Core.SrcConstants.PrintLeftMargin);
+                _static_page_srcs.Add(Core.SrcConstants.PrintCenterX);
+                _static_page_srcs.Add(Core.SrcConstants.PrintCenterY);
+                _static_page_srcs.Add(Core.SrcConstants.PrintOnPage);
+                _static_page_srcs.Add(Core.SrcConstants.PrintBottomMargin);
+                _static_page_srcs.Add(Core.SrcConstants.PrintRightMargin);
+                _static_page_srcs.Add(Core.SrcConstants.PrintPagesX);
+                _static_page_srcs.Add(Core.SrcConstants.PrintPagesY);
+                _static_page_srcs.Add(Core.SrcConstants.PrintTopMargin);
+                _static_page_srcs.Add(Core.SrcConstants.PrintPaperKind);
+                _static_page_srcs.Add(Core.SrcConstants.PrintGrid);
+                _static_page_srcs.Add(Core.SrcConstants.PrintPageOrientation);
+                _static_page_srcs.Add(Core.SrcConstants.PrintScaleX);
+                _static_page_srcs.Add(Core.SrcConstants.PrintScaleY);
+                _static_page_srcs.Add(Core.SrcConstants.PrintPaperSource);
 
-                _static_page_srcs.Add(VASS.SrcConstants.PageDrawingScale);
-                _static_page_srcs.Add(VASS.SrcConstants.PageDrawingScaleType);
-                _static_page_srcs.Add(VASS.SrcConstants.PageDrawingSizeType);
-                _static_page_srcs.Add(VASS.SrcConstants.PageInhibitSnap);
-                _static_page_srcs.Add(VASS.SrcConstants.PageHeight);
-                _static_page_srcs.Add(VASS.SrcConstants.PageScale);
-                _static_page_srcs.Add(VASS.SrcConstants.PageWidth);
-                _static_page_srcs.Add(VASS.SrcConstants.PageShadowObliqueAngle);
-                _static_page_srcs.Add(VASS.SrcConstants.PageShadowOffsetX);
-                _static_page_srcs.Add(VASS.SrcConstants.PageShadowOffsetY);
-                _static_page_srcs.Add(VASS.SrcConstants.PageShadowScaleFactor);
-                _static_page_srcs.Add(VASS.SrcConstants.PageShadowType);
-                _static_page_srcs.Add(VASS.SrcConstants.PageUIVisibility);
-                _static_page_srcs.Add(VASS.SrcConstants.PageDrawingResizeType);
+                _static_page_srcs.Add(Core.SrcConstants.PageDrawingScale);
+                _static_page_srcs.Add(Core.SrcConstants.PageDrawingScaleType);
+                _static_page_srcs.Add(Core.SrcConstants.PageDrawingSizeType);
+                _static_page_srcs.Add(Core.SrcConstants.PageInhibitSnap);
+                _static_page_srcs.Add(Core.SrcConstants.PageHeight);
+                _static_page_srcs.Add(Core.SrcConstants.PageScale);
+                _static_page_srcs.Add(Core.SrcConstants.PageWidth);
+                _static_page_srcs.Add(Core.SrcConstants.PageShadowObliqueAngle);
+                _static_page_srcs.Add(Core.SrcConstants.PageShadowOffsetX);
+                _static_page_srcs.Add(Core.SrcConstants.PageShadowOffsetY);
+                _static_page_srcs.Add(Core.SrcConstants.PageShadowScaleFactor);
+                _static_page_srcs.Add(Core.SrcConstants.PageShadowType);
+                _static_page_srcs.Add(Core.SrcConstants.PageUIVisibility);
+                _static_page_srcs.Add(Core.SrcConstants.PageDrawingResizeType);
 
-                _static_page_srcs.Add(VASS.SrcConstants.XGridDensity);
-                _static_page_srcs.Add(VASS.SrcConstants.XGridOrigin);
-                _static_page_srcs.Add(VASS.SrcConstants.XGridSpacing);
-                _static_page_srcs.Add(VASS.SrcConstants.XRulerDensity);
-                _static_page_srcs.Add(VASS.SrcConstants.XRulerOrigin);
-                _static_page_srcs.Add(VASS.SrcConstants.YGridDensity);
-                _static_page_srcs.Add(VASS.SrcConstants.YGridOrigin);
-                _static_page_srcs.Add(VASS.SrcConstants.YGridSpacing);
-                _static_page_srcs.Add(VASS.SrcConstants.YRulerDensity);
-                _static_page_srcs.Add(VASS.SrcConstants.YRulerOrigin);
+                _static_page_srcs.Add(Core.SrcConstants.XGridDensity);
+                _static_page_srcs.Add(Core.SrcConstants.XGridOrigin);
+                _static_page_srcs.Add(Core.SrcConstants.XGridSpacing);
+                _static_page_srcs.Add(Core.SrcConstants.XRulerDensity);
+                _static_page_srcs.Add(Core.SrcConstants.XRulerOrigin);
+                _static_page_srcs.Add(Core.SrcConstants.YGridDensity);
+                _static_page_srcs.Add(Core.SrcConstants.YGridOrigin);
+                _static_page_srcs.Add(Core.SrcConstants.YGridSpacing);
+                _static_page_srcs.Add(Core.SrcConstants.YRulerDensity);
+                _static_page_srcs.Add(Core.SrcConstants.YRulerOrigin);
 
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutAvenueSizeX);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutAvenueSizeY);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutBlockSizeX);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutBlockSizeY);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutControlAsInput);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutDynamicsOff);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutEnableGrid);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineAdjustFrom);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineAdjustTo);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineJumpCode);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineJumpFactorX);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineJumpFactorY);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineJumpStyle);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineRouteExt);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineToLineX);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineToLineY);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineToNodeX);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineToNodeY);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineJumpDirX);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutLineJumpDirY);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutShapeSplit);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutPlaceDepth);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutPlaceFlip);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutPlaceStyle);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutPlowCode);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutResizePage);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutRouteStyle);
-                _static_page_srcs.Add(VASS.SrcConstants.PageLayoutAvoidPageBreaks);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutAvenueSizeX);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutAvenueSizeY);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutBlockSizeX);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutBlockSizeY);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutControlAsInput);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutDynamicsOff);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutEnableGrid);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineAdjustFrom);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineAdjustTo);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineJumpCode);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineJumpFactorX);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineJumpFactorY);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineJumpStyle);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineRouteExt);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineToLineX);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineToLineY);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineToNodeX);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineToNodeY);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineJumpDirX);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutLineJumpDirY);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutShapeSplit);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutPlaceDepth);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutPlaceFlip);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutPlaceStyle);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutPlowCode);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutResizePage);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutRouteStyle);
+                _static_page_srcs.Add(Core.SrcConstants.PageLayoutAvoidPageBreaks);
             }
         }
 
-        public static Geometry.Size GetSize(IVisio.Page page)
+        public static Core.Size GetSize(IVisio.Page page)
         {
             var query = new VASS.Query.CellQuery();
-            var col_height = query.Columns.Add(VASS.SrcConstants.PageHeight,nameof(VASS.SrcConstants.PageHeight));
-            var col_width = query.Columns.Add(VASS.SrcConstants.PageWidth,nameof(VASS.SrcConstants.PageWidth));
+            var col_height = query.Columns.Add(Core.SrcConstants.PageHeight);
+            var col_width = query.Columns.Add(Core.SrcConstants.PageWidth);
 
             var cellqueryresult = query.GetResults<double>(page.PageSheet);
             var row = cellqueryresult[0];
             double height = row[col_height];
             double width = row[col_width];
-            var s = new Geometry.Size(width, height);
+            var s = new Core.Size(width, height);
             return s;
         }
 
-        public static void SetSize(IVisio.Page page, Geometry.Size size)
+        public static void SetSize(IVisio.Page page, Core.Size size)
         {
             var writer = new VASS.Writers.SrcWriter();
-            writer.SetValue(VASS.SrcConstants.PageWidth, size.Width);
-            writer.SetValue(VASS.SrcConstants.PageHeight, size.Height);
+            writer.SetValue(Core.SrcConstants.PageWidth, size.Width);
+            writer.SetValue(Core.SrcConstants.PageHeight, size.Height);
 
-            writer.Commit(page.PageSheet, VASS.CellValueType.Formula);
+            writer.Commit(page.PageSheet, Core.CellValueType.Formula);
         }        
 
         public static short[] DropManyAutoConnectors(
             IVisio.Page page,
-            ICollection<Geometry.Point> points)
+            ICollection<Core.Point> points)
         {
 
             if (points == null)
@@ -202,7 +203,7 @@ namespace VisioAutomation.Pages
             var thing = app.ConnectorToolDataObject;
             int num_points = points.Count;
             var masters_obj_array = Enumerable.Repeat(thing, num_points).ToArray();
-            var xy_array = Geometry.Point.ToDoubles(points).ToArray();
+            var xy_array = Core.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 
@@ -212,7 +213,7 @@ namespace VisioAutomation.Pages
             return outids;
         }
 
-        public static void ResizeToFitContents(IVisio.Page page, Geometry.Size padding)
+        public static void ResizeToFitContents(IVisio.Page page, Core.Size padding)
         {
             // first perform the native resizetofit
             page.ResizeToFitContents();
@@ -225,9 +226,9 @@ namespace VisioAutomation.Pages
                 // first determine the desired page size including the padding
                 // and set the new size
 
-                var old_size = VisioAutomation.Pages.PageHelper.GetSize(page);
+                var old_size = GetSize(page);
                 var new_size = old_size + padding.Multiply(2, 2);
-                VisioAutomation.Pages.PageHelper.SetSize(page, new_size);
+                SetSize(page, new_size);
 
                 // The page has the correct size, but
                 // the contents will be offset from the correct location
@@ -238,26 +239,19 @@ namespace VisioAutomation.Pages
         public static short[] DropManyU(
             IVisio.Page page,
             IList<IVisio.Master> masters,
-            IEnumerable<Geometry.Point> points)
+            IEnumerable<Core.Point> points)
         {
-            if (masters == null)
-            {
-                throw new System.ArgumentNullException(nameof(masters));
-            }
+            Internal.Helpers.ValidateDropManyParams(masters, points);
+
 
             if (masters.Count < 1)
             {
                 return new short[0];
             }
 
-            if (points == null)
-            {
-                throw new System.ArgumentNullException(nameof(points));
-            }
-
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = Geometry.Point.ToDoubles(points).ToArray();
+            var xy_array = Core.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 
@@ -266,5 +260,6 @@ namespace VisioAutomation.Pages
             short[] outids = (short[])outids_sa;
             return outids;
         }
+
     }
 }

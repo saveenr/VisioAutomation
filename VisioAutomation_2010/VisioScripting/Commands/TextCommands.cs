@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VASS=VisioAutomation.ShapeSheet;
 
 namespace VisioScripting.Commands
 {
@@ -70,7 +69,7 @@ namespace VisioScripting.Commands
 
             var shapeidpairs = targetshapes.ToShapeIDPairs();
             var application = cmdtarget.Application;
-            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeidpairs, VASS.CellValueType.Formula);
+            var formats = VisioAutomation.Text.TextFormat.GetFormat(application.ActivePage, shapeidpairs, VisioAutomation.Core.CellValueType.Formula);
             return formats;
         }
     }

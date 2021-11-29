@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Exceptions;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -194,17 +193,17 @@ namespace VisioScripting.Commands
             targetdoc.Document.SaveAs(filename);
         }
 
-        public IVisio.Document NewDocument(VisioAutomation.Geometry.Size size)
+        public IVisio.Document NewDocument(VisioAutomation.Core.Size size)
         {
             return this.NewDocumentFromTemplate(size,null);
         }
 
-        public IVisio.Document NewDocumentFromTemplate(VisioAutomation.Geometry.Size size, string template)
+        public IVisio.Document NewDocumentFromTemplate(VisioAutomation.Core.Size size, string template)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             var doc = this.NewDocumentFromTemplate(template);
-            var pagecells = new VisioAutomation.Pages.PageFormatCells();
+            var pagecells = new VisioAutomation.Pages.FormatCells();
             pagecells.Width = size.Width;
             pagecells.Height = size.Height;
 
@@ -213,7 +212,7 @@ namespace VisioScripting.Commands
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
             writer.SetValues(pagecells);
-            writer.Commit(page.PageSheet, CellValueType.Formula);
+            writer.Commit(page.PageSheet, VisioAutomation.Core.CellValueType.Formula);
 
             return doc;
         }

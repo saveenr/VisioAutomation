@@ -40,14 +40,14 @@ namespace VisioPowerShell.Commands.VisioPage
 
             if (this.FitContents)
             {
-                var bordersize = new VisioAutomation.Geometry.Size(this.BorderWidth, this.BorderHeight);
+                var bordersize = new VisioAutomation.Core.Size(this.BorderWidth, this.BorderHeight);
                 this.Client.Page.ResizePageToFitContents(targetpages, bordersize);
                 this.Client.View.SetZoomToObject(VisioScripting.TargetWindow.Auto, VisioScripting.Models.ZoomToObject.Page);
             }
 
             if (this.Width >0 || this.Height >0)
             {
-                var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
+                var page_format_cells = new VisioAutomation.Pages.FormatCells();
 
                 if (this.Width > 0)
                 {
@@ -59,7 +59,7 @@ namespace VisioPowerShell.Commands.VisioPage
                     page_format_cells.Height = this.Height;
                 }
 
-                this.Client.Page.SetPageFormatCells(targetpages, page_format_cells);
+                this.Client.Page.SetFormatCells(targetpages, page_format_cells);
             }
 
 

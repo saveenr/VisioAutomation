@@ -1,4 +1,7 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.Internal;
+using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
+
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
@@ -6,24 +9,31 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
 
 
-        public SrcWriter() : base(StreamType.Src)
+        public SrcWriter() : base(VisioAutomation.ShapeSheet.Streams.StreamType.Src)
         {
         }
 
 
-        public void Commit(IVisio.Shape shape, CellValueType type)
+        public void Commit(IVisio.Shape shape, Core.CellValueType type)
         {
-            var surface = new SurfaceTarget(shape);
-            this._commit(surface, type);
+            var visobjtarget = new VisioObjectTarget(shape);
+            this._commit(visobjtarget, type);
         }
 
-        public void Commit(IVisio.Page page, CellValueType type)
+        public void Commit(IVisio.Master master, Core.CellValueType type)
         {
-            var surface = new SurfaceTarget(page);
-            this._commit(surface, type);
+            var visobjtarget = new VisioObjectTarget(master);
+
+            this._commit(visobjtarget, type);
         }
 
-        public void SetValue(Src src, CellValue formula)
+        public void Commit(IVisio.Page page, Core.CellValueType type)
+        {
+            var visobjtarget = new VisioObjectTarget(page);
+            this._commit(visobjtarget, type);
+        }
+
+        public void SetValue(Core.Src src, Core.CellValue formula)
         {
             this.__set_value_ignore_null(src, formula);
         }
@@ -44,11 +54,11 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void __set_value_ignore_null(Src src, CellValue formula)
+        private void __set_value_ignore_null(Core.Src src, Core.CellValue formula)
         {
             if (this._records == null)
             {
-                this._records = new WriteRecordList(StreamType.Src);
+                this._records = new WriteRecordList(VisioAutomation.ShapeSheet.Streams.StreamType.Src);
             }
 
             if (formula.HasValue)
@@ -57,33 +67,40 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void _commit(SurfaceTarget surface, CellValueType type)
+        private void _commit(VisioObjectTarget visobjtarget, Core.CellValueType type)
         {
             if (this._records == null || this._records.Count < 1)
             {
                 return;
             }
 
-            var stream = this._records.BuildStreamArray(StreamType.Src);
+            var stream = this._records.BuildStreamArray(VisioAutomation.ShapeSheet.Streams.StreamType.Src);
 
             if (stream.Array.Length == 0)
             {
-                throw new VisioAutomation.Exceptions.InternalAssertionException();
+                throw new Exceptions.InternalAssertionException();
             }
 
             var values = this._records.BuildValuesArray();
 
-            if (type == CellValueType.Formula)
+            if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                int c = surface.SetFormulas(stream, values, (short)flags);
+                var c = visobjtarget.Dispatch_Func<int>(
+                    (shape) => (shape.SetFormulas(stream, values, (short)flags)),
+                    (master) => (master.SetFormulas(stream, values, (short)flags)),
+                    (page) => (page.SetFormulas(stream, values, (short)flags)));
 
             }
             else
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-                surface.SetResults(stream, unitcodes, values, (short)flags);
+
+                var res = visobjtarget.Dispatch_Func<int>(
+                    (shape) => (shape.SetResults(stream, unitcodes, values, (short)flags)),
+                    (master) => (master.SetResults(stream, unitcodes, values, (short)flags)),
+                    (page) => (page.SetResults(stream, unitcodes, values, (short)flags)));
             }
         }
     }

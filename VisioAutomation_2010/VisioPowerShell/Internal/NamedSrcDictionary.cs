@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace VisioPowerShell.Internal
 {
-    public class NamedSrcDictionary : NameValueDictionary<VisioAutomation.ShapeSheet.Src>
+    public class NamedSrcDictionary : NameValueDictionary<VisioAutomation.Core.Src>
     {
         public static NamedSrcDictionary FromCells(Models.BaseCells cells)
         {

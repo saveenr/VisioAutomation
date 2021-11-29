@@ -1,57 +1,55 @@
-﻿using VisioAutomation.ShapeSheet;
-
-namespace VisioAutomation.Models.Text
+﻿namespace VisioAutomation.Models.Text
 {
     public class CharacterFormatting
     {
-        public ShapeSheet.CellValue AsianFont { get; set; }
-        public ShapeSheet.CellValue Case { get; set; }
-        public ShapeSheet.CellValue Color { get; set; }
-        public ShapeSheet.CellValue ComplexScriptFont { get; set; }
-        public ShapeSheet.CellValue ComplexScriptSize { get; set; }
-        public ShapeSheet.CellValue DoubleStrikeThrough { get; set; }
-        public ShapeSheet.CellValue DoubleUnderline { get; set; }
-        public ShapeSheet.CellValue Font { get; set; }
-        public ShapeSheet.CellValue FontScale { get; set; }
-        public ShapeSheet.CellValue LangID { get; set; }
-        public ShapeSheet.CellValue Letterspace { get; set; }
-        public ShapeSheet.CellValue Locale { get; set; }
-        public ShapeSheet.CellValue LocalizeFont { get; set; }
-        public ShapeSheet.CellValue Overline { get; set; }
-        public ShapeSheet.CellValue Perpendicular { get; set; }
-        public ShapeSheet.CellValue Pos { get; set; }
-        public ShapeSheet.CellValue RTLText { get; set; }
-        public ShapeSheet.CellValue Size { get; set; }
-        public ShapeSheet.CellValue Strikethru { get; set; }
-        public ShapeSheet.CellValue Style { get; set; }
-        public ShapeSheet.CellValue Transparency { get; set; }
-        public ShapeSheet.CellValue UseVertical { get; set; }
+        public Core.CellValue AsianFont { get; set; }
+        public Core.CellValue Case { get; set; }
+        public Core.CellValue Color { get; set; }
+        public Core.CellValue ComplexScriptFont { get; set; }
+        public Core.CellValue ComplexScriptSize { get; set; }
+        public Core.CellValue DoubleStrikeThrough { get; set; }
+        public Core.CellValue DoubleUnderline { get; set; }
+        public Core.CellValue Font { get; set; }
+        public Core.CellValue FontScale { get; set; }
+        public Core.CellValue LangID { get; set; }
+        public Core.CellValue Letterspace { get; set; }
+        public Core.CellValue Locale { get; set; }
+        public Core.CellValue LocalizeFont { get; set; }
+        public Core.CellValue Overline { get; set; }
+        public Core.CellValue Perpendicular { get; set; }
+        public Core.CellValue Pos { get; set; }
+        public Core.CellValue RTLText { get; set; }
+        public Core.CellValue Size { get; set; }
+        public Core.CellValue Strikethru { get; set; }
+        public Core.CellValue Style { get; set; }
+        public Core.CellValue Transparency { get; set; }
+        public Core.CellValue UseVertical { get; set; }
 
         internal void ApplyFormulas(VisioAutomation.ShapeSheet.Writers.SrcWriter writer, short row)
         {
-            writer.SetValue(SrcConstants.CharColor.CloneWithNewRow(row), this.Color);
-            writer.SetValue(SrcConstants.CharFont.CloneWithNewRow(row), this.Font);
-            writer.SetValue(SrcConstants.CharSize.CloneWithNewRow(row), this.Size);
-            writer.SetValue(SrcConstants.CharStyle.CloneWithNewRow(row), this.Style);
-            writer.SetValue(SrcConstants.CharColorTransparency.CloneWithNewRow(row), this.Transparency);
-            writer.SetValue(SrcConstants.CharAsianFont.CloneWithNewRow(row), this.AsianFont);
-            writer.SetValue(SrcConstants.CharCase.CloneWithNewRow(row), this.Case);
-            writer.SetValue(SrcConstants.CharComplexScriptFont.CloneWithNewRow(row), this.ComplexScriptFont);
-            writer.SetValue(SrcConstants.CharComplexScriptSize.CloneWithNewRow(row), this.ComplexScriptSize);
-            writer.SetValue(SrcConstants.CharDoubleUnderline.CloneWithNewRow(row), this.DoubleUnderline);
-            writer.SetValue(SrcConstants.CharDoubleStrikethrough.CloneWithNewRow(row), this.DoubleStrikeThrough);
-            writer.SetValue(SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
-            writer.SetValue(SrcConstants.CharFontScale.CloneWithNewRow(row), this.FontScale);
-            writer.SetValue(SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
-            writer.SetValue(SrcConstants.CharLetterspace.CloneWithNewRow(row), this.Letterspace);
-            writer.SetValue(SrcConstants.CharLocale.CloneWithNewRow(row), this.Locale);
-            writer.SetValue(SrcConstants.CharLocalizeFont.CloneWithNewRow(row), this.LocalizeFont);
-            writer.SetValue(SrcConstants.CharOverline.CloneWithNewRow(row), this.Overline);
-            writer.SetValue(SrcConstants.CharPerpendicular.CloneWithNewRow(row), this.Perpendicular);
-            writer.SetValue(SrcConstants.CharPos.CloneWithNewRow(row), this.Pos);
-            writer.SetValue(SrcConstants.CharRTLText.CloneWithNewRow(row), this.RTLText);
-            writer.SetValue(SrcConstants.CharStrikethru.CloneWithNewRow(row), this.Strikethru);
-            writer.SetValue(SrcConstants.CharUseVertical.CloneWithNewRow(row), this.UseVertical);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharColor.CloneWithNewRow(row), this.Color);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharFont.CloneWithNewRow(row), this.Font);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharSize.CloneWithNewRow(row), this.Size);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharStyle.CloneWithNewRow(row), this.Style);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharColorTransparency.CloneWithNewRow(row), this.Transparency);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharAsianFont.CloneWithNewRow(row), this.AsianFont);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharCase.CloneWithNewRow(row), this.Case);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharComplexScriptFont.CloneWithNewRow(row), this.ComplexScriptFont);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharComplexScriptSize.CloneWithNewRow(row), this.ComplexScriptSize);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharDoubleUnderline.CloneWithNewRow(row), this.DoubleUnderline);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharDoubleStrikethrough.CloneWithNewRow(row), this.DoubleStrikeThrough);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharFontScale.CloneWithNewRow(row), this.FontScale);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharLangID.CloneWithNewRow(row), this.LangID);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharLetterspace.CloneWithNewRow(row), this.Letterspace);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharLocale.CloneWithNewRow(row), this.Locale);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharLocalizeFont.CloneWithNewRow(row), this.LocalizeFont);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharOverline.CloneWithNewRow(row), this.Overline);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharPerpendicular.CloneWithNewRow(row), this.Perpendicular);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharPos.CloneWithNewRow(row), this.Pos);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharRTLText.CloneWithNewRow(row), this.RTLText);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharStrikethru.CloneWithNewRow(row), this.Strikethru);
+            writer.SetValue(VisioAutomation.Core.SrcConstants.CharUseVertical.CloneWithNewRow(row), this.UseVertical);
         }
 
         public void ApplyFormulasTo(CharacterFormatting target)

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -45,9 +45,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         }
 
-        public abstract TGroup ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols);
+        public abstract TGroup ToCellGroup(Query.Row<string> row, Query.Columns cols);
 
-        public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, CellValueType type)
+        public List<TGroup> GetCellsSingleRow(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.SingleRow);
             var cellgroups = new List<TGroup>(shapeids.Count);
@@ -69,7 +69,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public TGroup GetCellsSingleRow(IVisio.Shape shape, CellValueType type)
+        public TGroup GetCellsSingleRow(IVisio.Shape shape, Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.SingleRow);
             var cellqueryresult = this.__GetCells(query_cells_singlerow, shape, type);
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cells;
         }
         
-        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, ShapeIDPairs shapeidpairs, CellValueType type)
+        public List<List<TGroup>> GetCellsMultiRow(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
@@ -95,7 +95,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return list_cellgroups;
         }
 
-        public List<TGroup> GetCellsMultiRow(IVisio.Shape shape, CellValueType type)
+        public List<TGroup> GetCellsMultiRow(IVisio.Shape shape, Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
@@ -105,7 +105,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> _sectionshaperows_to_cellgroups(Query.SectionShapeRows<string> section_rows, VASS.Query.Columns cols)
+        private List<TGroup> _sectionshaperows_to_cellgroups(Query.SectionShapeRows<string> section_rows, Query.Columns cols)
         {
             var cellgroups = new List<TGroup>(section_rows.Count);
             foreach (var section_row in section_rows)
@@ -116,49 +116,45 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, CellValueType type)
+        private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
-            var surface = new SurfaceTarget(shape);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface),
-                CellValueType.Result => query.GetResults<string>(surface),
+                Core.CellValueType.Formula => query.GetFormulas(shape),
+                Core.CellValueType.Result => query.GetResults<string>(shape),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
         }
 
-        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, ShapeIDPairs shapeidpairs, CellValueType type)
+        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var surface = new SurfaceTarget(page);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface, shapeidpairs),
-                CellValueType.Result => query.GetResults<string>(surface, shapeidpairs),
+                Core.CellValueType.Formula => query.GetFormulas(page, shapeidpairs),
+                Core.CellValueType.Result => query.GetResults<string>(page, shapeidpairs),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
         }
 
-        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, CellValueType type)
+        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
-            var surface = new SurfaceTarget(shape);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface),
-                CellValueType.Result => query.GetResults<string>(surface),
+                Core.CellValueType.Formula => query.GetFormulas(shape),
+                Core.CellValueType.Result => query.GetResults<string>(shape),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
         }
 
-        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, CellValueType type)
+        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
-            var surface = new SurfaceTarget(page);
             var results = type switch
             {
-                CellValueType.Formula => query.GetFormulas(surface, shapeids),
-                CellValueType.Result => query.GetResults<string>(surface, shapeids),
+                Core.CellValueType.Formula => query.GetFormulas(page, shapeids),
+                Core.CellValueType.Result => query.GetResults<string>(page, shapeids),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;

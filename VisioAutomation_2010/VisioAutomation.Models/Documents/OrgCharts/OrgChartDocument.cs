@@ -102,7 +102,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                     i.Position = i.Position.Add(this.OrgChartLayoutOptions.PageBorderWidth, this.OrgChartLayoutOptions.PageBorderWidth);
                 }
 
-                var centerpoints = new VisioAutomation.Geometry.Point[treenodes.Count];
+                var centerpoints = new VisioAutomation.Core.Point[treenodes.Count];
                 foreach (int i in Enumerable.Range(0, treenodes.Count))
                 {
                     centerpoints[i] = treenodes[i].Rect.Center;
@@ -158,7 +158,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
                 var page_size_with_border = bb.Size.Add(this.OrgChartLayoutOptions.PageBorderWidth * 2, this.OrgChartLayoutOptions.PageBorderWidth * 2.0);
                 page_node.Size = page_size_with_border;
                 page_node.ResizeToFit = true;
-                page_node.ResizeToFitMargin = new VisioAutomation.Geometry.Size(this.OrgChartLayoutOptions.PageBorderWidth * 2, this.OrgChartLayoutOptions.PageBorderWidth * 2.0);
+                page_node.ResizeToFitMargin = new VisioAutomation.Core.Size(this.OrgChartLayoutOptions.PageBorderWidth * 2, this.OrgChartLayoutOptions.PageBorderWidth * 2.0);
             } // finish handling root node
 
             var doc = doc_node.Render(app);

@@ -5,14 +5,14 @@ namespace VisioAutomation.Models.Dom
 {
     public class PolyLine : BaseShape
     {
-        public List<VisioAutomation.Geometry.Point> Points { get; }
+        public List<VisioAutomation.Core.Point> Points { get; }
 
         public PolyLine(params double[] doubles)
         {
-            this.Points = VisioAutomation.Geometry.Point.FromDoubles(doubles).ToList();
+            this.Points = VisioAutomation.Core.Point.FromDoubles(doubles).ToList();
         }
 
-        public PolyLine(IEnumerable<VisioAutomation.Geometry.Point> pts)
+        public PolyLine(IEnumerable<VisioAutomation.Core.Point> pts)
         {
             this.Points = pts.ToList();
         }

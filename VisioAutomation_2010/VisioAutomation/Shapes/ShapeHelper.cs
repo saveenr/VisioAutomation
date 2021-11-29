@@ -48,7 +48,7 @@ namespace VisioAutomation.Shapes
 
             var shapes = new[] {shape};
 
-            return ShapeHelper.GetNestedShapes(shapes);
+            return GetNestedShapes(shapes);
         }
 
         public static List<IVisio.Shape> GetShapesFromIDs(IVisio.Shapes shapes, IList<short> shapeids)

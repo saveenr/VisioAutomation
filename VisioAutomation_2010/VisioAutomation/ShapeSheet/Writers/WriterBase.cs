@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        protected WriterBase(StreamType type)
+        protected WriterBase(VisioAutomation.ShapeSheet.Streams.StreamType type)
         {
             this._records = new WriteRecordList(type);
         }

@@ -1,7 +1,7 @@
 ﻿<Types>
 
   <Type>
-    <Name>VisioAutomation.Geometry.Rectangle</Name>
+    <Name>VisioAutomation.Core.Rectangle</Name>
     <Members>
       <MemberSet>
         <Name>PSStandardMembers</Name>

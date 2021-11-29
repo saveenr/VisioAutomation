@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VisioPowerShell.Models;
 using SMA = System.Management.Automation;
@@ -29,8 +28,8 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         protected override void ProcessRecord()
         {
             var valuetype = this.Results
-                ? VisioAutomation.ShapeSheet.CellValueType.Result
-                : VisioAutomation.ShapeSheet.CellValueType.Formula;
+                ? VisioAutomation.Core.CellValueType.Result
+                : VisioAutomation.Core.CellValueType.Formula;
 
             var target_shapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
 
@@ -47,9 +46,8 @@ namespace VisioPowerShell.Commands.VisioShapeCells
 
             var query = _create_query(dicof_name_to_cell, desired_cells);
             var page = target_shapes.Shapes[0].ContainingPage;
-            var surface = new VisioAutomation.SurfaceTarget(page);
             var shapeids = target_shapes.Shapes.Select(s => s.ID).ToList();
-            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, surface);
+            var datatable = VisioPowerShell.Internal.DataTableHelpers.QueryToDataTable(query, valuetype, this.ResultType, shapeids, page);
 
             // Annotate the returned datatable to disambiguate rows
             var shapeid_col = datatable.Columns.Add("ShapeID", typeof(int));
@@ -73,7 +71,7 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             if (invalid_names.Count > 0)
             {
                 string msg = "Invalid cell names: " + string.Join(",", invalid_names);
-                throw new ArgumentException(msg);
+                throw new System.ArgumentException(msg);
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();

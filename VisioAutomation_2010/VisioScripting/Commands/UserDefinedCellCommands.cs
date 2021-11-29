@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VA=VisioAutomation;
-using VASS=VisioAutomation.ShapeSheet;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Commands
@@ -14,7 +13,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCellsAsShapeDictionary(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCellsAsShapeDictionary(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
             var listof_udcelldic = GetUserDefinedCells(targetshapes, cvt);
@@ -30,7 +29,7 @@ namespace VisioScripting.Commands
             return dicof_shape_to_udcelldic;
         }
 
-        public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VASS.CellValueType cvt)
+        public List<VA.Shapes.UserDefinedCellDictionary> GetUserDefinedCells(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
 

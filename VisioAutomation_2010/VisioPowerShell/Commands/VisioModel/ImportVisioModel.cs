@@ -1,4 +1,3 @@
-using System;
 using SXL = System.Xml.Linq;
 using SMA = System.Management.Automation;
 
@@ -37,7 +36,7 @@ namespace VisioPowerShell.Commands.VisioModel
             }
             else
             {
-                var exc = new ArgumentOutOfRangeException("Unknown root element for XML");
+                var exc = new System.ArgumentOutOfRangeException("Unknown root element for XML");
                 throw exc;
             }
         }

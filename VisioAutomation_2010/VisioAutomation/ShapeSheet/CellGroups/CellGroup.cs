@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public class CellGroup
     {
 
-        public virtual IEnumerable<CellMetadataItem> GetCellMetadata()
+        public virtual IEnumerable<CellMetadata> GetCellMetadata()
         {
             throw new System.NotImplementedException();
         }
@@ -41,12 +40,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        protected CellMetadataItem Create(string name, Src src, CellValue value)
+        protected CellMetadata _create(string name, Core.Src src, Core.CellValue value)
         {
-            return new CellMetadataItem(name, src, value.Value);
+            return new CellMetadata(name, src, value.Value);
         }
 
-        internal static System.Func<string,string> row_to_cellgroup(ShapeSheet.Query.Row<string> row, VASS.Query.Columns cols)
+        internal static System.Func<string,string> queryrow_to_cellgroup(Query.Row<string> row, Query.Columns cols)
         {
             return (s) => row[cols[s].Ordinal];
         }

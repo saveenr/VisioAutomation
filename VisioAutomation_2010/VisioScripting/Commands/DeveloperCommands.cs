@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VADOC=VisioAutomation.Models.Documents;
 using VADOM=VisioAutomation.Models.Dom;
 using VATREE=VisioAutomation.Models.Layouts.Tree;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA = VisioAutomation;
 
 namespace VisioScripting.Commands
 {
@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public static List<Type> GetTypes()
+        public static List<System.Type> GetTypes()
         {
             // TODO: Consider filtering out types that should *not* be exposed despite being public
             var va_type = typeof(VisioAutomation.Application.ApplicationHelper);
@@ -25,7 +25,7 @@ namespace VisioScripting.Commands
             var va_types = va_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
             var vas_types = vas_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
             
-            var types = new List<Type>();
+            var types = new List<System.Type>();
             types.AddRange(va_types);
             types.AddRange(vas_types);
             
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
-                formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
+                formpage.Size = new VisioAutomation.Core.Size(8.5, 11);
                 formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
@@ -124,7 +124,7 @@ namespace VisioScripting.Commands
                     }
 
                     var formpage = new VADOC.Forms.FormPage();
-                    formpage.Size = new VisioAutomation.Geometry.Size(8.5, 11);
+                    formpage.Size = new VisioAutomation.Core.Size(8.5, 11);
                     formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
@@ -137,17 +137,9 @@ namespace VisioScripting.Commands
                         formpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
                     }
 
-                    //docbuilder.BodyParaSpacingAfter = 2.0;
-
                     formpage.BodyTextSize = 8.0;
                     formdoc.Pages.Add(formpage);
-            
-                    var tabstops = new[]
-                                 {
-                                     new VisioAutomation.Text.TabStop(1.5, VisioAutomation.Text.TabStopAlignment.Left)
-                                 };
-
-                    //VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
+           
                     
                     chunkcount++;
                 }
@@ -157,9 +149,6 @@ namespace VisioScripting.Commands
             formdoc.Title = "Visio Interop Enum Documenation";
             formdoc.Creator = "";
             formdoc.Company = "";
-
-            //hide_ui_stuff(docbuilder.VisioDocument);
-
 
             var application = cmdtarget.Application;
             var doc = formdoc.Render(application);
@@ -172,7 +161,7 @@ namespace VisioScripting.Commands
             public readonly List<string> Roots;
             public readonly string Separator;
             private readonly string[] _seps;
-            private StringSplitOptions options = StringSplitOptions.None;
+            private System.StringSplitOptions options = System.StringSplitOptions.None;
 
             public PathTreeBuilder()
             {
@@ -220,7 +209,7 @@ namespace VisioScripting.Commands
             return this.DrawNamespaces(DeveloperCommands.GetTypes());
         }
 
-        public IVisio.Document DrawNamespaces(IList<Type> types)
+        public IVisio.Document DrawNamespaces(IList<System.Type> types)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
@@ -229,7 +218,7 @@ namespace VisioScripting.Commands
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var page_size = new VisioAutomation.Geometry.Size(8.5,11);
+            var page_size = new VisioAutomation.Core.Size(8.5,11);
             var doc = this._client.Document.NewDocumentFromTemplate(page_size,template);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
@@ -252,7 +241,7 @@ namespace VisioScripting.Commands
             foreach (string ns in namespaces)
             {
                 string label = ns;
-                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, StringComparison.Ordinal);
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, System.StringComparison.Ordinal);
                 if (index_of_last_sep > 0)
                 {
                     label = ns.Substring(index_of_last_sep+1);
@@ -260,7 +249,7 @@ namespace VisioScripting.Commands
 
                 var node = new VATREE.Node(ns);
                 node.Text = new VisioAutomation.Models.Text.Element(label);
-                node.Size = new VisioAutomation.Geometry.Size(2.0, 0.25);
+                node.Size = new VisioAutomation.Core.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }
 
@@ -340,7 +329,7 @@ namespace VisioScripting.Commands
             return VisioScripting.Helpers.InteropHelper.GetEnum(name);
         }
 
-        public Models.EnumType GetEnum(Type type)
+        public Models.EnumType GetEnum(System.Type type)
         {
             return new Models.EnumType(type);
         }
@@ -356,11 +345,11 @@ namespace VisioScripting.Commands
 
         private class TypeInfo
         {
-            public readonly Type Type;
+            public readonly System.Type Type;
             public Helpers.ReflectionHelper.TypeCategory TypeCategory ;
             public readonly string Label;
 
-            public TypeInfo(Type type)
+            public TypeInfo(System.Type type)
             {
                 this.Type = type;
                 this.TypeCategory = VisioScripting.Helpers.ReflectionHelper.GetTypeCategory(type);
@@ -374,7 +363,7 @@ namespace VisioScripting.Commands
             return this.DrawNamespacesAndClasses(DeveloperCommands.GetTypes());
         }
 
-        public IVisio.Document DrawNamespacesAndClasses(IList<Type> types_)
+        public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
@@ -385,7 +374,7 @@ namespace VisioScripting.Commands
             string def_shape_fill = "rgb(245,245,245)";
             string template = null;
 
-            var page_size = new VisioAutomation.Geometry.Size(8.5,11);
+            var page_size = new VisioAutomation.Core.Size(8.5,11);
             var doc = this._client.Document.NewDocumentFromTemplate(page_size,template);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
@@ -413,7 +402,7 @@ namespace VisioScripting.Commands
             foreach (string ns in namespaces)
             {
                 string label = ns;
-                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, StringComparison.Ordinal);
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, System.StringComparison.Ordinal);
                 if (index_of_last_sep > 0)
                 {
                     label = ns.Substring(index_of_last_sep + 1);
@@ -424,7 +413,7 @@ namespace VisioScripting.Commands
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new VATREE.Node(ns);
-                node.Size = new VisioAutomation.Geometry.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
+                node.Size = new VisioAutomation.Core.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
                 var markup = new VisioAutomation.Models.Text.Element();

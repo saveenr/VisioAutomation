@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using SMA = System.Management.Automation;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioRectangle
 {
@@ -15,7 +13,7 @@ namespace VisioPowerShell.Commands.VisioRectangle
 
         protected override void ProcessRecord()
         {
-            var point = new VisioAutomation.Geometry.Point(this.X, this.Y);
+            var point = new VisioAutomation.Core.Point(this.X, this.Y);
             this.WriteObject(point);
         }
     }

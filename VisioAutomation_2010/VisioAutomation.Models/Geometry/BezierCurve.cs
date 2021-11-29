@@ -4,10 +4,10 @@ namespace VisioAutomation.Models.Geometry
 {
     public class BezierCurve
     {
-        public VisioAutomation.Geometry.Point[] ControlPoints { get; }
+        public VisioAutomation.Core.Point[] ControlPoints { get; }
         public int Degree { get; }
 
-        public BezierCurve(VisioAutomation.Geometry.Point[] controlpoints, int degree)
+        public BezierCurve(VisioAutomation.Core.Point[] controlpoints, int degree)
         {
             if (degree < 1)
             {
@@ -18,12 +18,12 @@ namespace VisioAutomation.Models.Geometry
             this.Degree = degree;
         }
 
-        public static BezierCurve FromEllipse(VisioAutomation.Geometry.Point center, VisioAutomation.Geometry.Size radius)
+        public static BezierCurve FromEllipse(VisioAutomation.Core.Point center, VisioAutomation.Core.Size radius)
         {
-            var pt1 = new VisioAutomation.Geometry.Point(0, radius.Height); // top
-            var pt2 = new VisioAutomation.Geometry.Point(radius.Width, 0); // right
-            var pt3 = new VisioAutomation.Geometry.Point(0, -radius.Height); // bottom
-            var pt4 = new VisioAutomation.Geometry.Point(-radius.Width, 0); // left
+            var pt1 = new VisioAutomation.Core.Point(0, radius.Height); // top
+            var pt2 = new VisioAutomation.Core.Point(radius.Width, 0); // right
+            var pt3 = new VisioAutomation.Core.Point(0, -radius.Height); // bottom
+            var pt4 = new VisioAutomation.Core.Point(-radius.Width, 0); // left
 
             double dx = radius.Width * 4.0 * (System.Math.Sqrt(2) - 1) / 3;
             double dy = radius.Height * 4.0 * (System.Math.Sqrt(2) - 1) / 3;

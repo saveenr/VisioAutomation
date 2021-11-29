@@ -1,6 +1,5 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioPowerShell.Commands.VisioCustomProperty
 {
@@ -14,7 +13,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
         protected override void ProcessRecord()
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shape);
-            var type = VASS.CellValueType.Formula;
+            var type = VisioAutomation.Core.CellValueType.Formula;
             var dicof_shape_to_cpdic = this.Client.CustomProperty.GetCustomPropertiesAsShapeDictionary(targetshapes, type);
             this.WriteObject(dicof_shape_to_cpdic);                
         }

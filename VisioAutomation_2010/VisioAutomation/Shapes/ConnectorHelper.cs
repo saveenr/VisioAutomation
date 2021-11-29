@@ -9,7 +9,7 @@ namespace VisioAutomation.Shapes
     {
         public static void ConnectShapes(IVisio.Shape from_shape, IVisio.Shape to_shape, IVisio.Shape connector_shape)
         {
-            ConnectorHelper.ConnectShapes(from_shape, to_shape, connector_shape, true);
+            ConnectShapes(from_shape, to_shape, connector_shape, true);
         }
 
         public static void ConnectShapes(IVisio.Shape from_shape, IVisio.Shape to_shape, IVisio.Shape connector_shape, bool manual_connection)
@@ -42,8 +42,8 @@ namespace VisioAutomation.Shapes
                     throw new System.ArgumentException("connector cannot be null when specifying manual connection");                    
                 }
 
-                var src_beginx = ShapeSheet.SrcConstants.OneDBeginX;
-                var src_endx = ShapeSheet.SrcConstants.OneDEndX;
+                var src_beginx = Core.SrcConstants.OneDBeginX;
+                var src_endx = Core.SrcConstants.OneDEndX;
                 var connector_beginx = connector_shape.CellsSRC[src_beginx.Section, src_beginx.Row, src_beginx.Cell];
                 var connector_endx = connector_shape.CellsSRC[src_endx.Section, src_endx.Row, src_endx.Cell];
                 var from_cell = from_shape.CellsSRC[1, 1, 0];
@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes
         public static List<IVisio.Shape> ConnectShapes( IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes,
             IVisio.Master connector_master)
         {
-            return ConnectorHelper.ConnectShapes(page, fromshapes, toshapes, connector_master, true);
+            return ConnectShapes(page, fromshapes, toshapes, connector_master, true);
         }
 
         public static List<IVisio.Shape> ConnectShapes(IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master connector_master, bool force_manual)
@@ -106,18 +106,18 @@ namespace VisioAutomation.Shapes
             int num_connectors = fromshapes.Count;
             var connectors = new List<IVisio.Shape>(num_connectors);
 
-            var points = Enumerable.Range(0, num_connectors).Select(i => new Geometry.Point(i*2.0, -2)).ToList();
+            var points = Enumerable.Range(0, num_connectors).Select(i => new Core.Point(i*2.0, -2)).ToList();
             IList<IVisio.Shape> con_shapes = null;
             if (connector_master != null)
             {
                 var masters = Enumerable.Repeat(connector_master, num_connectors).ToList();
                 short[] con_shapeids = page.DropManyU(masters, points);
-                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);                
+                con_shapes = ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);                
             }
             else
             {
                 short[] con_shapeids = Pages.PageHelper.DropManyAutoConnectors(page, points);
-                con_shapes = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);
+                con_shapes = ShapeHelper.GetShapesFromIDs(page.Shapes,con_shapeids);
             }
 
             for (int i = 0; i < num_connectors; i++)
@@ -126,7 +126,7 @@ namespace VisioAutomation.Shapes
                 var to_shape = toshapes[i];
                 var connector = con_shapes[i];
 
-                ConnectorHelper.ConnectShapes(from_shape, to_shape, connector, true);
+                ConnectShapes(from_shape, to_shape, connector, true);
 
                 connectors.Add(connector);
             }

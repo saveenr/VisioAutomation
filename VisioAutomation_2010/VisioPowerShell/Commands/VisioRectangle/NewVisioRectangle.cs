@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using SMA = System.Management.Automation;
+﻿using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands.VisioRectangle
 {
@@ -20,7 +19,7 @@ namespace VisioPowerShell.Commands.VisioRectangle
 
         protected override void ProcessRecord()
         {
-            var rect = new VisioAutomation.Geometry.Rectangle(this.Left, this.Bottom, this.Right, this.Top);
+            var rect = new VisioAutomation.Core.Rectangle(this.Left, this.Bottom, this.Right, this.Top);
             this.WriteObject(rect);
         }
     }

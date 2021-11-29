@@ -1,67 +1,67 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ControlCells : VASS.CellGroups.CellGroup
+    public class ControlCells : VACG.CellGroup
     {
-        public VASS.CellValue CanGlue { get; set; }
-        public VASS.CellValue Tip { get; set; }
-        public VASS.CellValue X { get; set; }
-        public VASS.CellValue Y { get; set; }
-        public VASS.CellValue YBehavior { get; set; }
-        public VASS.CellValue XBehavior { get; set; }
-        public VASS.CellValue XDynamics { get; set; }
-        public VASS.CellValue YDynamics { get; set; }
+        public Core.CellValue CanGlue { get; set; }
+        public Core.CellValue Tip { get; set; }
+        public Core.CellValue X { get; set; }
+        public Core.CellValue Y { get; set; }
+        public Core.CellValue YBehavior { get; set; }
+        public Core.CellValue XBehavior { get; set; }
+        public Core.CellValue XDynamics { get; set; }
+        public Core.CellValue YDynamics { get; set; }
 
-        public override IEnumerable<CellMetadataItem> GetCellMetadata()
+        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
-            yield return this.Create(nameof(this.CanGlue), VASS.SrcConstants.ControlCanGlue, this.CanGlue);
-            yield return this.Create(nameof(this.Tip), VASS.SrcConstants.ControlTip, this.Tip);
-            yield return this.Create(nameof(this.X), VASS.SrcConstants.ControlX, this.X);
-            yield return this.Create(nameof(this.Y), VASS.SrcConstants.ControlY, this.Y);
-            yield return this.Create(nameof(this.YBehavior), VASS.SrcConstants.ControlYBehavior, this.YBehavior);
-            yield return this.Create(nameof(this.XBehavior), VASS.SrcConstants.ControlXBehavior, this.XBehavior);
-            yield return this.Create(nameof(this.XDynamics), VASS.SrcConstants.ControlXDynamics, this.XDynamics);
-            yield return this.Create(nameof(this.YDynamics), VASS.SrcConstants.ControlYDynamics, this.YDynamics);
+            yield return this._create(nameof(this.CanGlue), Core.SrcConstants.ControlCanGlue, this.CanGlue);
+            yield return this._create(nameof(this.Tip), Core.SrcConstants.ControlTip, this.Tip);
+            yield return this._create(nameof(this.X), Core.SrcConstants.ControlX, this.X);
+            yield return this._create(nameof(this.Y), Core.SrcConstants.ControlY, this.Y);
+            yield return this._create(nameof(this.YBehavior), Core.SrcConstants.ControlYBehavior, this.YBehavior);
+            yield return this._create(nameof(this.XBehavior), Core.SrcConstants.ControlXBehavior, this.XBehavior);
+            yield return this._create(nameof(this.XDynamics), Core.SrcConstants.ControlXDynamics, this.XDynamics);
+            yield return this._create(nameof(this.YDynamics), Core.SrcConstants.ControlYDynamics, this.YDynamics);
         }
 
-        public static List<ControlCells> GetCells(IVisio.Shape shape, VASS.CellValueType type)
+        public static List<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
-            var reader = ControlCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(shape, type);
         }
 
-        public static List<List<ControlCells>> GetCells(IVisio.Page page, ShapeIDPairs shapeidpairs, VASS.CellValueType type)
+        public static List<List<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var reader = ControlCells_lazy_builder.Value;
+            var reader = builder.Value;
             return reader.GetCellsMultiRow(page, shapeidpairs, type);
         }
 
 
-        private static readonly System.Lazy<ControlCellsBuilder> ControlCells_lazy_builder = new System.Lazy<ControlCellsBuilder>();
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class ControlCellsBuilder : VASS.CellGroups.CellGroupBuilder<ControlCells>
+        class Builder : VACG.CellGroupBuilder<ControlCells>
         {
-            public ControlCellsBuilder() : base(VASS.CellGroups.CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
 
-            public override ControlCells ToCellGroup(ShapeSheet.Query.Row<string> row, VisioAutomation.ShapeSheet.Query.Columns cols)
+            public override ControlCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new ControlCells();
-                var getcellvalue = VisioAutomation.ShapeSheet.CellGroups.CellGroup.row_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellgroup(row, cols);
 
-                cells.CanGlue = getcellvalue(nameof(ControlCells.CanGlue));
-                cells.Tip = getcellvalue(nameof(ControlCells.Tip));
-                cells.X = getcellvalue(nameof(ControlCells.X));
-                cells.Y = getcellvalue(nameof(ControlCells.Y));
-                cells.YBehavior = getcellvalue(nameof(ControlCells.YBehavior));
-                cells.XBehavior = getcellvalue(nameof(ControlCells.XBehavior));
-                cells.XDynamics = getcellvalue(nameof(ControlCells.XDynamics));
-                cells.YDynamics = getcellvalue(nameof(ControlCells.YDynamics));
+                cells.CanGlue = getcellvalue(nameof(CanGlue));
+                cells.Tip = getcellvalue(nameof(Tip));
+                cells.X = getcellvalue(nameof(X));
+                cells.Y = getcellvalue(nameof(Y));
+                cells.YBehavior = getcellvalue(nameof(YBehavior));
+                cells.XBehavior = getcellvalue(nameof(XBehavior));
+                cells.XDynamics = getcellvalue(nameof(XDynamics));
+                cells.YDynamics = getcellvalue(nameof(YDynamics));
                 return cells;
             }
         }

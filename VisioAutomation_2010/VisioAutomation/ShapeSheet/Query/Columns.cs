@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         protected IList<Column> _items;
         protected Dictionary<string, Column> _map_name_to_item;
-        protected Dictionary<ShapeSheet.Src, Column> _dic_src_to_col;
+        protected Dictionary<Core.Src, Column> _dic_src_to_col;
 
         internal Columns() 
         {
@@ -50,22 +50,28 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        protected void check_deplicate_src(Src src)
+        protected void check_deplicate_src(Core.Src src)
         {
             if (this._dic_src_to_col == null)
             {
-                this._dic_src_to_col = new Dictionary<ShapeSheet.Src, Column>();
+                this._dic_src_to_col = new Dictionary<Core.Src, Column>();
             }
 
             if (this._dic_src_to_col.ContainsKey(src))
             {
-                string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Src), src.Section, src.Row, src.Cell);
+                string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Core.Src), src.Section, src.Row, src.Cell);
                 throw new System.ArgumentException(msg);
             }
         }
 
+        public Column Add(Core.Src src)
+        {
+            string name = string.Format("Column{0}", this.Count);
+            var col = this.Add(src, name);
+            return col;
+        }
 
-        public Column Add(ShapeSheet.Src src, string name)
+        public Column Add(Core.Src src, string name)
         {
             if (name == null)
             {
