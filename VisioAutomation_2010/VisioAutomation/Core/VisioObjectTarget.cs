@@ -2,6 +2,7 @@
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Streams;
 
 namespace VisioAutomation.Core
 {
@@ -130,13 +131,7 @@ namespace VisioAutomation.Core
 
         public int SetFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
         {
-            if (formulas.Length != stream.Count)
-            {
-                string msg =
-                    string.Format("stream contains {0} items ({1} short values) and requires {2} formula values",
-                        stream.Count, stream.Array.Length, stream.Count);
-                throw new System.ArgumentException(msg);
-            }
+            Internal.TempHelper.ValidateStreamLengthFormulas(stream, formulas);
 
             var val = this.Category switch
             {
@@ -149,15 +144,11 @@ namespace VisioAutomation.Core
             return val;
         }
 
+
+
         public int SetResults(ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
-            if (results.Length != stream.Count)
-            {
-                string msg =
-                    string.Format("stream contains {0} items ({1} short values) and requires {2} result values",
-                        stream.Count, stream.Array.Length, stream.Count);
-                throw new System.ArgumentException(msg);
-            }
+            Internal.TempHelper.ValidateStreamLengthResults(stream, results);
 
             var val = this.Category switch
             {
@@ -172,11 +163,6 @@ namespace VisioAutomation.Core
 
         public TResult[] GetResults<TResult>(ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
         {
-            if (stream.Array.Length == 0)
-            {
-                return new TResult[0];
-            }
-
             Internal.TempHelper._enforce_valid_result_type(typeof(TResult));
 
             var val = this.Category switch

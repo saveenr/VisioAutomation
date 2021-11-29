@@ -12,6 +12,13 @@
 
         public static TResult[] GetResults<TResult>(this Microsoft.Office.Interop.Visio.Shape shape, ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
         {
+            if (stream.Array.Length == 0)
+            {
+                return new TResult[0];
+            }
+            Internal.TempHelper._enforce_valid_result_type(typeof(TResult));
+
+
             var flags = Core.VisioObjectTarget._type_to_vis_get_set_args(typeof(TResult));
             System.Array results_sa = null;
             shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);

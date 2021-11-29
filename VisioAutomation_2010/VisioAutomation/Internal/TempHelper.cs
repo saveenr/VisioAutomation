@@ -23,5 +23,26 @@ namespace VisioAutomation.Internal
                     || result_type == typeof(string));
         }
 
+        public static void ValidateStreamLengthFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas)
+        {
+            if (formulas.Length != stream.Count)
+            {
+                string msg =
+                    string.Format("stream contains {0} items ({1} short values) and requires {2} formula values",
+                        stream.Count, stream.Array.Length, stream.Count);
+                throw new System.ArgumentException(msg);
+            }
+        }
+        public static void ValidateStreamLengthResults(ShapeSheet.Streams.StreamArray stream, object[] results)
+        {
+            if (results.Length != stream.Count)
+            {
+                string msg =
+                    string.Format("stream contains {0} items ({1} short values) and requires {2} result values",
+                        stream.Count, stream.Array.Length, stream.Count);
+                throw new System.ArgumentException(msg);
+            }
+        }
+
     }
 }
