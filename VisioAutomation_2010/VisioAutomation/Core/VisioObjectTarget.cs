@@ -177,7 +177,7 @@ namespace VisioAutomation.Core
                 return new TResult[0];
             }
 
-            _enforce_valid_result_type(typeof(TResult));
+            Internal.TempHelper._enforce_valid_result_type(typeof(TResult));
 
             var val = this.Category switch
             {
@@ -213,22 +213,6 @@ namespace VisioAutomation.Core
             var results = new T[results_sa.Length];
             results_sa.CopyTo(results, 0);
             return results;
-        }
-
-        private static void _enforce_valid_result_type(System.Type result_type)
-        {
-            if (!_is_valid_result_type(result_type))
-            {
-                string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
-                throw new Exceptions.InternalAssertionException(msg);
-            }
-        }
-
-        private static bool _is_valid_result_type(System.Type result_type)
-        {
-            return (result_type == typeof(int)
-                    || result_type == typeof(double)
-                    || result_type == typeof(string));
         }
 
         internal static IVisio.VisGetSetArgs _type_to_vis_get_set_args(System.Type type)
