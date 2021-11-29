@@ -33,6 +33,8 @@
         public static int SetFormulas(this Microsoft.Office.Interop.Visio.Shape shape,
             ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
         {
+            Internal.TempHelper.ValidateStreamLengthFormulas(stream, formulas);
+
             int val = shape.SetFormulas(stream.Array, formulas, flags);
             return val;
         }

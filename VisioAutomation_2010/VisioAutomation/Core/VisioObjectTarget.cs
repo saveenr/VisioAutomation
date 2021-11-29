@@ -131,8 +131,6 @@ namespace VisioAutomation.Core
 
         public int SetFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
         {
-            Internal.TempHelper.ValidateStreamLengthFormulas(stream, formulas);
-
             var val = this.Category switch
             {
                 VisioObjectCategory.Master => this.Master.SetFormulas(stream, formulas, flags),
