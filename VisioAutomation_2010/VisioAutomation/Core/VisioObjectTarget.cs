@@ -183,36 +183,6 @@ namespace VisioAutomation.Core
             return val;
         }
 
-        internal static T[] system_array_to_typed_array<T>(System.Array results_sa)
-        {
-            var results = new T[results_sa.Length];
-            results_sa.CopyTo(results, 0);
-            return results;
-        }
-
-        internal static IVisio.VisGetSetArgs _type_to_vis_get_set_args(System.Type type)
-        {
-            IVisio.VisGetSetArgs flags;
-
-            if (type == typeof(int))
-            {
-                flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
-            }
-            else if (type == typeof(double))
-            {
-                flags = IVisio.VisGetSetArgs.visGetFloats;
-            }
-            else if (type == typeof(string))
-            {
-                flags = IVisio.VisGetSetArgs.visGetStrings;
-            }
-            else
-            {
-                string msg = string.Format("Unsupported Result Type: {0}", type.Name);
-                throw new Exceptions.InternalAssertionException(msg);
-            }
-            return flags;
-        }
 
     }
 }

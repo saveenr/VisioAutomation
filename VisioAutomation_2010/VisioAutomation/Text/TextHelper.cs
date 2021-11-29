@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VASS=VisioAutomation.ShapeSheet;
 using VACG=VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
@@ -41,11 +42,9 @@ namespace VisioAutomation.Text
 
             var streamarray = VASS.Streams.StreamArray.FromSrc(srcs);
    
-            var visio_object_target = new Core.VisioObjectTarget(shape);
-
             const object[] unitcodes = null;
 
-            var results = visio_object_target.GetResults<double>(streamarray, unitcodes);
+            var results = shape.GetResults<double>(streamarray, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
