@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.Internal;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
