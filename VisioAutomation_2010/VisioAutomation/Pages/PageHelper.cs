@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Core;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -241,6 +242,7 @@ namespace VisioAutomation.Pages
             IEnumerable<Core.Point> points)
         {
             Internal.Helpers.ValidateDropManyParams(masters, points);
+
 
             if (masters.Count < 1)
             {

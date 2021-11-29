@@ -23,6 +23,7 @@ namespace VisioAutomation.Extensions
         {
             Internal.Helpers.ValidateDropManyParams(masters, points);
 
+
             if (masters.Count < 1)
             {
                 return new short[0];

@@ -25,8 +25,6 @@ namespace VisioAutomation.Extensions
                 return new TResult[0];
             }
             Internal.Helpers._enforce_valid_result_type(typeof(TResult));
-
-
             var flags = Internal.Helpers._type_to_vis_get_set_args(typeof(TResult));
             System.Array results_sa = null;
             page.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);

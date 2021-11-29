@@ -28,12 +28,14 @@
             System.Array results_sa = null;
             shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             var results = Internal.Helpers.system_array_to_typed_array<TResult>(results_sa);
+
             return results;
         }
         public static int SetFormulas(this Microsoft.Office.Interop.Visio.Shape shape,
             ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
         {
             Internal.Helpers.ValidateStreamLengthFormulas(stream, formulas);
+
 
             int val = shape.SetFormulas(stream.Array, formulas, flags);
             return val;

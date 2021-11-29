@@ -2,6 +2,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
+
 namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SrcWriter : WriterBase
@@ -22,6 +23,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         public void Commit(IVisio.Master master, Core.CellValueType type)
         {
             var visobjtarget = new VisioObjectTarget(master);
+
             this._commit(visobjtarget, type);
         }
 
