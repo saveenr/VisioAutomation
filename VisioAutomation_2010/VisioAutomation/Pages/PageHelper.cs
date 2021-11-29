@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Core;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -240,19 +241,11 @@ namespace VisioAutomation.Pages
             IList<IVisio.Master> masters,
             IEnumerable<Core.Point> points)
         {
-            if (masters == null)
-            {
-                throw new System.ArgumentNullException(nameof(masters));
-            }
+            Internal.TempHelper.ValidateDropManyParams(masters, points);
 
             if (masters.Count < 1)
             {
                 return new short[0];
-            }
-
-            if (points == null)
-            {
-                throw new System.ArgumentNullException(nameof(points));
             }
 
             // NOTE: DropMany will fail if you pass in zero items to drop
@@ -266,5 +259,6 @@ namespace VisioAutomation.Pages
             short[] outids = (short[])outids_sa;
             return outids;
         }
+
     }
 }

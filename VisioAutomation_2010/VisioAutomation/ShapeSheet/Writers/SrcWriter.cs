@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.Internal;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
@@ -13,13 +14,13 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Shape shape, Core.CellValueType type)
         {
-            var visobjtarget = new Core.VisioObjectTarget(shape);
+            var visobjtarget = new VisioObjectTarget(shape);
             this._commit(visobjtarget, type);
         }
 
         public void Commit(IVisio.Page page, Core.CellValueType type)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
+            var visobjtarget = new VisioObjectTarget(page);
             this._commit(visobjtarget, type);
         }
 
@@ -57,7 +58,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        private void _commit(Core.VisioObjectTarget visobjtarget, Core.CellValueType type)
+        private void _commit(VisioObjectTarget visobjtarget, Core.CellValueType type)
         {
             if (this._records == null || this._records.Count < 1)
             {

@@ -1,5 +1,6 @@
 ﻿using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioScripting.Models
 {
@@ -7,14 +8,14 @@ namespace VisioScripting.Models
     {
         internal readonly SidSrcWriter Writer;
         public Client Client;
-        public VisioAutomation.Core.VisioObjectTarget visobjtarget;
+        public IVisio.Page visobjtarget;
         public bool BlastGuards;
         public bool TestCircular;
 
         public ShapeSheetWriter(Client client, IVisio.Page page)
         {
             this.Client = client;
-            this.visobjtarget = new VisioAutomation.Core.VisioObjectTarget(page);
+            this.visobjtarget = page;
             this.Writer = new SidSrcWriter();
         }
 
