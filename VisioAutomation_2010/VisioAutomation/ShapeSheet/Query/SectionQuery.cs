@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -24,11 +25,9 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public SectionQueryShapeResults<string> GetFormulas(Core.VisioObjectTarget visobjtarget)
+        public SectionQueryShapeResults<string> GetFormulas(IVisio.Shape visobjtarget)
         {
-            _RestrictToShapesOnly(visobjtarget);
-
-            var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget.Shape);
+            var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget);
             var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);

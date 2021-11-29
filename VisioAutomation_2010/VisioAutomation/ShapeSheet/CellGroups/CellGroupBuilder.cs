@@ -120,7 +120,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var objtarget = new Core.VisioObjectTarget(shape);
             var results = type switch
             {
-                Core.CellValueType.Formula => query.GetFormulas(objtarget),
+                Core.CellValueType.Formula => query.GetFormulas(shape),
                 Core.CellValueType.Result => query.GetResults<string>(objtarget),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
