@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using VisioAutomation.Core;
-using VisioAutomation.Extensions;
+﻿using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Internal
@@ -38,108 +35,137 @@ namespace VisioAutomation.Internal
             this.Category = VisioObjectCategory.Shape;
         }
 
-        public IVisio.Shapes Shapes
-        {
-            get
-            {
-                var shapes = this.Category switch
-                {
-                    VisioObjectCategory.Master => this.Master.Shapes,
-                    VisioObjectCategory.Page => this.Page.Shapes,
-                    VisioObjectCategory.Shape => this.Shape.Shapes,
-                    _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-                };
 
-                return shapes;
-            }
+        public int SetResults(ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
+        {
+            var res = this.Dispatch_Func<int>(
+                (shape) => (shape.SetResults(stream,unitcodes,results,flags)),
+                (master) => (master.SetResults(stream, unitcodes, results, flags)),
+                (page) => (page.SetResults(stream, unitcodes, results, flags)));
+            return res;
+
+        }
+
+        public int SetFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
+        {
+            var res = this.Dispatch_Func<int>(
+                (shape) => (shape.SetFormulas(stream, formulas, flags)),
+                (master) => (master.SetFormulas(stream, formulas, flags)),
+                (page) => (page.SetFormulas(stream, formulas, flags)));
+            return res;
+
+        }
+
+
+        public T Dispatch_Func<T>(
+            System.Func<IVisio.Shape, T> fshape,
+            System.Func<IVisio.Master, T> fmaster, 
+            System.Func<IVisio.Page, T> fpage)
+        {
+            T res = this.Category switch
+            {
+                VisioObjectCategory.Shape => fshape(this.Shape),
+                VisioObjectCategory.Master => fmaster(this.Master),
+                VisioObjectCategory.Page => fpage(this.Page),
+                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
+            };
+            return res;
+        }
+
+        public T Dispatch_Func<P1,T>(
+            System.Func<IVisio.Shape, P1, T> fshape,
+            System.Func<IVisio.Master, P1, T> fmaster,
+            System.Func<IVisio.Page, P1, T> fpage,
+            P1 p1)
+        {
+            T res = this.Category switch
+            {
+                VisioObjectCategory.Shape => fshape(this.Shape, p1),
+                VisioObjectCategory.Master => fmaster(this.Master, p1),
+                VisioObjectCategory.Page => fpage(this.Page, p1),
+                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
+            };
+            return res;
+        }
+
+
+        public T Dispatch_Func<P1, P2, T>(
+            System.Func<IVisio.Shape, P1, P2, T> fshape,
+            System.Func<IVisio.Master, P1, P2, T> fmaster,
+            System.Func<IVisio.Page, P1, P2, T> fpage,
+            P1 p1,
+            P2 p2)
+        {
+            T res = this.Category switch
+            {
+                VisioObjectCategory.Shape => fshape(this.Shape, p1,p2),
+                VisioObjectCategory.Master => fmaster(this.Master, p1,p2),
+                VisioObjectCategory.Page => fpage(this.Page, p1,p2),
+                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
+            };
+            return res;
+        }
+
+        public T Dispatch_Func<P1, P2, P3, T>(
+            System.Func<IVisio.Shape, P1, P2, P3, T> fshape,
+            System.Func<IVisio.Master, P1, P2, P3, T> fmaster,
+            System.Func<IVisio.Page, P1, P2, P3, T> fpage,
+            P1 p1,
+            P2 p2,
+            P3 p3)
+        {
+            T res = this.Category switch
+            {
+                VisioObjectCategory.Shape => fshape(this.Shape, p1, p2, p3),
+                VisioObjectCategory.Master => fmaster(this.Master, p1, p2, p3),
+                VisioObjectCategory.Page => fpage(this.Page, p1, p2, p3),
+                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
+            };
+            return res;
+        }
+
+        public T Dispatch_Func<P1, P2, P3, P4, T>(
+            System.Func<IVisio.Shape, P1, P2, P3, P4, T> fshape,
+            System.Func<IVisio.Master, P1, P2, P3, P4, T> fmaster,
+            System.Func<IVisio.Page, P1, P2, P3, P4, T> fpage,
+            P1 p1,
+            P2 p2,
+            P3 p3,
+            P4 p4)
+        {
+            T res = this.Category switch
+            {
+                VisioObjectCategory.Shape => fshape(this.Shape, p1, p2, p3, p4),
+                VisioObjectCategory.Master => fmaster(this.Master, p1, p2, p3, p4),
+                VisioObjectCategory.Page => fpage(this.Page, p1, p2, p3, p4),
+                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
+            };
+            return res;
         }
 
         public short ID16
         {
             get
             {
-                short id16 = this.Category switch
-                {
-                    VisioObjectCategory.Master => this.Master.ID16,
-                    VisioObjectCategory.Page => this.Page.ID16,
-                    VisioObjectCategory.Shape => this.Shape.ID16,
-                    _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-                };
-
-                return id16;
+                var res = this.Dispatch_Func<short>(
+                    (shape) => (shape.ID16),
+                    (master) => (master.ID16),
+                    (page) => (page.ID16));
+                return res;
             }
         }
 
-
-        public short[] DropManyU(
-            IList<IVisio.Master> masters,
-            IEnumerable<Point> points)
+        public IVisio.Shapes Shapes
         {
-            var outids = this.Category switch
+            get
             {
-                VisioObjectCategory.Master => this.Master.DropManyU(masters, points),
-                VisioObjectCategory.Page => this.Page.DropManyU(masters, points),
-                VisioObjectCategory.Shape => this.Shape.DropManyU(masters, points),
-                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-            };
+                var res = this.Dispatch_Func<IVisio.Shapes>(
+                    (shape) => (shape.Shapes),
+                    (master) => (master.Shapes),
+                    (page) => (page.Shapes));
+                return res;
 
-            return outids;
+            }
         }
-
-        public int SetFormulas(ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
-        {
-            var val = this.Category switch
-            {
-                VisioObjectCategory.Master => this.Master.SetFormulas(stream, formulas, flags),
-                VisioObjectCategory.Page => this.Page.SetFormulas(stream, formulas, flags),
-                VisioObjectCategory.Shape => this.Shape.SetFormulas(stream, formulas, flags),
-                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-            };
-
-            return val;
-        }
-
-
-
-        public int SetResults(ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
-        {
-            var val = this.Category switch
-            {
-                VisioObjectCategory.Master => this.Master.SetResults(stream, unitcodes, results, flags),
-                VisioObjectCategory.Page => this.Page.SetResults(stream, unitcodes, results, flags),
-                VisioObjectCategory.Shape => this.Shape.SetResults(stream, unitcodes, results, flags),
-                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-            };
-
-            return val;
-        }
-
-        public TResult[] GetResults<TResult>(ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
-        {
-            var val = this.Category switch
-            {
-                VisioObjectCategory.Master => this.Master.GetResults<TResult>(stream, unitcodes),
-                VisioObjectCategory.Page => this.Page.GetResults<TResult>(stream, unitcodes),
-                VisioObjectCategory.Shape => this.Shape.GetResults<TResult>(stream, unitcodes),
-                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-            };
-
-            return val;
-        }
-
-        public string[] GetFormulasU(ShapeSheet.Streams.StreamArray stream)
-        {
-            var val = this.Category switch
-            {
-                VisioObjectCategory.Master => this.Master.GetFormulasU(stream),
-                VisioObjectCategory.Page => this.Page.GetFormulasU(stream),
-                VisioObjectCategory.Shape => this.Shape.GetFormulasU(stream),
-                _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
-            };
-
-            return val;
-        }
-
-
     }
 }
