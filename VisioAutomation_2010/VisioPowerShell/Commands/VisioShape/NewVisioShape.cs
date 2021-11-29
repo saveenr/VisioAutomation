@@ -140,7 +140,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 
                 using (var undoscope = this.Client.Undo.NewUndoScope(nameof(NewVisioShape) +":CommitCells"))
                 {
-                    writer.CommitFormulas(targetpage.Page);
+                    writer.Commit(targetpage.Page, VisioAutomation.Core.CellValueType.Formula);
                 }
 
             }

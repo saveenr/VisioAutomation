@@ -31,7 +31,8 @@ namespace VisioScripting.Models
             {
                 this.Writer.BlastGuards = this.BlastGuards;
                 this.Writer.TestCircular = this.TestCircular;
-                this.Writer.CommitFormulas(this.visobjtarget);
+                this.Writer.Commit(this.visobjtarget, VisioAutomation.Core.CellValueType.Formula);
+
             }
         }
     }
