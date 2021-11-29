@@ -118,11 +118,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
-            var objtarget = new VisioObjectTarget(shape);
             var results = type switch
             {
                 Core.CellValueType.Formula => query.GetFormulas(shape),
-                Core.CellValueType.Result => query.GetResults<string>(objtarget),
+                Core.CellValueType.Result => query.GetResults<string>(shape),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
@@ -130,11 +129,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
-            var visobjtarget = new VisioObjectTarget(page);
             var results = type switch
             {
-                Core.CellValueType.Formula => query.GetFormulas(visobjtarget, shapeidpairs),
-                Core.CellValueType.Result => query.GetResults<string>(visobjtarget, shapeidpairs),
+                Core.CellValueType.Formula => query.GetFormulas(page, shapeidpairs),
+                Core.CellValueType.Result => query.GetResults<string>(page, shapeidpairs),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
@@ -142,11 +140,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
-            var visobjtarget = new VisioObjectTarget(shape);
             var results = type switch
             {
-                Core.CellValueType.Formula => query.GetFormulas(visobjtarget),
-                Core.CellValueType.Result => query.GetResults<string>(visobjtarget),
+                Core.CellValueType.Formula => query.GetFormulas(shape),
+                Core.CellValueType.Result => query.GetResults<string>(shape),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
@@ -154,11 +151,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
-            var visobjtarget = new VisioObjectTarget(page);
             var results = type switch
             {
-                Core.CellValueType.Formula => query.GetFormulas(visobjtarget, shapeids),
-                Core.CellValueType.Result => query.GetResults<string>(visobjtarget, shapeids),
+                Core.CellValueType.Formula => query.GetFormulas(page, shapeids),
+                Core.CellValueType.Result => query.GetResults<string>(page, shapeids),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return results;
