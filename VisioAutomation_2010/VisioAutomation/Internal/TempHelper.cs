@@ -77,5 +77,18 @@ namespace VisioAutomation.Internal
             return flags;
         }
 
+        public static void ValidateDropManyParams(IList<IVisio.Master> masters, IEnumerable<Core.Point> points)
+        {
+            if (masters == null)
+            {
+                throw new System.ArgumentNullException(nameof(masters));
+            }
+
+            if (points == null)
+            {
+                throw new System.ArgumentNullException(nameof(points));
+            }
+        }
+
     }
 }
