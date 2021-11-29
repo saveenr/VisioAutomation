@@ -9,7 +9,7 @@ namespace VisioAutomation.Internal
         public readonly IVisio.Master Master;
         public readonly IVisio.Shape Shape;
         public readonly VisioObjectCategory Category;
-        private static readonly string _unhandled_category_exc_msg = "Unhandled Category";
+        private static readonly string _unhandled_category_exc_msg = string.Format("Unhandled {0}",nameof(VisioObjectCategory));
 
         public VisioObjectTarget(IVisio.Page page)
         {
