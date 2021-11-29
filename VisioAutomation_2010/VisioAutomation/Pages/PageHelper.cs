@@ -235,31 +235,5 @@ namespace VisioAutomation.Pages
                 page.CenterDrawing();
             }
         }
-
-        public static short[] DropManyU(
-            IVisio.Page page,
-            IList<IVisio.Master> masters,
-            IEnumerable<Core.Point> points)
-        {
-            Internal.Helpers.ValidateDropManyParams(masters, points);
-
-
-            if (masters.Count < 1)
-            {
-                return new short[0];
-            }
-
-            // NOTE: DropMany will fail if you pass in zero items to drop
-            var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = Core.Point.ToDoubles(points).ToArray();
-
-            System.Array outids_sa;
-
-            page.DropManyU(masters_obj_array, xy_array, out outids_sa);
-
-            short[] outids = (short[])outids_sa;
-            return outids;
-        }
-
     }
 }

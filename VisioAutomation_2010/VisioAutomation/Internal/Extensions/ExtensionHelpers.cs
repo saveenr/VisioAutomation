@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Internal.Extensions
 {
@@ -140,6 +142,74 @@ namespace VisioAutomation.Internal.Extensions
             }
 
             return val;
+        }
+
+
+        public static IVisio.Shape _Drop(
+            VisioObjectTarget visobjtarget,
+            IVisio.Master master,
+            Core.Point point)
+        {
+            IVisio.Shape output;
+
+            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            {
+                output = visobjtarget.Shape.Drop(master, point.X, point.Y);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            {
+                output = visobjtarget.Master.Drop(master, point.X, point.Y);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            {
+                output = visobjtarget.Page.Drop(master, point.X, point.Y);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
+            return output;
+        }
+
+        public static short[] _DropManyU(
+            VisioObjectTarget visobjtarget,
+            IList<IVisio.Master> masters,
+            IEnumerable<Core.Point> points)
+        {
+            Internal.Helpers.ValidateDropManyParams(masters, points);
+
+
+            if (masters.Count < 1)
+            {
+                return new short[0];
+            }
+
+            // NOTE: DropMany will fail if you pass in zero items to drop
+            var masters_obj_array = masters.Cast<object>().ToArray();
+            var xy_array = Core.Point.ToDoubles(points).ToArray();
+
+            System.Array outids_sa;
+
+            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            {
+                visobjtarget.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            {
+                visobjtarget.Master.DropManyU(masters_obj_array, xy_array, out outids_sa);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            {
+                visobjtarget.Page.DropManyU(masters_obj_array, xy_array, out outids_sa);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
+            short[] outids = (short[])outids_sa;
+            return outids;
         }
     }
 }
