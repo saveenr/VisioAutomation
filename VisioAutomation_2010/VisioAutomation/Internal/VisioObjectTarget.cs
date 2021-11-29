@@ -75,36 +75,14 @@ namespace VisioAutomation.Internal
             IList<IVisio.Master> masters,
             IEnumerable<Point> points)
         {
-            if (masters == null)
+            var outids = this.Category switch
             {
-                throw new System.ArgumentNullException(nameof(masters));
-            }
-
-            if (masters.Count < 1)
-            {
-                return new short[0];
-            }
-
-            if (points == null)
-            {
-                throw new System.ArgumentNullException(nameof(points));
-            }
-
-            // NOTE: DropMany will fail if you pass in zero items to drop
-            var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = Point.ToDoubles(points).ToArray();
-
-            System.Array outids_sa;
-
-            var val = this.Category switch
-            {
-                VisioObjectCategory.Master => this.Master.DropManyU(masters_obj_array, xy_array, out outids_sa),
-                VisioObjectCategory.Page => this.Page.DropManyU(masters_obj_array, xy_array, out outids_sa),
-                VisioObjectCategory.Shape => this.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa),
+                VisioObjectCategory.Master => this.Master.DropManyU(masters, points),
+                VisioObjectCategory.Page => this.Page.DropManyU(masters, points),
+                VisioObjectCategory.Shape => this.Shape.DropManyU(masters, points),
                 _ => throw new System.ArgumentException(_unhandled_category_exc_msg)
             };
 
-            short[] outids = (short[]) outids_sa;
             return outids;
         }
 
