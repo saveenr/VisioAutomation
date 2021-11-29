@@ -36,11 +36,23 @@ namespace VisioAutomation.Internal.Extensions
 
             System.Array formulas_sa = null;
 
-            visobjtarget.DispatchAction(
-                (shape) => shape.GetFormulasU(stream.Array, out formulas_sa),
-                (master) => master.GetFormulasU(stream.Array, out formulas_sa),
-                (page) => page.GetFormulasU(stream.Array, out formulas_sa));
-
+            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            {
+                visobjtarget.Shape.GetFormulasU(stream.Array, out formulas_sa);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            {
+                visobjtarget.Master.GetFormulasU(stream.Array, out formulas_sa);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            {
+                visobjtarget.Page.GetFormulasU(stream.Array, out formulas_sa);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+            
             var formulas = Internal.Helpers.SystemArrayToTypedArray<string>(formulas_sa);
             return formulas;
         }
@@ -57,11 +69,22 @@ namespace VisioAutomation.Internal.Extensions
             var flags = Internal.Helpers.GetVisGetSetArgsFromType(typeof(TResult));
             System.Array results_sa = null;
 
-            visobjtarget.DispatchAction(
-                (shape) => shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa),
-                (master) => master.GetResults(stream.Array, (short)flags, unitcodes, out results_sa),
-                (page) => page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa));
-
+            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            {
+                visobjtarget.Shape.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            {
+                visobjtarget.Master.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            {
+                visobjtarget.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
 
             var results = Internal.Helpers.SystemArrayToTypedArray<TResult>(results_sa);
             return results;
@@ -72,10 +95,23 @@ namespace VisioAutomation.Internal.Extensions
         {
             Internal.Helpers.ValidateStreamLengthFormulas(stream, formulas);
 
-            int val = visobjtarget.DispatchFunction(
-                (shape) => shape.SetFormulas(stream.Array, formulas, flags),
-                (master) => master.SetFormulas(stream.Array, formulas, flags),
-                (page) => page.SetFormulas(stream.Array, formulas, flags));
+            int val = 0;
+            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            {
+                val = visobjtarget.Shape.SetFormulas(stream.Array, formulas, flags);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            {
+                val = visobjtarget.Master.SetFormulas(stream.Array, formulas, flags);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            {
+                val = visobjtarget.Page.SetFormulas(stream.Array, formulas, flags);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
 
             return val;
         }
@@ -85,10 +121,23 @@ namespace VisioAutomation.Internal.Extensions
         {
             Internal.Helpers.ValidateStreamLengthResults(stream, results);
 
-            int val = visobjtarget.DispatchFunction(
-                (shape) => shape.SetResults(stream.Array, unitcodes, results, flags),
-                (master) => master.SetResults(stream.Array, unitcodes, results, flags),
-                (page) => page.SetResults(stream.Array, unitcodes, results, flags));
+            int val = 0;
+            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            {
+                val = visobjtarget.Shape.SetResults(stream.Array, unitcodes, results, flags);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            {
+                val = visobjtarget.Master.SetResults(stream.Array, unitcodes, results, flags);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            {
+                val = visobjtarget.Page.SetResults(stream.Array, unitcodes, results, flags);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
 
             return val;
         }
