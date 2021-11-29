@@ -6,17 +6,6 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods
     {
-        public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
-        {
-            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => pages.Count,
-                i => pages[i + 1]);
-        }
-
-        public static List<IVisio.Page> ToList(this IVisio.Pages pages)
-        {
-            return Internal.Extensions.ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
-        }
-
         public static Core.Rectangle GetBoundingBox(this IVisio.Page page, IVisio.VisBoundingBoxArgs args)
         {
             double bbx0, bby0, bbx1, bby1;
@@ -63,24 +52,6 @@ namespace VisioAutomation.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawPolyLine(this IVisio.Page page, IList<Core.Point> points)
-        {
-            var doubles_array = Core.Point.ToDoubles(points).ToArray();
-            var shape = page.DrawPolyline(doubles_array, 0);
-            return shape;
-        }
-
-        public static IVisio.Shape DrawQuarterArc(
-            this IVisio.Page page,
-            Core.Point p0,
-            Core.Point p1,
-            IVisio.VisArcSweepFlags flags)
-        {
-            var s = page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
-            return s;
-        }
-
-
         public static IVisio.Shape DrawNurbs(
             this IVisio.Page page,
             IList<Core.Point> controlpoints,
@@ -102,15 +73,6 @@ namespace VisioAutomation.Extensions
             return shape;
         }
 
-        public static string[] GetNamesU(this IVisio.Pages pages)
-        {
-            System.Array names_sa;
-            pages.GetNamesU(out names_sa);
-            string[] names = (string[])names_sa;
-            return names;
-        }
-
-
         public static IVisio.Shape Drop(
             this IVisio.Page page,
             IVisio.Master master,
@@ -126,6 +88,25 @@ namespace VisioAutomation.Extensions
             IEnumerable<Core.Point> points)
         {
             return Pages.PageHelper.DropManyU(page, masters, points);
+        }
+
+        public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
+        {
+            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => pages.Count,
+                i => pages[i + 1]);
+        }
+
+        public static List<IVisio.Page> ToList(this IVisio.Pages pages)
+        {
+            return Internal.Extensions.ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
+        }
+
+        public static string[] GetNamesU(this IVisio.Pages pages)
+        {
+            System.Array names_sa;
+            pages.GetNamesU(out names_sa);
+            string[] names = (string[]) names_sa;
+            return names;
         }
 
         public static string[] GetFormulasU(this IVisio.Page page, ShapeSheet.Streams.StreamArray stream)
@@ -145,6 +126,23 @@ namespace VisioAutomation.Extensions
             page.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
             var results = Core.VisioObjectTarget.system_array_to_typed_array<TResult>(results_sa);
             return results;
+        }
+
+        public static IVisio.Shape DrawQuarterArc(
+            this IVisio.Page page,
+            Core.Point p0,
+            Core.Point p1,
+            IVisio.VisArcSweepFlags flags)
+        {
+            var s = page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+            return s;
+        }
+
+        public static IVisio.Shape DrawPolyLine(this IVisio.Page page, IList<Core.Point> points)
+        {
+            var doubles_array = Core.Point.ToDoubles(points).ToArray();
+            var shape = page.DrawPolyline(doubles_array, 0);
+            return shape;
         }
     }
 }
