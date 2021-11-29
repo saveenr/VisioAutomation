@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Core
+﻿namespace VisioAutomation.Internal
 {
     public enum VisioObjectCategory
     {

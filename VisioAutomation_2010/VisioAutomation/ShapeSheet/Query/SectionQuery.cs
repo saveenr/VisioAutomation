@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
+using VisioAutomation.Internal;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -15,20 +17,10 @@ namespace VisioAutomation.ShapeSheet.Query
             this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionQueryColumns>();
         }
 
-        private static void _RestrictToShapesOnly(Core.VisioObjectTarget visobjtarget)
-        {
-            if (visobjtarget.Shape == null)
-            {
-                string msg = "Target must be Shape not Page or Master";
-                throw new System.ArgumentException(msg);
-            }
-        }
 
-        public SectionQueryShapeResults<string> GetFormulas(Core.VisioObjectTarget visobjtarget)
+        public SectionQueryShapeResults<string> GetFormulas(IVisio.Shape visobjtarget)
         {
-            _RestrictToShapesOnly(visobjtarget);
-
-            var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget.Shape);
+            var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget);
             var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);
@@ -43,41 +35,34 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQueryShapeResults<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
-            var visobjtarget = new Core.VisioObjectTarget(shape);
-            return GetResults<TResult>(visobjtarget);
-        }
-
-        public SectionQueryShapeResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget)
-        {
-            _RestrictToShapesOnly(visobjtarget);
-
-            var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget.Shape);
+            var shapeidpairs = Core.ShapeIDPairs.FromShapes(shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);
             const object[] unitcodes = null;
-            var values = visobjtarget.GetResults<TResult>(srcstream, unitcodes);
+            var values = shape.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
             var sectioncache = cache[shape_index];
             var reader = new Internal.ArraySegmentEnumerator<TResult>(values);
-            var output_for_shape = this._create_output_for_shape(visobjtarget.ID16, sectioncache, reader);
+            var output_for_shape = this._create_output_for_shape(shape.ID16, sectioncache, reader);
             return output_for_shape;
         }
 
         public SectionQueryResults<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
-            return this.GetFormulas(visobjtarget, shapeidpairs);
+            // Store information about the sections we need to query
+            var cache = _create_sectionquerycache(shapeidpairs);
+
+            // Perform the query
+            var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
+            var values = page.GetFormulasU(srcstream);
+            var reader = new Internal.ArraySegmentEnumerator<string>(values);
+            var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
+            return results;
         }
 
 
         public SectionQueryResults<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
-        {
-            var visobjtarget = new Core.VisioObjectTarget(page);
-            return this.GetResults<TResult>(visobjtarget, shapeidpairs);
-        }
-
-        public SectionQueryResults<TResult> GetResults<TResult>(Core.VisioObjectTarget visobjtarget, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
             var cache = _create_sectionquerycache(shapeidpairs);
@@ -85,23 +70,12 @@ namespace VisioAutomation.ShapeSheet.Query
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             const object[] unitcodes = null;
-            var values = visobjtarget.GetResults<TResult>(srcstream, unitcodes);
+            var values = page.GetResults<TResult>(srcstream, unitcodes);
             var reader = new Internal.ArraySegmentEnumerator<TResult>(values);
             var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
             return results;
         }
-        public SectionQueryResults<string> GetFormulas(Core.VisioObjectTarget visobjtarget, Core.ShapeIDPairs shapeidpairs)
-        {
-            // Store information about the sections we need to query
-            var cache = _create_sectionquerycache(shapeidpairs);
 
-            // Perform the query
-            var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
-            var values = visobjtarget.GetFormulasU(srcstream);
-            var reader = new Internal.ArraySegmentEnumerator<string>(values);
-            var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
-            return results;
-        }
 
         private SectionQueryCache _create_sectionquerycache(Core.ShapeIDPairs shapeidpairs)
         {

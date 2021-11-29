@@ -1,5 +1,7 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA= VisioAutomation;
+using VisioAutomation.Extensions;
+using VisioAutomation.Internal;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
@@ -11,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void Commit(IVisio.Page page, Core.CellValueType type)
         {
-            var visobjtarget = new Core.VisioObjectTarget(page);
+            var visobjtarget = new VisioObjectTarget(page);
             this.Commit(visobjtarget, type);
         }
         public void SetValue(short id, Core.Src src, Core.CellValue formula)
@@ -60,7 +62,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        public void CommitFormulas(Core.VisioObjectTarget visobjtarget)
+        public void CommitFormulas(VisioObjectTarget visobjtarget)
         {
             if ((this._records == null || this._records.Count < 1))
             {
@@ -80,7 +82,47 @@ namespace VisioAutomation.ShapeSheet.Writers
             int c = visobjtarget.SetFormulas(stream, formulas, (short)flags);
         }
 
-        public void Commit(Core.VisioObjectTarget visobjtarget, Core.CellValueType type)
+        public void CommitFormulas(IVisio.Shape shape)
+        {
+            if ((this._records == null || this._records.Count < 1))
+            {
+                return;
+            }
+
+            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
+            var formulas = this._records.BuildValuesArray();
+
+            if (stream.Array.Length == 0)
+            {
+                throw new Exceptions.InternalAssertionException();
+            }
+
+            var flags = this._compute_setformula_flags();
+
+            int c = shape.SetFormulas(stream, formulas, (short)flags);
+        }
+
+        public void CommitFormulas(IVisio.Page page)
+        {
+            if ((this._records == null || this._records.Count < 1))
+            {
+                return;
+            }
+
+            var stream = this._records.BuildStreamArray(VA.ShapeSheet.Streams.StreamType.SidSrc);
+            var formulas = this._records.BuildValuesArray();
+
+            if (stream.Array.Length == 0)
+            {
+                throw new Exceptions.InternalAssertionException();
+            }
+
+            var flags = this._compute_setformula_flags();
+
+            int c = page.SetFormulas(stream, formulas, (short)flags);
+        }
+
+        public void Commit(VisioObjectTarget visobjtarget, Core.CellValueType type)
         {
             if ((this._records == null || this._records.Count < 1))
             {

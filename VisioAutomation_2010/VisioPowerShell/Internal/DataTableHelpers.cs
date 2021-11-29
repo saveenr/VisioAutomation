@@ -2,7 +2,7 @@
 using System.Data;
 using VisioPowerShell.Models;
 using VASS=VisioAutomation.ShapeSheet;
-
+using IVisio=Microsoft.Office.Interop.Visio;
 namespace VisioPowerShell.Internal
 {
     static class DataTableHelpers
@@ -42,7 +42,7 @@ namespace VisioPowerShell.Internal
             VisioAutomation.Core.CellValueType value_type,
             Models.ResultType result_type,
             IList<int> shapeids, 
-            VisioAutomation.Core.VisioObjectTarget visobjtarget)
+            IVisio.Page visobjtarget)
         {
 
             if (value_type == VisioAutomation.Core.CellValueType.Formula)
