@@ -241,7 +241,7 @@ namespace VisioAutomation.Pages
             IList<IVisio.Master> masters,
             IEnumerable<Core.Point> points)
         {
-            Internal.TempHelper.ValidateDropManyParams(masters, points);
+            Internal.Helpers.ValidateDropManyParams(masters, points);
 
             if (masters.Count < 1)
             {

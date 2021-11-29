@@ -112,7 +112,7 @@
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
     <Compile Include="Exceptions\InternalAssertionException.cs" />
-    <Compile Include="Internal\TempHelper.cs" />
+    <Compile Include="Internal\Helpers.cs" />
     <Compile Include="Internal\Extensions\ExtensionHelpers.cs" />
     <Compile Include="Pages\LayoutCells.cs" />
     <Compile Include="Pages\PrintCells.cs" />

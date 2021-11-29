@@ -11,7 +11,7 @@
 
             System.Array formulas_sa = null;
             shape.GetFormulasU(stream.Array, out formulas_sa);
-            var formulas = Internal.TempHelper.system_array_to_typed_array<string>(formulas_sa);
+            var formulas = Internal.Helpers.system_array_to_typed_array<string>(formulas_sa);
             return formulas;
         }
 
@@ -21,19 +21,19 @@
             {
                 return new TResult[0];
             }
-            Internal.TempHelper._enforce_valid_result_type(typeof(TResult));
+            Internal.Helpers._enforce_valid_result_type(typeof(TResult));
 
 
-            var flags = Internal.TempHelper._type_to_vis_get_set_args(typeof(TResult));
+            var flags = Internal.Helpers._type_to_vis_get_set_args(typeof(TResult));
             System.Array results_sa = null;
             shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
-            var results = Internal.TempHelper.system_array_to_typed_array<TResult>(results_sa);
+            var results = Internal.Helpers.system_array_to_typed_array<TResult>(results_sa);
             return results;
         }
         public static int SetFormulas(this Microsoft.Office.Interop.Visio.Shape shape,
             ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
         {
-            Internal.TempHelper.ValidateStreamLengthFormulas(stream, formulas);
+            Internal.Helpers.ValidateStreamLengthFormulas(stream, formulas);
 
             int val = shape.SetFormulas(stream.Array, formulas, flags);
             return val;
@@ -42,7 +42,7 @@
         public static int SetResults(this Microsoft.Office.Interop.Visio.Shape shape,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
-            Internal.TempHelper.ValidateStreamLengthResults(stream, results);
+            Internal.Helpers.ValidateStreamLengthResults(stream, results);
 
             int val = shape.SetResults(stream.Array, unitcodes, results, flags);
             return val;

@@ -6,7 +6,7 @@ using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Internal
 {
-    internal class TempHelper
+    internal class Helpers
     {
         public static void _enforce_valid_result_type(System.Type result_type)
         {
