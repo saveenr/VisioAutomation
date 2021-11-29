@@ -96,14 +96,17 @@
     <Compile Include="Extensions\FontsMethods.cs" />
     <Compile Include="Extensions\LayersMethods.cs" />
     <Compile Include="Extensions\MasterMethods_Draw.cs" />
+    <Compile Include="Extensions\MasterMethods_Drop.cs" />
     <Compile Include="Extensions\MasterMethods_General.cs" />
     <Compile Include="Extensions\MasterMethods_ShapeSheet.cs" />
     <Compile Include="Extensions\PageMethods_Draw.cs" />
+    <Compile Include="Extensions\PageMethods_Drop.cs" />
     <Compile Include="Extensions\PageMethods_General.cs" />
     <Compile Include="Extensions\PageMethods_ShapeSheet.cs" />
     <Compile Include="Extensions\SectionMethods.cs" />
     <Compile Include="Extensions\SelectionMethods.cs" />
     <Compile Include="Extensions\ShapeMethods_Draw.cs" />
+    <Compile Include="Extensions\ShapeMethods_Drop.cs" />
     <Compile Include="Extensions\ShapeMethods_General.cs" />
     <Compile Include="Extensions\ShapeMethods_ShapeSheet.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
