@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(short id, CellGroups.CellGroup cellgroup, short row)
         {
-            var pairs = cellgroup.GetSidSrcValuePairs_NewRow(id, row);
+            var pairs = cellgroup.GetSidSrcValuesWithNewRow(id, row);
             foreach (var pair in pairs)
             {
                 this.SetValue(pair.ShapeID, pair.Src, pair.Value);
@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(short id, CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cellgroup.GetSrcValuePairs())
+            foreach (var pair in cellgroup.GetSrcValues())
             {
                 this.SetValue(id, pair.Src, pair.Value);
             }

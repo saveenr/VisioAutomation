@@ -37,9 +37,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 throw new Exceptions.InternalAssertionException();
             }
 
-            foreach (var pair in temp_cells.GetCellMetadata())
+            foreach (var item in temp_cells.GetCellMetadata())
             {
-                cols.Add(pair.Src, pair.Name);
+                cols.Add(item.Src, item.Name);
             }
 
         }
