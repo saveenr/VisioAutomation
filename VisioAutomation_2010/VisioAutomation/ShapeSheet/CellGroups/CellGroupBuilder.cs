@@ -51,7 +51,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this._enforce_type(CellGroupBuilderType.SingleRow);
             var cellgroups = new List<TGroup>(shapeids.Count);
             var cols = this.query_cells_singlerow.Columns;
-            var rows_for_shapes = this.__GetCells(query_cells_singlerow, page, shapeids, type);
+            var rows_for_shapes = this.__QueryCells(query_cells_singlerow, page, shapeids, type);
             foreach (var row in rows_for_shapes)
             {
                 var cellgroup = this.ToCellGroup(row, cols);
@@ -71,7 +71,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public TGroup GetCellsSingleRow(IVisio.Shape shape, Core.CellValueType type)
         {
             this._enforce_type(CellGroupBuilderType.SingleRow);
-            var cellqueryresult = this.__GetCells(query_cells_singlerow, shape, type);
+            var cellqueryresult = this.__QueryCells(query_cells_singlerow, shape, type);
             var cols = this.query_cells_singlerow.Columns;
             var first_row = cellqueryresult[0];
             var cells = this.ToCellGroup(first_row, cols);
@@ -83,7 +83,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
 
-            var cellqueryresult = __GetCells(query_sections_multirow,page, shapeidpairs, type);
+            var cellqueryresult = __QueryCells(query_sections_multirow,page, shapeidpairs, type);
             var list_cellgroups = new List<List<TGroup>>(shapeidpairs.Count);
             foreach (var data_for_shape in cellqueryresult)
             {
@@ -98,7 +98,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             this._enforce_type(CellGroupBuilderType.MultiRow);
             var sec_cols = this.query_sections_multirow[0];
-            var cellqueryresult = __GetCells(query_sections_multirow, shape, type);
+            var cellqueryresult = __QueryCells(query_sections_multirow, shape, type);
             var shape0_sectionshaperows0 = cellqueryresult[0];
             var cellgroups = this._sectionshaperows_to_cellgroups(shape0_sectionshaperows0,sec_cols);
             return cellgroups;
@@ -115,7 +115,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private Query.SectionQueryShapeResults<string> __GetCells(Query.SectionQuery query, IVisio.Shape shape, Core.CellValueType type)
+        private Query.SectionQueryShapeResults<string> __QueryCells(Query.SectionQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
             var results = type switch
             {
@@ -126,7 +126,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Query.SectionQueryResults<string> __GetCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        private Query.SectionQueryResults<string> __QueryCells(Query.SectionQuery query, IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
             var results = type switch
             {
@@ -137,7 +137,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Shape shape, Core.CellValueType type)
+        private Query.CellQueryResults<string> __QueryCells(Query.CellQuery query, IVisio.Shape shape, Core.CellValueType type)
         {
             var results = type switch
             {
@@ -148,7 +148,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Query.CellQueryResults<string> __GetCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        private Query.CellQueryResults<string> __QueryCells(Query.CellQuery query, IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var results = type switch
             {
