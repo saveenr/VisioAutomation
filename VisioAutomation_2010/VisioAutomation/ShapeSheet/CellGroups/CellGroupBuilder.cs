@@ -60,9 +60,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private void _enforce_type(CellGroupBuilderType t)
+        private void _enforce_type(CellGroupBuilderType buildertype)
         {
-            if (this.Type != t)
+            if (this.Type != buildertype)
             {
                 throw new Exceptions.InternalAssertionException();
             }
