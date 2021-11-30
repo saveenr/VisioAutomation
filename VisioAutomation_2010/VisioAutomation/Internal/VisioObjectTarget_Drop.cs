@@ -11,22 +11,21 @@ namespace VisioAutomation.Internal
         {
 
 
-            var visobjtarget = this;
 
 
             Microsoft.Office.Interop.Visio.Shape output;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                output = visobjtarget.Shape.Drop(master, point.X, point.Y);
+                output = this.Shape.Drop(master, point.X, point.Y);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                output = visobjtarget.Master.Drop(master, point.X, point.Y);
+                output = this.Master.Drop(master, point.X, point.Y);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                output = visobjtarget.Page.Drop(master, point.X, point.Y);
+                output = this.Page.Drop(master, point.X, point.Y);
             }
             else
             {
@@ -41,7 +40,6 @@ namespace VisioAutomation.Internal
             IEnumerable<Core.Point> points)
         {
 
-            var visobjtarget = this;
 
             Internal.DropHelpers.ValidateDropManyParams(masters, points);
             
@@ -56,17 +54,17 @@ namespace VisioAutomation.Internal
 
             System.Array outids_sa;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                visobjtarget.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa);
+                this.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                visobjtarget.Master.DropManyU(masters_obj_array, xy_array, out outids_sa);
+                this.Master.DropManyU(masters_obj_array, xy_array, out outids_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                visobjtarget.Page.DropManyU(masters_obj_array, xy_array, out outids_sa);
+                this.Page.DropManyU(masters_obj_array, xy_array, out outids_sa);
             }
             else
             {

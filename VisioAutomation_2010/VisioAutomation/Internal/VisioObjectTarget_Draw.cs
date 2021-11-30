@@ -10,21 +10,20 @@ namespace VisioAutomation.Internal
         public IVisio.Shape DrawOval(Core.Rectangle rect)
         {
 
-            var visobjtarget = this;
 
             IVisio.Shape shape;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                shape = visobjtarget.Shape.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                shape = this.Shape.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                shape = visobjtarget.Master.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                shape = this.Master.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                shape = visobjtarget.Page.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                shape = this.Page.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
             }
             else
             {
@@ -36,22 +35,20 @@ namespace VisioAutomation.Internal
 
         public IVisio.Shape DrawRectangle(Core.Rectangle rect)
         {
-            var visobjtarget = this;
-
 
             IVisio.Shape shape;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                shape = visobjtarget.Shape.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                shape = this.Shape.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                shape = visobjtarget.Master.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                shape = this.Master.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                shape = visobjtarget.Page.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                shape = this.Page.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
             }
             else
             {
@@ -64,7 +61,6 @@ namespace VisioAutomation.Internal
         public  IVisio.Shape DrawBezier(IList<Core.Point> points)
         {
 
-            var visobjtarget = this;
 
 
             var doubles_array = VisioAutomation.Core.Point.ToDoubles(points).ToArray();
@@ -73,17 +69,17 @@ namespace VisioAutomation.Internal
 
             IVisio.Shape shape;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                shape = visobjtarget.Shape.DrawBezier(doubles_array, degree, flags);
+                shape = this.Shape.DrawBezier(doubles_array, degree, flags);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                shape = visobjtarget.Master.DrawBezier(doubles_array, degree, flags);
+                shape = this.Master.DrawBezier(doubles_array, degree, flags);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                shape = visobjtarget.Page.DrawBezier(doubles_array, degree, flags);
+                shape = this.Page.DrawBezier(doubles_array, degree, flags);
             }
             else
             {
@@ -96,22 +92,21 @@ namespace VisioAutomation.Internal
         public IVisio.Shape DrawPolyline(IList<Core.Point> points)
         {
 
-            var visobjtarget = this;
 
             var doubles_array = Core.Point.ToDoubles(points).ToArray();
             IVisio.Shape shape;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                shape = visobjtarget.Shape.DrawPolyline(doubles_array, 0);
+                shape = this.Shape.DrawPolyline(doubles_array, 0);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                shape = visobjtarget.Master.DrawPolyline(doubles_array, 0);
+                shape = this.Master.DrawPolyline(doubles_array, 0);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                shape = visobjtarget.Page.DrawPolyline(doubles_array, 0);
+                shape = this.Page.DrawPolyline(doubles_array, 0);
             }
             else
             {
@@ -129,21 +124,19 @@ namespace VisioAutomation.Internal
             Microsoft.Office.Interop.Visio.VisArcSweepFlags flags)
         {
 
-            var visobjtarget = this;
-
 
             IVisio.Shape shape;
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                shape = visobjtarget.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+                shape = this.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                shape = visobjtarget.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+                shape = this.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                shape = visobjtarget.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+                shape = this.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             }
             else
             {
@@ -158,20 +151,19 @@ namespace VisioAutomation.Internal
             Core.Point p1)
         {
 
-            var visobjtarget = this;
 
             IVisio.Shape shape;
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                shape = visobjtarget.Shape.DrawLine(p0.X, p0.Y, p1.X, p1.Y);
+                shape = this.Shape.DrawLine(p0.X, p0.Y, p1.X, p1.Y);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                shape = visobjtarget.Master.DrawLine(p0.X, p0.Y, p1.X, p1.Y);
+                shape = this.Master.DrawLine(p0.X, p0.Y, p1.X, p1.Y);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                shape = visobjtarget.Page.DrawLine(p0.X, p0.Y, p1.X, p1.Y);
+                shape = this.Page.DrawLine(p0.X, p0.Y, p1.X, p1.Y);
             }
             else
             {
@@ -188,7 +180,6 @@ namespace VisioAutomation.Internal
             int degree)
         {
 
-            var visobjtarget = this;
 
 
             // flags:
@@ -201,17 +192,17 @@ namespace VisioAutomation.Internal
             double[] weights_dbl_a = weights.ToArray();
 
             IVisio.Shape shape;
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                shape = visobjtarget.Shape.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
+                shape = this.Shape.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                shape = visobjtarget.Master.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
+                shape = this.Master.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                shape = visobjtarget.Page.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
+                shape = this.Page.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
             }
             else
             {
@@ -226,19 +217,18 @@ namespace VisioAutomation.Internal
         {
             double bbx0, bby0, bbx1, bby1;
 
-            var visobjtarget = this;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (this.Category == VisioObjectCategory.Shape)
             {
-                visobjtarget.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+                this.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (this.Category == VisioObjectCategory.Master)
             {
-                visobjtarget.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+                this.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (this.Category == VisioObjectCategory.Page)
             {
-                visobjtarget.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+                this.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
             }
             else
             {
