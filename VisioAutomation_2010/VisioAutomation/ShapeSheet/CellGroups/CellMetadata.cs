@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public struct CellMetadata
+    public readonly struct CellMetadata
     {
         public readonly string Name;
         public readonly Core.Src Src;

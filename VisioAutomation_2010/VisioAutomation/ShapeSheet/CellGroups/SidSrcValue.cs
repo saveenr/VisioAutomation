@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public struct SidSrcValue
+    public readonly struct SidSrcValue
     {
         public readonly short ShapeID;
         public readonly Core.Src Src;
