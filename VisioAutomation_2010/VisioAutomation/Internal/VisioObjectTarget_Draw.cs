@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Internal
@@ -8,7 +7,7 @@ namespace VisioAutomation.Internal
     internal readonly partial struct VisioObjectTarget
     {
 
-        public Microsoft.Office.Interop.Visio.Shape DrawOval(Core.Rectangle rect)
+        public IVisio.Shape DrawOval(Core.Rectangle rect)
         {
 
             var visobjtarget = this;

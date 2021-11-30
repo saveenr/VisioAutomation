@@ -1,5 +1,3 @@
-using VisioAutomation.Internal;
-
 namespace VisioAutomation.Internal
 {
     internal readonly partial struct VisioObjectTarget

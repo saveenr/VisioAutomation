@@ -1,7 +1,6 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Internal;
-using VisioAutomation.Internal.Extensions;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
