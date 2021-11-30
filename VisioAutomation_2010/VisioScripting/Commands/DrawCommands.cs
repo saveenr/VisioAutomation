@@ -79,7 +79,7 @@ namespace VisioScripting.Commands
             targetpage = targetpage.ResolveToPage(this._client);
             using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawPolyLine)))
             {
-                var shape = targetpage.Page.DrawPolyLine(points);
+                var shape = targetpage.Page.DrawPolyline(points);
                 return shape;
             }
         }

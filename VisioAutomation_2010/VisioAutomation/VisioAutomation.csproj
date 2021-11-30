@@ -113,6 +113,7 @@
     <Compile Include="Extensions\WindowMethods.cs" />
     <Compile Include="Exceptions\InternalAssertionException.cs" />
     <Compile Include="Internal\DropHelpers.cs" />
+    <Compile Include="Internal\Extensions\VisioObjectTarget_Draw.cs" />
     <Compile Include="Internal\Extensions\VisioObjectTarget_Drop.cs" />
     <Compile Include="Internal\Extensions\VisioObjectTarget_ShapeSheet.cs" />
     <Compile Include="Internal\ShapesheetHelpers.cs" />
