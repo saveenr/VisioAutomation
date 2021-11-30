@@ -12,15 +12,5 @@
             this.Src = src;
             this.Value = value;
         }
-
-        public static SidSrcValuePair Create(short shapeid, Core.Src src, string value)
-        {
-            return new SidSrcValuePair(shapeid, src, value);
-        }
-
-        public static SidSrcValuePair Create(short shapeid, Core.Src src, Core.CellValue cvf)
-        {
-            return new SidSrcValuePair(shapeid, src, cvf.Value);
-        }
     }
 }

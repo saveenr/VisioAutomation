@@ -10,15 +10,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.Src = src;
             this.Value = value;
         }
-
-        public static SrcValuePair Create(Core.Src src, string value)
-        {
-            return new SrcValuePair(src,value);
-        }
-
-        public static SrcValuePair Create(Core.Src src, Core.CellValue cvf)
-        {
-            return new SrcValuePair(src, cvf.Value);
-        }
     }
 }
