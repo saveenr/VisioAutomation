@@ -5,13 +5,14 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods_Drop
     {
+
         public static IVisio.Shape Drop(
             this IVisio.Page page,
             IVisio.Master master,
             Core.Point point)
         {
-            var output = page.Drop(master, point.X, point.Y);
-            return output;
+            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
+            return visobjtarget.Drop(master, point);
         }
 
         public static short[] DropManyU(
@@ -19,7 +20,8 @@ namespace VisioAutomation.Extensions
             IList<IVisio.Master> masters,
             IEnumerable<Core.Point> points)
         {
-            return Pages.PageHelper.DropManyU(page, masters, points);
+            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
+            return visobjtarget.DropManyU( masters, points);
         }
     }
 }

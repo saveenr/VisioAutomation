@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -8,12 +9,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Shapes shapes)
         {
-            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => shapes.Count, i => shapes[i + 1]);
+            return CollectionHelpers.ToEnumerable(() => shapes.Count, i => shapes[i + 1]);
         }
 
         public static List<IVisio.Shape> ToList(this IVisio.Shapes shapes)
         {
-            return Internal.Extensions.ExtensionHelpers.ToList(() => shapes.Count, i => shapes[i + 1]);
+            return CollectionHelpers.ToList(() => shapes.Count, i => shapes[i + 1]);
         }
 
         public static Core.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using IVisio=Microsoft.Office.Interop.Visio;
+﻿using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Internal
 {
-    internal class Helpers
+    internal class ShapesheetHelpers
     {
         public static void EnforceValid_ResultType(System.Type result_type)
         {
@@ -31,6 +30,7 @@ namespace VisioAutomation.Internal
                 throw new System.ArgumentException(msg);
             }
         }
+
         public static void ValidateStreamLengthResults(ShapeSheet.Streams.StreamArray stream, object[] results)
         {
             if (results.Length != stream.Count)
@@ -71,21 +71,8 @@ namespace VisioAutomation.Internal
                 string msg = string.Format("Unsupported Result Type: {0}", type.Name);
                 throw new Exceptions.InternalAssertionException(msg);
             }
+
             return flags;
         }
-
-        public static void ValidateDropManyParams(IList<IVisio.Master> masters, IEnumerable<Core.Point> points)
-        {
-            if (masters == null)
-            {
-                throw new System.ArgumentNullException(nameof(masters));
-            }
-
-            if (points == null)
-            {
-                throw new System.ArgumentNullException(nameof(points));
-            }
-        }
-
     }
 }

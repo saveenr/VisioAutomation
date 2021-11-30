@@ -1,33 +1,12 @@
-using System.Collections.Generic;
+using VisioAutomation.Internal;
 
-namespace VisioAutomation.Internal.Extensions
+namespace VisioAutomation.Extensions
 {
-    internal static class ExtensionHelpers
+    internal static class VisioObjectTarget_ShapeSheet
     {
-
-        public static IEnumerable<T> ToEnumerable<T>(System.Func<int> get_count, System.Func<int, T> get_item)
-        {
-            int count = get_count();
-            for (int i = 0; i < count; i++)
-            {
-                var item = get_item(i);
-                yield return item;
-            }
-        }
-
-        public static List<T> ToList<T>(System.Func<int> get_count, System.Func<int, T> get_item)
-        {
-            int count = get_count();
-            var list = new List<T>(count);
-            for (int i = 0; i < count; i++)
-            {
-                var item = get_item(i);
-                list.Add(item);
-            }
-            return list;
-        }
-
-        public static string[] _GetFormulas(VisioObjectTarget visobjtarget , ShapeSheet.Streams.StreamArray stream)
+        public static string[] GetFormulas(
+            this Internal.VisioObjectTarget visobjtarget,
+            ShapeSheet.Streams.StreamArray stream)
         {
             if (stream.Array.Length == 0)
             {
@@ -36,15 +15,15 @@ namespace VisioAutomation.Internal.Extensions
 
             System.Array formulas_sa = null;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (visobjtarget.Category == Internal.VisioObjectCategory.Shape)
             {
                 visobjtarget.Shape.GetFormulasU(stream.Array, out formulas_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Master)
             {
                 visobjtarget.Master.GetFormulasU(stream.Array, out formulas_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Page)
             {
                 visobjtarget.Page.GetFormulasU(stream.Array, out formulas_sa);
             }
@@ -52,32 +31,35 @@ namespace VisioAutomation.Internal.Extensions
             {
                 throw new System.ArgumentOutOfRangeException();
             }
-            
-            var formulas = Internal.Helpers.SystemArrayToTypedArray<string>(formulas_sa);
+
+            var formulas = Internal.ShapesheetHelpers.SystemArrayToTypedArray<string>(formulas_sa);
             return formulas;
         }
 
-        public static TResult[] _GetResults<TResult>(VisioObjectTarget visobjtarget,
-            ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
+        public static TResult[] GetResults<TResult>(
+            this Internal.VisioObjectTarget visobjtarget,
+            ShapeSheet.Streams.StreamArray stream,
+            object[] unitcodes)
         {
             if (stream.Array.Length == 0)
             {
                 return new TResult[0];
             }
-            Internal.Helpers.EnforceValid_ResultType(typeof(TResult));
-            
-            var flags = Internal.Helpers.GetVisGetSetArgsFromType(typeof(TResult));
+
+            Internal.ShapesheetHelpers.EnforceValid_ResultType(typeof(TResult));
+
+            var flags = Internal.ShapesheetHelpers.GetVisGetSetArgsFromType(typeof(TResult));
             System.Array results_sa = null;
 
-            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            if (visobjtarget.Category == Internal.VisioObjectCategory.Shape)
             {
-                visobjtarget.Shape.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
+                visobjtarget.Shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Master)
             {
-                visobjtarget.Master.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
+                visobjtarget.Master.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             }
-            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            else if (visobjtarget.Category == Internal.VisioObjectCategory.Page)
             {
                 visobjtarget.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
             }
@@ -86,14 +68,16 @@ namespace VisioAutomation.Internal.Extensions
                 throw new System.ArgumentOutOfRangeException();
             }
 
-            var results = Internal.Helpers.SystemArrayToTypedArray<TResult>(results_sa);
+            var results = Internal.ShapesheetHelpers.SystemArrayToTypedArray<TResult>(results_sa);
             return results;
         }
 
-        public static int _SetFormulas(VisioObjectTarget visobjtarget,
-            ShapeSheet.Streams.StreamArray stream, object[] formulas, short flags)
+        public static int SetFormulas(
+            this VisioObjectTarget visobjtarget,
+            ShapeSheet.Streams.StreamArray stream,
+            object[] formulas, short flags)
         {
-            Internal.Helpers.ValidateStreamLengthFormulas(stream, formulas);
+            Internal.ShapesheetHelpers.ValidateStreamLengthFormulas(stream, formulas);
 
             int val = 0;
             if (visobjtarget.Category == VisioObjectCategory.Shape)
@@ -116,10 +100,11 @@ namespace VisioAutomation.Internal.Extensions
             return val;
         }
 
-        public static int _SetResults(VisioObjectTarget visobjtarget,
+        public static int SetResults(
+            this VisioObjectTarget visobjtarget,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
-            Internal.Helpers.ValidateStreamLengthResults(stream, results);
+            Internal.ShapesheetHelpers.ValidateStreamLengthResults(stream, results);
 
             int val = 0;
             if (visobjtarget.Category == VisioObjectCategory.Shape)
