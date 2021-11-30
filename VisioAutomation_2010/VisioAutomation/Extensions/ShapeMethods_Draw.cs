@@ -5,33 +5,33 @@ namespace VisioAutomation.Extensions
 {
     public static class ShapeMethods_Draw
     {
-        public static Microsoft.Office.Interop.Visio.Shape DrawOval(this Microsoft.Office.Interop.Visio.Shape shape, Core.Rectangle rect)
+        public static IVisio.Shape DrawOval(this IVisio.Shape shape, Core.Rectangle rect)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawOval(rect);
         }
 
-        public static Microsoft.Office.Interop.Visio.Shape DrawRectangle(this Microsoft.Office.Interop.Visio.Shape shape, Core.Rectangle rect)
+        public static IVisio.Shape DrawRectangle(this IVisio.Shape shape, Core.Rectangle rect)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawRectangle(rect);
         }
 
-        public static Microsoft.Office.Interop.Visio.Shape DrawBezier(this IVisio.Shape  shape, IList<Core.Point> points)
+        public static IVisio.Shape DrawBezier(this IVisio.Shape  shape, IList<Core.Point> points)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawBezier(points);
         }
 
 
-        public static Microsoft.Office.Interop.Visio.Shape DrawPolyline(this Microsoft.Office.Interop.Visio.Shape shape, IList<Core.Point> points)
+        public static IVisio.Shape DrawPolyline(this IVisio.Shape shape, IList<Core.Point> points)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawPolyline(points);
         }
 
-        public static Microsoft.Office.Interop.Visio.Shape DrawLine(
-            this Microsoft.Office.Interop.Visio.Shape shape,
+        public static IVisio.Shape DrawLine(
+            this IVisio.Shape shape,
             Core.Point p0,
             Core.Point p1)
         {
@@ -39,11 +39,11 @@ namespace VisioAutomation.Extensions
             return visobjtarget.DrawLine(p0, p1);
         }
 
-        public static Microsoft.Office.Interop.Visio.Shape DrawQuarterArc(
-            this Microsoft.Office.Interop.Visio.Shape shape,
+        public static IVisio.Shape DrawQuarterArc(
+            this IVisio.Shape shape,
             Core.Point p0,
             Core.Point p1,
-            Microsoft.Office.Interop.Visio.VisArcSweepFlags flags)
+            IVisio.VisArcSweepFlags flags)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawQuarterArc(p0, p1, flags);

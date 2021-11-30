@@ -1,5 +1,4 @@
-﻿using VisioAutomation.Core;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using VisioAutomation.Internal;

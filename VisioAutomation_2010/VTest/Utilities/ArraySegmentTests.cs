@@ -17,7 +17,7 @@ namespace VTest.Utilities
             {
                 var s = new VA.Internal.ArraySegmentEnumerator<int>(null);
             }
-            catch (System.ArgumentNullException e)
+            catch (System.ArgumentNullException)
             {
                 caught = true;
             }
@@ -135,7 +135,7 @@ namespace VTest.Utilities
             {
                 var s2 = s.GetNextSegment(size);
             }
-            catch (System.ArgumentOutOfRangeException e)
+            catch (System.ArgumentOutOfRangeException)
             {
                 caught = true;
             }
