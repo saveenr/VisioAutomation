@@ -10,31 +10,31 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<SrcValuePair> GetSrcValuePairs()
+        public IEnumerable<SrcValue> GetSrcValuePairs()
         {
             foreach (var pair in this.GetCellMetadata())
             {
-                yield return new SrcValuePair(pair.Src, pair.Value);
+                yield return new SrcValue(pair.Src, pair.Value);
             }
         }
 
-        public IEnumerable<SrcValuePair> GetSrcValuePairs_NewRow(short row)
+        public IEnumerable<SrcValue> GetSrcValuePairs_NewRow(short row)
         {
             foreach (var pair in this.GetSrcValuePairs())
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
-                var new_pair = new SrcValuePair(new_src, pair.Value);
+                var new_pair = new SrcValue(new_src, pair.Value);
                 yield return new_pair;
 
             }
         }
 
-        public IEnumerable<SidSrcValuePair> GetSidSrcValuePairs_NewRow(short shapeid, short row)
+        public IEnumerable<SidSrcValue> GetSidSrcValuePairs_NewRow(short shapeid, short row)
         {
             foreach (var pair in this.GetSrcValuePairs())
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
-                var new_pair = new SidSrcValuePair(shapeid, new_src, pair.Value);
+                var new_pair = new SidSrcValue(shapeid, new_src, pair.Value);
                 yield return new_pair;
 
             }

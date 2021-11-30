@@ -124,7 +124,7 @@
     <Compile Include="Internal\Extensions\LinqExtensions.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilderType.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellMetadata.cs" />
-    <Compile Include="ShapeSheet\CellGroups\SidSrcValuePair.cs" />
+    <Compile Include="ShapeSheet\CellGroups\SidSrcValue.cs" />
     <Compile Include="Core\CellValueType.cs" />
     <Compile Include="Core\ShapeIDPairs.cs" />
     <Compile Include="Core\ShapeIDPair.cs" />
@@ -149,7 +149,7 @@
     <Compile Include="ShapeSheet\Query\Columns.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\Column.cs" />
-    <Compile Include="ShapeSheet\CellGroups\SrcValuePair.cs" />
+    <Compile Include="ShapeSheet\CellGroups\SrcValue.cs" />
     <Compile Include="Shapes\UserDefinedCellDictionary.cs" />
     <Compile Include="Shapes\UserDefinedCellNameCellsPair.cs" />
     <Compile Include="Internal\VisioObjectTarget.cs" />
