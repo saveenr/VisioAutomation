@@ -64,13 +64,13 @@ namespace VisioAutomation.Text
         public static List<List<CharacterCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(page, pairs, type);
+            return reader.GetCellsMultipleShapesMultipleRows(page, pairs, type);
         }
 
         public static List<CharacterCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(shape, type);
+            return reader.GetCellsSingleShapeMultipleRows(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();

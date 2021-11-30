@@ -33,13 +33,13 @@ namespace VisioAutomation.Shapes
         public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(page, shapeidpairs, type);
+            return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
         public static List<HyperlinkCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(shape, type);
+            return reader.GetCellsSingleShapeMultipleRows(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();

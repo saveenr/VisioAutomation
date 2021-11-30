@@ -55,13 +55,13 @@ namespace VisioAutomation.Shapes
         public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeid, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(page, shapeid, type);
+            return reader.GetCellsMultipleShapesSingleRow(page, shapeid, type);
         }
 
         public static LockCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(shape, type);
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
