@@ -93,11 +93,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-
-                var res = visobjtarget.Dispatch_Func<int>(
-                    (shape) => (shape.SetResults(stream, unitcodes, values, (short)flags)),
-                    (master) => (master.SetResults(stream, unitcodes, values, (short)flags)),
-                    (page) => (page.SetResults(stream, unitcodes, values, (short)flags)));
+                var c = visobjtarget.SetResults(stream, unitcodes, values, (short)flags);
             }
         }
     }
