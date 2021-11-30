@@ -2,15 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Internal;
 
-namespace VisioAutomation.Internal.Extensions
+namespace VisioAutomation.Internal
 {
-    internal static class VisioObjectTarget_Drop
+    internal readonly partial struct VisioObjectTarget
     {
-        public static Microsoft.Office.Interop.Visio.Shape Drop(
-            this VisioObjectTarget visobjtarget,
+        public Microsoft.Office.Interop.Visio.Shape Drop(
             Microsoft.Office.Interop.Visio.Master master,
             Core.Point point)
         {
+
+
+            var visobjtarget = this;
+
+
             Microsoft.Office.Interop.Visio.Shape output;
 
             if (visobjtarget.Category == VisioObjectCategory.Shape)
@@ -33,14 +37,15 @@ namespace VisioAutomation.Internal.Extensions
             return output;
         }
 
-        public static short[] DropManyU(
-            this VisioObjectTarget visobjtarget,
+        public short[] DropManyU(
             IList<Microsoft.Office.Interop.Visio.Master> masters,
             IEnumerable<Core.Point> points)
         {
+
+            var visobjtarget = this;
+
             Internal.DropHelpers.ValidateDropManyParams(masters, points);
-
-
+            
             if (masters.Count < 1)
             {
                 return new short[0];

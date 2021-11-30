@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Internal
 {
-    internal readonly struct VisioObjectTarget
+    internal readonly partial struct VisioObjectTarget
     {
         public readonly IVisio.Page Page;
         public readonly IVisio.Master Master;

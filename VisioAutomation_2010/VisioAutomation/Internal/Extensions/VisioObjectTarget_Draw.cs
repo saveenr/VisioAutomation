@@ -3,13 +3,16 @@ using System.Linq;
 using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Internal.Extensions
+namespace VisioAutomation.Internal
 {
-    internal static class VisioObjectTarget_Draw
+    internal readonly partial struct VisioObjectTarget
     {
 
-        public static Microsoft.Office.Interop.Visio.Shape DrawOval(this VisioObjectTarget visobjtarget, Core.Rectangle rect)
+        public Microsoft.Office.Interop.Visio.Shape DrawOval(Core.Rectangle rect)
         {
+
+            var visobjtarget = this;
+
             IVisio.Shape shape;
 
             if (visobjtarget.Category == VisioObjectCategory.Shape)
@@ -32,8 +35,10 @@ namespace VisioAutomation.Internal.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawRectangle(this VisioObjectTarget visobjtarget, Core.Rectangle rect)
+        public IVisio.Shape DrawRectangle(Core.Rectangle rect)
         {
+            var visobjtarget = this;
+
 
             IVisio.Shape shape;
 
@@ -57,8 +62,12 @@ namespace VisioAutomation.Internal.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawBezier(this VisioObjectTarget visobjtarget, IList<Core.Point> points)
+        public  IVisio.Shape DrawBezier(IList<Core.Point> points)
         {
+
+            var visobjtarget = this;
+
+
             var doubles_array = VisioAutomation.Core.Point.ToDoubles(points).ToArray();
             short degree = 3;
             short flags = 0;
@@ -85,9 +94,11 @@ namespace VisioAutomation.Internal.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawPolyline(this VisioObjectTarget visobjtarget,
-            IList<Core.Point> points)
+        public IVisio.Shape DrawPolyline(IList<Core.Point> points)
         {
+
+            var visobjtarget = this;
+
             var doubles_array = Core.Point.ToDoubles(points).ToArray();
             IVisio.Shape shape;
 
@@ -113,12 +124,15 @@ namespace VisioAutomation.Internal.Extensions
 
 
 
-        public static IVisio.Shape DrawQuarterArc(
-            this VisioObjectTarget visobjtarget,
+        public  IVisio.Shape DrawQuarterArc(
             Core.Point p0,
             Core.Point p1,
             Microsoft.Office.Interop.Visio.VisArcSweepFlags flags)
         {
+
+            var visobjtarget = this;
+
+
             IVisio.Shape shape;
             if (visobjtarget.Category == VisioObjectCategory.Shape)
             {
@@ -140,11 +154,13 @@ namespace VisioAutomation.Internal.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawLine(
-            this VisioObjectTarget visobjtarget,
+        public IVisio.Shape DrawLine(
             Core.Point p0,
             Core.Point p1)
         {
+
+            var visobjtarget = this;
+
             IVisio.Shape shape;
             if (visobjtarget.Category == VisioObjectCategory.Shape)
             {
@@ -166,13 +182,15 @@ namespace VisioAutomation.Internal.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawNurbs(
-            this VisioObjectTarget visobjtarget,
+        public IVisio.Shape DrawNurbs(
             IList<Core.Point> controlpoints,
             IList<double> knots,
             IList<double> weights,
             int degree)
         {
+
+            var visobjtarget = this;
+
 
             // flags:
             // None = 0,

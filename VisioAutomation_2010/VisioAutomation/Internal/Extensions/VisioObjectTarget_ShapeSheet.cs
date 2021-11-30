@@ -1,13 +1,14 @@
 using VisioAutomation.Internal;
 
-namespace VisioAutomation.Internal.Extensions
+namespace VisioAutomation.Internal
 {
-    internal static class VisioObjectTarget_ShapeSheet
+    internal readonly partial struct VisioObjectTarget
     {
-        public static string[] GetFormulas(
-            this Internal.VisioObjectTarget visobjtarget,
+        public string[] GetFormulas(
             ShapeSheet.Streams.StreamArray stream)
         {
+            var visobjtarget = this;
+
             if (stream.Array.Length == 0)
             {
                 return new string[0];
@@ -36,11 +37,13 @@ namespace VisioAutomation.Internal.Extensions
             return formulas;
         }
 
-        public static TResult[] GetResults<TResult>(
-            this Internal.VisioObjectTarget visobjtarget,
+        public TResult[] GetResults<TResult>(
             ShapeSheet.Streams.StreamArray stream,
             object[] unitcodes)
         {
+
+            var visobjtarget = this;
+
             if (stream.Array.Length == 0)
             {
                 return new TResult[0];
@@ -72,11 +75,13 @@ namespace VisioAutomation.Internal.Extensions
             return results;
         }
 
-        public static int SetFormulas(
-            this VisioObjectTarget visobjtarget,
+        public int SetFormulas(
             ShapeSheet.Streams.StreamArray stream,
             object[] formulas, short flags)
         {
+
+            var visobjtarget = this;
+
             Internal.ShapesheetHelpers.ValidateStreamLengthFormulas(stream, formulas);
 
             int val = 0;
@@ -100,10 +105,12 @@ namespace VisioAutomation.Internal.Extensions
             return val;
         }
 
-        public static int SetResults(
-            this VisioObjectTarget visobjtarget,
+        public int SetResults(
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
+
+            var visobjtarget = this;
+
             Internal.ShapesheetHelpers.ValidateStreamLengthResults(stream, results);
 
             int val = 0;
