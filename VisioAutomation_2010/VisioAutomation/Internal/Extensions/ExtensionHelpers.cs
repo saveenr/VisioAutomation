@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Extensions
+namespace VisioAutomation.Internal.Extensions
 {
     internal static class ExtensionHelpers
     {

@@ -7,13 +7,13 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Page> ToEnumerable(this IVisio.Pages pages)
         {
-            return Extensions.ExtensionHelpers.ToEnumerable(() => pages.Count,
+            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => pages.Count,
                 i => pages[i + 1]);
         }
 
         public static List<IVisio.Page> ToList(this IVisio.Pages pages)
         {
-            return Extensions.ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
+            return Internal.Extensions.ExtensionHelpers.ToList(() => pages.Count, i => pages[i + 1]);
         }
 
         public static Core.Rectangle GetBoundingBox(this IVisio.Page page, IVisio.VisBoundingBoxArgs args)
