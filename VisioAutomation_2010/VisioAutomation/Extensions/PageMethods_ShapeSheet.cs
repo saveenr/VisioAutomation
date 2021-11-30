@@ -6,7 +6,7 @@ namespace VisioAutomation.Extensions
             ShapeSheet.Streams.StreamArray stream)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return VisioAutomation.Extensions.ExtensionHelpers.GetFormulas(visobjtarget, stream);
+            return visobjtarget.GetFormulas(stream);
         }
 
         public static TResult[] GetResults<TResult>(this Microsoft.Office.Interop.Visio.Page page,
@@ -29,7 +29,7 @@ namespace VisioAutomation.Extensions
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return VisioAutomation.Extensions.ExtensionHelpers.SetResults(visobjtarget, stream, unitcodes, results, flags);
+            return visobjtarget.SetResults(stream, unitcodes, results, flags);
 
         }
     }

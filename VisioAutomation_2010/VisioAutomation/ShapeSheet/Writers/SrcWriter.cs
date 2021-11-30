@@ -86,8 +86,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                var c = VisioAutomation.Extensions.ExtensionHelpers.SetFormulas(visobjtarget, stream, values,
-                    (short) flags);
+                var c = visobjtarget.SetFormulas(stream, values, (short) flags);
 
             }
             else
@@ -95,8 +94,7 @@ namespace VisioAutomation.ShapeSheet.Writers
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
 
-                var c = VisioAutomation.Extensions.ExtensionHelpers.SetResults(visobjtarget, stream,
-                    unitcodes, values, (short) flags);
+                var c = visobjtarget.SetResults(stream,unitcodes, values, (short) flags);
             }
         }
     }
