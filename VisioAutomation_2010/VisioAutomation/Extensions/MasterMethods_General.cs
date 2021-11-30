@@ -8,10 +8,8 @@ namespace VisioAutomation.Extensions
     {
         public static Core.Rectangle GetBoundingBox(this IVisio.Master master, IVisio.VisBoundingBoxArgs args)
         {
-            double bbx0, bby0, bbx1, bby1;
-            master.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new Core.Rectangle(bbx0, bby0, bbx1, bby1);
-            return r;
+            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
+            return visobjtarget.GetBoundingBox(args);
         }
 
         public static IEnumerable<IVisio.Master> ToEnumerable(this IVisio.Masters masters)

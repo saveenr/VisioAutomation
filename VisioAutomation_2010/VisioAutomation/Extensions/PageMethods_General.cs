@@ -18,11 +18,10 @@ namespace VisioAutomation.Extensions
 
         public static Core.Rectangle GetBoundingBox(this IVisio.Page page, IVisio.VisBoundingBoxArgs args)
         {
-            double bbx0, bby0, bbx1, bby1;
-            page.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new Core.Rectangle(bbx0, bby0, bbx1, bby1);
-            return r;
+            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
+            return visobjtarget.GetBoundingBox(args);
         }
+
 
         public static void ResizeToFitContents(this IVisio.Page page, Core.Size padding)
         {

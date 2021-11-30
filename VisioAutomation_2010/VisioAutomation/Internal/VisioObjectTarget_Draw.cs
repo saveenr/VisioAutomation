@@ -220,5 +220,33 @@ namespace VisioAutomation.Internal
 
             return shape;
         }
+
+
+        public Core.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)
+        {
+            double bbx0, bby0, bbx1, bby1;
+
+            var visobjtarget = this;
+
+            if (visobjtarget.Category == VisioObjectCategory.Shape)
+            {
+                visobjtarget.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Master)
+            {
+                visobjtarget.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            }
+            else if (visobjtarget.Category == VisioObjectCategory.Page)
+            {
+                visobjtarget.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
+            var r = new Core.Rectangle(bbx0, bby0, bbx1, bby1);
+            return r;
+        }
     }
 }

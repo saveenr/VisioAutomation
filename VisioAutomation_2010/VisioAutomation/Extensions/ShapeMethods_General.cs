@@ -19,10 +19,8 @@ namespace VisioAutomation.Extensions
 
         public static Core.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)
         {
-            double bbx0, bby0, bbx1, bby1;
-            shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new Core.Rectangle(bbx0, bby0, bbx1, bby1);
-            return r;
+            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
+            return visobjtarget.GetBoundingBox(args);
         }
 
 
