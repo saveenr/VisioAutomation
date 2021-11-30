@@ -3,7 +3,7 @@ using System.Linq;
 using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Extensions
+namespace VisioAutomation.Internal.Extensions
 {
     internal static class VisioObjectTarget_Draw
     {

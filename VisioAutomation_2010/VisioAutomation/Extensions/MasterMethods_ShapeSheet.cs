@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.Extensions
+﻿using VisioAutomation.Internal.Extensions;
+
+namespace VisioAutomation.Extensions
 {
     public static class MasterMethods_ShapeSheet
     {

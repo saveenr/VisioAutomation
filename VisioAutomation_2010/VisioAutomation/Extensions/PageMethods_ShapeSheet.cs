@@ -1,3 +1,5 @@
+using VisioAutomation.Internal.Extensions;
+
 namespace VisioAutomation.Extensions
 {
     public static class PageMethods_ShapeSheet

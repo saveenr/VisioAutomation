@@ -1,6 +1,6 @@
 using VisioAutomation.Internal;
 
-namespace VisioAutomation.Extensions
+namespace VisioAutomation.Internal.Extensions
 {
     internal static class VisioObjectTarget_ShapeSheet
     {

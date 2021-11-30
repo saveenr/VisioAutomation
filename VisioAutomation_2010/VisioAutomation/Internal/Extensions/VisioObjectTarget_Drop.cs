@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Internal;
 
-namespace VisioAutomation.Extensions
+namespace VisioAutomation.Internal.Extensions
 {
     internal static class VisioObjectTarget_Drop
     {
