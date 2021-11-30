@@ -115,7 +115,7 @@
     <Compile Include="Internal\Extensions\VisioObjectTarget_Drop.cs" />
     <Compile Include="Internal\Extensions\VisioObjectTarget_ShapeSheet.cs" />
     <Compile Include="Internal\Helpers.cs" />
-    <Compile Include="Internal\Extensions\ExtensionHelpers.cs" />
+    <Compile Include="Internal\CollectionHelpers.cs" />
     <Compile Include="Pages\LayoutCells.cs" />
     <Compile Include="Pages\PrintCells.cs" />
     <Compile Include="Pages\RulerAndGridCells.cs" />

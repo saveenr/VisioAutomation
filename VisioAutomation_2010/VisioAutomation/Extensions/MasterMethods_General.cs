@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -15,13 +16,13 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Master> ToEnumerable(this IVisio.Masters masters)
         {
-            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => masters.Count,
+            return CollectionHelpers.ToEnumerable(() => masters.Count,
                 i => masters[i + 1]);
         }
 
         public static List<IVisio.Master> ToList(this IVisio.Masters masters)
         {
-            return Internal.Extensions.ExtensionHelpers.ToList(() => masters.Count,
+            return CollectionHelpers.ToList(() => masters.Count,
                 i => masters[i + 1]);
         }
 

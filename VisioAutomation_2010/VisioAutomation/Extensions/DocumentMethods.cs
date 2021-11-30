@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.Internal;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -12,12 +13,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Document> ToEnumerable(this IVisio.Documents documents)
         {
-            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => documents.Count, i => documents[i + 1]); ;
+            return CollectionHelpers.ToEnumerable(() => documents.Count, i => documents[i + 1]); ;
         }
 
         public static List<IVisio.Document> ToList(this IVisio.Documents documents)
         {
-            return Internal.Extensions.ExtensionHelpers.ToList(() => documents.Count, i => documents[i + 1]); ;
+            return CollectionHelpers.ToList(() => documents.Count, i => documents[i + 1]); ;
         }
 
         public static IVisio.Document OpenStencil(this IVisio.Documents documents, string filename)

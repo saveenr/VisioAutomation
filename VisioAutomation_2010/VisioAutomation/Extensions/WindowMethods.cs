@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.Internal;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -57,12 +58,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Window> ToEnumerable(this IVisio.Windows windows)
         {
-            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => windows.Count, i => windows[(short)(i + 1)]);
+            return CollectionHelpers.ToEnumerable(() => windows.Count, i => windows[(short)(i + 1)]);
         }
 
         public static List<IVisio.Window> ToList(this IVisio.Windows windows)
         {
-            return Internal.Extensions.ExtensionHelpers.ToList(() => windows.Count, i => windows[(short)(i + 1)]);
+            return CollectionHelpers.ToList(() => windows.Count, i => windows[(short)(i + 1)]);
         }
     }
 }

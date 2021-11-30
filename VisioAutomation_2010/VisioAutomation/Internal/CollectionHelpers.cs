@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.Internal.Extensions
+namespace VisioAutomation.Internal
 {
-    internal static class ExtensionHelpers
+    internal static class CollectionHelpers
     {
 
         public static IEnumerable<T> ToEnumerable<T>(System.Func<int> get_count, System.Func<int, T> get_item)

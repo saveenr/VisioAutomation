@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.Internal;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
@@ -7,12 +8,12 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Color> ToEnumerable(this IVisio.Colors colors)
         {
-            return Internal.Extensions.ExtensionHelpers.ToEnumerable(() => colors.Count, i => colors[i]);
+            return CollectionHelpers.ToEnumerable(() => colors.Count, i => colors[i]);
         }
 
         public static List<IVisio.Color> ToList(this IVisio.Colors colors)
         {
-            return Internal.Extensions.ExtensionHelpers.ToList(() => colors.Count, i => colors[i]);
+            return CollectionHelpers.ToList(() => colors.Count, i => colors[i]);
         }
     }
 }
