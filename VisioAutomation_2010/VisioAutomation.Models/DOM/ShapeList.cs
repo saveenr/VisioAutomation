@@ -131,9 +131,9 @@ namespace VisioAutomation.Models.Dom
         private void _perform_drawing(RenderContext context)
         {
             // Draw shapes
-            var non_connectors = this._shapes.WhereNotOfType(typeof(Connector)).ToList();
+            var non_connectors = this._shapes.NotOfType(typeof(Connector)).ToList();
             var non_connector_dropshapes = non_connectors.OfType<Shape>().ToList();
-            var non_connector_nondropshapes = non_connectors.WhereNotOfType(typeof(Shape)).ToList();
+            var non_connector_nondropshapes = non_connectors.NotOfType(typeof(Shape)).ToList();
 
             this.drop_masters(context, non_connector_dropshapes);
             this._draw_non_masters(context, non_connector_nondropshapes);
