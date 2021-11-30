@@ -38,7 +38,7 @@ namespace VisioAutomation.Extensions
             IList<Microsoft.Office.Interop.Visio.Master> masters,
             IEnumerable<Core.Point> points)
         {
-            Internal.Helpers.ValidateDropManyParams(masters, points);
+            Internal.DropHelpers.ValidateDropManyParams(masters, points);
 
 
             if (masters.Count < 1)

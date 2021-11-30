@@ -32,7 +32,7 @@ namespace VisioAutomation.Extensions
                 throw new System.ArgumentOutOfRangeException();
             }
 
-            var formulas = Internal.Helpers.SystemArrayToTypedArray<string>(formulas_sa);
+            var formulas = Internal.ShapesheetHelpers.SystemArrayToTypedArray<string>(formulas_sa);
             return formulas;
         }
 
@@ -46,9 +46,9 @@ namespace VisioAutomation.Extensions
                 return new TResult[0];
             }
 
-            Internal.Helpers.EnforceValid_ResultType(typeof(TResult));
+            Internal.ShapesheetHelpers.EnforceValid_ResultType(typeof(TResult));
 
-            var flags = Internal.Helpers.GetVisGetSetArgsFromType(typeof(TResult));
+            var flags = Internal.ShapesheetHelpers.GetVisGetSetArgsFromType(typeof(TResult));
             System.Array results_sa = null;
 
             if (visobjtarget.Category == Internal.VisioObjectCategory.Shape)
@@ -68,7 +68,7 @@ namespace VisioAutomation.Extensions
                 throw new System.ArgumentOutOfRangeException();
             }
 
-            var results = Internal.Helpers.SystemArrayToTypedArray<TResult>(results_sa);
+            var results = Internal.ShapesheetHelpers.SystemArrayToTypedArray<TResult>(results_sa);
             return results;
         }
 
@@ -77,7 +77,7 @@ namespace VisioAutomation.Extensions
             ShapeSheet.Streams.StreamArray stream,
             object[] formulas, short flags)
         {
-            Internal.Helpers.ValidateStreamLengthFormulas(stream, formulas);
+            Internal.ShapesheetHelpers.ValidateStreamLengthFormulas(stream, formulas);
 
             int val = 0;
             if (visobjtarget.Category == VisioObjectCategory.Shape)
@@ -104,7 +104,7 @@ namespace VisioAutomation.Extensions
             this VisioObjectTarget visobjtarget,
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
-            Internal.Helpers.ValidateStreamLengthResults(stream, results);
+            Internal.ShapesheetHelpers.ValidateStreamLengthResults(stream, results);
 
             int val = 0;
             if (visobjtarget.Category == VisioObjectCategory.Shape)
