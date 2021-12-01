@@ -37,18 +37,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public int Count
         {
-            get
-            {
-                return this._list.Count;
-            }
+            get { return this._list.Count; }
         }
 
         public SectionQueryShapeResults<T> this[int index]
         {
-            get
-            {
-                return this._list[index];
-            }
+            get { return this._list[index]; }
         }
     }
 }

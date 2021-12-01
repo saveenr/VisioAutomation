@@ -2,7 +2,6 @@ namespace VisioAutomation.Internal
 {
     internal readonly partial struct VisioObjectTarget
     {
-
         public string[] GetFormulas(
             ShapeSheet.Streams.StreamArray stream)
         {
@@ -38,8 +37,6 @@ namespace VisioAutomation.Internal
             ShapeSheet.Streams.StreamArray stream,
             object[] unitcodes)
         {
-
-
             if (stream.Array.Length == 0)
             {
                 return new TResult[0];
@@ -52,15 +49,15 @@ namespace VisioAutomation.Internal
 
             if (this.Category == Internal.VisioObjectCategory.Shape)
             {
-                this.Shape.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+                this.Shape.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
             }
             else if (this.Category == Internal.VisioObjectCategory.Master)
             {
-                this.Master.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+                this.Master.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
             }
             else if (this.Category == Internal.VisioObjectCategory.Page)
             {
-                this.Page.GetResults(stream.Array, (short)flags, unitcodes, out results_sa);
+                this.Page.GetResults(stream.Array, (short) flags, unitcodes, out results_sa);
             }
             else
             {
@@ -75,8 +72,6 @@ namespace VisioAutomation.Internal
             ShapeSheet.Streams.StreamArray stream,
             object[] formulas, short flags)
         {
-
-
             Internal.ShapesheetHelpers.ValidateStreamLengthFormulas(stream, formulas);
 
             int val = 0;
@@ -103,8 +98,6 @@ namespace VisioAutomation.Internal
         public int SetResults(
             ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
-
-
             Internal.ShapesheetHelpers.ValidateStreamLengthResults(stream, results);
 
             int val = 0;

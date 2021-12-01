@@ -1,10 +1,9 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query 
+namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionShapeRows<T> : Rows<T>
     {
-
         // for a given tuple of (shape, section) gives the rows for that tuple
         //
         // {

@@ -5,8 +5,6 @@ namespace VisioAutomation.ShapeSheet.Writers
 {
     public class SrcWriter : WriterBase
     {
-
-
         public SrcWriter() : base(VisioAutomation.ShapeSheet.Streams.StreamType.Src)
         {
         }
@@ -38,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(CellGroups.CellGroup cellgroup, short row)
         {
-            foreach (var pair in cellgroup.GetSrcValuePairs_NewRow(row))
+            foreach (var pair in cellgroup.GetSrcValuesWithNewRow(row))
             {
                 this.SetValue(pair.Src, pair.Value);
             }
@@ -46,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(CellGroups.CellGroup cellgroup)
         {
-            foreach (var pair in cellgroup.GetSrcValuePairs())
+            foreach (var pair in cellgroup.GetSrcValues())
             {
                 this.SetValue(pair.Src, pair.Value);
             }
@@ -85,13 +83,12 @@ namespace VisioAutomation.ShapeSheet.Writers
             {
                 var flags = this._compute_setformula_flags();
                 var c = visobjtarget.SetFormulas(stream, values, (short) flags);
-
             }
             else
             {
                 const object[] unitcodes = null;
                 var flags = this._compute_setresults_flags();
-                var c = visobjtarget.SetResults(stream, unitcodes, values, (short)flags);
+                var c = visobjtarget.SetResults(stream, unitcodes, values, (short) flags);
             }
         }
     }

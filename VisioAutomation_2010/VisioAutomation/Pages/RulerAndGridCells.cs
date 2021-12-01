@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -35,7 +35,7 @@ namespace VisioAutomation.Pages
         public static RulerAndGridCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(shape, type);
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
@@ -65,6 +65,5 @@ namespace VisioAutomation.Pages
                 return cells;
             }
         }
-
     }
 }

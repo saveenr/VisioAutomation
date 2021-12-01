@@ -56,9 +56,9 @@ namespace VTest.Core.ShapeSheet
                     reflected_nametovalue[k] = v;
                 }
 
-                var enumerated_values = cellgroup.GetSrcValuePairs().Select(i => i.Value).ToList();
-                var enumerated_srcs = cellgroup.GetSrcValuePairs().Select(i => i.Src).ToList();
-                var enumerated_srctovalue = cellgroup.GetSrcValuePairs().ToDictionary(i => i.Src, i => i.Value);
+                var enumerated_values = cellgroup.GetSrcValues().Select(i => i.Value).ToList();
+                var enumerated_srcs = cellgroup.GetSrcValues().Select(i => i.Src).ToList();
+                var enumerated_srctovalue = cellgroup.GetSrcValues().ToDictionary(i => i.Src, i => i.Value);
 
                 MUT.Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
 

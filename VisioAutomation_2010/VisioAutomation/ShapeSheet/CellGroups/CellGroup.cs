@@ -4,39 +4,36 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public class CellGroup
     {
-
         public virtual IEnumerable<CellMetadata> GetCellMetadata()
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<SrcValuePair> GetSrcValuePairs()
+        public IEnumerable<SrcValue> GetSrcValues()
         {
             foreach (var pair in this.GetCellMetadata())
             {
-                yield return new SrcValuePair(pair.Src, pair.Value);
+                yield return new SrcValue(pair.Src, pair.Value);
             }
         }
 
-        public IEnumerable<SrcValuePair> GetSrcValuePairs_NewRow(short row)
+        public IEnumerable<SrcValue> GetSrcValuesWithNewRow(short row)
         {
-            foreach (var pair in this.GetSrcValuePairs())
+            foreach (var pair in this.GetSrcValues())
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
-                var new_pair = new SrcValuePair(new_src, pair.Value);
+                var new_pair = new SrcValue(new_src, pair.Value);
                 yield return new_pair;
-
             }
         }
 
-        public IEnumerable<SidSrcValuePair> GetSidSrcValuePairs_NewRow(short shapeid, short row)
+        public IEnumerable<SidSrcValue> GetSidSrcValuesWithNewRow(short shapeid, short row)
         {
-            foreach (var pair in this.GetSrcValuePairs())
+            foreach (var pair in this.GetSrcValues())
             {
                 var new_src = pair.Src.CloneWithNewRow(row);
-                var new_pair = new SidSrcValuePair(shapeid, new_src, pair.Value);
+                var new_pair = new SidSrcValue(shapeid, new_src, pair.Value);
                 yield return new_pair;
-
             }
         }
 
@@ -45,7 +42,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return new CellMetadata(name, src, value.Value);
         }
 
-        internal static System.Func<string,string> queryrow_to_cellgroup(Query.Row<string> row, Query.Columns cols)
+        internal static System.Func<string, string> queryrow_to_cellgroup(Query.Row<string> row, Query.Columns cols)
         {
             return (s) => row[cols[s].Ordinal];
         }

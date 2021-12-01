@@ -14,7 +14,7 @@ namespace VisioAutomation.Extensions
             object[] unitcodes)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.GetResults<TResult>(stream,unitcodes);
+            return visobjtarget.GetResults<TResult>(stream, unitcodes);
         }
 
         public static int SetFormulas(this Microsoft.Office.Interop.Visio.Page page,
@@ -22,16 +22,13 @@ namespace VisioAutomation.Extensions
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
             return visobjtarget.SetFormulas(stream, formulas, flags);
-
         }
 
         public static int SetResults(this Microsoft.Office.Interop.Visio.Page page,
-        ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
+            ShapeSheet.Streams.StreamArray stream, object[] unitcodes, object[] results, short flags)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.SetResults(stream, unitcodes,results, flags);
-
+            return visobjtarget.SetResults(stream, unitcodes, results, flags);
         }
-
     }
 }

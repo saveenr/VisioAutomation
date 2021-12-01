@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using VACG = VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -31,13 +31,14 @@ namespace VisioAutomation.Shapes
         public static List<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(shape, type);
+            return reader.GetCellsSingleShapeMultipleRows(shape, type);
         }
 
-        public static List<List<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static List<List<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+            Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(page, shapeidpairs, type);
+            return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
 
@@ -65,6 +66,5 @@ namespace VisioAutomation.Shapes
                 return cells;
             }
         }
-
     }
 }

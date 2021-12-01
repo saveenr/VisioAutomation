@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -35,11 +35,15 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
-            yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground, this.FillBackground);
-            yield return this._create(nameof(this.FillBackgroundTransparency), Core.SrcConstants.FillBackgroundTransparency,
+            yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground,
+                this.FillBackground);
+            yield return this._create(nameof(this.FillBackgroundTransparency),
+                Core.SrcConstants.FillBackgroundTransparency,
                 this.FillBackgroundTransparency);
-            yield return this._create(nameof(this.FillForeground), Core.SrcConstants.FillForeground, this.FillForeground);
-            yield return this._create(nameof(this.FillForegroundTransparency), Core.SrcConstants.FillForegroundTransparency,
+            yield return this._create(nameof(this.FillForeground), Core.SrcConstants.FillForeground,
+                this.FillForeground);
+            yield return this._create(nameof(this.FillForegroundTransparency),
+                Core.SrcConstants.FillForegroundTransparency,
                 this.FillForegroundTransparency);
             yield return this._create(nameof(this.FillPattern), Core.SrcConstants.FillPattern, this.FillPattern);
             yield return this._create(nameof(this.FillShadowObliqueAngle), Core.SrcConstants.FillShadowObliqueAngle,
@@ -50,7 +54,8 @@ namespace VisioAutomation.Shapes
                 this.FillShadowOffsetY);
             yield return this._create(nameof(this.FillShadowScaleFactor), Core.SrcConstants.FillShadowScaleFactor,
                 this.FillShadowScaleFactor);
-            yield return this._create(nameof(this.FillShadowType), Core.SrcConstants.FillShadowType, this.FillShadowType);
+            yield return this._create(nameof(this.FillShadowType), Core.SrcConstants.FillShadowType,
+                this.FillShadowType);
             yield return this._create(nameof(this.FillShadowBackground), Core.SrcConstants.FillShadowBackground,
                 this.FillShadowBackground);
             yield return this._create(nameof(this.FillShadowBackgroundTransparency),
@@ -61,11 +66,13 @@ namespace VisioAutomation.Shapes
                 Core.SrcConstants.FillShadowForegroundTransparency, this.FillShadowForegroundTransparency);
             yield return this._create(nameof(this.FillShadowPattern), Core.SrcConstants.FillShadowPattern,
                 this.FillShadowPattern);
-            yield return this._create(nameof(this.LineBeginArrow), Core.SrcConstants.LineBeginArrow, this.LineBeginArrow);
+            yield return this._create(nameof(this.LineBeginArrow), Core.SrcConstants.LineBeginArrow,
+                this.LineBeginArrow);
             yield return this._create(nameof(this.LineBeginArrowSize), Core.SrcConstants.LineBeginArrowSize,
                 this.LineBeginArrowSize);
             yield return this._create(nameof(this.LineEndArrow), Core.SrcConstants.LineEndArrow, this.LineEndArrow);
-            yield return this._create(nameof(this.LineEndArrowSize), Core.SrcConstants.LineEndArrowSize, this.LineEndArrowSize);
+            yield return this._create(nameof(this.LineEndArrowSize), Core.SrcConstants.LineEndArrowSize,
+                this.LineEndArrowSize);
             yield return this._create(nameof(this.LineCap), Core.SrcConstants.LineCap, this.LineCap);
             yield return this._create(nameof(this.LineColor), Core.SrcConstants.LineColor, this.LineColor);
             yield return this._create(nameof(this.LineColorTransparency), Core.SrcConstants.LineColorTransparency,
@@ -79,27 +86,25 @@ namespace VisioAutomation.Shapes
         public static List<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(page, shapeids, type);
+            return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
         public static FormatCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(shape, type);
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
         class Builder : VACG.CellGroupBuilder<FormatCells>
         {
-
             public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
 
             public override FormatCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
             {
-
                 var cells = new FormatCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);
 
@@ -130,9 +135,6 @@ namespace VisioAutomation.Shapes
                 cells.LineRounding = getcellvalue(nameof(LineRounding));
                 return cells;
             }
-
         }
-
     }
 }
-

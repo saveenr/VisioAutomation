@@ -6,7 +6,6 @@ namespace VisioAutomation.Extensions
 {
     public static class ShapeMethods_General
     {
-
         public static IEnumerable<IVisio.Shape> ToEnumerable(this IVisio.Shapes shapes)
         {
             return CollectionHelpers.ToEnumerable(() => shapes.Count, i => shapes[i + 1]);
@@ -45,6 +44,5 @@ namespace VisioAutomation.Extensions
             shape.XYToPage(xy.X, xy.Y, out xprime, out yprime);
             return new Core.Point(xprime, yprime);
         }
-
     }
 }

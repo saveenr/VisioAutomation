@@ -32,13 +32,13 @@ namespace VisioAutomation.Shapes
 
         private void Update(short section_index, short row_index, ShapeSheet.Writers.SrcWriter writer)
         {
-            var x_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexX.Cell);
-            var y_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexY.Cell);
-            var a_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexA.Cell);
-            var b_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexB.Cell);
-            var c_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexC.Cell);
-            var d_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexD.Cell);
-            var e_src = new Core.Src(section_index, row_index,Core.SrcConstants.GeometryVertexE.Cell);
+            var x_src = new Core.Src(section_index, row_index, Core.SrcConstants.GeometryVertexX.Cell);
+            var y_src = new Core.Src(section_index, row_index, Core.SrcConstants.GeometryVertexY.Cell);
+            var a_src = new Core.Src(section_index, row_index, Core.SrcConstants.GeometryVertexA.Cell);
+            var b_src = new Core.Src(section_index, row_index, Core.SrcConstants.GeometryVertexB.Cell);
+            var c_src = new Core.Src(section_index, row_index, Core.SrcConstants.GeometryVertexC.Cell);
+            var d_src = new Core.Src(section_index, row_index, Core.SrcConstants.GeometryVertexD.Cell);
+            var e_src = new Core.Src(section_index, row_index, Core.SrcConstants.GeometryVertexE.Cell);
 
             writer.SetValue(x_src, this.X);
             writer.SetValue(y_src, this.Y);
@@ -70,7 +70,7 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreateArcTo(Core.CellValue x, Core.CellValue y,
-                                              Core.CellValue a)
+            Core.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195698(v=office.11).aspx
 
@@ -82,11 +82,11 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreateEllipticalArcTo(Core.CellValue x,
-                                                        Core.CellValue y,
-                                                        Core.CellValue a,
-                                                        Core.CellValue b,
-                                                        Core.CellValue c,
-                                                        Core.CellValue d)
+            Core.CellValue y,
+            Core.CellValue a,
+            Core.CellValue b,
+            Core.CellValue c,
+            Core.CellValue d)
         {
             // http://msdn.microsoft.com/en-us/library/aa195660(v=office.11).aspx
 
@@ -101,13 +101,12 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreateEllipse(Core.CellValue x,
-                                                Core.CellValue y,
-                                                Core.CellValue a,
-                                                Core.CellValue b,
-                                                Core.CellValue c,
-                                                Core.CellValue d)
+            Core.CellValue y,
+            Core.CellValue a,
+            Core.CellValue b,
+            Core.CellValue c,
+            Core.CellValue d)
         {
-
             // http://msdn.microsoft.com/en-us/library/aa195692(v=office.11).aspx
 
             var row = new GeometryRow(IVisio.VisRowTags.visTagEllipse);
@@ -121,12 +120,12 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreateNurbsTo(Core.CellValue x,
-                                                Core.CellValue y,
-                                                Core.CellValue a,
-                                                Core.CellValue b,
-                                                Core.CellValue c,
-                                                Core.CellValue d,
-                                                Core.CellValue e)
+            Core.CellValue y,
+            Core.CellValue a,
+            Core.CellValue b,
+            Core.CellValue c,
+            Core.CellValue d,
+            Core.CellValue e)
         {
             // http://msdn.microsoft.com/en-us/library/aa195685(v=office.11).aspx
 
@@ -142,8 +141,8 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreatePolylineTo(Core.CellValue x,
-                                        Core.CellValue y,
-                                        Core.CellValue a)
+            Core.CellValue y,
+            Core.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
@@ -155,9 +154,9 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreateInfiniteLine(Core.CellValue x,
-                                Core.CellValue y,
-                                Core.CellValue a,
-                                Core.CellValue b)
+            Core.CellValue y,
+            Core.CellValue a,
+            Core.CellValue b)
         {
             // http://msdn.microsoft.com/en-us/library/aa195682(v=office.11).aspx
 
@@ -170,8 +169,8 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreateSplineKnot(Core.CellValue x,
-                                Core.CellValue y,
-                                Core.CellValue a)
+            Core.CellValue y,
+            Core.CellValue a)
         {
             // http://msdn.microsoft.com/en-us/library/aa195667(v=office.11).aspx
 
@@ -183,13 +182,12 @@ namespace VisioAutomation.Shapes
         }
 
         public static GeometryRow CreateSplineStart(Core.CellValue x,
-                                                Core.CellValue y,
-                                                Core.CellValue a,
-                                                Core.CellValue b,
-                                                Core.CellValue c,
-                                                Core.CellValue d)
+            Core.CellValue y,
+            Core.CellValue a,
+            Core.CellValue b,
+            Core.CellValue c,
+            Core.CellValue d)
         {
-
             // http://msdn.microsoft.com/en-us/library/aa195663(v=office.11).aspx
 
             var row = new GeometryRow(IVisio.VisRowTags.visTagSplineBeg);

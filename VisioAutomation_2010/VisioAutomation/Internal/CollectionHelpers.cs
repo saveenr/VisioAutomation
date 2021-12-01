@@ -4,7 +4,6 @@ namespace VisioAutomation.Internal
 {
     internal static class CollectionHelpers
     {
-
         public static IEnumerable<T> ToEnumerable<T>(System.Func<int> get_count, System.Func<int, T> get_item)
         {
             int count = get_count();

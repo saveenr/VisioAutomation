@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -30,15 +30,20 @@ namespace VisioAutomation.Shapes
         {
             yield return this._create(nameof(this.ConnectorFixedCode), Core.SrcConstants.ShapeLayoutConnectorFixedCode,
                 this.ConnectorFixedCode);
-            yield return this._create(nameof(this.LineJumpCode), Core.SrcConstants.ShapeLayoutLineJumpCode, this.LineJumpCode);
-            yield return this._create(nameof(this.LineJumpDirX), Core.SrcConstants.ShapeLayoutLineJumpDirX, this.LineJumpDirX);
-            yield return this._create(nameof(this.LineJumpDirY), Core.SrcConstants.ShapeLayoutLineJumpDirY, this.LineJumpDirY);
+            yield return this._create(nameof(this.LineJumpCode), Core.SrcConstants.ShapeLayoutLineJumpCode,
+                this.LineJumpCode);
+            yield return this._create(nameof(this.LineJumpDirX), Core.SrcConstants.ShapeLayoutLineJumpDirX,
+                this.LineJumpDirX);
+            yield return this._create(nameof(this.LineJumpDirY), Core.SrcConstants.ShapeLayoutLineJumpDirY,
+                this.LineJumpDirY);
             yield return this._create(nameof(this.LineJumpStyle), Core.SrcConstants.ShapeLayoutLineJumpStyle,
                 this.LineJumpStyle);
-            yield return this._create(nameof(this.LineRouteExt), Core.SrcConstants.ShapeLayoutLineRouteExt, this.LineRouteExt);
+            yield return this._create(nameof(this.LineRouteExt), Core.SrcConstants.ShapeLayoutLineRouteExt,
+                this.LineRouteExt);
             yield return this._create(nameof(this.ShapeFixedCode), Core.SrcConstants.ShapeLayoutShapeFixedCode,
                 this.ShapeFixedCode);
-            yield return this._create(nameof(this.ShapePermeablePlace), Core.SrcConstants.ShapeLayoutShapePermeablePlace,
+            yield return this._create(nameof(this.ShapePermeablePlace),
+                Core.SrcConstants.ShapeLayoutShapePermeablePlace,
                 this.ShapePermeablePlace);
             yield return this._create(nameof(this.ShapePermeableX), Core.SrcConstants.ShapeLayoutShapePermeableX,
                 this.ShapePermeableX);
@@ -52,7 +57,8 @@ namespace VisioAutomation.Shapes
                 this.ShapePlowCode);
             yield return this._create(nameof(this.ShapeRouteStyle), Core.SrcConstants.ShapeLayoutShapeRouteStyle,
                 this.ShapeRouteStyle);
-            yield return this._create(nameof(this.ShapeSplit), Core.SrcConstants.ShapeLayoutShapeSplit, this.ShapeSplit);
+            yield return this._create(nameof(this.ShapeSplit), Core.SrcConstants.ShapeLayoutShapeSplit,
+                this.ShapeSplit);
             yield return this._create(nameof(this.ShapeSplittable), Core.SrcConstants.ShapeLayoutShapeSplittable,
                 this.ShapeSplittable);
             yield return this._create(nameof(this.ShapeDisplayLevel), Core.SrcConstants.ShapeLayoutShapeDisplayLevel,
@@ -65,20 +71,19 @@ namespace VisioAutomation.Shapes
         public static List<LayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(page, shapeids, type);
+            return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
         public static LayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(shape, type);
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
         class Builder : VACG.CellGroupBuilder<LayoutCells>
         {
-
             public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
             {
             }
@@ -110,6 +115,5 @@ namespace VisioAutomation.Shapes
                 return cells;
             }
         }
-
     }
 }

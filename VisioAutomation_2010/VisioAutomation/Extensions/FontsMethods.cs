@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.Internal;
-using IVisio=Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Extensions
 {

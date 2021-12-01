@@ -7,7 +7,7 @@ namespace VisioAutomation.Shapes
 {
     public static class CustomPropertyHelper
     {
-        static short vis_sec_prop = (short)IVisio.VisSectionIndices.visSectionProp;
+        static short vis_sec_prop = (short) IVisio.VisSectionIndices.visSectionProp;
 
         public static void Set(
             IVisio.Shape shape,
@@ -43,7 +43,7 @@ namespace VisioAutomation.Shapes
             short row = shape.AddNamedRow(
                 vis_sec_prop,
                 name,
-                (short)IVisio.VisRowIndices.visRowProp);
+                (short) IVisio.VisRowIndices.visRowProp);
 
             Set(shape, row, cp);
         }
@@ -63,14 +63,15 @@ namespace VisioAutomation.Shapes
 
         public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, Core.CellValueType type)
 
-  
+
         {
             var pairs = __GetPairs(shape, type);
             var shape_custprop_dic = CustomPropertyDictionary.FromPairs(pairs);
             return shape_custprop_dic;
         }
 
-        public static List<CustomPropertyDictionary> GetDictionary(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static List<CustomPropertyDictionary> GetDictionary(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+            Core.CellValueType type)
         {
             var listof_listof_custpropscells = CustomPropertyCells.GetCells(page, shapeidpairs, type);
             var listof_custpropdics = _get_cells_as_list(shapeidpairs, listof_listof_custpropscells);
@@ -102,7 +103,7 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            var exists_flag = (short)IVisio.VisExistsFlags.visExistsAnywhere;
+            var exists_flag = (short) IVisio.VisExistsFlags.visExistsAnywhere;
 
             // If the Custom Property section does not exist then return zero immediately
             if (0 == shape.SectionExists[vis_sec_prop, exists_flag])
@@ -171,7 +172,7 @@ namespace VisioAutomation.Shapes
 
             string full_prop_name = __GetRowName(name);
 
-            var exists = (short)IVisio.VisExistsFlags.visExistsAnywhere;
+            var exists = (short) IVisio.VisExistsFlags.visExistsAnywhere;
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
 
@@ -256,7 +257,6 @@ namespace VisioAutomation.Shapes
 
         private static List<List<CustomPropertyNameCellsPair>> __GetListOfCpPairLists(
             Core.ShapeIDPairs shapeidpairs,
-
             List<List<CustomPropertyCells>> listof_listof_cpcells)
         {
             if (listof_listof_cpcells.Count != shapeidpairs.Count)
@@ -281,12 +281,14 @@ namespace VisioAutomation.Shapes
                 foreach (int cprow in cp_indices)
                 {
                     int shapeid = shapeidpairs[i].ShapeID;
-                    var cppair = new CustomPropertyNameCellsPair(shapeid, cprow, listof_cpnames[cprow], listof_cpcells[cprow]);
+                    var cppair =
+                        new CustomPropertyNameCellsPair(shapeid, cprow, listof_cpnames[cprow], listof_cpcells[cprow]);
                     listof_cppairs.Add(cppair);
                 }
-                listof_listof_cppairs.Add(listof_cppairs);
 
+                listof_listof_cppairs.Add(listof_cppairs);
             }
+
             return listof_listof_cppairs;
         }
 
@@ -335,6 +337,5 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentException(msg);
             }
         }
-
     }
 }

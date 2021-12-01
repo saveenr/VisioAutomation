@@ -23,16 +23,16 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            short row = shape.AddRow((short)IVisio.VisSectionIndices.visSectionControls,
-                                     (short)IVisio.VisRowIndices.visRowLast,
-                                     (short)IVisio.VisRowTags.visTagDefault);
+            short row = shape.AddRow((short) IVisio.VisSectionIndices.visSectionControls,
+                (short) IVisio.VisRowIndices.visRowLast,
+                (short) IVisio.VisRowTags.visTagDefault);
 
             Set(shape, row, ctrl);
 
             return row;
         }
 
-        public static int Set( IVisio.Shape shape, short row, ControlCells ctrl)
+        public static int Set(IVisio.Shape shape, short row, ControlCells ctrl)
         {
             if (shape == null)
             {
@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes
             }
 
 
-            if (ctrl.XDynamics.Value==null)
+            if (ctrl.XDynamics.Value == null)
             {
                 ctrl.XDynamics = string.Format("Controls.Row_{0}", row + 1);
             }
@@ -70,8 +70,8 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentOutOfRangeException(nameof(index));
             }
 
-            var row = (IVisio.VisRowIndices)index;
-            shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionControls, (short)row);
+            var row = (IVisio.VisRowIndices) index;
+            shape.DeleteRow((short) IVisio.VisSectionIndices.visSectionControls, (short) row);
         }
 
         public static int GetCount(IVisio.Shape shape)
@@ -81,8 +81,7 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];
+            return shape.RowCount[(short) IVisio.VisSectionIndices.visSectionControls];
         }
-
     }
 }

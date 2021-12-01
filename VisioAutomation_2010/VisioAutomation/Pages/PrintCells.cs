@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -29,14 +29,16 @@ namespace VisioAutomation.Pages
             yield return this._create(nameof(this.CenterX), Core.SrcConstants.PrintCenterX, this.CenterX);
             yield return this._create(nameof(this.CenterY), Core.SrcConstants.PrintCenterY, this.CenterY);
             yield return this._create(nameof(this.OnPage), Core.SrcConstants.PrintOnPage, this.OnPage);
-            yield return this._create(nameof(this.BottomMargin), Core.SrcConstants.PrintBottomMargin, this.BottomMargin);
+            yield return this._create(nameof(this.BottomMargin), Core.SrcConstants.PrintBottomMargin,
+                this.BottomMargin);
             yield return this._create(nameof(this.RightMargin), Core.SrcConstants.PrintRightMargin, this.RightMargin);
             yield return this._create(nameof(this.PagesX), Core.SrcConstants.PrintPagesX, this.PagesX);
             yield return this._create(nameof(this.PagesY), Core.SrcConstants.PrintPagesY, this.PagesY);
             yield return this._create(nameof(this.TopMargin), Core.SrcConstants.PrintTopMargin, this.TopMargin);
             yield return this._create(nameof(this.PaperKind), Core.SrcConstants.PrintPaperKind, this.PaperKind);
             yield return this._create(nameof(this.Grid), Core.SrcConstants.PrintGrid, this.Grid);
-            yield return this._create(nameof(this.Orientation), Core.SrcConstants.PrintPageOrientation, this.Orientation);
+            yield return this._create(nameof(this.Orientation), Core.SrcConstants.PrintPageOrientation,
+                this.Orientation);
             yield return this._create(nameof(this.ScaleX), Core.SrcConstants.PrintScaleX, this.ScaleX);
             yield return this._create(nameof(this.ScaleY), Core.SrcConstants.PrintScaleY, this.ScaleY);
             yield return this._create(nameof(this.PaperSource), Core.SrcConstants.PrintPaperSource, this.PaperSource);
@@ -46,7 +48,7 @@ namespace VisioAutomation.Pages
         public static PrintCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(shape, type);
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
@@ -84,6 +86,5 @@ namespace VisioAutomation.Pages
                 return cells;
             }
         }
-
     }
 }

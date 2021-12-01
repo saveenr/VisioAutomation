@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VASS=VisioAutomation.ShapeSheet;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -16,7 +16,7 @@ namespace VisioAutomation.Pages
             init_page_srcs();
 
             var app = src_page.Application;
-            short copy_paste_flags = (short)IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
+            short copy_paste_flags = (short) IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
 
             // handle the source page
             if (src_page == null)
@@ -41,7 +41,7 @@ namespace VisioAutomation.Pages
             }
 
             var src_page_shapes = src_page.Shapes;
-            int num_src_shapes=src_page_shapes.Count;
+            int num_src_shapes = src_page_shapes.Count;
 
             if (num_src_shapes > 0)
             {
@@ -57,30 +57,30 @@ namespace VisioAutomation.Pages
             int i = 0;
             foreach (var src in _static_page_srcs)
             {
-                query.Columns.Add(src,"Col"+i.ToString());
+                query.Columns.Add(src, "Col" + i.ToString());
                 i++;
             }
 
             var src_formulas = query.GetFormulas(src_page.PageSheet);
 
             // Set the Cells on the Destination
-           
+
             var writer = new VASS.Writers.SrcWriter();
             for (i = 0; i < _static_page_srcs.Count; i++)
             {
                 int row = 0;
-                writer.SetValue(_static_page_srcs[i],src_formulas[row][i]);
+                writer.SetValue(_static_page_srcs[i], src_formulas[row][i]);
             }
 
             writer.Commit(dest_page.PageSheet, Core.CellValueType.Formula);
 
             // make sure the new page looks like the old page
             dest_page.Background = src_page.Background;
-            
+
             // then paste any contents from the first page
-            if (num_src_shapes>0)
+            if (num_src_shapes > 0)
             {
-                dest_page.Paste(copy_paste_flags);                
+                dest_page.Paste(copy_paste_flags);
             }
         }
 
@@ -184,13 +184,12 @@ namespace VisioAutomation.Pages
             writer.SetValue(Core.SrcConstants.PageHeight, size.Height);
 
             writer.Commit(page.PageSheet, Core.CellValueType.Formula);
-        }        
+        }
 
         public static short[] DropManyAutoConnectors(
             IVisio.Page page,
             ICollection<Core.Point> points)
         {
-
             if (points == null)
             {
                 throw new System.ArgumentNullException(nameof(points));
@@ -208,7 +207,7 @@ namespace VisioAutomation.Pages
 
             page.DropManyU(masters_obj_array, xy_array, out outids_sa);
 
-            short[] outids = (short[])outids_sa;
+            short[] outids = (short[]) outids_sa;
             return outids;
         }
 

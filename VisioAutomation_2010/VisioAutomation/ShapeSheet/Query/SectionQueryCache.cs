@@ -23,26 +23,17 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public int Count
         {
-            get
-            {
-                return this._list.Count;
-            }
+            get { return this._list.Count; }
         }
 
         public IEnumerable<ShapeCache> ShapeCacheItems
         {
-            get
-            {
-                return this._list;
-            }
+            get { return this._list; }
         }
 
         public ShapeCache this[int index]
         {
-            get
-            {
-                return this._list[index];
-            }
+            get { return this._list[index]; }
         }
 
         public int CountCells()

@@ -2,17 +2,16 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class Columns : IEnumerable<Column> 
+    public class Columns : IEnumerable<Column>
     {
         protected IList<Column> _items;
         protected Dictionary<string, Column> _map_name_to_item;
         protected Dictionary<Core.Src, Column> _dic_src_to_col;
 
-        internal Columns() 
+        internal Columns()
         {
             this._items = new List<Column>();
             this._map_name_to_item = new Dictionary<string, Column>();
-
         }
 
         public IEnumerator<Column> GetEnumerator()
@@ -37,6 +36,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 name = string.Format("Col{0}", this._items.Count);
             }
+
             return name;
         }
 
@@ -59,7 +59,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (this._dic_src_to_col.ContainsKey(src))
             {
-                string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Core.Src), src.Section, src.Row, src.Cell);
+                string msg = string.Format("Duplicate {0}({1},{2},{3})", nameof(Core.Src), src.Section, src.Row,
+                    src.Cell);
                 throw new System.ArgumentException(msg);
             }
         }
@@ -90,6 +91,5 @@ namespace VisioAutomation.ShapeSheet.Query
             this._dic_src_to_col.Add(src, col);
             return col;
         }
-
     }
 }

@@ -4,7 +4,6 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class Rows<T> : IEnumerable<Row<T>>
     {
-
         private readonly List<Row<T>> _list;
 
         internal Rows(int capacity)

@@ -46,13 +46,13 @@ namespace VisioAutomation.Text
 
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(page, shapeidpairs, type);
+            return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
         public static List<ParagraphCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsMultiRow(shape, type);
+            return reader.GetCellsSingleShapeMultipleRows(shape, type);
         }
 
 

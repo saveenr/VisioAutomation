@@ -23,6 +23,5 @@ namespace VisioAutomation.Extensions
             return CollectionHelpers.ToList(() => masters.Count,
                 i => masters[i + 1]);
         }
-
     }
 }

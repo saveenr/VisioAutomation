@@ -187,13 +187,13 @@ namespace VisioAutomation.Text
         public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(page, shapeids, type);
+            return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
         public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(shape, type);
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();

@@ -9,10 +9,6 @@ namespace VisioAutomation.Internal
             Microsoft.Office.Interop.Visio.Master master,
             Core.Point point)
         {
-
-
-
-
             Microsoft.Office.Interop.Visio.Shape output;
 
             if (this.Category == VisioObjectCategory.Shape)
@@ -39,10 +35,8 @@ namespace VisioAutomation.Internal
             IList<Microsoft.Office.Interop.Visio.Master> masters,
             IEnumerable<Core.Point> points)
         {
-
-
             Internal.DropHelpers.ValidateDropManyParams(masters, points);
-            
+
             if (masters.Count < 1)
             {
                 return new short[0];
@@ -71,9 +65,8 @@ namespace VisioAutomation.Internal
                 throw new System.ArgumentOutOfRangeException();
             }
 
-            short[] outids = (short[])outids_sa;
+            short[] outids = (short[]) outids_sa;
             return outids;
         }
-
     }
 }

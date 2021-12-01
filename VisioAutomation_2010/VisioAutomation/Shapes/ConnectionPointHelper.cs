@@ -13,21 +13,21 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            if (connection_point_cells.X.Value==null)
+            if (connection_point_cells.X.Value == null)
             {
                 string msg = "Must provide an X Formula";
                 throw new System.ArgumentException(msg, nameof(connection_point_cells));
             }
 
-            if (connection_point_cells.Y.Value==null)
+            if (connection_point_cells.Y.Value == null)
             {
                 string msg = "Must provide an Y Formula";
                 throw new System.ArgumentException(msg, nameof(connection_point_cells));
             }
 
-            var n = shape.AddRow((short)IVisio.VisSectionIndices.visSectionConnectionPts,
-                                 (short)IVisio.VisRowIndices.visRowLast,
-                                 (short)IVisio.VisRowTags.visTagCnnctPt);
+            var n = shape.AddRow((short) IVisio.VisSectionIndices.visSectionConnectionPts,
+                (short) IVisio.VisRowIndices.visRowLast,
+                (short) IVisio.VisRowTags.visTagCnnctPt);
 
             var writer = new ShapeSheet.Writers.SrcWriter();
             writer.SetValues(connection_point_cells, n);
@@ -67,8 +67,8 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentOutOfRangeException(nameof(index));
             }
 
-            var row = (IVisio.VisRowIndices)index;
-            shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionConnectionPts, (short)row);
+            var row = (IVisio.VisRowIndices) index;
+            shape.DeleteRow((short) IVisio.VisSectionIndices.visSectionConnectionPts, (short) row);
         }
 
         public static int Delete(IVisio.Shape shape)
@@ -95,8 +95,7 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionConnectionPts];
+            return shape.RowCount[(short) IVisio.VisSectionIndices.visSectionConnectionPts];
         }
-
     }
 }

@@ -4,6 +4,7 @@ namespace VisioAutomation.ShapeSheet.Writers
     {
         public readonly Core.SidSrc SidSrc;
         public readonly string Value;
+
         public WriteRecord(Core.SidSrc sidsrc, string value)
         {
             this.SidSrc = sidsrc;
@@ -12,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public WriteRecord(Core.Src src, string value)
         {
-            this.SidSrc = new Core.SidSrc(-1,src);
+            this.SidSrc = new Core.SidSrc(-1, src);
             this.Value = value;
         }
     }

@@ -2,13 +2,15 @@
 {
     public static class ShapeMethods_ShapeSheet
     {
-        public static string[] GetFormulasU(this Microsoft.Office.Interop.Visio.Shape shape, ShapeSheet.Streams.StreamArray stream)
+        public static string[] GetFormulasU(this Microsoft.Office.Interop.Visio.Shape shape,
+            ShapeSheet.Streams.StreamArray stream)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.GetFormulas(stream);
         }
 
-        public static TResult[] GetResults<TResult>(this Microsoft.Office.Interop.Visio.Shape shape, ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
+        public static TResult[] GetResults<TResult>(this Microsoft.Office.Interop.Visio.Shape shape,
+            ShapeSheet.Streams.StreamArray stream, object[] unitcodes)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.GetResults<TResult>(stream, unitcodes);

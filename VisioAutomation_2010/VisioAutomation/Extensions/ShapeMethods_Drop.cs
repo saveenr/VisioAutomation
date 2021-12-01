@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using IVisio=Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 
 namespace VisioAutomation.Extensions
 {
     public static class ShapeMethods_Drop
     {
-
         public static IVisio.Shape Drop(
             this IVisio.Shape shape,
             IVisio.Master master,

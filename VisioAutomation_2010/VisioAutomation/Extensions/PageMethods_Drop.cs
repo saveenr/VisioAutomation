@@ -5,7 +5,6 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods_Drop
     {
-
         public static IVisio.Shape Drop(
             this IVisio.Page page,
             IVisio.Master master,
@@ -21,7 +20,7 @@ namespace VisioAutomation.Extensions
             IEnumerable<Core.Point> points)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DropManyU( masters, points);
+            return visobjtarget.DropManyU(masters, points);
         }
     }
 }

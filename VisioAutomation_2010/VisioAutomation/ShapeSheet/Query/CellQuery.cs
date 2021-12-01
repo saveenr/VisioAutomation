@@ -73,9 +73,10 @@ namespace VisioAutomation.ShapeSheet.Query
             var rows = new Rows<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
             {
-                var row = this._shapedata_to_row((short)shapeid, seg_enumerator);
+                var row = this._shapedata_to_row((short) shapeid, seg_enumerator);
                 rows.Add(row);
             }
+
             return rows;
         }
 
@@ -130,12 +131,11 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             foreach (var shapeid in shapeids)
             {
-                foreach(var col in this.Columns)
+                foreach (var col in this.Columns)
                 {
-                    yield return new Core.SidSrc((short)shapeid, col.Src);
+                    yield return new Core.SidSrc((short) shapeid, col.Src);
                 }
             }
         }
-
     }
 }

@@ -1,7 +1,5 @@
-﻿
-namespace VisioAutomation.Shapes
+﻿namespace VisioAutomation.Shapes
 {
-
     internal class CustomPropertyNameCellsPair
     {
         public readonly int ShapeID;
@@ -18,5 +16,4 @@ namespace VisioAutomation.Shapes
             this.Cells = cells;
         }
     }
-
 }

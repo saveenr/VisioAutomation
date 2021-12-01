@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -38,30 +38,45 @@ namespace VisioAutomation.Pages
 
         public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
-            yield return this._create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX, this.AvenueSizeX);
-            yield return this._create(nameof(this.AvenueSizeY), Core.SrcConstants.PageLayoutAvenueSizeY, this.AvenueSizeY);
+            yield return this._create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX,
+                this.AvenueSizeX);
+            yield return this._create(nameof(this.AvenueSizeY), Core.SrcConstants.PageLayoutAvenueSizeY,
+                this.AvenueSizeY);
             yield return this._create(nameof(this.BlockSizeX), Core.SrcConstants.PageLayoutBlockSizeX, this.BlockSizeX);
             yield return this._create(nameof(this.BlockSizeY), Core.SrcConstants.PageLayoutBlockSizeY, this.BlockSizeY);
-            yield return this._create(nameof(this.CtrlAsInput), Core.SrcConstants.PageLayoutControlAsInput, this.CtrlAsInput);
-            yield return this._create(nameof(this.DynamicsOff), Core.SrcConstants.PageLayoutDynamicsOff, this.DynamicsOff);
+            yield return this._create(nameof(this.CtrlAsInput), Core.SrcConstants.PageLayoutControlAsInput,
+                this.CtrlAsInput);
+            yield return this._create(nameof(this.DynamicsOff), Core.SrcConstants.PageLayoutDynamicsOff,
+                this.DynamicsOff);
             yield return this._create(nameof(this.EnableGrid), Core.SrcConstants.PageLayoutEnableGrid, this.EnableGrid);
             yield return this._create(nameof(this.LineAdjustFrom), Core.SrcConstants.PageLayoutLineAdjustFrom,
                 this.LineAdjustFrom);
-            yield return this._create(nameof(this.LineAdjustTo), Core.SrcConstants.PageLayoutLineAdjustTo, this.LineAdjustTo);
-            yield return this._create(nameof(this.LineJumpCode), Core.SrcConstants.PageLayoutLineJumpCode, this.LineJumpCode);
+            yield return this._create(nameof(this.LineAdjustTo), Core.SrcConstants.PageLayoutLineAdjustTo,
+                this.LineAdjustTo);
+            yield return this._create(nameof(this.LineJumpCode), Core.SrcConstants.PageLayoutLineJumpCode,
+                this.LineJumpCode);
             yield return this._create(nameof(this.LineJumpFactorX), Core.SrcConstants.PageLayoutLineJumpFactorX,
                 this.LineJumpFactorX);
             yield return this._create(nameof(this.LineJumpFactorY), Core.SrcConstants.PageLayoutLineJumpFactorY,
                 this.LineJumpFactorY);
-            yield return this._create(nameof(this.LineJumpStyle), Core.SrcConstants.PageLayoutLineJumpStyle, this.LineJumpStyle);
-            yield return this._create(nameof(this.LineRouteExt), Core.SrcConstants.PageLayoutLineRouteExt, this.LineRouteExt);
-            yield return this._create(nameof(this.LineToLineX), Core.SrcConstants.PageLayoutLineToLineX, this.LineToLineX);
-            yield return this._create(nameof(this.LineToLineY), Core.SrcConstants.PageLayoutLineToLineY, this.LineToLineY);
-            yield return this._create(nameof(this.LineToNodeX), Core.SrcConstants.PageLayoutLineToNodeX, this.LineToNodeX);
-            yield return this._create(nameof(this.LineToNodeY), Core.SrcConstants.PageLayoutLineToNodeY, this.LineToNodeY);
-            yield return this._create(nameof(this.LineJumpDirX), Core.SrcConstants.PageLayoutLineJumpDirX, this.LineJumpDirX);
-            yield return this._create(nameof(this.LineJumpDirY), Core.SrcConstants.PageLayoutLineJumpDirY, this.LineJumpDirY);
-            yield return this._create(nameof(this.PageShapeSplit), Core.SrcConstants.PageLayoutShapeSplit, this.PageShapeSplit);
+            yield return this._create(nameof(this.LineJumpStyle), Core.SrcConstants.PageLayoutLineJumpStyle,
+                this.LineJumpStyle);
+            yield return this._create(nameof(this.LineRouteExt), Core.SrcConstants.PageLayoutLineRouteExt,
+                this.LineRouteExt);
+            yield return this._create(nameof(this.LineToLineX), Core.SrcConstants.PageLayoutLineToLineX,
+                this.LineToLineX);
+            yield return this._create(nameof(this.LineToLineY), Core.SrcConstants.PageLayoutLineToLineY,
+                this.LineToLineY);
+            yield return this._create(nameof(this.LineToNodeX), Core.SrcConstants.PageLayoutLineToNodeX,
+                this.LineToNodeX);
+            yield return this._create(nameof(this.LineToNodeY), Core.SrcConstants.PageLayoutLineToNodeY,
+                this.LineToNodeY);
+            yield return this._create(nameof(this.LineJumpDirX), Core.SrcConstants.PageLayoutLineJumpDirX,
+                this.LineJumpDirX);
+            yield return this._create(nameof(this.LineJumpDirY), Core.SrcConstants.PageLayoutLineJumpDirY,
+                this.LineJumpDirY);
+            yield return this._create(nameof(this.PageShapeSplit), Core.SrcConstants.PageLayoutShapeSplit,
+                this.PageShapeSplit);
             yield return this._create(nameof(this.PlaceDepth), Core.SrcConstants.PageLayoutPlaceDepth, this.PlaceDepth);
             yield return this._create(nameof(this.PlaceFlip), Core.SrcConstants.PageLayoutPlaceFlip, this.PlaceFlip);
             yield return this._create(nameof(this.PlaceStyle), Core.SrcConstants.PageLayoutPlaceStyle, this.PlaceStyle);
@@ -75,7 +90,7 @@ namespace VisioAutomation.Pages
         public static LayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
-            return reader.GetCellsSingleRow(shape, type);
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
         }
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
@@ -125,6 +140,5 @@ namespace VisioAutomation.Pages
                 return cells;
             }
         }
-
     }
 }

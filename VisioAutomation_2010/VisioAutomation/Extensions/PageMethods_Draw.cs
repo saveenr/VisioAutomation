@@ -5,9 +5,6 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods_Draw
     {
-
-
-
         public static IVisio.Shape DrawOval(this IVisio.Page page, Core.Rectangle rect)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
@@ -19,7 +16,7 @@ namespace VisioAutomation.Extensions
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
             return visobjtarget.DrawRectangle(rect);
         }
-        
+
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Core.Point> points)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
@@ -59,9 +56,7 @@ namespace VisioAutomation.Extensions
             int degree)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawNurbs(controlpoints,knots, weights,degree);
-
+            return visobjtarget.DrawNurbs(controlpoints, knots, weights, degree);
         }
-
     }
 }

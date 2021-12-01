@@ -17,7 +17,7 @@ namespace VisioAutomation.Extensions
             return visobjtarget.DrawRectangle(rect);
         }
 
-        public static IVisio.Shape DrawBezier(this IVisio.Shape  shape, IList<Core.Point> points)
+        public static IVisio.Shape DrawBezier(this IVisio.Shape shape, IList<Core.Point> points)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawBezier(points);
@@ -48,7 +48,7 @@ namespace VisioAutomation.Extensions
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawQuarterArc(p0, p1, flags);
         }
-        
+
         public static IVisio.Shape DrawNurbs(
             this IVisio.Shape shape,
             IList<Core.Point> controlpoints,
@@ -58,8 +58,6 @@ namespace VisioAutomation.Extensions
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
             return visobjtarget.DrawNurbs(controlpoints, knots, weights, degree);
-
         }
-
     }
 }
