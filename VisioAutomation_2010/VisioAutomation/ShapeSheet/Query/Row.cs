@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-
     public class Row<T> : IEnumerable<T>
     {
         public int ShapeID { get; }
@@ -29,18 +28,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public int Count
         {
-            get
-            {
-                return this.Cells.Count;
-            }
+            get { return this.Cells.Count; }
         }
 
         public T this[int index]
         {
-            get
-            {
-                return this.Cells[index];
-            }
+            get { return this.Cells[index]; }
         }
     }
 }

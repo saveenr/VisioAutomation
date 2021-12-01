@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -20,7 +20,8 @@ namespace VisioAutomation.Shapes
         public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
-            yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription, this.Description);
+            yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription,
+                this.Description);
             yield return this._create(nameof(this.ExtraInfo), Core.SrcConstants.HyperlinkExtraInfo, this.ExtraInfo);
             yield return this._create(nameof(this.Frame), Core.SrcConstants.HyperlinkFrame, this.Frame);
             yield return this._create(nameof(this.SortKey), Core.SrcConstants.HyperlinkSortKey, this.SortKey);
@@ -30,7 +31,8 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.Invisible), Core.SrcConstants.HyperlinkInvisible, this.Invisible);
         }
 
-        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+            Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
@@ -47,7 +49,6 @@ namespace VisioAutomation.Shapes
 
         class Builder : VACG.CellGroupBuilder<HyperlinkCells>
         {
-
             public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
@@ -57,7 +58,7 @@ namespace VisioAutomation.Shapes
                 var cells = new HyperlinkCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);
 
-                
+
                 cells.Address = getcellvalue(nameof(Address));
                 cells.Description = getcellvalue(nameof(Description));
                 cells.ExtraInfo = getcellvalue(nameof(ExtraInfo));
@@ -71,7 +72,5 @@ namespace VisioAutomation.Shapes
                 return cells;
             }
         }
-
-
     }
 }

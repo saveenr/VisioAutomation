@@ -1,5 +1,6 @@
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("VTest")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("VTest.Scripting")]
+
 namespace VisioAutomation.Internal
 {
     /// <summary>
@@ -37,7 +38,7 @@ namespace VisioAutomation.Internal
                 throw new System.ArgumentOutOfRangeException(nameof(size), msg);
             }
 
-            if (size >0 && this.Count == this.Capacity)
+            if (size > 0 && this.Count == this.Capacity)
             {
                 // there's nothing left to consume
                 string msg = string.Format("All {0} elements of the array have been consumed", this._array.Length);
@@ -49,7 +50,7 @@ namespace VisioAutomation.Internal
                 int remaining = this.Capacity - this.Count;
                 // there's request goes beyond want is available
                 string msg = string.Format("Requesting {0} elements but only {1} are remaining", size, remaining);
-                throw new System.ArgumentOutOfRangeException(nameof(size),msg);
+                throw new System.ArgumentOutOfRangeException(nameof(size), msg);
             }
 
             var seg = new ArraySegment<T>(this._array, this._pos, size);

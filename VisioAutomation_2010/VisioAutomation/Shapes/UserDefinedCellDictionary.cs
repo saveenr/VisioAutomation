@@ -6,7 +6,6 @@ namespace VisioAutomation.Shapes
     {
         public UserDefinedCellDictionary(int capacity) : base(capacity)
         {
-
         }
 
         internal static UserDefinedCellDictionary FromPairs(List<UserDefinedCellNameCellsPair> pairs)
@@ -16,8 +15,8 @@ namespace VisioAutomation.Shapes
             {
                 dic[pair.Name] = pair.Cells;
             }
+
             return dic;
         }
-
     }
 }

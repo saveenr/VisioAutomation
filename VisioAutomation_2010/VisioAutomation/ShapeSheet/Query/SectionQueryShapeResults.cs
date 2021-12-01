@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public readonly int ShapeID;
         private readonly List<SectionShapeRows<T>> _items;
 
-        internal SectionQueryShapeResults(int shapeid, List<SectionShapeRows<T>> sections) 
+        internal SectionQueryShapeResults(int shapeid, List<SectionShapeRows<T>> sections)
         {
             this.ShapeID = shapeid;
             this._items = sections;
@@ -34,19 +34,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public int Count
         {
-            get
-            {
-                return this._items.Count;
-            }
+            get { return this._items.Count; }
         }
 
         public SectionShapeRows<T> this[int index]
         {
-            get
-            {
-                return this._items[index];
-            }
+            get { return this._items[index]; }
         }
-
     }
 }

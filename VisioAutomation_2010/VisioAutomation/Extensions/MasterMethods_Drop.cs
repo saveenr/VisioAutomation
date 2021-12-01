@@ -5,7 +5,6 @@ namespace VisioAutomation.Extensions
 {
     public static class MasterMethods_Drop
     {
-
         public static IVisio.Shape Drop(
             this IVisio.Master master1,
             IVisio.Master master2,

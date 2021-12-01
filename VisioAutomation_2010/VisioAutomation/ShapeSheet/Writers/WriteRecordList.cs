@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Writers
         {
             if (this._streamtype != type)
             {
-                string msg = string.Format("writer does not contain {0} values", type.ToString() );
+                string msg = string.Format("writer does not contain {0} values", type.ToString());
                 throw new System.ArgumentOutOfRangeException(msg);
             }
 
@@ -84,6 +84,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             {
                 array[i] = this._items[i].Value;
             }
+
             return array;
         }
 

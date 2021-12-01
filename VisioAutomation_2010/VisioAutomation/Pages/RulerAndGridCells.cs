@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -65,6 +65,5 @@ namespace VisioAutomation.Pages
                 return cells;
             }
         }
-
     }
 }

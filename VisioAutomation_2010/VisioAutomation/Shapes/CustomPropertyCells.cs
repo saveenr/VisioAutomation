@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -20,7 +20,6 @@ namespace VisioAutomation.Shapes
 
         public CustomPropertyCells()
         {
-
         }
 
         public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
@@ -51,7 +50,7 @@ namespace VisioAutomation.Shapes
             this.Value = value;
             this.Type = type_int;
         }
-        
+
         public static CustomPropertyCells Create(Core.CellValue value, CustomPropertyType type)
         {
             return new CustomPropertyCells(value.Value, type);
@@ -159,7 +158,8 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+            Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
@@ -176,7 +176,6 @@ namespace VisioAutomation.Shapes
 
         public class Builder : VACG.CellGroupBuilder<CustomPropertyCells>
         {
-
             public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
@@ -200,6 +199,5 @@ namespace VisioAutomation.Shapes
                 return cells;
             }
         }
-
     }
 }

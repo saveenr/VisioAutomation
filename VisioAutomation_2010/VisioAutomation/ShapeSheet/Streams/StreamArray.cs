@@ -24,13 +24,16 @@ namespace VisioAutomation.ShapeSheet.Streams
 
             if (count * this.ChunkSize != array.Length)
             {
-                string msg = string.Format("Array length does not match the number of cells {0} multiplied by the chunk size {1}", this.Count, this.ChunkSize);
-                throw new Exceptions.InternalAssertionException("Count does not match the number of short elements in the array");
+                string msg =
+                    string.Format(
+                        "Array length does not match the number of cells {0} multiplied by the chunk size {1}",
+                        this.Count, this.ChunkSize);
+                throw new Exceptions.InternalAssertionException(
+                    "Count does not match the number of short elements in the array");
             }
 
             this.Count = count;
         }
-
 
 
         public static StreamArray FromSidSrc(IList<Core.SidSrc> sidsrcs)
@@ -52,12 +55,14 @@ namespace VisioAutomation.ShapeSheet.Streams
                 {
                     break;
                 }
+
                 array[i++] = sidsrc.ShapeID;
                 array[i++] = sidsrc.Src.Section;
                 array[i++] = sidsrc.Src.Row;
                 array[i++] = sidsrc.Src.Cell;
                 j++;
             }
+
             return stream;
         }
 
@@ -80,13 +85,14 @@ namespace VisioAutomation.ShapeSheet.Streams
                 {
                     break;
                 }
+
                 array[i++] = src.Section;
                 array[i++] = src.Row;
                 array[i++] = src.Cell;
                 j++;
             }
+
             return stream;
         }
-
     }
 }

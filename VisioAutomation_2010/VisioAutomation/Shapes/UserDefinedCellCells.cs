@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
@@ -27,7 +27,8 @@ namespace VisioAutomation.Shapes
             this.Prompt = Core.CellValue.EncodeValue(this.Prompt.Value);
         }
 
-        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+            Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
@@ -42,11 +43,8 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-
-
         class Builder : VACG.CellGroupBuilder<UserDefinedCellCells>
         {
-
             public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {
             }
@@ -61,10 +59,8 @@ namespace VisioAutomation.Shapes
                 cells.Prompt = getcellvalue(nameof(Prompt));
 
 
-
                 return cells;
             }
         }
-
     }
 }

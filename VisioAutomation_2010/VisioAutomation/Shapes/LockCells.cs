@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -38,7 +38,8 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.Delete), Core.SrcConstants.LockDelete, this.Delete);
             yield return this._create(nameof(this.End), Core.SrcConstants.LockEnd, this.End);
             yield return this._create(nameof(this.Format), Core.SrcConstants.LockFormat, this.Format);
-            yield return this._create(nameof(this.FromGroupFormat), Core.SrcConstants.LockFromGroupFormat, this.FromGroupFormat);
+            yield return this._create(nameof(this.FromGroupFormat), Core.SrcConstants.LockFromGroupFormat,
+                this.FromGroupFormat);
             yield return this._create(nameof(this.Group), Core.SrcConstants.LockGroup, this.Group);
             yield return this._create(nameof(this.Height), Core.SrcConstants.LockHeight, this.Height);
             yield return this._create(nameof(this.MoveX), Core.SrcConstants.LockMoveX, this.MoveX);
@@ -101,6 +102,5 @@ namespace VisioAutomation.Shapes
                 return cells;
             }
         }
-
     }
 }

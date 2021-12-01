@@ -20,7 +20,7 @@ namespace VisioAutomation.Extensions
         {
             System.Array names_sa;
             styles.GetNamesU(out names_sa);
-            string[] names = (string[])names_sa;
+            string[] names = (string[]) names_sa;
             return names;
         }
     }

@@ -4,8 +4,8 @@ namespace VisioAutomation.Internal
 {
     internal class DropHelpers
     {
-
-        public static void ValidateDropManyParams(IList<Microsoft.Office.Interop.Visio.Master> masters, IEnumerable<Core.Point> points)
+        public static void ValidateDropManyParams(IList<Microsoft.Office.Interop.Visio.Master> masters,
+            IEnumerable<Core.Point> points)
         {
             if (masters == null)
             {
@@ -17,6 +17,5 @@ namespace VisioAutomation.Internal
                 throw new System.ArgumentNullException(nameof(points));
             }
         }
-
     }
 }

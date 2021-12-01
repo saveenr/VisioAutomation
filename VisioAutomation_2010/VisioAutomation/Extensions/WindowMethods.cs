@@ -13,7 +13,7 @@ namespace VisioAutomation.Extensions
         {
             foreach (var shape in shapes)
             {
-                window.Select(shape, (short)selectargs);
+                window.Select(shape, (short) selectargs);
             }
         }
 
@@ -41,7 +41,7 @@ namespace VisioAutomation.Extensions
         }
 
         public static void SetWindowRect(
-            this IVisio.Window window, 
+            this IVisio.Window window,
             System.Drawing.Rectangle rect)
         {
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ff769098.aspx
@@ -58,12 +58,12 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Window> ToEnumerable(this IVisio.Windows windows)
         {
-            return CollectionHelpers.ToEnumerable(() => windows.Count, i => windows[(short)(i + 1)]);
+            return CollectionHelpers.ToEnumerable(() => windows.Count, i => windows[(short) (i + 1)]);
         }
 
         public static List<IVisio.Window> ToList(this IVisio.Windows windows)
         {
-            return CollectionHelpers.ToList(() => windows.Count, i => windows[(short)(i + 1)]);
+            return CollectionHelpers.ToList(() => windows.Count, i => windows[(short) (i + 1)]);
         }
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
-using VASS=VisioAutomation.ShapeSheet;
-
+using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
@@ -28,15 +27,18 @@ namespace VisioAutomation.Pages
             yield return this._create(nameof(this.DrawingScale), Core.SrcConstants.PageDrawingScale, this.DrawingScale);
             yield return this._create(nameof(this.DrawingScaleType), Core.SrcConstants.PageDrawingScaleType,
                 this.DrawingScaleType);
-            yield return this._create(nameof(this.DrawingSizeType), Core.SrcConstants.PageDrawingSizeType, this.DrawingSizeType);
+            yield return this._create(nameof(this.DrawingSizeType), Core.SrcConstants.PageDrawingSizeType,
+                this.DrawingSizeType);
             yield return this._create(nameof(this.InhibitSnap), Core.SrcConstants.PageInhibitSnap, this.InhibitSnap);
             yield return this._create(nameof(this.Height), Core.SrcConstants.PageHeight, this.Height);
             yield return this._create(nameof(this.Scale), Core.SrcConstants.PageScale, this.Scale);
             yield return this._create(nameof(this.Width), Core.SrcConstants.PageWidth, this.Width);
             yield return this._create(nameof(this.ShadowObliqueAngle), Core.SrcConstants.PageShadowObliqueAngle,
                 this.ShadowObliqueAngle);
-            yield return this._create(nameof(this.ShadowOffsetX), Core.SrcConstants.PageShadowOffsetX, this.ShadowOffsetX);
-            yield return this._create(nameof(this.ShadowOffsetY), Core.SrcConstants.PageShadowOffsetY, this.ShadowOffsetY);
+            yield return this._create(nameof(this.ShadowOffsetX), Core.SrcConstants.PageShadowOffsetX,
+                this.ShadowOffsetX);
+            yield return this._create(nameof(this.ShadowOffsetY), Core.SrcConstants.PageShadowOffsetY,
+                this.ShadowOffsetY);
             yield return this._create(nameof(this.ShadowScaleFactor), Core.SrcConstants.PageShadowScaleFactor,
                 this.ShadowScaleFactor);
             yield return this._create(nameof(this.ShadowType), Core.SrcConstants.PageShadowType, this.ShadowType);
@@ -83,6 +85,5 @@ namespace VisioAutomation.Pages
                 return cells;
             }
         }
-
     }
 }

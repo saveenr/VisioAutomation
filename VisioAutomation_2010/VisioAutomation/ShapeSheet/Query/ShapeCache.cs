@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-
     internal class ShapeCache : IEnumerable<ShapeCacheItem>
     {
         private readonly List<ShapeCacheItem> _list_shapecacheitems;
@@ -16,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this._list_shapecacheitems.Add(item);
         }
-        
+
         public IEnumerator<ShapeCacheItem> GetEnumerator()
         {
             return this._list_shapecacheitems.GetEnumerator();
@@ -29,10 +28,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public int Count
         {
-            get
-            {
-                return this._list_shapecacheitems.Count;
-            }
+            get { return this._list_shapecacheitems.Count; }
         }
 
         public int CountCells()
@@ -42,6 +38,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 n += shapecacheitem.RowCount * shapecacheitem.SectionQueryColumns.Count;
             }
+
             return n;
         }
     }

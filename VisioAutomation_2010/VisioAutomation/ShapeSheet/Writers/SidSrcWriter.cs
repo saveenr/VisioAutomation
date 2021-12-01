@@ -57,11 +57,13 @@ namespace VisioAutomation.ShapeSheet.Writers
             var visobjtarget = new VisioObjectTarget(page);
             this._commit(visobjtarget, type);
         }
+
         public void Commit(IVisio.Shape shape, Core.CellValueType type)
         {
             var visobjtarget = new VisioObjectTarget(shape);
             this._commit(visobjtarget, type);
         }
+
         public void Commit(IVisio.Master master, Core.CellValueType type)
         {
             var visobjtarget = new VisioObjectTarget(master);
@@ -86,7 +88,7 @@ namespace VisioAutomation.ShapeSheet.Writers
             if (type == Core.CellValueType.Formula)
             {
                 var flags = this._compute_setformula_flags();
-                var c = visobjtarget.SetFormulas(stream, values, (short)flags);
+                var c = visobjtarget.SetFormulas(stream, values, (short) flags);
             }
             else
             {

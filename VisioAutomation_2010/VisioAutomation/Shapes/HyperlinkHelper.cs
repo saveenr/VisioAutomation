@@ -4,7 +4,6 @@ namespace VisioAutomation.Shapes
 {
     public static class HyperlinkHelper
     {
-
         public static int Add(
             IVisio.Shape shape,
             HyperlinkCells hyperlink)
@@ -21,7 +20,7 @@ namespace VisioAutomation.Shapes
 
             if (hyperlink.Address.Value == null)
             {
-                throw new System.ArgumentException("Address is null",nameof(hyperlink));
+                throw new System.ArgumentException("Address is null", nameof(hyperlink));
             }
 
             /*
@@ -38,9 +37,9 @@ namespace VisioAutomation.Shapes
             hlinks_object.Address = hyperlink.Address.Value;
             hlinks_object.Description = hyperlink.Description.Value;
             hlinks_object.ExtraInfo = hyperlink.ExtraInfo.Value;
-            hlinks_object.Frame= hyperlink.Frame.Value;
-            hlinks_object.SubAddress= hyperlink.SubAddress.Value;
-            hlinks_object.ExtraInfo= hyperlink.ExtraInfo.Value;
+            hlinks_object.Frame = hyperlink.Frame.Value;
+            hlinks_object.SubAddress = hyperlink.SubAddress.Value;
+            hlinks_object.ExtraInfo = hyperlink.ExtraInfo.Value;
 
             //hlinks_object.NewWindow = hyperlink.NewWindow.Formula.Value;
             //hlinks_object.IsDefaultLink = hyperlink.Default.Formula.Value;
@@ -79,8 +78,8 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentOutOfRangeException(nameof(index));
             }
 
-            var row = (IVisio.VisRowIndices)index;
-            shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionHyperlink, (short)row);
+            var row = (IVisio.VisRowIndices) index;
+            shape.DeleteRow((short) IVisio.VisSectionIndices.visSectionHyperlink, (short) row);
         }
 
         public static int GetCount(IVisio.Shape shape)
@@ -90,8 +89,7 @@ namespace VisioAutomation.Shapes
                 throw new System.ArgumentNullException(nameof(shape));
             }
 
-            return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionHyperlink];
+            return shape.RowCount[(short) IVisio.VisSectionIndices.visSectionHyperlink];
         }
-
     }
 }

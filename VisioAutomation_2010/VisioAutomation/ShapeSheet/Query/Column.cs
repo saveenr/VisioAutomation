@@ -7,7 +7,7 @@
 
         public Core.Src Src { get; }
 
-        public Column(int ordinal, string name, Core.Src src) 
+        public Column(int ordinal, string name, Core.Src src)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -18,6 +18,7 @@
             this.Name = name;
             this.Ordinal = ordinal;
         }
+
         protected Column(int ordinal, string name)
         {
         }
@@ -26,7 +27,5 @@
         {
             return col.Ordinal;
         }
-
-
     }
 }

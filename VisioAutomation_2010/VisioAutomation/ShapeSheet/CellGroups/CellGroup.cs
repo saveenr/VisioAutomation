@@ -4,7 +4,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public class CellGroup
     {
-
         public virtual IEnumerable<CellMetadata> GetCellMetadata()
         {
             throw new System.NotImplementedException();
@@ -25,7 +24,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 var new_src = pair.Src.CloneWithNewRow(row);
                 var new_pair = new SrcValue(new_src, pair.Value);
                 yield return new_pair;
-
             }
         }
 
@@ -36,7 +34,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 var new_src = pair.Src.CloneWithNewRow(row);
                 var new_pair = new SidSrcValue(shapeid, new_src, pair.Value);
                 yield return new_pair;
-
             }
         }
 
@@ -45,7 +42,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return new CellMetadata(name, src, value.Value);
         }
 
-        internal static System.Func<string,string> queryrow_to_cellgroup(Query.Row<string> row, Query.Columns cols)
+        internal static System.Func<string, string> queryrow_to_cellgroup(Query.Row<string> row, Query.Columns cols)
         {
             return (s) => row[cols[s].Ordinal];
         }

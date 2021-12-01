@@ -18,9 +18,10 @@ namespace VisioAutomation.Internal
             GetWindowText(hWnd, sb, sb.Capacity);
             return sb.ToString();
         }
-        
+
         [DllImport("user32.dll")]
-        public static extern uint RealGetWindowClass(System.IntPtr hwnd, [Out] System.Text.StringBuilder pszType, uint cchType);
+        public static extern uint RealGetWindowClass(System.IntPtr hwnd, [Out] System.Text.StringBuilder pszType,
+            uint cchType);
 
         public const short GWL_STYLE = -16;
         public const int WS_CHILD = 0x40000000;
@@ -31,11 +32,12 @@ namespace VisioAutomation.Internal
 
         [DllImport("User32.dll")]
         public static extern int SetWindowLong(System.IntPtr hWnd, int nIndex, int dwNewLong);
-        
+
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool BringWindowToTop(System.IntPtr hWnd);
-        
+
         [DllImport("Ole32.Dll")]
-        public static extern int CreateBindCtx(int reserved, out System.Runtime.InteropServices.ComTypes.IBindCtx bind_ctx);
+        public static extern int CreateBindCtx(int reserved,
+            out System.Runtime.InteropServices.ComTypes.IBindCtx bind_ctx);
     }
 }

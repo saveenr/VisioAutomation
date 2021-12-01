@@ -26,8 +26,8 @@ namespace VisioAutomation.Shapes
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     
-        {                                           
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return this.GetEnumerator();
         }
 
@@ -78,7 +78,6 @@ namespace VisioAutomation.Shapes
             var row = GeometryRow.CreateLineTo(x, y);
             this.Rows.Add(row);
             return row;
-
         }
 
         public GeometryRow AddArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
@@ -86,31 +85,30 @@ namespace VisioAutomation.Shapes
             var row = GeometryRow.CreateArcTo(x, y, a);
             this.Rows.Add(row);
             return row;
-
         }
 
-        public GeometryRow AddEllipticalArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
+        public GeometryRow AddEllipticalArcTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b,
+            Core.CellValue c, Core.CellValue d)
         {
             var row = GeometryRow.CreateEllipticalArcTo(x, y, a, b, c, d);
             this.Rows.Add(row);
             return row;
-
         }
 
-        public GeometryRow AddEllipse(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
+        public GeometryRow AddEllipse(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b,
+            Core.CellValue c, Core.CellValue d)
         {
             var row = GeometryRow.CreateEllipse(x, y, a, b, c, d);
             this.Rows.Add(row);
             return row;
-
         }
 
-        public GeometryRow AddNurbsTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d, Core.CellValue e)
+        public GeometryRow AddNurbsTo(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b,
+            Core.CellValue c, Core.CellValue d, Core.CellValue e)
         {
             var row = GeometryRow.CreateNurbsTo(x, y, a, b, c, d, e);
             this.Rows.Add(row);
             return row;
-
         }
 
         public GeometryRow AddPolylineTo(Core.CellValue x, Core.CellValue y, Core.CellValue a)
@@ -118,7 +116,6 @@ namespace VisioAutomation.Shapes
             var row = GeometryRow.CreatePolylineTo(x, y, a);
             this.Rows.Add(row);
             return row;
-
         }
 
         public GeometryRow AddInfiniteLine(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b)
@@ -126,15 +123,14 @@ namespace VisioAutomation.Shapes
             var row = GeometryRow.CreateInfiniteLine(x, y, a, b);
             this.Rows.Add(row);
             return row;
-
         }
 
-        public GeometryRow AddSplineStart(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b, Core.CellValue c, Core.CellValue d)
+        public GeometryRow AddSplineStart(Core.CellValue x, Core.CellValue y, Core.CellValue a, Core.CellValue b,
+            Core.CellValue c, Core.CellValue d)
         {
             var row = GeometryRow.CreateSplineStart(x, y, a, b, c, d);
             this.Rows.Add(row);
             return row;
-
         }
 
         public GeometryRow AddSplineKnot(Core.CellValue x, Core.CellValue y, Core.CellValue a)

@@ -41,7 +41,7 @@ namespace VisioAutomation.Shapes
 
         public static List<IVisio.Shape> GetNestedShapes(IVisio.Shape shape)
         {
-            if (shape== null)
+            if (shape == null)
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
@@ -59,6 +59,7 @@ namespace VisioAutomation.Shapes
                 var shape = shapes.ItemFromID16[shapeid];
                 shape_objs.Add(shape);
             }
+
             return shape_objs;
         }
     }

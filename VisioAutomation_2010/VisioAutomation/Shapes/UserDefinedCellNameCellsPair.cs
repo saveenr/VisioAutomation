@@ -6,6 +6,7 @@ namespace VisioAutomation.Shapes
         public readonly int Row;
         public readonly string Name;
         public readonly UserDefinedCellCells Cells;
+
         public UserDefinedCellNameCellsPair(int shapeid, int row, string name, UserDefinedCellCells cells)
         {
             this.ShapeID = shapeid;

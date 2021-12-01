@@ -10,7 +10,7 @@ namespace VisioAutomation.Extensions
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
             return visobjtarget.DrawOval(rect);
         }
-        
+
         public static IVisio.Shape DrawRectangle(this IVisio.Master master, Core.Rectangle rect)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
@@ -22,7 +22,7 @@ namespace VisioAutomation.Extensions
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
             return visobjtarget.DrawBezier(points);
         }
-        
+
         public static IVisio.Shape DrawPolyline(this IVisio.Master master, IList<Core.Point> points)
         {
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
@@ -37,7 +37,7 @@ namespace VisioAutomation.Extensions
             var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
             return visobjtarget.DrawLine(p0, p1);
         }
-        
+
         public static IVisio.Shape DrawQuarterArc(
             this IVisio.Master master,
             Core.Point p0,
