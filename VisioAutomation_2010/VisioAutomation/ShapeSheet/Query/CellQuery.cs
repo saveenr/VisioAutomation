@@ -17,13 +17,13 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             var srcstream = this._build_src_stream();
             var values = shape.GetFormulasU(srcstream);
-            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
-            var row = this._shapedata_to_row(shape.ID16, reader);
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
+            var row = this._segment_to_row(shape.ID16, segments);
 
-            var cellqueryresults = new Data.DataRowCollection<string>(1);
-            cellqueryresults.Add(row);
+            var datarows = new Data.DataRowCollection<string>(1);
+            datarows.Add(row);
 
-            return cellqueryresults;
+            return datarows;
         }
 
         public Data.DataRowCollection<TResult> GetResults<TResult>(IVisio.Shape shape)
@@ -31,27 +31,27 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = shape.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
-            var row = this._shapedata_to_row(shape.ID16, reader);
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
+            var row = this._segment_to_row(shape.ID16, segments);
 
 
-            var cellqueryresults = new Data.DataRowCollection<TResult>(1);
-            cellqueryresults.Add(row);
+            var datarows = new Data.DataRowCollection<TResult>(1);
+            datarows.Add(row);
 
-            return cellqueryresults;
+            return datarows;
         }
 
         public Data.DataRowCollection<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = page.GetFormulasU(srcstream);
-            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
-            var rows = this._shapesid_to_rows(shapeids, reader);
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
+            var rows = this._get_rows_for_shapes(shapeids, segments);
 
-            var cellqueryresults = new Data.DataRowCollection<string>(rows.Count);
-            cellqueryresults.AddRange(rows);
+            var datarows = new Data.DataRowCollection<string>(rows.Count);
+            datarows.AddRange(rows);
 
-            return cellqueryresults;
+            return datarows;
         }
 
         public Data.DataRowCollection<TResult> GetResults<TResult>(IVisio.Page page, IList<int> shapeids)
@@ -59,33 +59,33 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = page.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
-            var rows = this._shapesid_to_rows(shapeids, reader);
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
+            var rows = this._get_rows_for_shapes(shapeids, segments);
 
-            var cellqueryresults = new Data.DataRowCollection<TResult>(rows.Count);
-            cellqueryresults.AddRange(rows);
+            var datarows = new Data.DataRowCollection<TResult>(rows.Count);
+            datarows.AddRange(rows);
 
-            return cellqueryresults;
+            return datarows;
         }
 
-        private Data.DataRowCollection<T> _shapesid_to_rows<T>(IList<int> shapeids, VisioAutomation.Internal.ArraySegmentEnumerator<T> seg_enumerator)
+        private Data.DataRowCollection<T> _get_rows_for_shapes<T>(IList<int> shapeids, VisioAutomation.Internal.ArraySegmentEnumerator<T> seg_enumerator)
         {
-            var rows = new Data.DataRowCollection<T>(shapeids.Count);
+            var datarows = new Data.DataRowCollection<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
             {
-                var row = this._shapedata_to_row((short) shapeid, seg_enumerator);
-                rows.Add(row);
+                var row = this._segment_to_row((short) shapeid, seg_enumerator);
+                datarows.Add(row);
             }
 
-            return rows;
+            return datarows;
         }
 
-        private Data.DataRow<T> _shapedata_to_row<T>(short shapeid, VisioAutomation.Internal.ArraySegmentEnumerator<T> seg_enumerator)
+        private Data.DataRow<T> _segment_to_row<T>(short shapeid, VisioAutomation.Internal.ArraySegmentEnumerator<T> seg_enumerator)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
             int original_seg_size = seg_enumerator.Count;
-            var cells = seg_enumerator.GetNextSegment(numcols);
+            var segment = seg_enumerator.GetNextSegment(numcols);
 
             // verify that nothing strange has happened
             int final_seg_size = seg_enumerator.Count;
@@ -95,7 +95,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             var sec_index = IVisio.VisSectionIndices.visSectionInval;
-            var row = new Data.DataRow<T>(shapeid, sec_index, cells);
+            var row = new Data.DataRow<T>(shapeid, sec_index, segment);
             return row;
         }
 
@@ -103,7 +103,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             int numshapes = 1;
             int numcells = this.Columns.Count * numshapes;
-            var srcs = this._enum_srcs();
+            var srcs = this._cols_to_srcs();
             var stream = Streams.StreamArray.FromSrc(numcells, srcs);
 
             return stream;
@@ -113,13 +113,13 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             int numshapes = shapeids.Count;
             int numcells = this.Columns.Count * numshapes;
-            var sidsrcs = _enum_sidsrcs(shapeids);
+            var sidsrcs = _cols_to_sidsrcs(shapeids);
             var stream = Streams.StreamArray.FromSidSrc(numcells, sidsrcs);
 
             return stream;
         }
 
-        private IEnumerable<Core.Src> _enum_srcs()
+        private IEnumerable<Core.Src> _cols_to_srcs()
         {
             foreach (var col in this.Columns)
             {
@@ -127,7 +127,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private IEnumerable<Core.SidSrc> _enum_sidsrcs(IList<int> shapeids)
+        private IEnumerable<Core.SidSrc> _cols_to_sidsrcs(IList<int> shapeids)
         {
             foreach (var shapeid in shapeids)
             {
