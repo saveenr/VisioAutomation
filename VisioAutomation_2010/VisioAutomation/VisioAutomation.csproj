@@ -131,7 +131,7 @@
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Data\CellValueGroup.cs" />
-    <Compile Include="ShapeSheet\Query\Internal\ShapeCache.cs" />
+    <Compile Include="ShapeSheet\Internal\ShapeCache.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Shapes\CustomPropertyType.cs" />
     <Compile Include="Internal\ArraySegmentEnumerator.cs" />
     <Compile Include="Internal\ArraySegment.cs" />
-    <Compile Include="ShapeSheet\Query\Internal\SectionMetadataCache.cs" />
+    <Compile Include="ShapeSheet\Internal\SectionMetadataCache.cs" />
     <Compile Include="ShapeSheet\Data\CellValueRows.cs" />
     <Compile Include="ShapeSheet\Query\Columns.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
@@ -171,7 +171,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
     <Compile Include="ShapeSheet\Data\CellValueGroups.cs" />
     <Compile Include="ShapeSheet\Data\CellValueRow.cs" />
-    <Compile Include="ShapeSheet\Query\Internal\ShapeCacheItem.cs" />
+    <Compile Include="ShapeSheet\Internal\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryColumns.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />

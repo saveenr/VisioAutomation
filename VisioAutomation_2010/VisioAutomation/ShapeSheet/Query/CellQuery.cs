@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             var srcstream = this._build_src_stream();
             var values = shape.GetFormulasU(srcstream);
-            var reader = new Internal.ArraySegmentEnumerator<string>(values);
+            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
             var row = this._shapedata_to_row(shape.ID16, reader);
 
             var cellqueryresults = new Data.CellValueRows<string>(1);
@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_src_stream();
             const object[] unitcodes = null;
             var values = shape.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new Internal.ArraySegmentEnumerator<TResult>(values);
+            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
             var row = this._shapedata_to_row(shape.ID16, reader);
 
 
@@ -45,7 +45,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             var srcstream = this._build_sidsrc_stream(shapeids);
             var values = page.GetFormulasU(srcstream);
-            var reader = new Internal.ArraySegmentEnumerator<string>(values);
+            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
             var rows = this._shapesid_to_rows(shapeids, reader);
 
             var cellqueryresults = new Data.CellValueRows<string>(rows.Count);
@@ -59,7 +59,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeids);
             const object[] unitcodes = null;
             var values = page.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new Internal.ArraySegmentEnumerator<TResult>(values);
+            var reader = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
             var rows = this._shapesid_to_rows(shapeids, reader);
 
             var cellqueryresults = new Data.CellValueRows<TResult>(rows.Count);
@@ -68,7 +68,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return cellqueryresults;
         }
 
-        private Data.CellValueRows<T> _shapesid_to_rows<T>(IList<int> shapeids, Internal.ArraySegmentEnumerator<T> seg_enumerator)
+        private Data.CellValueRows<T> _shapesid_to_rows<T>(IList<int> shapeids, VisioAutomation.Internal.ArraySegmentEnumerator<T> seg_enumerator)
         {
             var rows = new Data.CellValueRows<T>(shapeids.Count);
             foreach (int shapeid in shapeids)
@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return rows;
         }
 
-        private Data.CellValueRow<T> _shapedata_to_row<T>(short shapeid, Internal.ArraySegmentEnumerator<T> seg_enumerator)
+        private Data.CellValueRow<T> _shapedata_to_row<T>(short shapeid, VisioAutomation.Internal.ArraySegmentEnumerator<T> seg_enumerator)
         {
             // From the reader, pull as many cells as there are columns
             int numcols = this.Columns.Count;
