@@ -205,29 +205,24 @@ namespace VTest.Core.ShapeSheet
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
 
-            var expected_formulas = new[,]
-                                      {
-                                          {"1 in", "1 in"},
-                                          {"5 in", "5 in"},
-                                          {"6 in", "6 in"}
-                                      };
+            MUT.Assert.AreEqual("1 in", data_formulas[0][0]);
+            MUT.Assert.AreEqual(1.0, data_results[0][0]);
 
-            var expected_results = new[,]
-                                      {
-                                          {1.0, 1.0},
-                                          {5.0, 5.0},
-                                          {6.0, 6.0}
-                                      };
+            MUT.Assert.AreEqual("1 in", data_formulas[0][1]);
+            MUT.Assert.AreEqual(1.0, data_results[0][1]);
+            
+            MUT.Assert.AreEqual("5 in", data_formulas[1][0]);
+            MUT.Assert.AreEqual(5.0, data_results[1][0]);
+            
+            MUT.Assert.AreEqual("5 in", data_formulas[1][1]);
+            MUT.Assert.AreEqual(5.0, data_results[1][1]);
+            
+            MUT.Assert.AreEqual("6 in", data_formulas[2][0]);
+            MUT.Assert.AreEqual(6.0, data_results[2][0]);
+            
+            MUT.Assert.AreEqual("6 in", data_formulas[2][1]);
+            MUT.Assert.AreEqual(6.0, data_results[2][1]);
 
-
-            for (int row = 0; row < data_results.Count; row++)
-            {
-                for (int col = 0; col < query.Columns.Count; col++)
-                {
-                    MUT.Assert.AreEqual(expected_formulas[row,col], data_formulas[row][col]);
-                    MUT.Assert.AreEqual(expected_results[row,col], data_results[row][col]);
-                }
-            }
 
             page1.Delete(0);
         }
@@ -257,29 +252,24 @@ namespace VTest.Core.ShapeSheet
             var data_formulas = query.GetFormulas(page1, shapeids);
             var data_results = query.GetResults<double>(page1, shapeids);
 
-            var expected_formulas = new[,]
-                                      {
-                                          {"5 in", "5 in"},
-                                          {"6 in", "6 in"},
-                                          {"1 in", "1 in"}
-                                      };
+            MUT.Assert.AreEqual("5 in", data_formulas[0][0]);
+            MUT.Assert.AreEqual(5.0, data_results[0][0]);
 
-            var expected_results = new[,]
-                                      {
-                                          {5.0, 5.0},
-                                          {6.0, 6.0},
-                                          {1.0, 1.0}
-                                      };
+            MUT.Assert.AreEqual("5 in", data_formulas[0][1]);
+            MUT.Assert.AreEqual(5.0, data_results[0][1]);
+            
+            MUT.Assert.AreEqual("6 in", data_formulas[1][0]);
+            MUT.Assert.AreEqual(6.0, data_results[1][0]);
+            
+            MUT.Assert.AreEqual("6 in", data_formulas[1][1]);
+            MUT.Assert.AreEqual(6.0, data_results[1][1]);
+            
+            MUT.Assert.AreEqual("1 in", data_formulas[2][0]);
+            MUT.Assert.AreEqual(1.0, data_results[2][0]);
+            
+            MUT.Assert.AreEqual("1 in", data_formulas[2][1]);
+            MUT.Assert.AreEqual(1.0, data_results[2][1]);
 
-
-            for (int row = 0; row < data_results.Count; row++)
-            {
-                for (int col = 0; col < query.Columns.Count; col++)
-                {
-                    MUT.Assert.AreEqual(expected_formulas[row, col], data_formulas[row][col]);
-                    MUT.Assert.AreEqual(expected_results[row, col], data_results[row][col]);
-                }
-            }
 
             page1.Delete(0);
         }
