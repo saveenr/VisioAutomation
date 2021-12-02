@@ -82,7 +82,7 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override CharacterCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.Columns cols)
+            public override CharacterCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.ColumnCollection cols)
             {
                 var cells = new CharacterCells();
 

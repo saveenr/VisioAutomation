@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class Columns : IEnumerable<Column>
+    public class ColumnCollection : IEnumerable<Column>
     {
         protected IList<Column> _items;
         protected Dictionary<string, Column> _map_name_to_item;
         protected Dictionary<Core.Src, Column> _dic_src_to_col;
 
-        internal Columns()
+        internal ColumnCollection()
         {
             this._items = new List<Column>();
             this._map_name_to_item = new Dictionary<string, Column>();

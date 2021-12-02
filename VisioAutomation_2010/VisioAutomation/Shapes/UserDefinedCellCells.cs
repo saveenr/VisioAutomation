@@ -50,7 +50,7 @@ namespace VisioAutomation.Shapes
             }
 
 
-            public override UserDefinedCellCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.Columns cols)
+            public override UserDefinedCellCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.ColumnCollection cols)
             {
                 var cells = new UserDefinedCellCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

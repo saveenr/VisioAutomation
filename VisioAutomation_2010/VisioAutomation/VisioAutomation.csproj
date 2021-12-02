@@ -145,7 +145,7 @@
     <Compile Include="Internal\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Internal\SectionMetadataCache.cs" />
     <Compile Include="ShapeSheet\Data\DataRowCollection.cs" />
-    <Compile Include="ShapeSheet\Query\Columns.cs" />
+    <Compile Include="ShapeSheet\Query\ColumnCollection.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\Column.cs" />
     <Compile Include="ShapeSheet\CellGroups\SrcValue.cs" />

@@ -59,7 +59,7 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PrintCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.Columns cols)
+            public override PrintCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.ColumnCollection cols)
             {
                 var cells = new PrintCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

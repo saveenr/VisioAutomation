@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected CellGroupBuilder(CellGroupBuilderType type)
         {
             var temp_cells = new TGroup();
-            Query.Columns cols;
+            Query.ColumnCollection cols;
 
             this.Type = type;
             if (type == CellGroupBuilderType.SingleRow)
@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public abstract TGroup ToCellGroup(Data.DataRow<string> row, Query.Columns cols);
+        public abstract TGroup ToCellGroup(Data.DataRow<string> row, Query.ColumnCollection cols);
 
         public List<TGroup> GetCellsMultipleShapesSingleRow(IVisio.Page page, IList<int> shapeids,
             Core.CellValueType type)
@@ -110,7 +110,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         }
 
         private List<TGroup> _sectionshaperows_to_cellgroups(Data.DataRowCollection<string> group_cell_value_data_row_collection,
-            Query.Columns cols)
+            Query.ColumnCollection cols)
         {
             var cellgroups = new List<TGroup>(group_cell_value_data_row_collection.Count);
             foreach (var section_row in group_cell_value_data_row_collection)
