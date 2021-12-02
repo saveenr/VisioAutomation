@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    internal class SectionQueryCache
+    internal class SectionMetadataCache
     {
         private readonly List<ShapeCache> _list;
 
-        public SectionQueryCache()
+        public SectionMetadataCache()
         {
             this._list = new List<ShapeCache>();
         }
 
-        public SectionQueryCache(int capacity)
+        public SectionMetadataCache(int capacity)
         {
             this._list = new List<ShapeCache>(capacity);
         }

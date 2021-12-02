@@ -76,15 +76,15 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private SectionQueryCache _create_sectionquerycache(Core.ShapeIDPairs shapeidpairs)
+        private SectionMetadataCache _create_sectionquerycache(Core.ShapeIDPairs shapeidpairs)
         {
             // Prepare a cache object
             if (this.Count < 1)
             {
-                return new SectionQueryCache(0);
+                return new SectionMetadataCache(0);
             }
 
-            var cache = new SectionQueryCache();
+            var cache = new SectionMetadataCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shapeidpair in shapeidpairs)
@@ -114,7 +114,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
 
         private Data.CellValueGroups<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
-            SectionQueryCache sectioncache, Internal.ArraySegmentEnumerator<T> segreader)
+            SectionMetadataCache sectioncache, Internal.ArraySegmentEnumerator<T> segreader)
         {
             var results = new Data.CellValueGroups<T>();
 
@@ -172,7 +172,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private Streams.StreamArray _build_src_stream(SectionQueryCache cache)
+        private Streams.StreamArray _build_src_stream(SectionMetadataCache cache)
         {
             int dummy_shapeid = -1;
             int shapeindex = 0;
@@ -184,7 +184,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, SectionQueryCache cache)
+        private Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, SectionMetadataCache cache)
         {
             int numcells = cache.CountCells();
             var sidsrcs = _sidsrcs_for_shapes(shapeidpairs, cache);
@@ -193,7 +193,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         private static IEnumerable<Core.SidSrc> _sidsrcs_for_shapes(Core.ShapeIDPairs shapeidpairs,
-            SectionQueryCache cache)
+            SectionMetadataCache cache)
         {
             foreach (int shape_ord in Enumerable.Range(0, shapeidpairs.Count))
             {
