@@ -130,7 +130,6 @@
     <Compile Include="Core\ShapeIDPair.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
-    <Compile Include="ShapeSheet\Query\CellQueryResults.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryShapeResults.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCache.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
