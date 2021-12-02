@@ -2,21 +2,21 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Internal
 {
-    internal class ShapeCache : IEnumerable<ShapeCacheItem>
+    internal class ShapeMetadataCache : IEnumerable<ShapeMetadataCacheItem>
     {
-        private readonly List<ShapeCacheItem> _list_shapecacheitems;
+        private readonly List<ShapeMetadataCacheItem> _list_shapecacheitems;
 
-        public ShapeCache(int capacity)
+        public ShapeMetadataCache(int capacity)
         {
-            this._list_shapecacheitems = new List<ShapeCacheItem>(capacity);
+            this._list_shapecacheitems = new List<ShapeMetadataCacheItem>(capacity);
         }
 
-        public void Add(ShapeCacheItem item)
+        public void Add(ShapeMetadataCacheItem item)
         {
             this._list_shapecacheitems.Add(item);
         }
 
-        public IEnumerator<ShapeCacheItem> GetEnumerator()
+        public IEnumerator<ShapeMetadataCacheItem> GetEnumerator()
         {
             return this._list_shapecacheitems.GetEnumerator();
         }

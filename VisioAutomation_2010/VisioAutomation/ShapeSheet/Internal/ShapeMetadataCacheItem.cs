@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Internal
 {
-    internal class ShapeCacheItem
+    internal class ShapeMetadataCacheItem
     {
         public short ShapeId { get; }
         public IVisio.VisSectionIndices SectionIndex { get; }
@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.Internal
         // The RowCount is the data that is being cached
         public int RowCount { get; }
 
-        internal ShapeCacheItem(short shapeid, IVisio.VisSectionIndices sec_index, VisioAutomation.ShapeSheet.Query.ColumnCollection sec_cols,
+        internal ShapeMetadataCacheItem(short shapeid, IVisio.VisSectionIndices sec_index, VisioAutomation.ShapeSheet.Query.ColumnCollection sec_cols,
             int numrows)
         {
             this.ShapeId = shapeid;

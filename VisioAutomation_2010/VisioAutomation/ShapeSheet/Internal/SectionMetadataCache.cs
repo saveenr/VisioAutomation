@@ -4,19 +4,19 @@ namespace VisioAutomation.ShapeSheet.Internal
 {
     internal class SectionMetadataCache
     {
-        private readonly List<ShapeCache> _list;
+        private readonly List<ShapeMetadataCache> _list;
 
         public SectionMetadataCache()
         {
-            this._list = new List<ShapeCache>();
+            this._list = new List<ShapeMetadataCache>();
         }
 
         public SectionMetadataCache(int capacity)
         {
-            this._list = new List<ShapeCache>(capacity);
+            this._list = new List<ShapeMetadataCache>(capacity);
         }
 
-        public void Add(ShapeCache item)
+        public void Add(ShapeMetadataCache item)
         {
             this._list.Add(item);
         }
@@ -26,12 +26,12 @@ namespace VisioAutomation.ShapeSheet.Internal
             get { return this._list.Count; }
         }
 
-        public IEnumerable<ShapeCache> ShapeCacheItems
+        public IEnumerable<ShapeMetadataCache> ShapeCacheItems
         {
             get { return this._list; }
         }
 
-        public ShapeCache this[int index]
+        public ShapeMetadataCache this[int index]
         {
             get { return this._list[index]; }
         }

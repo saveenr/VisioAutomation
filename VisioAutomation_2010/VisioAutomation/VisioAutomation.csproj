@@ -131,7 +131,7 @@
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Data\DataRowGroup.cs" />
-    <Compile Include="ShapeSheet\Internal\ShapeCache.cs" />
+    <Compile Include="ShapeSheet\Internal\ShapeMetadataCache.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
     <Compile Include="ShapeSheet\Writers\SrcWriter.cs" />
@@ -171,7 +171,7 @@
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
     <Compile Include="ShapeSheet\Data\DataRowGroupCollection.cs" />
     <Compile Include="ShapeSheet\Data\DataRow.cs" />
-    <Compile Include="ShapeSheet\Internal\ShapeCacheItem.cs" />
+    <Compile Include="ShapeSheet\Internal\ShapeMetadataCacheItem.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
