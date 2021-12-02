@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellQuery()
         {
-            this.Columns = new ColumnCollection();
+            this.Columns = new ColumnCollection(IVisio.VisSectionIndices.visSectionInval);
         }
 
         public Data.DataRowCollection<string> GetFormulas(IVisio.Shape shape)

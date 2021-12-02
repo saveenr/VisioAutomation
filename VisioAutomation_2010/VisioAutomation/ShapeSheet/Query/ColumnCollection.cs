@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -7,12 +8,15 @@ namespace VisioAutomation.ShapeSheet.Query
         protected IList<Column> _items;
         protected Dictionary<string, Column> _map_name_to_item;
         protected Dictionary<Core.Src, Column> _dic_src_to_col;
+        public IVisio.VisSectionIndices SectionIndex { get; }
 
-        internal ColumnCollection()
+        internal ColumnCollection(IVisio.VisSectionIndices section)
         {
             this._items = new List<Column>();
             this._map_name_to_item = new Dictionary<string, Column>();
+            this.SectionIndex = section;
         }
+
 
         public IEnumerator<Column> GetEnumerator()
         {

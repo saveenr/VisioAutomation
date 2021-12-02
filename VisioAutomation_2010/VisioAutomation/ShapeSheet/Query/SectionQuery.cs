@@ -5,15 +5,15 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : IEnumerable<ColumnGroup>
+    public class SectionQuery : IEnumerable<ColumnCollection>
     {
-        private IList<ColumnGroup> _list_section_query_columns { get; }
-        private readonly Dictionary<IVisio.VisSectionIndices, ColumnGroup> _map_secindex_to_sec_cols;
+        private IList<ColumnCollection> _list_section_query_columns { get; }
+        private readonly Dictionary<IVisio.VisSectionIndices, ColumnCollection> _map_secindex_to_sec_cols;
 
         public SectionQuery() : base()
         {
-            this._list_section_query_columns = new List<ColumnGroup>();
-            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, ColumnGroup>();
+            this._list_section_query_columns = new List<ColumnCollection>();
+            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, ColumnCollection>();
         }
 
 
@@ -147,7 +147,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var sectionshaperows = new Data.DataRowCollection<T>(shapecacheitem.RowCount, shapeid, secindex);
                 results_rows.Add(sectionshaperows);
 
-                int num_cols = shapecacheitem.ColumnGroup.Count;
+                int num_cols = shapecacheitem.ColumnGroup.Count();
                 foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
                     var cells = segreader.GetNextSegment(num_cols);
@@ -230,7 +230,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         private static Internal.ShapeCacheItem _create_shapesectioncacheitem(Core.ShapeIDPair shapeidpair,
-            IVisio.VisSectionIndices sec_index, ColumnGroup sec_cols)
+            IVisio.VisSectionIndices sec_index, ColumnCollection sec_cols)
         {
             // first count the rows in the section
 
@@ -251,7 +251,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return shapecacheitem;
         }
 
-        public IEnumerator<ColumnGroup> GetEnumerator()
+        public IEnumerator<ColumnCollection> GetEnumerator()
         {
             return this._list_section_query_columns.GetEnumerator();
         }
@@ -261,9 +261,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public ColumnGroup this[int index] => this._list_section_query_columns[index];
+        public ColumnCollection this[int index] => this._list_section_query_columns[index];
 
-        public ColumnGroup Add(IVisio.VisSectionIndices sec_index)
+        public ColumnCollection Add(IVisio.VisSectionIndices sec_index)
         {
             if (this._map_secindex_to_sec_cols.ContainsKey(sec_index))
             {
@@ -272,13 +272,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentException(msg);
             }
 
-            var sec_cols = new ColumnGroup(sec_index);
+            var sec_cols = new ColumnCollection(sec_index);
             this._list_section_query_columns.Add(sec_cols);
             this._map_secindex_to_sec_cols[sec_index] = sec_cols;
             return sec_cols;
         }
 
-        public ColumnGroup Add(Core.Src src)
+        public ColumnCollection Add(Core.Src src)
         {
             return this.Add((IVisio.VisSectionIndices) src.Section);
         }
