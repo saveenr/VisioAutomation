@@ -95,31 +95,31 @@ namespace VTest.Core.ShapeSheet
 
             var shapeids = new[] {shape_a_id};
 
-            var formulas = query.GetFormulas(page1, shapeids);
+            var out_formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            MUT.Assert.AreEqual("2", formulas[0][col_fg]);
-            MUT.Assert.AreEqual("3", formulas[0][col_bg]);
-            MUT.Assert.AreEqual("40", formulas[0][col_filpat]);
+            MUT.Assert.AreEqual("2", out_formulas[0][col_fg]);
+            MUT.Assert.AreEqual("3", out_formulas[0][col_bg]);
+            MUT.Assert.AreEqual("40", out_formulas[0][col_filpat]);
 
             // now retrieve the results with GetResults as floats
-            var float_results = query.GetResults<double>(page1, shapeids);
-            MUT.Assert.AreEqual(2.0, float_results[0][col_fg]);
-            MUT.Assert.AreEqual(3.0, float_results[0][col_bg]);
-            MUT.Assert.AreEqual(40.0, float_results[0][col_filpat]);
+            var out_float_results = query.GetResults<double>(page1, shapeids);
+            MUT.Assert.AreEqual(2.0, out_float_results[0][col_fg]);
+            MUT.Assert.AreEqual(3.0, out_float_results[0][col_bg]);
+            MUT.Assert.AreEqual(40.0, out_float_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as ints
-            var int_results = query.GetResults<int>(page1, shapeids);
+            var out_int_results = query.GetResults<int>(page1, shapeids);
 
-            MUT.Assert.AreEqual(2, int_results[0][col_fg]);
-            MUT.Assert.AreEqual(3, int_results[0][col_bg]);
-            MUT.Assert.AreEqual(40, int_results[0][col_filpat]);
+            MUT.Assert.AreEqual(2, out_int_results[0][col_fg]);
+            MUT.Assert.AreEqual(3, out_int_results[0][col_bg]);
+            MUT.Assert.AreEqual(40, out_int_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as strings
-            var string_results = query.GetResults<string>(page1,shapeids);
-            MUT.Assert.AreEqual("2", string_results[0][col_fg]);
-            MUT.Assert.AreEqual("3", string_results[0][col_bg]);
-            MUT.Assert.AreEqual("40", string_results[0][col_filpat]);
+            var out_string_results = query.GetResults<string>(page1,shapeids);
+            MUT.Assert.AreEqual("2", out_string_results[0][col_fg]);
+            MUT.Assert.AreEqual("3", out_string_results[0][col_bg]);
+            MUT.Assert.AreEqual("40", out_string_results[0][col_filpat]);
 
             page1.Delete(0);
         }
@@ -150,8 +150,8 @@ namespace VTest.Core.ShapeSheet
 
             var shapeidpairs = VA.Core.ShapeIDPairs.FromShapes( shape_a, shape_b, shape_c, shape_d );
 
-            var output_formulas = sec_query.GetFormulas(page1, shapeidpairs);
-            var output_results_str = sec_query.GetResults<string>(page1, shapeidpairs);
+            var out_formulas = sec_query.GetFormulas(page1, shapeidpairs);
+            var out_results = sec_query.GetResults<string>(page1, shapeidpairs);
 
             int shape_a_index = 0;
             int shape_b_index = 1;
@@ -159,26 +159,26 @@ namespace VTest.Core.ShapeSheet
             int shape_d_index = 3;
             int section0_index = 0;
 
-            MUT.Assert.AreEqual(4, output_formulas.Count);
-            MUT.Assert.AreEqual(1, output_formulas[shape_a_index][section0_index].Count);
-            MUT.Assert.AreEqual(2, output_formulas[shape_b_index][section0_index].Count);
-            MUT.Assert.AreEqual(0, output_formulas[shape_c_index][section0_index].Count);
-            MUT.Assert.AreEqual(3, output_formulas[3][0].Count);
+            MUT.Assert.AreEqual(4, out_formulas.Count);
+            MUT.Assert.AreEqual(1, out_formulas[shape_a_index][section0_index].Count);
+            MUT.Assert.AreEqual(2, out_formulas[shape_b_index][section0_index].Count);
+            MUT.Assert.AreEqual(0, out_formulas[shape_c_index][section0_index].Count);
+            MUT.Assert.AreEqual(3, out_formulas[shape_d_index][0].Count);
 
-            MUT.Assert.AreEqual("\"1\"", output_formulas[shape_a_index][section0_index][0][0]);
-            MUT.Assert.AreEqual("\"2\"", output_formulas[shape_b_index][section0_index][0][0]);
-            MUT.Assert.AreEqual("\"3\"", output_formulas[shape_b_index][section0_index][1][0]);
-            MUT.Assert.AreEqual("\"4\"", output_formulas[shape_d_index][section0_index][0][0]);
-            MUT.Assert.AreEqual("\"5\"", output_formulas[shape_d_index][section0_index][1][0]);
-            MUT.Assert.AreEqual("\"6\"", output_formulas[shape_d_index][section0_index][2][0]);
+            MUT.Assert.AreEqual("\"1\"", out_formulas[shape_a_index][section0_index][0][0]);
+            MUT.Assert.AreEqual("\"2\"", out_formulas[shape_b_index][section0_index][0][0]);
+            MUT.Assert.AreEqual("\"3\"", out_formulas[shape_b_index][section0_index][1][0]);
+            MUT.Assert.AreEqual("\"4\"", out_formulas[shape_d_index][section0_index][0][0]);
+            MUT.Assert.AreEqual("\"5\"", out_formulas[shape_d_index][section0_index][1][0]);
+            MUT.Assert.AreEqual("\"6\"", out_formulas[shape_d_index][section0_index][2][0]);
 
 
-            MUT.Assert.AreEqual( "1", output_results_str[shape_a_index][section0_index][0][0]);
-            MUT.Assert.AreEqual( "2", output_results_str[shape_b_index][section0_index][0][0]);
-            MUT.Assert.AreEqual( "3", output_results_str[shape_b_index][section0_index][1][0]);
-            MUT.Assert.AreEqual( "4", output_results_str[shape_d_index][section0_index][0][0]);
-            MUT.Assert.AreEqual( "5", output_results_str[shape_d_index][section0_index][1][0]);
-            MUT.Assert.AreEqual( "6", output_results_str[shape_d_index][section0_index][2][0]);
+            MUT.Assert.AreEqual( "1", out_results[shape_a_index][section0_index][0][0]);
+            MUT.Assert.AreEqual( "2", out_results[shape_b_index][section0_index][0][0]);
+            MUT.Assert.AreEqual( "3", out_results[shape_b_index][section0_index][1][0]);
+            MUT.Assert.AreEqual( "4", out_results[shape_d_index][section0_index][0][0]);
+            MUT.Assert.AreEqual( "5", out_results[shape_d_index][section0_index][1][0]);
+            MUT.Assert.AreEqual( "6", out_results[shape_d_index][section0_index][2][0]);
 
             page1.Delete(0);
         }
@@ -202,26 +202,26 @@ namespace VTest.Core.ShapeSheet
             var col_pinx = query.Columns.Add(VA.Core.SrcConstants.XFormPinX);
             var col_piny = query.Columns.Add(VA.Core.SrcConstants.XFormPinY);
 
-            var data_formulas = query.GetFormulas(page1, shapeids);
-            var data_results = query.GetResults<double>(page1, shapeids);
+            var out_formulas = query.GetFormulas(page1, shapeids);
+            var out_results = query.GetResults<double>(page1, shapeids);
 
-            MUT.Assert.AreEqual("1 in", data_formulas[0][0]);
-            MUT.Assert.AreEqual(1.0, data_results[0][0]);
+            MUT.Assert.AreEqual("1 in", out_formulas[0][0]);
+            MUT.Assert.AreEqual(1.0, out_results[0][0]);
 
-            MUT.Assert.AreEqual("1 in", data_formulas[0][1]);
-            MUT.Assert.AreEqual(1.0, data_results[0][1]);
+            MUT.Assert.AreEqual("1 in", out_formulas[0][1]);
+            MUT.Assert.AreEqual(1.0, out_results[0][1]);
             
-            MUT.Assert.AreEqual("5 in", data_formulas[1][0]);
-            MUT.Assert.AreEqual(5.0, data_results[1][0]);
+            MUT.Assert.AreEqual("5 in", out_formulas[1][0]);
+            MUT.Assert.AreEqual(5.0, out_results[1][0]);
             
-            MUT.Assert.AreEqual("5 in", data_formulas[1][1]);
-            MUT.Assert.AreEqual(5.0, data_results[1][1]);
+            MUT.Assert.AreEqual("5 in", out_formulas[1][1]);
+            MUT.Assert.AreEqual(5.0, out_results[1][1]);
             
-            MUT.Assert.AreEqual("6 in", data_formulas[2][0]);
-            MUT.Assert.AreEqual(6.0, data_results[2][0]);
+            MUT.Assert.AreEqual("6 in", out_formulas[2][0]);
+            MUT.Assert.AreEqual(6.0, out_results[2][0]);
             
-            MUT.Assert.AreEqual("6 in", data_formulas[2][1]);
-            MUT.Assert.AreEqual(6.0, data_results[2][1]);
+            MUT.Assert.AreEqual("6 in", out_formulas[2][1]);
+            MUT.Assert.AreEqual(6.0, out_results[2][1]);
 
 
             page1.Delete(0);
@@ -249,26 +249,26 @@ namespace VTest.Core.ShapeSheet
             var col_pinx = query.Columns.Add(VA.Core.SrcConstants.XFormPinX);
             var col_piny = query.Columns.Add(VA.Core.SrcConstants.XFormPinY);
 
-            var data_formulas = query.GetFormulas(page1, shapeids);
-            var data_results = query.GetResults<double>(page1, shapeids);
+            var out_formulas = query.GetFormulas(page1, shapeids);
+            var out_results = query.GetResults<double>(page1, shapeids);
 
-            MUT.Assert.AreEqual("5 in", data_formulas[0][0]);
-            MUT.Assert.AreEqual(5.0, data_results[0][0]);
+            MUT.Assert.AreEqual("5 in", out_formulas[0][0]);
+            MUT.Assert.AreEqual(5.0, out_results[0][0]);
 
-            MUT.Assert.AreEqual("5 in", data_formulas[0][1]);
-            MUT.Assert.AreEqual(5.0, data_results[0][1]);
+            MUT.Assert.AreEqual("5 in", out_formulas[0][1]);
+            MUT.Assert.AreEqual(5.0, out_results[0][1]);
             
-            MUT.Assert.AreEqual("6 in", data_formulas[1][0]);
-            MUT.Assert.AreEqual(6.0, data_results[1][0]);
+            MUT.Assert.AreEqual("6 in", out_formulas[1][0]);
+            MUT.Assert.AreEqual(6.0, out_results[1][0]);
             
-            MUT.Assert.AreEqual("6 in", data_formulas[1][1]);
-            MUT.Assert.AreEqual(6.0, data_results[1][1]);
+            MUT.Assert.AreEqual("6 in", out_formulas[1][1]);
+            MUT.Assert.AreEqual(6.0, out_results[1][1]);
             
-            MUT.Assert.AreEqual("1 in", data_formulas[2][0]);
-            MUT.Assert.AreEqual(1.0, data_results[2][0]);
+            MUT.Assert.AreEqual("1 in", out_formulas[2][0]);
+            MUT.Assert.AreEqual(1.0, out_results[2][0]);
             
-            MUT.Assert.AreEqual("1 in", data_formulas[2][1]);
-            MUT.Assert.AreEqual(1.0, data_results[2][1]);
+            MUT.Assert.AreEqual("1 in", out_formulas[2][1]);
+            MUT.Assert.AreEqual(1.0, out_results[2][1]);
 
 
             page1.Delete(0);
@@ -303,16 +303,16 @@ namespace VTest.Core.ShapeSheet
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
-            var r2 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VA.Core.CellValueType.Formula);
-            MUT.Assert.AreEqual(shapes.Length,r2.Count);
+            var list_list_ctrcells_1 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VA.Core.CellValueType.Formula);
+            MUT.Assert.AreEqual(shapes.Length,list_list_ctrcells_1.Count);
             for (int i = 0; i < shapes.Length;i++)
             {
-                MUT.Assert.AreEqual(0,r2[i].Count);
+                MUT.Assert.AreEqual(0,list_list_ctrcells_1[i].Count);
             }
 
             // Add a Controls row to shape2
-            var cc = new VA.Shapes.ControlCells();
-            VA.Shapes.ControlHelper.Add(shape_b, cc);
+            var list_list_ctrcells_2 = new VA.Shapes.ControlCells();
+            VA.Shapes.ControlHelper.Add(shape_b, list_list_ctrcells_2);
 
             // Now verify that none of the shapes *except s2* have the controls section locally or otherwise
             foreach (var s in shapes)
@@ -345,17 +345,17 @@ namespace VTest.Core.ShapeSheet
             }
 
             // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
-            var r3 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VA.Core.CellValueType.Formula);
-            MUT.Assert.AreEqual(shapes.Length, r3.Count);
+            var list_list_ctrcells_3 = VA.Shapes.ControlCells.GetCells(page1, shapeidpairs, VA.Core.CellValueType.Formula);
+            MUT.Assert.AreEqual(shapes.Length, list_list_ctrcells_3.Count);
             for (int i = 0; i < shapes.Length; i++)
             {
                 if (shapes[i] != shape_b)
                 {
-                    MUT.Assert.AreEqual(0, r3[i].Count);
+                    MUT.Assert.AreEqual(0, list_list_ctrcells_3[i].Count);
                 }
                 else
                 {
-                    MUT.Assert.AreEqual(1, r3[i].Count);
+                    MUT.Assert.AreEqual(1, list_list_ctrcells_3[i].Count);
                 }
             }
 
