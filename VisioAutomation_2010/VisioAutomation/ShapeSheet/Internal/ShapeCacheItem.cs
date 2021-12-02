@@ -7,17 +7,17 @@ namespace VisioAutomation.ShapeSheet.Internal
         public short ShapeId { get; }
         public IVisio.VisSectionIndices SectionIndex { get; }
 
-        public VisioAutomation.ShapeSheet.Query.SectionQueryColumns SectionQueryColumns { get; }
+        public VisioAutomation.ShapeSheet.Query.ColumnGroup ColumnGroup { get; }
 
         // The RowCount is the data that is being cached
         public int RowCount { get; }
 
-        internal ShapeCacheItem(short shapeid, IVisio.VisSectionIndices sec_index, VisioAutomation.ShapeSheet.Query.SectionQueryColumns sec_cols,
+        internal ShapeCacheItem(short shapeid, IVisio.VisSectionIndices sec_index, VisioAutomation.ShapeSheet.Query.ColumnGroup sec_cols,
             int numrows)
         {
             this.ShapeId = shapeid;
             this.SectionIndex = sec_index;
-            this.SectionQueryColumns = sec_cols;
+            this.ColumnGroup = sec_cols;
             this.RowCount = numrows;
         }
     }

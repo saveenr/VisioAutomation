@@ -172,7 +172,7 @@
     <Compile Include="ShapeSheet\Data\CellValueGroups.cs" />
     <Compile Include="ShapeSheet\Data\CellValueRow.cs" />
     <Compile Include="ShapeSheet\Internal\ShapeCacheItem.cs" />
-    <Compile Include="ShapeSheet\Query\SectionQueryColumns.cs" />
+    <Compile Include="ShapeSheet\Query\ColumnGroup.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />

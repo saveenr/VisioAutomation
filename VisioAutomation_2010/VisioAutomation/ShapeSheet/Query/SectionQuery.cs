@@ -5,15 +5,15 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : IEnumerable<SectionQueryColumns>
+    public class SectionQuery : IEnumerable<ColumnGroup>
     {
-        private IList<SectionQueryColumns> _list_section_query_columns { get; }
-        private readonly Dictionary<IVisio.VisSectionIndices, SectionQueryColumns> _map_secindex_to_sec_cols;
+        private IList<ColumnGroup> _list_section_query_columns { get; }
+        private readonly Dictionary<IVisio.VisSectionIndices, ColumnGroup> _map_secindex_to_sec_cols;
 
         public SectionQuery() : base()
         {
-            this._list_section_query_columns = new List<SectionQueryColumns>();
-            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionQueryColumns>();
+            this._list_section_query_columns = new List<ColumnGroup>();
+            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, ColumnGroup>();
         }
 
 
@@ -143,11 +143,11 @@ namespace VisioAutomation.ShapeSheet.Query
             var results_rows = new List<Data.CellValueRows<T>>(shapecacheitems.Count);
             foreach (var shapecacheitem in shapecacheitems)
             {
-                var secindex = shapecacheitem.SectionQueryColumns.SectionIndex;
+                var secindex = shapecacheitem.ColumnGroup.SectionIndex;
                 var sectionshaperows = new Data.CellValueRows<T>(shapecacheitem.RowCount, shapeid, secindex);
                 results_rows.Add(sectionshaperows);
 
-                int num_cols = shapecacheitem.SectionQueryColumns.Count;
+                int num_cols = shapecacheitem.ColumnGroup.Count;
                 foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
                     var cells = segreader.GetNextSegment(num_cols);
@@ -214,7 +214,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
-                    var cols = shapecacheitem.SectionQueryColumns;
+                    var cols = shapecacheitem.ColumnGroup;
                     var section_index = shapecacheitem.SectionIndex;
                     foreach (var col in cols)
                     {
@@ -230,7 +230,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         private static Internal.ShapeCacheItem _create_shapesectioncacheitem(Core.ShapeIDPair shapeidpair,
-            IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols)
+            IVisio.VisSectionIndices sec_index, ColumnGroup sec_cols)
         {
             // first count the rows in the section
 
@@ -251,7 +251,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return shapecacheitem;
         }
 
-        public IEnumerator<SectionQueryColumns> GetEnumerator()
+        public IEnumerator<ColumnGroup> GetEnumerator()
         {
             return this._list_section_query_columns.GetEnumerator();
         }
@@ -261,9 +261,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public SectionQueryColumns this[int index] => this._list_section_query_columns[index];
+        public ColumnGroup this[int index] => this._list_section_query_columns[index];
 
-        public SectionQueryColumns Add(IVisio.VisSectionIndices sec_index)
+        public ColumnGroup Add(IVisio.VisSectionIndices sec_index)
         {
             if (this._map_secindex_to_sec_cols.ContainsKey(sec_index))
             {
@@ -272,13 +272,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentException(msg);
             }
 
-            var sec_cols = new SectionQueryColumns(sec_index);
+            var sec_cols = new ColumnGroup(sec_index);
             this._list_section_query_columns.Add(sec_cols);
             this._map_secindex_to_sec_cols[sec_index] = sec_cols;
             return sec_cols;
         }
 
-        public SectionQueryColumns Add(Core.Src src)
+        public ColumnGroup Add(Core.Src src)
         {
             return this.Add((IVisio.VisSectionIndices) src.Section);
         }
