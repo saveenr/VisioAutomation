@@ -4,9 +4,8 @@ namespace VisioAutomation.ShapeSheet.Data
 {
     public class DataRowGroup<T> : IEnumerable<DataRowCollection<T>>
     {
-        // For a given shape id
-        //   For a given section
-        //      contains rows for that shape and section
+        // For a tuple of (shape id, section ids ) contains rows for
+        // each pair of (shape and sectionid )
         //
         // Example:
         // rg = RowGroup for a shape 1 and sections A, B, C
