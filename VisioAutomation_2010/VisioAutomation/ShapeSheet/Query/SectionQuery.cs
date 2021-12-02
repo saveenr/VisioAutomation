@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public Data.CellValueGroups<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public Data.RowGroups<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
             var cache = _create_sectionquerycache(shapeidpairs);
@@ -61,7 +61,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public Data.CellValueGroups<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public Data.RowGroups<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
             var cache = _create_sectionquerycache(shapeidpairs);
@@ -113,10 +113,10 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private Data.CellValueGroups<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
+        private Data.RowGroups<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
             VisioAutomation.ShapeSheet.Internal.SectionMetadataCache sectioncache, VisioAutomation.Internal.ArraySegmentEnumerator<T> segreader)
         {
-            var results = new Data.CellValueGroups<T>();
+            var results = new Data.RowGroups<T>();
 
             for (int pair_index = 0; pair_index < shapeidpairs.Count; pair_index++)
             {

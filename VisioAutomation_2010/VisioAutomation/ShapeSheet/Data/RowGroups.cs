@@ -2,20 +2,20 @@
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class CellValueGroups<T> : IEnumerable<RowGroup<T>>
+    public class RowGroups<T> : IEnumerable<RowGroup<T>>
     {
         // this class contains all the outputs for every shape that was queried
         // think of it this collection as having this shape
         //
         // list {
-        //     [0] - { shapeid0, {sections found for shapeid0} }
-        //     [1] - { shapeid1, {sections found for shapeid1} }
-        //     [n] - { shapeidn, {sections found for shapeidn} }
+        //     [0] - RowGroup { shapeid0, {sections found for shapeid0} }
+        //     [1] - RowGroup { shapeid1, {sections found for shapeid1} }
+        //     [n] - RowGroup { shapeidn, {sections found for shapeidn} }
         // }
 
         private readonly List<RowGroup<T>> _list;
 
-        internal CellValueGroups()
+        internal RowGroups()
         {
             this._list = new List<RowGroup<T>>();
         }

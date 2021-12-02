@@ -134,7 +134,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Data.CellValueGroups<string> __QueryCells_MultipleShapes_MultipleRows(Query.SectionQuery query,
+        private Data.RowGroups<string> __QueryCells_MultipleShapes_MultipleRows(Query.SectionQuery query,
             IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
             var results = type switch
