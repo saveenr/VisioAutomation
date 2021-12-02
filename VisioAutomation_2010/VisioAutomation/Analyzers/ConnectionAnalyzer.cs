@@ -251,12 +251,12 @@ namespace VisioAutomation.Analyzers
             }
 
             // Clone the adjacency matrix, and fill it in 
-            // with the transitive closure as specified from the Warshall algortihm
+            // with the transitive closure as specified from the Warshall algorithm
 
             var warshall_result = adj_matrix.Clone();
             ConnectionAnalyzer.PerformWarshall(warshall_result);
 
-            // For each item in the where an transitive closure is indicated
+            // For each item in the where a transitive closure is indicated (value is true)
             // create a directed edge object
             for (int row = 0; row < adj_matrix.Width; row++)
             {
