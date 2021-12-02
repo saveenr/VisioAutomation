@@ -14,12 +14,12 @@ namespace VisioScripting.Models
         public double XFormWidth;
         public double XFormHeight;
 
-        private static VASS.Data.Column _static_col_x_form_pin_x;
-        private static VASS.Data.Column _static_col_x_form_pin_y;
-        private static VASS.Data.Column _static_col_x_form_loc_pin_x;
-        private static VASS.Data.Column _static_col_x_form_loc_pin_y;
-        private static VASS.Data.Column _static_col_x_form_width;
-        private static VASS.Data.Column _static_col_x_form_height;
+        private static VASS.Data.DataColumn _static_col_x_form_pin_x;
+        private static VASS.Data.DataColumn _static_col_x_form_pin_y;
+        private static VASS.Data.DataColumn _static_col_x_form_loc_pin_x;
+        private static VASS.Data.DataColumn _static_col_x_form_loc_pin_y;
+        private static VASS.Data.DataColumn _static_col_x_form_width;
+        private static VASS.Data.DataColumn _static_col_x_form_height;
         private static VASS.Query.CellQuery _static_query;
 
         internal static List<ShapeXFormData> _get_xfrms(IVisio.Page page, IList<int> shapeids)

@@ -9,8 +9,8 @@ namespace VisioAutomation.ShapeSheet.Data
 
         private readonly List<DataRow<T>> _list;
 
-        public readonly int ShapeID = -1;
-        public readonly IVisio.VisSectionIndices SectionIndex = IVisio.VisSectionIndices.visSectionInval;
+        public readonly int ShapeID;
+        public readonly IVisio.VisSectionIndices SectionIndex;
 
         internal DataRowCollection(int capacity)
         {

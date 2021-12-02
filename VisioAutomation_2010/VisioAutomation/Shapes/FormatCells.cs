@@ -103,7 +103,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override FormatCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.ColumnCollection cols)
+            public override FormatCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new FormatCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);
