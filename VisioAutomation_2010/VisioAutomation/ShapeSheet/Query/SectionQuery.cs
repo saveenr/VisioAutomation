@@ -76,15 +76,15 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private VisioAutomation.ShapeSheet.Internal.SectionMetadataCache _create_sectionquerycache(Core.ShapeIDPairs shapeidpairs)
+        private Internal.SectionMetadataCache _create_sectionquerycache(Core.ShapeIDPairs shapeidpairs)
         {
             // Prepare a cache object
             if (this.Count < 1)
             {
-                return new VisioAutomation.ShapeSheet.Internal.SectionMetadataCache(0);
+                return new Internal.SectionMetadataCache(0);
             }
 
-            var cache = new VisioAutomation.ShapeSheet.Internal.SectionMetadataCache();
+            var cache = new Internal.SectionMetadataCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shapeidpair in shapeidpairs)
@@ -114,7 +114,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
 
         private Data.DataRowGroupCollection<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
-            VisioAutomation.ShapeSheet.Internal.SectionMetadataCache sectioncache, VisioAutomation.Internal.ArraySegmentEnumerator<T> segreader)
+            Internal.SectionMetadataCache sectioncache, VisioAutomation.Internal.ArraySegmentEnumerator<T> segreader)
         {
             var results = new Data.DataRowGroupCollection<T>();
 
@@ -129,7 +129,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private Data.DataRowGroup<T> _create_output_for_shape<T>(short shapeid, VisioAutomation.ShapeSheet.Internal.ShapeMetadataCache shapecacheitems,
+        private Data.DataRowGroup<T> _create_output_for_shape<T>(short shapeid, Internal.ShapeMetadataCache shapecacheitems,
             VisioAutomation.Internal.ArraySegmentEnumerator<T> segreader)
         {
             int original_seg_count = segreader.Count;
@@ -184,7 +184,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream;
         }
 
-        private Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, VisioAutomation.ShapeSheet.Internal.SectionMetadataCache cache)
+        private Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, Internal.SectionMetadataCache cache)
         {
             int numcells = cache.CountCells();
             var sidsrcs = _sidsrcs_for_shapes(shapeidpairs, cache);
@@ -193,7 +193,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         private static IEnumerable<Core.SidSrc> _sidsrcs_for_shapes(Core.ShapeIDPairs shapeidpairs,
-            VisioAutomation.ShapeSheet.Internal.SectionMetadataCache cache)
+            Internal.SectionMetadataCache cache)
         {
             foreach (int shape_ord in Enumerable.Range(0, shapeidpairs.Count))
             {
@@ -208,7 +208,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static IEnumerable<Core.SidSrc> _sidsrcs_for_shape(int shapeid, VisioAutomation.ShapeSheet.Internal.ShapeMetadataCache shapecache)
+        private static IEnumerable<Core.SidSrc> _sidsrcs_for_shape(int shapeid, Internal.ShapeMetadataCache shapecache)
         {
             foreach (var shapecacheitem in shapecache)
             {
@@ -247,7 +247,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 row_count = shapeidpair.Shape.RowCount[(short) sec_index];
             }
 
-            var shapecacheitem = new VisioAutomation.ShapeSheet.Internal.ShapeMetadataCacheItem((short) shapeidpair.ShapeID, sec_index, sec_cols, row_count);
+            var shapecacheitem = new Internal.ShapeMetadataCacheItem((short) shapeidpair.ShapeID, sec_index, sec_cols, row_count);
             return shapecacheitem;
         }
 
