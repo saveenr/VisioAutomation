@@ -18,8 +18,7 @@ namespace VisioAutomation.Extensions
 
         public static Core.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(shape);
-            return visobjtarget.GetBoundingBox(args);
+            return shape.Wrap().GetBoundingBox(args);
         }
 
 
@@ -43,6 +42,11 @@ namespace VisioAutomation.Extensions
             double yprime;
             shape.XYToPage(xy.X, xy.Y, out xprime, out yprime);
             return new Core.Point(xprime, yprime);
+        }
+
+        internal static VisioAutomation.Internal.VisioObjectTarget Wrap(this IVisio.Shape shape)
+        {
+            return new VisioAutomation.Internal.VisioObjectTarget(shape);
         }
     }
 }

@@ -10,8 +10,7 @@ namespace VisioAutomation.Extensions
             IVisio.Master master,
             Core.Point point)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.Drop(master, point);
+            return page.Wrap().Drop(master, point);
         }
 
         public static short[] DropManyU(
@@ -19,8 +18,7 @@ namespace VisioAutomation.Extensions
             IList<IVisio.Master> masters,
             IEnumerable<Core.Point> points)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DropManyU(masters, points);
+            return page.Wrap().DropManyU(masters, points);
         }
     }
 }

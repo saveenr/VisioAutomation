@@ -7,26 +7,22 @@ namespace VisioAutomation.Extensions
     {
         public static IVisio.Shape DrawOval(this IVisio.Master master, Core.Rectangle rect)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return visobjtarget.DrawOval(rect);
+            return master.Wrap().DrawOval(rect);
         }
 
         public static IVisio.Shape DrawRectangle(this IVisio.Master master, Core.Rectangle rect)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return visobjtarget.DrawRectangle(rect);
+            return master.Wrap().DrawRectangle(rect);
         }
 
         public static IVisio.Shape DrawBezier(this IVisio.Master master, IList<Core.Point> points)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return visobjtarget.DrawBezier(points);
+            return master.Wrap().DrawBezier(points);
         }
 
         public static IVisio.Shape DrawPolyline(this IVisio.Master master, IList<Core.Point> points)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return visobjtarget.DrawPolyline(points);
+            return master.Wrap().DrawPolyline(points);
         }
 
         public static IVisio.Shape DrawLine(
@@ -34,8 +30,7 @@ namespace VisioAutomation.Extensions
             Core.Point p0,
             Core.Point p1)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return visobjtarget.DrawLine(p0, p1);
+            return master.Wrap().DrawLine(p0, p1);
         }
 
         public static IVisio.Shape DrawQuarterArc(
@@ -44,8 +39,7 @@ namespace VisioAutomation.Extensions
             Core.Point p1,
             IVisio.VisArcSweepFlags flags)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(master);
-            return visobjtarget.DrawQuarterArc(p0, p1, flags);
+            return master.Wrap().DrawQuarterArc(p0, p1, flags);
         }
     }
 }
