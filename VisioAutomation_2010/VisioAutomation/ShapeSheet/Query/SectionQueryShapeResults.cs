@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQueryShapeResults<T> : IEnumerable<SectionShapeRows<T>>
+    public class SectionQueryShapeResults<T> : IEnumerable<SectionShape_CellValueRows<T>>
     {
         // for a given shape, contains rows for every section that was queried
         //
@@ -14,15 +14,15 @@ namespace VisioAutomation.ShapeSheet.Query
         // }
 
         public readonly int ShapeID;
-        private readonly List<SectionShapeRows<T>> _items;
+        private readonly List<SectionShape_CellValueRows<T>> _items;
 
-        internal SectionQueryShapeResults(int shapeid, List<SectionShapeRows<T>> sections)
+        internal SectionQueryShapeResults(int shapeid, List<SectionShape_CellValueRows<T>> sections)
         {
             this.ShapeID = shapeid;
             this._items = sections;
         }
 
-        public IEnumerator<SectionShapeRows<T>> GetEnumerator()
+        public IEnumerator<SectionShape_CellValueRows<T>> GetEnumerator()
         {
             return this._items.GetEnumerator();
         }
@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return this._items.Count; }
         }
 
-        public SectionShapeRows<T> this[int index]
+        public SectionShape_CellValueRows<T> this[int index]
         {
             get { return this._items[index]; }
         }

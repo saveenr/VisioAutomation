@@ -144,7 +144,7 @@
     <Compile Include="Internal\ArraySegmentEnumerator.cs" />
     <Compile Include="Internal\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryCache.cs" />
-    <Compile Include="ShapeSheet\Query\Rows.cs" />
+    <Compile Include="ShapeSheet\Query\CellValueRows.cs" />
     <Compile Include="ShapeSheet\Query\Columns.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\Column.cs" />
@@ -170,10 +170,10 @@
     <Compile Include="Shapes\GeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryResults.cs" />
-    <Compile Include="ShapeSheet\Query\Row.cs" />
+    <Compile Include="ShapeSheet\Query\CellValueRow.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryColumns.cs" />
-    <Compile Include="ShapeSheet\Query\SectionShapeRows.cs" />
+    <Compile Include="ShapeSheet\Query\SectionShape_CellValueRows.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />

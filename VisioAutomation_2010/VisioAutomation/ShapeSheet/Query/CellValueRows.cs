@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class Rows<T> : IEnumerable<Row<T>>
+    public class CellValueRows<T> : IEnumerable<CellValueRow<T>>
     {
-        private readonly List<Row<T>> _list;
+        private readonly List<CellValueRow<T>> _list;
 
-        internal Rows(int capacity)
+        internal CellValueRows(int capacity)
         {
-            this._list = new List<Row<T>>(capacity);
+            this._list = new List<CellValueRow<T>>(capacity);
         }
 
-        public IEnumerator<Row<T>> GetEnumerator()
+        public IEnumerator<CellValueRow<T>> GetEnumerator()
         {
             return this._list.GetEnumerator();
         }
@@ -21,18 +21,18 @@ namespace VisioAutomation.ShapeSheet.Query
             return GetEnumerator();
         }
 
-        internal void Add(Row<T> r)
+        internal void Add(CellValueRow<T> r)
         {
             this._list.Add(r);
         }
 
-        internal void AddRange(IEnumerable<Row<T>> rows)
+        internal void AddRange(IEnumerable<CellValueRow<T>> rows)
         {
             this._list.AddRange(rows);
         }
 
         public int Count => this._list.Count;
 
-        public Row<T> this[int index] => this._list[index];
+        public CellValueRow<T> this[int index] => this._list[index];
     }
 }

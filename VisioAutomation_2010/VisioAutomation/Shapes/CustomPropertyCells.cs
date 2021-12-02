@@ -180,7 +180,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override CustomPropertyCells ToCellGroup(VASS.Query.Row<string> row, VASS.Query.Columns cols)
+            public override CustomPropertyCells ToCellGroup(VASS.Query.CellValueRow<string> row, VASS.Query.Columns cols)
             {
                 var cells = new CustomPropertyCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public abstract TGroup ToCellGroup(Query.Row<string> row, Query.Columns cols);
+        public abstract TGroup ToCellGroup(Query.CellValueRow<string> row, Query.Columns cols);
 
         public List<TGroup> GetCellsMultipleShapesSingleRow(IVisio.Page page, IList<int> shapeids,
             Core.CellValueType type)
@@ -109,11 +109,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> _sectionshaperows_to_cellgroups(Query.SectionShapeRows<string> section_rows,
+        private List<TGroup> _sectionshaperows_to_cellgroups(Query.SectionShape_CellValueRows<string> section_cell_value_rows,
             Query.Columns cols)
         {
-            var cellgroups = new List<TGroup>(section_rows.Count);
-            foreach (var section_row in section_rows)
+            var cellgroups = new List<TGroup>(section_cell_value_rows.Count);
+            foreach (var section_row in section_cell_value_rows)
             {
                 var cellgroup = this.ToCellGroup(section_row, cols);
                 cellgroups.Add(cellgroup);
@@ -146,7 +146,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Query.Rows<string> __QueryCells_SingleShape_SingleRow(Query.CellQuery query,
+        private Query.CellValueRows<string> __QueryCells_SingleShape_SingleRow(Query.CellQuery query,
             IVisio.Shape shape, Core.CellValueType type)
         {
             var results = type switch
@@ -158,7 +158,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Query.Rows<string> __QueryCells_MultipleShapes_SingleRow(Query.CellQuery query,
+        private Query.CellValueRows<string> __QueryCells_MultipleShapes_SingleRow(Query.CellQuery query,
             IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var results = type switch

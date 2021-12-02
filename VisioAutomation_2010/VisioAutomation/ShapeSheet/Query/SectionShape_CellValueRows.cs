@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionShapeRows<T> : Rows<T>
+    public class SectionShape_CellValueRows<T> : CellValueRows<T>
     {
         // for a given tuple of (shape, section) gives the rows for that tuple
         //
@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public readonly int ShapeID;
         public readonly IVisio.VisSectionIndices SectionIndex;
 
-        internal SectionShapeRows(int capacity, int shapeid, IVisio.VisSectionIndices section_index) : base(capacity)
+        internal SectionShape_CellValueRows(int capacity, int shapeid, IVisio.VisSectionIndices section_index) : base(capacity)
         {
             this.ShapeID = shapeid;
             this.SectionIndex = section_index;
