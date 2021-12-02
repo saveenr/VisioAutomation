@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public Data.CellValueGroup<string> GetFormulas(IVisio.Shape visobjtarget)
+        public Data.RowGroup<string> GetFormulas(IVisio.Shape visobjtarget)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget);
             var cache = this._create_sectionquerycache(shapeidpairs);
@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public Data.CellValueGroup<TResult> GetResults<TResult>(IVisio.Shape shape)
+        public Data.RowGroup<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
@@ -129,7 +129,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private Data.CellValueGroup<T> _create_output_for_shape<T>(short shapeid, VisioAutomation.ShapeSheet.Internal.ShapeCache shapecacheitems,
+        private Data.RowGroup<T> _create_output_for_shape<T>(short shapeid, VisioAutomation.ShapeSheet.Internal.ShapeCache shapecacheitems,
             VisioAutomation.Internal.ArraySegmentEnumerator<T> segreader)
         {
             int original_seg_count = segreader.Count;
@@ -140,23 +140,23 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            var results_rows = new List<Data.CellValueRows<T>>(shapecacheitems.Count);
+            var results_rows = new List<Data.Rows<T>>(shapecacheitems.Count);
             foreach (var shapecacheitem in shapecacheitems)
             {
                 var secindex = shapecacheitem.ColumnGroup.SectionIndex;
-                var sectionshaperows = new Data.CellValueRows<T>(shapecacheitem.RowCount, shapeid, secindex);
+                var sectionshaperows = new Data.Rows<T>(shapecacheitem.RowCount, shapeid, secindex);
                 results_rows.Add(sectionshaperows);
 
                 int num_cols = shapecacheitem.ColumnGroup.Count;
                 foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
                     var cells = segreader.GetNextSegment(num_cols);
-                    var sec_res_row = new Data.CellValueRow<T>(shapeid, secindex, cells);
+                    var sec_res_row = new Data.Row<T>(shapeid, secindex, cells);
                     sectionshaperows.Add(sec_res_row);
                 }
             }
 
-            var results = new Data.CellValueGroup<T>(shapeid, results_rows);
+            var results = new Data.RowGroup<T>(shapeid, results_rows);
 
             // the difference in the segment count must match the total number of output cells
 

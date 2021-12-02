@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class CellValueGroups<T> : IEnumerable<CellValueGroup<T>>
+    public class CellValueGroups<T> : IEnumerable<RowGroup<T>>
     {
         // this class contains all the outputs for every shape that was queried
         // think of it this collection as having this shape
@@ -13,19 +13,19 @@ namespace VisioAutomation.ShapeSheet.Data
         //     [n] - { shapeidn, {sections found for shapeidn} }
         // }
 
-        private readonly List<CellValueGroup<T>> _list;
+        private readonly List<RowGroup<T>> _list;
 
         internal CellValueGroups()
         {
-            this._list = new List<CellValueGroup<T>>();
+            this._list = new List<RowGroup<T>>();
         }
 
-        public void Add(CellValueGroup<T> item)
+        public void Add(RowGroup<T> item)
         {
             this._list.Add(item);
         }
 
-        public IEnumerator<CellValueGroup<T>> GetEnumerator()
+        public IEnumerator<RowGroup<T>> GetEnumerator()
         {
             return this._list.GetEnumerator();
         }
@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Data
             get { return this._list.Count; }
         }
 
-        public CellValueGroup<T> this[int index]
+        public RowGroup<T> this[int index]
         {
             get { return this._list[index]; }
         }

@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class CellValueGroup<T> : IEnumerable<CellValueRows<T>>
+    public class RowGroup<T> : IEnumerable<Rows<T>>
     {
         // for a given shape, contains rows for every section that was queried
         //
@@ -14,15 +14,15 @@ namespace VisioAutomation.ShapeSheet.Data
         // }
 
         public readonly int ShapeID;
-        private readonly List<CellValueRows<T>> _items;
+        private readonly List<Rows<T>> _items;
 
-        internal CellValueGroup(int shapeid, List<CellValueRows<T>> sections)
+        internal RowGroup(int shapeid, List<Rows<T>> sections)
         {
             this.ShapeID = shapeid;
             this._items = sections;
         }
 
-        public IEnumerator<CellValueRows<T>> GetEnumerator()
+        public IEnumerator<Rows<T>> GetEnumerator()
         {
             return this._items.GetEnumerator();
         }
@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet.Data
             get { return this._items.Count; }
         }
 
-        public CellValueRows<T> this[int index]
+        public Rows<T> this[int index]
         {
             get { return this._items[index]; }
         }

@@ -144,7 +144,7 @@
     <Compile Include="Internal\ArraySegmentEnumerator.cs" />
     <Compile Include="Internal\ArraySegment.cs" />
     <Compile Include="ShapeSheet\Internal\SectionMetadataCache.cs" />
-    <Compile Include="ShapeSheet\Data\CellValueRows.cs" />
+    <Compile Include="ShapeSheet\Data\Rows.cs" />
     <Compile Include="ShapeSheet\Query\Columns.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroupBuilder.cs" />
     <Compile Include="ShapeSheet\Query\Column.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="Shapes\GeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
     <Compile Include="ShapeSheet\Data\CellValueGroups.cs" />
-    <Compile Include="ShapeSheet\Data\CellValueRow.cs" />
+    <Compile Include="ShapeSheet\Data\Row.cs" />
     <Compile Include="ShapeSheet\Internal\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\ColumnGroup.cs" />
     <Compile Include="Text\TextFormat.cs" />

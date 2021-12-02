@@ -48,7 +48,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override XFormCells ToCellGroup(VASS.Data.CellValueRow<string> row, VASS.Query.Columns cols)
+            public override XFormCells ToCellGroup(VASS.Data.Row<string> row, VASS.Query.Columns cols)
             {
                 var cells = new XFormCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

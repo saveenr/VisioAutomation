@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class CellValueRow<T> : IEnumerable<T>
+    public class Row<T> : IEnumerable<T>
     {
         public int ShapeID { get; }
         public IVisio.VisSectionIndices SectionIndex { get; }
         private VisioAutomation.Internal.ArraySegment<T> Cells { get; }
 
-        internal CellValueRow(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Internal.ArraySegment<T> cells)
+        internal Row(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Internal.ArraySegment<T> cells)
         {
             this.ShapeID = shapeid;
             this.Cells = cells;
