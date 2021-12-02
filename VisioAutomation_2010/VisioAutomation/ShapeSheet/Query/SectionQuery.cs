@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public SectionQueryShapeResults<string> GetFormulas(IVisio.Shape visobjtarget)
+        public CellValueGroup<string> GetFormulas(IVisio.Shape visobjtarget)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget);
             var cache = this._create_sectionquerycache(shapeidpairs);
@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public SectionQueryShapeResults<TResult> GetResults<TResult>(IVisio.Shape shape)
+        public CellValueGroup<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public SectionQueryResults<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public CellValueGroups<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
             var cache = _create_sectionquerycache(shapeidpairs);
@@ -61,7 +61,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public SectionQueryResults<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public CellValueGroups<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
             var cache = _create_sectionquerycache(shapeidpairs);
@@ -113,10 +113,10 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private SectionQueryResults<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
+        private CellValueGroups<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
             SectionQueryCache sectioncache, Internal.ArraySegmentEnumerator<T> segreader)
         {
-            var results = new SectionQueryResults<T>();
+            var results = new CellValueGroups<T>();
 
             for (int pair_index = 0; pair_index < shapeidpairs.Count; pair_index++)
             {
@@ -129,7 +129,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems,
+        private CellValueGroup<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems,
             Internal.ArraySegmentEnumerator<T> segreader)
         {
             int original_seg_count = segreader.Count;
@@ -156,7 +156,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
 
-            var results = new SectionQueryShapeResults<T>(shapeid, results_rows);
+            var results = new CellValueGroup<T>(shapeid, results_rows);
 
             // the difference in the segment count must match the total number of output cells
 

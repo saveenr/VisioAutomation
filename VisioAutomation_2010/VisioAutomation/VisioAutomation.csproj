@@ -130,7 +130,7 @@
     <Compile Include="Core\ShapeIDPair.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
-    <Compile Include="ShapeSheet\Query\SectionQueryShapeResults.cs" />
+    <Compile Include="ShapeSheet\Query\CellValueGroup.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCache.cs" />
     <Compile Include="ShapeSheet\Writers\WriterBase.cs" />
     <Compile Include="ShapeSheet\Writers\SidSrcWriter.cs" />
@@ -169,7 +169,7 @@
     <Compile Include="Shapes\GeometryRow.cs" />
     <Compile Include="Shapes\GeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
-    <Compile Include="ShapeSheet\Query\SectionQueryResults.cs" />
+    <Compile Include="ShapeSheet\Query\CellValueGroups.cs" />
     <Compile Include="ShapeSheet\Query\CellValueRow.cs" />
     <Compile Include="ShapeSheet\Query\ShapeCacheItem.cs" />
     <Compile Include="ShapeSheet\Query\SectionQueryColumns.cs" />

@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQueryShapeResults<T> : IEnumerable<CellValueRows<T>>
+    public class CellValueGroup<T> : IEnumerable<CellValueRows<T>>
     {
         // for a given shape, contains rows for every section that was queried
         //
@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public readonly int ShapeID;
         private readonly List<CellValueRows<T>> _items;
 
-        internal SectionQueryShapeResults(int shapeid, List<CellValueRows<T>> sections)
+        internal CellValueGroup(int shapeid, List<CellValueRows<T>> sections)
         {
             this.ShapeID = shapeid;
             this._items = sections;
