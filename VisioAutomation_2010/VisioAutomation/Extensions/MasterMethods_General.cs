@@ -23,5 +23,10 @@ namespace VisioAutomation.Extensions
             return CollectionHelpers.ToList(() => masters.Count,
                 i => masters[i + 1]);
         }
+
+        internal static VisioAutomation.Internal.VisioObjectTarget Wrap(this IVisio.Master master)
+        {
+            return new VisioAutomation.Internal.VisioObjectTarget(master);
+        }
     }
 }

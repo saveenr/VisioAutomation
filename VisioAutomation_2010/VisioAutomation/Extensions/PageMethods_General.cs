@@ -36,5 +36,10 @@ namespace VisioAutomation.Extensions
             string[] names = (string[]) names_sa;
             return names;
         }
+
+        internal static VisioAutomation.Internal.VisioObjectTarget Wrap(this IVisio.Page page)
+        {
+            return new VisioAutomation.Internal.VisioObjectTarget(page);
+        }
     }
 }

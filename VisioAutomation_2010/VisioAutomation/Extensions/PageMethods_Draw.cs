@@ -7,26 +7,22 @@ namespace VisioAutomation.Extensions
     {
         public static IVisio.Shape DrawOval(this IVisio.Page page, Core.Rectangle rect)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawOval(rect);
+            return page.Wrap().DrawOval(rect);
         }
 
         public static IVisio.Shape DrawRectangle(this IVisio.Page page, Core.Rectangle rect)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawRectangle(rect);
+            return page.Wrap().DrawRectangle(rect);
         }
 
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<Core.Point> points)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawBezier(points);
+            return page.Wrap().DrawBezier(points);
         }
 
         public static IVisio.Shape DrawPolyline(this IVisio.Page page, IList<Core.Point> points)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawPolyline(points);
+            return page.Wrap().DrawPolyline(points);
         }
 
         public static IVisio.Shape DrawLine(
@@ -34,8 +30,7 @@ namespace VisioAutomation.Extensions
             Core.Point p0,
             Core.Point p1)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawLine(p0, p1);
+            return page.Wrap().DrawLine(p0, p1);
         }
 
         public static IVisio.Shape DrawQuarterArc(
@@ -44,8 +39,7 @@ namespace VisioAutomation.Extensions
             Core.Point p1,
             IVisio.VisArcSweepFlags flags)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawQuarterArc(p0, p1, flags);
+            return page.Wrap().DrawQuarterArc(p0, p1, flags);
         }
 
         public static IVisio.Shape DrawNurbs(
@@ -55,8 +49,7 @@ namespace VisioAutomation.Extensions
             IList<double> weights,
             int degree)
         {
-            var visobjtarget = new VisioAutomation.Internal.VisioObjectTarget(page);
-            return visobjtarget.DrawNurbs(controlpoints, knots, weights, degree);
+            return page.Wrap().DrawNurbs(controlpoints, knots, weights, degree);
         }
     }
 }
