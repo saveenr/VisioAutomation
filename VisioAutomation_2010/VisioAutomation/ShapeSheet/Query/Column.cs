@@ -6,7 +6,7 @@
         public int Ordinal { get; protected set; }
         public Core.Src Src { get; }
 
-        public Column(int ordinal, string name, Core.Src src)
+        internal Column(int ordinal, string name, Core.Src src)
         {
             if (string.IsNullOrEmpty(name))
             {
