@@ -205,7 +205,7 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override TextBlockCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.ColumnCollection cols)
+            public override TextBlockCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.ColumnCollection cols)
             {
                 var cells = new TextBlockCells();
              

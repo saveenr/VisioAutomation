@@ -74,7 +74,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override LockCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.ColumnCollection cols)
+            public override LockCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.ColumnCollection cols)
             {
                 var cells = new LockCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

@@ -88,7 +88,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override LayoutCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.ColumnCollection cols)
+            public override LayoutCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.ColumnCollection cols)
             {
                 var cells = new LayoutCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

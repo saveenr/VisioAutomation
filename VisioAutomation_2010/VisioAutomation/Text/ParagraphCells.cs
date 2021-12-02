@@ -65,7 +65,7 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override ParagraphCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.ColumnCollection cols)
+            public override ParagraphCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.ColumnCollection cols)
             {
                 var getcellvalue = queryrow_to_cellgroup(row, cols);
                 var cells = new ParagraphCells();
