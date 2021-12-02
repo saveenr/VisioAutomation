@@ -7,18 +7,18 @@ namespace VisioAutomation.ShapeSheet.Data
     {
         public int ShapeID { get; }
         public IVisio.VisSectionIndices SectionIndex { get; }
-        private VisioAutomation.Internal.ArraySegment<T> Cells { get; }
+        private VisioAutomation.Internal.ArraySegment<T> _values { get; }
 
-        internal Row(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Internal.ArraySegment<T> cells)
+        internal Row(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Internal.ArraySegment<T> values)
         {
             this.ShapeID = shapeid;
-            this.Cells = cells;
+            this._values = values;
             this.SectionIndex = secindex;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this.Cells.GetEnumerator();
+            return this._values.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -28,12 +28,12 @@ namespace VisioAutomation.ShapeSheet.Data
 
         public int Count
         {
-            get { return this.Cells.Count; }
+            get { return this._values.Count; }
         }
 
         public T this[int index]
         {
-            get { return this.Cells[index]; }
+            get { return this._values[index]; }
         }
     }
 }
