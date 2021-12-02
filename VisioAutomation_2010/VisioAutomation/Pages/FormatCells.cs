@@ -62,7 +62,7 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override FormatCells ToCellGroup(VASS.Data.Row<string> row, VASS.Query.Columns cols)
+            public override FormatCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Query.Columns cols)
             {
                 var cells = new FormatCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

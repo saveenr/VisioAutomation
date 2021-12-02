@@ -3,13 +3,18 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class Row<T> : IEnumerable<T>
+    public class DataRow<T> : IEnumerable<T>
     {
+        // For a shape id, contains an array of values
+        // associated with that shape
+        // 
+        // SectionIndex = if these cells are known to be part of a section
+
         public int ShapeID { get; }
         public IVisio.VisSectionIndices SectionIndex { get; }
         private VisioAutomation.Internal.ArraySegment<T> _values { get; }
 
-        internal Row(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Internal.ArraySegment<T> values)
+        internal DataRow(int shapeid, IVisio.VisSectionIndices secindex, VisioAutomation.Internal.ArraySegment<T> values)
         {
             this.ShapeID = shapeid;
             this._values = values;

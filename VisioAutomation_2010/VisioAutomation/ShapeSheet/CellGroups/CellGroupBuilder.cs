@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        public abstract TGroup ToCellGroup(Data.Row<string> row, Query.Columns cols);
+        public abstract TGroup ToCellGroup(Data.DataRow<string> row, Query.Columns cols);
 
         public List<TGroup> GetCellsMultipleShapesSingleRow(IVisio.Page page, IList<int> shapeids,
             Core.CellValueType type)
@@ -109,11 +109,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> _sectionshaperows_to_cellgroups(Data.Rows<string> group_cell_value_rows,
+        private List<TGroup> _sectionshaperows_to_cellgroups(Data.DataRowCollection<string> group_cell_value_data_row_collection,
             Query.Columns cols)
         {
-            var cellgroups = new List<TGroup>(group_cell_value_rows.Count);
-            foreach (var section_row in group_cell_value_rows)
+            var cellgroups = new List<TGroup>(group_cell_value_data_row_collection.Count);
+            foreach (var section_row in group_cell_value_data_row_collection)
             {
                 var cellgroup = this.ToCellGroup(section_row, cols);
                 cellgroups.Add(cellgroup);
@@ -122,7 +122,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private Data.RowGroup<string> __QueryCells_SingleShape_MultipleRows(Query.SectionQuery query,
+        private Data.DataRowGroup<string> __QueryCells_SingleShape_MultipleRows(Query.SectionQuery query,
             IVisio.Shape shape, Core.CellValueType type)
         {
             var results = type switch
@@ -134,7 +134,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Data.RowGroups<string> __QueryCells_MultipleShapes_MultipleRows(Query.SectionQuery query,
+        private Data.DataRowGroupCollection<string> __QueryCells_MultipleShapes_MultipleRows(Query.SectionQuery query,
             IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
         {
             var results = type switch
@@ -146,7 +146,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Data.Rows<string> __QueryCells_SingleShape_SingleRow(Query.CellQuery query,
+        private Data.DataRowCollection<string> __QueryCells_SingleShape_SingleRow(Query.CellQuery query,
             IVisio.Shape shape, Core.CellValueType type)
         {
             var results = type switch
@@ -158,7 +158,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return results;
         }
 
-        private Data.Rows<string> __QueryCells_MultipleShapes_SingleRow(Query.CellQuery query,
+        private Data.DataRowCollection<string> __QueryCells_MultipleShapes_SingleRow(Query.CellQuery query,
             IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var results = type switch
