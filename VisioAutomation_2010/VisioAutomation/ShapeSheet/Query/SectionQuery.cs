@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public CellValueGroup<string> GetFormulas(IVisio.Shape visobjtarget)
+        public Data.CellValueGroup<string> GetFormulas(IVisio.Shape visobjtarget)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget);
             var cache = this._create_sectionquerycache(shapeidpairs);
@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public CellValueGroup<TResult> GetResults<TResult>(IVisio.Shape shape)
+        public Data.CellValueGroup<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(shape);
             var cache = this._create_sectionquerycache(shapeidpairs);
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return output_for_shape;
         }
 
-        public CellValueGroups<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public Data.CellValueGroups<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
             var cache = _create_sectionquerycache(shapeidpairs);
@@ -61,7 +61,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public CellValueGroups<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public Data.CellValueGroups<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
             var cache = _create_sectionquerycache(shapeidpairs);
@@ -113,10 +113,10 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private CellValueGroups<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
+        private Data.CellValueGroups<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
             SectionQueryCache sectioncache, Internal.ArraySegmentEnumerator<T> segreader)
         {
-            var results = new CellValueGroups<T>();
+            var results = new Data.CellValueGroups<T>();
 
             for (int pair_index = 0; pair_index < shapeidpairs.Count; pair_index++)
             {
@@ -129,7 +129,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private CellValueGroup<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems,
+        private Data.CellValueGroup<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems,
             Internal.ArraySegmentEnumerator<T> segreader)
         {
             int original_seg_count = segreader.Count;
@@ -140,23 +140,23 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            var results_rows = new List<CellValueRows<T>>(shapecacheitems.Count);
+            var results_rows = new List<Data.CellValueRows<T>>(shapecacheitems.Count);
             foreach (var shapecacheitem in shapecacheitems)
             {
                 var secindex = shapecacheitem.SectionQueryColumns.SectionIndex;
-                var sectionshaperows = new CellValueRows<T>(shapecacheitem.RowCount, shapeid, secindex);
+                var sectionshaperows = new Data.CellValueRows<T>(shapecacheitem.RowCount, shapeid, secindex);
                 results_rows.Add(sectionshaperows);
 
                 int num_cols = shapecacheitem.SectionQueryColumns.Count;
                 foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
                     var cells = segreader.GetNextSegment(num_cols);
-                    var sec_res_row = new CellValueRow<T>(shapeid, secindex, cells);
+                    var sec_res_row = new Data.CellValueRow<T>(shapeid, secindex, cells);
                     sectionshaperows.Add(sec_res_row);
                 }
             }
 
-            var results = new CellValueGroup<T>(shapeid, results_rows);
+            var results = new Data.CellValueGroup<T>(shapeid, results_rows);
 
             // the difference in the segment count must match the total number of output cells
 

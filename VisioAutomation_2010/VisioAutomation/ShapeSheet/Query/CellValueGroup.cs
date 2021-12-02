@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Data
 {
     public class CellValueGroup<T> : IEnumerable<CellValueRows<T>>
     {

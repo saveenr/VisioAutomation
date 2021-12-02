@@ -103,7 +103,7 @@ namespace VisioAutomation.Pages
             }
 
 
-            public override LayoutCells ToCellGroup(VASS.Query.CellValueRow<string> row, VASS.Query.Columns cols)
+            public override LayoutCells ToCellGroup(VASS.Data.CellValueRow<string> row, VASS.Query.Columns cols)
             {
                 var cells = new LayoutCells();
                 var getcellvalue = queryrow_to_cellgroup(row, cols);

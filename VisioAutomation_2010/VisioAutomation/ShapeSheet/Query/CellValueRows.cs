@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Data
 {
     public class CellValueRows<T> : IEnumerable<CellValueRow<T>>
     {
