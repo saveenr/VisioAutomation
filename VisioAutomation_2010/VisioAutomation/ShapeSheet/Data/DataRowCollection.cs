@@ -46,8 +46,20 @@ namespace VisioAutomation.ShapeSheet.Data
             this._list.AddRange(rows);
         }
 
-        public int Count => this._list.Count;
+        public int Count
+        {
+            get
+            {
+                return this._list.Count;
+            }
+        }
 
-        public DataRow<T> this[int index] => this._list[index];
+        public DataRow<T> this[int index]
+        {
+            get
+            {
+                return this._list[index];
+            }
+        }
     }
 }
