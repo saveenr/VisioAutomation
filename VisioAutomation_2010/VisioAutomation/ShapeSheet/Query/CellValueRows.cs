@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
@@ -6,9 +7,21 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         private readonly List<CellValueRow<T>> _list;
 
+        public readonly int ShapeID = -1;
+        public readonly IVisio.VisSectionIndices SectionIndex = IVisio.VisSectionIndices.visSectionInval;
+
         internal CellValueRows(int capacity)
         {
             this._list = new List<CellValueRow<T>>(capacity);
+            this.ShapeID = -1;
+            this.SectionIndex = IVisio.VisSectionIndices.visSectionInval;
+        }
+
+        internal CellValueRows(int capacity, int shapeid, IVisio.VisSectionIndices section_index)
+        {
+            this._list = new List<CellValueRow<T>>(capacity);
+            this.ShapeID = shapeid;
+            this.SectionIndex = section_index;
         }
 
         public IEnumerator<CellValueRow<T>> GetEnumerator()

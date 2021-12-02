@@ -109,11 +109,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cellgroups;
         }
 
-        private List<TGroup> _sectionshaperows_to_cellgroups(Query.SectionShape_CellValueRows<string> section_cell_value_rows,
+        private List<TGroup> _sectionshaperows_to_cellgroups(Query.CellValueRows<string> group_cell_value_rows,
             Query.Columns cols)
         {
-            var cellgroups = new List<TGroup>(section_cell_value_rows.Count);
-            foreach (var section_row in section_cell_value_rows)
+            var cellgroups = new List<TGroup>(group_cell_value_rows.Count);
+            foreach (var section_row in group_cell_value_rows)
             {
                 var cellgroup = this.ToCellGroup(section_row, cols);
                 cellgroups.Add(cellgroup);
