@@ -1,22 +1,22 @@
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Internal
 {
-    internal class SectionQueryCache
+    internal class SectionMetadataCache
     {
-        private readonly List<ShapeCache> _list;
+        private readonly List<ShapeMetadataCache> _list;
 
-        public SectionQueryCache()
+        public SectionMetadataCache()
         {
-            this._list = new List<ShapeCache>();
+            this._list = new List<ShapeMetadataCache>();
         }
 
-        public SectionQueryCache(int capacity)
+        public SectionMetadataCache(int capacity)
         {
-            this._list = new List<ShapeCache>(capacity);
+            this._list = new List<ShapeMetadataCache>(capacity);
         }
 
-        public void Add(ShapeCache item)
+        public void Add(ShapeMetadataCache item)
         {
             this._list.Add(item);
         }
@@ -26,12 +26,12 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return this._list.Count; }
         }
 
-        public IEnumerable<ShapeCache> ShapeCacheItems
+        public IEnumerable<ShapeMetadataCache> ShapeCacheItems
         {
             get { return this._list; }
         }
 
-        public ShapeCache this[int index]
+        public ShapeMetadataCache this[int index]
         {
             get { return this._list[index]; }
         }

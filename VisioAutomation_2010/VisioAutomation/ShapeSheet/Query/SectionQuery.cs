@@ -1,97 +1,101 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Core;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.Internal;
+using VisioAutomation.ShapeSheet.Data;
+using VisioAutomation.ShapeSheet.Internal;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : IEnumerable<SectionQueryColumns>
+    public class SectionQuery : IEnumerable<Data.DataColumnCollection>
     {
-        private IList<SectionQueryColumns> _list_section_query_columns { get; }
-        private readonly Dictionary<IVisio.VisSectionIndices, SectionQueryColumns> _map_secindex_to_sec_cols;
+        private IList<Data.DataColumnCollection> _list_section_query_columns { get; }
+        private readonly Dictionary<IVisio.VisSectionIndices, Data.DataColumnCollection> _map_secindex_to_sec_cols;
 
         public SectionQuery() : base()
         {
-            this._list_section_query_columns = new List<SectionQueryColumns>();
-            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, SectionQueryColumns>();
+            this._list_section_query_columns = new List<Data.DataColumnCollection>();
+            this._map_secindex_to_sec_cols = new Dictionary<IVisio.VisSectionIndices, Data.DataColumnCollection>();
         }
 
 
-        public SectionQueryShapeResults<string> GetFormulas(IVisio.Shape visobjtarget)
+        public Data.DataRowGroup<string> GetFormulas(IVisio.Shape visobjtarget)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(visobjtarget);
-            var cache = this._create_sectionquerycache(shapeidpairs);
+            var cache = this._create_section_metadata_cache(shapeidpairs);
 
             var srcstream = this._build_src_stream(cache);
             var values = visobjtarget.GetFormulasU(srcstream);
             var shape_index = 0;
             var shape_cache_item = cache[shape_index];
-            var reader = new Internal.ArraySegmentEnumerator<string>(values);
-            var output_for_shape = this._create_output_for_shape(visobjtarget.ID16, shape_cache_item, reader);
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
+            var output_for_shape = this._create_output_for_shape(shape_cache_item, visobjtarget.ID16, segments);
 
             return output_for_shape;
         }
 
-        public SectionQueryShapeResults<TResult> GetResults<TResult>(IVisio.Shape shape)
+        public Data.DataRowGroup<TResult> GetResults<TResult>(IVisio.Shape shape)
         {
             var shapeidpairs = Core.ShapeIDPairs.FromShapes(shape);
-            var cache = this._create_sectionquerycache(shapeidpairs);
+            var sectionmetadatacache = this._create_section_metadata_cache(shapeidpairs);
 
-            var srcstream = this._build_src_stream(cache);
+            var srcstream = this._build_src_stream(sectionmetadatacache);
             const object[] unitcodes = null;
             var values = shape.GetResults<TResult>(srcstream, unitcodes);
             var shape_index = 0;
-            var sectioncache = cache[shape_index];
-            var reader = new Internal.ArraySegmentEnumerator<TResult>(values);
-            var output_for_shape = this._create_output_for_shape(shape.ID16, sectioncache, reader);
+            var shapemetadatacache = sectionmetadatacache[shape_index];
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
+            var output_for_shape = this._create_output_for_shape(shapemetadatacache, shape.ID16, segments);
             return output_for_shape;
         }
 
-        public SectionQueryResults<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public Data.DataRowGroupCollection<string> GetFormulas(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
-            var cache = _create_sectionquerycache(shapeidpairs);
+            var cache = _create_section_metadata_cache(shapeidpairs);
 
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             var values = page.GetFormulasU(srcstream);
-            var reader = new Internal.ArraySegmentEnumerator<string>(values);
-            var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
+            var results = this._create_outputs_for_shapes(shapeidpairs, cache, segments);
             return results;
         }
 
 
-        public SectionQueryResults<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
+        public Data.DataRowGroupCollection<TResult> GetResults<TResult>(IVisio.Page page, Core.ShapeIDPairs shapeidpairs)
         {
             // Store information about the sections we need to query
-            var cache = _create_sectionquerycache(shapeidpairs);
+            var cache = _create_section_metadata_cache(shapeidpairs);
 
             // Perform the query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             const object[] unitcodes = null;
             var values = page.GetResults<TResult>(srcstream, unitcodes);
-            var reader = new Internal.ArraySegmentEnumerator<TResult>(values);
-            var results = this._create_outputs_for_shapes(shapeidpairs, cache, reader);
+            var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
+            var results = this._create_outputs_for_shapes(shapeidpairs, cache, segments);
             return results;
         }
 
 
-        private SectionQueryCache _create_sectionquerycache(Core.ShapeIDPairs shapeidpairs)
+        private Internal.SectionMetadataCache _create_section_metadata_cache(Core.ShapeIDPairs shapeidpairs)
         {
             // Prepare a cache object
             if (this.Count < 1)
             {
-                return new SectionQueryCache(0);
+                return new Internal.SectionMetadataCache(0);
             }
 
-            var cache = new SectionQueryCache();
+            var cache = new Internal.SectionMetadataCache();
 
             // For each shape, for each section find the number of rows
             foreach (var shapeidpair in shapeidpairs)
             {
                 // For that shape, fill in the section cache for each section that
                 // needs to be queried
-                var shapecache = new ShapeCache(this.Count);
+                var shapecache = new Internal.ShapeMetadataCache(this.Count);
                 foreach (var sec_cols in this)
                 {
                     var shapecacheitem = _create_shapesectioncacheitem(shapeidpair, sec_cols.SectionIndex, sec_cols);
@@ -113,24 +117,25 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private SectionQueryResults<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
-            SectionQueryCache sectioncache, Internal.ArraySegmentEnumerator<T> segreader)
+        private Data.DataRowGroupCollection<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
+            Internal.SectionMetadataCache sectionmetadatacache, VisioAutomation.Internal.ArraySegmentEnumerator<T> segreader)
         {
-            var results = new SectionQueryResults<T>();
+            var datarowgroups = new Data.DataRowGroupCollection<T>();
 
             for (int pair_index = 0; pair_index < shapeidpairs.Count; pair_index++)
             {
                 var pair = shapeidpairs[pair_index];
-                var shapecache = sectioncache[pair_index];
-                var output_for_shape = this._create_output_for_shape((short) pair.ShapeID, shapecache, segreader);
-                results.Add(output_for_shape);
+                var sectionmetadata = sectionmetadatacache[pair_index];
+                var output_for_shape = this._create_output_for_shape(sectionmetadata, (short) pair.ShapeID, segreader);
+                datarowgroups.Add(output_for_shape);
             }
 
-            return results;
+            return datarowgroups;
         }
 
-        private SectionQueryShapeResults<T> _create_output_for_shape<T>(short shapeid, ShapeCache shapecacheitems,
-            Internal.ArraySegmentEnumerator<T> segreader)
+        private DataRowGroup<T> _create_output_for_shape<T>(ShapeMetadataCache shapecacheitems,
+            short shapeid,
+            ArraySegmentEnumerator<T> segreader)
         {
             int original_seg_count = segreader.Count;
 
@@ -140,23 +145,23 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            var results_rows = new List<SectionShapeRows<T>>(shapecacheitems.Count);
+            var results_rows = new List<Data.DataRowCollection<T>>(shapecacheitems.Count);
             foreach (var shapecacheitem in shapecacheitems)
             {
-                var secindex = shapecacheitem.SectionQueryColumns.SectionIndex;
-                var sectionshaperows = new SectionShapeRows<T>(shapecacheitem.RowCount, shapeid, secindex);
-                results_rows.Add(sectionshaperows);
+                var secindex = shapecacheitem.ColumnGroup.SectionIndex;
+                var datarows = new Data.DataRowCollection<T>(shapecacheitem.RowCount, shapeid, secindex);
+                results_rows.Add(datarows);
 
-                int num_cols = shapecacheitem.SectionQueryColumns.Count;
+                int num_cols = shapecacheitem.ColumnGroup.Count();
                 foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
                     var cells = segreader.GetNextSegment(num_cols);
-                    var sec_res_row = new Row<T>(shapeid, secindex, cells);
-                    sectionshaperows.Add(sec_res_row);
+                    var sec_res_row = new Data.DataRow<T>(shapeid, secindex, cells);
+                    datarows.Add(sec_res_row);
                 }
             }
 
-            var results = new SectionQueryShapeResults<T>(shapeid, results_rows);
+            var results = new Data.DataRowGroup<T>(shapeid, results_rows);
 
             // the difference in the segment count must match the total number of output cells
 
@@ -172,19 +177,19 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
 
-        private Streams.StreamArray _build_src_stream(SectionQueryCache cache)
+        private Streams.StreamArray _build_src_stream(Internal.SectionMetadataCache cache)
         {
             int dummy_shapeid = -1;
             int shapeindex = 0;
             int numcells = cache.CountCells();
             var shapecache = cache[shapeindex];
-            var srcs = _sidsrcs_for_shape(dummy_shapeid, shapecache).Select(i => i.Src);
+            var srcs = _sidsrcs_for_shape(shapecache, dummy_shapeid).Select(i => i.Src);
             var stream = Streams.StreamArray.FromSrc(numcells, srcs);
 
             return stream;
         }
 
-        private Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, SectionQueryCache cache)
+        private Streams.StreamArray _build_sidsrc_stream(Core.ShapeIDPairs shapeidpairs, Internal.SectionMetadataCache cache)
         {
             int numcells = cache.CountCells();
             var sidsrcs = _sidsrcs_for_shapes(shapeidpairs, cache);
@@ -193,14 +198,14 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         private static IEnumerable<Core.SidSrc> _sidsrcs_for_shapes(Core.ShapeIDPairs shapeidpairs,
-            SectionQueryCache cache)
+            Internal.SectionMetadataCache sectionmetadatacache)
         {
             foreach (int shape_ord in Enumerable.Range(0, shapeidpairs.Count))
             {
                 // For each shape add the cells to query
                 var pair = shapeidpairs[shape_ord];
-                var shapecache = cache[shape_ord];
-                var sidsrcs = _sidsrcs_for_shape(pair.ShapeID, shapecache);
+                var shapemetadatacache = sectionmetadatacache[shape_ord];
+                var sidsrcs = _sidsrcs_for_shape(shapemetadatacache, pair.ShapeID);
                 foreach (var sidsrc in sidsrcs)
                 {
                     yield return sidsrc;
@@ -208,13 +213,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static IEnumerable<Core.SidSrc> _sidsrcs_for_shape(int shapeid, ShapeCache shapecache)
+        private static IEnumerable<SidSrc> _sidsrcs_for_shape(ShapeMetadataCache shapemetadatacache, int shapeid)
         {
-            foreach (var shapecacheitem in shapecache)
+            foreach (var shapecacheitem in shapemetadatacache)
             {
                 foreach (int row_index in Enumerable.Range(0, shapecacheitem.RowCount))
                 {
-                    var cols = shapecacheitem.SectionQueryColumns;
+                    var cols = shapecacheitem.ColumnGroup;
                     var section_index = shapecacheitem.SectionIndex;
                     foreach (var col in cols)
                     {
@@ -229,8 +234,8 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private static ShapeCacheItem _create_shapesectioncacheitem(Core.ShapeIDPair shapeidpair,
-            IVisio.VisSectionIndices sec_index, SectionQueryColumns sec_cols)
+        private static Internal.ShapeMetadataCacheItem _create_shapesectioncacheitem(Core.ShapeIDPair shapeidpair,
+            IVisio.VisSectionIndices sec_index, Data.DataColumnCollection sec_cols)
         {
             // first count the rows in the section
 
@@ -247,11 +252,11 @@ namespace VisioAutomation.ShapeSheet.Query
                 row_count = shapeidpair.Shape.RowCount[(short) sec_index];
             }
 
-            var shapecacheitem = new ShapeCacheItem((short) shapeidpair.ShapeID, sec_index, sec_cols, row_count);
+            var shapecacheitem = new Internal.ShapeMetadataCacheItem((short) shapeidpair.ShapeID, sec_index, sec_cols, row_count);
             return shapecacheitem;
         }
 
-        public IEnumerator<SectionQueryColumns> GetEnumerator()
+        public IEnumerator<Data.DataColumnCollection> GetEnumerator()
         {
             return this._list_section_query_columns.GetEnumerator();
         }
@@ -261,9 +266,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public SectionQueryColumns this[int index] => this._list_section_query_columns[index];
+        public Data.DataColumnCollection this[int index] => this._list_section_query_columns[index];
 
-        public SectionQueryColumns Add(IVisio.VisSectionIndices sec_index)
+        public Data.DataColumnCollection Add(IVisio.VisSectionIndices sec_index)
         {
             if (this._map_secindex_to_sec_cols.ContainsKey(sec_index))
             {
@@ -272,13 +277,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentException(msg);
             }
 
-            var sec_cols = new SectionQueryColumns(sec_index);
+            var sec_cols = new Data.DataColumnCollection(sec_index);
             this._list_section_query_columns.Add(sec_cols);
             this._map_secindex_to_sec_cols[sec_index] = sec_cols;
             return sec_cols;
         }
 
-        public SectionQueryColumns Add(Core.Src src)
+        public Data.DataColumnCollection Add(Core.Src src)
         {
             return this.Add((IVisio.VisSectionIndices) src.Section);
         }

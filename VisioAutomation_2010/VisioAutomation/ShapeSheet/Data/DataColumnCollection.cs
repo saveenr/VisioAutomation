@@ -1,20 +1,24 @@
 using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Data
 {
-    public class Columns : IEnumerable<Column>
+    public class DataColumnCollection : IEnumerable<DataColumn>
     {
-        protected IList<Column> _items;
-        protected Dictionary<string, Column> _map_name_to_item;
-        protected Dictionary<Core.Src, Column> _dic_src_to_col;
+        protected IList<DataColumn> _items;
+        protected Dictionary<string, DataColumn> _map_name_to_item;
+        protected Dictionary<Core.Src, DataColumn> _dic_src_to_col;
+        public IVisio.VisSectionIndices SectionIndex { get; }
 
-        internal Columns()
+        internal DataColumnCollection(IVisio.VisSectionIndices section)
         {
-            this._items = new List<Column>();
-            this._map_name_to_item = new Dictionary<string, Column>();
+            this._items = new List<DataColumn>();
+            this._map_name_to_item = new Dictionary<string, DataColumn>();
+            this.SectionIndex = section;
         }
 
-        public IEnumerator<Column> GetEnumerator()
+
+        public IEnumerator<DataColumn> GetEnumerator()
         {
             return (this._items).GetEnumerator();
         }
@@ -24,9 +28,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return this.GetEnumerator();
         }
 
-        public Column this[int index] => this._items[index];
+        public DataColumn this[int index] => this._items[index];
 
-        public Column this[string name] => this._map_name_to_item[name];
+        public DataColumn this[string name] => this._map_name_to_item[name];
 
         public bool Contains(string name) => this._map_name_to_item.ContainsKey(name);
 
@@ -54,7 +58,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this._dic_src_to_col == null)
             {
-                this._dic_src_to_col = new Dictionary<Core.Src, Column>();
+                this._dic_src_to_col = new Dictionary<Core.Src, DataColumn>();
             }
 
             if (this._dic_src_to_col.ContainsKey(src))
@@ -65,14 +69,14 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        public Column Add(Core.Src src)
+        public DataColumn Add(Core.Src src)
         {
             string name = string.Format("Column{0}", this.Count);
             var col = this.Add(src, name);
             return col;
         }
 
-        public Column Add(Core.Src src, string name)
+        public DataColumn Add(Core.Src src, string name)
         {
             if (name == null)
             {
@@ -84,7 +88,7 @@ namespace VisioAutomation.ShapeSheet.Query
             check_duplicate_column_name(norm_name);
 
             int ordinal = this._items.Count;
-            var col = new Column(ordinal, norm_name, src);
+            var col = new DataColumn(ordinal, norm_name, src);
             this._items.Add(col);
 
             this._map_name_to_item[norm_name] = col;
