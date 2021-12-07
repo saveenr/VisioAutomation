@@ -2,6 +2,7 @@
 using VA = VisioAutomation;
 using VisioAutomation.Internal;
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.ShapeSheet.CellRecords;
 
 namespace VisioAutomation.ShapeSheet.Writers
@@ -26,20 +27,12 @@ namespace VisioAutomation.ShapeSheet.Writers
         public void SetValues(short id, CellRecord cellrecord, short row)
         {
 
-            IEnumerable<SidSrcValue> GetSidSrcValuesWithNewRow(short shapeid, short row)
-            {
-                foreach (var pair in cellrecord.GetSrcValues())
-                {
-                    var new_src = pair.Src.CloneWithNewRow(row);
-                    var new_pair = new SidSrcValue(shapeid, new_src, pair.Value);
-                    yield return new_pair;
-                }
-            }
+            var metadata = cellrecord.GetCellMetadata();
+            var srcvalues = metadata.Select(i => new SidSrcValue(id, i.Src.CloneWithNewRow(row), i.Value));
 
-            var pairs = GetSidSrcValuesWithNewRow(id, row);
-            foreach (var pair in pairs)
+            foreach (var item in srcvalues)
             {
-                this.SetValue(pair.ShapeID, pair.Src, pair.Value);
+                this.SetValue(item.ShapeID, item.Src, item.Value);
             }
         }
 
