@@ -11,8 +11,8 @@ namespace VisioAutomation.Models.Dom
         public VisioAutomation.Core.Size? Size;
         public bool ResizeToFit;
         public VisioAutomation.Core.Size? ResizeToFitMargin;
-        public Pages.FormatCells FormatCells;
-        public Pages.LayoutCells LayoutCells;
+        public Pages.PageFormatCells PageFormatCells;
+        public Pages.PageLayoutCells PageLayoutCells;
         public string Name;
         public VisioAutomation.Models.LayoutStyles.LayoutStyleBase Layout;
         public IVisio.Page VisioPage;
@@ -21,8 +21,8 @@ namespace VisioAutomation.Models.Dom
         public Page()
         {
             this.Shapes = new ShapeList();
-            this.FormatCells = new Pages.FormatCells();
-            this.LayoutCells = new VA.Pages.LayoutCells();
+            this.PageFormatCells = new Pages.PageFormatCells();
+            this.PageLayoutCells = new VA.Pages.PageLayoutCells();
 
             this.RenderPerformanceSettings = new RenderPerformanceSettings();
             this.RenderPerformanceSettings.DeferRecalc = 0;
@@ -72,13 +72,13 @@ namespace VisioAutomation.Models.Dom
             {
                 if (this.Size.HasValue)
                 {
-                    this.FormatCells.Height = this.Size.Value.Height;
-                    this.FormatCells.Width = this.Size.Value.Width;
+                    this.PageFormatCells.Height = this.Size.Value.Height;
+                    this.PageFormatCells.Width = this.Size.Value.Width;
                 }
 
                 var writer = new VASS.Writers.SidSrcWriter();
-                writer.SetValues((short)page_sheet.ID, this.FormatCells);
-                writer.SetValues((short)page_sheet.ID, this.LayoutCells);
+                writer.SetValues((short)page_sheet.ID, this.PageFormatCells);
+                writer.SetValues((short)page_sheet.ID, this.PageLayoutCells);
                 writer.Commit(page, Core.CellValueType.Formula);
                 
                 // Then render the shapes

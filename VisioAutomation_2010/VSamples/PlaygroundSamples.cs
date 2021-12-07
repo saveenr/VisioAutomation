@@ -62,8 +62,8 @@ namespace VSamples
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
             var writer = new SidSrcWriter();
-            var format = new VA.Shapes.FormatCells();
-            var xfrm = new VA.Shapes.XFormCells();
+            var format = new VA.Shapes.ShapeFormatCells();
+            var xfrm = new VA.Shapes.ShapeXFormCells();
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {
@@ -123,7 +123,7 @@ namespace VSamples
             var color1 = new VA.Models.Color.ColorRgb(0xffdddd);
             var color2 = new VA.Models.Color.ColorRgb(0x00ffff);
 
-            var format = new VA.Shapes.FormatCells();
+            var format = new VA.Shapes.ShapeFormatCells();
 
             var writer = new SidSrcWriter();
 

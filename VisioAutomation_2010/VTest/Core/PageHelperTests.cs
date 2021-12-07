@@ -1,10 +1,10 @@
+using VisioAutomation.Extensions;
+using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
-using VTest.Framework;
 
-namespace VTest.Core.Page
+namespace VTest.Core
 {
     [MUT.TestClass]
     public class PageHelperTests : Framework.VTest
@@ -14,7 +14,7 @@ namespace VTest.Core.Page
         {
             var size = new VA.Core.Size(4, 3);
             var page1 = this.GetNewPage(size);
-            var page_fmt_cells = VA.Pages.FormatCells.GetCells(page1.PageSheet, VisioAutomation.Core.CellValueType.Formula);
+            var page_fmt_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.Core.CellValueType.Formula);
             MUT.Assert.AreEqual("4 in", page_fmt_cells.Width.Value);
             MUT.Assert.AreEqual("3 in", page_fmt_cells.Height.Value);
 
@@ -28,7 +28,7 @@ namespace VTest.Core.Page
 
             writer.Commit(page1.PageSheet, VisioAutomation.Core.CellValueType.Formula);
 
-            var actual_page_format_cells = VA.Pages.FormatCells.GetCells(page1.PageSheet, VisioAutomation.Core.CellValueType.Result);
+            var actual_page_format_cells = VA.Pages.PageFormatCells.GetCells(page1.PageSheet, VisioAutomation.Core.CellValueType.Result);
             MUT.Assert.AreEqual("8.0000 in.", actual_page_format_cells.Width.Value);
             MUT.Assert.AreEqual("6.0000 in.", actual_page_format_cells.Height.Value);
             page1.Delete(0);
@@ -146,7 +146,7 @@ namespace VTest.Core.Page
         {
             var page = doc.Pages.Add();
 
-            var pagecells = new VA.Pages.PrintCells();
+            var pagecells = new VA.Pages.PagePrintCells();
             pagecells.TopMargin = upperright_margin.Height;
             pagecells.BottomMargin = bottomleft_margin.Height;
             pagecells.LeftMargin = bottomleft_margin.Width;
@@ -160,7 +160,7 @@ namespace VTest.Core.Page
 
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5 + shape_size.Height);
             page.ResizeToFitContents(padding_size);
-            var xform = VA.Shapes.XFormCells.GetCells(shape, VisioAutomation.Core.CellValueType.Result);
+            var xform = VA.Shapes.ShapeXFormCells.GetCells(shape, VisioAutomation.Core.CellValueType.Result);
             var pinpos = xform.GetPinPosResult();
             MUT.Assert.AreEqual(expected_pinx, pinpos.X, 0.1);
             MUT.Assert.AreEqual(expected_piny, pinpos.Y, 0.1);

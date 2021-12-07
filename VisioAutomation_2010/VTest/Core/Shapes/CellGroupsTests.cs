@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using VisioAutomation.ShapeSheet.CellRecords;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 
-namespace VTest.Core.ShapeSheet
+namespace VTest.Core.Shapes
 {
     [MUT.TestClass]
-    public class CellGroupTests : Framework.VTest
+    public class CellRecordTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void VerifyAllCellsAreEnumerated()
@@ -17,22 +18,22 @@ namespace VTest.Core.ShapeSheet
             types.Add(typeof(VisioAutomation.Shapes.CustomPropertyCells));
             types.Add(typeof(VisioAutomation.Shapes.HyperlinkCells));
             types.Add(typeof(VisioAutomation.Shapes.LockCells));
-            types.Add(typeof(VisioAutomation.Shapes.FormatCells));
-            types.Add(typeof(VisioAutomation.Shapes.LayoutCells));
-            types.Add(typeof(VisioAutomation.Shapes.XFormCells));
-            types.Add(typeof(VisioAutomation.Pages.FormatCells));
-            types.Add(typeof(VisioAutomation.Pages.LayoutCells));
-            types.Add(typeof(VisioAutomation.Pages.PrintCells));
-            types.Add(typeof(VisioAutomation.Pages.RulerAndGridCells));
+            types.Add(typeof(VisioAutomation.Shapes.ShapeFormatCells));
+            types.Add(typeof(VisioAutomation.Shapes.ShapeLayoutCells));
+            types.Add(typeof(VisioAutomation.Shapes.ShapeXFormCells));
+            types.Add(typeof(VisioAutomation.Pages.PageFormatCells));
+            types.Add(typeof(VisioAutomation.Pages.PageLayoutCells));
+            types.Add(typeof(VisioAutomation.Pages.PagePrintCells));
+            types.Add(typeof(VisioAutomation.Pages.PageRulerAndGridCells));
 
             var cvt_ctor = typeof(VisioAutomation.Core.CellValue).GetConstructor(new []{typeof(string)});
-            foreach (var cellgroup_type in types)
+            foreach (var cellrecord_type in types)
             {
-                var cellgroup_ctor = cellgroup_type.GetConstructor(System.Type.EmptyTypes);
-                var cellgroup_obj = cellgroup_ctor.Invoke(new object[] { });
-                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroup) cellgroup_obj;
+                var cellrecord_ctor = cellrecord_type.GetConstructor(System.Type.EmptyTypes);
+                var cellrecord_obj = cellrecord_ctor.Invoke(new object[] { });
+                var cellrecord = (CellRecord) cellrecord_obj;
 
-                var props = _get_cell_data_props(cellgroup_type);
+                var props = _get_cell_data_props(cellrecord_type);
 
                 // Set unique values for the cells
                 // Later we'll verify they can be retrieved
@@ -42,10 +43,10 @@ namespace VTest.Core.ShapeSheet
                 {
                     var prop = props[i];
                     var cvl_value = cvt_ctor.Invoke(new object[] {input_values[i]});
-                    prop.SetValue(cellgroup, cvl_value);
+                    prop.SetValue(cellrecord, cvl_value);
                 }
 
-                var reflected_cvts = props.Select(p => (VisioAutomation.Core.CellValue)p.GetValue(cellgroup, null)).ToList();
+                var reflected_cvts = props.Select(p => (VisioAutomation.Core.CellValue)p.GetValue(cellrecord, null)).ToList();
                 var reflected_cvt_values = reflected_cvts.Select(p => p.Value).ToList();
                 var reflected_cvt_names = props.Select(p => p.Name).ToList();
                 var reflected_nametovalue = new Dictionary<string,string>();
@@ -56,9 +57,9 @@ namespace VTest.Core.ShapeSheet
                     reflected_nametovalue[k] = v;
                 }
 
-                var enumerated_values = cellgroup.GetSrcValues().Select(i => i.Value).ToList();
-                var enumerated_srcs = cellgroup.GetSrcValues().Select(i => i.Src).ToList();
-                var enumerated_srctovalue = cellgroup.GetSrcValues().ToDictionary(i => i.Src, i => i.Value);
+                var enumerated_values = cellrecord.GetCellMetadata().Select(i => i.Value).ToList();
+                var enumerated_srcs = cellrecord.GetCellMetadata().Select(i => i.Src).ToList();
+                var enumerated_srctovalue = cellrecord.GetCellMetadata().ToDictionary(i => i.Src, i => i.Value);
 
                 MUT.Assert.AreEqual(reflected_cvts.Count, enumerated_values.Count);
 

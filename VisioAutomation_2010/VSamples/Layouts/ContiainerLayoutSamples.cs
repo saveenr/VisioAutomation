@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.Models.Layouts.Container;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class ContainerLayoutSamples
     {
@@ -21,9 +21,9 @@ namespace VSamples
             c2.Add("3");
 
             m.LayoutOptions = new LayoutOptions();
-            m.LayoutOptions.ContainerFormatting.FormatCells.FillForeground = "rgb(0,176,240)";
-            m.LayoutOptions.ContainerItemFormatting.FormatCells.FillForeground = "rgb(250,250,250)";
-            m.LayoutOptions.ContainerItemFormatting.FormatCells.LinePattern= "0";
+            m.LayoutOptions.ContainerFormatting.ShapeFormatCells.FillForeground = "rgb(0,176,240)";
+            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.FillForeground = "rgb(250,250,250)";
+            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern= "0";
 
             m.PerformLayout();
             m.Render(SampleEnvironment.Application.ActiveDocument);

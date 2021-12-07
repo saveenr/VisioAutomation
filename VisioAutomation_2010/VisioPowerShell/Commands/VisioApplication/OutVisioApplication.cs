@@ -2,7 +2,7 @@ using VisioAutomation.Models.Layouts.DirectedGraph;
 using SMA = System.Management.Automation;
 using MODELS = VisioAutomation.Models;
 
-namespace VisioPowerShell.Commands.Visio
+namespace VisioPowerShell.Commands.VisioApplication
 {
     [SMA.Cmdlet(SMA.VerbsData.Out, Nouns.VisioApplication)]
     public class OutVisio : VisioCmdlet

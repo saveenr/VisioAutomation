@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : VACG.CellGroup
+    public class ShapeXFormCells : CellRecord
     {
         public Core.CellValue PinX { get; set; }
         public Core.CellValue PinY { get; set; }
@@ -16,7 +16,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Height { get; set; }
         public Core.CellValue Angle { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);
@@ -28,13 +28,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static List<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
-        public static XFormCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static ShapeXFormCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -42,16 +42,16 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : VACG.CellGroupBuilder<XFormCells>
+        class Builder : CellRecordBuilder<ShapeXFormCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override XFormCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ShapeXFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new XFormCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var cells = new ShapeXFormCells();
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.PinX = getcellvalue(nameof(PinX));
                 cells.PinY = getcellvalue(nameof(PinY));

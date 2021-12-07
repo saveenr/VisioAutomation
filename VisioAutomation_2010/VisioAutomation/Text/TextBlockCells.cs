@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 
 namespace VisioAutomation.Text
 {
-    public class TextBlockCells : VACG.CellGroup
+    public class TextBlockCells : CellRecord
     {
         public Core.CellValue BottomMargin { get; set; }
         public Core.CellValue LeftMargin { get; set; }
@@ -15,7 +15,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Direction { get; set; }
         public Core.CellValue VerticalAlign { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.BottomMargin), Core.SrcConstants.TextBlockBottomMargin, this.BottomMargin);
             yield return this._create(nameof(this.LeftMargin), Core.SrcConstants.TextBlockLeftMargin, this.LeftMargin);

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCells : VACG.CellGroup
+    public class CustomPropertyCells : CellRecord
     {
         public Core.CellValue Ask { get; set; }
         public Core.CellValue Calendar { get; set; }
@@ -22,7 +22,7 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Label), Core.SrcConstants.CustomPropLabel, this.Label);
             yield return this._create(nameof(this.Value), Core.SrcConstants.CustomPropValue, this.Value);
@@ -174,16 +174,16 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        public class Builder : VACG.CellGroupBuilder<CustomPropertyCells>
+        public class Builder : CellRecordBuilder<CustomPropertyCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellRecordBuilderType.MultiRow)
             {
             }
 
-            public override CustomPropertyCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override CustomPropertyCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new CustomPropertyCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.Value = getcellvalue(nameof(Value));
                 cells.Calendar = getcellvalue(nameof(Calendar));

@@ -2,7 +2,7 @@ using System.Linq;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands.VisioPage
+namespace VisioPowerShell.Commands.VisioShape
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Measure, Nouns.VisioShape)]
     public class MeasureVisioShape: VisioCmdlet

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class LayoutCells : VACG.CellGroup
+    public class PageLayoutCells : CellRecord
     {
         public Core.CellValue AvenueSizeX { get; set; }
         public Core.CellValue AvenueSizeY { get; set; }
@@ -36,7 +36,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue RouteStyle { get; set; }
         public Core.CellValue AvoidPageBreaks { get; set; } // new in visio 2010
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX,
                 this.AvenueSizeX);
@@ -87,7 +87,7 @@ namespace VisioAutomation.Pages
                 this.AvoidPageBreaks);
         }
 
-        public static LayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static PageLayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -96,17 +96,17 @@ namespace VisioAutomation.Pages
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : VACG.CellGroupBuilder<LayoutCells>
+        class Builder : CellRecordBuilder<PageLayoutCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
 
-            public override LayoutCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PageLayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new LayoutCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var cells = new PageLayoutCells();
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 
                 cells.AvenueSizeX = getcellvalue(nameof(AvenueSizeX));

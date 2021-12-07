@@ -2,7 +2,7 @@ namespace VTest.Framework
 {
     public static class VTestExtensions
     {
-        public static VisioAutomation.Core.Point GetPinPosResult(this VisioAutomation.Shapes.XFormCells xform)
+        public static VisioAutomation.Core.Point GetPinPosResult(this VisioAutomation.Shapes.ShapeXFormCells xform)
         {
             return  ToPoint(xform.PinX.Value, xform.PinY.Value);
         }

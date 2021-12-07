@@ -266,11 +266,11 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             }
 
             // Additional Page properties
-            page_node.LayoutCells.PlaceStyle = 1;
-            page_node.LayoutCells.RouteStyle = 5;
-            page_node.LayoutCells.AvenueSizeX = 2.0;
-            page_node.LayoutCells.AvenueSizeY = 2.0;
-            page_node.LayoutCells.LineRouteExt = 2;
+            page_node.PageLayoutCells.PlaceStyle = 1;
+            page_node.PageLayoutCells.RouteStyle = 5;
+            page_node.PageLayoutCells.AvenueSizeX = 2.0;
+            page_node.PageLayoutCells.AvenueSizeY = 2.0;
+            page_node.PageLayoutCells.LineRouteExt = 2;
             page_node.Size = this._visio_bb.Size;
 
             return page_node;

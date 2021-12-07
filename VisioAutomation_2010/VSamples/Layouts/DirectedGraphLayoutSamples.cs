@@ -1,9 +1,9 @@
-﻿using VA = VisioAutomation;
-using VisioAutomation.Extensions;
+﻿using VisioAutomation.Extensions;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
+using VA = VisioAutomation;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class DirectedGraphLayoutSamples
     {

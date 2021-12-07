@@ -1,7 +1,8 @@
 ﻿using VisioAutomation.Models.Layouts.Tree;
+using Node = VisioAutomation.Models.Layouts.Tree.Node;
 using VADOM = VisioAutomation.Models.Dom;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class TreeLayoutSamples
     {

@@ -38,7 +38,7 @@ namespace VTest.Scripting
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int)s.ID16).ToList();
-            VisioAutomation.Shapes.XFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.Core.CellValueType.Formula);
+            VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(),shapeids, VA.Core.CellValueType.Formula);
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
@@ -72,7 +72,7 @@ namespace VTest.Scripting
 
             var shapes = new[] { s1, s2, s3 };
             var shapeids = shapes.Select(s => (int) s.ID16).ToList();
-            var xforms = VisioAutomation.Shapes.XFormCells.GetCells(client.Page.GetActivePage(), shapeids, VA.Core.CellValueType.Result);
+            var xforms = VisioAutomation.Shapes.ShapeXFormCells.GetCells(client.Page.GetActivePage(), shapeids, VA.Core.CellValueType.Result);
 
             AssertUtil.AreEqual( (1.75, 1), xforms[0].GetPinPosResult(), 0.00001);
             AssertUtil.AreEqual( (3, 2.25), xforms[1].GetPinPosResult(), 0.00001);

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PrintCells : VACG.CellGroup
+    public class PagePrintCells : CellRecord
     {
         public Core.CellValue LeftMargin { get; set; }
         public Core.CellValue CenterX { get; set; }
@@ -23,7 +23,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue ScaleY { get; set; }
         public Core.CellValue PaperSource { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.LeftMargin), Core.SrcConstants.PrintLeftMargin, this.LeftMargin);
             yield return this._create(nameof(this.CenterX), Core.SrcConstants.PrintCenterX, this.CenterX);
@@ -45,7 +45,7 @@ namespace VisioAutomation.Pages
         }
 
 
-        public static PrintCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static PagePrintCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -53,16 +53,16 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : VACG.CellGroupBuilder<PrintCells>
+        class Builder : CellRecordBuilder<PagePrintCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override PrintCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PagePrintCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new PrintCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var cells = new PagePrintCells();
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 
                 cells.LeftMargin = getcellvalue(nameof(LeftMargin));

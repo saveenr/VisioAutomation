@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class RulerAndGridCells : VACG.CellGroup
+    public class PageRulerAndGridCells : CellRecord
     {
         public Core.CellValue XGridDensity { get; set; }
         public Core.CellValue YGridDensity { get; set; }
@@ -18,7 +18,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue YRulerDensity { get; set; }
         public Core.CellValue YRulerOrigin { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.XGridDensity), Core.SrcConstants.XGridDensity, this.XGridDensity);
             yield return this._create(nameof(this.XGridOrigin), Core.SrcConstants.XGridOrigin, this.XGridOrigin);
@@ -32,7 +32,7 @@ namespace VisioAutomation.Pages
             yield return this._create(nameof(this.YRulerOrigin), Core.SrcConstants.YRulerOrigin, this.YRulerOrigin);
         }
 
-        public static RulerAndGridCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static PageRulerAndGridCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -40,16 +40,16 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : VACG.CellGroupBuilder<RulerAndGridCells>
+        class Builder : CellRecordBuilder<PageRulerAndGridCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override RulerAndGridCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PageRulerAndGridCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new RulerAndGridCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var cells = new PageRulerAndGridCells();
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.XGridDensity = getcellvalue(nameof(XGridDensity));
                 cells.XGridOrigin = getcellvalue(nameof(XGridOrigin));

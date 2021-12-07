@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VASS=VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterCells : VACG.CellGroup
+    public class CharacterCells : CellRecord
     {
         public Core.CellValue Color { get; set; }
         public Core.CellValue Font { get; set; }
@@ -30,7 +30,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Strikethru { get; set; }
         public Core.CellValue UseVertical { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Color), Core.SrcConstants.CharColor, this.Color);
             yield return this._create(nameof(this.Font), Core.SrcConstants.CharFont, this.Font);
@@ -76,13 +76,13 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : VACG.CellGroupBuilder<CharacterCells>
+        class Builder : CellRecordBuilder<CharacterCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
+            public Builder() : base(CellRecordBuilderType.MultiRow)
             {
             }
 
-            public override CharacterCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override CharacterCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new CharacterCells();
 

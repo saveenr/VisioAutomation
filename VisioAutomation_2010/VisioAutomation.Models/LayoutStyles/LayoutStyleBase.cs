@@ -15,16 +15,16 @@ namespace VisioAutomation.Models.LayoutStyles
             this.AvenueSizeY = 0.375;
         }
 
-        protected virtual void _set_page_cells(VisioAutomation.Pages.LayoutCells layout_cells)
+        protected virtual void _set_page_cells(VisioAutomation.Pages.PageLayoutCells page_layout_cells)
         {
-            layout_cells.AvenueSizeX = this.AvenueSizeX;
-            layout_cells.AvenueSizeY = this.AvenueSizeY;
-            layout_cells.LineRouteExt = (int) LayoutStyleBase._connector_appearance_to_line_route_ext(this.ConnectorAppearance);
+            page_layout_cells.AvenueSizeX = this.AvenueSizeX;
+            page_layout_cells.AvenueSizeY = this.AvenueSizeY;
+            page_layout_cells.LineRouteExt = (int) LayoutStyleBase._connector_appearance_to_line_route_ext(this.ConnectorAppearance);
 
             var rs = this.ConnectorsStyleToRouteStyle();
             if (rs.HasValue)
             {
-                layout_cells.RouteStyle = (int) rs.Value;
+                page_layout_cells.RouteStyle = (int) rs.Value;
             }
         }
 
@@ -137,7 +137,7 @@ namespace VisioAutomation.Models.LayoutStyles
 
         public void Apply(IVisio.Page page)
         {
-            var page_layout_cells = new VisioAutomation.Pages.LayoutCells();
+            var page_layout_cells = new VisioAutomation.Pages.PageLayoutCells();
             this._set_page_cells(page_layout_cells);
 
             var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();

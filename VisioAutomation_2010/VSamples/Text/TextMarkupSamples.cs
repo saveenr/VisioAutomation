@@ -1,7 +1,7 @@
 ﻿using VAM = VisioAutomation.Models;
 using VSM = VisioScripting.Models;
 
-namespace VSamples
+namespace VSamples.Text
 {
     public static class TextMarkpSamples
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class FormatCells : VACG.CellGroup
+    public class ShapeFormatCells : CellRecord
     {
         public Core.CellValue FillBackground { get; set; }
         public Core.CellValue FillBackgroundTransparency { get; set; }
@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue LineWeight { get; set; }
         public Core.CellValue LineRounding { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground,
                 this.FillBackground);
@@ -83,13 +83,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
-        public static FormatCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static ShapeFormatCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -97,16 +97,16 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : VACG.CellGroupBuilder<FormatCells>
+        class Builder : CellRecordBuilder<ShapeFormatCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override FormatCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ShapeFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new FormatCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var cells = new ShapeFormatCells();
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.FillBackground = getcellvalue(nameof(FillBackground));
                 cells.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));
