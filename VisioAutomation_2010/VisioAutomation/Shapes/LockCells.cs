@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : VACG.CellRecord
+    public class LockCells : CellRecord
     {
         public Core.CellValue Aspect { get; set; }
         public Core.CellValue Begin { get; set; }
@@ -29,7 +28,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue VertexEdit { get; set; }
         public Core.CellValue Width { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Aspect), Core.SrcConstants.LockAspect, this.Aspect);
             yield return this._create(nameof(this.Begin), Core.SrcConstants.LockBegin, this.Begin);
@@ -71,14 +70,14 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<LockCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override LockCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override LockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new LockCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.Aspect = getcellvalue(nameof(Aspect));
                 cells.Begin = getcellvalue(nameof(Begin));

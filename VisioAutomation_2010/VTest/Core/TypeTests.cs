@@ -1,6 +1,6 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace VTest.Core.Internal
+namespace VTest.Core
 {
     [MUT.TestClass]
     public class TypeTests : Framework.VTest

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VASS=VisioAutomation.ShapeSheet;
-using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet.CellRecords;
 
@@ -202,11 +201,11 @@ namespace VisioAutomation.Text
         class Builder : CellRecordBuilder<TextBlockCells>
         {
 
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override TextBlockCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override TextBlockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new TextBlockCells();
              

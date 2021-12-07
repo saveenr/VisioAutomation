@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PrintCells : VACG.CellRecord
+    public class PrintCells : CellRecord
     {
         public Core.CellValue LeftMargin { get; set; }
         public Core.CellValue CenterX { get; set; }
@@ -24,7 +23,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue ScaleY { get; set; }
         public Core.CellValue PaperSource { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.LeftMargin), Core.SrcConstants.PrintLeftMargin, this.LeftMargin);
             yield return this._create(nameof(this.CenterX), Core.SrcConstants.PrintCenterX, this.CenterX);
@@ -56,14 +55,14 @@ namespace VisioAutomation.Pages
 
         class Builder : CellRecordBuilder<PrintCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override PrintCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PrintCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new PrintCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 
                 cells.LeftMargin = getcellvalue(nameof(LeftMargin));

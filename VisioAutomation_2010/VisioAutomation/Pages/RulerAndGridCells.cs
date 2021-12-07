@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class RulerAndGridCells : VACG.CellRecord
+    public class RulerAndGridCells : CellRecord
     {
         public Core.CellValue XGridDensity { get; set; }
         public Core.CellValue YGridDensity { get; set; }
@@ -19,7 +18,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue YRulerDensity { get; set; }
         public Core.CellValue YRulerOrigin { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.XGridDensity), Core.SrcConstants.XGridDensity, this.XGridDensity);
             yield return this._create(nameof(this.XGridOrigin), Core.SrcConstants.XGridOrigin, this.XGridOrigin);
@@ -43,14 +42,14 @@ namespace VisioAutomation.Pages
 
         class Builder : CellRecordBuilder<RulerAndGridCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override RulerAndGridCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override RulerAndGridCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new RulerAndGridCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.XGridDensity = getcellvalue(nameof(XGridDensity));
                 cells.XGridOrigin = getcellvalue(nameof(XGridOrigin));

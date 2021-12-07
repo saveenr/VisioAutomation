@@ -1,11 +1,11 @@
-﻿using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
+using VisioAutomation.Extensions;
+using VA = VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 using VAM=VisioAutomation.Models;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class BoxLayoutSamples
     {

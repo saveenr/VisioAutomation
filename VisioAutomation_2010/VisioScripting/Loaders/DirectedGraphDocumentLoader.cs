@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
-using VisioScripting.Extensions;
 using VisioAutomation.Shapes;
+using VisioScripting.Extensions;
 using SXL = System.Xml.Linq;
 
-namespace VisioScripting.Builders
+namespace VisioScripting.Loaders
 {
     public class DirectedGraphDocumentLoader
     {

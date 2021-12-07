@@ -1,8 +1,8 @@
-using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA=VisioAutomation;
 
-namespace VTest.Core.Connections
+namespace VTest.Core
 {
     [MUT.TestClass]
     public class ConnectionPoint_Tests : Framework.VTest

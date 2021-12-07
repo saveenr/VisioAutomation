@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.Models.Layouts.Container;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class ContainerLayoutSamples
     {

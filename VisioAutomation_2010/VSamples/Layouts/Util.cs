@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Box;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class Util
     {

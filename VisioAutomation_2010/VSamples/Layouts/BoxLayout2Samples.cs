@@ -1,11 +1,11 @@
-﻿using VA = VisioAutomation;
-using VisioAutomation.Extensions;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
+using VisioAutomation.Extensions;
+using VA = VisioAutomation;
 using VADOM = VisioAutomation.Models.Dom;
 using VABOX = VisioAutomation.Models.Layouts.Box;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class BoxLayout2Samples
     {

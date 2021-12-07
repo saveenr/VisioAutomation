@@ -1,10 +1,10 @@
+using VisioAutomation.Extensions;
+using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
-using VTest.Framework;
 
-namespace VTest.Core.Page
+namespace VTest.Core
 {
     [MUT.TestClass]
     public class PageHelperTests : Framework.VTest

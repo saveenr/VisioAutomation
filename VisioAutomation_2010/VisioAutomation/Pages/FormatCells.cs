@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class FormatCells : VACG.CellRecord
+    public class FormatCells : CellRecord
     {
         public Core.CellValue DrawingScale { get; set; }
         public Core.CellValue DrawingScaleType { get; set; }
@@ -23,7 +22,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue UIVisibility { get; set; }
         public Core.CellValue DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.DrawingScale), Core.SrcConstants.PageDrawingScale, this.DrawingScale);
             yield return this._create(nameof(this.DrawingScaleType), Core.SrcConstants.PageDrawingScaleType,
@@ -59,14 +58,14 @@ namespace VisioAutomation.Pages
 
         class Builder : CellRecordBuilder<FormatCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override FormatCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override FormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new FormatCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.DrawingScale = getcellvalue(nameof(DrawingScale));
                 cells.DrawingScaleType = getcellvalue(nameof(DrawingScaleType));

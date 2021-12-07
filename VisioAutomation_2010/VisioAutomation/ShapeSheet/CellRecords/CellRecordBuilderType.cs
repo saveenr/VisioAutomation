@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.ShapeSheet.CellGroups
+﻿namespace VisioAutomation.ShapeSheet.CellRecords
 {
     public enum CellRecordBuilderType
     {

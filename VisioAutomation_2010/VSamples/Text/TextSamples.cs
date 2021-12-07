@@ -1,6 +1,6 @@
 ﻿using VA = VisioAutomation;
 
-namespace VSamples
+namespace VSamples.Text
 {
     public static class TextSamples
     {

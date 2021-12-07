@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class HyperlinkCells : VACG.CellRecord
+    public class HyperlinkCells : CellRecord
     {
         public Core.CellValue Address { get; set; }
         public Core.CellValue Description { get; set; }
@@ -18,7 +17,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Default { get; set; }
         public Core.CellValue Invisible { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
             yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription,
@@ -50,14 +49,14 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<HyperlinkCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordBuilderType.MultiRow)
             {
             }
 
-            public override HyperlinkCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override HyperlinkCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new HyperlinkCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 
                 cells.Address = getcellvalue(nameof(Address));

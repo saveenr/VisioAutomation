@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellRecords
@@ -44,23 +43,23 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             }
         }
 
-        public abstract TGroup ToCellGroup(Data.DataRow<string> row, Data.DataColumnCollection cols);
+        public abstract TGroup ToCellRecord(Data.DataRow<string> row, Data.DataColumnCollection cols);
 
         public List<TGroup> GetCellsMultipleShapesSingleRow(IVisio.Page page, IList<int> shapeids,
             Core.CellValueType type)
         {
             this._enforce_type(CellRecordBuilderType.SingleRow);
-            var cellgroups = new List<TGroup>(shapeids.Count);
+            var cell_records = new List<TGroup>(shapeids.Count);
             var cols = this.query_cells_singlerow.Columns;
             var rows_for_shapes =
                 this.__QueryCells_MultipleShapes_SingleRow(query_cells_singlerow, page, shapeids, type);
             foreach (var row in rows_for_shapes)
             {
-                var cellgroup = this.ToCellGroup(row, cols);
-                cellgroups.Add(cellgroup);
+                var cell_record = this.ToCellRecord(row, cols);
+                cell_records.Add(cell_record);
             }
 
-            return cellgroups;
+            return cell_records;
         }
 
         private void _enforce_type(CellRecordBuilderType buildertype)
@@ -77,7 +76,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             var cellqueryresult = this.__QueryCells_SingleShape_SingleRow(query_cells_singlerow, shape, type);
             var cols = this.query_cells_singlerow.Columns;
             var first_row = cellqueryresult[0];
-            var cells = this.ToCellGroup(first_row, cols);
+            var cells = this.ToCellRecord(first_row, cols);
             return cells;
         }
 
@@ -89,15 +88,15 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
             var cellqueryresult =
                 __QueryCells_MultipleShapes_MultipleRows(query_sections_multirow, page, shapeidpairs, type);
-            var list_cellgroups = new List<List<TGroup>>(shapeidpairs.Count);
+            var list_cellrecords = new List<List<TGroup>>(shapeidpairs.Count);
             foreach (var data_for_shape in cellqueryresult)
             {
                 var first_section_results = data_for_shape[0];
-                var cellgroups = this._sectionshaperows_to_cellgroups(first_section_results, sec_cols);
-                list_cellgroups.Add(cellgroups);
+                var cell_records = this._sectionshaperows_to_cellrecords(first_section_results, sec_cols);
+                list_cellrecords.Add(cell_records);
             }
 
-            return list_cellgroups;
+            return list_cellrecords;
         }
 
         public List<TGroup> GetCellsSingleShapeMultipleRows(IVisio.Shape shape, Core.CellValueType type)
@@ -106,21 +105,21 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             var sec_cols = this.query_sections_multirow[0];
             var cellqueryresult = __QueryCells_SingleShape_MultipleRows(query_sections_multirow, shape, type);
             var shape0_sectionshaperows0 = cellqueryresult[0];
-            var cellgroups = this._sectionshaperows_to_cellgroups(shape0_sectionshaperows0, sec_cols);
-            return cellgroups;
+            var cellrecords = this._sectionshaperows_to_cellrecords(shape0_sectionshaperows0, sec_cols);
+            return cellrecords;
         }
 
-        private List<TGroup> _sectionshaperows_to_cellgroups(Data.DataRowCollection<string> group_cell_value_data_row_collection,
+        private List<TGroup> _sectionshaperows_to_cellrecords(Data.DataRowCollection<string> group_cell_value_data_row_collection,
             Data.DataColumnCollection cols)
         {
-            var cellgroups = new List<TGroup>(group_cell_value_data_row_collection.Count);
+            var cell_records = new List<TGroup>(group_cell_value_data_row_collection.Count);
             foreach (var section_row in group_cell_value_data_row_collection)
             {
-                var cellgroup = this.ToCellGroup(section_row, cols);
-                cellgroups.Add(cellgroup);
+                var cell_record = this.ToCellRecord(section_row, cols);
+                cell_records.Add(cell_record);
             }
 
-            return cellgroups;
+            return cell_records;
         }
 
         private Data.DataRowGroup<string> __QueryCells_SingleShape_MultipleRows(Query.SectionQuery query,

@@ -1,12 +1,11 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
-    public class ConnectionPointCells : VACG.CellRecord
+    public class ConnectionPointCells : CellRecord
     {
         public Core.CellValue X { get; set; }
         public Core.CellValue Y { get; set; }
@@ -14,7 +13,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue DirY { get; set; }
         public Core.CellValue Type { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.X), Core.SrcConstants.ConnectionPointX, this.X);
             yield return this._create(nameof(this.Y), Core.SrcConstants.ConnectionPointY, this.Y);
@@ -40,14 +39,14 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<ConnectionPointCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordBuilderType.MultiRow)
             {
             }
 
-            public override ConnectionPointCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ConnectionPointCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new ConnectionPointCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.X = getcellvalue(nameof(X));
                 cells.Y = getcellvalue(nameof(Y));

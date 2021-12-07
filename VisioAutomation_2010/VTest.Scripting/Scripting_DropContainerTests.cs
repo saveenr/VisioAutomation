@@ -1,7 +1,7 @@
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
-namespace VTest.Models
+namespace VTest.Scripting
 {
     public class Scripting_DropContainerTests : Framework.VTest
     {

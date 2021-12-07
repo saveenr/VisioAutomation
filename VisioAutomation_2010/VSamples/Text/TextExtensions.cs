@@ -1,6 +1,6 @@
 using VAM = VisioAutomation.Models;
 
-namespace VSamples
+namespace VSamples.Text
 {
     public class TextFmt
     {

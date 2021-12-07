@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class FormatCells : VACG.CellRecord
+    public class FormatCells : CellRecord
     {
         public Core.CellValue FillBackground { get; set; }
         public Core.CellValue FillBackgroundTransparency { get; set; }
@@ -34,7 +33,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue LineWeight { get; set; }
         public Core.CellValue LineRounding { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground,
                 this.FillBackground);
@@ -100,14 +99,14 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<FormatCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override FormatCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override FormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new FormatCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.FillBackground = getcellvalue(nameof(FillBackground));
                 cells.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.Internal;
+using VisioAutomation.ShapeSheet.CellRecords;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Writers
@@ -35,14 +36,14 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__set_value_ignore_null(src, formula);
         }
 
-        public void SetValues(CellGroups.CellRecord cellgroup, short row)
+        public void SetValues(CellRecord cellrecord, short row)
         {
-            IEnumerable<CellGroups.SrcValue> GetSrcValuesWithNewRow(short row)
+            IEnumerable<SrcValue> GetSrcValuesWithNewRow(short row)
             {
-                foreach (var pair in cellgroup.GetSrcValues())
+                foreach (var pair in cellrecord.GetSrcValues())
                 {
                     var new_src = pair.Src.CloneWithNewRow(row);
-                    var new_pair = new CellGroups.SrcValue(new_src, pair.Value);
+                    var new_pair = new SrcValue(new_src, pair.Value);
                     yield return new_pair;
                 }
             }
@@ -53,9 +54,9 @@ namespace VisioAutomation.ShapeSheet.Writers
             }
         }
 
-        public void SetValues(CellGroups.CellRecord cellgroup)
+        public void SetValues(CellRecord cellrecord)
         {
-            foreach (var pair in cellgroup.GetSrcValues())
+            foreach (var pair in cellrecord.GetSrcValues())
             {
                 this.SetValue(pair.Src, pair.Value);
             }

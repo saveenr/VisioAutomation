@@ -1,9 +1,9 @@
-﻿using VA = VisioAutomation;
-using VisioAutomation.Extensions;
+﻿using VisioAutomation.Extensions;
 using VisioAutomation.Models.Layouts.Grid;
 using VisioAutomation.ShapeSheet.Writers;
+using VA = VisioAutomation;
 
-namespace VSamples
+namespace VSamples.Layouts
 {
     public static class GridLayoutSamples
     {

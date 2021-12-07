@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LayoutCells : VACG.CellRecord
+    public class LayoutCells : CellRecord
     {
         public Core.CellValue ConnectorFixedCode { get; set; }
         public Core.CellValue LineJumpCode { get; set; }
@@ -27,7 +26,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue ShapeDisplayLevel { get; set; } // new in visio 2010
         public Core.CellValue Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.ConnectorFixedCode), Core.SrcConstants.ShapeLayoutConnectorFixedCode,
                 this.ConnectorFixedCode);
@@ -85,14 +84,14 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<LayoutCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override LayoutCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override LayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new LayoutCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.ConnectorFixedCode = getcellvalue(nameof(ConnectorFixedCode));
                 cells.LineJumpCode = getcellvalue(nameof(LineJumpCode));

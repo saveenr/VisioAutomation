@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ControlCells : VACG.CellRecord
+    public class ControlCells : CellRecord
     {
         public Core.CellValue CanGlue { get; set; }
         public Core.CellValue Tip { get; set; }
@@ -17,7 +16,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue XDynamics { get; set; }
         public Core.CellValue YDynamics { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.CanGlue), Core.SrcConstants.ControlCanGlue, this.CanGlue);
             yield return this._create(nameof(this.Tip), Core.SrcConstants.ControlTip, this.Tip);
@@ -47,14 +46,14 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<ControlCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordBuilderType.MultiRow)
             {
             }
 
-            public override ControlCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ControlCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new ControlCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.CanGlue = getcellvalue(nameof(CanGlue));
                 cells.Tip = getcellvalue(nameof(Tip));

@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class LayoutCells : VACG.CellRecord
+    public class LayoutCells : CellRecord
     {
         public Core.CellValue AvenueSizeX { get; set; }
         public Core.CellValue AvenueSizeY { get; set; }
@@ -37,7 +36,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue RouteStyle { get; set; }
         public Core.CellValue AvoidPageBreaks { get; set; } // new in visio 2010
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX,
                 this.AvenueSizeX);
@@ -99,15 +98,15 @@ namespace VisioAutomation.Pages
 
         class Builder : CellRecordBuilder<LayoutCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
 
-            public override LayoutCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override LayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new LayoutCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 
                 cells.AvenueSizeX = getcellvalue(nameof(AvenueSizeX));

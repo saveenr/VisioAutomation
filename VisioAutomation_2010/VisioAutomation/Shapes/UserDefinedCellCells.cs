@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellCells : VACG.CellRecord
+    public class UserDefinedCellCells : CellRecord
     {
         public Core.CellValue Value { get; set; }
         public Core.CellValue Prompt { get; set; }
@@ -16,7 +15,7 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Value), Core.SrcConstants.UserDefCellValue, this.Value);
             yield return this._create(nameof(this.Prompt), Core.SrcConstants.UserDefCellPrompt, this.Prompt);
@@ -46,15 +45,15 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<UserDefinedCellCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordBuilderType.MultiRow)
             {
             }
 
 
-            public override UserDefinedCellCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override UserDefinedCellCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new UserDefinedCellCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.Value = getcellvalue(nameof(Value));
                 cells.Prompt = getcellvalue(nameof(Prompt));

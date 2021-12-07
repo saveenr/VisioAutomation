@@ -1,6 +1,6 @@
 ﻿using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands.Visio
+namespace VisioPowerShell.Commands.VisioApplication
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Redo, Nouns.VisioApplication)]
     public class RedoVisio : VisioCmdlet

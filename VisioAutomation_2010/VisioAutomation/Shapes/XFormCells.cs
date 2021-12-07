@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
-using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : VACG.CellRecord
+    public class XFormCells : CellRecord
     {
         public Core.CellValue PinX { get; set; }
         public Core.CellValue PinY { get; set; }
@@ -17,7 +16,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Height { get; set; }
         public Core.CellValue Angle { get; set; }
 
-        public override IEnumerable<VACG.CellMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);
@@ -45,14 +44,14 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<XFormCells>
         {
-            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override XFormCells ToCellGroup(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override XFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
                 var cells = new XFormCells();
-                var getcellvalue = queryrow_to_cellgroup(row, cols);
+                var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.PinX = getcellvalue(nameof(PinX));
                 cells.PinY = getcellvalue(nameof(PinY));
