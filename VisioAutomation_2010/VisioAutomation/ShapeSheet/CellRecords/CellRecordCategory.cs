@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.ShapeSheet.CellRecords
 {
-    public enum CellRecordBuilderType
+    public enum CellRecordCategory
     {
         SingleRow,
         MultiRow

@@ -46,7 +46,7 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<ControlCells>
         {
-            public Builder() : base(CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordCategory.MultiRow)
             {
             }
 

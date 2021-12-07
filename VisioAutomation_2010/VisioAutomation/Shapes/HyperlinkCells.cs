@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<HyperlinkCells>
         {
-            public Builder() : base(CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordCategory.MultiRow)
             {
             }
 

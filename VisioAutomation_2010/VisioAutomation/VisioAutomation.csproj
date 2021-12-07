@@ -122,7 +122,7 @@
     <Compile Include="Pages\PagePrintCells.cs" />
     <Compile Include="Pages\PageRulerAndGridCells.cs" />
     <Compile Include="Internal\Extensions\LinqExtensions.cs" />
-    <Compile Include="ShapeSheet\CellRecords\CellRecordBuilderType.cs" />
+    <Compile Include="ShapeSheet\CellRecords\CellRecordCategory.cs" />
     <Compile Include="ShapeSheet\CellRecords\CellMetadata.cs" />
     <Compile Include="ShapeSheet\CellRecords\SidSrcValue.cs" />
     <Compile Include="Core\CellValueType.cs" />

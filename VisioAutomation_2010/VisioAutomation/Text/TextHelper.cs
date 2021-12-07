@@ -201,7 +201,7 @@ namespace VisioAutomation.Text
         class Builder : CellRecordBuilder<TextBlockCells>
         {
 
-            public Builder() : base(CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordCategory.SingleRow)
             {
             }
 

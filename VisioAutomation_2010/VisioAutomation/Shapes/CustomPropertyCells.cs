@@ -176,7 +176,7 @@ namespace VisioAutomation.Shapes
 
         public class Builder : CellRecordBuilder<CustomPropertyCells>
         {
-            public Builder() : base(CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordCategory.MultiRow)
             {
             }
 

@@ -99,7 +99,7 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<ShapeFormatCells>
         {
-            public Builder() : base(CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordCategory.SingleRow)
             {
             }
 

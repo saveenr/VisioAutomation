@@ -43,7 +43,7 @@ namespace VisioAutomation.Text
 
         class Builder : CellRecordBuilder<TextXFormCells>
         {
-            public Builder() : base(CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordCategory.SingleRow)
             {
             }
 
