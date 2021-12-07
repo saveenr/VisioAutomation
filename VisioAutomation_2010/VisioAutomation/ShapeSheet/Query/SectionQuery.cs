@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var shape_cache_item = cache[shape_index];
             var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
-            var output_for_shape = this._create_output_for_shape(shape_cache_item, visobjtarget.ID16, segments);
+            var output_for_shape = this.segments_to_rowgroup(shape_cache_item, visobjtarget.ID16, segments);
 
             return output_for_shape;
         }
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var shape_index = 0;
             var shapemetadatacache = sectionmetadatacache[shape_index];
             var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
-            var output_for_shape = this._create_output_for_shape(shapemetadatacache, shape.ID16, segments);
+            var output_for_shape = this.segments_to_rowgroup(shapemetadatacache, shape.ID16, segments);
             return output_for_shape;
         }
 
@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = this._build_sidsrc_stream(shapeidpairs, cache);
             var values = page.GetFormulasU(srcstream);
             var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<string>(values);
-            var results = this._create_outputs_for_shapes(shapeidpairs, cache, segments);
+            var results = this._segments_to_rowgroups(shapeidpairs, cache, segments);
             return results;
         }
 
@@ -75,7 +75,7 @@ namespace VisioAutomation.ShapeSheet.Query
             const object[] unitcodes = null;
             var values = page.GetResults<TResult>(srcstream, unitcodes);
             var segments = new VisioAutomation.Internal.ArraySegmentEnumerator<TResult>(values);
-            var results = this._create_outputs_for_shapes(shapeidpairs, cache, segments);
+            var results = this._segments_to_rowgroups(shapeidpairs, cache, segments);
             return results;
         }
 
@@ -117,7 +117,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private Data.DataRowGroups<T> _create_outputs_for_shapes<T>(Core.ShapeIDPairs shapeidpairs,
+        private Data.DataRowGroups<T> _segments_to_rowgroups<T>(Core.ShapeIDPairs shapeidpairs,
             Internal.SectionMetadataCache sectionmetadatacache, VisioAutomation.Internal.ArraySegmentEnumerator<T> segreader)
         {
             var datarowgroups = new Data.DataRowGroups<T>();
@@ -126,14 +126,14 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 var pair = shapeidpairs[pair_index];
                 var sectionmetadata = sectionmetadatacache[pair_index];
-                var output_for_shape = this._create_output_for_shape(sectionmetadata, (short) pair.ShapeID, segreader);
+                var output_for_shape = this.segments_to_rowgroup(sectionmetadata, (short) pair.ShapeID, segreader);
                 datarowgroups.Add(output_for_shape);
             }
 
             return datarowgroups;
         }
 
-        private DataRowGroup<T> _create_output_for_shape<T>(ShapeMetadataCache shapecacheitems,
+        private DataRowGroup<T> segments_to_rowgroup<T>(ShapeMetadataCache shapecacheitems,
             short shapeid,
             ArraySegmentEnumerator<T> segreader)
         {
