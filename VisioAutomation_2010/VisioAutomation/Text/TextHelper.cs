@@ -199,10 +199,10 @@ namespace VisioAutomation.Text
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<TextBlockCells>
+        class Builder : CellRecordBuilder<TextBlockCells>
         {
 
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
             {
             }
 

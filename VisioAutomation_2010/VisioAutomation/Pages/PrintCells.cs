@@ -54,9 +54,9 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<PrintCells>
+        class Builder : CellRecordBuilder<PrintCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
             {
             }
 

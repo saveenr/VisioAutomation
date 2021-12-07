@@ -42,9 +42,9 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<TextXFormCells>
+        class Builder : CellRecordBuilder<TextXFormCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
             {
             }
 

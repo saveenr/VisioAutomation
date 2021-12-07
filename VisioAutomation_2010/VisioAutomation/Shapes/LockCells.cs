@@ -69,9 +69,9 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<LockCells>
+        class Builder : CellRecordBuilder<LockCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
+            public Builder() : base(VACG.CellRecordBuilderType.SingleRow)
             {
             }
 

@@ -45,9 +45,9 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellGroupBuilder<ControlCells>
+        class Builder : CellRecordBuilder<ControlCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellRecordBuilderType.MultiRow)
             {
             }
 

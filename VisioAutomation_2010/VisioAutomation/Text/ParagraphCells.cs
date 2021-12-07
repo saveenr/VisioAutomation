@@ -60,9 +60,9 @@ namespace VisioAutomation.Text
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellGroupBuilder<ParagraphCells>
+        class Builder : CellRecordBuilder<ParagraphCells>
         {
-            public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
+            public Builder() : base(VACG.CellRecordBuilderType.MultiRow)
             {
             }
 
