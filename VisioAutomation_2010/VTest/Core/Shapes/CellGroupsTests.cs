@@ -27,13 +27,13 @@ namespace VTest.Core.Shapes
             types.Add(typeof(VisioAutomation.Pages.RulerAndGridCells));
 
             var cvt_ctor = typeof(VisioAutomation.Core.CellValue).GetConstructor(new []{typeof(string)});
-            foreach (var cellgroup_type in types)
+            foreach (var cellrecord_type in types)
             {
-                var cellrecord_ctor = cellgroup_type.GetConstructor(System.Type.EmptyTypes);
+                var cellrecord_ctor = cellrecord_type.GetConstructor(System.Type.EmptyTypes);
                 var cellrecord_obj = cellrecord_ctor.Invoke(new object[] { });
                 var cellrecord = (CellRecord) cellrecord_obj;
 
-                var props = _get_cell_data_props(cellgroup_type);
+                var props = _get_cell_data_props(cellrecord_type);
 
                 // Set unique values for the cells
                 // Later we'll verify they can be retrieved
