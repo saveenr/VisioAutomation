@@ -407,7 +407,7 @@ namespace VTest.Models
                 s2.VisioShapeID,
                 s3.VisioShapeID};
 
-            var xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids, VA.Core.CellValueType.Formula);
+            var xfrms = VA.Shapes.ShapeXFormCells.GetCells(page, shapeids, VA.Core.CellValueType.Formula);
 
             MUT.Assert.AreEqual(xfrms[1].PinX, xfrms[0].PinX);
             MUT.Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);

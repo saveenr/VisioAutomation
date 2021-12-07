@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class LayoutCells : CellRecord
+    public class PageLayoutCells : CellRecord
     {
         public Core.CellValue AvenueSizeX { get; set; }
         public Core.CellValue AvenueSizeY { get; set; }
@@ -87,7 +87,7 @@ namespace VisioAutomation.Pages
                 this.AvoidPageBreaks);
         }
 
-        public static LayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static PageLayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -96,16 +96,16 @@ namespace VisioAutomation.Pages
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : CellRecordBuilder<LayoutCells>
+        class Builder : CellRecordBuilder<PageLayoutCells>
         {
             public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
 
-            public override LayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PageLayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new LayoutCells();
+                var cells = new PageLayoutCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 

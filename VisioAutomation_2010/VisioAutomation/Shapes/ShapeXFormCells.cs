@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : CellRecord
+    public class ShapeXFormCells : CellRecord
     {
         public Core.CellValue PinX { get; set; }
         public Core.CellValue PinY { get; set; }
@@ -28,13 +28,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static List<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
-        public static XFormCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static ShapeXFormCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -42,15 +42,15 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<XFormCells>
+        class Builder : CellRecordBuilder<ShapeXFormCells>
         {
             public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override XFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ShapeXFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new XFormCells();
+                var cells = new ShapeXFormCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.PinX = getcellvalue(nameof(PinX));

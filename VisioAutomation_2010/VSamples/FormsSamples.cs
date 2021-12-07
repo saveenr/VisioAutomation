@@ -56,8 +56,8 @@ namespace VSamples
             page_title.CharacterCells.Font = segoe_ui__light_font_id;
             page_title.CharacterCells.Size = "100pt";
             page_title.ParagraphCells.HorizontalAlign = 0;
-            page_title.FormatCells.LineWeight = 0;
-            page_title.FormatCells.LinePattern = 0;
+            page_title.ShapeFormatCells.LineWeight = 0;
+            page_title.ShapeFormatCells.LinePattern = 0;
             //page_title.FormatCells.FillForegnd = "RGB(240,240,240)"; renderer.Linefeed(0.5);
             renderer.Linefeed(0);
 
@@ -68,9 +68,9 @@ namespace VSamples
                group_title.CharacterCells.Font = segoe_ui__light_font_id;
                group_title.CharacterCells.Size = "50pt";
                group_title.ParagraphCells.HorizontalAlign = 0;
-               group_title.FormatCells.LineWeight = 0;
-               group_title.FormatCells.LinePattern = 0;
-               group_title.FormatCells.FillForeground = "RGB(250,250,250)";
+               group_title.ShapeFormatCells.LineWeight = 0;
+               group_title.ShapeFormatCells.LinePattern = 0;
+               group_title.ShapeFormatCells.FillForeground = "RGB(250,250,250)";
 
                renderer.Linefeed(0.5);
 
@@ -86,7 +86,7 @@ namespace VSamples
                     //res_title.ParagraphCells.HorizontalAlign = 0;
                     //res_title.FormatCells.LineWeight = 0;
                     //res_title.FormatCells.LinePattern = 0;
-                    res_title.FormatCells.FillForeground = "RGB(240,240,240)";
+                    res_title.ShapeFormatCells.FillForeground = "RGB(240,240,240)";
                     renderer.MoveRight(0.5);
                 }
                 renderer.Linefeed(1);

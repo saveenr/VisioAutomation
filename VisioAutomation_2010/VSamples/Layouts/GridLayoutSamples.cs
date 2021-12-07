@@ -44,7 +44,7 @@ namespace VSamples.Layouts
             layout.PerformLayout();
             layout.Render(page);
 
-            var fmtcells = new VA.Shapes.FormatCells();
+            var fmtcells = new VA.Shapes.ShapeFormatCells();
             int i = 0;
             var writer = new SidSrcWriter();
             foreach (var node in layout.Nodes)

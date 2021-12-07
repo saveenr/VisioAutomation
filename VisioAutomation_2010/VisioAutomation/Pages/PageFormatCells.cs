@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class FormatCells : CellRecord
+    public class PageFormatCells : CellRecord
     {
         public Core.CellValue DrawingScale { get; set; }
         public Core.CellValue DrawingScaleType { get; set; }
@@ -48,7 +48,7 @@ namespace VisioAutomation.Pages
         }
 
 
-        public static FormatCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static PageFormatCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -56,15 +56,15 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<FormatCells>
+        class Builder : CellRecordBuilder<PageFormatCells>
         {
             public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override FormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PageFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new FormatCells();
+                var cells = new PageFormatCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.DrawingScale = getcellvalue(nameof(DrawingScale));

@@ -38,8 +38,8 @@ namespace VisioAutomation.Models.Documents.Forms
             int fontid = context.GetFontID(this.DefaultFont);
             titleblock.TextBlockCells.VerticalAlign = 0;
             titleblock.ParagraphCells.HorizontalAlign = 0;
-            titleblock.FormatCells.LineWeight = 0;
-            titleblock.FormatCells.LinePattern = 0;
+            titleblock.ShapeFormatCells.LineWeight = 0;
+            titleblock.ShapeFormatCells.LinePattern = 0;
             titleblock.CharacterCells.Font = fontid;
             titleblock.CharacterCells.Size = get_pt_string(this.TitleTextSize);
 
@@ -55,11 +55,11 @@ namespace VisioAutomation.Models.Documents.Forms
             bodyblock.ParagraphCells.SpacingAfter = get_pt_string(this.BodyParaSpacingAfter);
             bodyblock.CharacterCells.Font = fontid;
             bodyblock.CharacterCells.Size = get_pt_string(this.BodyTextSize);
-            bodyblock.FormatCells.LineWeight = 0;
-            bodyblock.FormatCells.LinePattern = 0;
+            bodyblock.ShapeFormatCells.LineWeight = 0;
+            bodyblock.ShapeFormatCells.LinePattern = 0;
             bodyblock.TextBlockCells.VerticalAlign = 0;
-            bodyblock.FormatCells.LineWeight = 0;
-            bodyblock.FormatCells.LinePattern = 0;
+            bodyblock.ShapeFormatCells.LineWeight = 0;
+            bodyblock.ShapeFormatCells.LinePattern = 0;
 
             var bodyshape = r.AddShape(bodyblock);
             r.Linefeed();

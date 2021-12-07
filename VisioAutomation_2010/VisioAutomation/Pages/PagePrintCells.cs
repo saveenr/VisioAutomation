@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PrintCells : CellRecord
+    public class PagePrintCells : CellRecord
     {
         public Core.CellValue LeftMargin { get; set; }
         public Core.CellValue CenterX { get; set; }
@@ -45,7 +45,7 @@ namespace VisioAutomation.Pages
         }
 
 
-        public static PrintCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static PagePrintCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -53,15 +53,15 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<PrintCells>
+        class Builder : CellRecordBuilder<PagePrintCells>
         {
             public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override PrintCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PagePrintCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new PrintCells();
+                var cells = new PagePrintCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 

@@ -47,7 +47,7 @@ namespace VisioPowerShell.Commands.VisioPage
 
             if (this.Width >0 || this.Height >0)
             {
-                var page_format_cells = new VisioAutomation.Pages.FormatCells();
+                var page_format_cells = new VisioAutomation.Pages.PageFormatCells();
 
                 if (this.Width > 0)
                 {

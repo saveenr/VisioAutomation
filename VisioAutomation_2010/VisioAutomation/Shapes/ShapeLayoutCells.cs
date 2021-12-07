@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LayoutCells : CellRecord
+    public class ShapeLayoutCells : CellRecord
     {
         public Core.CellValue ConnectorFixedCode { get; set; }
         public Core.CellValue LineJumpCode { get; set; }
@@ -68,13 +68,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<LayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
-        public static LayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static ShapeLayoutCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -82,15 +82,15 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<LayoutCells>
+        class Builder : CellRecordBuilder<ShapeLayoutCells>
         {
             public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override LayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ShapeLayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new LayoutCells();
+                var cells = new ShapeLayoutCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.ConnectorFixedCode = getcellvalue(nameof(ConnectorFixedCode));

@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class FormatCells : CellRecord
+    public class ShapeFormatCells : CellRecord
     {
         public Core.CellValue FillBackground { get; set; }
         public Core.CellValue FillBackgroundTransparency { get; set; }
@@ -83,13 +83,13 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
         }
 
-        public static FormatCells GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static ShapeFormatCells GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeSingleRow(shape, type);
@@ -97,15 +97,15 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<FormatCells>
+        class Builder : CellRecordBuilder<ShapeFormatCells>
         {
             public Builder() : base(CellRecordBuilderType.SingleRow)
             {
             }
 
-            public override FormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ShapeFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
             {
-                var cells = new FormatCells();
+                var cells = new ShapeFormatCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
                 cells.FillBackground = getcellvalue(nameof(FillBackground));
