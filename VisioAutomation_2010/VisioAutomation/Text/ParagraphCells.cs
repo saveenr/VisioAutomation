@@ -65,7 +65,7 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override ParagraphCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ParagraphCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
                 var cells = new ParagraphCells();

@@ -62,7 +62,7 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PageFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PageFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new PageFormatCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

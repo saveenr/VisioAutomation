@@ -103,7 +103,7 @@ namespace VisioAutomation.Pages
             }
 
 
-            public override PageLayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PageLayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new PageLayoutCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

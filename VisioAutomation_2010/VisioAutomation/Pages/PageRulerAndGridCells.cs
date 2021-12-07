@@ -46,7 +46,7 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PageRulerAndGridCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override PageRulerAndGridCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new PageRulerAndGridCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

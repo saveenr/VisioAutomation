@@ -3,14 +3,14 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class DataColumnCollection : IEnumerable<DataColumn>
+    public class DataColumns : IEnumerable<DataColumn>
     {
         protected IList<DataColumn> _items;
         protected Dictionary<string, DataColumn> _map_name_to_item;
         protected Dictionary<Core.Src, DataColumn> _dic_src_to_col;
         public IVisio.VisSectionIndices SectionIndex { get; }
 
-        internal DataColumnCollection(IVisio.VisSectionIndices section)
+        internal DataColumns(IVisio.VisSectionIndices section)
         {
             this._items = new List<DataColumn>();
             this._map_name_to_item = new Dictionary<string, DataColumn>();

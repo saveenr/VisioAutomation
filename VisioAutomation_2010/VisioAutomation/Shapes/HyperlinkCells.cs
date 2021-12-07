@@ -53,7 +53,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override HyperlinkCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override HyperlinkCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new HyperlinkCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

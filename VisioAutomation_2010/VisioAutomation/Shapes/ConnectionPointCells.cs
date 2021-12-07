@@ -43,7 +43,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ConnectionPointCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ConnectionPointCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new ConnectionPointCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

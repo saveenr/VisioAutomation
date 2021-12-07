@@ -103,7 +103,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ShapeFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ShapeFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new ShapeFormatCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

@@ -180,7 +180,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override CustomPropertyCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override CustomPropertyCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new CustomPropertyCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

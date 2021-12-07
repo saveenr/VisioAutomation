@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
         protected CellRecordBuilder(CellRecordBuilderType type)
         {
             var temp_cells = new TGroup();
-            Data.DataColumnCollection cols;
+            Data.DataColumns cols;
 
             this.Type = type;
             if (type == CellRecordBuilderType.SingleRow)
@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             }
         }
 
-        public abstract TGroup ToCellRecord(Data.DataRow<string> row, Data.DataColumnCollection cols);
+        public abstract TGroup ToCellRecord(Data.DataRow<string> row, Data.DataColumns cols);
 
         public List<TGroup> GetCellsMultipleShapesSingleRow(IVisio.Page page, IList<int> shapeids,
             Core.CellValueType type)
@@ -110,7 +110,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
         }
 
         private List<TGroup> _sectionshaperows_to_cellrecords(Data.DataRowCollection<string> group_cell_value_data_row_collection,
-            Data.DataColumnCollection cols)
+            Data.DataColumns cols)
         {
             var cell_records = new List<TGroup>(group_cell_value_data_row_collection.Count);
             foreach (var section_row in group_cell_value_data_row_collection)

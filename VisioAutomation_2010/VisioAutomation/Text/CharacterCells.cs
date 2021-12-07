@@ -82,7 +82,7 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override CharacterCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override CharacterCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new CharacterCells();
 

@@ -50,7 +50,7 @@ namespace VisioAutomation.Shapes
             }
 
 
-            public override UserDefinedCellCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override UserDefinedCellCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new UserDefinedCellCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

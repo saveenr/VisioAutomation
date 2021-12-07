@@ -205,7 +205,7 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override TextBlockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override TextBlockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new TextBlockCells();
              

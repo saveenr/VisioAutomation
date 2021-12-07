@@ -48,7 +48,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ShapeXFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
+            public override ShapeXFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new ShapeXFormCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
