@@ -169,7 +169,7 @@
     <Compile Include="Shapes\GeometryRow.cs" />
     <Compile Include="Shapes\GeometryHelper.cs" />
     <Compile Include="ShapeSheet\CellRecords\CellRecord.cs" />
-    <Compile Include="ShapeSheet\Data\DataRowGroupCollection.cs" />
+    <Compile Include="ShapeSheet\Data\DataRowGroups.cs" />
     <Compile Include="ShapeSheet\Data\DataRow.cs" />
     <Compile Include="ShapeSheet\Internal\ShapeMetadataCacheItem.cs" />
     <Compile Include="Text\TextFormat.cs" />
