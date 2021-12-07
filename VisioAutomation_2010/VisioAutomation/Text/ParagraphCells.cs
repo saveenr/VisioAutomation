@@ -5,7 +5,7 @@ using VACG=VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphCells : VACG.CellGroup
+    public class ParagraphCells : VACG.CellRecord
     {
         public Core.CellValue IndentFirst { get; set; }
         public Core.CellValue IndentRight { get; set; }

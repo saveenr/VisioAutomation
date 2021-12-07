@@ -30,7 +30,7 @@ namespace VTest.Core.ShapeSheet
             {
                 var cellgroup_ctor = cellgroup_type.GetConstructor(System.Type.EmptyTypes);
                 var cellgroup_obj = cellgroup_ctor.Invoke(new object[] { });
-                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellGroup) cellgroup_obj;
+                var cellgroup = (VisioAutomation.ShapeSheet.CellGroups.CellRecord) cellgroup_obj;
 
                 var props = _get_cell_data_props(cellgroup_type);
 

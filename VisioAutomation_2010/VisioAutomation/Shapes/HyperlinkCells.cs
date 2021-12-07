@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class HyperlinkCells : VACG.CellGroup
+    public class HyperlinkCells : VACG.CellRecord
     {
         public Core.CellValue Address { get; set; }
         public Core.CellValue Description { get; set; }

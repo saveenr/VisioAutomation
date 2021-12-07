@@ -3,7 +3,7 @@ using VACG=VisioAutomation.ShapeSheet.CellGroups;
 
 namespace VisioAutomation.Text
 {
-    public class TextBlockCells : VACG.CellGroup
+    public class TextBlockCells : VACG.CellRecord
     {
         public Core.CellValue BottomMargin { get; set; }
         public Core.CellValue LeftMargin { get; set; }

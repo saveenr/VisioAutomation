@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class PrintCells : VACG.CellGroup
+    public class PrintCells : VACG.CellRecord
     {
         public Core.CellValue LeftMargin { get; set; }
         public Core.CellValue CenterX { get; set; }

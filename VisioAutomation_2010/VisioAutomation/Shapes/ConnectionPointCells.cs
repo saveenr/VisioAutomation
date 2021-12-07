@@ -5,7 +5,7 @@ using VASS = VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Shapes
 {
-    public class ConnectionPointCells : VACG.CellGroup
+    public class ConnectionPointCells : VACG.CellRecord
     {
         public Core.CellValue X { get; set; }
         public Core.CellValue Y { get; set; }

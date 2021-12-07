@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class CustomPropertyCells : VACG.CellGroup
+    public class CustomPropertyCells : VACG.CellRecord
     {
         public Core.CellValue Ask { get; set; }
         public Core.CellValue Calendar { get; set; }

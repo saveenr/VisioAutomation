@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class TextXFormCells : VACG.CellGroup
+    public class TextXFormCells : VACG.CellRecord
     {
         public Core.CellValue Angle { get; set; }
         public Core.CellValue Width { get; set; }

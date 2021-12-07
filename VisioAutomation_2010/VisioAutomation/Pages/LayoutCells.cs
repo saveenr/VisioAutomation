@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class LayoutCells : VACG.CellGroup
+    public class LayoutCells : VACG.CellRecord
     {
         public Core.CellValue AvenueSizeX { get; set; }
         public Core.CellValue AvenueSizeY { get; set; }

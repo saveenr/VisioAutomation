@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class FormatCells : VACG.CellGroup
+    public class FormatCells : VACG.CellRecord
     {
         public Core.CellValue FillBackground { get; set; }
         public Core.CellValue FillBackgroundTransparency { get; set; }

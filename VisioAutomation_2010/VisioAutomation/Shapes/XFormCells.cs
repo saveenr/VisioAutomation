@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : VACG.CellGroup
+    public class XFormCells : VACG.CellRecord
     {
         public Core.CellValue PinX { get; set; }
         public Core.CellValue PinY { get; set; }

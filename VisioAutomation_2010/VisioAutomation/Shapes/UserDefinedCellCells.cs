@@ -6,7 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class UserDefinedCellCells : VACG.CellGroup
+    public class UserDefinedCellCells : VACG.CellRecord
     {
         public Core.CellValue Value { get; set; }
         public Core.CellValue Prompt { get; set; }

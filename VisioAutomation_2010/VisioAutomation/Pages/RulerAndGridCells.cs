@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class RulerAndGridCells : VACG.CellGroup
+    public class RulerAndGridCells : VACG.CellRecord
     {
         public Core.CellValue XGridDensity { get; set; }
         public Core.CellValue YGridDensity { get; set; }

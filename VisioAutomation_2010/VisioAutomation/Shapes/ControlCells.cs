@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class ControlCells : VACG.CellGroup
+    public class ControlCells : VACG.CellRecord
     {
         public Core.CellValue CanGlue { get; set; }
         public Core.CellValue Tip { get; set; }

@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterCells : VACG.CellGroup
+    public class CharacterCells : VACG.CellRecord
     {
         public Core.CellValue Color { get; set; }
         public Core.CellValue Font { get; set; }

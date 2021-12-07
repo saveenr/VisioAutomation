@@ -1,6 +1,7 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Internal;
+using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.Writers
 {
@@ -21,16 +22,27 @@ namespace VisioAutomation.ShapeSheet.Writers
             this.__SetValueIgnoreNull(sidsrc, formula);
         }
 
-        public void SetValues(short id, CellGroups.CellGroup cellgroup, short row)
+        public void SetValues(short id, CellGroups.CellRecord cellgroup, short row)
         {
-            var pairs = cellgroup.GetSidSrcValuesWithNewRow(id, row);
+
+            IEnumerable<CellGroups.SidSrcValue> GetSidSrcValuesWithNewRow(short shapeid, short row)
+            {
+                foreach (var pair in cellgroup.GetSrcValues())
+                {
+                    var new_src = pair.Src.CloneWithNewRow(row);
+                    var new_pair = new CellGroups.SidSrcValue(shapeid, new_src, pair.Value);
+                    yield return new_pair;
+                }
+            }
+
+            var pairs = GetSidSrcValuesWithNewRow(id, row);
             foreach (var pair in pairs)
             {
                 this.SetValue(pair.ShapeID, pair.Src, pair.Value);
             }
         }
 
-        public void SetValues(short id, CellGroups.CellGroup cellgroup)
+        public void SetValues(short id, CellGroups.CellRecord cellgroup)
         {
             foreach (var pair in cellgroup.GetSrcValues())
             {

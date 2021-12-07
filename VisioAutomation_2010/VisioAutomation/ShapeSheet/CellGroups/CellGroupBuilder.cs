@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class CellGroupBuilder<TGroup> where TGroup : CellGroup, new()
+    public abstract class CellGroupBuilder<TGroup> where TGroup : CellRecord, new()
     {
         public readonly CellGroupBuilderType Type;
         protected Query.CellQuery query_cells_singlerow;

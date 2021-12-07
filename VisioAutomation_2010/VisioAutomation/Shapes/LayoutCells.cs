@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LayoutCells : VACG.CellGroup
+    public class LayoutCells : VACG.CellRecord
     {
         public Core.CellValue ConnectorFixedCode { get; set; }
         public Core.CellValue LineJumpCode { get; set; }

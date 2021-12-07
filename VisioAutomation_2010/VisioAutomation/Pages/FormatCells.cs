@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Pages
 {
-    public class FormatCells : VACG.CellGroup
+    public class FormatCells : VACG.CellRecord
     {
         public Core.CellValue DrawingScale { get; set; }
         public Core.CellValue DrawingScaleType { get; set; }

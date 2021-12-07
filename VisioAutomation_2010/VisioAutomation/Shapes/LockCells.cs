@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : VACG.CellGroup
+    public class LockCells : VACG.CellRecord
     {
         public Core.CellValue Aspect { get; set; }
         public Core.CellValue Begin { get; set; }
