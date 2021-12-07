@@ -3,7 +3,7 @@ using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class DataRowCollection<T> : IEnumerable<DataRow<T>>
+    public class DataRows<T> : IEnumerable<DataRow<T>>
     {
         // Simple list of Rows
 
@@ -12,14 +12,14 @@ namespace VisioAutomation.ShapeSheet.Data
         public readonly int ShapeID;
         public readonly IVisio.VisSectionIndices SectionIndex;
 
-        internal DataRowCollection(int capacity)
+        internal DataRows(int capacity)
         {
             this._list = new List<DataRow<T>>(capacity);
             this.ShapeID = -1;
             this.SectionIndex = IVisio.VisSectionIndices.visSectionInval;
         }
 
-        internal DataRowCollection(int capacity, int shapeid, IVisio.VisSectionIndices section_index)
+        internal DataRows(int capacity, int shapeid, IVisio.VisSectionIndices section_index)
         {
             this._list = new List<DataRow<T>>(capacity);
             this.ShapeID = shapeid;

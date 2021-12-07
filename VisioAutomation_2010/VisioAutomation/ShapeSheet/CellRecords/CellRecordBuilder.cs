@@ -109,7 +109,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return cellrecords;
         }
 
-        private List<TGroup> _sectionshaperows_to_cellrecords(Data.DataRowCollection<string> group_cell_value_data_row_collection,
+        private List<TGroup> _sectionshaperows_to_cellrecords(Data.DataRows<string> group_cell_value_data_row_collection,
             Data.DataColumns cols)
         {
             var cell_records = new List<TGroup>(group_cell_value_data_row_collection.Count);
@@ -146,7 +146,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return results;
         }
 
-        private Data.DataRowCollection<string> __QueryCells_SingleShape_SingleRow(Query.CellQuery query,
+        private Data.DataRows<string> __QueryCells_SingleShape_SingleRow(Query.CellQuery query,
             IVisio.Shape shape, Core.CellValueType type)
         {
             var results = type switch
@@ -158,7 +158,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return results;
         }
 
-        private Data.DataRowCollection<string> __QueryCells_MultipleShapes_SingleRow(Query.CellQuery query,
+        private Data.DataRows<string> __QueryCells_MultipleShapes_SingleRow(Query.CellQuery query,
             IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var results = type switch

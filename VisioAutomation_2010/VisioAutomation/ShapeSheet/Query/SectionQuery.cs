@@ -145,11 +145,11 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
 
-            var results_rows = new List<Data.DataRowCollection<T>>(shapecacheitems.Count);
+            var results_rows = new List<Data.DataRows<T>>(shapecacheitems.Count);
             foreach (var shapecacheitem in shapecacheitems)
             {
                 var secindex = shapecacheitem.ColumnGroup.SectionIndex;
-                var datarows = new Data.DataRowCollection<T>(shapecacheitem.RowCount, shapeid, secindex);
+                var datarows = new Data.DataRows<T>(shapecacheitem.RowCount, shapeid, secindex);
                 results_rows.Add(datarows);
 
                 int num_cols = shapecacheitem.ColumnGroup.Count();
