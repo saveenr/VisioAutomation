@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.CellRecords;
 using VACG = VisioAutomation.ShapeSheet.CellGroups;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -43,7 +44,7 @@ namespace VisioAutomation.Shapes
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
 
-        class Builder : VACG.CellGroupBuilder<UserDefinedCellCells>
+        class Builder : CellGroupBuilder<UserDefinedCellCells>
         {
             public Builder() : base(VACG.CellGroupBuilderType.MultiRow)
             {

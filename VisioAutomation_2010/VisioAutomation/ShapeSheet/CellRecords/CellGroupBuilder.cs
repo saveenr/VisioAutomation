@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.CellGroups
+namespace VisioAutomation.ShapeSheet.CellRecords
 {
     public abstract class CellGroupBuilder<TGroup> where TGroup : CellRecord, new()
     {

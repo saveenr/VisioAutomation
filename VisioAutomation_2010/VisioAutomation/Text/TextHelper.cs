@@ -3,6 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VASS=VisioAutomation.ShapeSheet;
 using VACG=VisioAutomation.ShapeSheet.CellGroups;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.CellRecords;
 
 namespace VisioAutomation.Text
 {
@@ -198,7 +199,7 @@ namespace VisioAutomation.Text
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : VACG.CellGroupBuilder<TextBlockCells>
+        class Builder : CellGroupBuilder<TextBlockCells>
         {
 
             public Builder() : base(VACG.CellGroupBuilderType.SingleRow)
