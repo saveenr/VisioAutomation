@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.CellRecords
 {
@@ -11,10 +12,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
         public IEnumerable<SrcValue> GetSrcValues()
         {
-            foreach (var pair in this.GetCellMetadata())
-            {
-                yield return new SrcValue(pair.Src, pair.Value);
-            }
+            return this.GetCellMetadata().Select(i => new SrcValue(i.Src, i.Value));
         }
 
         protected CellMetadata _create(string name, Core.Src src, Core.CellValue value)
