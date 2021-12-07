@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(CellRecord cellrecord, short row)
         {
-            var srcvalues = cellrecord.GetSrcValues().Select(i => new SrcValue(i.Src.CloneWithNewRow(row), i.Value));
+            var srcvalues = cellrecord.GetCellMetadata().Select(i => new SrcValue(i.Src.CloneWithNewRow(row), i.Value));
 
             foreach (var srcvalue in srcvalues)
             {
@@ -49,7 +49,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(CellRecord cellrecord)
         {
-            foreach (var srcvalue in cellrecord.GetSrcValues())
+            foreach (var srcvalue in cellrecord.GetCellMetadata())
             {
                 this.SetValue(srcvalue.Src, srcvalue.Value);
             }

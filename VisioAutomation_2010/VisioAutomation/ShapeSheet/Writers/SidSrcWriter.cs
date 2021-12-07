@@ -38,7 +38,7 @@ namespace VisioAutomation.ShapeSheet.Writers
 
         public void SetValues(short id, CellRecord cellrecord)
         {
-            foreach (var pair in cellrecord.GetSrcValues())
+            foreach (var pair in cellrecord.GetCellMetadata())
             {
                 this.SetValue(id, pair.Src, pair.Value);
             }

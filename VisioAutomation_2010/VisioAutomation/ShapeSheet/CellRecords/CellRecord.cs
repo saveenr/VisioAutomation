@@ -10,11 +10,6 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<SrcValue> GetSrcValues()
-        {
-            return this.GetCellMetadata().Select(i => new SrcValue(i.Src, i.Value));
-        }
-
         protected CellMetadata _create(string name, Core.Src src, Core.CellValue value)
         {
             return new CellMetadata(name, src, value.Value);
