@@ -27,8 +27,6 @@ namespace VisioAutomation.ShapeSheet.CellRecords
         {
             this.func_row_to_rec = func_row_to_rec;
 
-            //VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols
-
             var temp_cells = new TREC();
             Data.DataColumns cols;
 
