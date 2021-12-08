@@ -45,7 +45,7 @@ namespace VisioAutomation.Core
 
         public T this[int index]
         {
-            get { return this._list[0]; }
+            get { return this._list[index]; }
             //set { /* set the specified index to value here */ }
         }
     }
