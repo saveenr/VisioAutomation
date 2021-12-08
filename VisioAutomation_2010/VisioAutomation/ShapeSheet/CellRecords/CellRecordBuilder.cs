@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             Core.CellValueType type)
         {
             this._enforce_category(CellRecordCategory.SingleRow);
-            var rows = this.__QueryCells_SingleShape_SingleRow(cellquery, shape, type);
+            var rows = this._cellquery_singleshape(cellquery, shape, type);
             var cols = this.cellquery.Columns;
             var first_row = rows[0];
             var cells = this.ToCellRecord(first_row, cols);
@@ -96,7 +96,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             var sec_cols = this.sectionquery[0];
 
             var rowgroups =
-                __QueryCells_MultipleShapes_MultipleRows(sectionquery, page, shapeidpairs, type);
+                sectionquery_multiplerows(sectionquery, page, shapeidpairs, type);
             var list_cellrecords = new List<List<TGroup>>(shapeidpairs.Count);
             foreach (var rowgroup in rowgroups)
             {
@@ -114,7 +114,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
         {
             this._enforce_category(CellRecordCategory.MultiRow);
             var sec_cols = this.sectionquery[0];
-            var rowgroup = __QueryCells_SingleShape_MultipleRows(sectionquery, shape, type);
+            var rowgroup = sectionquery_singleshape(sectionquery, shape, type);
             var first_rows = rowgroup[0];
             var records = this._sectionshaperows_to_cellrecords(first_rows, sec_cols);
             return records;
@@ -134,7 +134,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return records;
         }
 
-        private Data.DataRowGroup<string> __QueryCells_SingleShape_MultipleRows(
+        private Data.DataRowGroup<string> sectionquery_singleshape(
             Query.SectionQuery query,
             IVisio.Shape shape, 
             Core.CellValueType type)
@@ -148,7 +148,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return rowgroup;
         }
 
-        private Data.DataRowGroups<string> __QueryCells_MultipleShapes_MultipleRows(
+        private Data.DataRowGroups<string> sectionquery_multiplerows(
             Query.SectionQuery query,
             IVisio.Page page, 
             Core.ShapeIDPairs shapeidpairs, 
@@ -163,7 +163,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return rowgroups;
         }
 
-        private ROWS __QueryCells_SingleShape_SingleRow(
+        private ROWS _cellquery_singleshape(
             Query.CellQuery query,
             IVisio.Shape shape, 
             Core.CellValueType type)
