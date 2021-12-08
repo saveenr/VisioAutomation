@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 {
     public abstract class CellRecordBuilder<TREC> where TREC : CellRecord, new()
     {
-        public readonly CellRecordQueryType CellRecordQueryType;
+        public readonly CellRecordQueryType Querytype;
         protected Query.CellQuery cellquery;
         protected Query.SectionQuery sectionquery;
         private System.Func<ROW, COLS, TREC> func_row_to_rec;
@@ -23,23 +23,23 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             this.sectionquery = null;
         }
 
-        protected CellRecordBuilder(CellRecordQueryType cell_record_query_type, System.Func<ROW,COLS, TREC> func_row_to_rec)
+        protected CellRecordBuilder(CellRecordQueryType querytype, System.Func<ROW,COLS, TREC> func_row_to_rec)
         {
             this.func_row_to_rec = func_row_to_rec;
 
             var temp_cells = new TREC();
-            Data.DataColumns cols;
+            Data.DataColumns querycols;
 
-            this.CellRecordQueryType = cell_record_query_type;
-            if (cell_record_query_type == CellRecordQueryType.CellQuery)
+            this.Querytype = querytype;
+            if (querytype == CellRecordQueryType.CellQuery)
             {
                 this.cellquery = new Query.CellQuery();
-                cols = this.cellquery.Columns;
+                querycols = this.cellquery.Columns;
             }
-            else if (cell_record_query_type == CellRecordQueryType.SectionQuery)
+            else if (querytype == CellRecordQueryType.SectionQuery)
             {
                 this.sectionquery = new Query.SectionQuery();
-                cols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
+                querycols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
             }
             else
             {
@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
             foreach (var item in temp_cells.GetCellMetadata())
             {
-                cols.Add(item.Src, item.Name);
+                querycols.Add(item.Src, item.Name);
             }
         }
 
@@ -72,7 +72,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
         private void _enforce_category(CellRecordQueryType query_type)
         {
-            if (this.CellRecordQueryType != query_type)
+            if (this.Querytype != query_type)
             {
                 throw new Exceptions.InternalAssertionException();
             }
