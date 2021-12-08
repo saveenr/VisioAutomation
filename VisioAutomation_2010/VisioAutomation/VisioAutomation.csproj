@@ -128,6 +128,7 @@
     <Compile Include="Core\CellValueType.cs" />
     <Compile Include="Core\ShapeIDPairs.cs" />
     <Compile Include="Core\ShapeIDPair.cs" />
+    <Compile Include="Core\BasicList.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Data\DataRowGroup.cs" />
