@@ -4,6 +4,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 using ROW= VisioAutomation.ShapeSheet.Data.DataRow<string>;
 using ROWS= VisioAutomation.ShapeSheet.Data.DataRows<string>;
+using ROWGROUP = VisioAutomation.ShapeSheet.Data.DataRowGroup<string>;
+using ROWGROUPS = VisioAutomation.ShapeSheet.Data.DataRowGroups<string>;
 using COLS = VisioAutomation.ShapeSheet.Data.DataColumns;
 
 namespace VisioAutomation.ShapeSheet.CellRecords
@@ -137,7 +139,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return records;
         }
 
-        private Data.DataRowGroup<string> __sectionquery_singleshape(
+        private ROWGROUP __sectionquery_singleshape(
             IVisio.Shape shape,
             Core.CellValueType type)
         {
@@ -150,7 +152,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return rowgroup;
         }
 
-        private Data.DataRowGroups<string> __sectionquery_multiplerows(
+        private ROWGROUPS __sectionquery_multiplerows(
             Query.SectionQuery query,
             IVisio.Page page,
             Core.ShapeIDPairs shapeidpairs,
