@@ -42,27 +42,28 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
+        public static ShapeXFormCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+        {
+            var record = new ShapeXFormCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            record.PinX = getcellvalue(nameof(PinX));
+            record.PinY = getcellvalue(nameof(PinY));
+            record.LocPinX = getcellvalue(nameof(LocPinX));
+            record.LocPinY = getcellvalue(nameof(LocPinY));
+            record.Width = getcellvalue(nameof(Width));
+            record.Height = getcellvalue(nameof(Height));
+            record.Angle = getcellvalue(nameof(Angle));
+
+            return record;
+        }
+
         class Builder : CellRecordBuilder<ShapeXFormCells>
         {
-            public Builder() : base(CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery, ShapeXFormCells.RowToRecord)
             {
             }
 
-            public override ShapeXFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
-            {
-                var cells = new ShapeXFormCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                cells.PinX = getcellvalue(nameof(PinX));
-                cells.PinY = getcellvalue(nameof(PinY));
-                cells.LocPinX = getcellvalue(nameof(LocPinX));
-                cells.LocPinY = getcellvalue(nameof(LocPinY));
-                cells.Width = getcellvalue(nameof(Width));
-                cells.Height = getcellvalue(nameof(Height));
-                cells.Angle = getcellvalue(nameof(Angle));
-
-                return cells;
-            }
         }
     }
 }

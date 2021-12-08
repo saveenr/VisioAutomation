@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class DataRowGroup<T> : IEnumerable<DataRowCollection<T>>
+    public class DataRowGroup<T> : IEnumerable<DataRows<T>>
     {
         // For a tuple of (shape id, section ids ) contains rows for
         // each pair of (shape and sectionid )
@@ -14,15 +14,15 @@ namespace VisioAutomation.ShapeSheet.Data
         // rg[n] = rows for section C of shape 1
         
         public readonly int ShapeID;
-        private readonly List<DataRowCollection<T>> _items;
+        private readonly List<DataRows<T>> _items;
 
-        internal DataRowGroup(int shapeid, List<DataRowCollection<T>> sections)
+        internal DataRowGroup(int shapeid, List<DataRows<T>> sections)
         {
             this.ShapeID = shapeid;
             this._items = sections;
         }
 
-        public IEnumerator<DataRowCollection<T>> GetEnumerator()
+        public IEnumerator<DataRows<T>> GetEnumerator()
         {
             return this._items.GetEnumerator();
         }
@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet.Data
             get { return this._items.Count; }
         }
 
-        public DataRowCollection<T> this[int index]
+        public DataRows<T> this[int index]
         {
             get { return this._items[index]; }
         }

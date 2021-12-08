@@ -37,25 +37,26 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
+        public static ConnectionPointCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+        {
+            var record = new ConnectionPointCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            record.X = getcellvalue(nameof(X));
+            record.Y = getcellvalue(nameof(Y));
+            record.DirX = getcellvalue(nameof(DirX));
+            record.DirY = getcellvalue(nameof(DirY));
+            record.Type = getcellvalue(nameof(ConnectionPointCells.Type));
+
+            return record;
+        }
+
         class Builder : CellRecordBuilder<ConnectionPointCells>
         {
-            public Builder() : base(CellRecordBuilderType.MultiRow)
+            public Builder() : base(CellRecordQueryType.SectionQuery, ConnectionPointCells.RowToRecord)
             {
             }
 
-            public override ConnectionPointCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
-            {
-                var cells = new ConnectionPointCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                cells.X = getcellvalue(nameof(X));
-                cells.Y = getcellvalue(nameof(Y));
-                cells.DirX = getcellvalue(nameof(DirX));
-                cells.DirY = getcellvalue(nameof(DirY));
-                cells.Type = getcellvalue(nameof(ConnectionPointCells.Type));
-
-                return cells;
-            }
         }
     }
 }

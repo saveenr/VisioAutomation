@@ -9,7 +9,7 @@ namespace VisioPowerShell.Internal
     {
         private static DataTable querytable_to_datatable<T>(
             VASS.Query.CellQuery query,
-            VASS.Data.DataRowCollection<T> output)
+            VASS.Data.DataRows<T> output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();

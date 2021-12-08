@@ -67,40 +67,40 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
+        public static LockCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+        {
+            var cells = new LockCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            cells.Aspect = getcellvalue(nameof(Aspect));
+            cells.Begin = getcellvalue(nameof(Begin));
+            cells.CalcWH = getcellvalue(nameof(CalcWH));
+            cells.Crop = getcellvalue(nameof(Crop));
+            cells.CustProp = getcellvalue(nameof(CustProp));
+            cells.Delete = getcellvalue(nameof(Delete));
+            cells.End = getcellvalue(nameof(End));
+            cells.Format = getcellvalue(nameof(Format));
+            cells.FromGroupFormat = getcellvalue(nameof(FromGroupFormat));
+            cells.Group = getcellvalue(nameof(Group));
+            cells.Height = getcellvalue(nameof(Height));
+            cells.MoveX = getcellvalue(nameof(MoveX));
+            cells.MoveY = getcellvalue(nameof(MoveY));
+            cells.Rotate = getcellvalue(nameof(Rotate));
+            cells.Select = getcellvalue(nameof(Select));
+            cells.TextEdit = getcellvalue(nameof(TextEdit));
+            cells.ThemeColors = getcellvalue(nameof(ThemeColors));
+            cells.ThemeEffects = getcellvalue(nameof(ThemeEffects));
+            cells.VertexEdit = getcellvalue(nameof(VertexEdit));
+            cells.Width = getcellvalue(nameof(Width));
+            return cells;
+        }
 
         class Builder : CellRecordBuilder<LockCells>
         {
-            public Builder() : base(CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery, LockCells.RowToRecord)
             {
             }
 
-            public override LockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
-            {
-                var cells = new LockCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                cells.Aspect = getcellvalue(nameof(Aspect));
-                cells.Begin = getcellvalue(nameof(Begin));
-                cells.CalcWH = getcellvalue(nameof(CalcWH));
-                cells.Crop = getcellvalue(nameof(Crop));
-                cells.CustProp = getcellvalue(nameof(CustProp));
-                cells.Delete = getcellvalue(nameof(Delete));
-                cells.End = getcellvalue(nameof(End));
-                cells.Format = getcellvalue(nameof(Format));
-                cells.FromGroupFormat = getcellvalue(nameof(FromGroupFormat));
-                cells.Group = getcellvalue(nameof(Group));
-                cells.Height = getcellvalue(nameof(Height));
-                cells.MoveX = getcellvalue(nameof(MoveX));
-                cells.MoveY = getcellvalue(nameof(MoveY));
-                cells.Rotate = getcellvalue(nameof(Rotate));
-                cells.Select = getcellvalue(nameof(Select));
-                cells.TextEdit = getcellvalue(nameof(TextEdit));
-                cells.ThemeColors = getcellvalue(nameof(ThemeColors));
-                cells.ThemeEffects = getcellvalue(nameof(ThemeEffects));
-                cells.VertexEdit = getcellvalue(nameof(VertexEdit));
-                cells.Width = getcellvalue(nameof(Width));
-                return cells;
-            }
         }
     }
 }

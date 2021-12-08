@@ -184,48 +184,5 @@ namespace VisioAutomation.Text
 
 
 
-        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
-        {
-            var reader = builder.Value;
-            return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
-        }
-
-        public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, Core.CellValueType type)
-        {
-            var reader = builder.Value;
-            return reader.GetCellsSingleShapeSingleRow(shape, type);
-        }
-
-        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
-
-        class Builder : CellRecordBuilder<TextBlockCells>
-        {
-
-            public Builder() : base(CellRecordBuilderType.SingleRow)
-            {
-            }
-
-            public override TextBlockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
-            {
-                var cells = new TextBlockCells();
-             
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
-
-                cells.BottomMargin = getcellvalue(nameof(TextBlockCells.BottomMargin));
-                cells.LeftMargin = getcellvalue(nameof(TextBlockCells.LeftMargin));
-                cells.RightMargin = getcellvalue(nameof(TextBlockCells.RightMargin));
-                cells.TopMargin = getcellvalue(nameof(TextBlockCells.TopMargin));
-                cells.DefaultTabStop = getcellvalue(nameof(TextBlockCells.DefaultTabStop));
-                cells.Background = getcellvalue(nameof(TextBlockCells.Background));
-                cells.BackgroundTransparency = getcellvalue(nameof(TextBlockCells.BackgroundTransparency));
-                cells.Direction = getcellvalue(nameof(TextBlockCells.Direction));
-                cells.VerticalAlign = getcellvalue(nameof(TextBlockCells.VerticalAlign));
-
-                return cells;
-            }
-        }
     }
 }

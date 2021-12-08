@@ -2,13 +2,13 @@
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class DataRowGroupCollection<T> : IEnumerable<DataRowGroup<T>>
+    public class DataRowGroups<T> : IEnumerable<DataRowGroup<T>>
     {
         // Simple list of RowGroups
 
         private readonly List<DataRowGroup<T>> _list;
 
-        internal DataRowGroupCollection()
+        internal DataRowGroups()
         {
             this._list = new List<DataRowGroup<T>>();
         }

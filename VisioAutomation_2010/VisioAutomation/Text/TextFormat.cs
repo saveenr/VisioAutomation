@@ -71,7 +71,7 @@ namespace VisioAutomation.Text
             var cells = new TextFormat();
             cells.CharacterFormats = CharacterCells.GetCells(shape, type);
             cells.ParagraphFormats = ParagraphCells.GetCells(shape, type);
-            cells.TextBlock = TextHelper.GetTextBlockCells(shape, type);
+            cells.TextBlock = TextBlockCells.GetTextBlockCells(shape, type);
             if (HasTextXFormCells(shape))
             {
                 cells.TextXForm = TextXFormCells.GetCells(shape, type);
@@ -97,7 +97,7 @@ namespace VisioAutomation.Text
 
             var charcells = CharacterCells.GetCells(page, shapeidpairs, type);
             var paracells = ParagraphCells.GetCells(page, shapeidpairs, type);
-            var textblockcells = TextHelper.GetTextBlockCells(page, shapeids, type);
+            var textblockcells = TextBlockCells.GetTextBlockCells(page, shapeids, type);
 
             var page_shapes = page.Shapes;
             var formats = new List<TextFormat>(shapeidpairs.Count);

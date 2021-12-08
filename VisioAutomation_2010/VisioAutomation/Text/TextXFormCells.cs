@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
+using VisioAutomation.ShapeSheet.Data;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -40,27 +41,27 @@ namespace VisioAutomation.Text
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
+        public static TextXFormCells RowToRecord(DataRow<string> row, DataColumns cols)
+        {
+            var record = new TextXFormCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            record.PinX = getcellvalue(nameof(PinX));
+            record.PinY = getcellvalue(nameof(PinY));
+            record.LocPinX = getcellvalue(nameof(LocPinX));
+            record.LocPinY = getcellvalue(nameof(LocPinY));
+            record.Width = getcellvalue(nameof(Width));
+            record.Height = getcellvalue(nameof(Height));
+            record.Angle = getcellvalue(nameof(Angle));
+
+            return record;
+        }
+
 
         class Builder : CellRecordBuilder<TextXFormCells>
         {
-            public Builder() : base(CellRecordBuilderType.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery, TextXFormCells.RowToRecord)
             {
-            }
-
-            public override TextXFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumnCollection cols)
-            {
-                var cells = new TextXFormCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                cells.PinX = getcellvalue(nameof(PinX));
-                cells.PinY = getcellvalue(nameof(PinY));
-                cells.LocPinX = getcellvalue(nameof(LocPinX));
-                cells.LocPinY = getcellvalue(nameof(LocPinY));
-                cells.Width = getcellvalue(nameof(Width));
-                cells.Height = getcellvalue(nameof(Height));
-                cells.Angle = getcellvalue(nameof(Angle));
-
-                return cells;
             }
         }
 
