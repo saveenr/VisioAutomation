@@ -102,15 +102,15 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
             var rowgroups =
                 __sectionquery_multiplerows(sectionquery, page, shapeidpairs, type);
-            var list_cellrecords = new CellRecordsGroup<TREC>(shapeidpairs.Count);
+            var recordgroup = new CellRecordsGroup<TREC>(shapeidpairs.Count);
             foreach (var rowgroup in rowgroups)
             {
                 var first_rowgroup = rowgroup[0];
                 var records = this.__sectionshaperows_to_cellrecords(first_rowgroup, sec_cols);
-                list_cellrecords.Add(records);
+                recordgroup.Add(records);
             }
 
-            return list_cellrecords;
+            return recordgroup;
         }
 
         public CellRecords<TREC> GetCellsSingleShapeMultipleRows(
