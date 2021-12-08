@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 
+using ROW= VisioAutomation.ShapeSheet.Data.DataRow<string>;
 using ROWS= VisioAutomation.ShapeSheet.Data.DataRows<string>;
 using COLS = VisioAutomation.ShapeSheet.Data.DataColumns;
 
@@ -46,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             }
         }
 
-        public abstract TRecord ToCellRecord(Data.DataRow<string> row, Data.DataColumns cols);
+        public abstract TRecord ToCellRecord(ROW row, COLS cols);
 
         public List<TRecord> GetCellsMultipleShapesSingleRow(
             IVisio.Page page, 
