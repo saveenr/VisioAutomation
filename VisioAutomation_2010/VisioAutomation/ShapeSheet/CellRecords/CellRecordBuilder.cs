@@ -7,7 +7,7 @@ using COLS = VisioAutomation.ShapeSheet.Data.DataColumns;
 
 namespace VisioAutomation.ShapeSheet.CellRecords
 {
-    public abstract class CellRecordBuilder<TGroup> where TGroup : CellRecord, new()
+    public abstract class CellRecordBuilder<TRecord> where TRecord : CellRecord, new()
     {
         public readonly CellRecordCategory Type;
         protected Query.CellQuery cellquery;
@@ -21,7 +21,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
         protected CellRecordBuilder(CellRecordCategory type)
         {
-            var temp_cells = new TGroup();
+            var temp_cells = new TRecord();
             Data.DataColumns cols;
 
             this.Type = type;
@@ -46,24 +46,24 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             }
         }
 
-        public abstract TGroup ToCellRecord(Data.DataRow<string> row, Data.DataColumns cols);
+        public abstract TRecord ToCellRecord(Data.DataRow<string> row, Data.DataColumns cols);
 
-        public List<TGroup> GetCellsMultipleShapesSingleRow(
+        public List<TRecord> GetCellsMultipleShapesSingleRow(
             IVisio.Page page, 
             IList<int> shapeids,
             Core.CellValueType type)
         {
             this._enforce_category(CellRecordCategory.SingleRow);
-            var cell_records = new List<TGroup>(shapeids.Count);
+            var records = new List<TRecord>(shapeids.Count);
             var cols = this.cellquery.Columns;
             ROWS rows = this.__cellquery_multipleshapes(page, shapeids, type);
             foreach (var row in rows)
             {
-                var cell_record = this.ToCellRecord(row, cols);
-                cell_records.Add(cell_record);
+                var record = this.ToCellRecord(row, cols);
+                records.Add(record);
             }
 
-            return cell_records;
+            return records;
         }
 
         private void _enforce_category(CellRecordCategory category)
@@ -74,7 +74,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             }
         }
 
-        public TGroup GetCellsSingleShapeSingleRow(
+        public TRecord GetCellsSingleShapeSingleRow(
             IVisio.Shape shape,
             Core.CellValueType type)
         {
@@ -82,11 +82,11 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             var rows = this.__cellquery_singleshape(shape, type);
             var cols = this.cellquery.Columns;
             var first_row = rows[0];
-            var cells = this.ToCellRecord(first_row, cols);
-            return cells;
+            var record = this.ToCellRecord(first_row, cols);
+            return record;
         }
 
-        public List<List<TGroup>> GetCellsMultipleShapesMultipleRows(
+        public List<List<TRecord>> GetCellsMultipleShapesMultipleRows(
             IVisio.Page page, 
             Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
@@ -96,7 +96,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
             var rowgroups =
                 __sectionquery_multiplerows(sectionquery, page, shapeidpairs, type);
-            var list_cellrecords = new List<List<TGroup>>(shapeidpairs.Count);
+            var list_cellrecords = new List<List<TRecord>>(shapeidpairs.Count);
             foreach (var rowgroup in rowgroups)
             {
                 var first_rowgroup = rowgroup[0];
@@ -107,7 +107,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return list_cellrecords;
         }
 
-        public List<TGroup> GetCellsSingleShapeMultipleRows(
+        public List<TRecord> GetCellsSingleShapeMultipleRows(
             IVisio.Shape shape, 
             Core.CellValueType type)
         {
@@ -119,11 +119,11 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return records;
         }
 
-        private List<TGroup> __sectionshaperows_to_cellrecords(
+        private List<TRecord> __sectionshaperows_to_cellrecords(
             ROWS rows,
             COLS cols)
         {
-            var records = new List<TGroup>(rows.Count);
+            var records = new List<TRecord>(rows.Count);
             foreach (var section_row in rows)
             {
                 var record = this.ToCellRecord(section_row, cols);
