@@ -6,8 +6,8 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        public List<CharacterCells> CharacterFormats { get; private set; }
-        public List<ParagraphCells> ParagraphFormats { get; private set; }
+        public ShapeSheet.CellRecords.CellRecords<CharacterCells> CharacterFormats { get; private set; }
+        public ShapeSheet.CellRecords.CellRecords<ParagraphCells> ParagraphFormats { get; private set; }
         public TextBlockCells TextBlock { get; private set; }
         public TextXFormCells TextXForm { get; private set; }
         public List<TextRun> CharacterTextRuns { get; private set; }

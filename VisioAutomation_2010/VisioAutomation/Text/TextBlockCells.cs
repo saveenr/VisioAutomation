@@ -32,7 +32,7 @@ namespace VisioAutomation.Text
         }
 
 
-        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static CellRecords<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
@@ -68,10 +68,10 @@ namespace VisioAutomation.Text
             return record;
         }
 
-        class Builder : CellRecordBuilder<TextBlockCells>
+        class Builder : CellRecordBuilderCellQuery<TextBlockCells>
         {
 
-            public Builder() : base(CellRecordQueryType.CellQuery, TextBlockCells.RowToRecord)
+            public Builder() : base(TextBlockCells.RowToRecord)
             {
             }
         }

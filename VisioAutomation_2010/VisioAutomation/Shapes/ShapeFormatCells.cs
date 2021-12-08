@@ -83,7 +83,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static CellRecords<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
@@ -100,7 +100,7 @@ namespace VisioAutomation.Shapes
         public static ShapeFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ShapeFormatCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.FillBackground = getcellvalue(nameof(FillBackground));
             record.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));
@@ -129,9 +129,9 @@ namespace VisioAutomation.Shapes
             record.LineRounding = getcellvalue(nameof(LineRounding));
             return record;
         }
-        class Builder : CellRecordBuilder<ShapeFormatCells>
+        class Builder : CellRecordBuilderCellQuery<ShapeFormatCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery,ShapeFormatCells.RowToRecord)
+            public Builder() : base(ShapeFormatCells.RowToRecord)
             {
             }
 

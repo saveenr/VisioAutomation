@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static CellRecords<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
@@ -85,7 +85,7 @@ namespace VisioAutomation.Shapes
         private static ShapeLayoutCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
             var record = new ShapeLayoutCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.ConnectorFixedCode = getcellvalue(nameof(ConnectorFixedCode));
             record.LineJumpCode = getcellvalue(nameof(LineJumpCode));
@@ -108,9 +108,9 @@ namespace VisioAutomation.Shapes
 
             return record;
         }
-        class Builder : CellRecordBuilder<ShapeLayoutCells>
+        class Builder : CellRecordBuilderCellQuery<ShapeLayoutCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, ShapeLayoutCells.RowToRecord)
+            public Builder() : base(ShapeLayoutCells.RowToRecord)
             {
             }
         }

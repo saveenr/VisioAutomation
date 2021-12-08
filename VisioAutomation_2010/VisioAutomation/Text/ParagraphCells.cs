@@ -43,14 +43,14 @@ namespace VisioAutomation.Text
             yield return this._create(nameof(this.BulletString), Core.SrcConstants.ParaBulletString, this.BulletString);
         }
 
-        public static List<List<ParagraphCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static CellRecordsGroup<ParagraphCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
 
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
-        public static List<ParagraphCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<ParagraphCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
@@ -61,7 +61,7 @@ namespace VisioAutomation.Text
 
         private static ParagraphCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
             var record = new ParagraphCells();
 
             record.IndentFirst = getcellvalue(nameof(IndentFirst));
@@ -81,9 +81,9 @@ namespace VisioAutomation.Text
 
             return record;
         }
-        class Builder : CellRecordBuilder<ParagraphCells>
+        class Builder : CellRecordBuilderSectionQuery<ParagraphCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, ParagraphCells.RowToRecord)
+            public Builder() : base(ParagraphCells.RowToRecord)
             {
             }
         }

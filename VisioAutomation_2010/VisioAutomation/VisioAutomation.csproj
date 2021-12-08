@@ -122,12 +122,15 @@
     <Compile Include="Pages\PagePrintCells.cs" />
     <Compile Include="Pages\PageRulerAndGridCells.cs" />
     <Compile Include="Internal\Extensions\LinqExtensions.cs" />
-    <Compile Include="ShapeSheet\CellRecords\CellRecordQueryType.cs" />
     <Compile Include="ShapeSheet\CellRecords\CellMetadata.cs" />
+    <Compile Include="ShapeSheet\CellRecords\CellRecordBuilderCellQuery.cs" />
+    <Compile Include="ShapeSheet\CellRecords\CellRecords.cs" />
+    <Compile Include="ShapeSheet\CellRecords\CellRecordsGroup.cs" />
     <Compile Include="ShapeSheet\CellRecords\SidSrcValue.cs" />
     <Compile Include="Core\CellValueType.cs" />
     <Compile Include="Core\ShapeIDPairs.cs" />
     <Compile Include="Core\ShapeIDPair.cs" />
+    <Compile Include="Core\BasicList.cs" />
     <Compile Include="ShapeSheet\Query\SectionQuery.cs" />
     <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="ShapeSheet\Data\DataRowGroup.cs" />
@@ -146,7 +149,7 @@
     <Compile Include="ShapeSheet\Internal\SectionMetadataCache.cs" />
     <Compile Include="ShapeSheet\Data\DataRows.cs" />
     <Compile Include="ShapeSheet\Data\DataColumns.cs" />
-    <Compile Include="ShapeSheet\CellRecords\CellRecordBuilder.cs" />
+    <Compile Include="ShapeSheet\CellRecords\CellRecordBuilderSectionQuery.cs" />
     <Compile Include="ShapeSheet\Data\DataColumn.cs" />
     <Compile Include="ShapeSheet\CellRecords\SrcValue.cs" />
     <Compile Include="Shapes\UserDefinedCellDictionary.cs" />

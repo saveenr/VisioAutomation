@@ -59,7 +59,7 @@ namespace VisioAutomation.Pages
         public static PageFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new PageFormatCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.DrawingScale = getcellvalue(nameof(DrawingScale));
             record.DrawingScaleType = getcellvalue(nameof(DrawingScaleType));
@@ -79,9 +79,9 @@ namespace VisioAutomation.Pages
             return record;
         }
 
-        class Builder : CellRecordBuilder<PageFormatCells>
+        class Builder : CellRecordBuilderCellQuery<PageFormatCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, PageFormatCells.RowToRecord)
+            public Builder() : base(PageFormatCells.RowToRecord)
             {
             }
 

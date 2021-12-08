@@ -63,16 +63,16 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> GetControls(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VisioAutomation.ShapeSheet.CellRecords.CellRecords<ControlCells>> GetControls(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
-                return new Dictionary<IVisio.Shape, IList<ControlCells>>(0);
+                return new Dictionary<IVisio.Shape, VisioAutomation.ShapeSheet.CellRecords.CellRecords<ControlCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>(targetshapes.Shapes.Count);
+            var dic = new Dictionary<IVisio.Shape, VisioAutomation.ShapeSheet.CellRecords.CellRecords<ControlCells>>(targetshapes.Shapes.Count);
             foreach (var shape in targetshapes.Shapes)
             {
                 var controls = ControlCells.GetCells(shape, cvt);

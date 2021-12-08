@@ -43,7 +43,7 @@ namespace VisioAutomation.Pages
         public static PageRulerAndGridCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new PageRulerAndGridCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.XGridDensity = getcellvalue(nameof(XGridDensity));
             record.XGridOrigin = getcellvalue(nameof(XGridOrigin));
@@ -59,9 +59,9 @@ namespace VisioAutomation.Pages
             return record;
         }
 
-        class Builder : CellRecordBuilder<PageRulerAndGridCells>
+        class Builder : CellRecordBuilderCellQuery<PageRulerAndGridCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, PageRulerAndGridCells.RowToRecord)
+            public Builder() : base(PageRulerAndGridCells.RowToRecord)
             {
             }
 

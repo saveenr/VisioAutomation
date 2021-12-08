@@ -27,14 +27,14 @@ namespace VisioAutomation.Shapes
             this.Prompt = Core.CellValue.EncodeValue(this.Prompt.Value);
         }
 
-        public static List<List<UserDefinedCellCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<UserDefinedCellCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
-        public static List<UserDefinedCellCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<UserDefinedCellCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes
         public static UserDefinedCellCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new UserDefinedCellCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.Value = getcellvalue(nameof(Value));
             record.Prompt = getcellvalue(nameof(Prompt));
@@ -55,9 +55,9 @@ namespace VisioAutomation.Shapes
         }
 
 
-        class Builder : CellRecordBuilder<UserDefinedCellCells>
+        class Builder : CellRecordBuilderSectionQuery<UserDefinedCellCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, UserDefinedCellCells.RowToRecord)
+            public Builder() : base(UserDefinedCellCells.RowToRecord)
             {
             }
 

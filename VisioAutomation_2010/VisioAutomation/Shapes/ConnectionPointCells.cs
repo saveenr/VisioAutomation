@@ -22,14 +22,14 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.Type), Core.SrcConstants.ConnectionPointType, this.Type);
         }
 
-        public static List<List<ConnectionPointCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<ConnectionPointCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
-        public static List<ConnectionPointCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<ConnectionPointCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes
         public static ConnectionPointCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ConnectionPointCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.X = getcellvalue(nameof(X));
             record.Y = getcellvalue(nameof(Y));
@@ -51,9 +51,9 @@ namespace VisioAutomation.Shapes
             return record;
         }
 
-        class Builder : CellRecordBuilder<ConnectionPointCells>
+        class Builder : CellRecordBuilderSectionQuery<ConnectionPointCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, ConnectionPointCells.RowToRecord)
+            public Builder() : base(ConnectionPointCells.RowToRecord)
             {
             }
 

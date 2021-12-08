@@ -158,14 +158,14 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<List<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<CustomPropertyCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
-        public static List<CustomPropertyCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<CustomPropertyCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
@@ -176,7 +176,7 @@ namespace VisioAutomation.Shapes
         public static CustomPropertyCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new CustomPropertyCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.Value = getcellvalue(nameof(Value));
             record.Calendar = getcellvalue(nameof(Calendar));
@@ -192,9 +192,9 @@ namespace VisioAutomation.Shapes
             return record;
         }
 
-        public class Builder : CellRecordBuilder<CustomPropertyCells>
+        public class Builder : CellRecordBuilderSectionQuery<CustomPropertyCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, CustomPropertyCells.RowToRecord)
+            public Builder() : base(CustomPropertyCells.RowToRecord)
             {
             }
         }

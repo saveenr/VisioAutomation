@@ -27,7 +27,7 @@ namespace VisioAutomation.Text
             yield return this._create(nameof(this.Angle), Core.SrcConstants.TextXFormAngle, this.Angle);
         }
 
-        public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static CellRecords<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
@@ -44,7 +44,7 @@ namespace VisioAutomation.Text
         public static TextXFormCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
             var record = new TextXFormCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.PinX = getcellvalue(nameof(PinX));
             record.PinY = getcellvalue(nameof(PinY));
@@ -58,9 +58,9 @@ namespace VisioAutomation.Text
         }
 
 
-        class Builder : CellRecordBuilder<TextXFormCells>
+        class Builder : CellRecordBuilderCellQuery<TextXFormCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, TextXFormCells.RowToRecord)
+            public Builder() : base(TextXFormCells.RowToRecord)
             {
             }
         }

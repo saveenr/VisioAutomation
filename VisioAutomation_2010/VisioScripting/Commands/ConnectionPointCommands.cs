@@ -13,16 +13,16 @@ namespace VisioScripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>> GetConnectionPoints(TargetShapes targetshapes)
+        public IDictionary<IVisio.Shape, VA.ShapeSheet.CellRecords.CellRecords<VA.Shapes.ConnectionPointCells>> GetConnectionPoints(TargetShapes targetshapes)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count <1)
             {
-                return new Dictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>>();
+                return new Dictionary<IVisio.Shape, VA.ShapeSheet.CellRecords.CellRecords<VA.Shapes.ConnectionPointCells>>();
             }
 
-            var dicof_shape_to_cxnpoint = new Dictionary<IVisio.Shape, IList<VA.Shapes.ConnectionPointCells>>();
+            var dicof_shape_to_cxnpoint = new Dictionary<IVisio.Shape, VA.ShapeSheet.CellRecords.CellRecords<VA.Shapes.ConnectionPointCells>>();
             foreach (var shape in targetshapes.Shapes)
             {
                 var cp = VisioAutomation.Shapes.ConnectionPointCells.GetCells(shape, VisioAutomation.Core.CellValueType.Formula);

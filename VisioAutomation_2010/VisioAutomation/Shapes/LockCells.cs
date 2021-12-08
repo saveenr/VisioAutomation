@@ -53,7 +53,7 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.Width), Core.SrcConstants.LockWidth, this.Width);
         }
 
-        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeid, Core.CellValueType type)
+        public static CellRecords<LockCells> GetCells(IVisio.Page page, IList<int> shapeid, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeid, type);
@@ -70,7 +70,7 @@ namespace VisioAutomation.Shapes
         public static LockCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new LockCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             cells.Aspect = getcellvalue(nameof(Aspect));
             cells.Begin = getcellvalue(nameof(Begin));
@@ -95,9 +95,9 @@ namespace VisioAutomation.Shapes
             return cells;
         }
 
-        class Builder : CellRecordBuilder<LockCells>
+        class Builder : CellRecordBuilderCellQuery<LockCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, LockCells.RowToRecord)
+            public Builder() : base(LockCells.RowToRecord)
             {
             }
 

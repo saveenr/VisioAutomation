@@ -31,14 +31,14 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.Invisible), Core.SrcConstants.HyperlinkInvisible, this.Invisible);
         }
 
-        public static List<List<HyperlinkCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<HyperlinkCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
-        public static List<HyperlinkCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<HyperlinkCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes
         public static HyperlinkCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new HyperlinkCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
 
             record.Address = getcellvalue(nameof(Address));
@@ -64,9 +64,9 @@ namespace VisioAutomation.Shapes
 
             return record;
         }
-        class Builder : CellRecordBuilder<HyperlinkCells>
+        class Builder : CellRecordBuilderSectionQuery<HyperlinkCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, HyperlinkCells.RowToRecord)
+            public Builder() : base(HyperlinkCells.RowToRecord)
             {
             }
         }

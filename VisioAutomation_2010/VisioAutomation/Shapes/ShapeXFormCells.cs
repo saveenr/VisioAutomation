@@ -28,7 +28,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static CellRecords<ShapeXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes
         public static ShapeXFormCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ShapeXFormCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.PinX = getcellvalue(nameof(PinX));
             record.PinY = getcellvalue(nameof(PinY));
@@ -58,9 +58,9 @@ namespace VisioAutomation.Shapes
             return record;
         }
 
-        class Builder : CellRecordBuilder<ShapeXFormCells>
+        class Builder : CellRecordBuilderCellQuery<ShapeXFormCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, ShapeXFormCells.RowToRecord)
+            public Builder() : base(ShapeXFormCells.RowToRecord)
             {
             }
 

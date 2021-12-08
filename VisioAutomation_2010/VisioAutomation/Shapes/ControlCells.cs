@@ -28,13 +28,13 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.YDynamics), Core.SrcConstants.ControlYDynamics, this.YDynamics);
         }
 
-        public static List<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
         }
 
-        public static List<List<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<ControlCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;
@@ -47,7 +47,7 @@ namespace VisioAutomation.Shapes
         public static ControlCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new ControlCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             cells.CanGlue = getcellvalue(nameof(CanGlue));
             cells.Tip = getcellvalue(nameof(Tip));
@@ -60,9 +60,9 @@ namespace VisioAutomation.Shapes
             return cells;
         }
 
-        class Builder : CellRecordBuilder<ControlCells>
+        class Builder : CellRecordBuilderSectionQuery<ControlCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, ControlCells.RowToRecord)
+            public Builder() : base(ControlCells.RowToRecord)
             {
             }
 
