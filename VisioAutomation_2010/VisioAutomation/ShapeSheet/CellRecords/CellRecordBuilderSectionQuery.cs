@@ -48,7 +48,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             foreach (var rowgroup in rowgroups)
             {
                 var first_rowgroup = rowgroup[0];
-                var records = this.__sectionshaperows_to_cellrecords(first_rowgroup, sec_cols);
+                var records = this.rows_to_records(first_rowgroup, sec_cols);
                 recordgroup.Add(records);
             }
 
@@ -63,21 +63,16 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             var sec_cols = this.sectionquery[0];
             var rowgroup = __sectionquery_singleshape(shape, type);
             var first_rows = rowgroup[0];
-            var records = this.__sectionshaperows_to_cellrecords(first_rows, sec_cols);
+            var records = this.rows_to_records(first_rows, sec_cols);
             return records;
         }
 
-        private CellRecords<TREC> __sectionshaperows_to_cellrecords(
+        private CellRecords<TREC> rows_to_records(
             ROWS rows,
             COLS cols)
         {
             var records = new CellRecords<TREC>(rows.Count);
-            foreach (var section_row in rows)
-            {
-                var record = this.func_row_to_rec(section_row, cols);
-                records.Add(record);
-            }
-
+            records.AddRange( rows.Select( row => this.func_row_to_rec(row, cols)));
             return records;
         }
 
