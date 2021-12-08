@@ -131,7 +131,7 @@ namespace VisioAutomation.Pages
             record.AvoidPageBreaks = getcellvalue(nameof(AvoidPageBreaks));
             return record;
         }
-        class Builder : CellRecordBuilder2<PageLayoutCells>
+        class Builder : CellRecordBuilder<PageLayoutCells>
         {
             public Builder() : base(CellRecordQueryType.CellQuery, PageLayoutCells.RowToRecord)
             {

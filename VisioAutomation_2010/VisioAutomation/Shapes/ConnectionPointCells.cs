@@ -51,7 +51,7 @@ namespace VisioAutomation.Shapes
             return record;
         }
 
-        class Builder : CellRecordBuilder2<ConnectionPointCells>
+        class Builder : CellRecordBuilder<ConnectionPointCells>
         {
             public Builder() : base(CellRecordQueryType.SectionQuery, ConnectionPointCells.RowToRecord)
             {

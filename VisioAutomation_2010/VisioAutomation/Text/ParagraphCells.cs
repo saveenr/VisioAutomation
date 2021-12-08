@@ -81,7 +81,7 @@ namespace VisioAutomation.Text
 
             return record;
         }
-        class Builder : CellRecordBuilder2<ParagraphCells>
+        class Builder : CellRecordBuilder<ParagraphCells>
         {
             public Builder() : base(CellRecordQueryType.SectionQuery, ParagraphCells.RowToRecord)
             {

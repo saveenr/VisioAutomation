@@ -192,7 +192,7 @@ namespace VisioAutomation.Shapes
             return record;
         }
 
-        public class Builder : CellRecordBuilder2<CustomPropertyCells>
+        public class Builder : CellRecordBuilder<CustomPropertyCells>
         {
             public Builder() : base(CellRecordQueryType.SectionQuery, CustomPropertyCells.RowToRecord)
             {

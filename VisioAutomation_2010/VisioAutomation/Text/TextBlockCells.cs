@@ -68,7 +68,7 @@ namespace VisioAutomation.Text
             return record;
         }
 
-        class Builder : CellRecordBuilder2<TextBlockCells>
+        class Builder : CellRecordBuilder<TextBlockCells>
         {
 
             public Builder() : base(CellRecordQueryType.CellQuery, TextBlockCells.RowToRecord)

@@ -60,7 +60,7 @@ namespace VisioAutomation.Shapes
             return cells;
         }
 
-        class Builder : CellRecordBuilder2<ControlCells>
+        class Builder : CellRecordBuilder<ControlCells>
         {
             public Builder() : base(CellRecordQueryType.SectionQuery, ControlCells.RowToRecord)
             {
