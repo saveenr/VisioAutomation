@@ -42,7 +42,7 @@ namespace VisioAutomation.Pages
 
         class Builder : CellRecordBuilder<PageRulerAndGridCells>
         {
-            public Builder() : base(CellRecordCategory.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery)
             {
             }
 

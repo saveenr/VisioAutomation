@@ -84,7 +84,7 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<ShapeLayoutCells>
         {
-            public Builder() : base(CellRecordCategory.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery)
             {
             }
 

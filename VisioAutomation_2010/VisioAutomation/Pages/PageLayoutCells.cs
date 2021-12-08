@@ -98,7 +98,7 @@ namespace VisioAutomation.Pages
 
         class Builder : CellRecordBuilder<PageLayoutCells>
         {
-            public Builder() : base(CellRecordCategory.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery)
             {
             }
 

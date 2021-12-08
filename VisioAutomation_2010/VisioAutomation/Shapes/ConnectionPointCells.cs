@@ -39,7 +39,7 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<ConnectionPointCells>
         {
-            public Builder() : base(CellRecordCategory.MultiRow)
+            public Builder() : base(CellRecordQueryType.SectionQuery)
             {
             }
 

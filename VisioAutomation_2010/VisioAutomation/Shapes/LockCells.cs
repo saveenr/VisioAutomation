@@ -70,7 +70,7 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<LockCells>
         {
-            public Builder() : base(CellRecordCategory.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery)
             {
             }
 

@@ -61,7 +61,7 @@ namespace VisioAutomation.Text
 
         class Builder : CellRecordBuilder<ParagraphCells>
         {
-            public Builder() : base(CellRecordCategory.MultiRow)
+            public Builder() : base(CellRecordQueryType.SectionQuery)
             {
             }
 

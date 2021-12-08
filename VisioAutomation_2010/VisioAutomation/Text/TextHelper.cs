@@ -201,7 +201,7 @@ namespace VisioAutomation.Text
         class Builder : CellRecordBuilder<TextBlockCells>
         {
 
-            public Builder() : base(CellRecordCategory.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery)
             {
             }
 

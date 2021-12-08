@@ -55,7 +55,7 @@ namespace VisioAutomation.Pages
 
         class Builder : CellRecordBuilder<PagePrintCells>
         {
-            public Builder() : base(CellRecordCategory.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery)
             {
             }
 

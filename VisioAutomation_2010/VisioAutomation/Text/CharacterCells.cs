@@ -78,7 +78,7 @@ namespace VisioAutomation.Text
 
         class Builder : CellRecordBuilder<CharacterCells>
         {
-            public Builder() : base(CellRecordCategory.MultiRow)
+            public Builder() : base(CellRecordQueryType.SectionQuery)
             {
             }
 

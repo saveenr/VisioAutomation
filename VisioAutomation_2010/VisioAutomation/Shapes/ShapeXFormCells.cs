@@ -44,7 +44,7 @@ namespace VisioAutomation.Shapes
 
         class Builder : CellRecordBuilder<ShapeXFormCells>
         {
-            public Builder() : base(CellRecordCategory.SingleRow)
+            public Builder() : base(CellRecordQueryType.CellQuery)
             {
             }
 

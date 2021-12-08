@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 {
     public abstract class CellRecordBuilder<TREC> where TREC : CellRecord, new()
     {
-        public readonly CellRecordCategory CellRecordCategory;
+        public readonly CellRecordQueryType CellRecordQueryType;
         protected Query.CellQuery cellquery;
         protected Query.SectionQuery sectionquery;
 
@@ -20,18 +20,18 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             this.sectionquery = null;
         }
 
-        protected CellRecordBuilder(CellRecordCategory cell_record_category)
+        protected CellRecordBuilder(CellRecordQueryType cell_record_query_type)
         {
             var temp_cells = new TREC();
             Data.DataColumns cols;
 
-            this.CellRecordCategory = cell_record_category;
-            if (cell_record_category == CellRecordCategory.SingleRow)
+            this.CellRecordQueryType = cell_record_query_type;
+            if (cell_record_query_type == CellRecordQueryType.CellQuery)
             {
                 this.cellquery = new Query.CellQuery();
                 cols = this.cellquery.Columns;
             }
-            else if (cell_record_category == CellRecordCategory.MultiRow)
+            else if (cell_record_query_type == CellRecordQueryType.SectionQuery)
             {
                 this.sectionquery = new Query.SectionQuery();
                 cols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             IList<int> shapeids,
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordCategory.SingleRow);
+            this._enforce_category(CellRecordQueryType.CellQuery);
             var records = new List<TREC>(shapeids.Count);
             var cols = this.cellquery.Columns;
             ROWS rows = this.__cellquery_multipleshapes(page, shapeids, type);
@@ -67,9 +67,9 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return records;
         }
 
-        private void _enforce_category(CellRecordCategory category)
+        private void _enforce_category(CellRecordQueryType query_type)
         {
-            if (this.CellRecordCategory != category)
+            if (this.CellRecordQueryType != query_type)
             {
                 throw new Exceptions.InternalAssertionException();
             }
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             IVisio.Shape shape,
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordCategory.SingleRow);
+            this._enforce_category(CellRecordQueryType.CellQuery);
             var rows = this.__cellquery_singleshape(shape, type);
             var cols = this.cellquery.Columns;
             var first_row = rows[0];
@@ -92,7 +92,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordCategory.MultiRow);
+            this._enforce_category(CellRecordQueryType.SectionQuery);
             var sec_cols = this.sectionquery[0];
 
             var rowgroups =
@@ -112,7 +112,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             IVisio.Shape shape, 
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordCategory.MultiRow);
+            this._enforce_category(CellRecordQueryType.SectionQuery);
             var sec_cols = this.sectionquery[0];
             var rowgroup = __sectionquery_singleshape(shape, type);
             var first_rows = rowgroup[0];
