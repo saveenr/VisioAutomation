@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 {
     public abstract class CellRecordBuilder<TREC> where TREC : CellRecord, new()
     {
-        public readonly CellRecordCategory Type;
+        public readonly CellRecordCategory CellRecordCategory;
         protected Query.CellQuery cellquery;
         protected Query.SectionQuery sectionquery;
 
@@ -20,18 +20,18 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             this.sectionquery = null;
         }
 
-        protected CellRecordBuilder(CellRecordCategory type)
+        protected CellRecordBuilder(CellRecordCategory cell_record_category)
         {
             var temp_cells = new TREC();
             Data.DataColumns cols;
 
-            this.Type = type;
-            if (type == CellRecordCategory.SingleRow)
+            this.CellRecordCategory = cell_record_category;
+            if (cell_record_category == CellRecordCategory.SingleRow)
             {
                 this.cellquery = new Query.CellQuery();
                 cols = this.cellquery.Columns;
             }
-            else if (type == CellRecordCategory.MultiRow)
+            else if (cell_record_category == CellRecordCategory.MultiRow)
             {
                 this.sectionquery = new Query.SectionQuery();
                 cols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
@@ -69,7 +69,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
         private void _enforce_category(CellRecordCategory category)
         {
-            if (this.Type != category)
+            if (this.CellRecordCategory != category)
             {
                 throw new Exceptions.InternalAssertionException();
             }
