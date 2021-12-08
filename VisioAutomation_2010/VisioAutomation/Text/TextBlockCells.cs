@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
+using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
@@ -28,6 +29,51 @@ namespace VisioAutomation.Text
                 this.BackgroundTransparency);
             yield return this._create(nameof(this.Direction), Core.SrcConstants.TextBlockDirection, this.Direction);
             yield return this._create(nameof(this.VerticalAlign), Core.SrcConstants.TextBlockVerticalAlign, this.VerticalAlign);
+        }
+
+
+        public static IList<TextBlockCells> GetTextBlockCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        {
+            var reader = builder.Value;
+            return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);
+        }
+
+        public static TextBlockCells GetTextBlockCells(IVisio.Shape shape, Core.CellValueType type)
+        {
+            var reader = builder.Value;
+            return reader.GetCellsSingleShapeSingleRow(shape, type);
+        }
+
+        private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
+
+        public static TextBlockCells RowToRecord(VisioAutomation.ShapeSheet.Data.DataRow<string> row, VisioAutomation.ShapeSheet.Data.DataColumns cols)
+        {
+            var record = new TextBlockCells();
+
+            string getcellvalue(string name)
+            {
+                return row[cols[name].Ordinal];
+            }
+
+            record.BottomMargin = getcellvalue(nameof(TextBlockCells.BottomMargin));
+            record.LeftMargin = getcellvalue(nameof(TextBlockCells.LeftMargin));
+            record.RightMargin = getcellvalue(nameof(TextBlockCells.RightMargin));
+            record.TopMargin = getcellvalue(nameof(TextBlockCells.TopMargin));
+            record.DefaultTabStop = getcellvalue(nameof(TextBlockCells.DefaultTabStop));
+            record.Background = getcellvalue(nameof(TextBlockCells.Background));
+            record.BackgroundTransparency = getcellvalue(nameof(TextBlockCells.BackgroundTransparency));
+            record.Direction = getcellvalue(nameof(TextBlockCells.Direction));
+            record.VerticalAlign = getcellvalue(nameof(TextBlockCells.VerticalAlign));
+
+            return record;
+        }
+
+        class Builder : CellRecordBuilder2<TextBlockCells>
+        {
+
+            public Builder() : base(CellRecordQueryType.CellQuery, TextBlockCells.RowToRecord)
+            {
+            }
         }
     }
 }
