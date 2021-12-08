@@ -43,7 +43,7 @@ namespace VisioAutomation.Text
             yield return this._create(nameof(this.BulletString), Core.SrcConstants.ParaBulletString, this.BulletString);
         }
 
-        public static List<CellRecords<ParagraphCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static CellRecordsGroup<ParagraphCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
 
         {
             var reader = builder.Value;

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.CellRecords;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
@@ -81,7 +82,7 @@ namespace VisioAutomation.Shapes
 
         public static List<CustomPropertyDictionary> _get_cells_as_list(
             Core.ShapeIDPairs shapeidpairs,
-            List<ShapeSheet.CellRecords.CellRecords<CustomPropertyCells>> customprops_per_shape)
+            CellRecordsGroup<CustomPropertyCells> customprops_per_shape)
         {
             if (customprops_per_shape.Count != shapeidpairs.Count)
             {
@@ -257,7 +258,7 @@ namespace VisioAutomation.Shapes
 
         private static List<List<CustomPropertyNameCellsPair>> __GetListOfCpPairLists(
             Core.ShapeIDPairs shapeidpairs,
-            List<ShapeSheet.CellRecords.CellRecords<CustomPropertyCells>> listof_listof_cpcells)
+            CellRecordsGroup<CustomPropertyCells> listof_listof_cpcells)
         {
             if (listof_listof_cpcells.Count != shapeidpairs.Count)
             {

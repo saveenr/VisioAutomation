@@ -92,7 +92,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return record;
         }
 
-        public List<CellRecords<TREC>> GetCellsMultipleShapesMultipleRows(
+        public CellRecordsGroup<TREC> GetCellsMultipleShapesMultipleRows(
             IVisio.Page page,
             Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
@@ -102,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
             var rowgroups =
                 __sectionquery_multiplerows(sectionquery, page, shapeidpairs, type);
-            var list_cellrecords = new List<CellRecords<TREC>>(shapeidpairs.Count);
+            var list_cellrecords = new CellRecordsGroup<TREC>(shapeidpairs.Count);
             foreach (var rowgroup in rowgroups)
             {
                 var first_rowgroup = rowgroup[0];

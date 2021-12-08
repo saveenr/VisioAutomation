@@ -27,7 +27,7 @@ namespace VisioAutomation.Shapes
             this.Prompt = Core.CellValue.EncodeValue(this.Prompt.Value);
         }
 
-        public static List<CellRecords<UserDefinedCellCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<UserDefinedCellCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;

@@ -34,7 +34,7 @@ namespace VisioAutomation.Shapes
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
         }
 
-        public static List<CellRecords<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<ControlCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;

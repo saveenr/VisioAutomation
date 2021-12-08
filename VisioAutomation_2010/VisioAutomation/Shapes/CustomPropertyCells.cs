@@ -158,7 +158,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<CellRecords<CustomPropertyCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static CellRecordsGroup<CustomPropertyCells> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;

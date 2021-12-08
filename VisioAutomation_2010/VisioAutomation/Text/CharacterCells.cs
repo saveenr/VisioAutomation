@@ -61,7 +61,7 @@ namespace VisioAutomation.Text
         }
 
 
-        public static List<CellRecords<CharacterCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
+        public static CellRecordsGroup<CharacterCells> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, pairs, type);
