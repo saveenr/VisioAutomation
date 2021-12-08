@@ -20,34 +20,4 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return (s) => row[cols[s].Ordinal];
         }
     }
-
-    public class CellRecords<T> : VisioAutomation.Core.BasicList<T> where T : CellRecord, new()
-    {
-
-        public CellRecords() : base()
-        {
-
-        }
-
-        public CellRecords(int capacity) : base(capacity)
-        {
-
-        }
-
-    }
-
-    public class CellRecordsGroup<T> : VisioAutomation.Core.BasicList<CellRecords<T>> where T : CellRecord, new()
-    {
-
-        public CellRecordsGroup() : base()
-        {
-
-        }
-
-        public CellRecordsGroup(int capacity) : base(capacity)
-        {
-
-        }
-
-    }
 }
