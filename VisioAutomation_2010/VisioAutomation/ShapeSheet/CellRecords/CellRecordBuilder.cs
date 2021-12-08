@@ -10,13 +10,13 @@ namespace VisioAutomation.ShapeSheet.CellRecords
     public abstract class CellRecordBuilder<TGroup> where TGroup : CellRecord, new()
     {
         public readonly CellRecordCategory Type;
-        protected Query.CellQuery query_cells_singlerow;
-        protected Query.SectionQuery query_sections_multirow;
+        protected Query.CellQuery cellquery;
+        protected Query.SectionQuery sectionquery;
 
         private CellRecordBuilder()
         {
-            this.query_cells_singlerow = null;
-            this.query_sections_multirow = null;
+            this.cellquery = null;
+            this.sectionquery = null;
         }
 
         protected CellRecordBuilder(CellRecordCategory type)
@@ -27,13 +27,13 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             this.Type = type;
             if (type == CellRecordCategory.SingleRow)
             {
-                this.query_cells_singlerow = new Query.CellQuery();
-                cols = this.query_cells_singlerow.Columns;
+                this.cellquery = new Query.CellQuery();
+                cols = this.cellquery.Columns;
             }
             else if (type == CellRecordCategory.MultiRow)
             {
-                this.query_sections_multirow = new Query.SectionQuery();
-                cols = this.query_sections_multirow.Add(temp_cells.GetCellMetadata().First().Src);
+                this.sectionquery = new Query.SectionQuery();
+                cols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
             }
             else
             {
@@ -55,9 +55,9 @@ namespace VisioAutomation.ShapeSheet.CellRecords
         {
             this._enforce_category(CellRecordCategory.SingleRow);
             var cell_records = new List<TGroup>(shapeids.Count);
-            var cols = this.query_cells_singlerow.Columns;
+            var cols = this.cellquery.Columns;
             ROWS rows =
-                this.__QueryCells_MultipleShapes_SingleRow(query_cells_singlerow, page, shapeids, type);
+                this.__QueryCells_MultipleShapes_SingleRow(cellquery, page, shapeids, type);
             foreach (var row in rows)
             {
                 var cell_record = this.ToCellRecord(row, cols);
@@ -80,8 +80,8 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             Core.CellValueType type)
         {
             this._enforce_category(CellRecordCategory.SingleRow);
-            var rows = this.__QueryCells_SingleShape_SingleRow(query_cells_singlerow, shape, type);
-            var cols = this.query_cells_singlerow.Columns;
+            var rows = this.__QueryCells_SingleShape_SingleRow(cellquery, shape, type);
+            var cols = this.cellquery.Columns;
             var first_row = rows[0];
             var cells = this.ToCellRecord(first_row, cols);
             return cells;
@@ -93,10 +93,10 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             Core.CellValueType type)
         {
             this._enforce_category(CellRecordCategory.MultiRow);
-            var sec_cols = this.query_sections_multirow[0];
+            var sec_cols = this.sectionquery[0];
 
             var rowgroups =
-                __QueryCells_MultipleShapes_MultipleRows(query_sections_multirow, page, shapeidpairs, type);
+                __QueryCells_MultipleShapes_MultipleRows(sectionquery, page, shapeidpairs, type);
             var list_cellrecords = new List<List<TGroup>>(shapeidpairs.Count);
             foreach (var rowgroup in rowgroups)
             {
@@ -113,8 +113,8 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             Core.CellValueType type)
         {
             this._enforce_category(CellRecordCategory.MultiRow);
-            var sec_cols = this.query_sections_multirow[0];
-            var rowgroup = __QueryCells_SingleShape_MultipleRows(query_sections_multirow, shape, type);
+            var sec_cols = this.sectionquery[0];
+            var rowgroup = __QueryCells_SingleShape_MultipleRows(sectionquery, shape, type);
             var first_rows = rowgroup[0];
             var records = this._sectionshaperows_to_cellrecords(first_rows, sec_cols);
             return records;
