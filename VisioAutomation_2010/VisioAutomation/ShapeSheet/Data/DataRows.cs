@@ -1,32 +1,22 @@
 using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeSheet.Data
+namespace VisioAutomation.Core
 {
-    public class DataRows<T> : IEnumerable<DataRow<T>>
+    public class BasicList<T> : IEnumerable<T>
     {
-        // Simple list of Rows
+        private readonly List<T> _list;
 
-        private readonly List<DataRow<T>> _list;
-
-        public readonly int ShapeID;
-        public readonly IVisio.VisSectionIndices SectionIndex;
-
-        internal DataRows(int capacity)
+        internal BasicList()
         {
-            this._list = new List<DataRow<T>>(capacity);
-            this.ShapeID = -1;
-            this.SectionIndex = IVisio.VisSectionIndices.visSectionInval;
+            this._list = new List<T>();
         }
 
-        internal DataRows(int capacity, int shapeid, IVisio.VisSectionIndices section_index)
+        internal BasicList(int capacity)
         {
-            this._list = new List<DataRow<T>>(capacity);
-            this.ShapeID = shapeid;
-            this.SectionIndex = section_index;
+            this._list = new List<T>(capacity);
         }
-
-        public IEnumerator<DataRow<T>> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return this._list.GetEnumerator();
         }
@@ -36,12 +26,12 @@ namespace VisioAutomation.ShapeSheet.Data
             return GetEnumerator();
         }
 
-        internal void Add(DataRow<T> r)
+        public void Add(T r)
         {
             this._list.Add(r);
         }
 
-        internal void AddRange(IEnumerable<DataRow<T>> rows)
+        public void AddRange(IEnumerable<T> rows)
         {
             this._list.AddRange(rows);
         }
@@ -54,12 +44,36 @@ namespace VisioAutomation.ShapeSheet.Data
             }
         }
 
-        public DataRow<T> this[int index]
+        public T this[int index]
         {
-            get
-            {
-                return this._list[index];
-            }
+            get { return this._list[0]; }
+            //set { /* set the specified index to value here */ }
+        }
+    }
+}
+
+namespace VisioAutomation.ShapeSheet.Data
+{
+
+
+    public class DataRows<T> : VisioAutomation.Core.BasicList<DataRow<T>>
+    {
+        // Simple list of Rows
+
+
+        public readonly int ShapeID;
+        public readonly IVisio.VisSectionIndices SectionIndex;
+
+        internal DataRows(int capacity) : base(capacity)
+        {
+            this.ShapeID = -1;
+            this.SectionIndex = IVisio.VisSectionIndices.visSectionInval;
+        }
+
+        internal DataRows(int capacity, int shapeid, IVisio.VisSectionIndices section_index) : base (capacity)
+        {
+            this.ShapeID = shapeid;
+            this.SectionIndex = section_index;
         }
     }
 }
