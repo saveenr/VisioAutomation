@@ -28,13 +28,13 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.YDynamics), Core.SrcConstants.ControlYDynamics, this.YDynamics);
         }
 
-        public static List<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<ControlCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);
         }
 
-        public static List<List<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
+        public static List<CellRecords<ControlCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
             var reader = builder.Value;

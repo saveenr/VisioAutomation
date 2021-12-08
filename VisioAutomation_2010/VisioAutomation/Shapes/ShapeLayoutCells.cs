@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes
         }
 
 
-        public static List<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static CellRecords<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);

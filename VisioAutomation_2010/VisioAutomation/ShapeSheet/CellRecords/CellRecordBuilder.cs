@@ -54,13 +54,13 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             }
         }
 
-        public List<TREC> GetCellsMultipleShapesSingleRow(
+        public CellRecords<TREC> GetCellsMultipleShapesSingleRow(
             IVisio.Page page,
             IList<int> shapeids,
             Core.CellValueType type)
         {
             this._enforce_category(CellRecordQueryType.CellQuery);
-            var records = new List<TREC>(shapeids.Count);
+            var records = new CellRecords<TREC>(shapeids.Count);
             var cols = this.cellquery.Columns;
             ROWS rows = this.__cellquery_multipleshapes(page, shapeids, type);
             foreach (var row in rows)
@@ -92,7 +92,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return record;
         }
 
-        public List<List<TREC>> GetCellsMultipleShapesMultipleRows(
+        public List<CellRecords<TREC>> GetCellsMultipleShapesMultipleRows(
             IVisio.Page page,
             Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
@@ -102,7 +102,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
             var rowgroups =
                 __sectionquery_multiplerows(sectionquery, page, shapeidpairs, type);
-            var list_cellrecords = new List<List<TREC>>(shapeidpairs.Count);
+            var list_cellrecords = new List<CellRecords<TREC>>(shapeidpairs.Count);
             foreach (var rowgroup in rowgroups)
             {
                 var first_rowgroup = rowgroup[0];
@@ -113,7 +113,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return list_cellrecords;
         }
 
-        public List<TREC> GetCellsSingleShapeMultipleRows(
+        public CellRecords<TREC> GetCellsSingleShapeMultipleRows(
             IVisio.Shape shape,
             Core.CellValueType type)
         {
@@ -125,11 +125,11 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return records;
         }
 
-        private List<TREC> __sectionshaperows_to_cellrecords(
+        private CellRecords<TREC> __sectionshaperows_to_cellrecords(
             ROWS rows,
             COLS cols)
         {
-            var records = new List<TREC>(rows.Count);
+            var records = new CellRecords<TREC>(rows.Count);
             foreach (var section_row in rows)
             {
                 var record = this.func_row_to_rec(section_row, cols);

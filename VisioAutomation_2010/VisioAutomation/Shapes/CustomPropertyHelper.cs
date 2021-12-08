@@ -81,7 +81,7 @@ namespace VisioAutomation.Shapes
 
         public static List<CustomPropertyDictionary> _get_cells_as_list(
             Core.ShapeIDPairs shapeidpairs,
-            List<List<CustomPropertyCells>> customprops_per_shape)
+            List<ShapeSheet.CellRecords.CellRecords<CustomPropertyCells>> customprops_per_shape)
         {
             if (customprops_per_shape.Count != shapeidpairs.Count)
             {
@@ -236,7 +236,7 @@ namespace VisioAutomation.Shapes
 
         private static List<CustomPropertyNameCellsPair> __CreateListofPairs(
             List<string> shape_custprop_names,
-            List<CustomPropertyCells> shape_custprop_cells,
+            ShapeSheet.CellRecords.CellRecords<CustomPropertyCells> shape_custprop_cells,
             int shapeid)
         {
             int num_props = shape_custprop_names.Count;
@@ -257,7 +257,7 @@ namespace VisioAutomation.Shapes
 
         private static List<List<CustomPropertyNameCellsPair>> __GetListOfCpPairLists(
             Core.ShapeIDPairs shapeidpairs,
-            List<List<CustomPropertyCells>> listof_listof_cpcells)
+            List<ShapeSheet.CellRecords.CellRecords<CustomPropertyCells>> listof_listof_cpcells)
         {
             if (listof_listof_cpcells.Count != shapeidpairs.Count)
             {

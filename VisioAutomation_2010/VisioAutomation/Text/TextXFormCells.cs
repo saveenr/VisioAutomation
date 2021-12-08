@@ -27,7 +27,7 @@ namespace VisioAutomation.Text
             yield return this._create(nameof(this.Angle), Core.SrcConstants.TextXFormAngle, this.Angle);
         }
 
-        public static List<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
+        public static CellRecords<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeids, type);

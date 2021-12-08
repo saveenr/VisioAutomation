@@ -43,14 +43,14 @@ namespace VisioAutomation.Text
             yield return this._create(nameof(this.BulletString), Core.SrcConstants.ParaBulletString, this.BulletString);
         }
 
-        public static List<List<ParagraphCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
+        public static List<CellRecords<ParagraphCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs shapeidpairs, Core.CellValueType type)
 
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, shapeidpairs, type);
         }
 
-        public static List<ParagraphCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<ParagraphCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);

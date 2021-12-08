@@ -61,13 +61,13 @@ namespace VisioAutomation.Text
         }
 
 
-        public static List<List<CharacterCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
+        public static List<CellRecords<CharacterCells>> GetCells(IVisio.Page page, Core.ShapeIDPairs pairs, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesMultipleRows(page, pairs, type);
         }
 
-        public static List<CharacterCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
+        public static CellRecords<CharacterCells> GetCells(IVisio.Shape shape, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsSingleShapeMultipleRows(shape, type);

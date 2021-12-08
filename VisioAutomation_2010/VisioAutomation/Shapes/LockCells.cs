@@ -53,7 +53,7 @@ namespace VisioAutomation.Shapes
             yield return this._create(nameof(this.Width), Core.SrcConstants.LockWidth, this.Width);
         }
 
-        public static List<LockCells> GetCells(IVisio.Page page, IList<int> shapeid, Core.CellValueType type)
+        public static CellRecords<LockCells> GetCells(IVisio.Page page, IList<int> shapeid, Core.CellValueType type)
         {
             var reader = builder.Value;
             return reader.GetCellsMultipleShapesSingleRow(page, shapeid, type);

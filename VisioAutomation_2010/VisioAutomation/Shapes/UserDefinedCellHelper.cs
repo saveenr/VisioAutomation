@@ -231,7 +231,7 @@ namespace VisioAutomation.Shapes
         // ---------------------------------------------------------------
 
         private static List<UserDefinedCellNameCellsPair> __CreateNamePairs(int shapeid, List<string> udcell_names,
-            List<UserDefinedCellCells> list_udcells)
+            ShapeSheet.CellRecords.CellRecords<UserDefinedCellCells> list_udcells)
         {
             var namepairs = new List<UserDefinedCellNameCellsPair>(list_udcells.Count);
             int num_udcells = list_udcells.Count;

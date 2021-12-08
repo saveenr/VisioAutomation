@@ -63,16 +63,16 @@ namespace VisioScripting.Commands
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
+        public Dictionary<IVisio.Shape, VisioAutomation.ShapeSheet.CellRecords.CellRecords<HyperlinkCells>> GetHyperlinks(TargetShapes targetshapes, VisioAutomation.Core.CellValueType cvt)
         {
             targetshapes = targetshapes.ResolveToShapes(this._client);
 
             if (targetshapes.Shapes.Count < 1)
             {
-                return new Dictionary<IVisio.Shape, IList<HyperlinkCells>>(0);
+                return new Dictionary<IVisio.Shape, VisioAutomation.ShapeSheet.CellRecords.CellRecords<HyperlinkCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<HyperlinkCells>>();
+            var dic = new Dictionary<IVisio.Shape, VisioAutomation.ShapeSheet.CellRecords.CellRecords<HyperlinkCells>>();
             foreach (var shape in targetshapes.Shapes)
             {
                 var hyperlinks = HyperlinkCells.GetCells(shape, cvt);
