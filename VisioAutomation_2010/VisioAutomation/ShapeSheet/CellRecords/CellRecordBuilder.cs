@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             Core.CellValueType type)
         {
             this._enforce_category(CellRecordCategory.SingleRow);
-            var rows = this._cellquery_singleshape(cellquery, shape, type);
+            var rows = this.cellquery_singleshape(cellquery, shape, type);
             var cols = this.cellquery.Columns;
             var first_row = rows[0];
             var cells = this.ToCellRecord(first_row, cols);
@@ -163,7 +163,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return rowgroups;
         }
 
-        private ROWS _cellquery_singleshape(
+        private ROWS cellquery_singleshape(
             Query.CellQuery query,
             IVisio.Shape shape, 
             Core.CellValueType type)
