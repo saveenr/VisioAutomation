@@ -47,7 +47,7 @@ namespace VisioAutomation.Shapes
         public static ControlCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new ControlCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             cells.CanGlue = getcellvalue(nameof(CanGlue));
             cells.Tip = getcellvalue(nameof(Tip));

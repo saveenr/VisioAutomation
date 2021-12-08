@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes
         public static ConnectionPointCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ConnectionPointCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.X = getcellvalue(nameof(X));
             record.Y = getcellvalue(nameof(Y));

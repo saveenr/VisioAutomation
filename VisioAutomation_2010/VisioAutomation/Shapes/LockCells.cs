@@ -70,7 +70,7 @@ namespace VisioAutomation.Shapes
         public static LockCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new LockCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             cells.Aspect = getcellvalue(nameof(Aspect));
             cells.Begin = getcellvalue(nameof(Begin));

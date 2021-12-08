@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes
         public static UserDefinedCellCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new UserDefinedCellCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.Value = getcellvalue(nameof(Value));
             record.Prompt = getcellvalue(nameof(Prompt));

@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return new CellMetadata(name, src, value.Value);
         }
 
-        internal static System.Func<string, string> queryrow_to_cellrecord(Data.DataRow<string> row, Data.DataColumns cols)
+        internal static System.Func<string, string> getvalueforcol(Data.DataRow<string> row, Data.DataColumns cols)
         {
             return (s) => row[cols[s].Ordinal];
         }

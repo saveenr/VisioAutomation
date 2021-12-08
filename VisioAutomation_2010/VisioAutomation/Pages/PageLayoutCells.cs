@@ -98,7 +98,7 @@ namespace VisioAutomation.Pages
         public static PageLayoutCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new PageLayoutCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
 
             record.AvenueSizeX = getcellvalue(nameof(AvenueSizeX));

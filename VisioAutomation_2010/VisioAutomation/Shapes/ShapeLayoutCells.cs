@@ -85,7 +85,7 @@ namespace VisioAutomation.Shapes
         private static ShapeLayoutCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
             var record = new ShapeLayoutCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.ConnectorFixedCode = getcellvalue(nameof(ConnectorFixedCode));
             record.LineJumpCode = getcellvalue(nameof(LineJumpCode));

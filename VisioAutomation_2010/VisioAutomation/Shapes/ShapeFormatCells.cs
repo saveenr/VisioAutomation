@@ -100,7 +100,7 @@ namespace VisioAutomation.Shapes
         public static ShapeFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ShapeFormatCells();
-            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var getcellvalue = getvalueforcol(row, cols);
 
             record.FillBackground = getcellvalue(nameof(FillBackground));
             record.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));
