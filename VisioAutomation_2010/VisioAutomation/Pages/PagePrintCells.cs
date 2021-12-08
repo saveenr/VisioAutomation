@@ -53,38 +53,39 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<PagePrintCells>
+        public static PagePrintCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.CellQuery)
+            var cells = new PagePrintCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+
+            cells.LeftMargin = getcellvalue(nameof(LeftMargin));
+            cells.CenterX = getcellvalue(nameof(CenterX));
+            cells.CenterY = getcellvalue(nameof(CenterY));
+
+            cells.OnPage = getcellvalue(nameof(OnPage));
+            cells.BottomMargin = getcellvalue(nameof(BottomMargin));
+            cells.RightMargin = getcellvalue(nameof(RightMargin));
+            cells.PagesX = getcellvalue(nameof(PagesX));
+            cells.PagesY = getcellvalue(nameof(PagesY));
+            cells.TopMargin = getcellvalue(nameof(TopMargin));
+            cells.PaperKind = getcellvalue(nameof(PaperKind));
+
+            cells.Grid = getcellvalue(nameof(Grid));
+            cells.Orientation = getcellvalue(nameof(Orientation));
+            cells.ScaleX = getcellvalue(nameof(ScaleX));
+            cells.ScaleY = getcellvalue(nameof(ScaleY));
+            cells.PaperSource = getcellvalue(nameof(PaperSource));
+
+            return cells;
+        }
+
+        class Builder : CellRecordBuilder2<PagePrintCells>
+        {
+            public Builder() : base(CellRecordQueryType.CellQuery, PagePrintCells.RowToRecord)
             {
             }
 
-            public override PagePrintCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var cells = new PagePrintCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-
-                cells.LeftMargin = getcellvalue(nameof(LeftMargin));
-                cells.CenterX = getcellvalue(nameof(CenterX));
-                cells.CenterY = getcellvalue(nameof(CenterY));
-
-                cells.OnPage = getcellvalue(nameof(OnPage));
-                cells.BottomMargin = getcellvalue(nameof(BottomMargin));
-                cells.RightMargin = getcellvalue(nameof(RightMargin));
-                cells.PagesX = getcellvalue(nameof(PagesX));
-                cells.PagesY = getcellvalue(nameof(PagesY));
-                cells.TopMargin = getcellvalue(nameof(TopMargin));
-                cells.PaperKind = getcellvalue(nameof(PaperKind));
-
-                cells.Grid = getcellvalue(nameof(Grid));
-                cells.Orientation = getcellvalue(nameof(Orientation));
-                cells.ScaleX = getcellvalue(nameof(ScaleX));
-                cells.ScaleY = getcellvalue(nameof(ScaleY));
-                cells.PaperSource = getcellvalue(nameof(PaperSource));
-
-                return cells;
-            }
         }
     }
 }

@@ -42,25 +42,26 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-
-        class Builder : CellRecordBuilder<UserDefinedCellCells>
+        public static UserDefinedCellCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery)
+            var record = new UserDefinedCellCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            record.Value = getcellvalue(nameof(Value));
+            record.Prompt = getcellvalue(nameof(Prompt));
+
+
+            return record;
+        }
+
+
+        class Builder : CellRecordBuilder2<UserDefinedCellCells>
+        {
+            public Builder() : base(CellRecordQueryType.SectionQuery, UserDefinedCellCells.RowToRecord)
             {
             }
 
 
-            public override UserDefinedCellCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var record = new UserDefinedCellCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                record.Value = getcellvalue(nameof(Value));
-                record.Prompt = getcellvalue(nameof(Prompt));
-
-
-                return record;
-            }
         }
     }
 }

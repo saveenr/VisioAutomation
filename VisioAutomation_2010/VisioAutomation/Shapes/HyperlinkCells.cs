@@ -46,30 +46,28 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-
-        class Builder : CellRecordBuilder<HyperlinkCells>
+        public static HyperlinkCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery)
+            var record = new HyperlinkCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+
+            record.Address = getcellvalue(nameof(Address));
+            record.Description = getcellvalue(nameof(Description));
+            record.ExtraInfo = getcellvalue(nameof(ExtraInfo));
+            record.Frame = getcellvalue(nameof(Frame));
+            record.SortKey = getcellvalue(nameof(SortKey));
+            record.SubAddress = getcellvalue(nameof(SubAddress));
+            record.NewWindow = getcellvalue(nameof(NewWindow));
+            record.Default = getcellvalue(nameof(Default));
+            record.Invisible = getcellvalue(nameof(Invisible));
+
+            return record;
+        }
+        class Builder : CellRecordBuilder2<HyperlinkCells>
+        {
+            public Builder() : base(CellRecordQueryType.SectionQuery, HyperlinkCells.RowToRecord)
             {
-            }
-
-            public override HyperlinkCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var record = new HyperlinkCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-
-                record.Address = getcellvalue(nameof(Address));
-                record.Description = getcellvalue(nameof(Description));
-                record.ExtraInfo = getcellvalue(nameof(ExtraInfo));
-                record.Frame = getcellvalue(nameof(Frame));
-                record.SortKey = getcellvalue(nameof(SortKey));
-                record.SubAddress = getcellvalue(nameof(SubAddress));
-                record.NewWindow = getcellvalue(nameof(NewWindow));
-                record.Default = getcellvalue(nameof(Default));
-                record.Invisible = getcellvalue(nameof(Invisible));
-
-                return record;
             }
         }
     }

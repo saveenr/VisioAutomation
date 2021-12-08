@@ -44,27 +44,28 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<ControlCells>
+        public static ControlCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery)
+            var cells = new ControlCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            cells.CanGlue = getcellvalue(nameof(CanGlue));
+            cells.Tip = getcellvalue(nameof(Tip));
+            cells.X = getcellvalue(nameof(X));
+            cells.Y = getcellvalue(nameof(Y));
+            cells.YBehavior = getcellvalue(nameof(YBehavior));
+            cells.XBehavior = getcellvalue(nameof(XBehavior));
+            cells.XDynamics = getcellvalue(nameof(XDynamics));
+            cells.YDynamics = getcellvalue(nameof(YDynamics));
+            return cells;
+        }
+
+        class Builder : CellRecordBuilder2<ControlCells>
+        {
+            public Builder() : base(CellRecordQueryType.SectionQuery, ControlCells.RowToRecord)
             {
             }
 
-            public override ControlCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var cells = new ControlCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                cells.CanGlue = getcellvalue(nameof(CanGlue));
-                cells.Tip = getcellvalue(nameof(Tip));
-                cells.X = getcellvalue(nameof(X));
-                cells.Y = getcellvalue(nameof(Y));
-                cells.YBehavior = getcellvalue(nameof(YBehavior));
-                cells.XBehavior = getcellvalue(nameof(XBehavior));
-                cells.XDynamics = getcellvalue(nameof(XDynamics));
-                cells.YDynamics = getcellvalue(nameof(YDynamics));
-                return cells;
-            }
         }
     }
 }

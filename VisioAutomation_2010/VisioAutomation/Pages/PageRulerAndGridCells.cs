@@ -40,30 +40,31 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<PageRulerAndGridCells>
+        public static PageRulerAndGridCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.CellQuery)
+            var record = new PageRulerAndGridCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            record.XGridDensity = getcellvalue(nameof(XGridDensity));
+            record.XGridOrigin = getcellvalue(nameof(XGridOrigin));
+            record.XGridSpacing = getcellvalue(nameof(XGridSpacing));
+            record.XRulerDensity = getcellvalue(nameof(XRulerDensity));
+            record.XRulerOrigin = getcellvalue(nameof(XRulerOrigin));
+            record.YGridDensity = getcellvalue(nameof(YGridDensity));
+            record.YGridOrigin = getcellvalue(nameof(YGridOrigin));
+            record.YGridSpacing = getcellvalue(nameof(YGridSpacing));
+            record.YRulerDensity = getcellvalue(nameof(YRulerDensity));
+            record.YRulerOrigin = getcellvalue(nameof(YRulerOrigin));
+
+            return record;
+        }
+
+        class Builder : CellRecordBuilder2<PageRulerAndGridCells>
+        {
+            public Builder() : base(CellRecordQueryType.CellQuery, PageRulerAndGridCells.RowToRecord)
             {
             }
 
-            public override PageRulerAndGridCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var record = new PageRulerAndGridCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                record.XGridDensity = getcellvalue(nameof(XGridDensity));
-                record.XGridOrigin = getcellvalue(nameof(XGridOrigin));
-                record.XGridSpacing = getcellvalue(nameof(XGridSpacing));
-                record.XRulerDensity = getcellvalue(nameof(XRulerDensity));
-                record.XRulerOrigin = getcellvalue(nameof(XRulerOrigin));
-                record.YGridDensity = getcellvalue(nameof(YGridDensity));
-                record.YGridOrigin = getcellvalue(nameof(YGridOrigin));
-                record.YGridSpacing = getcellvalue(nameof(YGridSpacing));
-                record.YRulerDensity = getcellvalue(nameof(YRulerDensity));
-                record.YRulerOrigin = getcellvalue(nameof(YRulerOrigin));
-
-                return record;
-            }
         }
     }
 }

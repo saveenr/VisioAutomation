@@ -75,48 +75,48 @@ namespace VisioAutomation.Text
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-
-        class Builder : CellRecordBuilder<CharacterCells>
+        public static CharacterCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery)
+            var cells = new CharacterCells();
+
+            string getcellvalue(string name)
+            {
+                return row[cols[name].Ordinal];
+            }
+
+            cells.Color = getcellvalue(nameof(Color));
+            cells.ColorTransparency = getcellvalue(nameof(ColorTransparency));
+            cells.Font = getcellvalue(nameof(Font));
+            cells.Size = getcellvalue(nameof(Size));
+            cells.Style = getcellvalue(nameof(Style));
+            cells.AsianFont = getcellvalue(nameof(AsianFont));
+            cells.AsianFont = getcellvalue(nameof(AsianFont));
+            cells.Case = getcellvalue(nameof(Case));
+            cells.ComplexScriptFont = getcellvalue(nameof(ComplexScriptFont));
+            cells.ComplexScriptSize = getcellvalue(nameof(ComplexScriptSize));
+            cells.DoubleStrikethrough = getcellvalue(nameof(DoubleStrikethrough));
+            cells.DoubleUnderline = getcellvalue(nameof(DoubleUnderline));
+            cells.FontScale = getcellvalue(nameof(FontScale));
+            cells.LangID = getcellvalue(nameof(LangID));
+            cells.Letterspace = getcellvalue(nameof(Letterspace));
+            cells.Locale = getcellvalue(nameof(Locale));
+            cells.LocalizeFont = getcellvalue(nameof(LocalizeFont));
+            cells.Overline = getcellvalue(nameof(Overline));
+            cells.Perpendicular = getcellvalue(nameof(Perpendicular));
+            cells.Pos = getcellvalue(nameof(Pos));
+            cells.RTLText = getcellvalue(nameof(RTLText));
+            cells.Strikethru = getcellvalue(nameof(Strikethru));
+            cells.UseVertical = getcellvalue(nameof(UseVertical));
+
+            return cells;
+        }
+
+        class Builder : CellRecordBuilder2<CharacterCells>
+        {
+            public Builder() : base(CellRecordQueryType.SectionQuery, CharacterCells.RowToRecord)
             {
             }
 
-            public override CharacterCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var cells = new CharacterCells();
-
-                string getcellvalue(string name)
-                {
-                    return row[cols[name].Ordinal];
-                }
-
-                cells.Color = getcellvalue(nameof(Color));
-                cells.ColorTransparency = getcellvalue(nameof(ColorTransparency));
-                cells.Font = getcellvalue(nameof(Font));
-                cells.Size = getcellvalue(nameof(Size));
-                cells.Style = getcellvalue(nameof(Style));
-                cells.AsianFont = getcellvalue(nameof(AsianFont));
-                cells.AsianFont = getcellvalue(nameof(AsianFont));
-                cells.Case = getcellvalue(nameof(Case));
-                cells.ComplexScriptFont = getcellvalue(nameof(ComplexScriptFont));
-                cells.ComplexScriptSize = getcellvalue(nameof(ComplexScriptSize));
-                cells.DoubleStrikethrough = getcellvalue(nameof(DoubleStrikethrough));
-                cells.DoubleUnderline = getcellvalue(nameof(DoubleUnderline));
-                cells.FontScale = getcellvalue(nameof(FontScale));
-                cells.LangID = getcellvalue(nameof(LangID));
-                cells.Letterspace = getcellvalue(nameof(Letterspace));
-                cells.Locale = getcellvalue(nameof(Locale));
-                cells.LocalizeFont = getcellvalue(nameof(LocalizeFont));
-                cells.Overline = getcellvalue(nameof(Overline));
-                cells.Perpendicular = getcellvalue(nameof(Perpendicular));
-                cells.Pos = getcellvalue(nameof(Pos));
-                cells.RTLText = getcellvalue(nameof(RTLText));
-                cells.Strikethru = getcellvalue(nameof(Strikethru));
-                cells.UseVertical = getcellvalue(nameof(UseVertical));
-
-                return cells;
-            }
         }
 
     }

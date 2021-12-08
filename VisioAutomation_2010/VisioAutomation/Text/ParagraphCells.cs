@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
+using VisioAutomation.ShapeSheet.Data;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -58,34 +59,32 @@ namespace VisioAutomation.Text
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-
-        class Builder : CellRecordBuilder<ParagraphCells>
+        private static ParagraphCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery)
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+            var record = new ParagraphCells();
+
+            record.IndentFirst = getcellvalue(nameof(IndentFirst));
+            record.IndentLeft = getcellvalue(nameof(IndentLeft));
+            record.IndentRight = getcellvalue(nameof(IndentRight));
+            record.SpacingAfter = getcellvalue(nameof(SpacingAfter));
+            record.SpacingBefore = getcellvalue(nameof(SpacingBefore));
+            record.SpacingLine = getcellvalue(nameof(SpacingLine));
+            record.HorizontalAlign = getcellvalue(nameof(HorizontalAlign));
+            record.Bullet = getcellvalue(nameof(Bullet));
+            record.BulletFont = getcellvalue(nameof(BulletFont));
+            record.BulletFontSize = getcellvalue(nameof(BulletFontSize));
+            record.LocalizeBulletFont = getcellvalue(nameof(LocalizeBulletFont));
+            record.TextPosAfterBullet = getcellvalue(nameof(TextPosAfterBullet));
+            record.Flags = getcellvalue(nameof(Flags));
+            record.BulletString = getcellvalue(nameof(BulletString));
+
+            return record;
+        }
+        class Builder : CellRecordBuilder2<ParagraphCells>
+        {
+            public Builder() : base(CellRecordQueryType.SectionQuery, ParagraphCells.RowToRecord)
             {
-            }
-
-            public override ParagraphCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-                var record = new ParagraphCells();
-
-                record.IndentFirst = getcellvalue(nameof(IndentFirst));
-                record.IndentLeft = getcellvalue(nameof(IndentLeft));
-                record.IndentRight = getcellvalue(nameof(IndentRight));
-                record.SpacingAfter = getcellvalue(nameof(SpacingAfter));
-                record.SpacingBefore = getcellvalue(nameof(SpacingBefore));
-                record.SpacingLine = getcellvalue(nameof(SpacingLine));
-                record.HorizontalAlign = getcellvalue(nameof(HorizontalAlign));
-                record.Bullet = getcellvalue(nameof(Bullet));
-                record.BulletFont = getcellvalue(nameof(BulletFont));
-                record.BulletFontSize = getcellvalue(nameof(BulletFontSize));
-                record.LocalizeBulletFont = getcellvalue(nameof(LocalizeBulletFont));
-                record.TextPosAfterBullet = getcellvalue(nameof(TextPosAfterBullet));
-                record.Flags = getcellvalue(nameof(Flags));
-                record.BulletString = getcellvalue(nameof(BulletString));
-
-                return record;
             }
         }
 

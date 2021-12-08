@@ -56,34 +56,35 @@ namespace VisioAutomation.Pages
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-        class Builder : CellRecordBuilder<PageFormatCells>
+        public static PageFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.CellQuery)
+            var record = new PageFormatCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            record.DrawingScale = getcellvalue(nameof(DrawingScale));
+            record.DrawingScaleType = getcellvalue(nameof(DrawingScaleType));
+            record.DrawingSizeType = getcellvalue(nameof(DrawingSizeType));
+            record.InhibitSnap = getcellvalue(nameof(InhibitSnap));
+            record.Height = getcellvalue(nameof(Height));
+            record.Scale = getcellvalue(nameof(Scale));
+            record.Width = getcellvalue(nameof(Width));
+            record.ShadowObliqueAngle = getcellvalue(nameof(ShadowObliqueAngle));
+            record.ShadowOffsetX = getcellvalue(nameof(ShadowOffsetX));
+            record.ShadowOffsetY = getcellvalue(nameof(ShadowOffsetY));
+            record.ShadowScaleFactor = getcellvalue(nameof(ShadowScaleFactor));
+            record.ShadowType = getcellvalue(nameof(ShadowType));
+            record.UIVisibility = getcellvalue(nameof(UIVisibility));
+            record.DrawingResizeType = getcellvalue(nameof(DrawingResizeType));
+
+            return record;
+        }
+
+        class Builder : CellRecordBuilder2<PageFormatCells>
+        {
+            public Builder() : base(CellRecordQueryType.CellQuery, PageFormatCells.RowToRecord)
             {
             }
 
-            public override PageFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var record = new PageFormatCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                record.DrawingScale = getcellvalue(nameof(DrawingScale));
-                record.DrawingScaleType = getcellvalue(nameof(DrawingScaleType));
-                record.DrawingSizeType = getcellvalue(nameof(DrawingSizeType));
-                record.InhibitSnap = getcellvalue(nameof(InhibitSnap));
-                record.Height = getcellvalue(nameof(Height));
-                record.Scale = getcellvalue(nameof(Scale));
-                record.Width = getcellvalue(nameof(Width));
-                record.ShadowObliqueAngle = getcellvalue(nameof(ShadowObliqueAngle));
-                record.ShadowOffsetX = getcellvalue(nameof(ShadowOffsetX));
-                record.ShadowOffsetY = getcellvalue(nameof(ShadowOffsetY));
-                record.ShadowScaleFactor = getcellvalue(nameof(ShadowScaleFactor));
-                record.ShadowType = getcellvalue(nameof(ShadowType));
-                record.UIVisibility = getcellvalue(nameof(UIVisibility));
-                record.DrawingResizeType = getcellvalue(nameof(DrawingResizeType));
-
-                return record;
-            }
         }
     }
 }

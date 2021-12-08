@@ -173,30 +173,29 @@ namespace VisioAutomation.Shapes
 
         private static readonly System.Lazy<Builder> builder = new System.Lazy<Builder>();
 
-
-        public class Builder : CellRecordBuilder<CustomPropertyCells>
+        public static CustomPropertyCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery)
+            var record = new CustomPropertyCells();
+            var getcellvalue = queryrow_to_cellrecord(row, cols);
+
+            record.Value = getcellvalue(nameof(Value));
+            record.Calendar = getcellvalue(nameof(Calendar));
+            record.Format = getcellvalue(nameof(Format));
+            record.Invisible = getcellvalue(nameof(Invisible));
+            record.Label = getcellvalue(nameof(Label));
+            record.LangID = getcellvalue(nameof(LangID));
+            record.Prompt = getcellvalue(nameof(Prompt));
+            record.SortKey = getcellvalue(nameof(SortKey));
+            record.Type = getcellvalue(nameof(CustomPropertyCells.Type));
+            record.Ask = getcellvalue(nameof(Ask));
+
+            return record;
+        }
+
+        public class Builder : CellRecordBuilder2<CustomPropertyCells>
+        {
+            public Builder() : base(CellRecordQueryType.SectionQuery, CustomPropertyCells.RowToRecord)
             {
-            }
-
-            public override CustomPropertyCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
-            {
-                var record = new CustomPropertyCells();
-                var getcellvalue = queryrow_to_cellrecord(row, cols);
-
-                record.Value = getcellvalue(nameof(Value));
-                record.Calendar = getcellvalue(nameof(Calendar));
-                record.Format = getcellvalue(nameof(Format));
-                record.Invisible = getcellvalue(nameof(Invisible));
-                record.Label = getcellvalue(nameof(Label));
-                record.LangID = getcellvalue(nameof(LangID));
-                record.Prompt = getcellvalue(nameof(Prompt));
-                record.SortKey = getcellvalue(nameof(SortKey));
-                record.Type = getcellvalue(nameof(CustomPropertyCells.Type));
-                record.Ask = getcellvalue(nameof(Ask));
-
-                return record;
             }
         }
     }
