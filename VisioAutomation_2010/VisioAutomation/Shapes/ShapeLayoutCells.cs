@@ -88,31 +88,31 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ShapeLayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override ShapeLayoutCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new ShapeLayoutCells();
+                var record = new ShapeLayoutCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
-                cells.ConnectorFixedCode = getcellvalue(nameof(ConnectorFixedCode));
-                cells.LineJumpCode = getcellvalue(nameof(LineJumpCode));
-                cells.LineJumpDirX = getcellvalue(nameof(LineJumpDirX));
-                cells.LineJumpDirY = getcellvalue(nameof(LineJumpDirY));
-                cells.LineJumpStyle = getcellvalue(nameof(LineJumpStyle));
-                cells.LineRouteExt = getcellvalue(nameof(LineRouteExt));
-                cells.ShapeFixedCode = getcellvalue(nameof(ShapeFixedCode));
-                cells.ShapePermeablePlace = getcellvalue(nameof(ShapePermeablePlace));
-                cells.ShapePermeableX = getcellvalue(nameof(ShapePermeableX));
-                cells.ShapePermeableY = getcellvalue(nameof(ShapePermeableY));
-                cells.ShapePlaceFlip = getcellvalue(nameof(ShapePlaceFlip));
-                cells.ShapePlaceStyle = getcellvalue(nameof(ShapePlaceStyle));
-                cells.ShapePlowCode = getcellvalue(nameof(ShapePlowCode));
-                cells.ShapeRouteStyle = getcellvalue(nameof(ShapeRouteStyle));
-                cells.ShapeSplit = getcellvalue(nameof(ShapeSplit));
-                cells.ShapeSplittable = getcellvalue(nameof(ShapeSplittable));
-                cells.ShapeDisplayLevel = getcellvalue(nameof(ShapeDisplayLevel));
-                cells.Relationships = getcellvalue(nameof(Relationships));
+                record.ConnectorFixedCode = getcellvalue(nameof(ConnectorFixedCode));
+                record.LineJumpCode = getcellvalue(nameof(LineJumpCode));
+                record.LineJumpDirX = getcellvalue(nameof(LineJumpDirX));
+                record.LineJumpDirY = getcellvalue(nameof(LineJumpDirY));
+                record.LineJumpStyle = getcellvalue(nameof(LineJumpStyle));
+                record.LineRouteExt = getcellvalue(nameof(LineRouteExt));
+                record.ShapeFixedCode = getcellvalue(nameof(ShapeFixedCode));
+                record.ShapePermeablePlace = getcellvalue(nameof(ShapePermeablePlace));
+                record.ShapePermeableX = getcellvalue(nameof(ShapePermeableX));
+                record.ShapePermeableY = getcellvalue(nameof(ShapePermeableY));
+                record.ShapePlaceFlip = getcellvalue(nameof(ShapePlaceFlip));
+                record.ShapePlaceStyle = getcellvalue(nameof(ShapePlaceStyle));
+                record.ShapePlowCode = getcellvalue(nameof(ShapePlowCode));
+                record.ShapeRouteStyle = getcellvalue(nameof(ShapeRouteStyle));
+                record.ShapeSplit = getcellvalue(nameof(ShapeSplit));
+                record.ShapeSplittable = getcellvalue(nameof(ShapeSplittable));
+                record.ShapeDisplayLevel = getcellvalue(nameof(ShapeDisplayLevel));
+                record.Relationships = getcellvalue(nameof(Relationships));
 
-                return cells;
+                return record;
             }
         }
     }

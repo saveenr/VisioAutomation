@@ -103,37 +103,37 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ShapeFormatCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override ShapeFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new ShapeFormatCells();
+                var record = new ShapeFormatCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
-                cells.FillBackground = getcellvalue(nameof(FillBackground));
-                cells.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));
-                cells.FillForeground = getcellvalue(nameof(FillForeground));
-                cells.FillForegroundTransparency = getcellvalue(nameof(FillForegroundTransparency));
-                cells.FillPattern = getcellvalue(nameof(FillPattern));
-                cells.FillShadowObliqueAngle = getcellvalue(nameof(FillShadowObliqueAngle));
-                cells.FillShadowOffsetX = getcellvalue(nameof(FillShadowOffsetX));
-                cells.FillShadowOffsetY = getcellvalue(nameof(FillShadowOffsetY));
-                cells.FillShadowScaleFactor = getcellvalue(nameof(FillShadowScaleFactor));
-                cells.FillShadowType = getcellvalue(nameof(FillShadowType));
-                cells.FillShadowBackground = getcellvalue(nameof(FillShadowBackground));
-                cells.FillShadowBackgroundTransparency = getcellvalue(nameof(FillShadowBackgroundTransparency));
-                cells.FillShadowForeground = getcellvalue(nameof(FillShadowForeground));
-                cells.FillShadowForegroundTransparency = getcellvalue(nameof(FillShadowForegroundTransparency));
-                cells.FillShadowPattern = getcellvalue(nameof(FillShadowPattern));
-                cells.LineBeginArrow = getcellvalue(nameof(LineBeginArrow));
-                cells.LineBeginArrowSize = getcellvalue(nameof(LineBeginArrowSize));
-                cells.LineEndArrow = getcellvalue(nameof(LineEndArrow));
-                cells.LineEndArrowSize = getcellvalue(nameof(LineEndArrowSize));
-                cells.LineCap = getcellvalue(nameof(LineCap));
-                cells.LineColor = getcellvalue(nameof(LineColor));
-                cells.LineColorTransparency = getcellvalue(nameof(LineColorTransparency));
-                cells.LinePattern = getcellvalue(nameof(LinePattern));
-                cells.LineWeight = getcellvalue(nameof(LineWeight));
-                cells.LineRounding = getcellvalue(nameof(LineRounding));
-                return cells;
+                record.FillBackground = getcellvalue(nameof(FillBackground));
+                record.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));
+                record.FillForeground = getcellvalue(nameof(FillForeground));
+                record.FillForegroundTransparency = getcellvalue(nameof(FillForegroundTransparency));
+                record.FillPattern = getcellvalue(nameof(FillPattern));
+                record.FillShadowObliqueAngle = getcellvalue(nameof(FillShadowObliqueAngle));
+                record.FillShadowOffsetX = getcellvalue(nameof(FillShadowOffsetX));
+                record.FillShadowOffsetY = getcellvalue(nameof(FillShadowOffsetY));
+                record.FillShadowScaleFactor = getcellvalue(nameof(FillShadowScaleFactor));
+                record.FillShadowType = getcellvalue(nameof(FillShadowType));
+                record.FillShadowBackground = getcellvalue(nameof(FillShadowBackground));
+                record.FillShadowBackgroundTransparency = getcellvalue(nameof(FillShadowBackgroundTransparency));
+                record.FillShadowForeground = getcellvalue(nameof(FillShadowForeground));
+                record.FillShadowForegroundTransparency = getcellvalue(nameof(FillShadowForegroundTransparency));
+                record.FillShadowPattern = getcellvalue(nameof(FillShadowPattern));
+                record.LineBeginArrow = getcellvalue(nameof(LineBeginArrow));
+                record.LineBeginArrowSize = getcellvalue(nameof(LineBeginArrowSize));
+                record.LineEndArrow = getcellvalue(nameof(LineEndArrow));
+                record.LineEndArrowSize = getcellvalue(nameof(LineEndArrowSize));
+                record.LineCap = getcellvalue(nameof(LineCap));
+                record.LineColor = getcellvalue(nameof(LineColor));
+                record.LineColorTransparency = getcellvalue(nameof(LineColorTransparency));
+                record.LinePattern = getcellvalue(nameof(LinePattern));
+                record.LineWeight = getcellvalue(nameof(LineWeight));
+                record.LineRounding = getcellvalue(nameof(LineRounding));
+                return record;
             }
         }
     }

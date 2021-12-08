@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             }
         }
 
-        public abstract TREC ToCellRecord(ROW row, COLS cols);
+        public abstract TREC RowToRecord(ROW row, COLS cols);
 
         public List<TREC> GetCellsMultipleShapesSingleRow(
             IVisio.Page page, 
@@ -60,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             ROWS rows = this.__cellquery_multipleshapes(page, shapeids, type);
             foreach (var row in rows)
             {
-                var record = this.ToCellRecord(row, cols);
+                var record = this.RowToRecord(row, cols);
                 records.Add(record);
             }
 
@@ -83,7 +83,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             var rows = this.__cellquery_singleshape(shape, type);
             var cols = this.cellquery.Columns;
             var first_row = rows[0];
-            var record = this.ToCellRecord(first_row, cols);
+            var record = this.RowToRecord(first_row, cols);
             return record;
         }
 
@@ -127,7 +127,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             var records = new List<TREC>(rows.Count);
             foreach (var section_row in rows)
             {
-                var record = this.ToCellRecord(section_row, cols);
+                var record = this.RowToRecord(section_row, cols);
                 records.Add(record);
             }
 

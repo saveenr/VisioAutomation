@@ -74,7 +74,7 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override LockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override LockCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new LockCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

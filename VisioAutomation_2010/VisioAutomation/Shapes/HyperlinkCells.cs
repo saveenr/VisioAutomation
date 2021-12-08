@@ -53,23 +53,23 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override HyperlinkCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override HyperlinkCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new HyperlinkCells();
+                var record = new HyperlinkCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 
-                cells.Address = getcellvalue(nameof(Address));
-                cells.Description = getcellvalue(nameof(Description));
-                cells.ExtraInfo = getcellvalue(nameof(ExtraInfo));
-                cells.Frame = getcellvalue(nameof(Frame));
-                cells.SortKey = getcellvalue(nameof(SortKey));
-                cells.SubAddress = getcellvalue(nameof(SubAddress));
-                cells.NewWindow = getcellvalue(nameof(NewWindow));
-                cells.Default = getcellvalue(nameof(Default));
-                cells.Invisible = getcellvalue(nameof(Invisible));
+                record.Address = getcellvalue(nameof(Address));
+                record.Description = getcellvalue(nameof(Description));
+                record.ExtraInfo = getcellvalue(nameof(ExtraInfo));
+                record.Frame = getcellvalue(nameof(Frame));
+                record.SortKey = getcellvalue(nameof(SortKey));
+                record.SubAddress = getcellvalue(nameof(SubAddress));
+                record.NewWindow = getcellvalue(nameof(NewWindow));
+                record.Default = getcellvalue(nameof(Default));
+                record.Invisible = getcellvalue(nameof(Invisible));
 
-                return cells;
+                return record;
             }
         }
     }

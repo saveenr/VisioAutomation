@@ -205,26 +205,26 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override TextBlockCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override TextBlockCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new TextBlockCells();
+                var record = new TextBlockCells();
              
                 string getcellvalue(string name)
                 {
                     return row[cols[name].Ordinal];
                 }
 
-                cells.BottomMargin = getcellvalue(nameof(TextBlockCells.BottomMargin));
-                cells.LeftMargin = getcellvalue(nameof(TextBlockCells.LeftMargin));
-                cells.RightMargin = getcellvalue(nameof(TextBlockCells.RightMargin));
-                cells.TopMargin = getcellvalue(nameof(TextBlockCells.TopMargin));
-                cells.DefaultTabStop = getcellvalue(nameof(TextBlockCells.DefaultTabStop));
-                cells.Background = getcellvalue(nameof(TextBlockCells.Background));
-                cells.BackgroundTransparency = getcellvalue(nameof(TextBlockCells.BackgroundTransparency));
-                cells.Direction = getcellvalue(nameof(TextBlockCells.Direction));
-                cells.VerticalAlign = getcellvalue(nameof(TextBlockCells.VerticalAlign));
+                record.BottomMargin = getcellvalue(nameof(TextBlockCells.BottomMargin));
+                record.LeftMargin = getcellvalue(nameof(TextBlockCells.LeftMargin));
+                record.RightMargin = getcellvalue(nameof(TextBlockCells.RightMargin));
+                record.TopMargin = getcellvalue(nameof(TextBlockCells.TopMargin));
+                record.DefaultTabStop = getcellvalue(nameof(TextBlockCells.DefaultTabStop));
+                record.Background = getcellvalue(nameof(TextBlockCells.Background));
+                record.BackgroundTransparency = getcellvalue(nameof(TextBlockCells.BackgroundTransparency));
+                record.Direction = getcellvalue(nameof(TextBlockCells.Direction));
+                record.VerticalAlign = getcellvalue(nameof(TextBlockCells.VerticalAlign));
 
-                return cells;
+                return record;
             }
         }
     }

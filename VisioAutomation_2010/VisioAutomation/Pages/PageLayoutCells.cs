@@ -103,41 +103,41 @@ namespace VisioAutomation.Pages
             }
 
 
-            public override PageLayoutCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override PageLayoutCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new PageLayoutCells();
+                var record = new PageLayoutCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
 
-                cells.AvenueSizeX = getcellvalue(nameof(AvenueSizeX));
-                cells.AvenueSizeY = getcellvalue(nameof(AvenueSizeY));
-                cells.BlockSizeX = getcellvalue(nameof(BlockSizeX));
-                cells.BlockSizeY = getcellvalue(nameof(BlockSizeY));
-                cells.CtrlAsInput = getcellvalue(nameof(CtrlAsInput));
-                cells.DynamicsOff = getcellvalue(nameof(DynamicsOff));
-                cells.EnableGrid = getcellvalue(nameof(EnableGrid));
-                cells.LineAdjustFrom = getcellvalue(nameof(LineAdjustFrom));
-                cells.LineAdjustTo = getcellvalue(nameof(LineAdjustTo));
-                cells.LineJumpCode = getcellvalue(nameof(LineJumpCode));
-                cells.LineJumpFactorX = getcellvalue(nameof(LineJumpFactorX));
-                cells.LineJumpFactorY = getcellvalue(nameof(LineJumpFactorY));
-                cells.LineJumpStyle = getcellvalue(nameof(LineJumpStyle));
-                cells.LineRouteExt = getcellvalue(nameof(LineRouteExt));
-                cells.LineToLineX = getcellvalue(nameof(LineToLineX));
-                cells.LineToLineY = getcellvalue(nameof(LineToLineY));
-                cells.LineToNodeX = getcellvalue(nameof(LineToNodeX));
-                cells.LineToNodeY = getcellvalue(nameof(LineToNodeY));
-                cells.LineJumpDirX = getcellvalue(nameof(LineJumpDirX));
-                cells.LineJumpDirY = getcellvalue(nameof(LineJumpDirY));
-                cells.PageShapeSplit = getcellvalue(nameof(PageShapeSplit));
-                cells.PlaceDepth = getcellvalue(nameof(PlaceDepth));
-                cells.PlaceFlip = getcellvalue(nameof(PlaceFlip));
-                cells.PlaceStyle = getcellvalue(nameof(PlaceStyle));
-                cells.PlowCode = getcellvalue(nameof(PlowCode));
-                cells.ResizePage = getcellvalue(nameof(ResizePage));
-                cells.RouteStyle = getcellvalue(nameof(RouteStyle));
-                cells.AvoidPageBreaks = getcellvalue(nameof(AvoidPageBreaks));
-                return cells;
+                record.AvenueSizeX = getcellvalue(nameof(AvenueSizeX));
+                record.AvenueSizeY = getcellvalue(nameof(AvenueSizeY));
+                record.BlockSizeX = getcellvalue(nameof(BlockSizeX));
+                record.BlockSizeY = getcellvalue(nameof(BlockSizeY));
+                record.CtrlAsInput = getcellvalue(nameof(CtrlAsInput));
+                record.DynamicsOff = getcellvalue(nameof(DynamicsOff));
+                record.EnableGrid = getcellvalue(nameof(EnableGrid));
+                record.LineAdjustFrom = getcellvalue(nameof(LineAdjustFrom));
+                record.LineAdjustTo = getcellvalue(nameof(LineAdjustTo));
+                record.LineJumpCode = getcellvalue(nameof(LineJumpCode));
+                record.LineJumpFactorX = getcellvalue(nameof(LineJumpFactorX));
+                record.LineJumpFactorY = getcellvalue(nameof(LineJumpFactorY));
+                record.LineJumpStyle = getcellvalue(nameof(LineJumpStyle));
+                record.LineRouteExt = getcellvalue(nameof(LineRouteExt));
+                record.LineToLineX = getcellvalue(nameof(LineToLineX));
+                record.LineToLineY = getcellvalue(nameof(LineToLineY));
+                record.LineToNodeX = getcellvalue(nameof(LineToNodeX));
+                record.LineToNodeY = getcellvalue(nameof(LineToNodeY));
+                record.LineJumpDirX = getcellvalue(nameof(LineJumpDirX));
+                record.LineJumpDirY = getcellvalue(nameof(LineJumpDirY));
+                record.PageShapeSplit = getcellvalue(nameof(PageShapeSplit));
+                record.PlaceDepth = getcellvalue(nameof(PlaceDepth));
+                record.PlaceFlip = getcellvalue(nameof(PlaceFlip));
+                record.PlaceStyle = getcellvalue(nameof(PlaceStyle));
+                record.PlowCode = getcellvalue(nameof(PlowCode));
+                record.ResizePage = getcellvalue(nameof(ResizePage));
+                record.RouteStyle = getcellvalue(nameof(RouteStyle));
+                record.AvoidPageBreaks = getcellvalue(nameof(AvoidPageBreaks));
+                return record;
             }
         }
     }

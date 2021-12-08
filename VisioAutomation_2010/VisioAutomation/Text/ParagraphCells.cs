@@ -65,27 +65,27 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override ParagraphCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override ParagraphCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
-                var cells = new ParagraphCells();
+                var record = new ParagraphCells();
 
-                cells.IndentFirst = getcellvalue(nameof(IndentFirst));
-                cells.IndentLeft = getcellvalue(nameof(IndentLeft));
-                cells.IndentRight = getcellvalue(nameof(IndentRight));
-                cells.SpacingAfter = getcellvalue(nameof(SpacingAfter));
-                cells.SpacingBefore = getcellvalue(nameof(SpacingBefore));
-                cells.SpacingLine = getcellvalue(nameof(SpacingLine));
-                cells.HorizontalAlign = getcellvalue(nameof(HorizontalAlign));
-                cells.Bullet = getcellvalue(nameof(Bullet));
-                cells.BulletFont = getcellvalue(nameof(BulletFont));
-                cells.BulletFontSize = getcellvalue(nameof(BulletFontSize));
-                cells.LocalizeBulletFont = getcellvalue(nameof(LocalizeBulletFont));
-                cells.TextPosAfterBullet = getcellvalue(nameof(TextPosAfterBullet));
-                cells.Flags = getcellvalue(nameof(Flags));
-                cells.BulletString = getcellvalue(nameof(BulletString));
+                record.IndentFirst = getcellvalue(nameof(IndentFirst));
+                record.IndentLeft = getcellvalue(nameof(IndentLeft));
+                record.IndentRight = getcellvalue(nameof(IndentRight));
+                record.SpacingAfter = getcellvalue(nameof(SpacingAfter));
+                record.SpacingBefore = getcellvalue(nameof(SpacingBefore));
+                record.SpacingLine = getcellvalue(nameof(SpacingLine));
+                record.HorizontalAlign = getcellvalue(nameof(HorizontalAlign));
+                record.Bullet = getcellvalue(nameof(Bullet));
+                record.BulletFont = getcellvalue(nameof(BulletFont));
+                record.BulletFontSize = getcellvalue(nameof(BulletFontSize));
+                record.LocalizeBulletFont = getcellvalue(nameof(LocalizeBulletFont));
+                record.TextPosAfterBullet = getcellvalue(nameof(TextPosAfterBullet));
+                record.Flags = getcellvalue(nameof(Flags));
+                record.BulletString = getcellvalue(nameof(BulletString));
 
-                return cells;
+                return record;
             }
         }
 

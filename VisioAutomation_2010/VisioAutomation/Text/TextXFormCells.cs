@@ -47,20 +47,20 @@ namespace VisioAutomation.Text
             {
             }
 
-            public override TextXFormCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override TextXFormCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new TextXFormCells();
+                var record = new TextXFormCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
-                cells.PinX = getcellvalue(nameof(PinX));
-                cells.PinY = getcellvalue(nameof(PinY));
-                cells.LocPinX = getcellvalue(nameof(LocPinX));
-                cells.LocPinY = getcellvalue(nameof(LocPinY));
-                cells.Width = getcellvalue(nameof(Width));
-                cells.Height = getcellvalue(nameof(Height));
-                cells.Angle = getcellvalue(nameof(Angle));
+                record.PinX = getcellvalue(nameof(PinX));
+                record.PinY = getcellvalue(nameof(PinY));
+                record.LocPinX = getcellvalue(nameof(LocPinX));
+                record.LocPinY = getcellvalue(nameof(LocPinY));
+                record.Width = getcellvalue(nameof(Width));
+                record.Height = getcellvalue(nameof(Height));
+                record.Angle = getcellvalue(nameof(Angle));
 
-                return cells;
+                return record;
             }
         }
 

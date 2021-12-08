@@ -43,18 +43,18 @@ namespace VisioAutomation.Shapes
             {
             }
 
-            public override ConnectionPointCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override ConnectionPointCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new ConnectionPointCells();
+                var record = new ConnectionPointCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
-                cells.X = getcellvalue(nameof(X));
-                cells.Y = getcellvalue(nameof(Y));
-                cells.DirX = getcellvalue(nameof(DirX));
-                cells.DirY = getcellvalue(nameof(DirY));
-                cells.Type = getcellvalue(nameof(ConnectionPointCells.Type));
+                record.X = getcellvalue(nameof(X));
+                record.Y = getcellvalue(nameof(Y));
+                record.DirX = getcellvalue(nameof(DirX));
+                record.DirY = getcellvalue(nameof(DirY));
+                record.Type = getcellvalue(nameof(ConnectionPointCells.Type));
 
-                return cells;
+                return record;
             }
         }
     }

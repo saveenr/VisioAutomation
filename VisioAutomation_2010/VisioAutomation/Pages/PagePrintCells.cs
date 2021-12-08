@@ -59,7 +59,7 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PagePrintCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override PagePrintCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
                 var cells = new PagePrintCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);

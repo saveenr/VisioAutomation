@@ -50,16 +50,16 @@ namespace VisioAutomation.Shapes
             }
 
 
-            public override UserDefinedCellCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override UserDefinedCellCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new UserDefinedCellCells();
+                var record = new UserDefinedCellCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
-                cells.Value = getcellvalue(nameof(Value));
-                cells.Prompt = getcellvalue(nameof(Prompt));
+                record.Value = getcellvalue(nameof(Value));
+                record.Prompt = getcellvalue(nameof(Prompt));
 
 
-                return cells;
+                return record;
             }
         }
     }

@@ -46,23 +46,23 @@ namespace VisioAutomation.Pages
             {
             }
 
-            public override PageRulerAndGridCells ToCellRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
+            public override PageRulerAndGridCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
             {
-                var cells = new PageRulerAndGridCells();
+                var record = new PageRulerAndGridCells();
                 var getcellvalue = queryrow_to_cellrecord(row, cols);
 
-                cells.XGridDensity = getcellvalue(nameof(XGridDensity));
-                cells.XGridOrigin = getcellvalue(nameof(XGridOrigin));
-                cells.XGridSpacing = getcellvalue(nameof(XGridSpacing));
-                cells.XRulerDensity = getcellvalue(nameof(XRulerDensity));
-                cells.XRulerOrigin = getcellvalue(nameof(XRulerOrigin));
-                cells.YGridDensity = getcellvalue(nameof(YGridDensity));
-                cells.YGridOrigin = getcellvalue(nameof(YGridOrigin));
-                cells.YGridSpacing = getcellvalue(nameof(YGridSpacing));
-                cells.YRulerDensity = getcellvalue(nameof(YRulerDensity));
-                cells.YRulerOrigin = getcellvalue(nameof(YRulerOrigin));
+                record.XGridDensity = getcellvalue(nameof(XGridDensity));
+                record.XGridOrigin = getcellvalue(nameof(XGridOrigin));
+                record.XGridSpacing = getcellvalue(nameof(XGridSpacing));
+                record.XRulerDensity = getcellvalue(nameof(XRulerDensity));
+                record.XRulerOrigin = getcellvalue(nameof(XRulerOrigin));
+                record.YGridDensity = getcellvalue(nameof(YGridDensity));
+                record.YGridOrigin = getcellvalue(nameof(YGridOrigin));
+                record.YGridSpacing = getcellvalue(nameof(YGridSpacing));
+                record.YRulerDensity = getcellvalue(nameof(YRulerDensity));
+                record.YRulerOrigin = getcellvalue(nameof(YRulerOrigin));
 
-                return cells;
+                return record;
             }
         }
     }
