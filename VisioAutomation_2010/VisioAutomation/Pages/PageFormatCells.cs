@@ -79,9 +79,9 @@ namespace VisioAutomation.Pages
             return record;
         }
 
-        class Builder : CellRecordBuilder<PageFormatCells>
+        class Builder : CellRecordBuilderCellQuery<PageFormatCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, PageFormatCells.RowToRecord)
+            public Builder() : base(PageFormatCells.RowToRecord)
             {
             }
 

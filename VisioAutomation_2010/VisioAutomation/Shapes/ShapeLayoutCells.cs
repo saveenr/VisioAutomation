@@ -108,9 +108,9 @@ namespace VisioAutomation.Shapes
 
             return record;
         }
-        class Builder : CellRecordBuilder<ShapeLayoutCells>
+        class Builder : CellRecordBuilderCellQuery<ShapeLayoutCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, ShapeLayoutCells.RowToRecord)
+            public Builder() : base(ShapeLayoutCells.RowToRecord)
             {
             }
         }

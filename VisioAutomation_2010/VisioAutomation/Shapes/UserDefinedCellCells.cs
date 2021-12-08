@@ -55,9 +55,9 @@ namespace VisioAutomation.Shapes
         }
 
 
-        class Builder : CellRecordBuilder<UserDefinedCellCells>
+        class Builder : CellRecordBuilderSectionQuery<UserDefinedCellCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, UserDefinedCellCells.RowToRecord)
+            public Builder() : base(UserDefinedCellCells.RowToRecord)
             {
             }
 

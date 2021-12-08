@@ -95,9 +95,9 @@ namespace VisioAutomation.Shapes
             return cells;
         }
 
-        class Builder : CellRecordBuilder<LockCells>
+        class Builder : CellRecordBuilderCellQuery<LockCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, LockCells.RowToRecord)
+            public Builder() : base(LockCells.RowToRecord)
             {
             }
 

@@ -58,9 +58,9 @@ namespace VisioAutomation.Shapes
             return record;
         }
 
-        class Builder : CellRecordBuilder<ShapeXFormCells>
+        class Builder : CellRecordBuilderCellQuery<ShapeXFormCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, ShapeXFormCells.RowToRecord)
+            public Builder() : base(ShapeXFormCells.RowToRecord)
             {
             }
 

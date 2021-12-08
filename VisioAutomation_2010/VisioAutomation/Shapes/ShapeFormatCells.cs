@@ -129,9 +129,9 @@ namespace VisioAutomation.Shapes
             record.LineRounding = getcellvalue(nameof(LineRounding));
             return record;
         }
-        class Builder : CellRecordBuilder<ShapeFormatCells>
+        class Builder : CellRecordBuilderCellQuery<ShapeFormatCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery,ShapeFormatCells.RowToRecord)
+            public Builder() : base(ShapeFormatCells.RowToRecord)
             {
             }
 

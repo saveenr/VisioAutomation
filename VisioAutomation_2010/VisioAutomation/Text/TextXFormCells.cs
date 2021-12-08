@@ -58,9 +58,9 @@ namespace VisioAutomation.Text
         }
 
 
-        class Builder : CellRecordBuilder<TextXFormCells>
+        class Builder : CellRecordBuilderCellQuery<TextXFormCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, TextXFormCells.RowToRecord)
+            public Builder() : base(TextXFormCells.RowToRecord)
             {
             }
         }

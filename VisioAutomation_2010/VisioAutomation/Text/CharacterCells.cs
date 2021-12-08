@@ -111,9 +111,9 @@ namespace VisioAutomation.Text
             return cells;
         }
 
-        class Builder : CellRecordBuilder<CharacterCells>
+        class Builder : CellRecordBuilderSectionQuery<CharacterCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, CharacterCells.RowToRecord)
+            public Builder() : base(CharacterCells.RowToRecord)
             {
             }
 

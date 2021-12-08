@@ -64,9 +64,9 @@ namespace VisioAutomation.Shapes
 
             return record;
         }
-        class Builder : CellRecordBuilder<HyperlinkCells>
+        class Builder : CellRecordBuilderSectionQuery<HyperlinkCells>
         {
-            public Builder() : base(CellRecordQueryType.SectionQuery, HyperlinkCells.RowToRecord)
+            public Builder() : base(HyperlinkCells.RowToRecord)
             {
             }
         }

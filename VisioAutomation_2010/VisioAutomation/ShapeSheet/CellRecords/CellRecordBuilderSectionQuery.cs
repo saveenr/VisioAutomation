@@ -10,42 +10,23 @@ using COLS = VisioAutomation.ShapeSheet.Data.DataColumns;
 
 namespace VisioAutomation.ShapeSheet.CellRecords
 {
-    public abstract class CellRecordBuilder<TREC> where TREC : CellRecord, new()
+
+    public abstract class CellRecordBuilderCellQuery<TREC> where TREC : CellRecord, new()
     {
-        public readonly CellRecordQueryType Querytype;
         protected Query.CellQuery cellquery;
-        protected Query.SectionQuery sectionquery;
         private System.Func<ROW, COLS, TREC> func_row_to_rec;
 
-        private CellRecordBuilder()
+        private CellRecordBuilderCellQuery()
         {
             this.cellquery = null;
-            this.sectionquery = null;
         }
 
-        protected CellRecordBuilder(CellRecordQueryType querytype, System.Func<ROW,COLS, TREC> func_row_to_rec)
+        protected CellRecordBuilderCellQuery(System.Func<ROW, COLS, TREC> func_row_to_rec)
         {
             this.func_row_to_rec = func_row_to_rec;
-
+            this.cellquery = new Query.CellQuery();
+            var querycols = this.cellquery.Columns;
             var temp_cells = new TREC();
-            Data.DataColumns querycols;
-
-            this.Querytype = querytype;
-            if (querytype == CellRecordQueryType.CellQuery)
-            {
-                this.cellquery = new Query.CellQuery();
-                querycols = this.cellquery.Columns;
-            }
-            else if (querytype == CellRecordQueryType.SectionQuery)
-            {
-                this.sectionquery = new Query.SectionQuery();
-                querycols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
-            }
-            else
-            {
-                throw new Exceptions.InternalAssertionException();
-            }
-
             foreach (var item in temp_cells.GetCellMetadata())
             {
                 querycols.Add(item.Src, item.Name);
@@ -57,7 +38,6 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             IList<int> shapeids,
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordQueryType.CellQuery);
             var records = new CellRecords<TREC>(shapeids.Count);
             var cols = this.cellquery.Columns;
             ROWS rows = this.__cellquery_multipleshapes(page, shapeids, type);
@@ -70,19 +50,10 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return records;
         }
 
-        private void _enforce_category(CellRecordQueryType query_type)
-        {
-            if (this.Querytype != query_type)
-            {
-                throw new Exceptions.InternalAssertionException();
-            }
-        }
-
         public TREC GetCellsSingleShapeSingleRow(
             IVisio.Shape shape,
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordQueryType.CellQuery);
             var rows = this.__cellquery_singleshape(shape, type);
             var cols = this.cellquery.Columns;
             var first_row = rows[0];
@@ -90,12 +61,81 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return record;
         }
 
+
+        private CellRecords<TREC> __sectionshaperows_to_cellrecords(
+            ROWS rows,
+            COLS cols)
+        {
+            var records = new CellRecords<TREC>(rows.Count);
+            foreach (var section_row in rows)
+            {
+                var record = this.func_row_to_rec(section_row, cols);
+                records.Add(record);
+            }
+
+            return records;
+        }
+
+        private ROWS __cellquery_singleshape(
+            IVisio.Shape shape,
+            Core.CellValueType type)
+        {
+            ROWS rows = type switch
+            {
+                Core.CellValueType.Formula => this.cellquery.GetFormulas(shape),
+                Core.CellValueType.Result => this.cellquery.GetResults<string>(shape),
+                _ => throw new System.ArgumentOutOfRangeException(nameof(type))
+            };
+            return rows;
+        }
+
+        private ROWS __cellquery_multipleshapes(
+            IVisio.Page page,
+            IList<int> shapeids,
+            Core.CellValueType type)
+        {
+            ROWS rows = type switch
+            {
+                Core.CellValueType.Formula => this.cellquery.GetFormulas(page, shapeids),
+                Core.CellValueType.Result => this.cellquery.GetResults<string>(page, shapeids),
+                _ => throw new System.ArgumentOutOfRangeException(nameof(type))
+            };
+            return rows;
+        }
+    }
+
+
+    public abstract class CellRecordBuilderSectionQuery<TREC> where TREC : CellRecord, new()
+    {
+        protected Query.SectionQuery sectionquery;
+        private System.Func<ROW, COLS, TREC> func_row_to_rec;
+
+        private CellRecordBuilderSectionQuery()
+        {
+            this.sectionquery = null;
+        }
+
+        protected CellRecordBuilderSectionQuery(System.Func<ROW,COLS, TREC> func_row_to_rec)
+        {
+            this.func_row_to_rec = func_row_to_rec;
+
+            var temp_cells = new TREC();
+            Data.DataColumns querycols;
+            this.sectionquery = new Query.SectionQuery();
+            querycols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
+
+            foreach (var item in temp_cells.GetCellMetadata())
+            {
+                querycols.Add(item.Src, item.Name);
+            }
+        }
+
         public CellRecordsGroup<TREC> GetCellsMultipleShapesMultipleRows(
             IVisio.Page page,
             Core.ShapeIDPairs shapeidpairs,
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordQueryType.SectionQuery);
+
             var sec_cols = this.sectionquery[0];
 
             var rowgroups =
@@ -115,7 +155,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             IVisio.Shape shape,
             Core.CellValueType type)
         {
-            this._enforce_category(CellRecordQueryType.SectionQuery);
+
             var sec_cols = this.sectionquery[0];
             var rowgroup = __sectionquery_singleshape(shape, type);
             var first_rows = rowgroup[0];
@@ -163,33 +203,6 @@ namespace VisioAutomation.ShapeSheet.CellRecords
                 _ => throw new System.ArgumentOutOfRangeException(nameof(type))
             };
             return rowgroups;
-        }
-
-        private ROWS __cellquery_singleshape(
-            IVisio.Shape shape,
-            Core.CellValueType type)
-        {
-            ROWS rows = type switch
-            {
-                Core.CellValueType.Formula => this.cellquery.GetFormulas(shape),
-                Core.CellValueType.Result => this.cellquery.GetResults<string>(shape),
-                _ => throw new System.ArgumentOutOfRangeException(nameof(type))
-            };
-            return rows;
-        }
-
-        private ROWS __cellquery_multipleshapes(
-            IVisio.Page page,
-            IList<int> shapeids,
-            Core.CellValueType type)
-        {
-            ROWS rows = type switch
-            {
-                Core.CellValueType.Formula => this.cellquery.GetFormulas(page, shapeids),
-                Core.CellValueType.Result => this.cellquery.GetResults<string>(page, shapeids),
-                _ => throw new System.ArgumentOutOfRangeException(nameof(type))
-            };
-            return rows;
         }
     }
 

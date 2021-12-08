@@ -80,9 +80,9 @@ namespace VisioAutomation.Pages
             return cells;
         }
 
-        class Builder : CellRecordBuilder<PagePrintCells>
+        class Builder : CellRecordBuilderCellQuery<PagePrintCells>
         {
-            public Builder() : base(CellRecordQueryType.CellQuery, PagePrintCells.RowToRecord)
+            public Builder() : base(PagePrintCells.RowToRecord)
             {
             }
 
