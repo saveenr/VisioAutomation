@@ -6,6 +6,5 @@ namespace VisioAutomation.ShapeSheet.CellRecords
         {
 
         }
-
     }
 }
