@@ -13,7 +13,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue DirY { get; set; }
         public Core.CellValue Type { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.X), Core.SrcConstants.ConnectionPointX, this.X);
             yield return this._create(nameof(this.Y), Core.SrcConstants.ConnectionPointY, this.Y);
@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes
         public static ConnectionPointCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ConnectionPointCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.X = getcellvalue(nameof(X));
             record.Y = getcellvalue(nameof(Y));

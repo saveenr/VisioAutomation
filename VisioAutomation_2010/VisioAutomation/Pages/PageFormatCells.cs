@@ -22,7 +22,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue UIVisibility { get; set; }
         public Core.CellValue DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.DrawingScale), Core.SrcConstants.PageDrawingScale, this.DrawingScale);
             yield return this._create(nameof(this.DrawingScaleType), Core.SrcConstants.PageDrawingScaleType,
@@ -59,7 +59,7 @@ namespace VisioAutomation.Pages
         public static PageFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new PageFormatCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.DrawingScale = getcellvalue(nameof(DrawingScale));
             record.DrawingScaleType = getcellvalue(nameof(DrawingScaleType));

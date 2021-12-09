@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue LineWeight { get; set; }
         public Core.CellValue LineRounding { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground,
                 this.FillBackground);
@@ -100,7 +100,7 @@ namespace VisioAutomation.Shapes
         public static ShapeFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ShapeFormatCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.FillBackground = getcellvalue(nameof(FillBackground));
             record.FillBackgroundTransparency = getcellvalue(nameof(FillBackgroundTransparency));

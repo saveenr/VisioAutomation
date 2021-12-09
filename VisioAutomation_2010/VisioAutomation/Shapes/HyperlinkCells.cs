@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Default { get; set; }
         public Core.CellValue Invisible { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Address), Core.SrcConstants.HyperlinkAddress, this.Address);
             yield return this._create(nameof(this.Description), Core.SrcConstants.HyperlinkDescription,
@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes
         public static HyperlinkCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new HyperlinkCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
 
             record.Address = getcellvalue(nameof(Address));

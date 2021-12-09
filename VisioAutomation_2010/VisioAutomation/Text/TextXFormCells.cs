@@ -16,7 +16,7 @@ namespace VisioAutomation.Text
         public Core.CellValue LocPinX { get; set; }
         public Core.CellValue LocPinY { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.TextXFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.TextXFormPinY, this.PinY);
@@ -44,7 +44,7 @@ namespace VisioAutomation.Text
         public static TextXFormCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
             var record = new TextXFormCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.PinX = getcellvalue(nameof(PinX));
             record.PinY = getcellvalue(nameof(PinY));

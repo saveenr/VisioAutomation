@@ -27,7 +27,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue ShapeDisplayLevel { get; set; } // new in visio 2010
         public Core.CellValue Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.ConnectorFixedCode), Core.SrcConstants.ShapeLayoutConnectorFixedCode,
                 this.ConnectorFixedCode);
@@ -85,7 +85,7 @@ namespace VisioAutomation.Shapes
         private static ShapeLayoutCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
             var record = new ShapeLayoutCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.ConnectorFixedCode = getcellvalue(nameof(ConnectorFixedCode));
             record.LineJumpCode = getcellvalue(nameof(LineJumpCode));

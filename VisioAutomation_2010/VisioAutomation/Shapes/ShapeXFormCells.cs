@@ -16,7 +16,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Height { get; set; }
         public Core.CellValue Angle { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.XFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.XFormPinY, this.PinY);
@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes
         public static ShapeXFormCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ShapeXFormCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.PinX = getcellvalue(nameof(PinX));
             record.PinY = getcellvalue(nameof(PinY));

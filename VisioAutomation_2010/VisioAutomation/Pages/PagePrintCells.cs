@@ -23,7 +23,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue ScaleY { get; set; }
         public Core.CellValue PaperSource { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.LeftMargin), Core.SrcConstants.PrintLeftMargin, this.LeftMargin);
             yield return this._create(nameof(this.CenterX), Core.SrcConstants.PrintCenterX, this.CenterX);
@@ -56,7 +56,7 @@ namespace VisioAutomation.Pages
         public static PagePrintCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new PagePrintCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
 
             cells.LeftMargin = getcellvalue(nameof(LeftMargin));

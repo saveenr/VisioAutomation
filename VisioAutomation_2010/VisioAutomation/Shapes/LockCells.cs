@@ -28,7 +28,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue VertexEdit { get; set; }
         public Core.CellValue Width { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Aspect), Core.SrcConstants.LockAspect, this.Aspect);
             yield return this._create(nameof(this.Begin), Core.SrcConstants.LockBegin, this.Begin);
@@ -70,7 +70,7 @@ namespace VisioAutomation.Shapes
         public static LockCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new LockCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             cells.Aspect = getcellvalue(nameof(Aspect));
             cells.Begin = getcellvalue(nameof(Begin));

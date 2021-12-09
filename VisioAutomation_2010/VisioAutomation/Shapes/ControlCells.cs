@@ -16,7 +16,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue XDynamics { get; set; }
         public Core.CellValue YDynamics { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.CanGlue), Core.SrcConstants.ControlCanGlue, this.CanGlue);
             yield return this._create(nameof(this.Tip), Core.SrcConstants.ControlTip, this.Tip);
@@ -47,7 +47,7 @@ namespace VisioAutomation.Shapes
         public static ControlCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new ControlCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             cells.CanGlue = getcellvalue(nameof(CanGlue));
             cells.Tip = getcellvalue(nameof(Tip));

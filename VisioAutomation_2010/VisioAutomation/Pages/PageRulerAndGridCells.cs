@@ -18,7 +18,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue YRulerDensity { get; set; }
         public Core.CellValue YRulerOrigin { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.XGridDensity), Core.SrcConstants.XGridDensity, this.XGridDensity);
             yield return this._create(nameof(this.XGridOrigin), Core.SrcConstants.XGridOrigin, this.XGridOrigin);
@@ -43,7 +43,7 @@ namespace VisioAutomation.Pages
         public static PageRulerAndGridCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new PageRulerAndGridCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.XGridDensity = getcellvalue(nameof(XGridDensity));
             record.XGridOrigin = getcellvalue(nameof(XGridOrigin));

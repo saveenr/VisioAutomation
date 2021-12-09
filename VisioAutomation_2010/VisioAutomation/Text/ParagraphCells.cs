@@ -23,7 +23,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Flags { get; set; }
         public Core.CellValue BulletString { get; set; }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.IndentLeft), Core.SrcConstants.ParaIndentLeft, this.IndentLeft);
             yield return this._create(nameof(this.IndentFirst), Core.SrcConstants.ParaIndentFirst, this.IndentFirst);
@@ -61,7 +61,7 @@ namespace VisioAutomation.Text
 
         private static ParagraphCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
             var record = new ParagraphCells();
 
             record.IndentFirst = getcellvalue(nameof(IndentFirst));

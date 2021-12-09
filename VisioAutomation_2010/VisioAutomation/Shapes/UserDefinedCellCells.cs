@@ -15,7 +15,7 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<ColumnMetadata> GetCellMetadata()
+        public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Value), Core.SrcConstants.UserDefCellValue, this.Value);
             yield return this._create(nameof(this.Prompt), Core.SrcConstants.UserDefCellPrompt, this.Prompt);
@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes
         public static UserDefinedCellCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new UserDefinedCellCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.Value = getcellvalue(nameof(Value));
             record.Prompt = getcellvalue(nameof(Prompt));
