@@ -36,8 +36,7 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 
             var sec_cols = this.sectionquery[0];
 
-            var rowgroups =
-                __sectionquery_multiplerows(sectionquery, page, shapeidpairs, type);
+            var rowgroups = __sectionquery_multiplerows(sectionquery, page, shapeidpairs, type);
             var recordgroup = new CellRecordsGroup<TREC>(shapeidpairs.Count);
             foreach (var rowgroup in rowgroups)
             {
