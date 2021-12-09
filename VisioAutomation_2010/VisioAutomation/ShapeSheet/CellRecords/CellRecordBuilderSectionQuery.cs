@@ -14,11 +14,6 @@ namespace VisioAutomation.ShapeSheet.CellRecords
         protected Query.SectionQuery sectionquery;
         private System.Func<ROW, COLS, TREC> func_row_to_rec;
 
-        private CellRecordBuilderSectionQuery()
-        {
-            this.sectionquery = null;
-        }
-
         protected CellRecordBuilderSectionQuery(System.Func<ROW,COLS, TREC> func_row_to_rec)
         {
             this.func_row_to_rec = func_row_to_rec;
