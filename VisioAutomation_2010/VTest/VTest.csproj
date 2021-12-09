@@ -102,9 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Extensions\PageDropTests.cs" />
-    <Compile Include="Core\ShapeSheet\CellValueLiteralTests.cs" />
+    <Compile Include="Core\CellValueLiteralTests.cs" />
     <Compile Include="Utilities\ArraySegmentTests.cs" />
-    <Compile Include="Core\Shapes\CellGroupsTests.cs" />
+    <Compile Include="Core\CellRecords\CellGroupsTests.cs" />
     <Compile Include="Core\Shapes\ConnectorTests.cs" />
     <Compile Include="Analyzers\ConnectivityMap.cs" />
     <Compile Include="Analyzers\ConnectionAnalysisTests.cs" />
