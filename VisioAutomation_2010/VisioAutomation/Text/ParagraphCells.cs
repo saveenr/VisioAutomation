@@ -23,7 +23,7 @@ namespace VisioAutomation.Text
         public Core.CellValue Flags { get; set; }
         public Core.CellValue BulletString { get; set; }
 
-        public override IEnumerable<CellMetadata> GetCellMetadata()
+        public override IEnumerable<ColumnMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.IndentLeft), Core.SrcConstants.ParaIndentLeft, this.IndentLeft);
             yield return this._create(nameof(this.IndentFirst), Core.SrcConstants.ParaIndentFirst, this.IndentFirst);

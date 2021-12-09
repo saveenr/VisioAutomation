@@ -1,12 +1,12 @@
 ﻿namespace VisioAutomation.ShapeSheet.CellRecords
 {
-    public readonly struct CellMetadata
+    public readonly struct ColumnMetadata
     {
         public readonly string Name;
         public readonly Core.Src Src;
         public readonly string Value;
 
-        public CellMetadata(string name, Core.Src src, string value)
+        public ColumnMetadata(string name, Core.Src src, string value)
         {
             this.Name = name;
             this.Src = src;

@@ -5,10 +5,10 @@ namespace VisioAutomation.ShapeSheet.CellRecords
 {
     public abstract class CellRecord
     {
-        public abstract IEnumerable<CellMetadata> GetCellMetadata();
-        protected CellMetadata _create(string name, Core.Src src, Core.CellValue value)
+        public abstract IEnumerable<ColumnMetadata> GetCellMetadata();
+        protected ColumnMetadata _create(string name, Core.Src src, Core.CellValue value)
         {
-            return new CellMetadata(name, src, value.Value);
+            return new ColumnMetadata(name, src, value.Value);
         }
 
         internal static System.Func<string, string> getvalueforcol(Data.DataRow<string> row, Data.DataColumns cols)

@@ -22,7 +22,7 @@ namespace VisioAutomation.Shapes
         {
         }
 
-        public override IEnumerable<CellMetadata> GetCellMetadata()
+        public override IEnumerable<ColumnMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Label), Core.SrcConstants.CustomPropLabel, this.Label);
             yield return this._create(nameof(this.Value), Core.SrcConstants.CustomPropValue, this.Value);

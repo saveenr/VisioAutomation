@@ -28,7 +28,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue VertexEdit { get; set; }
         public Core.CellValue Width { get; set; }
 
-        public override IEnumerable<CellMetadata> GetCellMetadata()
+        public override IEnumerable<ColumnMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Aspect), Core.SrcConstants.LockAspect, this.Aspect);
             yield return this._create(nameof(this.Begin), Core.SrcConstants.LockBegin, this.Begin);

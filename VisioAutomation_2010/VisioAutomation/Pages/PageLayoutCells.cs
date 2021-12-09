@@ -36,7 +36,7 @@ namespace VisioAutomation.Pages
         public Core.CellValue RouteStyle { get; set; }
         public Core.CellValue AvoidPageBreaks { get; set; } // new in visio 2010
 
-        public override IEnumerable<CellMetadata> GetCellMetadata()
+        public override IEnumerable<ColumnMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.AvenueSizeX), Core.SrcConstants.PageLayoutAvenueSizeX,
                 this.AvenueSizeX);

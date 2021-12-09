@@ -16,7 +16,7 @@ namespace VisioAutomation.Text
         public Core.CellValue LocPinX { get; set; }
         public Core.CellValue LocPinY { get; set; }
 
-        public override IEnumerable<CellMetadata> GetCellMetadata()
+        public override IEnumerable<ColumnMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.PinX), Core.SrcConstants.TextXFormPinX, this.PinX);
             yield return this._create(nameof(this.PinY), Core.SrcConstants.TextXFormPinY, this.PinY);

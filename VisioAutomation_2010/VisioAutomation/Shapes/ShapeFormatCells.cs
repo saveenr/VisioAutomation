@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes
         public Core.CellValue LineWeight { get; set; }
         public Core.CellValue LineRounding { get; set; }
 
-        public override IEnumerable<CellMetadata> GetCellMetadata()
+        public override IEnumerable<ColumnMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.FillBackground), Core.SrcConstants.FillBackground,
                 this.FillBackground);
