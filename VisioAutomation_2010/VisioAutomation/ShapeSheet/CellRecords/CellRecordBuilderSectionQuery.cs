@@ -19,9 +19,8 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             this.func_row_to_rec = func_row_to_rec;
 
             var temp_cells = new TREC();
-            Data.DataColumns querycols;
             this.sectionquery = new Query.SectionQuery();
-            querycols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
+            var querycols = this.sectionquery.Add(temp_cells.GetCellMetadata().First().Src);
 
             foreach (var item in temp_cells.GetCellMetadata())
             {
