@@ -3,11 +3,17 @@
     public class SampleMethod
     {
         public string Name;
-        public System.Reflection.MethodInfo Method;
+        public System.Action Method;
 
+        public SampleMethod(string name, System.Action method)
+        {
+            this.Name = name;
+            this.Method = method; 
+
+        }
         public void Run()
         {
-            this.Method.Invoke(null, null);
+            this.Method();
         }
     }
 }

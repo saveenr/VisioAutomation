@@ -13,36 +13,24 @@ namespace VSamples
         {
             this.InitializeComponent();
 
-            var all_types = typeof (Program).Assembly.GetExportedTypes();
-            var public_sample_classes = all_types
-                .Where(t => t.IsPublic)
-                .Where(t => t.IsClass)
-                .Where(t => t.Name.Contains("Sample"))
-                .OrderBy(t => t.Name)
-                .ToList();
+            var sm1 = new SampleMethod(nameof(DeveloperSamples.VisioAutomationNamespacesAndClasses),DeveloperSamples.VisioAutomationNamespacesAndClasses);
+            var sm2 = new SampleMethod(nameof(DeveloperSamples.VisioAutomationNamespaces), DeveloperSamples.VisioAutomationNamespaces);
+            var sm3 = new SampleMethod(nameof(DeveloperSamples.InteropEnumDocumentation), DeveloperSamples.InteropEnumDocumentation);
+            var sm4 = new SampleMethod(nameof(DeveloperSamples.ScriptingDocumentation), DeveloperSamples.ScriptingDocumentation);
+
+            var methods = new List<SampleMethod>();
+            methods.Add(sm1);
+            methods.Add(sm2);
+            methods.Add(sm3);
+            methods.Add(sm4);
 
             var names = new List<string>();
-            foreach (var t in public_sample_classes)
+
+
+            foreach (var method in methods)
             {
-                var methods = t.GetMethods()
-                    .Where(m => m.IsPublic)
-                    .Where(m => m.IsStatic)
-                    .Where(m => !m.GetParameters().Any())
-                    .OrderBy(m => m.Name);
-
-                foreach (var m in methods)
-                {
-                    string name = string.Format("{0} / {1}", t.Name, m.Name);
-                    names.Add(name);
-
-                    var item = new SampleMethod();
-                    item.Name = name;
-                    item.Method = m;
-
-                    this._samplemethods.Add(item);
-
-                    this._dic[name] = item;
-                }
+                names.Add(method.Name);
+                this._dic[method.Name] = method;
             }
 
             var prev_names = this.GetPreviouslySelectedSamples();
@@ -51,6 +39,7 @@ namespace VSamples
             {
                 bool ischecked = prev_names.Contains(name);
                 this.checkedListBox1.Items.Add(name, ischecked);
+
             }
 
             const bool autorun = false;
