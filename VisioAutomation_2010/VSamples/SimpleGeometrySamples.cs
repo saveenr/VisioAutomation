@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace VSamples
 {
-    public static class SimpleGeometrySamples
+    public static class SimpleGeometrySamples1
     {
         public static void BezierCircle()
         {
@@ -20,7 +20,10 @@ namespace VSamples
             s0.Text = "Bezier approximating circle";
         }
 
-        public static void BezierEllipse()
+    }
+    public static class SimpleGeometrySamples2
+    {
+    public static void BezierEllipse()
         {
             // Draw an approximation of an ellipse using Bezier Curves
 
@@ -32,6 +35,9 @@ namespace VSamples
             var s0 = page.DrawBezier(curve0.ControlPoints);
             s0.Text = "Bezier approximating ellipse";
         }
+    }
+    public static class SimpleGeometrySamples3
+    {
 
         public static void BezierSimple()
         {
@@ -50,6 +56,11 @@ namespace VSamples
                 page.DrawRectangle(p1.X, p1.Y, p2.X, p2.Y);
             }
         }
+
+
+    }
+    public static class SimpleGeometrySamples7
+    {
 
         public static void Nurbs1()
         {
@@ -80,6 +91,9 @@ namespace VSamples
             var s0 = page.DrawNurbs(controlpoints, knots, weights, degree);
             s0.Text = "Generic NURBS shape";
         }
+    }
+    public static class SimpleGeometrySamples4
+    {
 
         public static void Nurbs2()
         {

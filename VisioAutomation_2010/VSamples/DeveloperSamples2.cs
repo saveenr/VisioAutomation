@@ -1,13 +1,14 @@
 ﻿namespace VSamples
 {
-    public static class DeveloperSamples4
+    public static class DeveloperSamples2
     {
 
-        public static void VisioAutomationNamespacesAndClasses()
+
+        public static void InteropEnumDocumentation()
         {
             var app = SampleEnvironment.Application;
             var client = new VisioScripting.Client(app);
-            var doc = client.Developer.DrawNamespacesAndClasses();
+            var doc = client.Developer.DrawInteropEnumDocumentation();
         }
     }
 }

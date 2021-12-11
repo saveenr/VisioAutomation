@@ -16,17 +16,17 @@ namespace VSamples
 
             var methods = new SampleMethods();
 
-            var sm1 = methods.Add(nameof(DeveloperSamples.VisioAutomationNamespacesAndClasses),DeveloperSamples.VisioAutomationNamespacesAndClasses);
-            var sm2 = methods.Add(nameof(DeveloperSamples.VisioAutomationNamespaces), DeveloperSamples.VisioAutomationNamespaces);
-            var sm3 = methods.Add(nameof(DeveloperSamples.InteropEnumDocumentation), DeveloperSamples.InteropEnumDocumentation);
-            var sm4 = methods.Add(nameof(DeveloperSamples.ScriptingDocumentation), DeveloperSamples.ScriptingDocumentation);
+            var sm1 = methods.Add(nameof(DeveloperSamples1.ScriptingDocumentation), DeveloperSamples1.ScriptingDocumentation);
+            var sm2 = methods.Add(nameof(DeveloperSamples2.InteropEnumDocumentation), DeveloperSamples2.InteropEnumDocumentation);
+            var sm3 = methods.Add(nameof(DeveloperSamples3.VisioAutomationNamespaces), DeveloperSamples3.VisioAutomationNamespaces);
+            var sm4 = methods.Add(nameof(DeveloperSamples1.ScriptingDocumentation), DeveloperSamples1.ScriptingDocumentation);
 
             var sm5 = methods.Add(nameof(ConnectorSamples.ConnectorsToBack), ConnectorSamples.ConnectorsToBack);
             var sm6 = methods.Add(nameof(EffectsSamples.GradientTransparencies), EffectsSamples.GradientTransparencies);
             var sm7 = methods.Add(nameof(StencilSamples.DrawGridOfMasters), StencilSamples.DrawGridOfMasters);
 
-            var sm8 = methods.Add(nameof(Layouts.BoxLayout2Samples), Layouts.BoxLayout2Samples.BoxLayout_SimpleCases);
-            var sm9 = methods.Add(nameof(Layouts.BoxLayout2Samples), Layouts.BoxLayout2Samples.BoxLayout_TwoLevelGrouping);
+            var sm8 = methods.Add(nameof(Layouts.BoxLayout2Samples1), Layouts.BoxLayout2Samples1.BoxLayout_SimpleCases);
+            var sm9 = methods.Add(nameof(Layouts.BoxLayout2Samples2), Layouts.BoxLayout2Samples2.BoxLayout_TwoLevelGrouping);
 
             var sm10 = methods.Add(nameof(Layouts.BoxLayoutSamples), Layouts.BoxLayoutSamples.FontCompare);
 
@@ -42,14 +42,14 @@ namespace VSamples
             var sm17 = methods.Add(nameof(CustomPropertySamples), CustomPropertySamples.SetCustomProperties);
             var sm18 = methods.Add(nameof(CustomPropertySamples), CustomPropertySamples.SetCustomProperties);
             var sm19 = methods.Add(nameof(FormsSamples), FormsSamples.MonitorResolutions);
-            var sm20 = methods.Add(nameof(PlaygroundSamples), PlaygroundSamples.DrawAllGradients);
-            var sm21 = methods.Add(nameof(PlaygroundSamples), PlaygroundSamples.Spirograph);
+            var sm20 = methods.Add(nameof(PlaygroundSamples2), PlaygroundSamples2.DrawAllGradients);
+            var sm21 = methods.Add(nameof(PlaygroundSamples1), PlaygroundSamples1.Spirograph);
             var sm22 = methods.Add(nameof(SmartShapeSamples), SmartShapeSamples.ProgressBar);
-            var sm23 = methods.Add(nameof(SimpleGeometrySamples), SimpleGeometrySamples.BezierCircle);
-            var sm24 = methods.Add(nameof(SimpleGeometrySamples), SimpleGeometrySamples.BezierEllipse);
-            var sm25 = methods.Add(nameof(SimpleGeometrySamples), SimpleGeometrySamples.BezierSimple);
-            var sm26 = methods.Add(nameof(SimpleGeometrySamples), SimpleGeometrySamples.Nurbs1);
-            var sm27 = methods.Add(nameof(SimpleGeometrySamples), SimpleGeometrySamples.Nurbs2);
+            var sm23 = methods.Add(nameof(SimpleGeometrySamples1), SimpleGeometrySamples1.BezierCircle);
+            var sm24 = methods.Add(nameof(SimpleGeometrySamples2), SimpleGeometrySamples2.BezierEllipse);
+            var sm25 = methods.Add(nameof(SimpleGeometrySamples3), SimpleGeometrySamples3.BezierSimple);
+            var sm26 = methods.Add(nameof(SimpleGeometrySamples7), SimpleGeometrySamples7.Nurbs1);
+            var sm27 = methods.Add(nameof(SimpleGeometrySamples4), SimpleGeometrySamples4.Nurbs2);
 
             var sm29 = methods.Add(nameof(SpecialDocumentSamples), SpecialDocumentSamples.OrgChart);
 
