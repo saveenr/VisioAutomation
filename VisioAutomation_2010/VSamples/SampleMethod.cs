@@ -1,5 +1,26 @@
-﻿namespace VSamples
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+
+namespace VSamples
 {
+
+    public class SampleMethods : List<SampleMethod>
+    {
+
+
+        public SampleMethods() : base(01)
+        {
+
+        }
+
+        public SampleMethod Add(string name, System.Action method)
+        {
+            var m = new SampleMethod(name, method);
+            this.Add(m);
+            return m;
+        }
+    }
+
     public class SampleMethod
     {
         public string Name;
