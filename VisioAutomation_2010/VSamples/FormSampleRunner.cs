@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using VSamples.Text;
+using VSamples.Samples.Developer;
+using VSamples.Samples.Layouts;
+using VSamples.Samples.Misc;
+using VSamples.Samples.Text;
+using ProgressBar = VSamples.Samples.Misc.ProgressBar;
 
 namespace VSamples
 {
@@ -15,51 +19,51 @@ namespace VSamples
 
             var methods = new SampleMethods();
 
-            var sm1 = methods.AddEx(new ScriptingDocumentationXX());
-            var sm2 = methods.AddEx(new InteropEnumDocumentationX());
-            var sm3 = methods.AddEx(new VisioAutomationNamespacesX());
-            var sm4 = methods.AddEx(new VisioAutomationNamespacesAndClassesX());
+            var sm1 = methods.AddEx(new DocumentScriptingAPI());
+            var sm2 = methods.AddEx(new DocumentVisioInterop());
+            var sm3 = methods.AddEx(new DiagramVANamespaces());
+            var sm4 = methods.AddEx(new DiagramVAClasses());
 
-            var sm5 = methods.AddEx(new ConnectorsToBackX());
-            var sm6 = methods.AddEx(new GradientTransparenciesX());
-            var sm7 = methods.AddEx(new DrawGridOfMastersX());
+            var sm5 = methods.AddEx(new SendConnectorsToBack());
+            var sm6 = methods.AddEx(new GradientTransparencies());
+            var sm7 = methods.AddEx(new GridOfMasters());
 
-            var sm8 = methods.AddEx(new Layouts.BoxLayout_SimpleCasesx());
-            var sm9 = methods.AddEx(new Layouts.BoxLayout_TwoLevelGroupingx());
+            var sm8 = methods.AddEx(new BoxLayoutSimple());
+            var sm9 = methods.AddEx(new BoxLayoutTwoLevelGrouping());
 
-            var sm10 = methods.AddEx(new Layouts.FontCompareX());
+            var sm10 = methods.AddEx(new CompareFonts());
 
-            var sm11 = methods.AddEx(new Layouts.SimpleContainerX());
-            var sm12 = methods.AddEx(new Layouts.DirectedGraphViaMsaglX());
-            var sm13 = methods.AddEx(new Layouts.DirectedGraphViaVisioX());
+            var sm11 = methods.AddEx(new Container1());
+            var sm12 = methods.AddEx(new DirectedGraphViaMsagl());
+            var sm13 = methods.AddEx(new DirectedGraphViaVisio());
             
-            var sm14 = methods.AddEx(new Layouts.ColorGridX());
+            var sm14 = methods.AddEx(new ColorGrid());
 
-            var sm16 = methods.AddEx(new Layouts.TreeWithTwoPassLayoutAndFormattingX());
+            var sm16 = methods.AddEx(new TreeWithTwoPassLayoutAndFormatting());
 
-            var sm17 = methods.AddEx(new SetCustomPropertiesX());
+            var sm17 = methods.AddEx(new SetCustomProperties());
 
-            var sm19 = methods.AddEx(new MonitorResolutionsX());
-            var sm20 = methods.AddEx(new DrawAllGradientsX());
-            var sm21 = methods.AddEx(new SpirographX());
-            var sm22 = methods.AddEx(new ProgressBarX());
-            var sm23 = methods.AddEx(new BezierCircleX());
-            var sm24 = methods.AddEx(new BezierEllipseX());
-            var sm25 = methods.AddEx(new BezierSimpleX());
-            var sm26 = methods.AddEx(new Nurbs1X());
-            var sm27 = methods.AddEx(new Nurbs2X());
+            var sm19 = methods.AddEx(new MonitorResolutions());
+            var sm20 = methods.AddEx(new AllGradients());
+            var sm21 = methods.AddEx(new Spirograph());
+            var sm22 = methods.AddEx(new ProgressBar());
+            var sm23 = methods.AddEx(new BezierCircle());
+            var sm24 = methods.AddEx(new BezierEllipse());
+            var sm25 = methods.AddEx(new BezierSimple());
+            var sm26 = methods.AddEx(new Nurbs1());
+            var sm27 = methods.AddEx(new Nurbs2());
 
-            var sm29 = methods.AddEx(new OrgChartX());
+            var sm29 = methods.AddEx(new OrgChart1());
 
 
-            var sm30 = methods.AddEx(new TextMarkpSamples1());
-            var sm31 = methods.AddEx(new TextMarkpSamples2());
-            var sm32 = methods.AddEx(new TextMarkpSamples3());
-            var sm33 = methods.AddEx(new TextMarkpSamples4());
-            var sm34 = methods.AddEx(new TextMarkpSamples5());
+            var sm30 = methods.AddEx(new TextMarkup1());
+            var sm31 = methods.AddEx(new TextMarkup2());
+            var sm32 = methods.AddEx(new TextMarkup3());
+            var sm33 = methods.AddEx(new TextMarkup4());
+            var sm34 = methods.AddEx(new TextMarkup5());
 
-            var sm35 = methods.AddEx(new NonRotatingTextX());
-            var sm36 = methods.AddEx(new TextFieldsX());
+            var sm35 = methods.AddEx(new NonRotatingText());
+            var sm36 = methods.AddEx(new TextFields());
 
 
 

@@ -89,55 +89,60 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Layouts\DirectedGraphViaMsaglX.cs" />
+    <Compile Include="Samples\Layouts\DirectedGraphViaMsagl.cs" />
     <Compile Include="SampleMethodBase.cs" />
     <Compile Include="SampleMethods.cs" />
-    <Compile Include="ScriptingDocumentationXX.cs" />
-    <Compile Include="InteropEnumDocumentationX.cs" />
-    <Compile Include="VisioAutomationNamespacesX.cs" />
-    <Compile Include="Layouts\BoxHelper.cs" />
-    <Compile Include="Layouts\BoxLayout_SimpleCasesx.cs" />
-    <Compile Include="Layouts\BoxLayout_TwoLevelGroupingx.cs" />
-    <Compile Include="Layouts\BoxLayoutShared.cs" />
-    <Compile Include="MonitorResolutionsX.cs" />
-    <Compile Include="Layouts\Util.cs" />
-    <Compile Include="LinqUtil.cs" />
-    <Compile Include="Layouts\TreeWithTwoPassLayoutAndFormattingX.cs" />
-    <Compile Include="SpirographX.cs" />
-    <Compile Include="DrawAllGradientsX.cs" />
+    <Compile Include="Samples\Developer\DocumentScriptingAPI.cs" />
+    <Compile Include="Samples\Developer\DocumentVisioInterop.cs" />
+    <Compile Include="Samples\Developer\DiagramVANamespaces.cs" />
+    <Compile Include="Samples\Layouts\BoxHelper.cs" />
+    <Compile Include="Samples\Layouts\BoxLayoutSimple.cs" />
+    <Compile Include="Samples\Layouts\BoxLayoutTwoLevelGrouping.cs" />
+    <Compile Include="Samples\Layouts\BoxLayoutShared.cs" />
+    <Compile Include="Samples\Misc\MonitorResolutions.cs" />
+    <Compile Include="Samples\Layouts\Util.cs" />
+    <Compile Include="Samples\Misc\LinqUtil.cs" />
+    <Compile Include="Samples\Layouts\TreeWithTwoPassLayoutAndFormatting.cs" />
+    <Compile Include="Samples\Misc\Spirograph.cs" />
+    <Compile Include="Samples\Misc\AllGradients.cs" />
     <Compile Include="ResolutionInfo.cs" />
-    <Compile Include="Text\TextExtensions.cs" />
-    <Compile Include="Layouts\ColorGridX.cs" />
-    <Compile Include="ConnectorsToBackX.cs" />
-    <Compile Include="Layouts\FontCompareX.cs" />
-    <Compile Include="Layouts\ContiainerLayoutSamples.cs" />
-    <Compile Include="Text\TextMarkupSamples.cs" />
-    <Compile Include="DeveloperSamples.cs" />
-    <Compile Include="DebugSamples.cs" />
+    <Compile Include="Samples\Text\NonRotatingText.cs" />
+    <Compile Include="Samples\Text\TextExtensions.cs" />
+    <Compile Include="Samples\Layouts\ColorGrid.cs" />
+    <Compile Include="Samples\Misc\SendConnectorsToBack.cs" />
+    <Compile Include="Samples\Layouts\CompareFonts.cs" />
+    <Compile Include="Samples\Layouts\ContiainerLayoutSamples.cs" />
+    <Compile Include="Samples\Text\TextFields.cs" />
+    <Compile Include="Samples\Text\TextMarkup1.cs" />
+    <Compile Include="Samples\Text\TextMarkup2.cs" />
+    <Compile Include="Samples\Text\TextMarkup3.cs" />
+    <Compile Include="Samples\Text\TextMarkup4.cs" />
+    <Compile Include="Samples\Text\TextMarkup5.cs" />
+    <Compile Include="Samples\Developer\DeveloperSamples.cs" />
+    <Compile Include="Samples\Developer\DebugSamples.cs" />
     <Compile Include="FormSampleRunner.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormSampleRunner.Designer.cs">
       <DependentUpon>FormSampleRunner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Layouts\DirectedGraphLayoutSamples.cs" />
+    <Compile Include="Samples\Layouts\DirectedGraphLayoutSamples.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SampleMethod.cs" />
-    <Compile Include="SimpleGeometrySamples.cs" />
-    <Compile Include="ProgressBarX.cs" />
-    <Compile Include="OrgChartX.cs" />
-    <Compile Include="GradientTransparenciesX.cs" />
-    <Compile Include="SetCustomPropertiesX.cs" />
-    <Compile Include="DrawGridOfMastersX.cs" />
+    <Compile Include="Samples\Misc\SimpleGeometrySamples.cs" />
+    <Compile Include="Samples\Misc\ProgressBar.cs" />
+    <Compile Include="Samples\Misc\OrgChart1.cs" />
+    <Compile Include="Samples\Misc\GradientTransparencies.cs" />
+    <Compile Include="Samples\Misc\SetCustomProperties.cs" />
+    <Compile Include="Samples\Misc\GridOfMasters.cs" />
     <Compile Include="PathAnalysis.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleEnvironment.cs" />
-    <Compile Include="Text\TextSamples.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj">
@@ -183,6 +188,7 @@
       <DependentUpon>FormSampleRunner.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
