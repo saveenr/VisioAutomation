@@ -3,7 +3,7 @@ using VSM = VisioScripting.Models;
 
 namespace VSamples.Text
 {
-    public static class TextMarkpSamples
+    public static class TextMarkpSamples1
     {
         public static void TextMarkup11()
         {
@@ -21,6 +21,9 @@ namespace VSamples.Text
             e1.AddText("Hello World");
             e1.SetText(s1);
         }
+    }
+    public static class TextMarkpSamples2
+    {
 
         public static void TextMarkup12()
         {
@@ -41,7 +44,9 @@ namespace VSamples.Text
             var e2 = e1.AddElementEx("World", f2 );
             e1.SetText(s1);
         }
-
+    }
+    public static class TextMarkpSamples3
+    {
         public static void TextMarkup13()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
@@ -63,7 +68,9 @@ namespace VSamples.Text
             e1.AddText("-William Wordsworth, the Prelude");
             e1.SetText(s1);
         }
-
+    }
+    public static class TextMarkpSamples4
+    {
         public static void TextMarkup14()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
@@ -78,7 +85,9 @@ namespace VSamples.Text
             e1.AddText("inches tall.");
             e1.SetText(s1);
         }
-
+    }
+    public static class TextMarkpSamples5
+    {
         public static void TextMarkup5()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();

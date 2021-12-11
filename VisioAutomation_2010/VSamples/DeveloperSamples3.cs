@@ -1,5 +1,6 @@
 ﻿namespace VSamples
 {
+
     public static class DeveloperSamples3
     {
 

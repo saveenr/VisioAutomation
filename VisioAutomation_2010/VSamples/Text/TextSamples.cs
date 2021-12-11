@@ -2,7 +2,7 @@
 
 namespace VSamples.Text
 {
-    public static class TextSamples
+    public static class TextSamples1
     {
         public static void NonRotatingText()
         {
@@ -14,6 +14,10 @@ namespace VSamples.Text
             var cell = s0.CellsSRC[src.Section, src.Row, src.Cell];
             cell.Formula = "-Angle";
         }
+    }
+
+    public static class TextSamples2
+    {
 
         public static void TextFields()
         {

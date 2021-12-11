@@ -40,7 +40,7 @@ namespace VSamples
             var sm16 = methods.Add(nameof(Layouts.TreeLayoutSamples), Layouts.TreeLayoutSamples.TreeWithTwoPassLayoutAndFormatting);
 
             var sm17 = methods.Add(nameof(CustomPropertySamples), CustomPropertySamples.SetCustomProperties);
-            var sm18 = methods.Add(nameof(CustomPropertySamples), CustomPropertySamples.SetCustomProperties);
+
             var sm19 = methods.Add(nameof(FormsSamples), FormsSamples.MonitorResolutions);
             var sm20 = methods.Add(nameof(PlaygroundSamples2), PlaygroundSamples2.DrawAllGradients);
             var sm21 = methods.Add(nameof(PlaygroundSamples1), PlaygroundSamples1.Spirograph);
@@ -54,13 +54,14 @@ namespace VSamples
             var sm29 = methods.Add(nameof(SpecialDocumentSamples), SpecialDocumentSamples.OrgChart);
 
 
-            var sm30 = methods.Add(nameof(TextMarkpSamples), TextMarkpSamples.TextMarkup11);
-            var sm31 = methods.Add(nameof(TextMarkpSamples), TextMarkpSamples.TextMarkup12);
-            var sm32 = methods.Add(nameof(TextMarkpSamples), TextMarkpSamples.TextMarkup13);
-            var sm33 = methods.Add(nameof(TextMarkpSamples), TextMarkpSamples.TextMarkup14);
-            var sm34 = methods.Add(nameof(TextMarkpSamples), TextMarkpSamples.TextMarkup5);
-            var sm35 = methods.Add(nameof(TextSamples), TextSamples.NonRotatingText);
-            var sm36 = methods.Add(nameof(TextSamples), TextSamples.TextFields);
+            var sm30 = methods.Add(nameof(TextMarkpSamples1), TextMarkpSamples1.TextMarkup11);
+            var sm31 = methods.Add(nameof(TextMarkpSamples2), TextMarkpSamples2.TextMarkup12);
+            var sm32 = methods.Add(nameof(TextMarkpSamples3), TextMarkpSamples3.TextMarkup13);
+            var sm33 = methods.Add(nameof(TextMarkpSamples4), TextMarkpSamples4.TextMarkup14);
+            var sm34 = methods.Add(nameof(TextMarkpSamples5), TextMarkpSamples5.TextMarkup5);
+
+            var sm35 = methods.Add(nameof(TextSamples1), TextSamples1.NonRotatingText);
+            var sm36 = methods.Add(nameof(TextSamples2), TextSamples2.TextFields);
 
 
 
