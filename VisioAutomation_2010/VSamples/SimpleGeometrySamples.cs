@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace VSamples
 {
-    public static class BezierCircleX
+    public  class BezierCircleX : SampleMethodBase
     {
-        public static void BezierCircle()
+        public override void RunSample()
         {
             // Draw an approximation of a circle using Bezier Curves
 
@@ -21,9 +21,9 @@ namespace VSamples
         }
 
     }
-    public static class BezierEllipseX
+    public  class BezierEllipseX : SampleMethodBase
     {
-    public static void BezierEllipse()
+    public override void RunSample()
         {
             // Draw an approximation of an ellipse using Bezier Curves
 
@@ -36,10 +36,10 @@ namespace VSamples
             s0.Text = "Bezier approximating ellipse";
         }
     }
-    public static class BezierSimpleX
+    public  class BezierSimpleX : SampleMethodBase
     {
 
-        public static void BezierSimple()
+        public override  void RunSample()
         {
             // Draw a Simple Bezier curve
 
@@ -59,10 +59,10 @@ namespace VSamples
 
 
     }
-    public static class Nurbs1X
+    public  class Nurbs1X : SampleMethodBase
     {
 
-        public static void Nurbs1()
+        public override void RunSample()
         {
             // Draw a simple NURBS
             // Example from this page:http://www.robthebloke.org/opengl_programming.html
@@ -92,10 +92,10 @@ namespace VSamples
             s0.Text = "Generic NURBS shape";
         }
     }
-    public static class Nurbs2X
+    public  class Nurbs2X : SampleMethodBase
     {
 
-        public static void Nurbs2()
+        public override void RunSample()
         {
             // Draw a simple NURBS
             // Example from Graham Wideman's book

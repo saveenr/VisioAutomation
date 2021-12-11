@@ -4,9 +4,9 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Layouts
 {
-    public static class BoxLayout_TwoLevelGroupingx
+    public  class BoxLayout_TwoLevelGroupingx : SampleMethodBase
     {
-        public static void BoxLayout_TwoLevelGrouping()
+        public override void RunSample()
         {
             int num_types = 10;
             int max_properties = 50;

@@ -1,8 +1,8 @@
 ﻿namespace VSamples
 {
-    public static class ScriptingDocumentationXX
+    public class ScriptingDocumentationXX : SampleMethodBase
     {
-        public static void ScriptingDocumentation()
+        public override  void RunSample()
         {
             var app = SampleEnvironment.Application;
             var client = new VisioScripting.Client(app);

@@ -7,7 +7,18 @@ using VAM=VisioAutomation.Models;
 
 namespace VSamples.Layouts
 {
-    public static class FontCompareX
+    public static class LH
+    {
+        public static VAM.Layouts.Box.Box AddNodeEx(this VAM.Layouts.Box.Container p, double w, double h, string s)
+        {
+            var box = p.AddBox(w, h);
+            var node_data = new FontCompareX.NodeData();
+            node_data.Text = s;
+            box.Data = node_data;
+            return box;
+        }
+    }
+    public  class FontCompareX : SampleMethodBase
     {
         public class NodeData
         {
@@ -24,16 +35,9 @@ namespace VSamples.Layouts
             }
         }
 
-        public static VAM.Layouts.Box.Box AddNodeEx(this VAM.Layouts.Box.Container p, double w, double h, string s)
-        {
-            var box = p.AddBox(w, h);
-            var node_data = new NodeData();
-            node_data.Text = s;
-            box.Data = node_data;
-            return box;
-        }
 
-        public static void FontCompare()
+
+        public override void RunSample()
         {
             var visapp = new IVisio.Application();
             var doc = visapp.Documents.Add(string.Empty);

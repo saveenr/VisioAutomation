@@ -2,9 +2,9 @@
 
 namespace VSamples.Layouts
 {
-    public static class DirectedGraphViaMsaglX
+    public  class DirectedGraphViaMsaglX : SampleMethodBase
     {
-        public static void DirectedGraphViaMsagl()
+        public override void RunSample ()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphViaVisioX.get_dg_drawing();

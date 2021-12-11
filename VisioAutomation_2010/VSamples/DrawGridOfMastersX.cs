@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace VSamples
 {
-    public static class DrawGridOfMastersX
+    public  class DrawGridOfMastersX : SampleMethodBase
     {
-        public static void DrawGridOfMasters()
+        public override void RunSample()
         {
             // http://blogs.msdn.com/saveenr/archive/2008/08/06/visioautoext-simplifying-dropmany-to-quickly-draw-a-grid.aspx
 

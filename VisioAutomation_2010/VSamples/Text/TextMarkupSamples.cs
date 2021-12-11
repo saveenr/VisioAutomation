@@ -3,9 +3,9 @@ using VSM = VisioScripting.Models;
 
 namespace VSamples.Text
 {
-    public static class TextMarkpSamples1
+    public  class TextMarkpSamples1 : SampleMethodBase
     {
-        public static void TextMarkup11()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
@@ -22,10 +22,10 @@ namespace VSamples.Text
             e1.SetText(s1);
         }
     }
-    public static class TextMarkpSamples2
+    public  class TextMarkpSamples2 : SampleMethodBase
     {
 
-        public static void TextMarkup12()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
@@ -45,9 +45,9 @@ namespace VSamples.Text
             e1.SetText(s1);
         }
     }
-    public static class TextMarkpSamples3
+    public  class TextMarkpSamples3 : SampleMethodBase
     {
-        public static void TextMarkup13()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var segoe_ui = page.Document.Fonts["Segoe UI"];
@@ -69,9 +69,9 @@ namespace VSamples.Text
             e1.SetText(s1);
         }
     }
-    public static class TextMarkpSamples4
+    public  class TextMarkpSamples4 : SampleMethodBase
     {
-        public static void TextMarkup14()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
@@ -86,9 +86,9 @@ namespace VSamples.Text
             e1.SetText(s1);
         }
     }
-    public static class TextMarkpSamples5
+    public  class TextMarkpSamples5 : SampleMethodBase
     {
-        public static void TextMarkup5()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 

@@ -5,11 +5,11 @@ using VA = VisioAutomation;
 
 namespace VSamples.Layouts
 {
-    public static class DirectedGraphViaVisioX
+    public  class DirectedGraphViaVisioX : SampleMethodBase
     {
 
 
-        public static void DirectedGraphViaVisio()
+        public override void RunSample()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = DirectedGraphViaVisioX.get_dg_drawing();

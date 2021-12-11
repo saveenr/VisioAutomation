@@ -4,9 +4,9 @@ using VADOM = VisioAutomation.Models.Dom;
 
 namespace VSamples.Layouts
 {
-    public static class TreeWithTwoPassLayoutAndFormattingX
+    public  class TreeWithTwoPassLayoutAndFormattingX : SampleMethodBase
     {
-        public static void TreeWithTwoPassLayoutAndFormatting()
+        public override void RunSample()
         {
             var doc = SampleEnvironment.Application.ActiveDocument;
             var page1 = doc.Pages.Add();

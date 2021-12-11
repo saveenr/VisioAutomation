@@ -7,8 +7,7 @@ namespace VSamples
 {
     public partial class FormSampleRunner : Form
     {
-        private readonly List<SampleMethod> _samplemethods = new List<SampleMethod>();
-        private readonly Dictionary<string, SampleMethod> _dic = new Dictionary<string, SampleMethod>();
+        private readonly Dictionary<string, SampleMethodBase> _dic = new Dictionary<string, SampleMethodBase>();
 
         public FormSampleRunner()
         {
@@ -16,51 +15,51 @@ namespace VSamples
 
             var methods = new SampleMethods();
 
-            var sm1 = methods.Add(nameof(ScriptingDocumentationXX.ScriptingDocumentation), ScriptingDocumentationXX.ScriptingDocumentation);
-            var sm2 = methods.Add(nameof(InteropEnumDocumentationX.InteropEnumDocumentation), InteropEnumDocumentationX.InteropEnumDocumentation);
-            var sm3 = methods.Add(nameof(VisioAutomationNamespacesX.VisioAutomationNamespaces), VisioAutomationNamespacesX.VisioAutomationNamespaces);
-            var sm4 = methods.Add(nameof(VisioAutomationNamespacesAndClassesX.VisioAutomationNamespacesAndClasses), VisioAutomationNamespacesAndClassesX.VisioAutomationNamespacesAndClasses);
+            var sm1 = methods.AddEx(new ScriptingDocumentationXX());
+            var sm2 = methods.AddEx(new InteropEnumDocumentationX());
+            var sm3 = methods.AddEx(new VisioAutomationNamespacesX());
+            var sm4 = methods.AddEx(new VisioAutomationNamespacesAndClassesX());
 
-            var sm5 = methods.Add(nameof(ConnectorsToBackX.ConnectorsToBack), ConnectorsToBackX.ConnectorsToBack);
-            var sm6 = methods.Add(nameof(GradientTransparenciesX.GradientTransparencies), GradientTransparenciesX.GradientTransparencies);
-            var sm7 = methods.Add(nameof(DrawGridOfMastersX.DrawGridOfMasters), DrawGridOfMastersX.DrawGridOfMasters);
+            var sm5 = methods.AddEx(new ConnectorsToBackX());
+            var sm6 = methods.AddEx(new GradientTransparenciesX());
+            var sm7 = methods.AddEx(new DrawGridOfMastersX());
 
-            var sm8 = methods.Add(nameof(Layouts.BoxLayout_SimpleCasesx), Layouts.BoxLayout_SimpleCasesx.BoxLayout_SimpleCases);
-            var sm9 = methods.Add(nameof(Layouts.BoxLayout_TwoLevelGroupingx), Layouts.BoxLayout_TwoLevelGroupingx.BoxLayout_TwoLevelGrouping);
+            var sm8 = methods.AddEx(new Layouts.BoxLayout_SimpleCasesx());
+            var sm9 = methods.AddEx(new Layouts.BoxLayout_TwoLevelGroupingx());
 
-            var sm10 = methods.Add(nameof(Layouts.FontCompareX), Layouts.FontCompareX.FontCompare);
+            var sm10 = methods.AddEx(new Layouts.FontCompareX());
 
-            var sm11 = methods.Add(nameof(Layouts.SimpleContainerX), Layouts.SimpleContainerX.SimpleContainer);
-            var sm12 = methods.Add(nameof(Layouts.DirectedGraphViaMsaglX), Layouts.DirectedGraphViaMsaglX.DirectedGraphViaMsagl);
-            var sm13 = methods.Add(nameof(Layouts.DirectedGraphViaVisioX), Layouts.DirectedGraphViaVisioX.DirectedGraphViaVisio);
+            var sm11 = methods.AddEx(new Layouts.SimpleContainerX());
+            var sm12 = methods.AddEx(new Layouts.DirectedGraphViaMsaglX());
+            var sm13 = methods.AddEx(new Layouts.DirectedGraphViaVisioX());
             
-            var sm14 = methods.Add(nameof(Layouts.ColorGridX), Layouts.ColorGridX.ColorGrid);
+            var sm14 = methods.AddEx(new Layouts.ColorGridX());
 
-            var sm16 = methods.Add(nameof(Layouts.TreeWithTwoPassLayoutAndFormattingX), Layouts.TreeWithTwoPassLayoutAndFormattingX.TreeWithTwoPassLayoutAndFormatting);
+            var sm16 = methods.AddEx(new Layouts.TreeWithTwoPassLayoutAndFormattingX());
 
-            var sm17 = methods.Add(nameof(SetCustomPropertiesX), SetCustomPropertiesX.SetCustomProperties);
+            var sm17 = methods.AddEx(new SetCustomPropertiesX());
 
-            var sm19 = methods.Add(nameof(MonitorResolutionsX), MonitorResolutionsX.MonitorResolutions);
-            var sm20 = methods.Add(nameof(DrawAllGradientsX), DrawAllGradientsX.DrawAllGradients);
-            var sm21 = methods.Add(nameof(SpirographX), SpirographX.Spirograph);
-            var sm22 = methods.Add(nameof(ProgressBarX), ProgressBarX.ProgressBar);
-            var sm23 = methods.Add(nameof(BezierCircleX), BezierCircleX.BezierCircle);
-            var sm24 = methods.Add(nameof(BezierEllipseX), BezierEllipseX.BezierEllipse);
-            var sm25 = methods.Add(nameof(BezierSimpleX), BezierSimpleX.BezierSimple);
-            var sm26 = methods.Add(nameof(Nurbs1X), Nurbs1X.Nurbs1);
-            var sm27 = methods.Add(nameof(Nurbs2X), Nurbs2X.Nurbs2);
+            var sm19 = methods.AddEx(new MonitorResolutionsX());
+            var sm20 = methods.AddEx(new DrawAllGradientsX());
+            var sm21 = methods.AddEx(new SpirographX());
+            var sm22 = methods.AddEx(new ProgressBarX());
+            var sm23 = methods.AddEx(new BezierCircleX());
+            var sm24 = methods.AddEx(new BezierEllipseX());
+            var sm25 = methods.AddEx(new BezierSimpleX());
+            var sm26 = methods.AddEx(new Nurbs1X());
+            var sm27 = methods.AddEx(new Nurbs2X());
 
-            var sm29 = methods.Add(nameof(OrgChartX), OrgChartX.OrgChart);
+            var sm29 = methods.AddEx(new OrgChartX());
 
 
-            var sm30 = methods.Add(nameof(TextMarkpSamples1), TextMarkpSamples1.TextMarkup11);
-            var sm31 = methods.Add(nameof(TextMarkpSamples2), TextMarkpSamples2.TextMarkup12);
-            var sm32 = methods.Add(nameof(TextMarkpSamples3), TextMarkpSamples3.TextMarkup13);
-            var sm33 = methods.Add(nameof(TextMarkpSamples4), TextMarkpSamples4.TextMarkup14);
-            var sm34 = methods.Add(nameof(TextMarkpSamples5), TextMarkpSamples5.TextMarkup5);
+            var sm30 = methods.AddEx(new TextMarkpSamples1());
+            var sm31 = methods.AddEx(new TextMarkpSamples2());
+            var sm32 = methods.AddEx(new TextMarkpSamples3());
+            var sm33 = methods.AddEx(new TextMarkpSamples4());
+            var sm34 = methods.AddEx(new TextMarkpSamples5());
 
-            var sm35 = methods.Add(nameof(NonRotatingTextX), NonRotatingTextX.NonRotatingText);
-            var sm36 = methods.Add(nameof(TextFieldsX), TextFieldsX.TextFields);
+            var sm35 = methods.AddEx(new NonRotatingTextX());
+            var sm36 = methods.AddEx(new TextFieldsX());
 
 
 
@@ -70,8 +69,8 @@ namespace VSamples
 
             foreach (var method in methods)
             {
-                names.Add(method.Name);
-                this._dic[method.Name] = method;
+                names.Add(method.GetName());
+                this._dic[method.GetName()] = method;
             }
 
             var prev_names = this.GetPreviouslySelectedSamples();
@@ -120,11 +119,11 @@ namespace VSamples
             {
                 try
                 {
-                    selectedMethod.Run();
+                    selectedMethod.RunSample();
                 }
                 catch (System.Exception)
                 {
-                    System.Console.WriteLine("Caught Exception for {0}", selectedMethod.Name);
+                    System.Console.WriteLine("Caught Exception for {0}", selectedMethod.GetType());
                     break;
                 }
             }

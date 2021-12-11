@@ -4,9 +4,9 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VSamples
 {
-    public static class DrawAllGradientsX
+    public  class DrawAllGradientsX : SampleMethodBase
     {
-        public static void DrawAllGradients()
+        public override void RunSample()
         {
             var app = SampleEnvironment.Application;
             var docs = app.Documents;

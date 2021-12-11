@@ -1,10 +1,10 @@
 ﻿namespace VSamples
 {
-    public static class InteropEnumDocumentationX
+    public  class InteropEnumDocumentationX : SampleMethodBase
     {
 
 
-        public static void InteropEnumDocumentation()
+        public override void RunSample()
         {
             var app = SampleEnvironment.Application;
             var client = new VisioScripting.Client(app);

@@ -4,9 +4,9 @@ using VisioAutomation.Shapes;
 
 namespace VSamples
 {
-    public static class ConnectorsToBackX
+    public  class ConnectorsToBackX : SampleMethodBase
     {
-        public static void ConnectorsToBack()
+        public override void RunSample()
         {
             var doc = SampleEnvironment.Application.ActiveDocument;
             var pages = doc.Pages;

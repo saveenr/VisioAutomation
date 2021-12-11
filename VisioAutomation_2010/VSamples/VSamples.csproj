@@ -90,6 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Layouts\DirectedGraphViaMsaglX.cs" />
+    <Compile Include="SampleMethodBase.cs" />
+    <Compile Include="SampleMethods.cs" />
     <Compile Include="ScriptingDocumentationXX.cs" />
     <Compile Include="InteropEnumDocumentationX.cs" />
     <Compile Include="VisioAutomationNamespacesX.cs" />

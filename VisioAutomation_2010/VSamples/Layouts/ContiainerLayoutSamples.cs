@@ -2,9 +2,9 @@
 
 namespace VSamples.Layouts
 {
-    public static class SimpleContainerX
+    public  class SimpleContainerX : SampleMethodBase
     {
-        public static void SimpleContainer()
+        public override void RunSample()
         {
             var m = new ContainerLayout();
 

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace VSamples
 {
-    public static class MonitorResolutionsX
+    public  class MonitorResolutionsX : SampleMethodBase
     {
-        public static void MonitorResolutions()
+        public override void RunSample()
         {
             var resolutions = new List<ResolutionInfo>
             {

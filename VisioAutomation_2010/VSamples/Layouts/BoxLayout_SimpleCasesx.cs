@@ -1,8 +1,8 @@
 ﻿namespace VSamples.Layouts
 {
-    public static class BoxLayout_SimpleCasesx
+    public  class BoxLayout_SimpleCasesx : SampleMethodBase
     {
-        public static void BoxLayout_SimpleCases()
+        public override void RunSample()
         {
             // Create a blank canvas in Visio 
             var app = SampleEnvironment.Application;

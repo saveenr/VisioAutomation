@@ -6,9 +6,9 @@ using VAM=VisioAutomation.Models;
 
 namespace VSamples
 {
-    public static class GradientTransparenciesX
+    public  class GradientTransparenciesX : SampleMethodBase
     {
-        public static void GradientTransparencies()
+        public override void RunSample()
         {
             int num_cols = 1;
             int num_rows = 10;

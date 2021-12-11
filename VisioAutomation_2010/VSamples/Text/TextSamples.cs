@@ -2,9 +2,9 @@
 
 namespace VSamples.Text
 {
-    public static class NonRotatingTextX
+    public  class NonRotatingTextX : SampleMethodBase
     {
-        public static void NonRotatingText()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var s0 = page.DrawRectangle(1, 1, 4, 4);
@@ -16,10 +16,10 @@ namespace VSamples.Text
         }
     }
 
-    public static class TextFieldsX
+    public  class TextFieldsX : SampleMethodBase
     {
 
-        public static void TextFields()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var s0 = page.DrawRectangle(1, 1, 4, 4);

@@ -1,10 +1,10 @@
 ﻿namespace VSamples
 {
 
-    public static class VisioAutomationNamespacesX
+    public  class VisioAutomationNamespacesX : SampleMethodBase
     {
 
-        public static void VisioAutomationNamespaces()
+        public override void RunSample()
         {
             var app = SampleEnvironment.Application;
             var client = new VisioScripting.Client(app);

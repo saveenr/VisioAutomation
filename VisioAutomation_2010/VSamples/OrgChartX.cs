@@ -4,9 +4,9 @@ using OCMODEL = VisioAutomation.Models.Documents.OrgCharts;
 
 namespace VSamples
 {
-    public static class OrgChartX
+    public  class OrgChartX : SampleMethodBase
     {
-        public static void OrgChart()
+        public override void RunSample()
         {
             // This creates a new document
             var orgchart = new OCMODEL.OrgChartDocument();

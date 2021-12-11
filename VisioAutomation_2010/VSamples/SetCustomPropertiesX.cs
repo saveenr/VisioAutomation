@@ -2,9 +2,9 @@ using VisioAutomation.Shapes;
 
 namespace VSamples
 {
-    public static class SetCustomPropertiesX
+    public  class SetCustomPropertiesX : SampleMethodBase
     {
-        public static void SetCustomProperties()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 

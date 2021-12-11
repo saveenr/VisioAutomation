@@ -5,7 +5,7 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VSamples
 {
-    public static class SpirographX
+    public  class SpirographX : SampleMethodBase
     {
         private static Microsoft.Office.Interop.Visio.Shape draw_leaf(Microsoft.Office.Interop.Visio.Page page, VisioAutomation.Core.Point p0)
         {
@@ -29,7 +29,7 @@ namespace VSamples
             return new_point;
         }
 
-        public static void Spirograph()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             page.Name = "Spirograph";
