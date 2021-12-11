@@ -6,7 +6,7 @@ using VAM=VisioAutomation.Models;
 
 namespace VSamples
 {
-    public static class EffectsSamples
+    public static class GradientTransparenciesX
     {
         public static void GradientTransparencies()
         {
@@ -32,7 +32,7 @@ namespace VSamples
             layout.CellSpacing = new VA.Core.Size(0.1, 0.1);
             layout.PerformLayout();
 
-            double[] trans = EffectsSamples.RangeSteps(0.0, 1.0, num_rows).ToArray();
+            double[] trans = GradientTransparenciesX.RangeSteps(0.0, 1.0, num_rows).ToArray();
 
             int i = 0;
             foreach (var node in layout.Nodes)

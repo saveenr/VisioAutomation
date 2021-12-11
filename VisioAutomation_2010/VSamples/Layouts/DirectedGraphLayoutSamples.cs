@@ -5,22 +5,14 @@ using VA = VisioAutomation;
 
 namespace VSamples.Layouts
 {
-    public static class DirectedGraphLayoutSamples
+    public static class DirectedGraphViaVisioX
     {
-        public static void DirectedGraphViaMsagl()
-        {
-            var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
 
-            var renderer = new MsaglRenderer();
-            renderer.LayoutOptions.UseDynamicConnectors = false;
-            renderer.Render(page1, directed_graph_drawing);
-        }
 
         public static void DirectedGraphViaVisio()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = DirectedGraphLayoutSamples.get_dg_drawing();
+            var directed_graph_drawing = DirectedGraphViaVisioX.get_dg_drawing();
 
             var vr = new VisioLayoutRenderer();
             vr.Render(page1, directed_graph_drawing);
@@ -29,7 +21,7 @@ namespace VSamples.Layouts
             page1.ResizeToFitContents(padding);
         }
 
-        private static DirectedGraphLayout get_dg_drawing()
+        public static DirectedGraphLayout get_dg_drawing()
         {
 
             var ver = VA.Application.ApplicationHelper.GetVersion(SampleEnvironment.Application);
@@ -95,4 +87,5 @@ namespace VSamples.Layouts
             return directed_graph_drawing;
         }
     }
+
 }

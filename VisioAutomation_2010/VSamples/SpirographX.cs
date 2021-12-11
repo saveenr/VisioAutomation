@@ -5,7 +5,7 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VSamples
 {
-    public static class PlaygroundSamples1
+    public static class SpirographX
     {
         private static Microsoft.Office.Interop.Visio.Shape draw_leaf(Microsoft.Office.Interop.Visio.Page page, VisioAutomation.Core.Point p0)
         {
@@ -49,8 +49,8 @@ namespace VSamples
             int numpoints = colors.Length;
             double angle_step = (System.Math.PI * 2 / numpoints);
             var angles = Enumerable.Range(0, numpoints).Select(i => i * angle_step).ToList();
-            var centers = angles.Select(a => PlaygroundSamples1.GetPointAtRadius(origin, a, radius)).ToList();
-            var shapes = centers.Select(p => PlaygroundSamples1.draw_leaf(page, p)).ToList();
+            var centers = angles.Select(a => SpirographX.GetPointAtRadius(origin, a, radius)).ToList();
+            var shapes = centers.Select(p => SpirographX.draw_leaf(page, p)).ToList();
             var culture = CultureInfo.InvariantCulture;
             var angles_as_formulas = angles.Select(a => a.ToString(culture)).ToList();
 

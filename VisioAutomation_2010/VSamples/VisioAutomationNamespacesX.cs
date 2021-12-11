@@ -1,7 +1,7 @@
 ﻿namespace VSamples
 {
 
-    public static class DeveloperSamples3
+    public static class VisioAutomationNamespacesX
     {
 
         public static void VisioAutomationNamespaces()

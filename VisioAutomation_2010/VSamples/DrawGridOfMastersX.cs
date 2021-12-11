@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace VSamples
 {
-    public static class StencilSamples
+    public static class DrawGridOfMastersX
     {
         public static void DrawGridOfMasters()
         {

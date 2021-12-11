@@ -2,7 +2,7 @@
 
 namespace VSamples.Text
 {
-    public static class TextSamples1
+    public static class NonRotatingTextX
     {
         public static void NonRotatingText()
         {
@@ -16,7 +16,7 @@ namespace VSamples.Text
         }
     }
 
-    public static class TextSamples2
+    public static class TextFieldsX
     {
 
         public static void TextFields()

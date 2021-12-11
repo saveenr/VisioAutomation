@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace VSamples
 {
-    public static class SimpleGeometrySamples1
+    public static class BezierCircleX
     {
         public static void BezierCircle()
         {
@@ -21,7 +21,7 @@ namespace VSamples
         }
 
     }
-    public static class SimpleGeometrySamples2
+    public static class BezierEllipseX
     {
     public static void BezierEllipse()
         {
@@ -36,7 +36,7 @@ namespace VSamples
             s0.Text = "Bezier approximating ellipse";
         }
     }
-    public static class SimpleGeometrySamples3
+    public static class BezierSimpleX
     {
 
         public static void BezierSimple()
@@ -59,7 +59,7 @@ namespace VSamples
 
 
     }
-    public static class SimpleGeometrySamples7
+    public static class Nurbs1X
     {
 
         public static void Nurbs1()
@@ -92,7 +92,7 @@ namespace VSamples
             s0.Text = "Generic NURBS shape";
         }
     }
-    public static class SimpleGeometrySamples4
+    public static class Nurbs2X
     {
 
         public static void Nurbs2()

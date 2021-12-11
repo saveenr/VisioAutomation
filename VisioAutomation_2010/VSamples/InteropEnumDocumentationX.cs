@@ -1,6 +1,6 @@
 ﻿namespace VSamples
 {
-    public static class DeveloperSamples2
+    public static class InteropEnumDocumentationX
     {
 
 

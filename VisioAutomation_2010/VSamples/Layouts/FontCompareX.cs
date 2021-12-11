@@ -7,7 +7,7 @@ using VAM=VisioAutomation.Models;
 
 namespace VSamples.Layouts
 {
-    public static class BoxLayoutSamples
+    public static class FontCompareX
     {
         public class NodeData
         {
@@ -44,9 +44,9 @@ namespace VSamples.Layouts
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
             var samplechars = sampletext.Select(c => new string(new[] {c})).ToList();
 
-            BoxLayoutSamples.FontGlyphComparision(doc, fontnames, samplechars);
-            BoxLayoutSamples.FontGlyphComparision2(doc, fontnames, samplechars);
-            BoxLayoutSamples.FontGlyphComparision3(doc, fontnames, samplechars);
+            FontCompareX.FontGlyphComparision(doc, fontnames, samplechars);
+            FontCompareX.FontGlyphComparision2(doc, fontnames, samplechars);
+            FontCompareX.FontGlyphComparision3(doc, fontnames, samplechars);
         }
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)

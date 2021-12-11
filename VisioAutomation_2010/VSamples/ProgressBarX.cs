@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VSamples
 {
-    public static class SmartShapeSamples
+    public static class ProgressBarX
     {
         public static void ProgressBar()
         {

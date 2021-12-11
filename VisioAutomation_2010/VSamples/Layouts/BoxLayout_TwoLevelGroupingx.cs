@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Layouts
 {
-    public static class BoxLayout2Samples2
+    public static class BoxLayout_TwoLevelGroupingx
     {
         public static void BoxLayout_TwoLevelGrouping()
         {
@@ -24,7 +24,7 @@ namespace VSamples.Layouts
                 }
             }
 
-            var layout1 = BoxLayout2Samples2.CreateTwoLevelLayout(data);
+            var layout1 = BoxLayout_TwoLevelGroupingx.CreateTwoLevelLayout(data);
 
 
             layout1.PerformLayout();

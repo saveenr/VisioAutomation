@@ -21,6 +21,14 @@ namespace VSamples
         }
     }
 
+    public class SampleMethodBase
+    {
+        public string GetName()
+        {
+            var t = this.GetType();
+            return t.FullName;
+        }
+    }
     public class SampleMethod
     {
         public string Name;

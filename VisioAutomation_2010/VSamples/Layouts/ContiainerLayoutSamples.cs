@@ -2,7 +2,7 @@
 
 namespace VSamples.Layouts
 {
-    public static class ContainerLayoutSamples
+    public static class SimpleContainerX
     {
         public static void SimpleContainer()
         {

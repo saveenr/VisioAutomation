@@ -4,7 +4,7 @@ using VADOM = VisioAutomation.Models.Dom;
 
 namespace VSamples.Layouts
 {
-    public static class TreeLayoutSamples
+    public static class TreeWithTwoPassLayoutAndFormattingX
     {
         public static void TreeWithTwoPassLayoutAndFormatting()
         {

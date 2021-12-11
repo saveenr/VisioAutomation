@@ -2,7 +2,7 @@ using VisioAutomation.Shapes;
 
 namespace VSamples
 {
-    public static class CustomPropertySamples
+    public static class SetCustomPropertiesX
     {
         public static void SetCustomProperties()
         {

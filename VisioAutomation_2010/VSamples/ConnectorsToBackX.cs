@@ -4,7 +4,7 @@ using VisioAutomation.Shapes;
 
 namespace VSamples
 {
-    public static class ConnectorSamples
+    public static class ConnectorsToBackX
     {
         public static void ConnectorsToBack()
         {

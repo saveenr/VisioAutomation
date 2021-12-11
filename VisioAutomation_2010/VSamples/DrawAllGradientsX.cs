@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VSamples
 {
-    public static class PlaygroundSamples2
+    public static class DrawAllGradientsX
     {
         public static void DrawAllGradients()
         {

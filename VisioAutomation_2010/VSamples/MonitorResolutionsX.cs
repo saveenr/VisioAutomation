@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace VSamples
 {
-    public static class FormsSamples
+    public static class MonitorResolutionsX
     {
         public static void MonitorResolutions()
         {

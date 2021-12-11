@@ -1,6 +1,6 @@
 ﻿namespace VSamples
 {
-    public static class DeveloperSamples4
+    public static class VisioAutomationNamespacesAndClassesX
     {
 
         public static void VisioAutomationNamespacesAndClasses()

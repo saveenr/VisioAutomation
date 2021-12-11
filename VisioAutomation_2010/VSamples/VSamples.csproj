@@ -89,24 +89,25 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeveloperSamples1.cs" />
-    <Compile Include="DeveloperSamples2.cs" />
-    <Compile Include="DeveloperSamples3.cs" />
+    <Compile Include="Layouts\DirectedGraphViaMsaglX.cs" />
+    <Compile Include="ScriptingDocumentationXX.cs" />
+    <Compile Include="InteropEnumDocumentationX.cs" />
+    <Compile Include="VisioAutomationNamespacesX.cs" />
     <Compile Include="Layouts\BoxHelper.cs" />
-    <Compile Include="Layouts\BoxLayout2Samples1.cs" />
-    <Compile Include="Layouts\BoxLayout2Samples2.cs" />
+    <Compile Include="Layouts\BoxLayout_SimpleCasesx.cs" />
+    <Compile Include="Layouts\BoxLayout_TwoLevelGroupingx.cs" />
     <Compile Include="Layouts\BoxLayoutShared.cs" />
-    <Compile Include="FormsSamples.cs" />
+    <Compile Include="MonitorResolutionsX.cs" />
     <Compile Include="Layouts\Util.cs" />
     <Compile Include="LinqUtil.cs" />
-    <Compile Include="Layouts\TreeLayoutSamples.cs" />
-    <Compile Include="PlaygroundSamples1.cs" />
-    <Compile Include="PlaygroundSamples2.cs" />
+    <Compile Include="Layouts\TreeWithTwoPassLayoutAndFormattingX.cs" />
+    <Compile Include="SpirographX.cs" />
+    <Compile Include="DrawAllGradientsX.cs" />
     <Compile Include="ResolutionInfo.cs" />
     <Compile Include="Text\TextExtensions.cs" />
-    <Compile Include="Layouts\GridLayoutSamples.cs" />
-    <Compile Include="ConnectorSamples.cs" />
-    <Compile Include="Layouts\BoxLayoutSamples.cs" />
+    <Compile Include="Layouts\ColorGridX.cs" />
+    <Compile Include="ConnectorsToBackX.cs" />
+    <Compile Include="Layouts\FontCompareX.cs" />
     <Compile Include="Layouts\ContiainerLayoutSamples.cs" />
     <Compile Include="Text\TextMarkupSamples.cs" />
     <Compile Include="DeveloperSamples.cs" />
@@ -125,11 +126,11 @@
     </Compile>
     <Compile Include="SampleMethod.cs" />
     <Compile Include="SimpleGeometrySamples.cs" />
-    <Compile Include="SmartShapeSamples.cs" />
-    <Compile Include="SpecialDocumentSamples.cs" />
-    <Compile Include="EffectsSamples.cs" />
-    <Compile Include="CustomPropertySamples.cs" />
-    <Compile Include="StencilSamples.cs" />
+    <Compile Include="ProgressBarX.cs" />
+    <Compile Include="OrgChartX.cs" />
+    <Compile Include="GradientTransparenciesX.cs" />
+    <Compile Include="SetCustomPropertiesX.cs" />
+    <Compile Include="DrawGridOfMastersX.cs" />
     <Compile Include="PathAnalysis.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

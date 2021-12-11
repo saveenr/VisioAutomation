@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Layouts
 {
-    public static class BoxLayout2Samples1
+    public static class BoxLayout_SimpleCasesx
     {
         public static void BoxLayout_SimpleCases()
         {

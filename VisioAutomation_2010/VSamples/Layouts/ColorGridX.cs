@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 
 namespace VSamples.Layouts
 {
-    public static class GridLayoutSamples
+    public static class ColorGridX
     {
         public static void ColorGrid()
         {

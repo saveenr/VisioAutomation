@@ -1,6 +1,6 @@
 ﻿namespace VSamples
 {
-    public static class DeveloperSamples1
+    public static class ScriptingDocumentationXX
     {
         public static void ScriptingDocumentation()
         {
