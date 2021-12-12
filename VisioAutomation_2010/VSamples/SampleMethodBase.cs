@@ -2,10 +2,18 @@
 {
     public abstract class SampleMethodBase
     {
-        public string GetName()
+        private string name;
+        public string Name
         {
-            var t = this.GetType();
-            return t.FullName;
+            get
+            {
+                if (name == null)
+                {
+                    this.name = this.GetType().FullName;
+                }
+
+                return this.name;
+            }
         }
 
         public abstract void RunSample();

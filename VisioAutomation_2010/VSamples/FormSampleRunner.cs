@@ -67,15 +67,15 @@ namespace VSamples
 
 
 
-
             var names = new List<string>();
 
 
             foreach (var method in methods)
             {
-                names.Add(method.GetName());
-                this._dic[method.GetName()] = method;
+                names.Add(method.Name);
+                this._dic[method.Name] = method;
             }
+            names = names.OrderBy(i => i).ToList();
 
             var prev_names = this.GetPreviouslySelectedSamples();
 
