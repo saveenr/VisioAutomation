@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
-using VAM=VisioAutomation.Models;
+using VAM = VisioAutomation.Models;
 
 namespace VSamples.Samples.Misc
 {
-    public  class GradientTransparencies : SampleMethodBase
+    public class GradientTransparencies : SampleMethodBase
     {
         public override void RunSample()
         {
@@ -15,7 +15,7 @@ namespace VSamples.Samples.Misc
             var color1 = new VAM.Color.ColorRgb(0xff000);
             var color2 = new VAM.Color.ColorRgb(0x000ff);
 
-            var page_size = new VA.Core.Size(num_rows/2.0, num_rows);
+            var page_size = new VA.Core.Size(num_rows / 2.0, num_rows);
             var upperleft = new VA.Core.Point(0, page_size.Height);
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
@@ -24,7 +24,7 @@ namespace VSamples.Samples.Misc
             var stencil = docs.OpenStencil("basic_U.vss");
             var master = stencil.Masters["Rectangle"];
 
-            SampleEnvironment.SetPageSize(page,page_size);
+            SampleEnvironment.SetPageSize(page, page_size);
 
             var layout = new VAM.Layouts.Grid.GridLayout(num_cols, num_rows, new VA.Core.Size(6.0, 1.0), master);
             layout.RowDirection = VAM.Layouts.Grid.RowDirection.TopToBottom;
@@ -93,13 +93,14 @@ namespace VSamples.Samples.Misc
             // is no possibility of rounding error affecting their values
             int segments = steps - 1;
             double total_length = end - start;
-            double stepsize = total_length/segments;
+            double stepsize = total_length / segments;
             yield return start;
             for (int i = 1; i < (steps - 1); i++)
             {
-                double p = start + (stepsize*i);
+                double p = start + (stepsize * i);
                 yield return p;
             }
+
             yield return end;
         }
     }

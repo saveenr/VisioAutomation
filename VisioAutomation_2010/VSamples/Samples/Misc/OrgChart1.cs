@@ -4,7 +4,7 @@ using OCMODEL = VisioAutomation.Models.Documents.OrgCharts;
 
 namespace VSamples.Samples.Misc
 {
-    public  class OrgChart1 : SampleMethodBase
+    public class OrgChart1 : SampleMethodBase
     {
         public override void RunSample()
         {
@@ -22,7 +22,7 @@ namespace VSamples.Samples.Misc
 
             orgchart.Render(SampleEnvironment.Application);
 
-            var bordersize = new VA.Core.Size(1,1);
+            var bordersize = new VA.Core.Size(1, 1);
             SampleEnvironment.Application.ActivePage.ResizeToFitContents(bordersize);
         }
     }

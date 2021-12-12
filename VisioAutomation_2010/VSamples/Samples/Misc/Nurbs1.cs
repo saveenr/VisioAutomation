@@ -3,9 +3,8 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Misc
 {
-    public  class Nurbs1 : SampleMethodBase
+    public class Nurbs1 : SampleMethodBase
     {
-
         public override void RunSample()
         {
             // Draw a simple NURBS
@@ -25,9 +24,9 @@ namespace VSamples.Samples.Misc
             };
 
             var origin = new VisioAutomation.Core.Point(4, 4);
-            var scale = new VisioAutomation.Core.Size(1.0/4.0, 1.0/4.0);
+            var scale = new VisioAutomation.Core.Size(1.0 / 4.0, 1.0 / 4.0);
 
-            var controlpoints = points.Select(x => (x*scale) + origin).ToList();
+            var controlpoints = points.Select(x => (x * scale) + origin).ToList();
             var knots = new double[] {0, 0, 0, 0, 1, 2, 3, 4, 4, 4, 4};
             var degree = 3;
             var weights = controlpoints.Select(i => 1.0).ToList();

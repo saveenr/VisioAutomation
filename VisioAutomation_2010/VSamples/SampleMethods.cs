@@ -4,11 +4,8 @@ namespace VSamples
 {
     public class SampleMethods : List<SampleMethodBase>
     {
-
-
         public SampleMethods() : base(01)
         {
-
         }
 
         public SampleMethodBase AddEx(SampleMethodBase sm)
@@ -16,9 +13,5 @@ namespace VSamples
             this.Add(sm);
             return sm;
         }
-
-
-     
-
     }
 }

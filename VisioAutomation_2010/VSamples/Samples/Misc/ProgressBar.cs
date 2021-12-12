@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Misc
 {
-    public  class ProgressBar : SampleMethodBase
+    public class ProgressBar : SampleMethodBase
     {
         public override void RunSample()
         {
@@ -15,7 +15,7 @@ namespace VSamples.Samples.Misc
             var progress = page_a.DrawRectangle(0, 0, 1, 1);
 
             var background_fmt = new VA.Shapes.ShapeFormatCells();
-            background_fmt.FillForeground= "rgb(240,240,240)";
+            background_fmt.FillForeground = "rgb(240,240,240)";
             background_fmt.LineColor = "rgb(100,100,100)";
 
 
@@ -33,7 +33,7 @@ namespace VSamples.Samples.Misc
             xfrm.PinX = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
             xfrm.PinY = string.Format("GUARD({0}!PinY)", bkname);
             xfrm.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
-            xfrm.Height = string.Format("GUARD({0}!Height)", bkname); 
+            xfrm.Height = string.Format("GUARD({0}!Height)", bkname);
 
             var writer = new SidSrcWriter();
 

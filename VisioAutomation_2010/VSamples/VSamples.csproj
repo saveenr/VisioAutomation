@@ -89,16 +89,15 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Samples\Layouts\Container1.cs" />
     <Compile Include="Samples\Layouts\DirectedGraphViaMsagl.cs" />
     <Compile Include="SampleMethodBase.cs" />
     <Compile Include="SampleMethods.cs" />
     <Compile Include="Samples\Developer\DocumentScriptingAPI.cs" />
     <Compile Include="Samples\Developer\DocumentVisioInterop.cs" />
     <Compile Include="Samples\Developer\DiagramVANamespaces.cs" />
-    <Compile Include="Samples\Layouts\BoxHelper.cs" />
     <Compile Include="Samples\Layouts\BoxLayoutSimple.cs" />
     <Compile Include="Samples\Layouts\BoxLayoutTwoLevelGrouping.cs" />
-    <Compile Include="Samples\Layouts\BoxLayoutShared.cs" />
     <Compile Include="Samples\Misc\BezierCircle.cs" />
     <Compile Include="Samples\Misc\BezierEllipse.cs" />
     <Compile Include="Samples\Misc\BezierSimple.cs" />
@@ -116,7 +115,6 @@
     <Compile Include="Samples\Layouts\ColorGrid.cs" />
     <Compile Include="Samples\Misc\SendConnectorsToBack.cs" />
     <Compile Include="Samples\Layouts\CompareFonts.cs" />
-    <Compile Include="Samples\Layouts\ContiainerLayoutSamples.cs" />
     <Compile Include="Samples\Text\TextFields.cs" />
     <Compile Include="Samples\Text\TextMarkup1.cs" />
     <Compile Include="Samples\Text\TextMarkup2.cs" />

@@ -2,7 +2,7 @@
 
 namespace VSamples.Samples.Misc
 {
-    public  class BezierCircle : SampleMethodBase
+    public class BezierCircle : SampleMethodBase
     {
         public override void RunSample()
         {
@@ -17,6 +17,5 @@ namespace VSamples.Samples.Misc
             var s0 = page.DrawBezier(curve0.ControlPoints);
             s0.Text = "Bezier approximating circle";
         }
-
     }
 }

@@ -3,10 +3,9 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Misc
 {
-    public  class BezierSimple : SampleMethodBase
+    public class BezierSimple : SampleMethodBase
     {
-
-        public override  void RunSample()
+        public override void RunSample()
         {
             // Draw a Simple Bezier curve
 
@@ -23,7 +22,5 @@ namespace VSamples.Samples.Misc
                 page.DrawRectangle(p1.X, p1.Y, p2.X, p2.Y);
             }
         }
-
-
     }
 }

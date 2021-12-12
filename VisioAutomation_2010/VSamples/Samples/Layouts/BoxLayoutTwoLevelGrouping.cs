@@ -4,14 +4,15 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Layouts
 {
-    public  class BoxLayoutTwoLevelGrouping : SampleMethodBase
+    public class BoxLayoutTwoLevelGrouping : SampleMethodBase
     {
         public override void RunSample()
         {
             int num_types = 10;
             int max_properties = 50;
 
-            var types = typeof(VisioAutomation.Shapes.UserDefinedCellCells).Assembly.GetExportedTypes().Take(num_types).ToList();
+            var types = typeof(VisioAutomation.Shapes.UserDefinedCellCells).Assembly.GetExportedTypes().Take(num_types)
+                .ToList();
 
             var data = new List<string[]>();
             foreach (var type in types)
@@ -40,31 +41,32 @@ namespace VSamples.Samples.Layouts
             //var rect_master = dom.m
             foreach (var item in layout1.Nodes)
             {
-                if (item.Data ==null)
+                if (item.Data == null)
                 {
                     continue;
                 }
-                var info = (BoxHelper.TwoLevelInfo) item.Data;
+
+                var info = (Util.BoxTwoLevelInfo) item.Data;
 
                 if (!info.Render)
                 {
                     continue;
                 }
 
-                var shape = domshapescol.Drop("Rectangle", "Basic_U.VSS",item.Rectangle);
+                var shape = domshapescol.Drop("Rectangle", "Basic_U.VSS", item.Rectangle);
 
-                if (info.Text!=null)
+                if (info.Text != null)
                 {
-                    shape.Text = new VisioAutomation.Models.Text.Element(info.Text);                    
+                    shape.Text = new VisioAutomation.Models.Text.Element(info.Text);
                 }
-                
+
                 shape.Cells = info.ShapeCells.ShallowCopy();
             }
+
             domshapescol.Render(page);
 
             var bordersize = new VisioAutomation.Core.Size(0.5, 0.5);
             page.ResizeToFitContents(bordersize);
-
         }
 
         private static VisioAutomation.Models.Layouts.Box.BoxLayout CreateTwoLevelLayout(List<string[]> data)
@@ -122,12 +124,12 @@ namespace VSamples.Samples.Layouts
                 {
                     majorcnt = layout1.Root.AddContainer(minor_group_direction, 1, 1);
 
-                    var major_info = new BoxHelper.TwoLevelInfo();
+                    var major_info = new Util.BoxTwoLevelInfo();
                     major_info.Text = majorname;
                     major_info.Render = true;
                     major_info.ShapeCells = major_cells;
                     majorcnt.Data = major_info;
-                    
+
 
                     name_to_major_group[majorname] = majorcnt;
 
@@ -144,7 +146,7 @@ namespace VSamples.Samples.Layouts
                 {
                     minorcnt = majorcnt.AddContainer(minor_group_direction);
                     minorcnt.ChildSpacing = itemsep;
-                    var minor_info = new BoxHelper.TwoLevelInfo();
+                    var minor_info = new Util.BoxTwoLevelInfo();
                     minor_info.Text = minorname;
                     minor_info.Render = true;
                     minor_info.ShapeCells = minor_cells;
@@ -156,15 +158,16 @@ namespace VSamples.Samples.Layouts
 
                 VisioAutomation.Models.Layouts.Box.Box itembox = minorcnt.AddBox(2, 0.25);
 
-                var item_info = new BoxHelper.TwoLevelInfo();
+                var item_info = new Util.BoxTwoLevelInfo();
                 item_info.Text = itemname;
                 item_info.Render = true;
 
 
                 item_info.ShapeCells = item_cells;
-                
+
                 itembox.Data = item_info;
             }
+
             return layout1;
         }
     }

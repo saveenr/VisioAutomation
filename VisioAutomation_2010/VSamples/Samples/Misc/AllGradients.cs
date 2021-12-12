@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VSamples.Samples.Misc
 {
-    public  class AllGradients : SampleMethodBase
+    public class AllGradients : SampleMethodBase
     {
         public override void RunSample()
         {
@@ -18,7 +18,7 @@ namespace VSamples.Samples.Misc
             int num_rows = 7;
 
             var page_size = new VisioAutomation.Core.Size(5, 5);
-            SampleEnvironment.SetPageSize(page,page_size);
+            SampleEnvironment.SetPageSize(page, page_size);
 
             var lowerleft = new VisioAutomation.Core.Point(0, 0);
             var actual_page_size = SampleEnvironment.GetPageSize(page);
@@ -32,10 +32,10 @@ namespace VSamples.Samples.Misc
 
             int max_grad_id = 40;
             int n = 0;
-            
+
             foreach (var node in layout.Nodes)
             {
-                int grad_id = n%max_grad_id;
+                int grad_id = n % max_grad_id;
                 node.Text = grad_id.ToString();
                 n++;
             }
@@ -57,7 +57,7 @@ namespace VSamples.Samples.Misc
             foreach (var node in layout.Nodes)
             {
                 short shapeid = node.ShapeID;
-                int grad_id = n%max_grad_id;
+                int grad_id = n % max_grad_id;
 
                 format.FillPattern = grad_id;
                 format.FillForeground = color1_formula;

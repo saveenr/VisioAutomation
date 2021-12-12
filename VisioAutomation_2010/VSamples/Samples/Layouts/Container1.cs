@@ -2,7 +2,7 @@
 
 namespace VSamples.Samples.Layouts
 {
-    public  class Container1 : SampleMethodBase
+    public class Container1 : SampleMethodBase
     {
         public override void RunSample()
         {
@@ -23,7 +23,7 @@ namespace VSamples.Samples.Layouts
             m.LayoutOptions = new LayoutOptions();
             m.LayoutOptions.ContainerFormatting.ShapeFormatCells.FillForeground = "rgb(0,176,240)";
             m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.FillForeground = "rgb(250,250,250)";
-            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern= "0";
+            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern = "0";
 
             m.PerformLayout();
             m.Render(SampleEnvironment.Application.ActiveDocument);

@@ -14,7 +14,7 @@ namespace VSamples
             this.AspectRatioName = aspectrationame;
             this.Width = width;
             this.Height = height;
-            this.AspectRatio = this.Width *1.0 /this.Height;
+            this.AspectRatio = this.Width * 1.0 / this.Height;
         }
     }
 }

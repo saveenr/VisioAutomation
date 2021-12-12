@@ -3,6 +3,7 @@
     public abstract class SampleMethodBase
     {
         private string name;
+
         public string Name
         {
             get

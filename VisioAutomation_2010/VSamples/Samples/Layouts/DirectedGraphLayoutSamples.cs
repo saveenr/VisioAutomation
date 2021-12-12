@@ -5,10 +5,8 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Layouts
 {
-    public  class DirectedGraphViaVisio : SampleMethodBase
+    public class DirectedGraphViaVisio : SampleMethodBase
     {
-
-
         public override void RunSample()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
@@ -23,7 +21,6 @@ namespace VSamples.Samples.Layouts
 
         public static DirectedGraphLayout get_dg_drawing()
         {
-
             var ver = VA.Application.ApplicationHelper.GetVersion(SampleEnvironment.Application);
 
             string server_stencil = (ver.Major >= 15) ? "server_u.vssx" : "server_u.vss";
@@ -87,5 +84,4 @@ namespace VSamples.Samples.Layouts
             return directed_graph_drawing;
         }
     }
-
 }

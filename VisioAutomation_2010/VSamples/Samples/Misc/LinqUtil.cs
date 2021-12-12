@@ -9,7 +9,7 @@ namespace VSamples.Samples.Misc
         {
             return source
                 .Select((x, i) => new {Index = i, Value = x})
-                .GroupBy(x => x.Index/chunksize)
+                .GroupBy(x => x.Index / chunksize)
                 .Select(x => x.Select(v => v.Value).ToList())
                 .ToList();
         }

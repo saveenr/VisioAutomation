@@ -2,7 +2,7 @@ using VisioAutomation.Shapes;
 
 namespace VSamples.Samples.Misc
 {
-    public  class SetCustomProperties : SampleMethodBase
+    public class SetCustomProperties : SampleMethodBase
     {
         public override void RunSample()
         {

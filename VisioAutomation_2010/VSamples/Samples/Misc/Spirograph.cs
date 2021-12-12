@@ -5,9 +5,10 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VSamples.Samples.Misc
 {
-    public  class Spirograph : SampleMethodBase
+    public class Spirograph : SampleMethodBase
     {
-        private static Microsoft.Office.Interop.Visio.Shape draw_leaf(Microsoft.Office.Interop.Visio.Page page, VisioAutomation.Core.Point p0)
+        private static Microsoft.Office.Interop.Visio.Shape draw_leaf(Microsoft.Office.Interop.Visio.Page page,
+            VisioAutomation.Core.Point p0)
         {
             var p1 = p0.Add(1, 1);
             var p2 = p1.Add(1, 0);
@@ -21,7 +22,8 @@ namespace VSamples.Samples.Misc
             return s;
         }
 
-        public static VisioAutomation.Core.Point GetPointAtRadius(VisioAutomation.Core.Point origin, double angle, double radius)
+        public static VisioAutomation.Core.Point GetPointAtRadius(VisioAutomation.Core.Point origin, double angle,
+            double radius)
         {
             var new_point = new VisioAutomation.Core.Point(radius * System.Math.Cos(angle),
                 radius * System.Math.Sin(angle));

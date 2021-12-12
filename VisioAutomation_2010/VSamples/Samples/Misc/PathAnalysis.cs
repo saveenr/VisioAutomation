@@ -43,10 +43,11 @@ namespace VSamples.Samples.Misc
             var normal_edges = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdges(page, options0);
 
             var options1 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
-            options1.EdgeNoArrowsHandling =  VisioAutomation.Analyzers.EdgeNoArrowsHandling.ExcludeEdge;
+            options1.EdgeNoArrowsHandling = VisioAutomation.Analyzers.EdgeNoArrowsHandling.ExcludeEdge;
 
             var options2 = new VisioAutomation.Analyzers.ConnectionAnalyzerOptions();
-            options2.EdgeNoArrowsHandling=VisioAutomation.Analyzers.EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
+            options2.EdgeNoArrowsHandling =
+                VisioAutomation.Analyzers.EdgeNoArrowsHandling.IncludeEdgesForBothDirections;
 
             var tc_edges_0 = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options1);
             var tc_edges_1 = VisioAutomation.Analyzers.ConnectionAnalyzer.GetDirectedEdgesTransitive(page, options2);
@@ -54,7 +55,7 @@ namespace VSamples.Samples.Misc
             var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
             var sb0 = new System.Text.StringBuilder();
             sb0.AppendLine("Connections");
-            
+
             foreach (var e in normal_edges)
             {
                 string s = string.Format("{0} - {1}", e.From.Text, e.To.Text);
@@ -66,7 +67,7 @@ namespace VSamples.Samples.Misc
             var legend1 = page.DrawRectangle(6.5, 0, 8.5, 6);
             var sb1 = new System.Text.StringBuilder();
             sb1.AppendLine("Transitive closure (treat edges as bidirectional)");
-            
+
             foreach (var e in tc_edges_1)
             {
                 string s = string.Format("{0} -> {1}", e.From.Text, e.To.Text);

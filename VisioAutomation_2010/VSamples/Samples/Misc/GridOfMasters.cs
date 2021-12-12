@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Misc
 {
-    public  class GridOfMasters : SampleMethodBase
+    public class GridOfMasters : SampleMethodBase
     {
         public override void RunSample()
         {
@@ -15,7 +15,7 @@ namespace VSamples.Samples.Misc
 
             // Resize the page to a sqaure
             var page_size = new VA.Core.Size(4, 4);
-            SampleEnvironment.SetPageSize(page,page_size);
+            SampleEnvironment.SetPageSize(page, page_size);
 
             // Load the Stencil
             var application = page.Application;
@@ -28,12 +28,12 @@ namespace VSamples.Samples.Misc
             int num_cols = 10;
             int num_rows = 10;
 
-            var centerpoints = new List<VA.Core.Point>(num_rows*num_cols);
+            var centerpoints = new List<VA.Core.Point>(num_rows * num_cols);
             foreach (var row in Enumerable.Range(0, num_rows))
             {
                 foreach (var col in Enumerable.Range(0, num_cols))
                 {
-                    var p = new VA.Core.Point(row*1.0, col*1.0);
+                    var p = new VA.Core.Point(row * 1.0, col * 1.0);
                     centerpoints.Add(p);
                 }
             }
@@ -43,7 +43,7 @@ namespace VSamples.Samples.Misc
             // Draw the masters
             var shapeids = page.DropManyU(masters, centerpoints);
 
-            var bordersize = new VA.Core.Size(1,1);
+            var bordersize = new VA.Core.Size(1, 1);
             page.ResizeToFitContents(bordersize);
         }
     }

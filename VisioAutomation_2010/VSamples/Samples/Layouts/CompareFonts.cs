@@ -4,22 +4,11 @@ using VisioAutomation.Extensions;
 using VSamples.Samples.Misc;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VAM=VisioAutomation.Models;
+using VAM = VisioAutomation.Models;
 
 namespace VSamples.Samples.Layouts
 {
-    public static class LH
-    {
-        public static VAM.Layouts.Box.Box AddNodeEx(this VAM.Layouts.Box.Container p, double w, double h, string s)
-        {
-            var box = p.AddBox(w, h);
-            var node_data = new CompareFonts.NodeData();
-            node_data.Text = s;
-            box.Data = node_data;
-            return box;
-        }
-    }
-    public  class CompareFonts : SampleMethodBase
+    public class CompareFonts : SampleMethodBase
     {
         public class NodeData
         {
@@ -35,7 +24,6 @@ namespace VSamples.Samples.Layouts
                 this.Cells = new VAM.Dom.ShapeCells();
             }
         }
-
 
 
         public override void RunSample()
@@ -93,12 +81,12 @@ namespace VSamples.Samples.Layouts
                 var font_vox_data = (NodeData) font_box.Data;
                 if (font_vox_data != null)
                 {
-                    font_vox_data.Render = false;                   
+                    font_vox_data.Render = false;
                 }
 
                 int numcols = 17;
                 int numrows = 5;
-                int numcells = numcols*numrows;
+                int numcells = numcols * numrows;
 
 
                 foreach (int row in Enumerable.Range(0, numrows))
@@ -112,7 +100,7 @@ namespace VSamples.Samples.Layouts
 
                     foreach (int col in Enumerable.Range(0, numcols))
                     {
-                        int charindex = (col + (numcols*row))%numcells;
+                        int charindex = (col + (numcols * row)) % numcells;
                         string curchar = samplechars[charindex];
                         var cell_box = row_box.AddNodeEx(0.50, 0.50, curchar);
                         var cell_box_data = (NodeData) cell_box.Data;
@@ -134,7 +122,8 @@ namespace VSamples.Samples.Layouts
                 {
                     continue;
                 }
-                var node_data = (NodeData)node.Data;
+
+                var node_data = (NodeData) node.Data;
 
                 if (node_data.Render == false)
                 {
@@ -142,7 +131,7 @@ namespace VSamples.Samples.Layouts
                 }
 
                 var shape_node = domshapescol.Drop("Rectangle", "basic_u.vss", node.Rectangle);
-       
+
                 var cells = node_data.Cells;
                 if (cells == null)
                 {
@@ -159,7 +148,7 @@ namespace VSamples.Samples.Layouts
                 }
 
                 shape_node.Cells = cells;
-                shape_node.Text = new VAM.Text.Element( node_data.Text );
+                shape_node.Text = new VAM.Text.Element(node_data.Text);
             }
 
             domshapescol.Render(page);
@@ -184,11 +173,11 @@ namespace VSamples.Samples.Layouts
                 for (int j = 0; j < fontnames.Length; j++)
                 {
                     string fontname = fontnames[j];
-                    double x0 = j*w;
+                    double x0 = j * w;
 
                     var r = new VA.Core.Rectangle(x0, 0 - th, x0 + w, 0);
                     var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
-                    n1.Text = new VAM.Text.Element( fontname.ToUpper() ) ;
+                    n1.Text = new VAM.Text.Element(fontname.ToUpper());
                     n1.Cells.FillForeground = "rgb(255,255,255)";
                     n1.Cells.LineWeight = 0.0;
                     n1.Cells.LinePattern = 0;
@@ -200,8 +189,8 @@ namespace VSamples.Samples.Layouts
                 {
                     for (int i = 0; i < chunksize; i++)
                     {
-                        double x0 = j*w;
-                        double y0 = i*h*-1 - th - h;
+                        double x0 = j * w;
+                        double y0 = i * h * -1 - th - h;
 
                         var r = new VA.Core.Rectangle(x0, y0, x0 + w, y0 + h);
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
@@ -209,6 +198,7 @@ namespace VSamples.Samples.Layouts
                         {
                             n1.Text = new VAM.Text.Element(chunk[i]);
                         }
+
                         n1.CharFontName = fontnames[j];
                         n1.Cells.CharSize = "36pt";
                         n1.Cells.FillForeground = "rgb(255,255,255)";
@@ -245,7 +235,7 @@ namespace VSamples.Samples.Layouts
                     for (int i = 0; i < chunksize; i++)
                     {
                         double x0 = 0;
-                        double y0 = i*h*-1;
+                        double y0 = i * h * -1;
 
                         var r = new VA.Core.Rectangle(x0, y0, x0 + w, y0 + h);
                         var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
@@ -253,10 +243,10 @@ namespace VSamples.Samples.Layouts
                         {
                             n1.Text = new VAM.Text.Element(chunk[i]);
                             n1.Text.CharacterFormatting.Color = colors[j];
-
                         }
+
                         n1.CharFontName = fontnames[j];
-    
+
                         //n1.Cells.CharColor = "=RGB(255,0,0)";// colors[j];
                         n1.Cells.CharTransparency = 0.7;
                         n1.Cells.CharSize = "36pt";
