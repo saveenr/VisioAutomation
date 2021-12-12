@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes
         public static HyperlinkCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new HyperlinkCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
 
             record.Address = getcellvalue(nameof(Address));

@@ -44,7 +44,7 @@ namespace VisioAutomation.Text
         public static TextXFormCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
             var record = new TextXFormCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.PinX = getcellvalue(nameof(PinX));
             record.PinY = getcellvalue(nameof(PinY));

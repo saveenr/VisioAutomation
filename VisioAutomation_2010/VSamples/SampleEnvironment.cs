@@ -1,6 +1,6 @@
 ﻿using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 
 namespace VSamples
 {
@@ -12,7 +12,7 @@ namespace VSamples
         {
             get
             {
-                if (SampleEnvironment._app== null)
+                if (SampleEnvironment._app == null)
                 {
                     // there is no application object associated with
                     // this session, so create one
@@ -36,8 +36,9 @@ namespace VSamples
                         // If a COMException is thrown, this indicates that the
                         // application object is invalid, so create a new one
                         SampleEnvironment.create_new_app_instance();
-                    }                   
+                    }
                 }
+
                 return SampleEnvironment._app;
             }
         }

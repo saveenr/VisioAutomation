@@ -1,49 +1,82 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using VSamples.Samples.Developer;
+using VSamples.Samples.Layouts;
+using VSamples.Samples.Misc;
+using VSamples.Samples.Text;
+using ProgressBar = VSamples.Samples.Misc.ProgressBar;
 
 namespace VSamples
 {
     public partial class FormSampleRunner : Form
     {
-        private readonly List<SampleMethod> _samplemethods = new List<SampleMethod>();
-        private readonly Dictionary<string, SampleMethod> _dic = new Dictionary<string, SampleMethod>();
+        private readonly Dictionary<string, SampleMethodBase> _dic = new Dictionary<string, SampleMethodBase>();
 
         public FormSampleRunner()
         {
             this.InitializeComponent();
 
-            var all_types = typeof (Program).Assembly.GetExportedTypes();
-            var public_sample_classes = all_types
-                .Where(t => t.IsPublic)
-                .Where(t => t.IsClass)
-                .Where(t => t.Name.Contains("Sample"))
-                .OrderBy(t => t.Name)
-                .ToList();
+            var methods = new SampleMethods();
+
+            var sm1 = methods.AddEx(new DocumentScriptingAPI());
+            var sm2 = methods.AddEx(new DocumentVisioInterop());
+            var sm3 = methods.AddEx(new DiagramVANamespaces());
+            var sm4 = methods.AddEx(new DiagramVAClasses());
+
+            var sm5 = methods.AddEx(new SendConnectorsToBack());
+            var sm6 = methods.AddEx(new GradientTransparencies());
+            var sm7 = methods.AddEx(new GridOfMasters());
+
+            var sm8 = methods.AddEx(new BoxLayoutSimple());
+            var sm9 = methods.AddEx(new BoxLayoutTwoLevelGrouping());
+
+            var sm10 = methods.AddEx(new CompareFonts());
+
+            var sm11 = methods.AddEx(new Container1());
+            var sm12 = methods.AddEx(new DirectedGraphViaMsagl());
+            var sm13 = methods.AddEx(new DirectedGraphViaVisio());
+            
+            var sm14 = methods.AddEx(new ColorGrid());
+
+            var sm16 = methods.AddEx(new TreeWithTwoPassLayoutAndFormatting());
+
+            var sm17 = methods.AddEx(new SetCustomProperties());
+
+            var sm19 = methods.AddEx(new MonitorResolutions());
+            var sm20 = methods.AddEx(new AllGradients());
+            var sm21 = methods.AddEx(new Spirograph());
+            var sm22 = methods.AddEx(new ProgressBar());
+            var sm23 = methods.AddEx(new BezierCircle());
+            var sm24 = methods.AddEx(new BezierEllipse());
+            var sm25 = methods.AddEx(new BezierSimple());
+            var sm26 = methods.AddEx(new Nurbs1());
+            var sm27 = methods.AddEx(new Nurbs2());
+
+            var sm29 = methods.AddEx(new OrgChart1());
+
+
+            var sm30 = methods.AddEx(new TextMarkup1());
+            var sm31 = methods.AddEx(new TextMarkup2());
+            var sm32 = methods.AddEx(new TextMarkup3());
+            var sm33 = methods.AddEx(new TextMarkup4());
+            var sm34 = methods.AddEx(new TextMarkup5());
+
+            var sm35 = methods.AddEx(new NonRotatingText());
+            var sm36 = methods.AddEx(new TextFields());
+            var sm37 = methods.AddEx(new PathAnalysisSamples());
+
+
 
             var names = new List<string>();
-            foreach (var t in public_sample_classes)
+
+
+            foreach (var method in methods)
             {
-                var methods = t.GetMethods()
-                    .Where(m => m.IsPublic)
-                    .Where(m => m.IsStatic)
-                    .Where(m => !m.GetParameters().Any())
-                    .OrderBy(m => m.Name);
-
-                foreach (var m in methods)
-                {
-                    string name = string.Format("{0} / {1}", t.Name, m.Name);
-                    names.Add(name);
-
-                    var item = new SampleMethod();
-                    item.Name = name;
-                    item.Method = m;
-
-                    this._samplemethods.Add(item);
-
-                    this._dic[name] = item;
-                }
+                names.Add(method.Name);
+                this._dic[method.Name] = method;
             }
+            names = names.OrderBy(i => i).ToList();
 
             var prev_names = this.GetPreviouslySelectedSamples();
 
@@ -51,6 +84,7 @@ namespace VSamples
             {
                 bool ischecked = prev_names.Contains(name);
                 this.checkedListBox1.Items.Add(name, ischecked);
+
             }
 
             const bool autorun = false;
@@ -90,11 +124,11 @@ namespace VSamples
             {
                 try
                 {
-                    selectedMethod.Run();
+                    selectedMethod.RunSample();
                 }
                 catch (System.Exception)
                 {
-                    System.Console.WriteLine("Caught Exception for {0}", selectedMethod.Name);
+                    System.Console.WriteLine("Caught Exception for {0}", selectedMethod.GetType());
                     break;
                 }
             }

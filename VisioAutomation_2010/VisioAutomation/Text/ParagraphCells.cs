@@ -61,7 +61,7 @@ namespace VisioAutomation.Text
 
         private static ParagraphCells RowToRecord(DataRow<string> row, DataColumns cols)
         {
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
             var record = new ParagraphCells();
 
             record.IndentFirst = getcellvalue(nameof(IndentFirst));

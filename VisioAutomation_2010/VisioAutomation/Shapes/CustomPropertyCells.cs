@@ -176,7 +176,7 @@ namespace VisioAutomation.Shapes
         public static CustomPropertyCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new CustomPropertyCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.Value = getcellvalue(nameof(Value));
             record.Calendar = getcellvalue(nameof(Calendar));

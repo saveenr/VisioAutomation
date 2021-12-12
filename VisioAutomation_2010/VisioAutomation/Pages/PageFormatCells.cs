@@ -59,7 +59,7 @@ namespace VisioAutomation.Pages
         public static PageFormatCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new PageFormatCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.DrawingScale = getcellvalue(nameof(DrawingScale));
             record.DrawingScaleType = getcellvalue(nameof(DrawingScaleType));

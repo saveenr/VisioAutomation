@@ -11,9 +11,14 @@ namespace VisioAutomation.ShapeSheet.CellRecords
             return new CellMetadata(name, src, value.Value);
         }
 
-        internal static System.Func<string, string> getvalueforcol(Data.DataRow<string> row, Data.DataColumns cols)
+        internal static System.Func<string, string> getvalfromrowfunc(Data.DataRow<string> row, Data.DataColumns cols)
         {
-            return (s) => row[cols[s].Ordinal];
+            string func(string s)
+            {
+                 return row[cols[s].Ordinal];
+            }
+
+            return func;
         }
     }
 }

@@ -11,6 +11,13 @@
     public struct CellValue
     {
         private readonly string _stringval;
+        private static string str_const_true = "TRUE";
+        private static string str_const_false = "FALSE";
+        private static char _char_equalssign = '=';
+        private static char _char_doublequote = '\"';
+        private static string _str_doublequote = "\"";
+        private static string _str_twodoublequotes = "\"\"";
+
         public string Value => this._stringval;
         public bool HasValue => this._stringval != null;
         public override string ToString() => this.Value;
@@ -34,7 +41,7 @@
 
         public CellValue(bool value)
         {
-            this._stringval = value ? "TRUE" : "FALSE";
+            this._stringval = value ? str_const_true : str_const_false;
         }
 
         public static implicit operator CellValue(string value)
@@ -78,62 +85,27 @@
             
             //  if noquote==false) replace " with "" and surround with " the result
 
-            if (string.IsNullOrEmpty(text) || text[0] == '=')
+            if (string.IsNullOrEmpty(text) || text[0] == _char_equalssign)
             {
                 return text;
             }
 
             // it's quoted already, just return it
-            if (text[0] == '\"' && text[text.Length-1]=='\"')
+            if (text[0] == _char_doublequote && text[text.Length-1]==_char_doublequote)
             {
                 return text;
             }
 
             if (quote)
             {
-                string str_quoted = text.Replace("\"", "\"\"");
+
+                string str_quoted = text.Replace(_str_doublequote, _str_twodoublequotes);
                 str_quoted = string.Format("\"{0}\"", str_quoted);
                 return str_quoted;
             }
 
             // For all other cases, just return the input string
             return text;
-        }
-
-        internal bool ValidateValue(bool quote_required)
-        {
-            string text = this.Value;
-
-            if (text == null)
-            {
-                return true;
-            }
-
-            if (text.Length == 0)
-            {
-                return true;
-            }
-
-            if (text[0] == '=')
-            {
-                return true;
-            }
-
-            if (text[0] == '\"')
-            {
-                if (text[text.Length - 1] != '\"')
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (quote_required)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }

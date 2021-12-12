@@ -56,7 +56,7 @@ namespace VisioAutomation.Pages
         public static PagePrintCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var cells = new PagePrintCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
 
             cells.LeftMargin = getcellvalue(nameof(LeftMargin));

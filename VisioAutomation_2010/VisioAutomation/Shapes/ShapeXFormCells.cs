@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes
         public static ShapeXFormCells RowToRecord(VASS.Data.DataRow<string> row, VASS.Data.DataColumns cols)
         {
             var record = new ShapeXFormCells();
-            var getcellvalue = getvalueforcol(row, cols);
+            var getcellvalue = getvalfromrowfunc(row, cols);
 
             record.PinX = getcellvalue(nameof(PinX));
             record.PinY = getcellvalue(nameof(PinY));
