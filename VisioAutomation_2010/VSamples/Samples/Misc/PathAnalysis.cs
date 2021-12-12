@@ -1,11 +1,10 @@
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VSamples
+namespace VSamples.Samples.Misc
 {
-    public static class PathAnalysisSamples
+    public class PathAnalysisSamples : SampleMethodBase
     {
-        public static void PathAnalysis()
+        public override void RunSample()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             page.DrawRectangle(0, 0, 1, 1);
@@ -31,7 +30,7 @@ namespace VSamples
             var connector = connec_stencil.Masters["Dynamic Connector"];
 
             // connect shapes - but leave s0 alone
-            var dir = IVisio.VisAutoConnectDir.visAutoConnectDirNone;
+            var dir = Microsoft.Office.Interop.Visio.VisAutoConnectDir.visAutoConnectDirNone;
             s1.AutoConnect(s2, dir, null);
             s2.AutoConnect(s3, dir, null);
             s3.AutoConnect(s2, dir, null);

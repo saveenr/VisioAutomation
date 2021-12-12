@@ -64,6 +64,7 @@ namespace VSamples
 
             var sm35 = methods.AddEx(new NonRotatingText());
             var sm36 = methods.AddEx(new TextFields());
+            var sm37 = methods.AddEx(new PathAnalysisSamples());
 
 
 

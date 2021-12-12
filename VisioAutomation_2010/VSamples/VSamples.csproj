@@ -99,13 +99,18 @@
     <Compile Include="Samples\Layouts\BoxLayoutSimple.cs" />
     <Compile Include="Samples\Layouts\BoxLayoutTwoLevelGrouping.cs" />
     <Compile Include="Samples\Layouts\BoxLayoutShared.cs" />
+    <Compile Include="Samples\Misc\BezierCircle.cs" />
+    <Compile Include="Samples\Misc\BezierEllipse.cs" />
+    <Compile Include="Samples\Misc\BezierSimple.cs" />
     <Compile Include="Samples\Misc\MonitorResolutions.cs" />
     <Compile Include="Samples\Layouts\Util.cs" />
     <Compile Include="Samples\Misc\LinqUtil.cs" />
     <Compile Include="Samples\Layouts\TreeWithTwoPassLayoutAndFormatting.cs" />
+    <Compile Include="Samples\Misc\Nurbs1.cs" />
+    <Compile Include="Samples\Misc\Nurbs2.cs" />
     <Compile Include="Samples\Misc\Spirograph.cs" />
     <Compile Include="Samples\Misc\AllGradients.cs" />
-    <Compile Include="ResolutionInfo.cs" />
+    <Compile Include="Samples\Misc\ResolutionInfo.cs" />
     <Compile Include="Samples\Text\NonRotatingText.cs" />
     <Compile Include="Samples\Text\TextExtensions.cs" />
     <Compile Include="Samples\Layouts\ColorGrid.cs" />
@@ -133,13 +138,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SampleMethod.cs" />
-    <Compile Include="Samples\Misc\SimpleGeometrySamples.cs" />
     <Compile Include="Samples\Misc\ProgressBar.cs" />
     <Compile Include="Samples\Misc\OrgChart1.cs" />
     <Compile Include="Samples\Misc\GradientTransparencies.cs" />
     <Compile Include="Samples\Misc\SetCustomProperties.cs" />
     <Compile Include="Samples\Misc\GridOfMasters.cs" />
-    <Compile Include="PathAnalysis.cs" />
+    <Compile Include="Samples\Misc\PathAnalysis.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleEnvironment.cs" />
