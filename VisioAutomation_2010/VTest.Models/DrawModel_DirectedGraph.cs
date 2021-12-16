@@ -1,5 +1,3 @@
-using VisioAutomation.Shapes;
-using VisioScripting.Loaders;
 using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VADG = VisioAutomation.Models.Layouts.DirectedGraph;
@@ -57,10 +55,10 @@ namespace VTest.Models
             var n0 = d.AddNode("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
             n0.Size = new VA.Core.Size(3, 2);
-            n0.CustomProperties = new CustomPropertyDictionary();
-            n0.CustomProperties["p1"] = new CustomPropertyCells("\"v1\"");
-            n0.CustomProperties["p2"] = new CustomPropertyCells("\"v2\"");
-            n0.CustomProperties["p3"] = new CustomPropertyCells("\"v3\"");
+            n0.CustomProperties = new VisioAutomation.Shapes.CustomPropertyDictionary();
+            n0.CustomProperties["p1"] = new VisioAutomation.Shapes.CustomPropertyCells("\"v1\"");
+            n0.CustomProperties["p2"] = new VisioAutomation.Shapes.CustomPropertyCells("\"v2\"");
+            n0.CustomProperties["p3"] = new VisioAutomation.Shapes.CustomPropertyCells("\"v3\"");
 
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -71,7 +69,7 @@ namespace VTest.Models
             renderer.Render(page1, d);
 
             MUT.Assert.IsNotNull(n0.VisioShape);
-            var props_dic = CustomPropertyHelper.GetDictionary(n0.VisioShape, VisioAutomation.Core.CellValueType.Formula);
+            var props_dic = VisioAutomation.Shapes.CustomPropertyHelper.GetDictionary(n0.VisioShape, VisioAutomation.Core.CellValueType.Formula);
 
             MUT.Assert.IsTrue(props_dic.Count>=3);
             MUT.Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Value);
@@ -182,7 +180,7 @@ namespace VTest.Models
         private void draw_directed_graph(VisioScripting.Client client, string dg_text)
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);
-            var dgdoc = DirectedGraphDocumentLoader.LoadFromXml(client, dg_xml);
+            var dgdoc = VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, dg_xml);
 
             // TODO: Investigate if this this special case for Visio 2013 can be removed
             // this is a temporary fix to handle the fact that server_u.vss in Visio 2013 doesn't result in server_u.vssx 

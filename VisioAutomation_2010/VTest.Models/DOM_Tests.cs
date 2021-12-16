@@ -1,5 +1,4 @@
-﻿using VisioAutomation.Exceptions;
-using VisioAutomation.Extensions;
+﻿using VisioAutomation.Extensions;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VADOM = VisioAutomation.Models.Dom;
 using VA = VisioAutomation;
@@ -362,7 +361,7 @@ namespace VTest.Models
             {
                 page = page_node.Render(doc);
             }
-            catch (AutomationException)
+            catch (VA.Exceptions.AutomationException)
             {
                 caught = true;
             }

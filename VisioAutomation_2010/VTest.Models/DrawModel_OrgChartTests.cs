@@ -1,6 +1,5 @@
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioScripting.Loaders;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VAORGCHART = VisioAutomation.Models.Documents.OrgCharts;
@@ -30,7 +29,7 @@ namespace VTest.Models
         private void draw_org_chart(VisioScripting.Client client, string text)
         {
             var xmldoc = SXL.XDocument.Parse(text);
-            var orgchart = OrgChartDocumentLoader.LoadFromXml(client, xmldoc);
+            var orgchart = VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xmldoc);
 
             client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
         }
