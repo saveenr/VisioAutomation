@@ -135,7 +135,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SampleMethod.cs" />
     <Compile Include="Samples\Misc\ProgressBar.cs" />
     <Compile Include="Samples\Misc\OrgChart1.cs" />
     <Compile Include="Samples\Misc\GradientTransparencies.cs" />

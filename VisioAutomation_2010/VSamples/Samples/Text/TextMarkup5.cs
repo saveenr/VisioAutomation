@@ -2,7 +2,7 @@
 {
     public  class TextMarkup5 : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 

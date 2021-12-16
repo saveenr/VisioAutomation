@@ -17,6 +17,6 @@
             }
         }
 
-        public abstract void RunSample();
+        public abstract void Run();
     }
 }

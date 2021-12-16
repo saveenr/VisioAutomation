@@ -5,7 +5,7 @@ namespace VSamples.Samples.Misc
 {
     public class BezierSimple : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             // Draw a Simple Bezier curve
 

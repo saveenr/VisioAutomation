@@ -4,7 +4,7 @@ namespace VSamples.Samples.Misc
 {
     public class SetCustomProperties : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 

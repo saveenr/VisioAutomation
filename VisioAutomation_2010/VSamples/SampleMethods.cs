@@ -8,7 +8,7 @@ namespace VSamples
         {
         }
 
-        public SampleMethodBase AddEx(SampleMethodBase sm)
+        public SampleMethodBase AddSample(SampleMethodBase sm)
         {
             this.Add(sm);
             return sm;

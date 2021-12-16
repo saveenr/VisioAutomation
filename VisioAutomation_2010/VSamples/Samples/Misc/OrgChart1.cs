@@ -6,7 +6,7 @@ namespace VSamples.Samples.Misc
 {
     public class OrgChart1 : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             // This creates a new document
             var orgchart = new OCMODEL.OrgChartDocument();

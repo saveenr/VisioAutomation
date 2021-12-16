@@ -6,7 +6,7 @@ namespace VSamples.Samples.Layouts
 {
     public class BoxLayoutTwoLevelGrouping : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             int num_types = 10;
             int max_properties = 50;

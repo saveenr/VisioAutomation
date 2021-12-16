@@ -2,7 +2,7 @@
 {
     public class BoxLayoutSimple : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             // Create a blank canvas in Visio 
             var app = SampleEnvironment.Application;

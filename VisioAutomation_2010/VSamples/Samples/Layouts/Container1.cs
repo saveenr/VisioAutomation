@@ -4,7 +4,7 @@ namespace VSamples.Samples.Layouts
 {
     public class Container1 : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             var m = new ContainerLayout();
 

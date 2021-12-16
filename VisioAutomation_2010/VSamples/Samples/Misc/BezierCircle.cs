@@ -4,7 +4,7 @@ namespace VSamples.Samples.Misc
 {
     public class BezierCircle : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             // Draw an approximation of a circle using Bezier Curves
 

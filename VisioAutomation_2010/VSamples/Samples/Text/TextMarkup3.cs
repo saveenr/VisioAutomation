@@ -2,7 +2,7 @@
 {
     public  class TextMarkup3 : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var segoe_ui = page.Document.Fonts["Segoe UI"];

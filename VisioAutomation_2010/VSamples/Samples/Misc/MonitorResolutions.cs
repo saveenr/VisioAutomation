@@ -6,7 +6,7 @@ namespace VSamples.Samples.Misc
 {
     public class MonitorResolutions : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             var resolutions = new List<ResolutionInfo>
             {

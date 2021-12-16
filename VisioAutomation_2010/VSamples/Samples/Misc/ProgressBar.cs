@@ -5,7 +5,7 @@ namespace VSamples.Samples.Misc
 {
     public class ProgressBar : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             var page_a = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 

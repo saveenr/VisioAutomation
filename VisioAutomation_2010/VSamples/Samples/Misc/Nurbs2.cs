@@ -5,7 +5,7 @@ namespace VSamples.Samples.Misc
 {
     public class Nurbs2 : SampleMethodBase
     {
-        public override void RunSample()
+        public override void Run()
         {
             // Draw a simple NURBS
             // Example from Graham Wideman's book
