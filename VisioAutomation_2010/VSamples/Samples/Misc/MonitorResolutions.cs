@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Misc
 {
-    public class MonitorResolutions : SampleMethodBase
+    public class MonitorResolutions : SampleMethod
     {
         public override void Run()
         {

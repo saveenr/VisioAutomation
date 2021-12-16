@@ -8,7 +8,7 @@ using VAM = VisioAutomation.Models;
 
 namespace VSamples.Samples.Layouts
 {
-    public class CompareFonts : SampleMethodBase
+    public class CompareFonts : SampleMethod
     {
         public class NodeData
         {

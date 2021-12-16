@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Misc
 {
-    public class ProgressBar : SampleMethodBase
+    public class ProgressBar : SampleMethod
     {
         public override void Run()
         {

@@ -6,7 +6,7 @@ using VAM = VisioAutomation.Models;
 
 namespace VSamples.Samples.Misc
 {
-    public class GradientTransparencies : SampleMethodBase
+    public class GradientTransparencies : SampleMethod
     {
         public override void Run()
         {

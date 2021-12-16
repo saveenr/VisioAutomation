@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VSamples.Samples.Misc
 {
-    public class SendConnectorsToBack : SampleMethodBase
+    public class SendConnectorsToBack : SampleMethod
     {
         public override void Run()
         {

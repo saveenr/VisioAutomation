@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Misc
 {
-    public class BezierSimple : SampleMethodBase
+    public class BezierSimple : SampleMethod
     {
         public override void Run()
         {

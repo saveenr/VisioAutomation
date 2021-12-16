@@ -2,7 +2,7 @@
 
 namespace VSamples.Samples.Misc
 {
-    public class BezierCircle : SampleMethodBase
+    public class BezierCircle : SampleMethod
     {
         public override void Run()
         {

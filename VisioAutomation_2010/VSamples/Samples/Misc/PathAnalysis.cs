@@ -2,7 +2,7 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Misc
 {
-    public class PathAnalysisSamples : SampleMethodBase
+    public class PathAnalysisSamples : SampleMethod
     {
         public override void Run()
         {

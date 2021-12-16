@@ -3,7 +3,7 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Misc
 {
-    public class Nurbs2 : SampleMethodBase
+    public class Nurbs2 : SampleMethod
     {
         public override void Run()
         {

@@ -4,7 +4,7 @@ using VADOM = VisioAutomation.Models.Dom;
 
 namespace VSamples.Samples.Layouts
 {
-    public class TreeWithTwoPassLayoutAndFormatting : SampleMethodBase
+    public class TreeWithTwoPassLayoutAndFormatting : SampleMethod
     {
         public override void Run()
         {

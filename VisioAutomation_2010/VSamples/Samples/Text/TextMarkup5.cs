@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Samples.Text
 {
-    public  class TextMarkup5 : SampleMethodBase
+    public  class TextMarkup5 : SampleMethod
     {
         public override void Run()
         {

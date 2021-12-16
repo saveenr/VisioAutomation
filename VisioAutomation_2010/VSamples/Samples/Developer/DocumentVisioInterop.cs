@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Samples.Developer
 {
-    public  class DocumentVisioInterop : SampleMethodBase
+    public  class DocumentVisioInterop : SampleMethod
     {
 
 

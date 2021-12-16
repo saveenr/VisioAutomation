@@ -6,7 +6,7 @@ namespace VSamples
 {
     public partial class FormSampleRunner : Form
     {
-        private readonly Dictionary<string, SampleMethodBase> dic_name_to_sample = new Dictionary<string, SampleMethodBase>();
+        private readonly Dictionary<string, SampleMethod> dic_name_to_sample = new Dictionary<string, SampleMethod>();
 
         public FormSampleRunner()
         {

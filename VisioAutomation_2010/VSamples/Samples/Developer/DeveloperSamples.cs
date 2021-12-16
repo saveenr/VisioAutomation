@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Samples.Developer
 {
-    public  class DiagramVAClasses : SampleMethodBase
+    public  class DiagramVAClasses : SampleMethod
     {
 
         public override void Run()

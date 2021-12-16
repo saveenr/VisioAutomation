@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Samples.Layouts
 {
-    public class BoxLayoutSimple : SampleMethodBase
+    public class BoxLayoutSimple : SampleMethod
     {
         public override void Run()
         {

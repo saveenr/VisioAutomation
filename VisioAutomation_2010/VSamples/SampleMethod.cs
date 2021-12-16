@@ -1,6 +1,6 @@
 ﻿namespace VSamples
 {
-    public abstract class SampleMethodBase
+    public abstract class SampleMethod
     {
         private string name;
 

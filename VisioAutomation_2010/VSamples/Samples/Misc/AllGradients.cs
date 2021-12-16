@@ -4,7 +4,7 @@ using VisioAutomation.ShapeSheet.Writers;
 
 namespace VSamples.Samples.Misc
 {
-    public class AllGradients : SampleMethodBase
+    public class AllGradients : SampleMethod
     {
         public override void Run()
         {

@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Samples.Text
 {
-    public  class TextFields : SampleMethodBase
+    public  class TextFields : SampleMethod
     {
 
         public override void Run()

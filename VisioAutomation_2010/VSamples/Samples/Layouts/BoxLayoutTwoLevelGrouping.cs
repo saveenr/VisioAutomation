@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Layouts
 {
-    public class BoxLayoutTwoLevelGrouping : SampleMethodBase
+    public class BoxLayoutTwoLevelGrouping : SampleMethod
     {
         public override void Run()
         {

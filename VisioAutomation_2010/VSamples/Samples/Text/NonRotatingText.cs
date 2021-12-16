@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Samples.Text
 {
-    public  class NonRotatingText : SampleMethodBase
+    public  class NonRotatingText : SampleMethod
     {
         public override void Run()
         {

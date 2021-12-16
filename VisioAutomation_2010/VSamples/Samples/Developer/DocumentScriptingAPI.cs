@@ -1,6 +1,6 @@
 ﻿namespace VSamples.Samples.Developer
 {
-    public class DocumentScriptingAPI : SampleMethodBase
+    public class DocumentScriptingAPI : SampleMethod
     {
         public override  void Run()
         {

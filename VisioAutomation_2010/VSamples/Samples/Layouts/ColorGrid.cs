@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Layouts
 {
-    public class ColorGrid : SampleMethodBase
+    public class ColorGrid : SampleMethod
 
     {
         public override void Run()

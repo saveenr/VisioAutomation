@@ -4,7 +4,7 @@ using OCMODEL = VisioAutomation.Models.Documents.OrgCharts;
 
 namespace VSamples.Samples.Misc
 {
-    public class OrgChart1 : SampleMethodBase
+    public class OrgChart1 : SampleMethod
     {
         public override void Run()
         {

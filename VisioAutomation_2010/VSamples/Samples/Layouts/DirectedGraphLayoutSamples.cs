@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Layouts
 {
-    public class DirectedGraphViaVisio : SampleMethodBase
+    public class DirectedGraphViaVisio : SampleMethod
     {
         public override void Run()
         {

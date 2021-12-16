@@ -2,7 +2,7 @@
 
 namespace VSamples.Samples.Layouts
 {
-    public class DirectedGraphViaMsagl : SampleMethodBase
+    public class DirectedGraphViaMsagl : SampleMethod
     {
         public override void Run()
         {
