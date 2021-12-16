@@ -25,9 +25,9 @@ namespace VSamples
             }
         }
 
-        private static SampleMethods AddSampleMethods()
+        private static List<SampleMethod> AddSampleMethods()
         {
-            var methods = new SampleMethods();
+            var methods = new List<SampleMethod>();
 
 
             methods.Add(new Samples.Developer.DiagramVAClasses());

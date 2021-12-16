@@ -92,7 +92,6 @@
     <Compile Include="Samples\Layouts\Container1.cs" />
     <Compile Include="Samples\Layouts\DirectedGraphViaMsagl.cs" />
     <Compile Include="SampleMethod.cs" />
-    <Compile Include="SampleMethods.cs" />
     <Compile Include="Samples\Developer\DocumentScriptingAPI.cs" />
     <Compile Include="Samples\Developer\DocumentVisioInterop.cs" />
     <Compile Include="Samples\Developer\DiagramVANamespaces.cs" />
