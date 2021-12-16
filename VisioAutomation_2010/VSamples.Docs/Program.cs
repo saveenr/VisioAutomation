@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VSamples.Docs.Samples;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VSamples.Docs
 {
@@ -11,10 +12,10 @@ namespace VSamples.Docs
 
             var doc = app.Documents.Add("");
 
-            Docs.CustomProperties_Samples.Set_Custom_Property_on_Shape(doc);
-            Docs.CustomProperties_Samples.Set_Custom_Property_on_multiple_Shapes(doc);
-            Docs.Dropping_Shapes_Using_Masters.One_shape_at_a_time(doc);
-            Docs.Dropping_Shapes_Using_Masters.Multiple_shapes_at_a_time(doc);
+            SetCustomProperties.Set_Custom_Property_on_Shape(doc);
+            SetCustomProperties.Set_Custom_Property_on_multiple_Shapes(doc);
+            DropMasters.One_shape_at_a_time(doc);
+            DropMasters.Multiple_shapes_at_a_time(doc);
 
         }
     }
