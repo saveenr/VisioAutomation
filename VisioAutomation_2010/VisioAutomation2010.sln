@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Models", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTest", "VTest\VTest.csproj", "{F04E9277-48D2-4822-9AE6-E7E6ADB262C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vtest.Models", "VTest.Models\Vtest.Models.csproj", "{E151ADA1-7DE9-489C-86EC-29E552B95605}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTest.Models", "VTest.Models\VTest.Models.csproj", "{E151ADA1-7DE9-489C-86EC-29E552B95605}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTest.Scripting", "VTest.Scripting\VTest.Scripting.csproj", "{FB9BBF5F-3B40-4180-9D1D-55FABF5B0D59}"
 EndProject
