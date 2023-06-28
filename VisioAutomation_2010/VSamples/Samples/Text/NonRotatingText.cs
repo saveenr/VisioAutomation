@@ -1,8 +1,8 @@
 ﻿namespace VSamples.Samples.Text
 {
-    public  class NonRotatingText : SampleMethodBase
+    public  class NonRotatingText : SampleMethod
     {
-        public override void RunSample()
+        public override void Run()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var s0 = page.DrawRectangle(1, 1, 4, 4);

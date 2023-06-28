@@ -1,9 +1,9 @@
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VSamples.Docs
+namespace VSamples.Docs.Samples
 {
-    public static class Dropping_Shapes_Using_Masters
+    public static class DropMasters
     {
         public static void One_shape_at_a_time(IVisio.Document doc)
         {

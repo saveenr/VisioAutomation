@@ -5,9 +5,9 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Misc
 {
-    public class GridOfMasters : SampleMethodBase
+    public class GridOfMasters : SampleMethod
     {
-        public override void RunSample()
+        public override void Run()
         {
             // http://blogs.msdn.com/saveenr/archive/2008/08/06/visioautoext-simplifying-dropmany-to-quickly-draw-a-grid.aspx
 

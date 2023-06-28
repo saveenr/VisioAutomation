@@ -1,10 +1,10 @@
 ﻿namespace VSamples.Samples.Developer
 {
-    public  class DocumentVisioInterop : SampleMethodBase
+    public  class DocumentVisioInterop : SampleMethod
     {
 
 
-        public override void RunSample()
+        public override void Run()
         {
             var app = SampleEnvironment.Application;
             var client = new VisioScripting.Client(app);

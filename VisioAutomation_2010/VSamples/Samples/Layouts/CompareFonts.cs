@@ -8,7 +8,7 @@ using VAM = VisioAutomation.Models;
 
 namespace VSamples.Samples.Layouts
 {
-    public class CompareFonts : SampleMethodBase
+    public class CompareFonts : SampleMethod
     {
         public class NodeData
         {
@@ -26,7 +26,7 @@ namespace VSamples.Samples.Layouts
         }
 
 
-        public override void RunSample()
+        public override void Run()
         {
             var visapp = new IVisio.Application();
             var doc = visapp.Documents.Add(string.Empty);

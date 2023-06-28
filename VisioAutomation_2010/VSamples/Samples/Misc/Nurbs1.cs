@@ -3,9 +3,9 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Misc
 {
-    public class Nurbs1 : SampleMethodBase
+    public class Nurbs1 : SampleMethod
     {
-        public override void RunSample()
+        public override void Run()
         {
             // Draw a simple NURBS
             // Example from this page:http://www.robthebloke.org/opengl_programming.html

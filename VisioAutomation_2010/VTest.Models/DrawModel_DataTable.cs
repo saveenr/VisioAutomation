@@ -1,4 +1,3 @@
-using System.Data;
 using System.Linq;
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +22,7 @@ namespace VTest.Models
                     new {Name = "U", Age = 48, Score = 10}
                 };
 
-            var dt = new DataTable();
+            var dt = new System.Data.DataTable();
             dt.Columns.Add("X", typeof(string));
             dt.Columns.Add("Age", typeof(int));
             dt.Columns.Add("Score", typeof(int));

@@ -3,9 +3,9 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Misc
 {
-    public class ProgressBar : SampleMethodBase
+    public class ProgressBar : SampleMethod
     {
-        public override void RunSample()
+        public override void Run()
         {
             var page_a = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 

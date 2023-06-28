@@ -4,9 +4,9 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VSamples.Samples.Misc
 {
-    public class SendConnectorsToBack : SampleMethodBase
+    public class SendConnectorsToBack : SampleMethod
     {
-        public override void RunSample()
+        public override void Run()
         {
             var doc = SampleEnvironment.Application.ActiveDocument;
             var pages = doc.Pages;

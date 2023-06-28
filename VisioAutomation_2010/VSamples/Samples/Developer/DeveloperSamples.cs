@@ -1,9 +1,9 @@
 ﻿namespace VSamples.Samples.Developer
 {
-    public  class DiagramVAClasses : SampleMethodBase
+    public  class DiagramVAClasses : SampleMethod
     {
 
-        public override void RunSample()
+        public override void Run()
         {
             var app = SampleEnvironment.Application;
             var client = new VisioScripting.Client(app);

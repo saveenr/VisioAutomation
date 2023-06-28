@@ -2,9 +2,9 @@
 
 namespace VSamples.Samples.Misc
 {
-    public class BezierEllipse : SampleMethodBase
+    public class BezierEllipse : SampleMethod
     {
-        public override void RunSample()
+        public override void Run()
         {
             // Draw an approximation of an ellipse using Bezier Curves
 

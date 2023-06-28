@@ -2,9 +2,9 @@ using VisioAutomation.Extensions;
 
 namespace VSamples.Samples.Misc
 {
-    public class PathAnalysisSamples : SampleMethodBase
+    public class PathAnalysisSamples : SampleMethod
     {
-        public override void RunSample()
+        public override void Run()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             page.DrawRectangle(0, 0, 1, 1);

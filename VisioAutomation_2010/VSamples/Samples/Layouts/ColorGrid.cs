@@ -5,10 +5,10 @@ using VA = VisioAutomation;
 
 namespace VSamples.Samples.Layouts
 {
-    public class ColorGrid : SampleMethodBase
+    public class ColorGrid : SampleMethod
 
     {
-        public override void RunSample()
+        public override void Run()
         {
             // Draws a grid rectangles and then formats the shapes
             // with different colors

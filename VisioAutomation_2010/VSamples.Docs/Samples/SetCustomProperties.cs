@@ -1,8 +1,8 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VSamples.Docs
+namespace VSamples.Docs.Samples
 {
-    public static class CustomProperties_Samples
+    public static class SetCustomProperties
     {
         public static void Set_Custom_Property_on_Shape(IVisio.Document doc)
         {
