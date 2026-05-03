@@ -197,10 +197,12 @@ In `VisioAutomation_GitBook_Docs` on `main`. **Pushed.**
 | 8f | `shapesheet/cells.md` — systemic API drift fix: `SRC` → `Src`, `VA.ShapeSheet.SRCConstants` → `VA.Core.SrcConstants`, constant names dropped underscores (`Char_Color` → `CharColor`, `FillForegnd` → `FillForeground`, etc.); deleted whole "Converting between cell names and (s,r,c)" section (documented non-existent `ShapeSheetHelper.GetSRCFromName`) | ✅ | `92104df` |
 | 8g | `shapesheet/query-the-shapesheet.md` — wrong API (`AddColumn` → `Columns.Add`), wrong type (`int[] results_bool` → `bool[]`), syntax bugs (`var query.AddColumn`, `new int { … }`), typos (`intm`, `twoc olumns`, `perfoming`, `Retieving`) | ✅ partial | `3e5b66e` |
 | 8h | `shapesheet/modify-the-shapesheet.md` — rewrote for current API: `SRCUpdate`/`SIDSRCUpdate` → `SrcWriter`/`SidSrcWriter`, `SetFormula`/`SetResult`/`Execute` → `SetValue`/`Commit(target, CellValueType)`, fix `shape.Cells["Pinx"]` → `shape.CellsU["PinX"]` | ✅ | `c1b800a` |
-| 9 | `SUMMARY.md` audit | ⬜ partial — incidental fixes in 8b deleted the `Convert values` entry; full link-target verification still pending |
-| 11a | `shapesheet/README.md` — truly empty stub (just heading); fill or drop from SUMMARY | ⬜ |
-| 11b | `classes.md` / `namespaces.md` / `related-projects.md` — diagram-only stubs; need diagram-currency verification by user (can't do from here) | ⬜ |
-| 11c | `resources/stencils-and-masters.md` — smart quotes (Word-paste artifact), `// C# Visual Studio 2010` outdated comment, duplicates the root `stencils-and-masters.md` topic with different content (consolidation candidate) | ⬜ |
+| 9 | `SUMMARY.md` link-target audit — programmatically verified all `(file.md)` targets resolve | ✅ | (no commit needed — clean) |
+| 11a | `shapesheet/README.md` — wrote a real section landing intro | ✅ | `cfc94fb` |
+| 11b | `classes.md` / `namespaces.md` / `related-projects.md` — added context paragraph above each diagram, expanded related-projects with VisioPS + PSVA. Diagram-currency still needs visual verification by user. | ✅ | `e3a514c` |
+| 11c | `resources/stencils-and-masters.md` — duplicate page deleted; SUMMARY entry removed | ✅ | `641083a` |
+
+**Section B done.** All accuracy fixes for the .NET docs are pushed.
 
 **Section B follow-ups deferred to Section C / option-2 work:**
 - `user-defined-cells.md` and `custom-properties.md` both have method-signature drift: their `.Get(shape)` and `.Set(shape, name, value, prompt)` examples don't match the actual API, which uses `.GetDictionary(shape, CellValueType)` and `.Set(shape, name, CellPropertyCells)`. The class-name renames I did fix a third of the issue; full content rewrite needed for the rest.
