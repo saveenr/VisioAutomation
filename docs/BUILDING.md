@@ -9,24 +9,25 @@ Practical notes on building the solution, running the tests, and trying things o
 - **.NET Framework reference assemblies for v4.5.** The shipping libraries target .NET Framework 4.5, but modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. Without them, neither VS nor MSBuild can build the v4.5 projects. Install a Developer Pack that covers v4.5 — see commands below. The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows.
 - **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
 
-### Installing the .NET Framework Developer Pack
+### Installing the .NET Framework 4.5.2 Developer Pack
 
-.NET Framework Developer Packs are **cumulative**: a newer pack includes reference assemblies for every prior version. So you can install the 4.5.2 pack specifically, or just install a newer one (4.6.2+) and get v4.5 ref assemblies for free.
+**.NET Framework Developer Packs are NOT cumulative** — each pack ships only its own version's reference assemblies. To build v4.5 projects you specifically need the **4.5.2 Developer Pack** (covers v4.5, v4.5.1, v4.5.2). Installing a newer pack (4.6.2 / 4.7 / 4.8) does not give you v4.5 reference assemblies.
+
+Microsoft does **not** publish a winget manifest for the 4.5.x Developer Pack — only for 4.6.2 and later. Use chocolatey or a direct download.
 
 All commands below need an **elevated shell** (the installer requires admin).
 
-**winget** (recommended — built into Windows 10/11). Microsoft only publishes winget manifests for 4.6.2 and later, so use 4.6.2 or any newer version (cumulative includes v4.5):
-
-```powershell
-winget install --id Microsoft.DotNet.Framework.DeveloperPack_4 --version 4.8.1
-```
-
-Available versions: `4.6.2`, `4.7`, `4.7.1`, `4.7.2`, `4.8`, `4.8.1`.
-
-**Chocolatey** (precise — directly installs the 4.5.2 pack):
+**Chocolatey** (recommended — matches what CI uses):
 
 ```powershell
 choco install netfx-4.5.2-devpack -y
+```
+
+If chocolatey isn't installed, one-line install:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 
 **Manual download** (no package manager needed):
