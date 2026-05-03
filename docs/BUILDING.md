@@ -30,14 +30,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 ```
 
-**Manual download** (no package manager needed):
+**Manual download** (no package manager needed): go to the official Microsoft download page and run the installer as administrator:
 
-```powershell
-$url = "https://download.microsoft.com/download/E/2/1/E21644B5-2DF2-47C2-91BD-63C560427900/NDP452-KB2901951-x86-x64-DevPack.exe"
-$out = "$env:TEMP\NDP452-DevPack.exe"
-Invoke-WebRequest -Uri $url -OutFile $out
-Start-Process -FilePath $out -ArgumentList "/q", "/norestart" -Wait
-```
+→ https://www.microsoft.com/en-us/download/details.aspx?id=42637
 
 After install, restart Visual Studio (or the Developer Command Prompt) so it picks up the new reference assemblies.
 
