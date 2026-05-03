@@ -112,8 +112,8 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 - **Effort:** S.
 
 ### Fix the misnamed PowerShell loader script ✅ done
-- **What:** [`DownloadFromPowerShellGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/DownloadFromPowerShellGallery.ps1) did not download from the PowerShell Gallery — it `Import-Module`d the local `bin\Debug` build.
-- **Resolution:** Rewrote the script to `Save-Module Visio` from PSGallery into a local `DownloadedModule/` subfolder (gitignored) and `Import-Module` that. Now serves as a one-shot release-verification helper. Documented in the file's header.
+- **What:** `DownloadFromPowerShellGallery.ps1` did not download from the PowerShell Gallery — it `Import-Module`d the local `bin\Debug` build.
+- **Resolution:** Rewrote the script to `Save-Module Visio` from PSGallery into a local `DownloadedModule/` subfolder (gitignored) and `Import-Module` that. Now serves as a one-shot release-verification helper. Renamed the file to [`LoadFromGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/LoadFromGallery.ps1) for parallelism with the other loader scripts; also renamed [`LoadFromBinDebug_ISE.ps1`](../VisioAutomation_2010/VisioPowerShell/LoadFromBinDebug.ISE.ps1) → `LoadFromBinDebug.ISE.ps1` (dot-suffix is more idiomatic than underscore).
 
 ### Publish the PowerShell module to the PowerShell Gallery
 - **What:** The module is currently distributed only by manual install (`InstallForCurrentUser.ps1`).

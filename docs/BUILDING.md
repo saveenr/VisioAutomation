@@ -106,8 +106,9 @@ nuget pack NuGet\VisioAutomation2010.nuspec
 
 ## Known rough edges (cleanup candidates for the 2026 refresh)
 
-- **Mixed target frameworks**: production projects target .NET 4.0; test projects target a mix of .NET 4.5 and .NET 4.7.2. Worth consolidating.
+See [FUTURES.md](FUTURES.md) for the full backlog and phasing. The build-relevant ones:
+
+- **Mixed target frameworks**: shipping libs are now on .NET 4.5; test projects on a mix of 4.5 and 4.7.2. Convergence on a single TFM (4.7.2) is a Phase 3 item; it also enables moving to VS 2026.
 - **MSTest is on a beta**: `MSTest.TestFramework` 2.0.0-beta2. Either pin to a current stable, or migrate to a newer test framework.
 - **`packages.config`** is still in use rather than PackageReference. Modernizing would simplify NuGet handling and CI.
-- **`DownloadFromPowerShellGallery.ps1`** is mis-named — it currently loads locally from `bin\Debug` rather than fetching from the PowerShell Gallery.
 - **No CI configuration** in the repo today. A simple GitHub Actions workflow that at least builds the solution would catch breakage early. (Tests need Visio, so they would have to run on a self-hosted Windows runner with Visio installed.)

@@ -238,6 +238,6 @@ fabric.properties
 ## VisioPowerShell helper-script downloads
 #################
 
-# DownloadFromPowerShellGallery.ps1 saves the published Visio module here for
+# LoadFromGallery.ps1 saves the published Visio module here for
 # release verification — local cache, not source.
 DownloadedModule/

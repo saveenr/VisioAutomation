@@ -149,8 +149,9 @@ Binary PowerShell module (`VisioPS.dll`) shipped as the `Visio` module. Module m
 
 **Loader scripts:**
 - [`LoadFromBinDebug.ps1`](../VisioAutomation_2010/VisioPowerShell/LoadFromBinDebug.ps1) — import the freshly built debug DLL for fast iteration.
+- [`LoadFromBinDebug.ISE.ps1`](../VisioAutomation_2010/VisioPowerShell/LoadFromBinDebug.ISE.ps1) — same, but launched inside the PowerShell ISE.
+- [`LoadFromGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/LoadFromGallery.ps1) — `Save-Module` the published Visio module from PSGallery into a local subfolder and import from there. Useful for release-verification against the published artifact.
 - [`InstallForCurrentUser.ps1`](../VisioAutomation_2010/VisioPowerShell/InstallForCurrentUser.ps1) — robocopy the built artifacts into the user's PowerShell modules directory.
-- [`DownloadFromPowerShellGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/DownloadFromPowerShellGallery.ps1) — alternative loader (despite the name, currently loads locally from `bin\Debug`).
 
 ---
 
