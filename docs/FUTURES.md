@@ -13,7 +13,6 @@ Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping
 
 Phase 1 items:
 - *Audit `Internal/` for dead code*
-- *Reconcile version numbers across artifacts*
 - *Investigate flakiness from leftover Visio processes*
 - *Add a `CONTRIBUTING.md`*
 - *Expand the root `readme.md`*
@@ -28,6 +27,9 @@ Phase 1 items completed:
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
+
+Phase 2 prerequisites (must be settled before the release ships):
+- *Reconcile version numbers across artifacts* — needs a deeper conversation before a decision; **currently deferred**, do not implement until discussed.
 
 ### Phase 3 — Modernization
 - *Move development to Visual Studio 2026*
@@ -105,10 +107,15 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 
 ## Packaging & versioning
 
-### Reconcile version numbers across artifacts
+### Reconcile version numbers across artifacts *(Phase 2 prereq — deferred, needs discussion)*
 - **What:** The NuGet [`VisioAutomation2010.nuspec`](../NuGet/VisioAutomation2010.nuspec) is at `2.6.0`; the PowerShell [`Visio.psd1`](../VisioAutomation_2010/VisioPowerShell/Visio.psd1) is at `4.6.0`; csproj `AssemblyVersion`s are independent again.
-- **Why:** Hard to tell at a glance which library version corresponds to which module version. Pick a single source of truth (e.g., a `Directory.Build.props` with one shared version) or document the versioning policy explicitly.
-- **Effort:** S.
+- **Why:** Hard to tell at a glance which library version corresponds to which module version. Same code (the PS module bundles the NuGet's DLLs) shipping under two different version numbers makes bug reports ambiguous and release coordination loose.
+- **Status (2026-05-03):** Held for further discussion. Three options on the table:
+  - **A — Converge:** both artifacts ship at the same number going forward; pick a number for the Phase 2 release.
+  - **B — Document the divergence policy:** keep them independent, write down the rule.
+  - **C — Single technical source of truth:** `Directory.Build.props` + token substitution into nuspec/psd1. Better suited to Phase 3 once csprojs are SDK-style.
+- **Forcing function:** must be answered before the Phase 2 release ships, since release time is when the version strings get bumped.
+- **Effort:** S for the policy decision and doc updates; M if Option C is chosen.
 
 ### Fix the misnamed PowerShell loader script ✅ done
 - **What:** `DownloadFromPowerShellGallery.ps1` did not download from the PowerShell Gallery — it `Import-Module`d the local `bin\Debug` build.
