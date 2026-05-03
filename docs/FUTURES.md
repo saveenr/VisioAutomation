@@ -16,7 +16,6 @@ Phase 1 items:
 - *Audit `Internal/` for dead code*
 - *Reconcile version numbers across artifacts*
 - *Investigate flakiness from leftover Visio processes*
-- *Add a `CLAUDE.md` at the repo root*
 - *Add a `CONTRIBUTING.md`*
 - *Expand the root `readme.md`*
 - *Add a per-project `README.md` for the larger projects*
@@ -25,6 +24,7 @@ Phase 1 items:
 
 Phase 1 items completed:
 - ✅ *Fix the misnamed PowerShell loader script* — rewrote it to actually `Save-Module` from the PS Gallery
+- ✅ *Add a `CLAUDE.md` at the repo root* — added with staged-plan, build commands, conventions, doc pointers
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
@@ -128,10 +128,9 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 
 ## Documentation
 
-### Add a `CLAUDE.md` at the repo root
+### Add a `CLAUDE.md` at the repo root ✅ done
 - **What:** Project-specific instructions for future Claude Code sessions: build commands, test rules (need Visio installed), where the public API lives, the `2026_Refresh` branch convention.
-- **Why:** Loaded automatically into every Claude session in this repo; prevents re-discovering the same context next time.
-- **Effort:** S.
+- **Resolution:** [`CLAUDE.md`](../CLAUDE.md) added. Covers the staged-plan summary, verified build commands, test prerequisites, the per-commit changelog convention, the PS loader-script naming convention, tooling notes (shell choice, MSBuild path), and pointers to the rest of the docs.
 
 ### Add a `CONTRIBUTING.md`
 - **What:** How to clone, build, run tests, the code style, the PR process.
