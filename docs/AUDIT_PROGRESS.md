@@ -164,33 +164,34 @@ Decided 2026-05-03. Fix what's wrong (strict accuracy) **and** write new doc pag
 
 Concrete list of what needs to land before the Phase 2 release ships, derived from the findings above.
 
-### A. Strict-accuracy fixes (PS docs)
+### A. Strict-accuracy fixes (PS docs) ✅ done
 
-In `VisioPowerShellDocs` on `visiops_v4_docs`:
+All landed as **local commits** on `visiops_v4_docs` in `VisioPowerShellDocs`. **Not yet pushed.**
 
-1. **`README.md`** — bump version pin `4.5.0` → `4.6.0`.
-2. **`SUMMARY.md`**:
-   - Line 15 — fix wrong link target for "Close Visio applications".
-   - Line 99 — `Get-UserDefinedCell` → `Get-VisioUserDefinedCell`.
-   - Line 100 — fix wrong link target for `Set-VisioUserDefinedCell` (currently points at remove-visiocustomproperty.md).
-   - Line 101 — `Remove-UserDefinedCell` → `Remove-VisioUserDefinedCell`.
-   - Line 122 — typo: `Publis` → `Publish`.
-   - Lines 89-90 — fold `Select-VisioShape Invert` and `Select-VisioShape -None` into one entry (or reword to make clear they're parameter usages).
-   - Lines 71, 78, 106 — three `[TBD]` markers; the underlying cmdlets (`Copy-VisioPage`, `Select-VisioPage`, `Get-VisioText`) all exist in code, so write the pages and drop the TBD.
-3. **`links.md`** — replace dead TechNet link (or remove); verify VisioBot3000 / PSVA repos still active.
-4. **`quick-start.md`** — `$p` vs `$points` prose mismatch, add `powershell` language tag to code blocks, verify `basic_u.vss` still loads on a current Visio.
-5. **`cmdlets/pagecells.md`** — content bug: lists Shape cmdlets where it should list Page cmdlets (2 of 3 wrong).
-6. **`cmdlets/selection/export-the-current-selection.md`** — documents `Export-VisioSelection`, which doesn't exist. Decide: delete the page, or repurpose to show how to export a selection using `Export-VisioShape` against `(Get-VisioShape -Selected)`.
-7. **`cmdlets/selection/checking-selection-status.md`** — same situation for `Test-VisioSelectedShapes`. Same decision.
+| # | Item | Status | Commit |
+|---|---|---|---|
+| 1 | `README.md` version pin 4.5.0 → 4.6.0 | ✅ | `e3ba7cf` |
+| 2a | SUMMARY line 15 — wrong link target for "Close Visio applications" | ✅ via rename | `4677f63` |
+| 2b | SUMMARY lines 99-101 — UserDefinedCell wrong names + wrong link target | ✅ | `5e8624d` + heading-fix follow-up `f66ce8d` |
+| 2c | SUMMARY line 122 — `Publis` → `Publish` typo | ✅ | `0bc600c` |
+| 2d | SUMMARY lines 89-90 — Select-VisioShape variations | **deferred** — not strictly wrong, just stylistic; revisit if time |
+| 2e | SUMMARY lines 71, 78, 106 — `[TBD]` markers | **deferred to Section C** — link targets already correct; markers honestly flag incomplete content (Copy-VisioPage, Select-VisioPage, Get-VisioText pages need to be written) |
+| 3 | `links.md` — dead TechNet link | ✅ removed | `1798a0b` |
+| 4 | `quick-start.md` — `$p`/`$points`, code-block tags, grammar | ✅ | `8186f71` |
+| 4a | `quick-start.md` — verify `basic_u.vss` still loads on current Visio | **deferred — needs live Visio test** |
+| 5 | `cmdlets/pagecells.md` content bug | ✅ | `3cd1f29` |
+| 6+7 | `cmdlets/selection/` — both pages document non-existent cmdlets | ✅ entire empty section deleted (3 files) | `e1d5762` |
 
 ### B. Strict-accuracy fixes (.NET docs)
 
 In `VisioAutomation_GitBook_Docs` on `main`:
 
-8. **`README.md`** — replace stale link to `https://github.com/saveenr/VisioPowerShell/wiki` (separate repo no longer exists). Verify `Visio-Power-Tools` link, drop if dead.
-9. **`SUMMARY.md`** — not yet audited; do that pass.
-10. **Substantive pages** (`shapesheet/*`, `convert-values.md`, `custom-properties.md`, `extension-methods.md`, etc.) — not yet audited; spot-check API/example accuracy.
-11. **Empty stubs** (`classes.md`, `namespaces.md`, `related-projects.md`, `shapesheet/README.md`) — decide whether to fill or remove from `SUMMARY.md`.
+| # | Item | Status | Commit |
+|---|---|---|---|
+| 8 | `README.md` — stale `VisioPowerShell/wiki` link + intro grammar | ✅ | `c1ddd25` (local, not pushed) |
+| 9 | `SUMMARY.md` audit | ⬜ |
+| 10 | Substantive-page audit (`shapesheet/*`, `convert-values.md`, `custom-properties.md`, `extension-methods.md`) | ⬜ |
+| 11 | Empty stubs (`classes.md`, `namespaces.md`, `related-projects.md`, `shapesheet/README.md`) — fill or remove from SUMMARY | ⬜ |
 
 ### C. New doc pages to write (PS docs, option 2 additions)
 
