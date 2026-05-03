@@ -10,7 +10,7 @@
     <description>VisioAutomation helps developers to control Visio from .NET languages. 
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>See https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md</releaseNotes>
     <copyright>Copyright Saveen Reddy</copyright>
     <tags>Visio</tags>
     <dependencies>

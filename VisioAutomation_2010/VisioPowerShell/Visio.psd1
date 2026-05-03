@@ -105,7 +105,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        #ReleaseNotes = '* Bug Fix for TokenCache initialization when importing a context'
+        ReleaseNotes = 'See https://github.com/saveenr/VisioAutomation/blob/master/VisioAutomation_2010/VisioPowerShell/CHANGELOG.md'
 
         # Prerelease string of this module
         # Prerelease = ''

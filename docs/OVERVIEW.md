@@ -14,3 +14,10 @@ This `docs/` folder contains the **internal / developer-facing** documentation f
 - **[BUILDING.md](BUILDING.md)** — prerequisites, how to build, how to run the tests, how to load the PowerShell module locally, and known rough edges worth cleaning up.
 - **[GLOSSARY.md](GLOSSARY.md)** — Visio-specific terms (ShapeSheet, SRC/SIDSRC, master, stencil, …) and codebase-specific terms (`VisioObjectTarget`, `Target*`, cell-group types, …).
 - **[FUTURES.md](FUTURES.md)** — backlog of cleanup, modernization, and improvement items being collected for the 2026 refresh.
+
+## Release history
+
+Release notes for each shipped artifact live next to the artifact itself, in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format:
+
+- **[NuGet/CHANGELOG.md](../NuGet/CHANGELOG.md)** — `VisioAutomation2010` NuGet package
+- **[VisioAutomation_2010/VisioPowerShell/CHANGELOG.md](../VisioAutomation_2010/VisioPowerShell/CHANGELOG.md)** — `Visio` PowerShell module

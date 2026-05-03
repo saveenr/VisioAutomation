@@ -47,6 +47,7 @@ Run from inside the `Demo/` folder, after the module is imported (e.g., via `Loa
 
 ## See also
 
+- [`CHANGELOG.md`](CHANGELOG.md) — release notes for the `Visio` PowerShell module
 - [`docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md) — solution-wide architecture and dependencies
 - [`docs/BUILDING.md`](../../docs/BUILDING.md) — how to build, test, and install
 - [`docs/GLOSSARY.md`](../../docs/GLOSSARY.md) — Visio and codebase terminology

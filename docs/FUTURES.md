@@ -148,6 +148,12 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 - **Why:** Two-repo doc setups drift. Either keep them split with a clear policy (which doc lives where) or consolidate. No urgent action needed — just call out the policy in `OVERVIEW.md` once decided.
 - **Effort:** S (policy) — or M (consolidation).
 
+### Keep CHANGELOGs current as Phase 1 work lands
+- **What:** Two changelogs were added in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format: [`NuGet/CHANGELOG.md`](../NuGet/CHANGELOG.md) for the `VisioAutomation2010` NuGet, and [`VisioAutomation_2010/VisioPowerShell/CHANGELOG.md`](../VisioAutomation_2010/VisioPowerShell/CHANGELOG.md) for the `Visio` PowerShell module. Each has an `[Unreleased]` section that should accumulate consumer-visible changes until the Phase 2 release cuts a real version.
+- **Why:** The whole point of cutting a final release in Phase 2 is to give consumers a clean, well-documented checkpoint. If Unreleased sections drift behind reality during Phase 1, the release notes will be wrong.
+- **How to apply:** When a Phase 1 commit changes anything a consumer of the NuGet or PS module would notice (public API, parameter behavior, supported runtime, dependencies), add an entry to the corresponding CHANGELOG's `[Unreleased]` in the same commit. Pure internal/build/docs changes don't need entries.
+- **Effort:** ~zero per change, if done in the same commit.
+
 ### Add a per-project `README.md` for the larger projects
 - **Status:** [`VisioPowerShell/README.md`](../VisioAutomation_2010/VisioPowerShell/README.md) done — covers folder layout, helper scripts (with naming convention), and the `Demo/` subfolder. Sets the template for the others.
 - **Remaining:** Same treatment for `VisioAutomation/`, `VisioAutomation.Models/`, `VisioScripting/`.
