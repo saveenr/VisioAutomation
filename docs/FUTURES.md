@@ -14,7 +14,6 @@ Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping
 Phase 1 items:
 - *Audit `Internal/` for dead code*
 - *Investigate flakiness from leftover Visio processes*
-- *Add a `CONTRIBUTING.md`*
 - *Expand the root `readme.md`*
 - *Revise user-facing documentation for accuracy* (the largest item)
 - *Add CI* (build-only is enough for this phase)
@@ -24,6 +23,7 @@ Phase 1 items completed:
 - ✅ *Add a `CLAUDE.md` at the repo root* — added with staged-plan, build commands, conventions, doc pointers
 - ✅ *Update MSTest off the beta* — upgraded `MSTest.TestFramework` and `MSTest.TestAdapter` from `2.0.0-beta2` to `4.2.2`; bumped `VTest` TFM 4.5 → 4.7.2 to satisfy MSTest 4.x's floor
 - ✅ *Add a per-project `README.md` for the larger projects* — `VisioAutomation/`, `VisioAutomation.Models/`, `VisioScripting/`, `VisioPowerShell/` (already had one)
+- ✅ *Add a `CONTRIBUTING.md`* — covers branch, setup pointer, tests-need-Visio rule, code style, commits, changelog discipline, per-phase scope
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
@@ -138,10 +138,8 @@ Phase 2 prerequisites (must be settled before the release ships):
 - **What:** Project-specific instructions for future Claude Code sessions: build commands, test rules (need Visio installed), where the public API lives, the `2026_Refresh` branch convention.
 - **Resolution:** [`CLAUDE.md`](../CLAUDE.md) added. Covers the staged-plan summary, verified build commands, test prerequisites, the per-commit changelog convention, the PS loader-script naming convention, tooling notes (shell choice, MSBuild path), and pointers to the rest of the docs.
 
-### Add a `CONTRIBUTING.md`
-- **What:** How to clone, build, run tests, the code style, the PR process.
-- **Why:** Lowers the barrier for outside contributors and for the project's own future-self after another long pause.
-- **Effort:** S.
+### Add a `CONTRIBUTING.md` ✅ done
+- **Resolution:** [`CONTRIBUTING.md`](../CONTRIBUTING.md) added at the repo root. Covers the active branch convention, setup pointer to BUILDING.md, the live-Visio test rule, code style guidance (don't reformat, no new files unless needed, default to no comments), commit message format, the per-commit changelog convention, and the per-phase scope rules from FUTURES so contributors don't accidentally violate them.
 
 ### Expand the root `readme.md`
 - **What:** Currently three lines. Add a short pitch, a code snippet, and links to `docs/OVERVIEW.md` and the gitbook user docs.
