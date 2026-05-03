@@ -154,15 +154,58 @@ Sorted into rough categories based on user-visibility:
   Two of three names are wrong.
 - **`cmdlets/container.md`** is essentially a placeholder — just the `# Container` heading. Needs content for `New-VisioContainer` at minimum.
 
-### Open: completeness target for Phase 2
+### Completeness target for Phase 2: **Option 2 — Reasonable completeness** ✓
 
-These findings expose a question the audit can't answer alone: **what's the completeness target for the Phase 2 release docs?** Three reasonable answers:
+Decided 2026-05-03. Fix what's wrong (strict accuracy) **and** write new doc pages for the central undocumented cmdlets. Don't try to document the small/utility cmdlets — they get a single "known undocumented cmdlets" note in the docs and that's it.
 
-1. **Strict accuracy.** Fix what's wrong, document what's there, mark missing docs as known limitations. Smallest scope; ~10 fix PRs.
-2. **Reasonable completeness.** Strict accuracy plus new doc pages for the central undocumented cmdlets (New-VisioShape, Remove-VisioShape, the Control family, working PageCells). Medium scope.
-3. **Full coverage.** Doc page for every cmdlet that exists in code. Largest scope; some pages would be near-empty stubs for trivial cmdlets.
+---
 
-This is worth a quick conversation before starting on per-page fixes.
+## Phase 2 doc-fix work plan
+
+Concrete list of what needs to land before the Phase 2 release ships, derived from the findings above.
+
+### A. Strict-accuracy fixes (PS docs)
+
+In `VisioPowerShellDocs` on `visiops_v4_docs`:
+
+1. **`README.md`** — bump version pin `4.5.0` → `4.6.0`.
+2. **`SUMMARY.md`**:
+   - Line 15 — fix wrong link target for "Close Visio applications".
+   - Line 99 — `Get-UserDefinedCell` → `Get-VisioUserDefinedCell`.
+   - Line 100 — fix wrong link target for `Set-VisioUserDefinedCell` (currently points at remove-visiocustomproperty.md).
+   - Line 101 — `Remove-UserDefinedCell` → `Remove-VisioUserDefinedCell`.
+   - Line 122 — typo: `Publis` → `Publish`.
+   - Lines 89-90 — fold `Select-VisioShape Invert` and `Select-VisioShape -None` into one entry (or reword to make clear they're parameter usages).
+   - Lines 71, 78, 106 — three `[TBD]` markers; the underlying cmdlets (`Copy-VisioPage`, `Select-VisioPage`, `Get-VisioText`) all exist in code, so write the pages and drop the TBD.
+3. **`links.md`** — replace dead TechNet link (or remove); verify VisioBot3000 / PSVA repos still active.
+4. **`quick-start.md`** — `$p` vs `$points` prose mismatch, add `powershell` language tag to code blocks, verify `basic_u.vss` still loads on a current Visio.
+5. **`cmdlets/pagecells.md`** — content bug: lists Shape cmdlets where it should list Page cmdlets (2 of 3 wrong).
+6. **`cmdlets/selection/export-the-current-selection.md`** — documents `Export-VisioSelection`, which doesn't exist. Decide: delete the page, or repurpose to show how to export a selection using `Export-VisioShape` against `(Get-VisioShape -Selected)`.
+7. **`cmdlets/selection/checking-selection-status.md`** — same situation for `Test-VisioSelectedShapes`. Same decision.
+
+### B. Strict-accuracy fixes (.NET docs)
+
+In `VisioAutomation_GitBook_Docs` on `main`:
+
+8. **`README.md`** — replace stale link to `https://github.com/saveenr/VisioPowerShell/wiki` (separate repo no longer exists). Verify `Visio-Power-Tools` link, drop if dead.
+9. **`SUMMARY.md`** — not yet audited; do that pass.
+10. **Substantive pages** (`shapesheet/*`, `convert-values.md`, `custom-properties.md`, `extension-methods.md`, etc.) — not yet audited; spot-check API/example accuracy.
+11. **Empty stubs** (`classes.md`, `namespaces.md`, `related-projects.md`, `shapesheet/README.md`) — decide whether to fill or remove from `SUMMARY.md`.
+
+### C. New doc pages to write (PS docs, option 2 additions)
+
+12. **`cmdlets/shapes/new-visioshape.md`** — central cmdlet; cover the full parameter set (`-Master`, `-Position`, plus the Rectangle / Oval / Line / Polyline / Bezier parameter sets).
+13. **`cmdlets/shapes/remove-visioshape.md`** — pair with above.
+14. **`cmdlets/pages/new-visiopagecells.md`**, **`set-visiopagecells.md`** — fix-up under the Pages section, plus updating the existing buggy `pagecells.md`.
+15. **`cmdlets/shapecells/new-visioshapecells.md`**, **`get-visioshapecells.md`** — fill out the section.
+16. **`cmdlets/control/`** — entirely new section. Add `README.md`, `get-visiocontrol.md`, `new-visiocontrol.md`, `remove-visiocontrol.md`. Add to SUMMARY.
+17. **`cmdlets/container.md`** — currently a placeholder; flesh out for `New-VisioContainer`.
+18. **One "Other cmdlets" / "Known undocumented cmdlets" note** — single page or an addendum to README listing the small/utility cmdlets we explicitly chose not to document (Get-VisioClient, Get-VisioLockCells, Import-VisioModel, Measure-VisioShape, New-VisioPoint, New-VisioRectangle, Select-VisioDocument, Test-VisioDocument).
+
+### Workflow questions
+
+- **Branching.** Commit doc fixes directly to `visiops_v4_docs` / `main`, or use feature branches and PRs? My instinct: commit directly — small project, no review chain — but easy to switch later.
+- **Authorship.** When committing in the gitbook repos, what author identity should the commits carry? My current git config is the same as the main repo (`TheSevenPens`). If you want a different identity for these commits (e.g., your name), I can override per-commit with `--author`.
 
 ---
 
