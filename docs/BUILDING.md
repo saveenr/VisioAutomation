@@ -5,21 +5,45 @@ Practical notes on building the solution, running the tests, and trying things o
 ## Prerequisites
 
 - **Microsoft Visio**, installed locally. The solution targets the Visio 2010 Primary Interop Assembly (`Microsoft.Office.Interop.Visio` v14) but works against newer Visio versions at runtime. Tests and samples instantiate a real Visio process, so Visio must be present on any machine that runs them.
-- **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works.
-- **.NET Framework developer packs**: 4.0, 4.5, and 4.7.2 — the projects target a mix of these (see the table in [ARCHITECTURE.md §3.2](ARCHITECTURE.md#32-test-projects)).
+- **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [FUTURES.md](FUTURES.md).
 - **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
-- **NuGet** restore (Visual Studio handles this automatically; `nuget restore` from the command line works too).
+- **No separate .NET Framework Developer Pack install is required.** The .NET Framework 4.5 reference assemblies are pulled from the `Microsoft.NETFramework.ReferenceAssemblies.net45` NuGet package (a development dependency — no effect on built binaries). The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows. See *Note on the v4.5 reference-assemblies NuGet* below.
 
 ## Building
 
+The exact MSBuild path depends on your VS 2022 install location. From a regular shell (Bash/PowerShell), use the full path:
+
 ```sh
-# from the repo root
-msbuild VisioAutomation_2010\VisioAutomation2010.sln /restore /p:Configuration=Debug
+# from the repo root, using VS 2022 Community at the default install path
+MSBUILD="/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
+
+# 1. Restore NuGet packages (packages.config style — needs the explicit flag)
+"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln \
+    -t:Restore -p:RestorePackagesConfig=true
+
+# 2. Build
+"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln \
+    -p:Configuration=Debug -m
 ```
 
-Or open [`VisioAutomation_2010/VisioAutomation2010.sln`](../VisioAutomation_2010/VisioAutomation2010.sln) in Visual Studio and build the solution.
+From the **Developer Command Prompt for VS 2022** (or Developer PowerShell), `MSBuild.exe` is on PATH and you can drop the full path:
+
+```cmd
+msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore -p:RestorePackagesConfig=true
+msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
+```
+
+Or open [`VisioAutomation_2010/VisioAutomation2010.sln`](../VisioAutomation_2010/VisioAutomation2010.sln) in Visual Studio 2022 and build the solution — the IDE handles restore automatically.
 
 The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutomation_2010/VisioAutomation/packages.config) NuGet package, so a clean machine without Visio's developer tools installed will still restore the interop reference.
+
+### Note on the v4.5 reference-assemblies NuGet
+
+[`VisioAutomation_2010/Directory.Build.targets`](../VisioAutomation_2010/Directory.Build.targets) conditionally imports build targets from the `Microsoft.NETFramework.ReferenceAssemblies.net45` NuGet package for projects targeting .NET Framework 4.5. This is necessary because modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. The NuGet package supplies them at restore time so the v4.5 projects build without needing a legacy Developer Pack install.
+
+The package is a **development dependency** — its DLLs do not get copied into output binaries, do not appear in the assembly metadata, and have no effect on consumers of the published NuGet/PowerShell-Gallery artifacts. The compiled output is byte-identical to one built against an installed Developer Pack.
+
+This package is **transient**. Phase 3 of the [2026 refresh](FUTURES.md) bumps the v4.5 projects to v4.7.2, at which point the package, the corresponding `packages.config` entries, and `Directory.Build.targets` can all be deleted — the v4.7.2 reference assemblies ship in-box on every supported Windows.
 
 ## Running the tests
 
