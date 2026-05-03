@@ -12,7 +12,6 @@ The 2026 refresh runs in three phases. Each backlog item below is tagged with it
 Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping libs). Code + docs improvements only, **no new features**. Anything that would destabilize a release (TFM jump, IDE jump, csproj-format change, breaking API change) waits for Phase 3.
 
 Phase 1 items:
-- *Misc cleanups discovered during the Internal/ audit*
 - *Investigate flakiness from leftover Visio processes*
 - *Revise user-facing documentation for accuracy* (the largest item)
 - *Add CI* (build-only is enough for this phase)
@@ -25,6 +24,7 @@ Phase 1 items completed:
 - ✅ *Add a `CONTRIBUTING.md`* — covers branch, setup pointer, tests-need-Visio rule, code style, commits, changelog discipline, per-phase scope
 - ✅ *Expand the root `readme.md`* — rewrote with pitch, install table, C# + PowerShell quick-start, doc links, license
 - ✅ *Audit `Internal/` for dead code* — deleted orphaned `TempHelper.cs` + removed dead `InternalsVisibleTo("TestVisioAutomation")` attribute; spawned a follow-up item for misc warts found during the audit
+- ✅ *Misc cleanups discovered during the Internal/ audit* (mostly) — moved misplaced `InternalsVisibleTo` attributes to `AssemblyInfo.cs`, deleted two orphaned VTest files, removed auto-generated `.sln.metaproj` from version control. `LinqExtensions` visibility-vs-folder mismatch deferred to Phase 3 as a breaking-namespace-change risk.
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
@@ -88,13 +88,13 @@ Phase 2 prerequisites (must be settled before the release ships):
 ### Audit `Internal/` for dead code ✅ done
 - **Resolution:** Audited `VisioAutomation/Internal/` end-to-end. Two clear-cut wins removed: deleted [`TempHelper.cs`](../VisioAutomation_2010/VisioAutomation/Internal/) (orphaned — duplicate of `ShapesheetHelpers` with snake_case names; not even listed in the csproj, so already wasn't being compiled) and removed the dead `[assembly: InternalsVisibleTo("TestVisioAutomation")]` attribute from `AssemblyInfo.cs` (no `TestVisioAutomation` assembly exists; current test projects are `VTest` / `VTest.Scripting`, granted access elsewhere). All other Internal/ types are actively referenced. Build verified clean.
 
-### Misc cleanups discovered during the Internal/ audit
-- **What:** Several small wart-fixing opportunities surfaced during the audit but were left out of scope to keep the commit focused. Worth a separate pass:
-  - **`LinqExtensions` is `public` despite living in `Internal/Extensions/`.** It's actually consumed across the assembly boundary by `VisioAutomation.Models` (`ShapeList` uses its single `NotOfType<T>` method). The `public` visibility is therefore correct, but the folder name is misleading. Fix is to either move it out of `Internal/` (Phase 3 — it would be a namespace change, technically a breaking API change) or rename the folder. Defer to Phase 3.
-  - **`InternalsVisibleTo("VTest")` and `InternalsVisibleTo("VTest.Scripting")` declared in `Internal/ArraySegmentEnumerator.cs`** — assembly-level attributes living in a random source file. They should move to `Properties/AssemblyInfo.cs`. Trivial.
-  - **Two VTest files use `namespace TestVisioAutomation`** instead of the project's normal namespace: `Vtest/FormatStringParserTest.cs` and `VTest/Core/Extensions/AsEnumerableTest.cs`. Stale name from a long-ago project rename. Trivial rename.
-  - **`VisioAutomation2010.sln.metaproj` is committed but auto-generated** by msbuild on CLI builds, and contains stale absolute paths (`D:\saveenr\code\hg\...`) plus references to long-gone projects (`TestVisioAutomation`, `TestVisioAutomationVDX`). Should be removed from the repo and added to `.gitignore`.
-- **Effort:** S — bundle as one cleanup commit.
+### Misc cleanups discovered during the Internal/ audit ✅ done (mostly)
+- **Resolution:** Three of the four findings cleaned up:
+  - ✅ Moved `[InternalsVisibleTo("VTest")]` and `[InternalsVisibleTo("VTest.Scripting")]` from `Internal/ArraySegmentEnumerator.cs` to `Properties/AssemblyInfo.cs` where they belong.
+  - ✅ Deleted `Vtest/FormatStringParserTest.cs` and `VTest/Core/Extensions/AsEnumerableTest.cs` — turned out to be fully orphaned (not in csproj, contained syntax errors and references to long-gone types like `Isotope.Text.FormatStringParser` and a `VisioAutomationTest` base class). Pure dead code.
+  - ✅ Removed `VisioAutomation2010.sln.metaproj` from version control and added `*.sln.metaproj` / `*.sln.metaproj.tmp` to `.gitignore` so it gets regenerated on demand instead of accumulating stale paths.
+- **Deferred to Phase 3:**
+  - **`LinqExtensions` is `public` despite living in `Internal/Extensions/`.** It's actually consumed across the assembly boundary by `VisioAutomation.Models` (`ShapeList` uses its single `NotOfType<T>` method). The `public` visibility is therefore correct, but the folder name is misleading. Fix is to either move it out of `Internal/` (a namespace change, technically a breaking API change) or rename the folder.
 
 ---
 

@@ -71,6 +71,10 @@ local.properties
 packages/
 src/packages/Microsoft
 
+# MSBuild auto-generates these alongside the .sln when building from the CLI.
+*.sln.metaproj
+*.sln.metaproj.tmp
+
 
 # Visual C++ cache files
 ipch/

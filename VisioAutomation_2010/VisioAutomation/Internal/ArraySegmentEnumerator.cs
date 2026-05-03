@@ -1,6 +1,3 @@
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("VTest")]
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("VTest.Scripting")]
-
 namespace VisioAutomation.Internal
 {
     /// <summary>
