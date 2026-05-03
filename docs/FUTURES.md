@@ -12,7 +12,6 @@ The 2026 refresh runs in three phases. Each backlog item below is tagged with it
 Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping libs). Code + docs improvements only, **no new features**. Anything that would destabilize a release (TFM jump, IDE jump, csproj-format change, breaking API change) waits for Phase 3.
 
 Phase 1 items:
-- *Investigate flakiness from leftover Visio processes*
 - *Revise user-facing documentation for accuracy* (the largest item)
 - *Add CI* (build-only is enough for this phase)
 
@@ -31,6 +30,7 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 
 Phase 2 prerequisites (must be settled before the release ships):
 - *Reconcile version numbers across artifacts* — needs a deeper conversation before a decision; **currently deferred**, do not implement until discussed.
+- *Investigate flakiness from leftover Visio processes* — relevant to the release-verification flow we'll exercise in Phase 2.
 
 ### Phase 3 — Modernization
 - *Move development to Visual Studio 2026*
@@ -105,9 +105,9 @@ Phase 2 prerequisites (must be settled before the release ships):
 - **Why (consider):** This is intentional — the library's whole job is to drive Visio, and mocking COM gives false confidence. But the lack of any non-Visio test surface means there's no quick `dotnet test` that runs anywhere. *Not necessarily a problem*, just worth a deliberate decision before adding CI.
 - **Effort:** N/A — design decision, not a task.
 
-### Investigate flakiness from leftover Visio processes
+### Investigate flakiness from leftover Visio processes *(Phase 2 prereq)*
 - **What:** Aborted test runs can leave Visio processes that lock files and break the next run.
-- **Why:** Add a test-host shutdown hook or pre-run cleanup so re-runs are deterministic.
+- **Why:** Add a test-host shutdown hook or pre-run cleanup so re-runs are deterministic. Important for the release-verification flow in Phase 2 — re-running the test suite should be reliably idempotent before we ship.
 - **Effort:** S.
 
 ---
