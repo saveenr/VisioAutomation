@@ -91,7 +91,7 @@ Section landings + content:
 - **Typo** (line 122): `[Publis to PowerShell Gallery]` — should be "Publish".
 - `Select-VisioShape Invert` and `Select-VisioShape -None` (lines 89-90) are listed as separate cmdlets but they are parameter variations of `Select-VisioShape`. Consider folding into one entry or being explicit they're parameter usages.
 - **3 `[TBD]` markers** indicate pages that were never written: `Copy-VisioPage [TBD]` (line 71), `Select-VisioPage [TBD]` (line 78), `Get-VisioText [TBD]` (line 106). Note: `Copy-VisioPage` *does* exist in the current code (`Commands/VisioPage/CopyVisioPage.cs`), so the page can be written. Same for `Get-VisioText` (`Commands/VisioText/GetVisioText.cs`). `Select-VisioPage` also exists. All three TBDs can be filled in.
-- **Cmdlet inventory delta:** 66 cmdlet entries here vs 64 cmdlet `.cs` files in current code. Per-cmdlet diff still needed to identify renames/removals/additions.
+- **Cmdlet inventory delta:** see *Cmdlet Inventory* section below.
 
 ### VisioPowerShellDocs/links.md 🔧
 
@@ -107,10 +107,69 @@ Section landings + content:
 
 ---
 
+## Cmdlet inventory (code v4.6.0 vs docs `visiops_v4_docs`)
+
+64 cmdlets in current code; 47 distinct verb-noun cmdlet links in SUMMARY. Spot-checked the section landing pages (`pagecells.md`, `shapecells/`, `selection/`, `container.md`) for hidden coverage of "missing" cmdlets.
+
+### Wrong cmdlet names in docs (2) 🔧
+Both already noted under SUMMARY findings — bear repeating here as inventory issues:
+- `Get-UserDefinedCell` → should be `Get-VisioUserDefinedCell`
+- `Remove-UserDefinedCell` → should be `Remove-VisioUserDefinedCell`
+
+### Documented cmdlets that don't exist in code (2) 🔧
+Confirmed via grep across the entire `VisioPowerShell` project — neither name appears anywhere in code. Either removed or never implemented:
+- `Export-VisioSelection` (doc page: `cmdlets/selection/export-the-current-selection.md`)
+- `Test-VisioSelectedShapes` (doc page: `cmdlets/selection/checking-selection-status.md`)
+
+Resolution choice: remove the doc pages, **or** investigate whether equivalent functionality exists under different cmdlets (e.g., `Get-VisioShape` for "what's selected", `Export-VisioShape` against the selection).
+
+### Cmdlets in code but undocumented (~17, after accounting for section-page coverage) 🔧
+
+Sorted into rough categories based on user-visibility:
+
+**Central cmdlets that should have docs:**
+- `New-VisioShape` — primary shape-creation cmdlet, not documented (!)
+- `Remove-VisioShape`
+- `Set-VisioPageCells`
+- `New-VisioPageCells`
+
+**Cmdlet families with partial doc coverage but missing pages:**
+- *Control* family (`Get-VisioControl`, `New-VisioControl`, `Remove-VisioControl`) — no `controls/` section in docs at all
+- *PageCells* — single `cmdlets/pagecells.md` exists but is buggy (see Section page bugs below)
+- *ShapeCells* — has a section but no per-cmdlet pages for `Get-VisioShapeCells`, `New-VisioShapeCells`
+- *Container* — has an essentially empty page; `New-VisioContainer` undocumented
+
+**Smaller / utility cmdlets** (debatable whether worth documenting):
+- `Get-VisioClient`, `Get-VisioLockCells`, `Import-VisioModel`, `Measure-VisioShape`, `New-VisioPoint`, `New-VisioRectangle`, `Select-VisioDocument`, `Test-VisioDocument`
+
+### Section page bugs 🔧
+
+- **`cmdlets/pagecells.md`** lists *Shape* cmdlets where it should list *Page* cmdlets:
+  ```
+  These cmdlets work with the ShapeSheet of pages:
+      New-VisioShapeCells   ← should be New-VisioPageCells
+      Get-VisioPageCells
+      Set-VisioShapeCells   ← should be Set-VisioPageCells
+  ```
+  Two of three names are wrong.
+- **`cmdlets/container.md`** is essentially a placeholder — just the `# Container` heading. Needs content for `New-VisioContainer` at minimum.
+
+### Open: completeness target for Phase 2
+
+These findings expose a question the audit can't answer alone: **what's the completeness target for the Phase 2 release docs?** Three reasonable answers:
+
+1. **Strict accuracy.** Fix what's wrong, document what's there, mark missing docs as known limitations. Smallest scope; ~10 fix PRs.
+2. **Reasonable completeness.** Strict accuracy plus new doc pages for the central undocumented cmdlets (New-VisioShape, Remove-VisioShape, the Control family, working PageCells). Medium scope.
+3. **Full coverage.** Doc page for every cmdlet that exists in code. Largest scope; some pages would be near-empty stubs for trivial cmdlets.
+
+This is worth a quick conversation before starting on per-page fixes.
+
+---
+
 ## Open questions for later
 
 - **Where the docs should ultimately live.** The Phase 3 FUTURES item *"Decide where docs live long-term"* — the audit might surface enough drift / stale infrastructure that consolidation becomes more attractive than fixing in place. Track and revisit.
-- **Branch versioning policy.** Now that `visiops_v3_docs` and `visiops_v4_docs` are the two branches, who keeps them in sync? If a fix applies to both, do we cherry-pick? My instinct: **only audit/fix `visiops_v4_docs`** (the current canonical), and let v3 be a frozen historical record for users still on the older module.
+- **Branch versioning policy:** decided. **Only audit/fix `visiops_v4_docs`.** `visiops_v3_docs` is a frozen historical record for users still on the v3 module. No cherry-picking; no syncing. Right answer for v3 users hitting issues is "upgrade to v4."
 
 ---
 
