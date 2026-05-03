@@ -4,6 +4,41 @@ A running list of cleanup, modernization, and improvement items for the VisioAut
 
 ---
 
+## Roadmap (staged plan)
+
+The 2026 refresh runs in three phases. Each backlog item below is tagged with its phase.
+
+### Phase 1 — VS 2022 cleanup *(in progress)*
+Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping libs). Code + docs improvements only, **no new features**. Anything that would destabilize a release (TFM jump, IDE jump, csproj-format change, breaking API change) waits for Phase 3.
+
+Phase 1 items:
+- *Update MSTest off the beta*
+- *Audit `Internal/` for dead code*
+- *Reconcile version numbers across artifacts*
+- *Fix the misnamed PowerShell loader script*
+- *Investigate flakiness from leftover Visio processes*
+- *Add a `CLAUDE.md` at the repo root*
+- *Add a `CONTRIBUTING.md`*
+- *Expand the root `readme.md`*
+- *Add a per-project `README.md` for the larger projects*
+- *Revise user-facing documentation for accuracy* (the largest item)
+- *Add CI* (build-only is enough for this phase)
+
+### Phase 2 — Cut the final release
+Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
+
+### Phase 3 — Modernization
+- *Move development to Visual Studio 2026*
+- *Consolidate target frameworks* — step 2 (4.5 → 4.7.2)
+- *Consider migrating off Visio 2010 PIA*
+- *Decide whether to move to .NET 6/8 (out of .NET Framework)*
+- *Migrate from `packages.config` to `PackageReference`*
+- *Modernize SDK-style csproj*
+- *Automate releases via GitHub CI — NuGet + PowerShell Gallery*
+- *Decide where docs live long-term*
+
+---
+
 ## Build & tooling
 
 ### Consolidate target frameworks
