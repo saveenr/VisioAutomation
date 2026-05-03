@@ -204,9 +204,10 @@ In `VisioAutomation_GitBook_Docs` on `main`. **Pushed.**
 
 **Section B done.** All accuracy fixes for the .NET docs are pushed.
 
-**Section B follow-ups deferred to Section C / option-2 work:**
-- `user-defined-cells.md` and `custom-properties.md` both have method-signature drift: their `.Get(shape)` and `.Set(shape, name, value, prompt)` examples don't match the actual API, which uses `.GetDictionary(shape, CellValueType)` and `.Set(shape, name, CellPropertyCells)`. The class-name renames I did fix a third of the issue; full content rewrite needed for the rest.
-- `query-the-shapesheet.md` describes return values as "Table object" but current code returns `Data.DataRows<T>` / `Data.DataRowGroup<T>` / `Data.DataRowGroups<T>`. Conceptual description still works at a high level but is technically inaccurate.
+**Section B follow-ups (originally Section C carry-overs) — done:**
+- ✅ `user-defined-cells.md` rewritten using `GetDictionary(shape, CellValueType)`, `Set(shape, name, UserDefinedCellCells)`, `ShapeIDPairs.FromShapes(...)` for multi-shape, plus the `IsValidName`/`CheckValidName` methods that previously weren't mentioned. Commit `08d4e9f`.
+- ✅ `custom-properties.md` rewritten with the full `CustomPropertyCells` field set (Value, Prompt, Label, Format, Type, Calendar, Invisible, LangID, SortKey, Ask), correct `GetDictionary` calls, and the `ShapeIDPairs` multi-shape pattern. Commit `be43089`.
+- ✅ `query-the-shapesheet.md` rewritten with a return-type table making clear which shape each method returns (`DataRows<T>` / `DataRowGroup<T>` / `DataRowGroups<T>`); fixed indexer syntax (`[r][c]` not `[r,c]`); fixed multi-shape SectionQuery to use `Core.ShapeIDPairs` instead of `IList<int>`; restructured the grouping discussion. Commit `e0f50f7`.
 
 ### C. New doc pages to write (PS docs, option 2 additions)
 
