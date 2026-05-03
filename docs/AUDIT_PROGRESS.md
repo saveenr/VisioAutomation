@@ -184,14 +184,27 @@ All landed as **local commits** on `visiops_v4_docs` in `VisioPowerShellDocs`. *
 
 ### B. Strict-accuracy fixes (.NET docs)
 
-In `VisioAutomation_GitBook_Docs` on `main`:
+In `VisioAutomation_GitBook_Docs` on `main`. **Pushed.**
 
-| # | Item | Status | Commit |
+| # | Item | Status | Commit(s) |
 |---|---|---|---|
-| 8 | `README.md` — stale `VisioPowerShell/wiki` link + intro grammar | ✅ | `c1ddd25` (local, not pushed) |
-| 9 | `SUMMARY.md` audit | ⬜ |
-| 10 | Substantive-page audit (`shapesheet/*`, `convert-values.md`, `custom-properties.md`, `extension-methods.md`) | ⬜ |
-| 11 | Empty stubs (`classes.md`, `namespaces.md`, `related-projects.md`, `shapesheet/README.md`) — fill or remove from SUMMARY | ⬜ |
+| 8 | `README.md` — stale `VisioPowerShell/wiki` link + intro grammar | ✅ | `c1ddd25` |
+| 8a | `compiling.md` — VS 2019 → 2022, C# 7.0 → 8.0, link to in-repo BUILDING | ✅ | `1b6e4b6` |
+| 8b | `convert-values.md` — entire page deleted (documents non-existent `VisioAutomation.Convert` static class) | ✅ | `b95b381` |
+| 8c | `user-defined-cells.md` — `UserDefinedCellsHelper` → `UserDefinedCellHelper` (singular) | ✅ partial | `83ae5a4` |
+| 8d | `custom-properties.md` — wrong namespaces (`Shapes.CustomProperties.X`) + truncated last line + duplicate closing code fence | ✅ partial | `a278563` + `f6c202b` |
+| 8e | `stencils-and-masters.md` + `extension-methods.md` — replace dead `VisioAutomation.Drawing.{Point,Size}` with `VisioAutomation.Core.{Point,Size}`; fix broken `=>` lambda formatting | ✅ | `6adfb83` |
+| 8f | `shapesheet/cells.md` — systemic API drift fix: `SRC` → `Src`, `VA.ShapeSheet.SRCConstants` → `VA.Core.SrcConstants`, constant names dropped underscores (`Char_Color` → `CharColor`, `FillForegnd` → `FillForeground`, etc.); deleted whole "Converting between cell names and (s,r,c)" section (documented non-existent `ShapeSheetHelper.GetSRCFromName`) | ✅ | `92104df` |
+| 8g | `shapesheet/query-the-shapesheet.md` — wrong API (`AddColumn` → `Columns.Add`), wrong type (`int[] results_bool` → `bool[]`), syntax bugs (`var query.AddColumn`, `new int { … }`), typos (`intm`, `twoc olumns`, `perfoming`, `Retieving`) | ✅ partial | `3e5b66e` |
+| 8h | `shapesheet/modify-the-shapesheet.md` — rewrote for current API: `SRCUpdate`/`SIDSRCUpdate` → `SrcWriter`/`SidSrcWriter`, `SetFormula`/`SetResult`/`Execute` → `SetValue`/`Commit(target, CellValueType)`, fix `shape.Cells["Pinx"]` → `shape.CellsU["PinX"]` | ✅ | `c1b800a` |
+| 9 | `SUMMARY.md` audit | ⬜ partial — incidental fixes in 8b deleted the `Convert values` entry; full link-target verification still pending |
+| 11a | `shapesheet/README.md` — truly empty stub (just heading); fill or drop from SUMMARY | ⬜ |
+| 11b | `classes.md` / `namespaces.md` / `related-projects.md` — diagram-only stubs; need diagram-currency verification by user (can't do from here) | ⬜ |
+| 11c | `resources/stencils-and-masters.md` — smart quotes (Word-paste artifact), `// C# Visual Studio 2010` outdated comment, duplicates the root `stencils-and-masters.md` topic with different content (consolidation candidate) | ⬜ |
+
+**Section B follow-ups deferred to Section C / option-2 work:**
+- `user-defined-cells.md` and `custom-properties.md` both have method-signature drift: their `.Get(shape)` and `.Set(shape, name, value, prompt)` examples don't match the actual API, which uses `.GetDictionary(shape, CellValueType)` and `.Set(shape, name, CellPropertyCells)`. The class-name renames I did fix a third of the issue; full content rewrite needed for the rest.
+- `query-the-shapesheet.md` describes return values as "Table object" but current code returns `Data.DataRows<T>` / `Data.DataRowGroup<T>` / `Data.DataRowGroups<T>`. Conceptual description still works at a high level but is technically inaccurate.
 
 ### C. New doc pages to write (PS docs, option 2 additions)
 
