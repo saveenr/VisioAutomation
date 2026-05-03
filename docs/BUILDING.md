@@ -39,11 +39,11 @@ The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutoma
 
 ### Note on the v4.5 reference-assemblies NuGet
 
-[`VisioAutomation_2010/Directory.Build.targets`](../VisioAutomation_2010/Directory.Build.targets) conditionally imports build targets from the `Microsoft.NETFramework.ReferenceAssemblies.net45` NuGet package for projects targeting .NET Framework 4.5. This is necessary because modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. The NuGet package supplies them at restore time so the v4.5 projects build without needing a legacy Developer Pack install.
+Each of the six projects targeting .NET Framework 4.5 imports build targets from the `Microsoft.NETFramework.ReferenceAssemblies.net45` NuGet package. This is necessary because modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. The NuGet package supplies them at restore time so the v4.5 projects build without needing a legacy Developer Pack install. The import + missing-package-error block lives near the bottom of each csproj, immediately after `Microsoft.CSharp.targets` (the package's targets file conditions on `$(TargetFrameworkIdentifier)`, which is set by `Microsoft.CSharp.targets` — so the import must come *after*).
 
 The package is a **development dependency** — its DLLs do not get copied into output binaries, do not appear in the assembly metadata, and have no effect on consumers of the published NuGet/PowerShell-Gallery artifacts. The compiled output is byte-identical to one built against an installed Developer Pack.
 
-This package is **transient**. Phase 3 of the [2026 refresh](FUTURES.md) bumps the v4.5 projects to v4.7.2, at which point the package, the corresponding `packages.config` entries, and `Directory.Build.targets` can all be deleted — the v4.7.2 reference assemblies ship in-box on every supported Windows.
+This package is **transient**. Phase 3 of the [2026 refresh](FUTURES.md) bumps the v4.5 projects to v4.7.2, at which point the package, the corresponding `packages.config` entries, and the per-csproj `<Import>` blocks can all be deleted — the v4.7.2 reference assemblies ship in-box on every supported Windows.
 
 ## Continuous integration
 
