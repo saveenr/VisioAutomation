@@ -13,7 +13,6 @@ Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping
 
 Phase 1 items:
 - *Revise user-facing documentation for accuracy* (the largest item)
-- *Add CI* (build-only is enough for this phase)
 
 Phase 1 items completed:
 - ✅ *Fix the misnamed PowerShell loader script* — rewrote it to actually `Save-Module` from the PS Gallery
@@ -24,6 +23,7 @@ Phase 1 items completed:
 - ✅ *Expand the root `readme.md`* — rewrote with pitch, install table, C# + PowerShell quick-start, doc links, license
 - ✅ *Audit `Internal/` for dead code* — deleted orphaned `TempHelper.cs` + removed dead `InternalsVisibleTo("TestVisioAutomation")` attribute; spawned a follow-up item for misc warts found during the audit
 - ✅ *Misc cleanups discovered during the Internal/ audit* (mostly) — moved misplaced `InternalsVisibleTo` attributes to `AssemblyInfo.cs`, deleted two orphaned VTest files, removed auto-generated `.sln.metaproj` from version control. `LinqExtensions` visibility-vs-folder mismatch deferred to Phase 3 as a breaking-namespace-change risk.
+- ✅ *Add CI* (build-only) — `.github/workflows/build.yml` builds the solution on push/PR for `master` and `2026_Refresh`, pinned to VS 2022 MSBuild, NuGet packages cached. Test runs in CI deferred to Phase 3 (needs self-hosted runner with Visio).
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
@@ -61,10 +61,9 @@ Phase 2 prerequisites (must be settled before the release ships):
 - **What:** All test projects pinned `MSTest.TestFramework` and `MSTest.TestAdapter` to `2.0.0-beta2`.
 - **Resolution:** Upgraded both packages to **4.2.2** (latest stable) across all four test projects. Required bumping VTest from .NET Framework 4.5 → 4.7.2 (MSTest 4.x's floor is 4.6.2); the other test projects were already on 4.7.2. Solution builds cleanly. Test code did not need any changes — MSTest's `[TestMethod]`/`Assert.*` API surface is stable across the version jump. Tests not actually run (need a live Visio).
 
-### Add CI
-- **What:** No GitHub Actions / Azure Pipelines configuration in the repo.
-- **Why:** A simple build-only workflow would catch regressions immediately. The integration tests need a live Visio, so they would run on a self-hosted Windows runner with Visio installed (or be skipped/quarantined in CI).
-- **Effort:** S for build-only; M for build + tests on a self-hosted runner.
+### Add CI ✅ done (build-only)
+- **Resolution:** [`.github/workflows/build.yml`](../.github/workflows/build.yml) added. Builds the solution in Debug on every push to `master` / `2026_Refresh` and on every PR. Pinned to VS 2022's MSBuild (`vs-version: '17.0'`) since VS 2026's MSBuild can't resolve the .NET Framework 4.5 reference assemblies the shipping libs need. NuGet packages are cached keyed on the hash of all `packages.config` files. Build status surfaces as a badge in the root README.
+- **Still to do (Phase 3):** Run the tests in CI. This needs a self-hosted Windows runner with Microsoft Visio installed. Track alongside *Automate releases via GitHub CI* in Phase 3.
 
 ### Modernize SDK-style csproj
 - **What:** Convert the legacy csproj format (long `<Compile Include="..." />` lists, packages.config) to SDK-style csproj.

@@ -1,0 +1,49 @@
+name: Build
+
+# Build-only CI for the 2026_Refresh era. Compiles the full solution to catch
+# regressions; does NOT run tests (tests need a live Visio install, which
+# requires a self-hosted runner — that's planned for Phase 3 when releases
+# are also automated).
+#
+# Pinned to VS 2022's MSBuild because the .NET Framework 4.5 reference
+# assemblies needed to build the shipping libs are not resolved by VS 2026's
+# MSBuild. See docs/BUILDING.md and docs/FUTURES.md.
+
+on:
+  push:
+    branches:
+      - master
+      - 2026_Refresh
+  pull_request:
+    branches:
+      - master
+      - 2026_Refresh
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (Debug)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild (Visual Studio 2022)
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: VisioAutomation_2010/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/**/packages.config') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Restore NuGet packages
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore -p:RestorePackagesConfig=true
+
+      - name: Build solution
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m

@@ -1,5 +1,6 @@
 # VisioAutomation
 
+[![Build](https://github.com/saveenr/VisioAutomation/actions/workflows/build.yml/badge.svg)](https://github.com/saveenr/VisioAutomation/actions/workflows/build.yml)
 [![NuGet](https://img.shields.io/nuget/v/VisioAutomation2010.svg)](https://www.nuget.org/packages/VisioAutomation2010/)
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/v/Visio.svg)](https://www.powershellgallery.com/packages/Visio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.txt)

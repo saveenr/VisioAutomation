@@ -45,6 +45,14 @@ The package is a **development dependency** — its DLLs do not get copied into 
 
 This package is **transient**. Phase 3 of the [2026 refresh](FUTURES.md) bumps the v4.5 projects to v4.7.2, at which point the package, the corresponding `packages.config` entries, and `Directory.Build.targets` can all be deleted — the v4.7.2 reference assemblies ship in-box on every supported Windows.
 
+## Continuous integration
+
+Every push to `master` and `2026_Refresh` (and every PR targeting either) is built by [`.github/workflows/build.yml`](../.github/workflows/build.yml) on a GitHub-hosted `windows-latest` runner. The workflow pins MSBuild to VS 2022 (matching local builds) and runs the same restore + build commands documented above.
+
+The CI is **build-only**. Tests need a live Visio install and would require a self-hosted Windows runner; that's planned for Phase 3 alongside automated releases (see [FUTURES.md](FUTURES.md)).
+
+The current build status appears as a badge in the [root README](../readme.md).
+
 ## Running the tests
 
 All test projects use **MSTest** and **require a live Visio installation** because they exercise real COM calls.
@@ -110,4 +118,3 @@ See [FUTURES.md](FUTURES.md) for the full backlog and phasing. The build-relevan
 
 - **Mixed target frameworks**: shipping libs are now on .NET 4.5; test projects on .NET 4.7.2. Convergence on a single TFM (4.7.2 across the whole solution) is a Phase 3 item; it also enables moving to VS 2026.
 - **`packages.config`** is still in use rather than PackageReference. Modernizing would simplify NuGet handling and CI.
-- **No CI configuration** in the repo today. A simple GitHub Actions workflow that at least builds the solution would catch breakage early. (Tests need Visio, so they would have to run on a self-hosted Windows runner with Visio installed.)
