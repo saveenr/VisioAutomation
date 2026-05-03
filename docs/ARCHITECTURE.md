@@ -157,7 +157,7 @@ Binary PowerShell module (`VisioPS.dll`) shipped as the `Visio` module. Module m
 
 ### 3.2 Test projects
 
-All test projects use **MSTest** (`MSTest.TestFramework` 2.0.0-beta2) and **require a live, locally-installed Microsoft Visio** because they exercise real COM calls.
+All test projects use **MSTest** (`MSTest.TestFramework` 4.2.2) and **require a live, locally-installed Microsoft Visio** because they exercise real COM calls.
 
 | Project | TFM | Tests |
 |---|---|---|

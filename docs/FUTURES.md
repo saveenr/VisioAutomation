@@ -12,7 +12,6 @@ The 2026 refresh runs in three phases. Each backlog item below is tagged with it
 Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping libs). Code + docs improvements only, **no new features**. Anything that would destabilize a release (TFM jump, IDE jump, csproj-format change, breaking API change) waits for Phase 3.
 
 Phase 1 items:
-- *Update MSTest off the beta*
 - *Audit `Internal/` for dead code*
 - *Reconcile version numbers across artifacts*
 - *Investigate flakiness from leftover Visio processes*
@@ -25,6 +24,7 @@ Phase 1 items:
 Phase 1 items completed:
 - ✅ *Fix the misnamed PowerShell loader script* — rewrote it to actually `Save-Module` from the PS Gallery
 - ✅ *Add a `CLAUDE.md` at the repo root* — added with staged-plan, build commands, conventions, doc pointers
+- ✅ *Update MSTest off the beta* — upgraded `MSTest.TestFramework` and `MSTest.TestAdapter` from `2.0.0-beta2` to `4.2.2`; bumped `VTest` TFM 4.5 → 4.7.2 to satisfy MSTest 4.x's floor
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
@@ -54,10 +54,9 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 - **Why:** `PackageReference` is transitive, lockable, and the only model supported by `dotnet` CLI / SDK-style projects. Required before any modernization beyond Framework.
 - **Effort:** S–M
 
-### Update MSTest off the beta
-- **What:** All test projects pin `MSTest.TestFramework` to `2.0.0-beta2`.
-- **Why:** Pre-release dependency in test code is a smell; current MSTest is well past 3.x. Either bump to a current stable MSTest or migrate to xUnit/NUnit while we're touching it.
-- **Effort:** S
+### Update MSTest off the beta ✅ done
+- **What:** All test projects pinned `MSTest.TestFramework` and `MSTest.TestAdapter` to `2.0.0-beta2`.
+- **Resolution:** Upgraded both packages to **4.2.2** (latest stable) across all four test projects. Required bumping VTest from .NET Framework 4.5 → 4.7.2 (MSTest 4.x's floor is 4.6.2); the other test projects were already on 4.7.2. Solution builds cleanly. Test code did not need any changes — MSTest's `[TestMethod]`/`Assert.*` API surface is stable across the version jump. Tests not actually run (need a live Visio).
 
 ### Add CI
 - **What:** No GitHub Actions / Azure Pipelines configuration in the repo.
