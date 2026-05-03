@@ -6,8 +6,41 @@ Practical notes on building the solution, running the tests, and trying things o
 
 - **Microsoft Visio**, installed locally. The solution targets the Visio 2010 Primary Interop Assembly (`Microsoft.Office.Interop.Visio` v14) but works against newer Visio versions at runtime. Tests and samples instantiate a real Visio process, so Visio must be present on any machine that runs them.
 - **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [FUTURES.md](FUTURES.md).
-- **.NET Framework 4.5.2 Developer Pack.** The shipping libraries target .NET Framework 4.5, but modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. Install the [.NET Framework 4.5.2 Developer Pack](https://dotnet.microsoft.com/download/dotnet-framework/net452) (which covers reference assemblies down to 4.5) on every dev machine and CI runner. The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows.
+- **.NET Framework reference assemblies for v4.5.** The shipping libraries target .NET Framework 4.5, but modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. Without them, neither VS nor MSBuild can build the v4.5 projects. Install a Developer Pack that covers v4.5 — see commands below. The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows.
 - **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
+
+### Installing the .NET Framework Developer Pack
+
+.NET Framework Developer Packs are **cumulative**: a newer pack includes reference assemblies for every prior version. So you can install the 4.5.2 pack specifically, or just install a newer one (4.6.2+) and get v4.5 ref assemblies for free.
+
+All commands below need an **elevated shell** (the installer requires admin).
+
+**winget** (recommended — built into Windows 10/11). Microsoft only publishes winget manifests for 4.6.2 and later, so use 4.6.2 or any newer version (cumulative includes v4.5):
+
+```powershell
+winget install --id Microsoft.DotNet.Framework.DeveloperPack_4 --version 4.8.1
+```
+
+Available versions: `4.6.2`, `4.7`, `4.7.1`, `4.7.2`, `4.8`, `4.8.1`.
+
+**Chocolatey** (precise — directly installs the 4.5.2 pack):
+
+```powershell
+choco install netfx-4.5.2-devpack -y
+```
+
+**Manual download** (no package manager needed):
+
+```powershell
+$url = "https://download.microsoft.com/download/E/2/1/E21644B5-2DF2-47C2-91BD-63C560427900/NDP452-KB2901951-x86-x64-DevPack.exe"
+$out = "$env:TEMP\NDP452-DevPack.exe"
+Invoke-WebRequest -Uri $url -OutFile $out
+Start-Process -FilePath $out -ArgumentList "/q", "/norestart" -Wait
+```
+
+After install, restart Visual Studio (or the Developer Command Prompt) so it picks up the new reference assemblies.
+
+> **Note for CI:** the GitHub Actions workflow uses the chocolatey command above (chocolatey is pre-installed on the `windows-latest` runner). Phase 3 of the [refresh](FUTURES.md) bumps the libraries to v4.7.2 (in-box reference assemblies on every supported Windows), at which point this dev-pack install requirement goes away.
 
 ## Building
 
