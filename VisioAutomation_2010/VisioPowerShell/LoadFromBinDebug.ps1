@@ -1,25 +1,13 @@
-﻿# PURPOSE
+# PURPOSE
 # -------
-# Loads the module directly from bin/debug
+# Imports the locally-built Visio module directly from bin/Debug into the current
+# PowerShell session. This is the fastest way to test the module without installing
+# it — no copy to the user's PowerShell modules folder.
 #
-# This the fastest way to test the module without installing the module
-#
+# Run after building the solution in Debug.
 
-$visio_psd1 = join-path $PSScriptRoot ".\bin\Debug\Visio.psd1"
-Import-Module $visio_psd1 
+Set-StrictMode -Version 2
+$ErrorActionPreference = "Stop"
 
-# Get a new document ready
-New-VisioApplication
-New-VisioDocument
-
-
-$page_cells = New-VisioPageCells
-
-$page_cells.PageHeight = "5 in"
-$page_cells.PageHeight = "10 in"
-$page_cells.PrintLeftMargin = "0 in"
-
-New-VisioPage -Name "HelloWorld" -Cells $page_cells -Verbose
-
-
-
+$visio_psd1 = Join-Path $PSScriptRoot ".\bin\Debug\Visio.psd1"
+Import-Module $visio_psd1

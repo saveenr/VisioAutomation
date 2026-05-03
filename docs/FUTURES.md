@@ -149,9 +149,10 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 - **Effort:** S (policy) — or M (consolidation).
 
 ### Add a per-project `README.md` for the larger projects
-- **What:** Short orientation file in `VisioAutomation/`, `VisioAutomation.Models/`, `VisioScripting/`, `VisioPowerShell/`.
+- **Status:** [`VisioPowerShell/README.md`](../VisioAutomation_2010/VisioPowerShell/README.md) done — covers folder layout, helper scripts (with naming convention), and the `Demo/` subfolder. Sets the template for the others.
+- **Remaining:** Same treatment for `VisioAutomation/`, `VisioAutomation.Models/`, `VisioScripting/`.
 - **Why:** When someone opens a single project in isolation (e.g., GitHub directory view), they see context immediately rather than having to navigate to `docs/`.
-- **Effort:** S.
+- **Effort:** S per project.
 
 ---
 
