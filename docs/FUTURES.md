@@ -15,7 +15,6 @@ Phase 1 items:
 - *Update MSTest off the beta*
 - *Audit `Internal/` for dead code*
 - *Reconcile version numbers across artifacts*
-- *Fix the misnamed PowerShell loader script*
 - *Investigate flakiness from leftover Visio processes*
 - *Add a `CLAUDE.md` at the repo root*
 - *Add a `CONTRIBUTING.md`*
@@ -23,6 +22,9 @@ Phase 1 items:
 - *Add a per-project `README.md` for the larger projects*
 - *Revise user-facing documentation for accuracy* (the largest item)
 - *Add CI* (build-only is enough for this phase)
+
+Phase 1 items completed:
+- ✅ *Fix the misnamed PowerShell loader script* — rewrote it to actually `Save-Module` from the PS Gallery
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
@@ -109,10 +111,9 @@ Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (
 - **Why:** Hard to tell at a glance which library version corresponds to which module version. Pick a single source of truth (e.g., a `Directory.Build.props` with one shared version) or document the versioning policy explicitly.
 - **Effort:** S.
 
-### Fix the misnamed PowerShell loader script
-- **What:** [`DownloadFromPowerShellGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/DownloadFromPowerShellGallery.ps1) does not download from the PowerShell Gallery — it `Import-Module`s the local `bin\Debug` build.
-- **Why:** Misleading. Either rename it (e.g., `LoadFromBinDebug_Alt.ps1`) and delete if redundant with `LoadFromBinDebug.ps1`, or make it actually fetch from the Gallery.
-- **Effort:** S.
+### Fix the misnamed PowerShell loader script ✅ done
+- **What:** [`DownloadFromPowerShellGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/DownloadFromPowerShellGallery.ps1) did not download from the PowerShell Gallery — it `Import-Module`d the local `bin\Debug` build.
+- **Resolution:** Rewrote the script to `Save-Module Visio` from PSGallery into a local `DownloadedModule/` subfolder (gitignored) and `Import-Module` that. Now serves as a one-shot release-verification helper. Documented in the file's header.
 
 ### Publish the PowerShell module to the PowerShell Gallery
 - **What:** The module is currently distributed only by manual install (`InstallForCurrentUser.ps1`).
