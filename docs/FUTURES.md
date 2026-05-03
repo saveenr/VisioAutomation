@@ -9,7 +9,7 @@ A running list of cleanup, modernization, and improvement items for the VisioAut
 The 2026 refresh runs in three phases. Each backlog item below is tagged with its phase.
 
 ### Phase 1 — VS 2022 cleanup *(in progress)*
-Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5 for shipping libs). Code + docs improvements only, **no new features**. Anything that would destabilize a release (TFM jump, IDE jump, csproj-format change, breaking API change) waits for Phase 3.
+Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5.2 for shipping libs, 4.7.2 for tests). Code + docs improvements only, **no new features**. Anything that would destabilize a release (major TFM jump, IDE jump, csproj-format change, breaking API change) waits for Phase 3.
 
 Phase 1 items:
 - *Revise user-facing documentation for accuracy* (the largest item)
@@ -26,7 +26,7 @@ Phase 1 items completed:
 - ✅ *Add CI* (build-only) — `.github/workflows/build.yml` builds the solution on push/PR for `master` and `2026_Refresh`, pinned to VS 2022 MSBuild, NuGet packages cached. Test runs in CI deferred to Phase 3 (needs self-hosted runner with Visio).
 
 ### Phase 2 — Cut the final release
-Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
+Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5.2 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
 
 Phase 2 prerequisites (must be settled before the release ships):
 - *Reconcile version numbers across artifacts* — needs a deeper conversation before a decision; **currently deferred**, do not implement until discussed.
@@ -47,7 +47,7 @@ Phase 2 prerequisites (must be settled before the release ships):
 ## Build & tooling
 
 ### Consolidate target frameworks
-- **Status:** Step 1 done. All shipping libraries (`VisioAutomation`, `VisioAutomation.Models`, `VisioScripting`, `VisioPowerShell`) and both sample projects (`VSamples`, `VSamples.Docs`) are now on **.NET Framework 4.5** — converged on the TFM `VisioPowerShell` was already using. Test projects intentionally left on their existing TFMs (`VTest` on 4.5; `VTest.Models` / `VTest.Scripting` / `VTest.PowerShell` on 4.7.2) since they don't ship.
+- **Status:** Step 1 done. All shipping libraries (`VisioAutomation`, `VisioAutomation.Models`, `VisioScripting`, `VisioPowerShell`) and both sample projects (`VSamples`, `VSamples.Docs`) are now on **.NET Framework 4.5.2** (originally bumped from 4.0 → 4.5 in commit `2fd6b466`, then 4.5 → 4.5.2 to satisfy the available Developer Pack — see BUILDING.md). Test projects on **.NET Framework 4.7.2** (VTest moved there as part of the MSTest 4.x upgrade; the others were already there).
 - **Step 2 (remaining):** Bump the shipping fleet again to clear the **VS 2026** floor (Framework 4.6.2 minimum). Recommended landing point: **4.7.2** — same TFM the test projects already use, so the whole solution converges on one number. **Side benefit of step 2:** the .NET Framework 4.5.2 Developer Pack will no longer be required on dev machines or CI runners (currently it is — see [BUILDING.md](BUILDING.md) prereqs). The v4.7.2 reference assemblies ship in-box on every supported Windows. See *Move development to Visual Studio 2026* below.
 - **Why:** Mixed TFMs cause subtle binary-compatibility surprises (a test project on a higher TFM can use APIs the library under test cannot). Step 1 eliminated the production 4.0/4.5 split; step 2 will eliminate the 4.5/4.7.2 split between shipping libs and tests, and let us drop the v4.5 reference-assemblies NuGet workaround.
 - **Effort:** S (already partially done).
@@ -62,7 +62,7 @@ Phase 2 prerequisites (must be settled before the release ships):
 - **Resolution:** Upgraded both packages to **4.2.2** (latest stable) across all four test projects. Required bumping VTest from .NET Framework 4.5 → 4.7.2 (MSTest 4.x's floor is 4.6.2); the other test projects were already on 4.7.2. Solution builds cleanly. Test code did not need any changes — MSTest's `[TestMethod]`/`Assert.*` API surface is stable across the version jump. Tests not actually run (need a live Visio).
 
 ### Add CI ✅ done (build-only)
-- **Resolution:** [`.github/workflows/build.yml`](../.github/workflows/build.yml) added. Builds the solution in Debug on every push to `master` / `2026_Refresh` and on every PR. Pinned to VS 2022's MSBuild (`vs-version: '17.0'`) since VS 2026's MSBuild can't resolve the .NET Framework 4.5 reference assemblies the shipping libs need. NuGet packages are cached keyed on the hash of all `packages.config` files. Build status surfaces as a badge in the root README.
+- **Resolution:** [`.github/workflows/build.yml`](../.github/workflows/build.yml) added. Builds the solution in Debug on every push to `master` / `2026_Refresh` and on every PR. Pinned to VS 2022's MSBuild (`vs-version: '17.0'`) since VS 2026's MSBuild can't resolve the .NET Framework 4.5.2 reference assemblies the shipping libs need. The workflow also installs the .NET Framework 4.5.2 Developer Pack via chocolatey before building (those reference assemblies aren't on the runner image). NuGet packages are cached keyed on the hash of all `packages.config` files. Build status surfaces as a badge in the root README.
 - **Still to do (Phase 3):** Run the tests in CI. This needs a self-hosted Windows runner with Microsoft Visio installed. Track alongside *Automate releases via GitHub CI* in Phase 3.
 
 ### Modernize SDK-style csproj
@@ -171,7 +171,7 @@ Phase 2 prerequisites (must be settled before the release ships):
 ### Move development to Visual Studio 2026
 - **What:** Bump the solution from VS 2022 (`VisualStudioVersion = 17.0` in the .sln) to VS 2026. Stay on .NET Framework — do not migrate to modern .NET (Core).
 - **Constraint discovered during research:** VS 2026 supports .NET Framework targets **4.6.2, 4.7, 4.7.1, 4.7.2, 4.8, 4.8.1** only. Framework 4.0 / 4.5 / 4.5.x / 4.6 / 4.6.1 are **not** supported targets in VS 2026. Source: [Visual Studio 2026 Compatibility](https://learn.microsoft.com/en-us/visualstudio/releases/2026/compatibility).
-- **Implication:** the shipping fleet (currently on 4.5 after step 1 of *Consolidate target frameworks*) must bump again before VS 2026 can build it. Recommended landing point: **4.7.2** — clears the VS 2026 floor *and* converges with the existing test-project TFM in one move.
+- **Implication:** the shipping fleet (currently on 4.5.2 after step 1 of *Consolidate target frameworks*) must bump again before VS 2026 can build it. Recommended landing point: **4.7.2** — clears the VS 2026 floor *and* converges with the existing test-project TFM in one move.
 - **VisioPowerShell older-PowerShell support is preserved** by this bump: the older-PS floor is set by the `System.Management.Automation` v3 reference and the `ModuleToProcess`/`PowerShellVersion = 2.0` choices in [Visio.psd1](../VisioAutomation_2010/VisioPowerShell/Visio.psd1), not by the .NET Framework TFM. Bumping 4.5 → 4.7.2 doesn't change that.
 - **Cross-refs:** Drives step 2 of *Consolidate target frameworks*. Supersedes *Decide whether to move to .NET 6/8* for now (defer that decision).
 - **Effort:** S — bump TFMs, bump `VisualStudioVersion` in the .sln, open in VS 2026, full rebuild.

@@ -10,7 +10,7 @@ A .NET Framework library plus a PowerShell module that automate Microsoft Visio 
 
 Active branch: `2026_Refresh`. Work is staged in three phases per [docs/FUTURES.md](docs/FUTURES.md):
 
-1. **Phase 1 — VS 2022 cleanup** *(currently in progress)*. Stay on the current TFMs (.NET Framework 4.5 for shipping libs, mixed for tests). **No new features.** No TFM bumps, no IDE upgrades, no csproj-format changes — those wait for Phase 3.
+1. **Phase 1 — VS 2022 cleanup** *(currently in progress)*. Stay on the current TFMs (.NET Framework 4.5.2 for shipping libs, .NET Framework 4.7.2 for tests). **No new features.** No major TFM bumps, no IDE upgrades, no csproj-format changes — those wait for Phase 3.
 2. **Phase 2 — Cut a final release** of the `VisioAutomation2010` NuGet and the `Visio` PowerShell module with refreshed docs.
 3. **Phase 3 — Modernization.** Move to VS 2026 (which requires bumping TFMs to 4.7.2), modern C#, possibly modern .NET, automated releases.
 

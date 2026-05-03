@@ -5,7 +5,7 @@ name: Build
 # requires a self-hosted runner — that's planned for Phase 3 when releases
 # are also automated).
 #
-# Pinned to VS 2022's MSBuild because the .NET Framework 4.5 reference
+# Pinned to VS 2022's MSBuild because the .NET Framework 4.5.2 reference
 # assemblies needed to build the shipping libs are not resolved by VS 2026's
 # MSBuild. See docs/BUILDING.md and docs/FUTURES.md.
 
@@ -34,10 +34,10 @@ jobs:
         with:
           vs-version: '17.0'
 
-      # The shipping libraries target .NET Framework 4.5, whose reference
+      # The shipping libraries target .NET Framework 4.5.2, whose reference
       # assemblies are not present on the windows-latest runner image.
-      # Install the 4.5.2 Developer Pack (covers v4.5 ref assemblies) via
-      # Chocolatey, which is pre-installed on the runner.
+      # Install the 4.5.2 Developer Pack via Chocolatey, which is
+      # pre-installed on the runner.
       # Phase 3 will bump these projects to 4.7.2 (in-box on every
       # supported Windows) and this step can be deleted.
       - name: Install .NET Framework 4.5.2 Developer Pack

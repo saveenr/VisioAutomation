@@ -6,14 +6,14 @@ Practical notes on building the solution, running the tests, and trying things o
 
 - **Microsoft Visio**, installed locally. The solution targets the Visio 2010 Primary Interop Assembly (`Microsoft.Office.Interop.Visio` v14) but works against newer Visio versions at runtime. Tests and samples instantiate a real Visio process, so Visio must be present on any machine that runs them.
 - **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [FUTURES.md](FUTURES.md).
-- **.NET Framework reference assemblies for v4.5.** The shipping libraries target .NET Framework 4.5, but modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. Without them, neither VS nor MSBuild can build the v4.5 projects. Install a Developer Pack that covers v4.5 — see commands below. The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows.
+- **.NET Framework 4.5.2 reference assemblies.** The shipping libraries target .NET Framework 4.5.2, but modern Windows install media don't include the v4.5.2 targeting pack — the reference DLLs are missing on disk. Without them, neither VS nor MSBuild can build the libs. Install the **.NET Framework 4.5.2 Developer Pack** — see commands below. The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows.
 - **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
 
 ### Installing the .NET Framework 4.5.2 Developer Pack
 
-**.NET Framework Developer Packs are NOT cumulative** — each pack ships only its own version's reference assemblies. To build v4.5 projects you specifically need the **4.5.2 Developer Pack** (covers v4.5, v4.5.1, v4.5.2). Installing a newer pack (4.6.2 / 4.7 / 4.8) does not give you v4.5 reference assemblies.
+**.NET Framework Developer Packs are NOT cumulative** — each pack ships only its own version's reference assemblies. The shipping libraries target v4.5.2 specifically, so you need the **4.5.2 Developer Pack**. Installing a newer pack (4.6.2 / 4.7 / 4.8) populates a different folder and does not satisfy the v4.5.2 build requirement.
 
-Microsoft does **not** publish a winget manifest for the 4.5.x Developer Pack — only for 4.6.2 and later. Use chocolatey or a direct download.
+Microsoft does **not** publish a winget manifest for the 4.5.2 Developer Pack — only for 4.6.2 and later (which doesn't help, since dev packs aren't cumulative). Use chocolatey or a direct download.
 
 All commands below need an **elevated shell** (the installer requires admin).
 

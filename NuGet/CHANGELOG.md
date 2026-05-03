@@ -11,7 +11,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 ## [Unreleased]
 
 ### Changed
-- Minimum required .NET Framework raised from 4.0 to 4.5. Consumers running .NET Framework 4.5 or later are unaffected.
+- Minimum required .NET Framework raised from 4.0 to **4.5.2**. .NET Framework 4.5.2 was released in 2014 and has shipped via Windows Update for years, so consumers on a current Windows machine are essentially unaffected.
 
 ## Earlier versions
 
