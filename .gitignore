@@ -224,3 +224,12 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+#################
+## Claude Code
+#################
+
+# Per-user local settings (permissions etc.) should not be committed.
+# If shared project-level settings are added later, un-ignore with:
+#   !.claude/settings.json
+.claude/
