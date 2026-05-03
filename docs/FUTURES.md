@@ -16,7 +16,6 @@ Phase 1 items:
 - *Investigate flakiness from leftover Visio processes*
 - *Add a `CONTRIBUTING.md`*
 - *Expand the root `readme.md`*
-- *Add a per-project `README.md` for the larger projects*
 - *Revise user-facing documentation for accuracy* (the largest item)
 - *Add CI* (build-only is enough for this phase)
 
@@ -24,6 +23,7 @@ Phase 1 items completed:
 - ✅ *Fix the misnamed PowerShell loader script* — rewrote it to actually `Save-Module` from the PS Gallery
 - ✅ *Add a `CLAUDE.md` at the repo root* — added with staged-plan, build commands, conventions, doc pointers
 - ✅ *Update MSTest off the beta* — upgraded `MSTest.TestFramework` and `MSTest.TestAdapter` from `2.0.0-beta2` to `4.2.2`; bumped `VTest` TFM 4.5 → 4.7.2 to satisfy MSTest 4.x's floor
+- ✅ *Add a per-project `README.md` for the larger projects* — `VisioAutomation/`, `VisioAutomation.Models/`, `VisioScripting/`, `VisioPowerShell/` (already had one)
 
 ### Phase 2 — Cut the final release
 Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
@@ -159,11 +159,8 @@ Phase 2 prerequisites (must be settled before the release ships):
 - **How to apply:** When a Phase 1 commit changes anything a consumer of the NuGet or PS module would notice (public API, parameter behavior, supported runtime, dependencies), add an entry to the corresponding CHANGELOG's `[Unreleased]` in the same commit. Pure internal/build/docs changes don't need entries.
 - **Effort:** ~zero per change, if done in the same commit.
 
-### Add a per-project `README.md` for the larger projects
-- **Status:** [`VisioPowerShell/README.md`](../VisioAutomation_2010/VisioPowerShell/README.md) done — covers folder layout, helper scripts (with naming convention), and the `Demo/` subfolder. Sets the template for the others.
-- **Remaining:** Same treatment for `VisioAutomation/`, `VisioAutomation.Models/`, `VisioScripting/`.
-- **Why:** When someone opens a single project in isolation (e.g., GitHub directory view), they see context immediately rather than having to navigate to `docs/`.
-- **Effort:** S per project.
+### Add a per-project `README.md` for the larger projects ✅ done
+- **Resolution:** READMEs added for all four larger projects: [`VisioAutomation/`](../VisioAutomation_2010/VisioAutomation/README.md), [`VisioAutomation.Models/`](../VisioAutomation_2010/VisioAutomation.Models/README.md), [`VisioScripting/`](../VisioAutomation_2010/VisioScripting/README.md), [`VisioPowerShell/`](../VisioAutomation_2010/VisioPowerShell/README.md). Each covers folder layout, key types where relevant, and pointers to ARCHITECTURE / GLOSSARY / BUILDING / CHANGELOG.
 
 ---
 
