@@ -1,0 +1,16 @@
+# VisioAutomation — Documentation
+
+**VisioAutomation** is a set of .NET libraries for automating a running instance of Microsoft Visio. It wraps the Visio COM API in ergonomic .NET types, adds a higher-level scripting facade, and ships a PowerShell module on top.
+
+This `docs/` folder contains the **internal / developer-facing** documentation for the codebase itself. The user-facing usage docs live separately:
+
+- VisioAutomation user guide — https://saveenr.gitbook.io/visioautomation/
+- Visio PowerShell user guide — https://saveenr.gitbook.io/visiopowershell/
+- Source for those gitbook docs — https://github.com/saveenr/VisioAutomation_GitBook_Docs
+
+## Documents in this folder
+
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** — projects in the solution, what each is responsible for, how they depend on one another, and the central concepts (ShapeSheet addressing, batch I/O, the DOM, the scripting Client).
+- **[BUILDING.md](BUILDING.md)** — prerequisites, how to build, how to run the tests, how to load the PowerShell module locally, and known rough edges worth cleaning up.
+- **[GLOSSARY.md](GLOSSARY.md)** — Visio-specific terms (ShapeSheet, SRC/SIDSRC, master, stencil, …) and codebase-specific terms (`VisioObjectTarget`, `Target*`, cell-group types, …).
+- **[FUTURES.md](FUTURES.md)** — backlog of cleanup, modernization, and improvement items being collected for the 2026 refresh.
