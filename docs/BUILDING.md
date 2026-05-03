@@ -6,8 +6,8 @@ Practical notes on building the solution, running the tests, and trying things o
 
 - **Microsoft Visio**, installed locally. The solution targets the Visio 2010 Primary Interop Assembly (`Microsoft.Office.Interop.Visio` v14) but works against newer Visio versions at runtime. Tests and samples instantiate a real Visio process, so Visio must be present on any machine that runs them.
 - **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [FUTURES.md](FUTURES.md).
+- **.NET Framework 4.5.2 Developer Pack.** The shipping libraries target .NET Framework 4.5, but modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. Install the [.NET Framework 4.5.2 Developer Pack](https://dotnet.microsoft.com/download/dotnet-framework/net452) (which covers reference assemblies down to 4.5) on every dev machine and CI runner. The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows.
 - **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
-- **No separate .NET Framework Developer Pack install is required.** The .NET Framework 4.5 reference assemblies are pulled from the `Microsoft.NETFramework.ReferenceAssemblies.net45` NuGet package (a development dependency — no effect on built binaries). The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows. See *Note on the v4.5 reference-assemblies NuGet* below.
 
 ## Building
 
@@ -36,14 +36,6 @@ msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
 Or open [`VisioAutomation_2010/VisioAutomation2010.sln`](../VisioAutomation_2010/VisioAutomation2010.sln) in Visual Studio 2022 and build the solution — the IDE handles restore automatically.
 
 The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutomation_2010/VisioAutomation/packages.config) NuGet package, so a clean machine without Visio's developer tools installed will still restore the interop reference.
-
-### Note on the v4.5 reference-assemblies NuGet
-
-Each of the six projects targeting .NET Framework 4.5 imports build targets from the `Microsoft.NETFramework.ReferenceAssemblies.net45` NuGet package. This is necessary because modern Windows install media ship only XML doc stubs for the v4.5 targeting pack — the actual reference DLLs are missing on disk. The NuGet package supplies them at restore time so the v4.5 projects build without needing a legacy Developer Pack install. The import + missing-package-error block lives near the bottom of each csproj, immediately after `Microsoft.CSharp.targets` (the package's targets file conditions on `$(TargetFrameworkIdentifier)`, which is set by `Microsoft.CSharp.targets` — so the import must come *after*).
-
-The package is a **development dependency** — its DLLs do not get copied into output binaries, do not appear in the assembly metadata, and have no effect on consumers of the published NuGet/PowerShell-Gallery artifacts. The compiled output is byte-identical to one built against an installed Developer Pack.
-
-This package is **transient**. Phase 3 of the [2026 refresh](FUTURES.md) bumps the v4.5 projects to v4.7.2, at which point the package, the corresponding `packages.config` entries, and the per-csproj `<Import>` blocks can all be deleted — the v4.7.2 reference assemblies ship in-box on every supported Windows.
 
 ## Continuous integration
 
