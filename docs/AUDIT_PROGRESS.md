@@ -8,10 +8,10 @@ Two gitbook source repos, cloned as siblings of `VisioAutomation/`:
 
 | Repo | Branch audited | .md files | Lines | Last meaningful commit |
 |---|---|---|---|---|
-| [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) | `main` | 17 | 684 | 2026-05-03 (squashed gitbook syncs — content age unclear) |
-| [`VisioPowerShellDocs`](https://github.com/saveenr/VisioPowerShellDocs) | `visiosps4.0.0docs` | 114 | 2,463 | 2019-10-13 |
+| [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) | `main` | 17 | 684 | 2026-05-03 (squashed gitbook syncs) |
+| [`VisioPowerShellDocs`](https://github.com/saveenr/VisioPowerShellDocs) | **`visiops_v4_docs`** | 116 | 2,214 | 2026-05-03 (`ccaf78d`, recent gitbook sync) |
 
-The PS docs branch is pinned to module v4.0.0; the current module version is **4.6.0**, so the PS docs are roughly 6.5 years stale across 0.6 minor releases.
+The PS docs repo also has a `visiops_v3_docs` branch (older). The current PS module ships at v4.6.0, so the v4 doc branch is the right canonical target — it just trails the module by 0.6 minor versions.
 
 ## Status legend
 
@@ -42,7 +42,7 @@ The PS docs branch is pinned to module v4.0.0; the current module version is **4
 | `classes.md` | ⬜ |
 | `related-projects.md` | ⬜ |
 
-## VisioPowerShellDocs (`visiosps4.0.0docs` branch)
+## VisioPowerShellDocs (`visiops_v4_docs` branch)
 
 Structural pages:
 
@@ -53,65 +53,73 @@ Structural pages:
 | `links.md` | 🔧 |
 | `quick-start.md` | 🔧 |
 
-Section landings + content (114 files total):
+Section landings + content:
 
-| Section | Files | Status |
-|---|---|---|
-| `basics/` | 12 | ⬜ |
-| `cmdlets/` | 66 | ⬜ |
-| `automatic-diagrams/` | 8 | ⬜ |
-| `samples/` | 6 | ⬜ |
-| `installation/` | 4 | ⬜ |
-| `developer-info/` | 3 | ⬜ |
-| `technical-notes/` | 11 | ⬜ |
+| Section | Files | Lines | Status |
+|---|---|---|---|
+| `basics/` | 15 | 457 | ⬜ |
+| `cmdlets/` | 66 | 977 | ⬜ |
+| `automatic-diagrams/` | 8 | 260 | ⬜ |
+| `samples/` | 5 | 198 | ⬜ |
+| `installation/` | 4 | 61 | ⬜ |
+| `developer-info/` | 3 | 93 | ⬜ |
+| `technical-notes/` | 11 | 168 | ⬜ |
 
 ---
 
 ## Findings
 
 ### VisioAutomation_GitBook_Docs/README.md 🔧
+
 - Links to **`https://github.com/saveenr/VisioPowerShell/wiki`** for the PowerShell module — that separate repo doesn't exist anymore; the PS module lives **inside** the main `VisioAutomation` repo. Replace with link to either the PS gitbook (`https://saveenr.gitbook.io/visiopowershell/`) or the in-repo `VisioAutomation_2010/VisioPowerShell/README.md`.
 - Links to **`https://github.com/saveenr/Visio-Power-Tools/releases`** "no longer maintained" — verify the repo still exists, otherwise remove the line.
 - VisioAutomation 2007 reference is fine to keep as historical context.
 
 ### VisioPowerShellDocs/README.md 🔧
-- Front matter: `description: This documentation is being updated to cover Visio PowerShell Version 4.4.0` — current module version is **4.6.0**.
-- Vimeo demo link from ~2014; content acknowledged as older. Keep, since principles still apply.
+
+- Front matter: `description: This documentation covers Visio PowerShell version 4.5.0` — current module version on the PowerShell Gallery is **4.6.0**.
+- Mentions Visio 2010 compatibility (matches the module's own description). OK.
+- "Alternatives" section recommends `VisioBot3000` — verify the repo is still maintained before keeping the recommendation.
 
 ### VisioPowerShellDocs/SUMMARY.md 🔧
-- **Definitely wrong link:** `Set-VisioUserDefinedCell` points at `cmdlets/user-defined-cells/remove-visiocustomproperty.md` — wrong file (points to a *remove* cmdlet under the *custom-properties* topic).
-- **Definitely wrong link:** `Close Visio applications` (in `basics/`) points at `basics/get-userdefinedcell.md` — wrong file.
+
+- **Definitely wrong link** (line 100): `Set-VisioUserDefinedCell` points at `cmdlets/user-defined-cells/remove-visiocustomproperty.md` — wrong file (it's a *remove* cmdlet under the *custom-properties* topic). The Set-VisioUserDefinedCell page should presumably exist as its own file.
+- **Definitely wrong link** (line 15): `Close Visio applications` (in `basics/`) points at `basics/get-userdefinedcell.md` — wrong file.
 - **Wrong cmdlet names** (current code uses `VisioUserDefinedCell`, not `UserDefinedCell`):
-  - `Get-UserDefinedCell` → should be `Get-VisioUserDefinedCell`
-  - `Remove-UserDefinedCell` → should be `Remove-VisioUserDefinedCell`
-- `Select-VisioShape Invert` and `Select-VisioShape -None` are listed as separate cmdlets but they are parameter variations of `Select-VisioShape`. Consider folding into one entry or being explicit they're parameter usages.
-- **12 `[TBD]` markers** in the table of contents — content was never written for those.
-- **Cmdlet inventory delta:** 66 cmdlet entries here vs 64 cmdlet `.cs` files in current code. Need a per-cmdlet diff to identify (a) cmdlets renamed, (b) cmdlets removed, (c) cmdlets added since 2019. *(Deferred to per-cmdlet audit.)*
+  - Line 99: `Get-UserDefinedCell` → should be `Get-VisioUserDefinedCell`
+  - Line 101: `Remove-UserDefinedCell` → should be `Remove-VisioUserDefinedCell`
+- **Typo** (line 122): `[Publis to PowerShell Gallery]` — should be "Publish".
+- `Select-VisioShape Invert` and `Select-VisioShape -None` (lines 89-90) are listed as separate cmdlets but they are parameter variations of `Select-VisioShape`. Consider folding into one entry or being explicit they're parameter usages.
+- **3 `[TBD]` markers** indicate pages that were never written: `Copy-VisioPage [TBD]` (line 71), `Select-VisioPage [TBD]` (line 78), `Get-VisioText [TBD]` (line 106). Note: `Copy-VisioPage` *does* exist in the current code (`Commands/VisioPage/CopyVisioPage.cs`), so the page can be written. Same for `Get-VisioText` (`Commands/VisioText/GetVisioText.cs`). `Select-VisioPage` also exists. All three TBDs can be filled in.
+- **Cmdlet inventory delta:** 66 cmdlet entries here vs 64 cmdlet `.cs` files in current code. Per-cmdlet diff still needed to identify renames/removals/additions.
 
 ### VisioPowerShellDocs/links.md 🔧
+
 - TechNet blog link `http://blogs.technet.com/b/heyscriptingguy/...` — Microsoft retired the `blogs.technet.com` domain years ago. Likely dead / 404. Replace with the migrated URL on `learn.microsoft.com` or remove.
 - Third-party tools `VisioBot3000` and `PSVA` — verify the repos still exist and are not abandoned before keeping the links.
 
 ### VisioPowerShellDocs/quick-start.md 🔧
-- **Line 30: stale namespace.** `New-Object VisioAutomation.Geometry.Point(4,5)` — that namespace does not exist in the current code. The current namespace for `Point` is `VisioAutomation.Core.Point` (per `docs/ARCHITECTURE.md`). The example as written will fail with a type-not-found error.
-- **Line 28: `basic_u.vss`** — the legacy `.vss` stencil format may still work but `.vssx` is modern. Verify the example still loads on a current Visio.
-- **Code blocks use `` ```text ``** instead of `` ```powershell `` (lines 7-11, 22-34). Switching gives proper syntax highlighting on the gitbook page.
+
+- **Line 17:** `Open-VisioDocument "basic_u.vss"` — the legacy `.vss` stencil format may still work but `.vssx` is modern. Verify the example still loads on a current Visio.
+- **Code blocks have no language tag** (lines 5-7, 11-23) — adding `powershell` enables syntax highlighting on the gitbook page.
+- **Line 33:** prose says *"The variable `$p` is defined …"* but the script uses `$points`. Should say `$points`.
 - **Asset reference** `.gitbook/assets/snap00001.png` — verify the file exists in the repo (it's in the gitbook-managed folder, may or may not be tracked).
 
 ---
 
-## Open questions for the next session
+## Open questions for later
 
-- **Should we keep both gitbook repos as the source of truth, or consolidate?** Phase 3 has a separate FUTURES item for "Decide where docs live long-term." The audit might surface enough drift that consolidation becomes more attractive — track findings here and revisit.
-- **For broken example code in the docs (e.g., `VisioAutomation.Geometry.Point`),** do we fix in place against the current API, or fix against the API as it was when the doc was written (and bump the doc's version pin)? The PS docs are explicitly version-pinned to `visiosps4.0.0docs` — meaning the code examples there *should* match v4.0.0 of the module, not v4.6.0. If we fix against v4.6.0, we should rename the branch (`visiosps4.6.0docs`) or drop the version pin altogether.
+- **Where the docs should ultimately live.** The Phase 3 FUTURES item *"Decide where docs live long-term"* — the audit might surface enough drift / stale infrastructure that consolidation becomes more attractive than fixing in place. Track and revisit.
+- **Branch versioning policy.** Now that `visiops_v3_docs` and `visiops_v4_docs` are the two branches, who keeps them in sync? If a fix applies to both, do we cherry-pick? My instinct: **only audit/fix `visiops_v4_docs`** (the current canonical), and let v3 be a frozen historical record for users still on the older module.
 
 ---
 
 ## Next steps
 
-1. ✅ Initial scoping (this commit)
-2. ⬜ Finish auditing the structural pages of `VisioAutomation_GitBook_Docs` (`SUMMARY.md`)
-3. ⬜ Per-cmdlet inventory diff: which docs cmdlets exist in current code, which don't, and vice versa
-4. ⬜ Audit each section folder of the PS docs in turn (`basics/`, `cmdlets/`, …)
-5. ⬜ Audit each substantive page of `VisioAutomation_GitBook_Docs` (`shapesheet/*`, `convert-values.md`, etc.)
-6. ⬜ Once findings are complete, propose fix PRs against each gitbook repo
+1. ✅ Initial scoping
+2. ✅ Structural-page audit (READMEs, SUMMARYs, links, quick-start)
+3. ⬜ Audit `SUMMARY.md` of VisioAutomation gitbook
+4. ⬜ Per-cmdlet inventory diff (66 docs entries vs 64 code files): identify renames, removals, additions
+5. ⬜ Audit each section folder of the PS docs in turn (`basics/`, `cmdlets/`, …)
+6. ⬜ Audit each substantive page of `VisioAutomation_GitBook_Docs` (`shapesheet/*`, `convert-values.md`, etc.)
+7. ⬜ Once findings are complete, propose fix PRs against each gitbook repo
