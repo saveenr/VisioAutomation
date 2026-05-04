@@ -36,6 +36,22 @@ param(
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
+# ----- Explicit PowerShell host check -----
+# Different PowerShell editions use different user-module paths and have
+# different Publish-Module versions. Capture what we're running so it's
+# visible in the banner below, and refuse to proceed on anything below 5.1.
+$ps_version = $PSVersionTable.PSVersion
+$ps_edition = if ($PSVersionTable.PSObject.Properties.Name -contains 'PSEdition') {
+    $PSVersionTable.PSEdition
+}
+else {
+    'Desktop'   # PS 5.1 ships with PSEdition; PS 2.0–3.0 don't.
+}
+$ps_min = [Version]'5.1'
+if ($ps_version -lt $ps_min) {
+    throw "PowerShell $ps_version is too old to publish. Need at least $ps_min (Windows PowerShell 5.1) or PowerShell 7+."
+}
+
 # ----- Resolve API key -----
 if (-not $ApiKey) {
     if ($env:PSGalleryApiKey) {
@@ -73,9 +89,15 @@ Write-Host "Publishing Visio PowerShell module to PSGallery"
 Write-Host "----------------------------------------------------"
 Write-Host "Version : $version"
 Write-Host "Tag     : $tag"
+Write-Host "Host    : PowerShell $ps_version ($ps_edition), PID $PID"
 Write-Host "WhatIf  : $WhatIf"
 Write-Host "===================================================="
 Write-Host ""
+if ($ps_edition -eq 'Core') {
+    Write-Host "Note: running under PowerShell 7+. Using Publish-Module -Path"
+    Write-Host "      to bypass the PS 5.1 vs 7 user-module path split."
+    Write-Host ""
+}
 
 # ----- Step 1: stage the build -----
 Write-Host "[1/3] Staging module via InstallForCurrentUser.ps1 ..."
