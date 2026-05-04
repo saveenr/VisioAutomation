@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Framework
@@ -36,6 +37,28 @@ namespace VTest.Framework
             }
 
             return this.app;
+        }
+
+        public void QuitVisioApplication()
+        {
+            // Called from [AssemblyCleanup] hooks so that the per-testhost
+            // singleton doesn't outlive the test run as an orphan process.
+            // Force-close all documents first so Quit doesn't pop a save
+            // prompt and hang the testhost. Swallow exceptions: teardown
+            // shouldn't throw or propagate to the test runner.
+            var current = this.app;
+            this.app = null;
+            if (current == null) { return; }
+            try
+            {
+                var documents = current.Documents;
+                while (documents.Count > 0)
+                {
+                    current.ActiveDocument.Close(true);
+                }
+                current.Quit(true);
+            }
+            catch (COMException) { }
         }
     }
 }

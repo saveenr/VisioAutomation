@@ -79,6 +79,7 @@
     <Compile Include="Scripting_SelectionTests.cs" />
     <Compile Include="Scripting_ShapeSheetTests.cs" />
     <Compile Include="Scripting_ShapeText_Tests.cs" />
+    <Compile Include="AssemblyHooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting_DropContainerTests.cs" />
   </ItemGroup>

@@ -67,14 +67,14 @@ namespace VTest.Models
             n_a.Size = new VA.Core.Size(4, 2);
             orgchart.OrgCharts.Add(n_a);
 
-            var app = new IVisio.Application();
+            var app = this.GetVisioApplication();
             orgchart.Render(app);
 
             var active_page = app.ActivePage;
             var page = active_page;
             page.ResizeToFitContents();
 
-            app.Quit(true);
+            app.ActiveDocument.Close(true);
         }
 
         [MUT.TestMethod]
@@ -99,7 +99,7 @@ namespace VTest.Models
 
             orgchart_doc.OrgCharts.Add(n_a);
 
-            var app = new IVisio.Application();
+            var app = this.GetVisioApplication();
 
             orgchart_doc.Render(app);
 
@@ -127,7 +127,7 @@ namespace VTest.Models
             MUT.Assert.AreEqual(new VA.Core.Size(4, 2), Framework.VTest.GetSize(n_a.VisioShape));
             MUT.Assert.AreEqual(orgchart_doc.OrgChartLayoutOptions.DefaultNodeSize, Framework.VTest.GetSize(n_b.VisioShape));
 
-            app.Quit(true);
+            app.ActiveDocument.Close(true);
         }
 
         [MUT.TestMethod]
@@ -154,11 +154,11 @@ namespace VTest.Models
             orgchart.OrgCharts.Add(n_a);
             orgchart.OrgCharts.Add(n_a);
 
-            var app = new IVisio.Application();
+            var app = this.GetVisioApplication();
 
             orgchart.Render(app);
 
-            app.Quit(true);
+            app.ActiveDocument.Close(true);
         }
 
 

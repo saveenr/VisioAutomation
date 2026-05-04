@@ -18,13 +18,12 @@ namespace VTest.PowerShell
         [MUT.ClassCleanup]
         public static void ClassCleanup()
         {
+            // Close Visio before tearing down the runspace, so the testhost
+            // doesn't leave a Visio orphan after exit. Swallow any exception:
+            // teardown shouldn't fail the test run if the cmdlet errors.
+            try { VisioPS_Basic_Tests.Session.Cmd_Close_VisioApplication(true); }
+            catch (System.Exception) { }
             VisioPS_Basic_Tests.Session.CleanUp();
-        }
-        
-        private static void VisioPS_Close_Visio_Application()
-        {
-            bool force = true;
-            VisioPS_Basic_Tests.Session.Cmd_Close_VisioApplication(force);
         }
 
         [MUT.TestMethod]

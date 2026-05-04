@@ -20,6 +20,14 @@ namespace VTest.Framework
             return app;
         }
 
+        public static void TeardownVisioApplication()
+        {
+            // Shared helper invoked from each test project's
+            // [AssemblyCleanup] hook (since [AssemblyCleanup] is per-assembly,
+            // not inherited from referenced assemblies).
+            app_ref.QuitVisioApplication();
+        }
+
         public IVisio.Page GetNewPage()
         {
             return this.GetNewPage(string.Empty);

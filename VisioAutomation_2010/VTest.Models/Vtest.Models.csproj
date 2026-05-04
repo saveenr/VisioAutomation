@@ -81,6 +81,7 @@
     <Compile Include="DrawModel_DataTable.cs" />
     <Compile Include="DrawModel_OrgChartTests.cs" />
     <Compile Include="Scripting_DropContainerTests.cs" />
+    <Compile Include="AssemblyHooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
