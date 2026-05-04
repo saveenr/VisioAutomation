@@ -11,7 +11,6 @@ namespace VTest.Models
     public class DrawModel_OrgChartTests: Framework.VTest
     {
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]
         public void Scripting_Draw_OrgChart()
         {
             // Load the chart

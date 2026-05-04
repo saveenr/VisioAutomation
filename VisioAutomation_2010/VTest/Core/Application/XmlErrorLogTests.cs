@@ -9,7 +9,6 @@ namespace VTest.Core.Application
     public class XmlErrorLogTests : Framework.VTest
     {
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\VSDX_Log_Visio_2013.txt", "datafiles")]
         public void VSD_Load_Visio2013()
         {
             string input_filename = this._get_test_results_out_path(@"datafiles\VSDX_Log_Visio_2013.txt");
@@ -22,7 +21,6 @@ namespace VTest.Core.Application
         }
 
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\XMLErrorLog_Visio_2010_1.txt", "datafiles")]
         public void XmlErrorLog_Load_Visio2010_1()
         {
             string input_filename = this._get_test_results_out_path(@"datafiles\XMLErrorLog_Visio_2010_1.txt");
@@ -50,7 +48,6 @@ namespace VTest.Core.Application
         }
 
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\XMLErrorLog_Visio_2013_1.txt", "datafiles")]
         public void XmlErrorLog_Load_Visio2013_1()
         {
             string input_filename = this._get_test_results_out_path(@"datafiles\XMLErrorLog_Visio_2013_1.txt");

@@ -106,7 +106,6 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\directed_graph_1.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph1()
         {
             // Load the graph
@@ -124,7 +123,6 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\directed_graph_2.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph2()
         {
             // Load the graph
@@ -141,7 +139,6 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\directed_graph_3.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph3()
         {
             // Load the graph
@@ -159,7 +156,6 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        [MUT.DeploymentItem(@"datafiles\directed_graph_4.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph4()
         {
             // Load the graph
