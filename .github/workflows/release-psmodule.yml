@@ -112,20 +112,59 @@ jobs:
           name: VisioPS-${{ steps.version.outputs.version }}
           path: artifacts/Visio-*.zip
 
+      - name: Build release notes from CHANGELOG
+        id: notes
+        shell: pwsh
+        run: |
+          # Source the release body from VisioPowerShell/CHANGELOG.md's
+          # [Unreleased] section, not from auto-generated PR-title lists.
+          $changelogPath = 'VisioAutomation_2010\VisioPowerShell\CHANGELOG.md'
+          $content = Get-Content -Raw $changelogPath
+          $pattern = '(?ms)^## \[Unreleased\]\s*\r?\n(.*?)(?=^## |\z)'
+          $regexMatch = [regex]::Match($content, $pattern)
+          if (-not $regexMatch.Success) {
+            throw "Could not find [Unreleased] section in $changelogPath"
+          }
+          $changelogSection = $regexMatch.Groups[1].Value.Trim()
+          if (-not $changelogSection -or $changelogSection -match '^_No consumer-visible changes yet\._\s*$') {
+            throw "[Unreleased] section in $changelogPath has no real entries -- nothing to release. Add the changes for this version under [Unreleased] first."
+          }
+          $version = '${{ steps.version.outputs.version }}'
+          $template = @'
+{0}
+
+## Install
+
+```powershell
+Install-Module Visio
+```
+
+Or download the attached zip and extract it to `$home\Documents\WindowsPowerShell\Modules\Visio` (Windows PowerShell 5.1) / `$home\Documents\PowerShell\Modules\Visio` (PowerShell 7+).
+
+## Artifacts
+
+- `Visio-{1}.zip` — the staged module folder.
+
+## Related
+
+- The bundled [VisioAutomation NuGet](https://www.nuget.org/packages/VisioAutomation2010/) is the underlying .NET library this module wraps.
+- [Project documentation](https://saveenr.gitbook.io/visiopowershell/).
+- [Full changelog](https://github.com/saveenr/VisioAutomation/blob/master/VisioAutomation_2010/VisioPowerShell/CHANGELOG.md).
+'@
+          $body = $template -f $changelogSection, $version
+          $notesPath = "release-notes-$version.md"
+          $body | Set-Content -Path $notesPath -Encoding utf8
+          "notes_path=$notesPath" >> $env:GITHUB_OUTPUT
+          Write-Host "----- Generated release notes -----"
+          Write-Host $body
+          Write-Host "----- End -----"
+
       - name: Create GitHub Release
         if: ${{ !inputs.dry_run }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: Visio PowerShell ${{ steps.version.outputs.version }}
-          generate_release_notes: true
-          body: |
-            Visio PowerShell module binary release. See [`VisioAutomation_2010/VisioPowerShell/CHANGELOG.md`](VisioAutomation_2010/VisioPowerShell/CHANGELOG.md) for the changelog.
-
-            ## Artifacts
-
-            - `Visio-${{ steps.version.outputs.version }}.zip` &mdash; the staged module folder. Extract to `$home\Documents\WindowsPowerShell\Modules\Visio` (Windows PowerShell 5.1) or `$home\Documents\PowerShell\Modules\Visio` (PowerShell 7+) to install.
-
-            For automated install from PowerShell Gallery use `Install-Module Visio`.
+          body_path: ${{ steps.notes.outputs.notes_path }}
           files: artifacts/Visio-*.zip
           fail_on_unmatched_files: true

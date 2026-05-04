@@ -123,20 +123,55 @@ jobs:
             artifacts/*.nupkg
             artifacts/*.zip
 
+      - name: Build release notes from CHANGELOG
+        id: notes
+        shell: pwsh
+        run: |
+          # Source the release body from NuGet/CHANGELOG.md's [Unreleased]
+          # section, not from auto-generated PR-title lists. The [Unreleased]
+          # entries are the curated, consumer-meaningful changes; PR titles
+          # like "Wip3" or "Beta" are noise.
+          $changelogPath = 'NuGet\CHANGELOG.md'
+          $content = Get-Content -Raw $changelogPath
+          $pattern = '(?ms)^## \[Unreleased\]\s*\r?\n(.*?)(?=^## |\z)'
+          $regexMatch = [regex]::Match($content, $pattern)
+          if (-not $regexMatch.Success) {
+            throw "Could not find [Unreleased] section in $changelogPath"
+          }
+          $changelogSection = $regexMatch.Groups[1].Value.Trim()
+          if (-not $changelogSection) {
+            throw "[Unreleased] section in $changelogPath is empty -- nothing to release. Add the changes for this version under [Unreleased] first."
+          }
+          $version = '${{ steps.version.outputs.version }}'
+          $template = @'
+{0}
+
+## Artifacts
+
+- `VisioAutomation2010.{1}.nupkg` — the NuGet package. Place in a folder, add that folder as a NuGet package source for your project, then `Install-Package VisioAutomation2010`.
+- `VisioAutomation2010-binaries-{1}.zip` — raw DLLs for projects that don't use NuGet.
+
+## Related
+
+- The companion [Visio PowerShell module](https://www.powershellgallery.com/packages/Visio) wraps this NuGet for PowerShell use.
+- [Project documentation](https://saveenr.gitbook.io/visioautomation/).
+- [Full changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md).
+'@
+          $body = $template -f $changelogSection, $version
+          $notesPath = "release-notes-$version.md"
+          $body | Set-Content -Path $notesPath -Encoding utf8
+          "notes_path=$notesPath" >> $env:GITHUB_OUTPUT
+          Write-Host "----- Generated release notes -----"
+          Write-Host $body
+          Write-Host "----- End -----"
+
       - name: Create GitHub Release
         if: ${{ !inputs.dry_run }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: VisioAutomation ${{ steps.version.outputs.version }}
-          generate_release_notes: true
-          body: |
-            VisioAutomation NuGet binary release. See [`NuGet/CHANGELOG.md`](NuGet/CHANGELOG.md) for the changelog.
-
-            ## Artifacts
-
-            - `VisioAutomation2010.${{ steps.version.outputs.version }}.nupkg` &mdash; the NuGet package; install via `nuget install` from a local source or by adding the file to a project directly.
-            - `VisioAutomation2010-binaries-${{ steps.version.outputs.version }}.zip` &mdash; raw DLLs for projects that don't use NuGet.
+          body_path: ${{ steps.notes.outputs.notes_path }}
           files: |
             artifacts/*.nupkg
             artifacts/*.zip
