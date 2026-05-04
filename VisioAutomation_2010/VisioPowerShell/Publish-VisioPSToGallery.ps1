@@ -80,9 +80,22 @@ Write-Host ""
 # ----- Step 1: stage the build -----
 Write-Host "[1/3] Staging module via InstallForCurrentUser.ps1 ..."
 & $install_script
-if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) {
-    throw "InstallForCurrentUser.ps1 exited with code $LASTEXITCODE"
+# Don't trust $LASTEXITCODE here — InstallForCurrentUser.ps1's last native
+# command is robocopy, which uses bit-flag exit codes where 0 means "no files
+# copied" and 1 means "files copied successfully". Both are non-failures, but
+# anything that propagates as $LASTEXITCODE looks like an error to a naive
+# check. Verify the actual outcome below instead.
+
+# Verify the staged module folder has the expected version.
+$staged_psd1 = Join-Path $home 'Documents\WindowsPowerShell\Modules\Visio\Visio.psd1'
+if (-not (Test-Path $staged_psd1)) {
+    throw "Staged module not found at $staged_psd1 — InstallForCurrentUser.ps1 may have failed."
 }
+$staged_version = (Import-PowerShellDataFile $staged_psd1).ModuleVersion
+if ($staged_version -ne $version) {
+    throw "Staged module is version $staged_version but the source manifest is $version. Rebuild the solution (MSBuild Debug) so the bin/Debug copy of Visio.psd1 reflects the bumped version, then re-run."
+}
+Write-Host "      Staged Visio $staged_version OK at $staged_psd1"
 
 # ----- Step 2: publish -----
 if ($WhatIf) {
