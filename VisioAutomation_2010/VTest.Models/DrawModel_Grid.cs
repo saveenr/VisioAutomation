@@ -4,6 +4,7 @@ using GRID = VisioAutomation.Models.Layouts.Grid;
 
 namespace VTest.Models
 {
+    [MUT.TestClass]
     public class DrawModel_Grid : Framework.VTest
     {
         [MUT.TestMethod]

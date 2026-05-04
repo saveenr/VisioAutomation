@@ -8,6 +8,7 @@ using SXL = System.Xml.Linq;
 
 namespace VTest.Models
 {
+    [MUT.TestClass]
     public class DrawModel_OrgChartTests: Framework.VTest
     {
         [MUT.TestMethod]

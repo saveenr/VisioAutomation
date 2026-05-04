@@ -3,6 +3,7 @@ using VA = VisioAutomation;
 
 namespace VTest.Scripting
 {
+    [MUT.TestClass]
     public class Scripting_DropContainerTests : Framework.VTest
     {
 
