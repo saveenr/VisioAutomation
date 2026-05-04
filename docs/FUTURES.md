@@ -199,16 +199,24 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 - **Cross-refs:** Drives step 2 of *Consolidate target frameworks*. Supersedes *Decide whether to move to .NET 6/8* for now (defer that decision).
 - **Effort:** S — bump TFMs, bump `VisualStudioVersion` in the .sln, open in VS 2026, full rebuild.
 
-### Automate releases via GitHub CI — NuGet + PowerShell Gallery
-- **What:** Replace the current manual release process with a GitHub Actions workflow that, on a tagged release, builds the solution, packs the NuGet package, packages the PowerShell module, and pushes to nuget.org and the PowerShell Gallery.
-- **Why:** Manual releases are error-prone and infrequent. Automating them removes friction, makes versioning consistent, and means fixes can ship quickly. (User notes the PS module is believed to already exist at https://www.powershellgallery.com/packages/Visio — confirm ownership and credentials as a prerequisite.)
+### Automate releases via GitHub CI — NuGet + PowerShell Gallery *(immediate next item)*
+- **What:** Replace the current manual release process with a GitHub Actions workflow that, on a chosen trigger, builds the solution, stages the module, publishes to the PowerShell Gallery (and eventually NuGet), and tags the commit.
+- **Why:** Manual releases are error-prone and infrequent. The 4.6.1 release surfaced several PS-5.1 / PowerShellGet gotchas that are now baked into [`Publish-VisioPSToGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) and the [Publishing doc](https://saveenr.gitbook.io/visiopowershell/developer-info/publishing-to-powershell-gallery). Automating those steps in CI ensures future releases inherit the workarounds without anyone having to remember them.
+- **Reference for the workflow content:** the [`Publish-VisioPSToGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) script has all the steps already, fully battle-tested. The CI job mostly reproduces what that script does; in fact the script is callable from the workflow as-is (it reads the API key from `$env:PSGalleryApiKey` or the `-ApiKey` parameter, so passing the GitHub secret is straightforward).
+- **Reference for the existing CI infrastructure:** [`.github/workflows/build.yml`](../.github/workflows/build.yml) is the build-only workflow. Pinned to VS 2022 MSBuild via `microsoft/setup-msbuild@v2`; installs the `netfx-4.5.2-devpack` via chocolatey before building. The new release workflow should copy this setup verbatim.
+- **Decisions to make first:**
+  - **Trigger.** Tag-push on `VisioPS_*` tags is the most natural; `workflow_dispatch` is useful for manual / first-cut testing (the workflow can support both). GitHub Release-based triggers are less appealing because the existing `Publish-VisioPSToGallery.ps1` already creates the tag at the end of a successful publish.
+  - **Tag-then-publish vs. publish-then-tag.** The current manual script tags **after** verifying the publish landed. Reproducing that order in CI requires the workflow to take the version from `Visio.psd1`, publish, then `git tag`-and-push at the end. Starting the workflow from a *push of a tag* would invert that ordering. Cleanest: trigger on `workflow_dispatch` (or push to `master`), publish, then tag-and-push from the workflow.
+  - **Build configuration.** Phase 1 shipped 4.6.1 from a Debug build (matching `InstallForCurrentUser.ps1`'s hardcoded `Debug`). Future releases should switch to Release; tracked in [the *Switch module-release builds from Debug to Release* item](#switch-module-release-builds-from-debug-to-release). Decide whether the CI workflow flips that constant or whether `InstallForCurrentUser.ps1` itself should be updated.
+  - **Signing.** Authenticode signing of the bundled DLLs is open. PSGallery does not require it, but it would silence the "publisher unknown" warning Windows shows on first import. Probably defer until the workflow is otherwise stable.
+  - **NuGet.** This item nominally covers both PSGallery and nuget.org, but the NuGet release is gated on the version-divergence policy (NuGet at `2.6.0`, PS module at `4.6.1`). Easier first scope: PSGallery only; add NuGet support after the version policy lands.
 - **Subtasks:**
-  - Confirm ownership of the `Visio` PowerShell Gallery package and the NuGet package identity.
-  - Store API keys as GitHub repository secrets.
-  - Define the release trigger (Git tag? Manual `workflow_dispatch`? GitHub Release?).
-  - Decide on signing (Authenticode for the PS module DLLs?) before automating publish.
-- **Cross-refs:** Subsumes *Publish the PowerShell module to the PowerShell Gallery* and *Publish the NuGet package to nuget.org*. Builds on *Add CI*. Depends on *Reconcile version numbers across artifacts* (need a single source of truth for the version a release stamps).
-- **Effort:** M.
+  - Confirm ownership of the `Visio` PowerShell Gallery package (the user owns it; just confirm the API key location).
+  - Store the PSGallery API key as a GitHub repository secret (suggested name: `PSGALLERY_API_KEY`).
+  - Add `.github/workflows/release-visiops.yml` that builds Debug, runs `Publish-VisioPSToGallery.ps1` with the secret, and pushes the tag.
+  - Test with `-WhatIf` first (the script supports it) by adding a `whatif` `workflow_dispatch` input.
+- **Cross-refs:** Subsumes *Publish the PowerShell module to the PowerShell Gallery* and *Publish the NuGet package to nuget.org*. Builds on *Add CI*. NuGet half is gated on *Reconcile version numbers across artifacts*.
+- **Effort:** M for PSGallery; +S for NuGet once the version policy is settled.
 
 ### Revise user-facing documentation for accuracy
 - **What:** Audit the public gitbook docs ([VisioAutomation](https://saveenr.gitbook.io/visioautomation/) and [Visio PowerShell](https://saveenr.gitbook.io/visiopowershell/), source repo: [VisioAutomation_GitBook_Docs](https://github.com/saveenr/VisioAutomation_GitBook_Docs)) against the current API surface. Update or remove anything that no longer matches the code, and fill in coverage for cmdlets / APIs that have been added since the docs were last touched.

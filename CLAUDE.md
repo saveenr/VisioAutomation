@@ -57,12 +57,20 @@ The 4.6.1 release bundles all the Phase 1 cleanup work plus four cmdlet bug fixe
 
 The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 default, PowerShellGet 1.x silent-error bug, PS 5.1 vs 7 user-module path divergence, .ps1 file encoding). All are documented in [VisioPowerShellDocs/developer-info/publishing-to-powershell-gallery.md](https://saveenr.gitbook.io/visiopowershell/developer-info/publishing-to-powershell-gallery) and worked around by [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1).
 
-**Doc audit:** complete and pushed on both gitbook repos. The reader-facing summary is at [VisioPowerShellDocs/documentation-changes.md](https://saveenr.gitbook.io/visiopowershell/documentation-changes); every cmdlet now has a complete page with a standard `## Syntax` / `## Parameters` / `## Examples` / `## See also` layout, and the bare-headline stubs (`visioapplication/`, the `[TBD]` pages) are filled in.
+**Doc audit:** complete on both gitbook repos. Reader-facing summaries at [VisioPowerShellDocs/documentation-changes.md](https://saveenr.gitbook.io/visiopowershell/documentation-changes) and [VisioAutomation_GitBook_Docs/documentation-changes.md](https://saveenr.gitbook.io/visioautomation/documentation-changes). Every cmdlet has a complete page in the standard `## Syntax` / `## Parameters` / `## Examples` / `## See also` layout, and the .NET-side helper-class coverage was extended in three tiers (Tier 1: Hyperlinks / Lock cells / Control handles / Connection points / Connectors. Tier 2: Shape format-layout-xform / Page cells / Text formatting / Geometry / Application. Tier 4: Analyzers / Visio error log / UndoScope / Exceptions / full Extension-methods rewrite). Only Tier 3 (the `VisioAutomation.Models` project) is still pending and is recorded in `docs/FUTURES.md` under *"Expand .NET-side doc coverage"*.
 
-**Followups for the next session:**
+**Repo state:** all three repos in sync with origin, working trees clean. No in-flight branches.
 
-1. **Set up GitHub Actions release CI** — automate the manual publish that was done by hand for 4.6.1. The current `Publish-VisioPSToGallery.ps1` carries the lessons (TLS, verification, etc.) and is the natural reference for the workflow. Tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"Automate releases via GitHub CI"*.
-2. **Resume the open Phase-2-deferred items** when ready: version-number policy (NuGet `2.6.0` vs PS `4.6.1`), leftover-Visio-process flakiness investigation. Both still in [`docs/FUTURES.md`](docs/FUTURES.md).
+## Resume here: next session is GitHub Actions release CI
+
+The last thing to do before declaring Phase 1 fully closed is **automate the PSGallery publish** that was done manually for 4.6.1. The full plan is in [`docs/FUTURES.md`](docs/FUTURES.md) under *"Automate releases via GitHub CI — NuGet + PowerShell Gallery"*. Quick orientation for a fresh session:
+
+- **Reference for what the workflow needs to do:** [`VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) is the canonical script for the manual flow. The CI workflow should reproduce its steps: force TLS 1.2, build Debug (Phase 3 backlog item to switch to Release), `InstallForCurrentUser.ps1` to stage, verify staged psd1 version matches manifest, `Publish-Module -Path` (not `-Name`) with `-ErrorAction Stop`, post-publish verification via `Find-Module`, then tag.
+- **Reference for the existing CI setup:** [`.github/workflows/build.yml`](.github/workflows/build.yml) is the build-only workflow already in place. Pinned to VS 2022 MSBuild + chocolatey `netfx-4.5.2-devpack`. The release workflow can copy that infrastructure.
+- **Trigger choice (decide first):** tag-push (`VisioPS_*`), `workflow_dispatch` for manual runs, or both. Tag-push is the most common for "release on tag" but `workflow_dispatch` is safer for first-cut testing.
+- **Open prereqs called out in FUTURES under the Automate-releases item:** confirm PSGallery package ownership, store the API key as a GitHub secret (`PSGALLERY_API_KEY`), decide whether to sign the DLLs (Authenticode) before automating, settle the version-divergence policy (NuGet `2.6.0` vs PS `4.6.1`).
+
+After CI lands, the other Phase-2-deferred items (version-number policy, leftover-Visio-process flakiness investigation) become the next conversation.
 
 ## Other docs in this repo
 
