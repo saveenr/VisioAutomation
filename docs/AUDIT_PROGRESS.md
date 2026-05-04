@@ -223,13 +223,32 @@ All landed as **local commits** on `visiops_v4_docs` in `VisioPowerShellDocs`. *
 | 17 | `cmdlets/container.md` — was a one-line placeholder. Now defines what a Visio container is, documents `New-VisioContainer`, and shows the select-then-drop pattern. | ✅ | `7746f6b` |
 | 18 | New `cmdlets/other-cmdlets.md` lists all eight small/utility cmdlets with one-line descriptions and points at `Get-Help` for full reference. SUMMARY entry added at the bottom of the Cmdlets section. Drive-by fix to `basics/list-of-all-cmdlets.md`: removed `Get-VisioLayer` (not in code), added the missing `New-VisioPoint` and `New-VisioRectangle` entries. | ✅ | `4f763db` |
 
-**Section C done.** All seven new-page items landed as 7 local commits on `visiops_v4_docs`. Branch is 7 commits ahead of `origin/visiops_v4_docs`; not pushed pending review.
+**Section C done.** All seven new-page items landed; pushed to `origin/visiops_v4_docs`.
 
-### Drive-by code-level findings (out-of-scope for the docs commit but worth a follow-up)
+### D. Stub-fill pass (post-Section-C, doc-only)
 
-- `NewVisioShape._check_num_Points` constructs `ArgumentOutOfRangeException` instances but never throws them — the polyline-≥2 / Bezier-≥4 guards are no-ops. (Fix in main repo; not blocking docs.)
-- `Set-VisioShapeCells` is the only cells-writer cmdlet without its own dedicated page (existing coverage is split across `working-with-shape-cells.md` and `format-text.md`). Could add `cmdlets/shapecells/set-visioshapecells.md` if/when the audit scope expands.
-- Several cmdlet pages in the docs are still bare-headline stubs (`copy-visioshape.md`, `export-visioshape.md`, `lock-visioshape.md`, `unlock-visioshape.md`, `test-visioshape.md`, `pages/measure-visiopage.md`). They were out of scope for Section C (which is "central undocumented cmdlets") but represent the largest remaining doc gap.
+A second pass to fill the bare-headline stub pages flagged at the end of Section C. Doc-only — code fixes for the bugs surfaced below are deferred pending a release-process discussion.
+
+| Page | Status | Notes |
+|---|---|---|
+| `cmdlets/shapes/copy-visioshape.md` | ✅ | |
+| `cmdlets/shapes/test-visioshape.md` | ✅ | |
+| `cmdlets/pages/measure-visiopage.md` | ✅ | |
+| `cmdlets/shapes/export-visioshape.md` | ✅ | Documents `-Overwrite` as the canonical form to work around the inverted file-exists check (see findings below). |
+| `cmdlets/shapes/lock-visioshape.md` | ⏸ deferred | Not safe to write until the binder bug is fixed (see findings). |
+| `cmdlets/shapes/unlock-visioshape.md` | ⏸ deferred | Same as Lock. |
+
+**Stubs found during this pass that were NOT in Section D scope** (mostly section READMEs and the entire `cmdlets/visioapplication/` per-cmdlet folder; also `cmdlets/text/get-visiotext.md` and `cmdlets/pages/select-visiopage-tbd.md`). Tracked here for visibility but no decision yet on whether to fill them.
+
+### Code-level findings (deferred — held pending release-process discussion)
+
+These were uncovered while writing the docs. None blocks Phase 1 docs work, but each is a real defect; landing them changes the **published** module behavior (currently 4.6.0 on PSGallery), which is the part the user wants to think about before agreeing.
+
+1. **`Lock-VisioShape` / `Unlock-VisioShape` — all 20 lock-flag switches are unbound.** The C# declares them as bare public fields with no `[SMA.Parameter]` attribute, so PowerShell ignores them. Both cmdlets currently call `SetLockCells` with all-null and effectively do nothing. Fix: add `[SMA.Parameter(Mandatory = false)]` to each switch field on both classes.
+2. **`Export-VisioShape` — inverted file-exists check.** `if (!File.Exists(...))` should be `if (File.Exists(...))`. Currently throws "already exists" on fresh paths without `-Overwrite`, and silently overwrites existing files regardless of `-Overwrite`. Fix: flip the `!`.
+3. **`NewVisioShape._check_num_Points` no-throw guards** (carried over from Section C). `new ArgumentOutOfRangeException(...)` is constructed but never thrown — polyline-≥2 / Bezier-≥4 validation is silently absent. Fix: add `throw`.
+
+When the release discussion concludes, all three are small contained fixes. Add `[Unreleased]` entries to `VisioPowerShell/CHANGELOG.md` per the per-commit convention; the docs already describe the intended behavior so the doc-vs-module gap closes when the next release ships.
 
 ### Workflow questions
 
