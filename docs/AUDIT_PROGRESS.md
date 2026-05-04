@@ -234,21 +234,51 @@ A second pass to fill the bare-headline stub pages flagged at the end of Section
 | `cmdlets/shapes/copy-visioshape.md` | ✅ | |
 | `cmdlets/shapes/test-visioshape.md` | ✅ | |
 | `cmdlets/pages/measure-visiopage.md` | ✅ | |
-| `cmdlets/shapes/export-visioshape.md` | ✅ | Documents `-Overwrite` as the canonical form to work around the inverted file-exists check (see findings below). |
-| `cmdlets/shapes/lock-visioshape.md` | ⏸ deferred | Not safe to write until the binder bug is fixed (see findings). |
-| `cmdlets/shapes/unlock-visioshape.md` | ⏸ deferred | Same as Lock. |
+| `cmdlets/shapes/export-visioshape.md` | ✅ | Initially documented `-Overwrite` workaround; rewritten in Phase A (after 4.6.1 fix) to describe normal behavior. |
+| `cmdlets/shapes/lock-visioshape.md` | ✅ | Written for 4.6.1 release once the binder bug was fixed. |
+| `cmdlets/shapes/unlock-visioshape.md` | ✅ | Same as Lock. |
 
 **Stubs found during this pass that were NOT in Section D scope** (mostly section READMEs and the entire `cmdlets/visioapplication/` per-cmdlet folder; also `cmdlets/text/get-visiotext.md` and `cmdlets/pages/select-visiopage-tbd.md`). Tracked here for visibility but no decision yet on whether to fill them.
 
-### Code-level findings (deferred — held pending release-process discussion)
+### E. Bare-headline stub fill + template overlay (post-4.6.1 release)
 
-These were uncovered while writing the docs. None blocks Phase 1 docs work, but each is a real defect; landing them changes the **published** module behavior (currently 4.6.0 on PSGallery), which is the part the user wants to think about before agreeing.
+A multi-stage pass after the 4.6.1 release shipped, applying a consistent **Syntax + Parameters** documentation template across every cmdlet page and filling the remaining bare-headline stubs.
 
-1. **`Lock-VisioShape` / `Unlock-VisioShape` — all 20 lock-flag switches are unbound.** The C# declares them as bare public fields with no `[SMA.Parameter]` attribute, so PowerShell ignores them. Both cmdlets currently call `SetLockCells` with all-null and effectively do nothing. Fix: add `[SMA.Parameter(Mandatory = false)]` to each switch field on both classes.
-2. **`Export-VisioShape` — inverted file-exists check.** `if (!File.Exists(...))` should be `if (File.Exists(...))`. Currently throws "already exists" on fresh paths without `-Overwrite`, and silently overwrites existing files regardless of `-Overwrite`. Fix: flip the `!`.
-3. **`NewVisioShape._check_num_Points` no-throw guards** (carried over from Section C). `new ArgumentOutOfRangeException(...)` is constructed but never thrown — polyline-≥2 / Bezier-≥4 validation is silently absent. Fix: add `throw`.
+**Phase A — Template overlay across content-rich pages.** ~47 cmdlet pages updated, organized into nine section commits. The template adds a `## Syntax` block (PowerShell `Get-Help -Syntax` style; one block per parameter set for multi-set cmdlets), a `## Parameters` table, and standardizes the `## Examples` and `## See also` sections. Bold for cmdlet name in topic-establishing prose; backticks for inline code references. Section commits on `visiops_v4_docs`:
 
-When the release discussion concludes, all three are small contained fixes. Add `[Unreleased]` entries to `VisioPowerShell/CHANGELOG.md` per the per-commit convention; the docs already describe the intended behavior so the doc-vs-module gap closes when the next release ships.
+| Section | Commit | Pages | Notes |
+|---|---|---|---|
+| Prototype + Documents | `0495191`, `b77c06a` | 6 | `Close-VisioDocuments` typo, `Set-VisioDocument` → `Select-VisioDocument`, "if not needed" wording |
+| Pages | `92f72ef` | 8 | `Set-VisioPage` (not a cmdlet), `Get-VisioScriptingClient` (not a cmdlet), `-AllPages` (not a parameter), positional binding on Remove-VisioPage |
+| Shapes | `fb2fb18` | 15 | `ShapeSelectionOperation` enum value mismatch (`All`/`None`/`Invert` → `SelectAll`/`SelectNone`/`InvertSelection`), `New-VisioGroup` (not a cmdlet), `-Operation` → `-SelectionOperation`, `-Recursive` (not real), `-NudgeX` for vertical nudges |
+| ShapeCells | `8a15b23` | 2 | |
+| Hyperlinks | `83e5689` | 3 | Many missing parameters surfaced |
+| Custom-properties | `8aed4be` | 4 | `-Master`/`-Stencil` on Get-VisioMaster (not real), `-Shapes` plural variants |
+| User-defined-cells | `6b5df9a` | 3 | |
+| Text/Master/Control/Windows | `0eaac0e` | 6 | `VisioAutomation.Geometry.Point` (wrong namespace), Format-VisioWindow prose param names |
+
+**Phase B — Bare-headline stubs filled.** All previously empty cmdlet pages now have content with the Phase A template applied:
+
+| Page | Commit |
+|---|---|
+| `cmdlets/visioapplication/{close,get,new,out,test,undo,redo}-visioapplication.md` (7 pages) | `fc06925` |
+| `cmdlets/pages/invoke-visioduplicate-page.md` (Copy-VisioPage, was [TBD]) | `fc06925` |
+| `cmdlets/pages/select-visiopage-tbd.md` (Select-VisioPage, was [TBD]) | `fc06925` |
+| `cmdlets/text/get-visiotext.md` (was [TBD]) | `fc06925` |
+
+SUMMARY: dropped the three `[TBD]` markers since the pages now have content.
+
+**Phase C — Multi-page Select-VisioShape consolidation.** Folded into Phase A's Shapes commit (`fb2fb18`). The three pages (`selecting-shapes.md`, `invert-the-selection.md`, `clearing-the-selection.md`) now share consistent enum values; the two variant pages each link back to the canonical page.
+
+### Code-level findings (resolved in 4.6.1)
+
+The three code-level findings flagged during Sections C and D were all fixed and shipped in the **Visio PowerShell 4.6.1** release on 2026-05-03 (tag `VisioPS_4.6.1` on `2026_Refresh`):
+
+1. ✅ **`Lock-VisioShape` / `Unlock-VisioShape` switches now bind.** Added `[SMA.Parameter(Mandatory = false)]` to all 20 switch fields on both classes.
+2. ✅ **`Export-VisioShape` file-exists check.** Inverted `!File.Exists` flipped to `File.Exists`.
+3. ✅ **`NewVisioShape._check_num_Points` guards.** `throw` added before each constructed `ArgumentOutOfRangeException`.
+
+The Phase A doc rollout describes the post-4.6.1 behavior; the published `lock-visioshape.md` / `unlock-visioshape.md` pages also include a "Requires 4.6.1 or later" note.
 
 ### Workflow questions
 
