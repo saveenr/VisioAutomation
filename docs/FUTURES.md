@@ -161,10 +161,13 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 - **Why:** Two-repo doc setups drift. Either keep them split with a clear policy (which doc lives where) or consolidate. No urgent action needed — just call out the policy in `OVERVIEW.md` once decided.
 - **Effort:** S (policy) — or M (consolidation).
 
-### Expand .NET-side doc coverage (Tier 3 and beyond)
-- **What:** The 2026 audit on [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) reviewed every existing page for accuracy and added 10 new pages covering the most common public surface (Tier 1: Hyperlinks, Lock cells, Control handles, Connection points, Connectors. Tier 2: Shape format / layout / xform cells, Page cells, Text formatting, Geometry, Application). The library still has substantial public surface that has no doc coverage at all.
-- **Why:** Library users currently have to read the source to discover types like `OrgChartDocument`, `DirectedGraphDocument`, the layout-style classes, the DOM document model, etc. These are some of the most useful capabilities and should be documented.
-- **Tier 3 — `VisioAutomation.Models` project (~6–8 pages):**
+### Expand .NET-side doc coverage — Tier 3 (`VisioAutomation.Models`)
+- **What:** The 2026 audit on [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) reviewed every existing page for accuracy and added 15 new pages over three tiers. Tier 3 is the only group still pending.
+- **Tier 1 — common helpers** *(done)*: Hyperlinks, Lock cells, Control handles, Connection points, Connectors.
+- **Tier 2 — structural cell-helper pages** *(done)*: Shape format / layout / xform cells, Page cells, Text formatting, Geometry, Application.
+- **Tier 4 — smaller / niche public surface** *(done)*: Analyzers, Visio error log (LoggingHelper / XmlErrorLog), UndoScope, Exception types, plus a full rewrite of `extension-methods.md` covering all 16 `Extensions/` method classes (LINQ bridges, drawing primitives, drop, ShapeSheet I/O, geometry / coordinates, one-offs).
+- **Why Tier 3 still:** It's the most useful unwritten chunk &mdash; `VisioAutomation.Models` covers the high-level "build a diagram declaratively / render it" flow that powers the `Out-VisioApplication` cmdlet on the PS side. Library users currently have to read the source to discover `OrgChartDocument`, `DirectedGraphDocument`, the layout-style classes, the DOM model, etc.
+- **Tier 3 page list (~6–8 pages):**
   - **DOM document model** — `Document`, `Page`, `MasterRef`, `Connector`, `Line`, `Oval`, `BezierCurve`, `PolyLine`, `Hyperlink`, the `Node`/`NodeList` containment pattern. The declarative way to build a Visio document.
   - **Layouts** — `LayoutStyleBase` and its subclasses (`FlowchartLayoutStyle`, `RadialLayoutStyle`, `CompactTreeLayoutStyle`, `HierarchyLayoutStyle`, `CircularLayoutStyle`, `OrganizationalChartLayoutStyle`).
   - **OrgChart** — `OrgChartDocument`, `OrgChartStyling`, `OrgChartLayoutOptions`. The model side of the existing `Out-VisioApplication -OrgChart` flow on the PowerShell side.
@@ -172,15 +175,8 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
   - **DataTable** — `DataTableModel` for tabular layouts.
   - **XmlModel** — generic XML-backed renderer.
   - **Forms** — `FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock` (the lightweight form-builder). Probably worth one page.
-- **Tier 4 — smaller / more niche public surface:**
-  - **Analyzers** — `ConnectionAnalyzer`, `ConnectionAnalyzerOptions`, `DirectedEdge`. Useful when you need to introspect existing diagrams.
-  - **Logging** — `LogSession`, `LogRecord`, `LoggingHelper`, `XmlErrorLog` under `Application/Logging/`.
-  - **Extension methods (full coverage)** — the existing `extension-methods.md` page documents three methods. The `Extensions/` folder has 16 method classes (`ApplicationMethods`, `ColorsMethods`, `ConnectsMethods`, `DocumentMethods`, `FontsMethods`, `LayersMethods`, `MasterMethods_Draw/_Drop/_General/_ShapeSheet`, `PageMethods_Draw/_Drop/_General/_ShapeSheet`, `SectionMethods`, `SelectionMethods`, `ShapeMethods_Draw/_Drop/_General/_ShapeSheet`, `StylesMethods`, `WindowMethods`). One page per method-cluster, or one big "Extension methods reference" landing page that links to per-cluster sub-pages.
-  - **Theme / color / styling helpers** scattered through `Shapes/`, `Pages/`, `Documents/`.
-  - **`UndoScope`** — small but widely useful (`Application/UndoScope.cs`).
-  - **Exception types** — three classes under `Exceptions/`. Probably a half-page note rather than a full page.
-- **Effort:** Tier 3 ≈ M (6–8 pages). Tier 4 ≈ M–L depending on how thoroughly extension methods get covered.
-- **How to apply:** The pattern established by the Tier 1 / Tier 2 pages is appropriate: one paragraph of conceptual framing, a field/method table when the surface is bigger than two methods, code examples for the common operations. Each new page goes into [SUMMARY.md](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/SUMMARY.md) and gets a one-line entry in [`documentation-changes.md`](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/documentation-changes.md) under "Pages added".
+- **Effort:** M (6–8 pages).
+- **How to apply:** Same pattern as Tiers 1 / 2 / 4: one paragraph of conceptual framing, a field/method table when the surface is bigger than two methods, code examples for the common operations. Each new page goes into [SUMMARY.md](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/SUMMARY.md) and gets a one-line entry in [`documentation-changes.md`](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/documentation-changes.md) under "Pages added".
 
 ### Keep CHANGELOGs current as Phase 1 work lands
 - **What:** Two changelogs were added in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format: [`NuGet/CHANGELOG.md`](../NuGet/CHANGELOG.md) for the `VisioAutomation2010` NuGet, and [`VisioAutomation_2010/VisioPowerShell/CHANGELOG.md`](../VisioAutomation_2010/VisioPowerShell/CHANGELOG.md) for the `Visio` PowerShell module. Each has an `[Unreleased]` section that should accumulate consumer-visible changes until the Phase 2 release cuts a real version.
