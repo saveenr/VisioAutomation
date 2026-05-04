@@ -61,21 +61,22 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 
 **Repo state:** all three repos in sync with origin, working trees clean. No in-flight branches.
 
-## Resume here: next session is GitHub Actions release CI
+**Test infrastructure (recently fixed):** VS Test Explorer wasn't discovering tests at all; after a multi-step fix it now discovers 163 tests across the four test projects and almost all run cleanly. Fixes that landed:
 
-The next item is **automating releases** with three deliverables in scope:
+- `12027821` &mdash; removed the legacy MSTest v1 project-type GUID (`{3AC096D0-…}`) from all four test csprojs (was making VS Test Explorer use the legacy discovery path). Added the `System.Threading.Tasks.Extensions 4.5.4` package as a transitive dep of MSTest's runner.
+- `5606adcc` &mdash; enabled `<AutoGenerateBindingRedirects>` + `<GenerateBindingRedirectsOutputType>` so library projects emit `.dll.config` files with binding redirects.
+- `5cbf11cd` &mdash; removed redundant `[DeploymentItem]` attributes (8 of them across `XmlErrorLogTests`, `DrawModel_DirectedGraph`, `DrawModel_OrgChartTests`). The data files are already `CopyToOutputDirectory=Always`, so the attributes were redundant; their only effect was triggering VS Test Explorer's deployment-mode behavior, which dropped runtime dependencies on the floor.
+- `fb1799d4` &mdash; reverted an attempt to use a solution-level `default.runsettings` with `DeploymentEnabled=false` (it broke previously-passing tests in VS Test Explorer; not the right approach).
+
+## Resume here: next session is test cleanup, then release CI
+
+**Phase 1 of the next session — make all tests work + the test cleanup pass.** One test still fails as of 2026-05-04, suspected to be a Visio-version-compatibility issue (the user's installed Visio is presumably newer than what the test was written against). After diagnosing that one, the broader test-cleanup work tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"General cleanup of the test projects"* is the natural follow-on: deterministic setup/teardown, robustness against leftover Visio processes, modernization, per-project READMEs explaining what each project covers.
+
+**Phase 2 of the next session — GitHub Actions release CI.** Only after tests are clean. Three deliverables, full plan in [`docs/FUTURES.md`](docs/FUTURES.md) &rarr; *"Automate releases via GitHub CI"*:
 
 1. **PSGallery publish** of the `Visio` PowerShell module (canonical script already exists: [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1)).
 2. **nuget.org publish** of the `VisioAutomation2010` NuGet package (no canonical script yet; metadata in [`NuGet/VisioAutomation2010.nuspec`](NuGet/VisioAutomation2010.nuspec) currently `2.6.0`).
 3. **GitHub Releases** with the built binaries / `.nupkg` / module zip attached as downloadable artifacts.
-
-Full plan with decision points and subtasks: [`docs/FUTURES.md`](docs/FUTURES.md) &rarr; *"Automate releases via GitHub CI"*. Quick orientation:
-
-- **Reference for what each step needs to do:** the manual PSGallery flow in `Publish-VisioPSToGallery.ps1` (TLS 1.2 + `Publish-Module -Path` + post-publish `Find-Module` verification + tag); for NuGet, `nuget pack` + `nuget push`; for GitHub Releases, [`softprops/action-gh-release@v2`](https://github.com/softprops/action-gh-release) on tag-push.
-- **Reference for the existing CI setup:** [`.github/workflows/build.yml`](.github/workflows/build.yml) is the build-only workflow. Pinned to VS 2022 MSBuild + chocolatey `netfx-4.5.2-devpack`. The release workflow should reuse the same setup steps.
-- **Decisions to settle first** (full list in FUTURES): one workflow or three; trigger choice (`workflow_dispatch` recommended for first cut); what artifacts attach to the GitHub Release; build config (Debug vs. Release); signing (defer); how to handle the two-version-source situation while the version-divergence policy is unsettled.
-- **Credentials needed:** `PSGALLERY_API_KEY` and `NUGET_API_KEY` as repository secrets; `contents: write` permission for the workflow to push tags / create releases.
-- **Suggested first-cut test:** run with `-WhatIf` (PSGallery), pack-only (NuGet), and `dry_run` (GitHub Release) inputs to validate workflow shape without touching public feeds.
 
 After CI lands, the other Phase-2-deferred items (version-number policy, leftover-Visio-process flakiness investigation) become the next conversation.
 
