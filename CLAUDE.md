@@ -63,12 +63,19 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 
 ## Resume here: next session is GitHub Actions release CI
 
-The last thing to do before declaring Phase 1 fully closed is **automate the PSGallery publish** that was done manually for 4.6.1. The full plan is in [`docs/FUTURES.md`](docs/FUTURES.md) under *"Automate releases via GitHub CI — NuGet + PowerShell Gallery"*. Quick orientation for a fresh session:
+The next item is **automating releases** with three deliverables in scope:
 
-- **Reference for what the workflow needs to do:** [`VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) is the canonical script for the manual flow. The CI workflow should reproduce its steps: force TLS 1.2, build Debug (Phase 3 backlog item to switch to Release), `InstallForCurrentUser.ps1` to stage, verify staged psd1 version matches manifest, `Publish-Module -Path` (not `-Name`) with `-ErrorAction Stop`, post-publish verification via `Find-Module`, then tag.
-- **Reference for the existing CI setup:** [`.github/workflows/build.yml`](.github/workflows/build.yml) is the build-only workflow already in place. Pinned to VS 2022 MSBuild + chocolatey `netfx-4.5.2-devpack`. The release workflow can copy that infrastructure.
-- **Trigger choice (decide first):** tag-push (`VisioPS_*`), `workflow_dispatch` for manual runs, or both. Tag-push is the most common for "release on tag" but `workflow_dispatch` is safer for first-cut testing.
-- **Open prereqs called out in FUTURES under the Automate-releases item:** confirm PSGallery package ownership, store the API key as a GitHub secret (`PSGALLERY_API_KEY`), decide whether to sign the DLLs (Authenticode) before automating, settle the version-divergence policy (NuGet `2.6.0` vs PS `4.6.1`).
+1. **PSGallery publish** of the `Visio` PowerShell module (canonical script already exists: [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1)).
+2. **nuget.org publish** of the `VisioAutomation2010` NuGet package (no canonical script yet; metadata in [`NuGet/VisioAutomation2010.nuspec`](NuGet/VisioAutomation2010.nuspec) currently `2.6.0`).
+3. **GitHub Releases** with the built binaries / `.nupkg` / module zip attached as downloadable artifacts.
+
+Full plan with decision points and subtasks: [`docs/FUTURES.md`](docs/FUTURES.md) &rarr; *"Automate releases via GitHub CI"*. Quick orientation:
+
+- **Reference for what each step needs to do:** the manual PSGallery flow in `Publish-VisioPSToGallery.ps1` (TLS 1.2 + `Publish-Module -Path` + post-publish `Find-Module` verification + tag); for NuGet, `nuget pack` + `nuget push`; for GitHub Releases, [`softprops/action-gh-release@v2`](https://github.com/softprops/action-gh-release) on tag-push.
+- **Reference for the existing CI setup:** [`.github/workflows/build.yml`](.github/workflows/build.yml) is the build-only workflow. Pinned to VS 2022 MSBuild + chocolatey `netfx-4.5.2-devpack`. The release workflow should reuse the same setup steps.
+- **Decisions to settle first** (full list in FUTURES): one workflow or three; trigger choice (`workflow_dispatch` recommended for first cut); what artifacts attach to the GitHub Release; build config (Debug vs. Release); signing (defer); how to handle the two-version-source situation while the version-divergence policy is unsettled.
+- **Credentials needed:** `PSGALLERY_API_KEY` and `NUGET_API_KEY` as repository secrets; `contents: write` permission for the workflow to push tags / create releases.
+- **Suggested first-cut test:** run with `-WhatIf` (PSGallery), pack-only (NuGet), and `dry_run` (GitHub Release) inputs to validate workflow shape without touching public feeds.
 
 After CI lands, the other Phase-2-deferred items (version-number policy, leftover-Visio-process flakiness investigation) become the next conversation.
 
