@@ -215,13 +215,13 @@ All landed as **local commits** on `visiops_v4_docs` in `VisioPowerShellDocs`. *
 
 | # | Item | Status | Commit |
 |---|---|---|---|
-| 12 | `cmdlets/shapes/new-visioshape.md` — central cmdlet, all six parameter sets (drop master, rectangle, oval, line, polyline, bezier) plus `-Cells`. Drive-by fixes to existing pages whose `New-VisioShape` examples wouldn't actually run (`connect-shapes.md`, `examples.md`, `basics/drop-masters.md`). | ✅ | `2ccac85` |
-| 13 | `cmdlets/shapes/remove-visioshape.md` | ✅ | `2350a98` |
-| 14 | `cmdlets/pages/new-visiopagecells.md`, `set-visiopagecells.md` — new cmdlet pages. Fixed bugs in `cmdlets/pagecells.md` landing (`-Pages` → `-Page`, `$pages`/`$page` mix-up, code-block tags). SUMMARY entries nested under PageCells (not Pages, to avoid confusing them with page-lifecycle cmdlets). | ✅ | `e0b32b3` |
-| 15 | `cmdlets/shapecells/new-visioshapecells.md`, `get-visioshapecells.md` — new cmdlet pages. Replaced the empty `shapecells/README.md` with a real landing. Drive-by fixes to `working-with-shape-cells.md` and `format-text.md`: `-Shapes` → `-Shape`, broken `New-VisioShape $master 2,2` form, code-block tags. | ✅ | `f40ddf8` |
-| 16 | `cmdlets/control/` — entirely new section (4 files). README explains control handles as ShapeSheet rows. SUMMARY entry slotted alphabetically between Container and Custom properties. | ✅ | `127affb` |
-| 17 | `cmdlets/container.md` — was a one-line placeholder. Now defines what a Visio container is, documents `New-VisioContainer`, and shows the select-then-drop pattern. | ✅ | `d3b3629` |
-| 18 | New `cmdlets/other-cmdlets.md` lists all eight small/utility cmdlets with one-line descriptions and points at `Get-Help` for full reference. SUMMARY entry added at the bottom of the Cmdlets section. Drive-by fix to `basics/list-of-all-cmdlets.md`: removed `Get-VisioLayer` (not in code), added the missing `New-VisioPoint` and `New-VisioRectangle` entries. | ✅ | `a5b9888` |
+| 12 | `cmdlets/shapes/new-visioshape.md` — central cmdlet, all six parameter sets (drop master, rectangle, oval, line, polyline, bezier) plus `-Cells`. Drive-by fixes to existing pages whose `New-VisioShape` examples wouldn't actually run (`connect-shapes.md`, `examples.md`, `basics/drop-masters.md`). | ✅ | `e554d3c` |
+| 13 | `cmdlets/shapes/remove-visioshape.md` | ✅ | `ca8b322` |
+| 14 | `cmdlets/pages/new-visiopagecells.md`, `set-visiopagecells.md` — new cmdlet pages. Fixed bugs in `cmdlets/pagecells.md` landing (`-Pages` → `-Page`, `$pages`/`$page` mix-up, code-block tags). SUMMARY entries nested under PageCells (not Pages, to avoid confusing them with page-lifecycle cmdlets). | ✅ | `bbd9241` |
+| 15 | `cmdlets/shapecells/new-visioshapecells.md`, `get-visioshapecells.md` — new cmdlet pages. Replaced the empty `shapecells/README.md` with a real landing. Drive-by fixes to `working-with-shape-cells.md` and `format-text.md`: `-Shapes` → `-Shape`, broken `New-VisioShape $master 2,2` form, code-block tags. | ✅ | `5e881c5` |
+| 16 | `cmdlets/control/` — entirely new section (4 files). README explains control handles as ShapeSheet rows. SUMMARY entry slotted alphabetically between Container and Custom properties. | ✅ | `8b098b1` |
+| 17 | `cmdlets/container.md` — was a one-line placeholder. Now defines what a Visio container is, documents `New-VisioContainer`, and shows the select-then-drop pattern. | ✅ | `7746f6b` |
+| 18 | New `cmdlets/other-cmdlets.md` lists all eight small/utility cmdlets with one-line descriptions and points at `Get-Help` for full reference. SUMMARY entry added at the bottom of the Cmdlets section. Drive-by fix to `basics/list-of-all-cmdlets.md`: removed `Get-VisioLayer` (not in code), added the missing `New-VisioPoint` and `New-VisioRectangle` entries. | ✅ | `4f763db` |
 
 **Section C done.** All seven new-page items landed as 7 local commits on `visiops_v4_docs`. Branch is 7 commits ahead of `origin/visiops_v4_docs`; not pushed pending review.
 
