@@ -146,8 +146,10 @@ namespace VTest.Models
             var app = this.GetVisioApplication();
             var vis_ver = VA.Application.ApplicationHelper.GetVersion(app);
 
-            // How to draw using a Template instead of a doc and a stencil
-            string orgchart_vst = "orgchart.vst";
+            // How to draw using a Template instead of a doc and a stencil.
+            // Visio 2013 (v15) replaced the binary .vst template with the XML-based .vstx
+            // and renamed orgchart.vst → orgch_u.vstx in the install's Visio Content folder.
+            string orgchart_vst = vis_ver.Major >= 15 ? "orgch_u.vstx" : "orgchart.vst";
             string position_master_name = vis_ver.Major >= 15 ? "Position Belt" : "Position";
 
             var doc_node = new VADOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);

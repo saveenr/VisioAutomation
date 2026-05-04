@@ -61,16 +61,17 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 
 **Repo state:** all three repos in sync with origin, working trees clean. No in-flight branches.
 
-**Test infrastructure (recently fixed):** VS Test Explorer wasn't discovering tests at all; after a multi-step fix it now discovers 163 tests across the four test projects and almost all run cleanly. Fixes that landed:
+**Test infrastructure:** all 163 tests across the four test projects pass as of 2026-05-04 (VTest 94, VTest.Models 37, VTest.Scripting 28, VTest.PowerShell 4). Fixes that landed to get there:
 
 - `12027821` &mdash; removed the legacy MSTest v1 project-type GUID (`{3AC096D0-…}`) from all four test csprojs (was making VS Test Explorer use the legacy discovery path). Added the `System.Threading.Tasks.Extensions 4.5.4` package as a transitive dep of MSTest's runner.
 - `5606adcc` &mdash; enabled `<AutoGenerateBindingRedirects>` + `<GenerateBindingRedirectsOutputType>` so library projects emit `.dll.config` files with binding redirects.
 - `5cbf11cd` &mdash; removed redundant `[DeploymentItem]` attributes (8 of them across `XmlErrorLogTests`, `DrawModel_DirectedGraph`, `DrawModel_OrgChartTests`). The data files are already `CopyToOutputDirectory=Always`, so the attributes were redundant; their only effect was triggering VS Test Explorer's deployment-mode behavior, which dropped runtime dependencies on the floor.
 - `fb1799d4` &mdash; reverted an attempt to use a solution-level `default.runsettings` with `DeploymentEnabled=false` (it broke previously-passing tests in VS Test Explorer; not the right approach).
+- The last failing test was `Dom_DrawOrgChart` &mdash; fixed by version-guarding the template filename (`orgchart.vst` for Visio &lt; v15, `orgch_u.vstx` for Visio 2013+), parallel to the already-version-guarded master name on the line above. Visio 2013 replaced binary `.vst` templates with XML-based `.vstx` and the user's M365 install only ships `.vstx`. **Note:** [`OrgChartStyling.cs:9`](VisioAutomation_2010/VisioAutomation.Models/Documents/OrgCharts/OrgChartStyling.cs:9) has the same bug pattern in production code (`Visio2013Template = "orgch_u.vst"`); flagged as a follow-up before the Phase 2 NuGet release.
 
 ## Resume here: next session is test cleanup, then release CI
 
-**Phase 1 of the next session — make all tests work + the test cleanup pass.** One test still fails as of 2026-05-04, suspected to be a Visio-version-compatibility issue (the user's installed Visio is presumably newer than what the test was written against). After diagnosing that one, the broader test-cleanup work tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"General cleanup of the test projects"* is the natural follow-on: deterministic setup/teardown, robustness against leftover Visio processes, modernization, per-project READMEs explaining what each project covers.
+**Phase 1 of the next session — the broader test-cleanup pass.** All tests pass; the structural cleanup tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"General cleanup of the test projects"* is the natural next chunk: deterministic setup/teardown, robustness against leftover Visio processes, the `MSB3270` x86/AnyCPU mismatch on `VTest.PowerShell` (visible in the build log), modernization, per-project READMEs explaining what each project covers.
 
 **Phase 2 of the next session — GitHub Actions release CI.** Only after tests are clean. Three deliverables, full plan in [`docs/FUTURES.md`](docs/FUTURES.md) &rarr; *"Automate releases via GitHub CI"*:
 
