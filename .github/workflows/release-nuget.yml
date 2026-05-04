@@ -1,0 +1,143 @@
+name: Release VisioAutomation NuGet
+
+# Manual-trigger workflow for cutting a binary release of the
+# VisioAutomation NuGet. Reads the version from
+# NuGet/VisioAutomation2010.nuspec, builds the solution Debug,
+# packs the .nupkg and a raw-DLL zip, and creates a GitHub Release
+# tagged VisioAutomation_<version> with both attached.
+#
+# Does NOT publish to nuget.org. That's a separate workflow planned
+# for after this one is proven to work end-to-end.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: build artifacts but do not create the GitHub Release or push the tag'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # to push the tag and create the GitHub Release
+
+concurrency:
+  group: release-nuget
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release VisioAutomation NuGet
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need full history so tag-existence check sees all tags
+
+      - name: Setup MSBuild (Visual Studio 2022)
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      # Mirror build.yml: shipping libs target .NET Framework 4.5.2,
+      # whose reference assemblies aren't on the runner image.
+      # Phase 3 will bump TFMs to 4.7.2 and this step can be deleted.
+      - name: Install .NET Framework 4.5.2 Developer Pack
+        run: choco install netfx-4.5.2-devpack -y --no-progress
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: VisioAutomation_2010/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/**/packages.config') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Restore solution NuGet packages
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore -p:RestorePackagesConfig=true
+
+      - name: Build solution (Debug)
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
+
+      - name: Read version and check tag does not exist
+        id: version
+        shell: pwsh
+        run: |
+          [xml]$nuspec = Get-Content NuGet\VisioAutomation2010.nuspec
+          $version = $nuspec.package.metadata.version
+          if (-not $version) { throw "Could not read <version> from VisioAutomation2010.nuspec" }
+          $tag = "VisioAutomation_$version"
+          $existing = git tag -l $tag
+          if ($existing) { throw "Tag '$tag' already exists. Bump <version> in NuGet\VisioAutomation2010.nuspec first." }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+          Write-Host "Version: $version"
+          Write-Host "Tag    : $tag"
+
+      - name: Acquire nuget.exe
+        shell: pwsh
+        run: |
+          & .\NuGet\AcquireNuGetExe.ps1
+          $nuget = Join-Path $env:LOCALAPPDATA 'NuGetCommandLine\nuget.exe'
+          "NUGET_EXE=$nuget" >> $env:GITHUB_ENV
+
+      - name: Pack NuGet package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts | Out-Null
+          & $env:NUGET_EXE pack NuGet\VisioAutomation2010.nuspec -OutputDirectory artifacts
+          if ($LASTEXITCODE -ne 0) { throw "nuget pack failed (exit $LASTEXITCODE)" }
+
+      - name: Build raw-DLL zip
+        shell: pwsh
+        run: |
+          $version = '${{ steps.version.outputs.version }}'
+          $bin = 'VisioAutomation_2010\VisioScripting\bin\Debug'
+          $staging = 'artifacts\binaries'
+          New-Item -ItemType Directory -Force -Path $staging | Out-Null
+          # Same DLL list as the nuspec <files> section -- keep these in sync
+          $patterns = @(
+            'Microsoft.Office.Interop.Visio.dll',
+            'GenTreeOps.dll',
+            'Microsoft.Msagl.dll',
+            'VisioAutomation*.dll',
+            'VisioScripting*.dll'
+          )
+          foreach ($p in $patterns) {
+            $matches = Get-ChildItem -Path (Join-Path $bin $p) -ErrorAction SilentlyContinue
+            if (-not $matches) { throw "No files matched pattern '$p' in $bin" }
+            $matches | Copy-Item -Destination $staging -Force
+          }
+          $zipPath = "artifacts\VisioAutomation2010-binaries-$version.zip"
+          Compress-Archive -Path "$staging\*" -DestinationPath $zipPath -Force
+          Write-Host "Artifacts:"
+          Get-ChildItem artifacts -File | ForEach-Object { Write-Host "  $($_.Name)  ($([math]::Round($_.Length/1KB,1)) KB)" }
+
+      - name: Upload workflow artifacts (always, including dry-runs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: VisioAutomation-${{ steps.version.outputs.version }}
+          path: |
+            artifacts/*.nupkg
+            artifacts/*.zip
+
+      - name: Create GitHub Release
+        if: ${{ !inputs.dry_run }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: VisioAutomation ${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          body: |
+            VisioAutomation NuGet binary release. See [`NuGet/CHANGELOG.md`](NuGet/CHANGELOG.md) for the changelog.
+
+            ## Artifacts
+
+            - `VisioAutomation2010.${{ steps.version.outputs.version }}.nupkg` &mdash; the NuGet package; install via `nuget install` from a local source or by adding the file to a project directly.
+            - `VisioAutomation2010-binaries-${{ steps.version.outputs.version }}.zip` &mdash; raw DLLs for projects that don't use NuGet.
+          files: |
+            artifacts/*.nupkg
+            artifacts/*.zip
+          fail_on_unmatched_files: true
