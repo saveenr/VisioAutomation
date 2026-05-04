@@ -25,7 +25,7 @@ var client = new VisioScripting.Client(visio);
 client.Document.NewDocument();
 client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto,
                           new VisioAutomation.Core.Rectangle(0, 0, 4, 2));
-client.Text.SetText(VisioScripting.TargetShapes.Auto, "Hello, Visio!");
+client.Text.SetShapeText(VisioScripting.TargetShapes.Auto, new[] { "Hello, Visio!" });
 ```
 
 PowerShell:
