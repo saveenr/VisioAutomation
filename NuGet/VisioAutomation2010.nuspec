@@ -4,26 +4,30 @@
     <version>2.6.0</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
-    <licenseUrl>https://github.com/saveenr/VisioAutomation/LICENSE.txt</licenseUrl>
+    <license type="expression">MIT</license>
     <projectUrl>https://github.com/saveenr/VisioAutomation</projectUrl>
+    <readme>README.md</readme>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>VisioAutomation helps developers to control Visio from .NET languages. 
-It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
+    <description>VisioAutomation helps developers to control Visio from .NET languages.
+It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools.
 </description>
     <releaseNotes>See https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md</releaseNotes>
     <copyright>Copyright Saveen Reddy</copyright>
     <tags>Visio</tags>
     <dependencies>
+      <group targetFramework="net452">
+      </group>
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.Office.Interop.Visio" />
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\Microsoft.Office.Interop.Visio.dll" target="lib\net40" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\GenTreeOps.dll" target="lib\net40" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\Microsoft.Msagl.dll" target="lib\net40" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\VisioAutomation*.dll" target="lib\net40" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\VisioScripting*.dll" target="lib\net40" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\Microsoft.Office.Interop.Visio.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\GenTreeOps.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\Microsoft.Msagl.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\VisioAutomation*.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\VisioScripting*.dll" target="lib\net452" />
+    <file src="..\readme.md" target="README.md" />
   </files>
 </package>
