@@ -21,7 +21,7 @@
 # - You must be the package owner of "Visio" on the PowerShell Gallery.
 # - The solution must already be built (Debug). Run MSBuild beforehand if needed.
 # - Working tree should be clean and HEAD should be the commit you want to tag.
-# - Use a fresh PowerShell session — if another session has the Visio module
+# - Use a fresh PowerShell session -- if another session has the Visio module
 #   loaded, the staging step will fail (locked DLLs).
 
 [CmdletBinding()]
@@ -45,7 +45,7 @@ $ps_edition = if ($PSVersionTable.PSObject.Properties.Name -contains 'PSEdition'
     $PSVersionTable.PSEdition
 }
 else {
-    'Desktop'   # PS 5.1 ships with PSEdition; PS 2.0–3.0 don't.
+    'Desktop'   # PS 5.1 ships with PSEdition; PS 2.0-3.0 don't.
 }
 $ps_min = [Version]'5.1'
 if ($ps_version -lt $ps_min) {
@@ -102,7 +102,7 @@ if ($ps_edition -eq 'Core') {
 # ----- Step 1: stage the build -----
 Write-Host "[1/3] Staging module via InstallForCurrentUser.ps1 ..."
 & $install_script
-# Don't trust $LASTEXITCODE here — InstallForCurrentUser.ps1's last native
+# Don't trust $LASTEXITCODE here -- InstallForCurrentUser.ps1's last native
 # command is robocopy, which uses bit-flag exit codes where 0 means "no files
 # copied" and 1 means "files copied successfully". Both are non-failures, but
 # anything that propagates as $LASTEXITCODE looks like an error to a naive
@@ -111,7 +111,7 @@ Write-Host "[1/3] Staging module via InstallForCurrentUser.ps1 ..."
 # Verify the staged module folder has the expected version.
 $staged_psd1 = Join-Path $home 'Documents\WindowsPowerShell\Modules\Visio\Visio.psd1'
 if (-not (Test-Path $staged_psd1)) {
-    throw "Staged module not found at $staged_psd1 — InstallForCurrentUser.ps1 may have failed."
+    throw "Staged module not found at $staged_psd1 -- InstallForCurrentUser.ps1 may have failed."
 }
 $staged_version = (Import-PowerShellDataFile $staged_psd1).ModuleVersion
 if ($staged_version -ne $version) {
@@ -149,7 +149,7 @@ try {
     $local_head  = git rev-parse HEAD
     $upstream    = git rev-parse "@{u}" 2>$null
     if ($LASTEXITCODE -ne 0 -or -not $upstream) {
-        throw "Branch '$branch' has no upstream — push it before tagging."
+        throw "Branch '$branch' has no upstream -- push it before tagging."
     }
     if ($local_head -ne $upstream) {
         throw "Local '$branch' is not in sync with origin. Push commits before tagging."

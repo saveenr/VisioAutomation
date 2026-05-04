@@ -2,7 +2,7 @@
 # -------
 # Imports the locally-built Visio module directly from bin/Debug into the current
 # PowerShell session. This is the fastest way to test the module without installing
-# it — no copy to the user's PowerShell modules folder.
+# it -- no copy to the user's PowerShell modules folder.
 #
 # Run after building the solution in Debug.
 
