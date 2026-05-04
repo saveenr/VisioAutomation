@@ -43,6 +43,25 @@ When your change is **consumer-visible** (public API, behavior, supported runtim
 
 Pure internal / build / docs changes don't need changelog entries.
 
+### Release flow
+
+The release workflows ([`release-nuget.yml`](.github/workflows/release-nuget.yml), [`release-psmodule.yml`](.github/workflows/release-psmodule.yml)) source each release's GitHub Release notes from the matching CHANGELOG's `[Unreleased]` section. The workflow refuses to run if `[Unreleased]` is empty or still contains the placeholder `_No consumer-visible changes yet._` — populate it before triggering a release.
+
+After a release lands, the maintainer converts the `[Unreleased]` section into a versioned section in the same CHANGELOG (per the Keep a Changelog convention):
+
+```markdown
+## [Unreleased]
+
+_No consumer-visible changes yet._
+
+## [2.6.1] - 2026-06-15
+
+### Fixed
+- ...
+```
+
+This is a manual post-release step — the workflows don't auto-edit the CHANGELOG.
+
 ## What's in scope right now
 
 The 2026 refresh is staged in three phases (see [`docs/FUTURES.md`](docs/FUTURES.md)).
