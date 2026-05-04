@@ -36,6 +36,14 @@ param(
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
+# ----- Force TLS 1.2 -----
+# PS 5.1 defaults to TLS 1.0/1.1 in many configs; PSGallery requires 1.2.
+# Without this, Publish-Module fails with 'Could not create SSL/TLS secure
+# channel'. PS 7 negotiates TLS 1.2 automatically, but doing it here keeps
+# the script behavior identical across editions.
+[Net.ServicePointManager]::SecurityProtocol =
+    [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
 # ----- Explicit PowerShell host check -----
 # Different PowerShell editions use different user-module paths and have
 # different Publish-Module versions. Capture what we're running so it's
@@ -125,12 +133,42 @@ Write-Host "      Staged Visio $staged_version OK at $staged_folder"
 # regardless of the running shell's PSModulePath. PowerShell 7 and Windows
 # PowerShell 5.1 use different user-module folders, and the staging script
 # writes to the 5.1 path; -Path sidesteps the discovery mismatch entirely.
+#
+# -ErrorAction Stop is necessary because PowerShellGet 1.x (the in-box version
+# on Windows PowerShell 5.1) catches its own internal failures and re-emits
+# them via Write-Error in a nested scope -- without -ErrorAction Stop on the
+# outer call, the script-level $ErrorActionPreference doesn't reliably stop
+# the script. Even with that, we verify the publish positively below by
+# querying PSGallery; do not skip that check.
 if ($WhatIf) {
     Write-Host "[2/3] WhatIf: skipping Publish-Module."
 }
 else {
     Write-Host "[2/3] Publishing to PowerShell Gallery ..."
-    Publish-Module -Path $staged_folder -NuGetApiKey $ApiKey
+    Publish-Module -Path $staged_folder -NuGetApiKey $ApiKey -ErrorAction Stop
+
+    # Positive verification: query PSGallery for the version we just published.
+    # Catches the case where Publish-Module emitted Write-Error but the script
+    # didn't terminate (PowerShellGet 1.x bug). Retry briefly because the
+    # gallery's version index is sometimes a few seconds behind the upload.
+    Write-Host "      Verifying $version is live on PSGallery ..."
+    $found = $null
+    for ($attempt = 1; $attempt -le 6; $attempt++) {
+        Start-Sleep -Seconds 5
+        try {
+            $found = Find-Module -Name 'Visio' -RequiredVersion $version `
+                -Repository 'PSGallery' -ErrorAction Stop
+            if ($found) { break }
+        }
+        catch {
+            # Module not yet listed -- keep retrying until timeout
+            if ($attempt -eq 6) { throw }
+        }
+    }
+    if (-not $found) {
+        throw "Publish appeared to run, but version $version is not visible on PSGallery after 30s. Check the gallery directly: https://www.powershellgallery.com/packages/Visio/$version"
+    }
+    Write-Host "      Confirmed: Visio $version is on PSGallery."
 }
 
 # ----- Step 3: tag and push -----
