@@ -60,7 +60,7 @@ Release notes:
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Active development is on the `2026_Refresh` branch.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Development happens on `master`.
 
 ## License
 

@@ -68,7 +68,7 @@ The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutoma
 
 ## Continuous integration
 
-Every push to `master` and `2026_Refresh` (and every PR targeting either) is built by [`.github/workflows/build.yml`](../.github/workflows/build.yml) on a GitHub-hosted `windows-latest` runner. The workflow pins MSBuild to VS 2022 (matching local builds) and runs the same restore + build commands documented above.
+Every push to `master` (and every PR targeting it) is built by [`.github/workflows/build.yml`](../.github/workflows/build.yml) on a GitHub-hosted `windows-latest` runner. The workflow pins MSBuild to VS 2022 (matching local builds) and runs the same restore + build commands documented above.
 
 The CI is **build-only**. Tests need a live Visio install and would require a self-hosted Windows runner; that's planned for Phase 3 alongside automated releases (see [FUTURES.md](FUTURES.md)).
 

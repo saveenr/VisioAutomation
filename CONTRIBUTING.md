@@ -4,7 +4,7 @@ Thanks for your interest in contributing. This is a small, focused project — p
 
 ## Active branch
 
-Development for the [2026 refresh](docs/FUTURES.md) is on the **`2026_Refresh`** branch. Until that branch lands on `master`, target it for any pull requests, and consult [`docs/FUTURES.md`](docs/FUTURES.md) to see what's in scope for the current phase.
+Development is on **`master`**. Target it for pull requests, and consult [`docs/FUTURES.md`](docs/FUTURES.md) to see what's in scope for the current phase of the [2026 refresh](docs/FUTURES.md). (Phase 1 merged into `master` on 2026-05-03; Phase 2 / 3 work is upcoming.)
 
 ## Setup
 

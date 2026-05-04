@@ -8,10 +8,10 @@ A .NET Framework library plus a PowerShell module that automate Microsoft Visio 
 
 ## The 2026 refresh — read this before making changes
 
-Active branch: `2026_Refresh`. Work is staged in three phases per [docs/FUTURES.md](docs/FUTURES.md):
+Active branch: `master`. Phase 1 of the refresh has merged; Phase 2 (the final release of the `VisioAutomation2010` NuGet) and Phase 3 (modernization) are still ahead. Work is staged in three phases per [docs/FUTURES.md](docs/FUTURES.md):
 
-1. **Phase 1 — VS 2022 cleanup** *(currently in progress)*. Stay on the current TFMs (.NET Framework 4.5.2 for shipping libs, .NET Framework 4.7.2 for tests). **No new features.** No major TFM bumps, no IDE upgrades, no csproj-format changes — those wait for Phase 3.
-2. **Phase 2 — Cut a final release** of the `VisioAutomation2010` NuGet and the `Visio` PowerShell module with refreshed docs.
+1. **Phase 1 — VS 2022 cleanup** *(done; merged to master 2026-05-03)*. Stayed on the then-current TFMs (.NET Framework 4.5.2 for shipping libs, .NET Framework 4.7.2 for tests) and shipped the **Visio PowerShell 4.6.1** release as the conclusion of this phase.
+2. **Phase 2 — Cut a final release** of the `VisioAutomation2010` NuGet (currently `2.6.0`) with refreshed docs. Two prereqs are deferred and need user discussion: the version-number policy (NuGet `2.6.0` vs PS module `4.6.1`) and a leftover-Visio-process flakiness investigation.
 3. **Phase 3 — Modernization.** Move to VS 2026 (which requires bumping TFMs to 4.7.2), modern C#, possibly modern .NET, automated releases.
 
 When in doubt whether a change fits the current phase, check [docs/FUTURES.md](docs/FUTURES.md).
@@ -51,21 +51,18 @@ All test projects exercise real Visio COM calls. There is no mock/fake layer (in
 
 ## Current state (resume here)
 
-**Phase 1 done. Visio PowerShell module 4.6.1 shipped to PSGallery on 2026-05-03** (tag `VisioPS_4.6.1` on `2026_Refresh`).
+**Phase 1 done. Visio PowerShell module 4.6.1 shipped to PSGallery on 2026-05-03** (tag `VisioPS_4.6.1`). The `2026_Refresh` feature branch has been fast-forwarded into `master` and deleted; new work goes on `master` directly or on a fresh feature branch.
 
-This release effectively pulled forward what had been planned for Phase 2: it bundles all the Phase 1 cleanup work plus four cmdlet bug fixes (`Lock-VisioShape` / `Unlock-VisioShape` switches now actually bind, `Export-VisioShape` no longer trips on its inverted file-existence check, `New-VisioShape` polyline / Bezier minimum-point validation actually throws). NuGet was deliberately not bumped — all four fixes are in `VisioPowerShell/Commands/`, not in the underlying library — so NuGet stays at `2.6.0` and the version-divergence policy decision is still deferred.
+The 4.6.1 release bundles all the Phase 1 cleanup work plus four cmdlet bug fixes (`Lock-VisioShape` / `Unlock-VisioShape` switches now actually bind, `Export-VisioShape` no longer trips on its inverted file-existence check, `New-VisioShape` polyline / Bezier minimum-point validation actually throws). NuGet was deliberately not bumped — all four fixes are in `VisioPowerShell/Commands/`, not in the underlying library — so NuGet stays at `2.6.0` and the version-divergence policy decision is still deferred to Phase 2.
 
 The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 default, PowerShellGet 1.x silent-error bug, PS 5.1 vs 7 user-module path divergence, .ps1 file encoding). All are documented in [VisioPowerShellDocs/developer-info/publishing-to-powershell-gallery.md](https://saveenr.gitbook.io/visiopowershell/developer-info/publishing-to-powershell-gallery) and worked around by [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1).
 
-**Doc audit:** complete and pushed on both gitbook repos. See [`docs/AUDIT_PROGRESS.md`](docs/AUDIT_PROGRESS.md) for the by-section log; the remaining open items there are code-level findings (none Phase 1 blockers) and a list of out-of-audit-scope stub pages. The audit tracker can be deleted once `2026_Refresh` merges to `master`.
+**Doc audit:** complete and pushed on both gitbook repos. The reader-facing summary is at [VisioPowerShellDocs/documentation-changes.md](https://saveenr.gitbook.io/visiopowershell/documentation-changes); every cmdlet now has a complete page with a standard `## Syntax` / `## Parameters` / `## Examples` / `## See also` layout, and the bare-headline stubs (`visioapplication/`, the `[TBD]` pages) are filled in.
 
-**Branch state:** the `2026_Refresh` branch is now pushed to origin and tagged. `master` has not yet been fast-forwarded to it — that's a pending decision (see Followups).
+**Followups for the next session:**
 
-**Followups, recorded for the next session:**
-
-1. **Set up GitHub Actions release CI** — automate the manual publish that was just done by hand. The current `Publish-VisioPSToGallery.ps1` carries the lessons (TLS, verification, etc.) and is the natural reference for the workflow. Tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"Automate releases via GitHub CI"*.
-2. **Merge `2026_Refresh` → `master`.** The release-tagged commit lives on the feature branch; convention is to fast-forward master after a release ships.
-3. **Resume the open Phase-2-deferred items** when ready: version-number policy (NuGet `2.6.0` vs PS `4.6.1`), leftover-Visio-process flakiness investigation. Both still in [`docs/FUTURES.md`](docs/FUTURES.md).
+1. **Set up GitHub Actions release CI** — automate the manual publish that was done by hand for 4.6.1. The current `Publish-VisioPSToGallery.ps1` carries the lessons (TLS, verification, etc.) and is the natural reference for the workflow. Tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"Automate releases via GitHub CI"*.
+2. **Resume the open Phase-2-deferred items** when ready: version-number policy (NuGet `2.6.0` vs PS `4.6.1`), leftover-Visio-process flakiness investigation. Both still in [`docs/FUTURES.md`](docs/FUTURES.md).
 
 ## Other docs in this repo
 
@@ -73,5 +70,4 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 - [docs/BUILDING.md](docs/BUILDING.md) — full build / test / install reference (incl. dev-pack install commands)
 - [docs/GLOSSARY.md](docs/GLOSSARY.md) — Visio and codebase terminology
 - [docs/FUTURES.md](docs/FUTURES.md) — staged backlog of cleanup/modernization work
-- [docs/AUDIT_PROGRESS.md](docs/AUDIT_PROGRESS.md) — in-progress doc-audit tracker (delete after Section C completes and merges)
 - [docs/OVERVIEW.md](docs/OVERVIEW.md) — entry point, links to the above

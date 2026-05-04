@@ -8,13 +8,13 @@ A running list of cleanup, modernization, and improvement items for the VisioAut
 
 The 2026 refresh runs in three phases. Each backlog item below is tagged with its phase.
 
-### Phase 1 — VS 2022 cleanup *(in progress)*
-Stay on Visual Studio 2022 and the current TFMs (.NET Framework 4.5.2 for shipping libs, 4.7.2 for tests). Code + docs improvements only, **no new features**. Anything that would destabilize a release (major TFM jump, IDE jump, csproj-format change, breaking API change) waits for Phase 3.
-
-Phase 1 items:
-- *Revise user-facing documentation for accuracy* (the largest item)
+### Phase 1 — VS 2022 cleanup *(done; merged to master 2026-05-03)*
+Stayed on Visual Studio 2022 and the current TFMs (.NET Framework 4.5.2 for shipping libs, 4.7.2 for tests). Code + docs improvements only, no new features. The phase culminated in the **Visio PowerShell 4.6.1** release on 2026-05-03 (tag `VisioPS_4.6.1`).
 
 Phase 1 items completed:
+- ✅ *Revise user-facing documentation for accuracy* — full audit and rewrite of [VisioPowerShellDocs](https://saveenr.gitbook.io/visiopowershell) and the .NET-side gitbook docs. Standardized every cmdlet page on a Syntax + Parameters + Examples + See-also layout. Reader-facing summary at [`documentation-changes.md`](https://saveenr.gitbook.io/visiopowershell/documentation-changes).
+- ✅ *Cmdlet bug fixes shipped in 4.6.1* — `Lock-VisioShape` / `Unlock-VisioShape` switches now actually bind; `Export-VisioShape` file-exists check no longer inverted; `New-VisioShape` polyline / Bezier minimum-point validation actually throws.
+- ✅ *Manual release machinery* — [`Publish-VisioPSToGallery.ps1`](../VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) wraps the staging / publish / tag / push flow with TLS 1.2 forcing, `-ErrorAction Stop`, and post-publish gallery verification. Documented in [VisioPowerShellDocs/developer-info/publishing-to-powershell-gallery.md](https://saveenr.gitbook.io/visiopowershell/developer-info/publishing-to-powershell-gallery).
 - ✅ *Fix the misnamed PowerShell loader script* — rewrote it to actually `Save-Module` from the PS Gallery
 - ✅ *Add a `CLAUDE.md` at the repo root* — added with staged-plan, build commands, conventions, doc pointers
 - ✅ *Update MSTest off the beta* — upgraded `MSTest.TestFramework` and `MSTest.TestAdapter` from `2.0.0-beta2` to `4.2.2`; bumped `VTest` TFM 4.5 → 4.7.2 to satisfy MSTest 4.x's floor
@@ -23,14 +23,14 @@ Phase 1 items completed:
 - ✅ *Expand the root `readme.md`* — rewrote with pitch, install table, C# + PowerShell quick-start, doc links, license
 - ✅ *Audit `Internal/` for dead code* — deleted orphaned `TempHelper.cs` + removed dead `InternalsVisibleTo("TestVisioAutomation")` attribute; spawned a follow-up item for misc warts found during the audit
 - ✅ *Misc cleanups discovered during the Internal/ audit* (mostly) — moved misplaced `InternalsVisibleTo` attributes to `AssemblyInfo.cs`, deleted two orphaned VTest files, removed auto-generated `.sln.metaproj` from version control. `LinqExtensions` visibility-vs-folder mismatch deferred to Phase 3 as a breaking-namespace-change risk.
-- ✅ *Add CI* (build-only) — `.github/workflows/build.yml` builds the solution on push/PR for `master` and `2026_Refresh`, pinned to VS 2022 MSBuild, NuGet packages cached. Test runs in CI deferred to Phase 3 (needs self-hosted runner with Visio).
+- ✅ *Add CI* (build-only) — `.github/workflows/build.yml` builds the solution on push/PR for `master`, pinned to VS 2022 MSBuild, NuGet packages cached. Test runs in CI deferred to Phase 3 (needs self-hosted runner with Visio).
 
 ### Phase 2 — Cut the final release
-Tag and publish a final release of VisioAutomation (NuGet) and VisioPowerShell (PowerShell Gallery) with the refreshed docs. This is the demarcation line between the old-world (VS 2022 / .NET Framework 4.5.2 / current architecture) and the new-world. Existing consumers get one stable, well-documented release before the modernization changes land.
+Tag and publish a final release of VisioAutomation (NuGet) with the refreshed docs. The PowerShell-module half of this phase shipped early as **Visio PowerShell 4.6.1** on 2026-05-03; only the NuGet release remains.
 
-Phase 2 prerequisites (must be settled before the release ships):
-- *Reconcile version numbers across artifacts* — needs a deeper conversation before a decision; **currently deferred**, do not implement until discussed.
-- *Investigate flakiness from leftover Visio processes* — relevant to the release-verification flow we'll exercise in Phase 2.
+Phase 2 prerequisites (must be settled before the NuGet release ships):
+- *Reconcile version numbers across artifacts* — needs a deeper conversation before a decision; **currently deferred**, do not implement until discussed. The PS module is now at `4.6.1`; the NuGet is at `2.6.0`.
+- *Investigate flakiness from leftover Visio processes* — relevant to the release-verification flow.
 
 ### Phase 3 — Modernization
 - *Move development to Visual Studio 2026*

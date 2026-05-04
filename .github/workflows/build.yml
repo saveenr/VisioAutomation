@@ -1,9 +1,8 @@
 name: Build
 
-# Build-only CI for the 2026_Refresh era. Compiles the full solution to catch
-# regressions; does NOT run tests (tests need a live Visio install, which
-# requires a self-hosted runner — that's planned for Phase 3 when releases
-# are also automated).
+# Build-only CI. Compiles the full solution to catch regressions; does NOT run
+# tests (tests need a live Visio install, which requires a self-hosted runner --
+# that's planned for Phase 3 when releases are also automated).
 #
 # Pinned to VS 2022's MSBuild because the .NET Framework 4.5.2 reference
 # assemblies needed to build the shipping libs are not resolved by VS 2026's
@@ -13,11 +12,9 @@ on:
   push:
     branches:
       - master
-      - 2026_Refresh
   pull_request:
     branches:
       - master
-      - 2026_Refresh
   workflow_dispatch:
 
 jobs:
