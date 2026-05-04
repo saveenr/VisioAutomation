@@ -53,15 +53,15 @@ All test projects exercise real Visio COM calls. There is no mock/fake layer (in
 
 **Phase 1 work is mostly done.** Everything from the original quick-wins list has landed: per-project READMEs, CONTRIBUTING.md, root readme rewrite, CLAUDE.md (this file), MSTest off the beta, PowerShell loader-script renames, per-artifact CHANGELOGs, dead-code cleanup in `Internal/`, build-only CI workflow, and TFM consolidation (now at .NET 4.5.2 for libs, .NET 4.7.2 for tests).
 
-**The doc audit is the only Phase 1 thread still partially open.** Status in [`docs/AUDIT_PROGRESS.md`](docs/AUDIT_PROGRESS.md):
+**Doc audit status** in [`docs/AUDIT_PROGRESS.md`](docs/AUDIT_PROGRESS.md):
 - Section A (PS docs strict-accuracy fixes): **done, pushed**
 - Section B (.NET docs strict-accuracy fixes): **done, pushed**
 - Section C.7/C.8/C.9 (.NET docs content rewrites): **done, pushed**
-- Section C.1–C.6 (PS docs *new* cmdlet pages — `New-VisioShape`, the Control family section, `cmdlets/container.md`, the three `[TBD]` page stubs, etc.): **not started**
+- Section C, items 12–18 (PS docs *new* cmdlet pages — `New-VisioShape`, `Remove-VisioShape`, `New-/Set-VisioPageCells`, `New-/Get-VisioShapeCells`, the Control family section, `cmdlets/container.md` flesh-out, `cmdlets/other-cmdlets.md`): **done locally; 7 commits ahead of `origin/visiops_v4_docs`, not pushed**
 
-When resuming the audit, start with `docs/AUDIT_PROGRESS.md` for the work plan.
+The audit is now substantively complete. Remaining work flagged in `AUDIT_PROGRESS.md` (bare-headline stubs for `Copy-VisioShape`, `Lock-VisioShape`, etc.) is out of audit scope.
 
-**Branch state:** the `2026_Refresh` branch on this repo is **local-only** — no upstream configured, ~30 commits not pushed. Both doc repos are pushed. Don't push `2026_Refresh` without explicit user confirmation.
+**Branch state:** the `2026_Refresh` branch on this repo is **local-only** — no upstream configured, ~30 commits not pushed. The `VisioPowerShellDocs` repo's `visiops_v4_docs` branch is 7 commits ahead of origin. The `VisioAutomation_GitBook_Docs` repo is pushed. Don't push `2026_Refresh` or the unpushed gitbook commits without explicit user confirmation.
 
 **Phase 2 prerequisites that are deferred and need user discussion** (in [`docs/FUTURES.md`](docs/FUTURES.md)):
 - Reconcile version numbers across artifacts (NuGet `2.6.0` vs PS module `4.6.0`)
