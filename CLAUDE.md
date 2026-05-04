@@ -51,21 +51,21 @@ All test projects exercise real Visio COM calls. There is no mock/fake layer (in
 
 ## Current state (resume here)
 
-**Phase 1 work is mostly done.** Everything from the original quick-wins list has landed: per-project READMEs, CONTRIBUTING.md, root readme rewrite, CLAUDE.md (this file), MSTest off the beta, PowerShell loader-script renames, per-artifact CHANGELOGs, dead-code cleanup in `Internal/`, build-only CI workflow, and TFM consolidation (now at .NET 4.5.2 for libs, .NET 4.7.2 for tests).
+**Phase 1 done. Visio PowerShell module 4.6.1 shipped to PSGallery on 2026-05-03** (tag `VisioPS_4.6.1` on `2026_Refresh`).
 
-**Doc audit status** in [`docs/AUDIT_PROGRESS.md`](docs/AUDIT_PROGRESS.md):
-- Section A (PS docs strict-accuracy fixes): **done, pushed**
-- Section B (.NET docs strict-accuracy fixes): **done, pushed**
-- Section C.7/C.8/C.9 (.NET docs content rewrites): **done, pushed**
-- Section C, items 12–18 (PS docs *new* cmdlet pages — `New-VisioShape`, `Remove-VisioShape`, `New-/Set-VisioPageCells`, `New-/Get-VisioShapeCells`, the Control family section, `cmdlets/container.md` flesh-out, `cmdlets/other-cmdlets.md`): **done locally; 7 commits ahead of `origin/visiops_v4_docs`, not pushed**
+This release effectively pulled forward what had been planned for Phase 2: it bundles all the Phase 1 cleanup work plus four cmdlet bug fixes (`Lock-VisioShape` / `Unlock-VisioShape` switches now actually bind, `Export-VisioShape` no longer trips on its inverted file-existence check, `New-VisioShape` polyline / Bezier minimum-point validation actually throws). NuGet was deliberately not bumped — all four fixes are in `VisioPowerShell/Commands/`, not in the underlying library — so NuGet stays at `2.6.0` and the version-divergence policy decision is still deferred.
 
-The audit is now substantively complete. Remaining work flagged in `AUDIT_PROGRESS.md` (bare-headline stubs for `Copy-VisioShape`, `Lock-VisioShape`, etc.) is out of audit scope.
+The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 default, PowerShellGet 1.x silent-error bug, PS 5.1 vs 7 user-module path divergence, .ps1 file encoding). All are documented in [VisioPowerShellDocs/developer-info/publishing-to-powershell-gallery.md](https://saveenr.gitbook.io/visiopowershell/developer-info/publishing-to-powershell-gallery) and worked around by [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1).
 
-**Branch state:** the `2026_Refresh` branch on this repo is **local-only** — no upstream configured, ~30 commits not pushed. The `VisioPowerShellDocs` repo's `visiops_v4_docs` branch is 7 commits ahead of origin. The `VisioAutomation_GitBook_Docs` repo is pushed. Don't push `2026_Refresh` or the unpushed gitbook commits without explicit user confirmation.
+**Doc audit:** complete and pushed on both gitbook repos. See [`docs/AUDIT_PROGRESS.md`](docs/AUDIT_PROGRESS.md) for the by-section log; the remaining open items there are code-level findings (none Phase 1 blockers) and a list of out-of-audit-scope stub pages. The audit tracker can be deleted once `2026_Refresh` merges to `master`.
 
-**Phase 2 prerequisites that are deferred and need user discussion** (in [`docs/FUTURES.md`](docs/FUTURES.md)):
-- Reconcile version numbers across artifacts (NuGet `2.6.0` vs PS module `4.6.0`)
-- Investigate flakiness from leftover Visio processes
+**Branch state:** the `2026_Refresh` branch is now pushed to origin and tagged. `master` has not yet been fast-forwarded to it — that's a pending decision (see Followups).
+
+**Followups, recorded for the next session:**
+
+1. **Set up GitHub Actions release CI** — automate the manual publish that was just done by hand. The current `Publish-VisioPSToGallery.ps1` carries the lessons (TLS, verification, etc.) and is the natural reference for the workflow. Tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"Automate releases via GitHub CI"*.
+2. **Merge `2026_Refresh` → `master`.** The release-tagged commit lives on the feature branch; convention is to fast-forward master after a release ships.
+3. **Resume the open Phase-2-deferred items** when ready: version-number policy (NuGet `2.6.0` vs PS `4.6.1`), leftover-Visio-process flakiness investigation. Both still in [`docs/FUTURES.md`](docs/FUTURES.md).
 
 ## Other docs in this repo
 
