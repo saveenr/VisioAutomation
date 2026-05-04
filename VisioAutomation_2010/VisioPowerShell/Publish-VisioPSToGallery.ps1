@@ -95,15 +95,20 @@ $staged_version = (Import-PowerShellDataFile $staged_psd1).ModuleVersion
 if ($staged_version -ne $version) {
     throw "Staged module is version $staged_version but the source manifest is $version. Rebuild the solution (MSBuild Debug) so the bin/Debug copy of Visio.psd1 reflects the bumped version, then re-run."
 }
-Write-Host "      Staged Visio $staged_version OK at $staged_psd1"
+$staged_folder = Split-Path $staged_psd1 -Parent
+Write-Host "      Staged Visio $staged_version OK at $staged_folder"
 
 # ----- Step 2: publish -----
+# Use -Path (not -Name) so Publish-Module locates the module deterministically
+# regardless of the running shell's PSModulePath. PowerShell 7 and Windows
+# PowerShell 5.1 use different user-module folders, and the staging script
+# writes to the 5.1 path; -Path sidesteps the discovery mismatch entirely.
 if ($WhatIf) {
     Write-Host "[2/3] WhatIf: skipping Publish-Module."
 }
 else {
     Write-Host "[2/3] Publishing to PowerShell Gallery ..."
-    Publish-Module -Name "Visio" -NuGetApiKey $ApiKey
+    Publish-Module -Path $staged_folder -NuGetApiKey $ApiKey
 }
 
 # ----- Step 3: tag and push -----
