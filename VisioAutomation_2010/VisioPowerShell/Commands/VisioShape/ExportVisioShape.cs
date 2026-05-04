@@ -28,7 +28,7 @@ namespace VisioPowerShell.Commands.VisioShape
 
             string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
             
-            if (!System.IO.File.Exists(this.Filename))
+            if (System.IO.File.Exists(this.Filename))
             {
                 this.WriteVerbose("File already exists");
                 if (this.Overwrite)

@@ -132,6 +132,12 @@ Phase 2 prerequisites (must be settled before the release ships):
 - **Why:** Gallery publication makes `Install-Module Visio` work for users. Requires deciding on the publication identity, signing, and a release process.
 - **Effort:** M — operational rather than coding work.
 
+### Switch module-release builds from Debug to Release
+- **What:** The release-prep script [`InstallForCurrentUser.ps1`](../VisioAutomation_2010/VisioPowerShell/InstallForCurrentUser.ps1) hardcodes `$release = "Debug"` (line 69). The 4.6.1 release was published from the Debug build to keep the workflow unchanged, but for future releases we should ship the Release build — smaller binaries, no `DEBUG` symbols, no JIT debug overhead.
+- **Why:** Shipping Debug builds to consumers is sloppy hygiene. Should be Release for any artifact that goes to a public feed (PSGallery, NuGet).
+- **How:** Either flip the constant in `InstallForCurrentUser.ps1` (and document in the script comment that release-mode is now used for actual releases), or split the script into `InstallForCurrentUser.ps1` (Debug, dev convenience) and a separate `Stage-ReleaseBuild.ps1` (Release, used by `Publish-VisioPSToGallery.ps1`).
+- **Effort:** S.
+
 ### Publish the NuGet package to nuget.org
 - **What:** Same question for the NuGet package as for the PS module.
 - **Effort:** S–M.

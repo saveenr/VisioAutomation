@@ -6,26 +6,26 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsCommon.Unlock, Nouns.VisioShape)]
     public class UnlockVisioShape : VisioCmdlet
     {
-        public SMA.SwitchParameter Aspect;
-        public SMA.SwitchParameter Begin;
-        public SMA.SwitchParameter CalcWH;
-        public SMA.SwitchParameter Crop;
-        public SMA.SwitchParameter CustProp;
-        public SMA.SwitchParameter Delete;
-        public SMA.SwitchParameter End;
-        public SMA.SwitchParameter Format;
-        public SMA.SwitchParameter FromGroupFormat;
-        public SMA.SwitchParameter Group;
-        public SMA.SwitchParameter Height;
-        public SMA.SwitchParameter MoveX;
-        public SMA.SwitchParameter MoveY;
-        public SMA.SwitchParameter Rotate;
-        public SMA.SwitchParameter Select;
-        public SMA.SwitchParameter TextEdit;
-        public SMA.SwitchParameter ThemeColors;
-        public SMA.SwitchParameter ThemeEffects;
-        public SMA.SwitchParameter VertexEdit;
-        public SMA.SwitchParameter Width;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Aspect;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Begin;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter CalcWH;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Crop;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter CustProp;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Delete;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter End;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Format;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter FromGroupFormat;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Group;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Height;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter MoveX;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter MoveY;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Rotate;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Select;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter TextEdit;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter ThemeColors;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter ThemeEffects;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter VertexEdit;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter Width;
 
         // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]

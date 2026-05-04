@@ -12,6 +12,18 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 _No consumer-visible changes yet._
 
+## [4.6.1] - 2026-05-03
+
+First release cut from the `2026_Refresh` work. Bundles the Phase 1 cleanup work and four cmdlet bug fixes.
+
+### Fixed
+- **`Lock-VisioShape` / `Unlock-VisioShape`** — the 20 lock-flag switches (`-Aspect`, `-Width`, `-Height`, `-MoveX`, `-MoveY`, `-Delete`, `-Format`, `-Rotate`, etc.) now actually bind. Previously the switches were declared without `[Parameter]` attributes, so PowerShell silently ignored them and both cmdlets were no-ops regardless of the flags passed.
+- **`Export-VisioShape`** — the file-existence check was inverted. Previously, exporting to a fresh path without `-Overwrite` raised *"File already exists"*, while writing to an existing path silently overwrote regardless of `-Overwrite`. Now the cmdlet writes fresh paths normally and refuses to overwrite existing files unless `-Overwrite` is passed.
+- **`New-VisioShape`** — the polyline-≥2-points and Bezier-≥4-points validations now actually throw `ArgumentOutOfRangeException`. Previously they constructed the exception object without throwing it, leaving invalid input to fail later inside Visio.
+
+### Changed
+- **Minimum .NET Framework runtime is now 4.5.2** (was 4.5). The bundled DLLs target 4.5.2; consumers running .NET Framework 4.5 or 4.5.1 will need to install 4.5.2 (universally available on supported Windows).
+
 ## Earlier versions
 
 Versions 4.6.0 and earlier predate this changelog. See the [git history](https://github.com/saveenr/VisioAutomation/commits/master/) and [release tags](https://github.com/saveenr/VisioAutomation/releases) for details.

@@ -101,7 +101,7 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 if (this.Points.Length < 2)
                 {
-                    new System.ArgumentOutOfRangeException("Need at least 2 points for a polyline", nameof(this.Points));
+                    throw new System.ArgumentOutOfRangeException(nameof(this.Points), "Need at least 2 points for a polyline");
                 }
             }
             else if (this.Bezier)
@@ -110,7 +110,7 @@ namespace VisioPowerShell.Commands.VisioShape
                 {
                     // two points
                     // two control points
-                    new System.ArgumentOutOfRangeException("Need at least 4 points for a bezier", nameof(this.Points));
+                    throw new System.ArgumentOutOfRangeException(nameof(this.Points), "Need at least 4 points for a bezier");
                 }
             }
         }
