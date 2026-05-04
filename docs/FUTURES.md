@@ -109,9 +109,15 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 - **Why:** Add a test-host shutdown hook or pre-run cleanup so re-runs are deterministic. Important for the release-verification flow in Phase 2 — re-running the test suite should be reliably idempotent before we ship.
 - **Effort:** S.
 
----
-
-## Packaging & versioning
+### General cleanup of the test projects
+- **What:** The four test projects (`VTest`, `VTest.Models`, `VTest.Scripting`, `VTest.PowerShell`) accumulated organically. They were upgraded off the MSTest beta in Phase 1 and consolidated to .NET Framework 4.7.2, but the test code itself hasn't had a deliberate review.
+- **Possible angles**, not prescriptive — pick what's worth doing:
+  - **Robustness.** Deterministic setup/teardown so a single test failure doesn't poison the rest of the run. Cross-references the *leftover-Visio-processes* item: a per-test or per-fixture Visio teardown would also fix that. Retry policy for known-flaky COM-interop calls.
+  - **Modernization.** Decide whether MSTest stays the framework or to consider xUnit / NUnit. Decide whether the four projects should consolidate (a lot of fixture code is similar). Convert test files to use modern C# idioms (the audit fixed a few `var` / `nameof` / target-typed-`new` opportunities incidentally; a deliberate sweep would catch more).
+  - **Documentation.** None of the test projects have READMEs explaining what they cover, what fixtures they need, what state they assume Visio to be in, or how to run them. A per-project README plus a top-level `docs/TESTING.md` would help anyone running the suite for the first time. Inline `///` summaries on test methods explaining *intent* (vs. *what the code does*) is valuable when a test starts failing months later.
+  - **Coverage gaps.** A pass over the public API surface would surface untested types &mdash; the doc-audit Tier 1/2/4 work flagged a lot of helpers that don't seem to have direct tests. Worth making a list before deciding to add tests.
+- **Cross-refs:** *Investigate flakiness from leftover Visio processes* (overlapping concern). *Run tests in CI* under Phase 3 (tests needing a self-hosted runner with Visio benefits from robustness work first). *Tests require a live Visio* (the design constraint that shapes anything done here).
+- **Effort:** S–L depending on scope. The robustness piece alone could be M. Pure documentation pass is S–M.
 
 ### Reconcile version numbers across artifacts *(Phase 2 prereq — deferred, needs discussion)*
 - **What:** The NuGet [`VisioAutomation2010.nuspec`](../NuGet/VisioAutomation2010.nuspec) is at `2.6.0`; the PowerShell [`Visio.psd1`](../VisioAutomation_2010/VisioPowerShell/Visio.psd1) is at `4.6.0`; csproj `AssemblyVersion`s are independent again.
@@ -177,6 +183,19 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
   - **Forms** — `FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock` (the lightweight form-builder). Probably worth one page.
 - **Effort:** M (6–8 pages).
 - **How to apply:** Same pattern as Tiers 1 / 2 / 4: one paragraph of conceptual framing, a field/method table when the surface is bigger than two methods, code examples for the common operations. Each new page goes into [SUMMARY.md](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/SUMMARY.md) and gets a one-line entry in [`documentation-changes.md`](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/documentation-changes.md) under "Pages added".
+
+### Decide whether to document `VisioScripting` as a public API
+- **What:** `VisioScripting` is the .NET layer between the PowerShell cmdlets and the underlying `VisioAutomation` library. Its `Client` object groups commands by topic (`Document`, `Page`, `Selection`, `View`, `Text`, `Shape`, `ShapeSheet`, `Application`, `Master`, `Container`, `Connection`, `Hyperlink`, `Lock`, `CustomProperty`, `UserDefinedCell`, `Output`, `Undo`, `Window`, `Layer`, `Color`, etc.) — most cmdlets are thin wrappers over a `Client.<Group>.<Method>(...)` call.
+- **Currently documented:** only as power-user escape hatches. The PS-side `cmdlets/other-cmdlets.md` lists `Get-VisioClient` (which returns a `VisioScripting.Client`); `technical-notes/getting-the-current-scriptingsession.md` and `technical-notes/use-visioautomation.md` give brief pointers to the .NET-side bridge. There is no per-method or per-group reference for `VisioScripting` itself.
+- **Why this is a real question, not just a coverage gap:**
+  - **Audience.** `VisioScripting` is a *higher-level* alternative to the raw `VisioAutomation` library — you'd reach for it from .NET when you want commands like "duplicate this page" or "select all shapes" without composing them yourself from `Page.Pages.Add` + `ShapeSheet.Writers.SrcWriter` + ... . That's a real audience, separate from PowerShell users.
+  - **Stability.** Right now `VisioScripting` is treated as an internal implementation detail of the cmdlets — APIs may shift to suit cmdlet needs. Documenting it elevates it to a public surface, which changes the cost of API churn.
+  - **Surface size.** Roughly one Helper / Commands class per topic, each with 5–20 methods. Order-of-magnitude similar to the .NET-side Tier 1+2+4 work that was just done (~15 pages).
+- **Decisions to make first:**
+  - **Is `VisioScripting` part of the project's promised surface, or an internal that shouldn't be relied on?** Affects whether documentation should exist at all and whether the cmdlets should keep wrapping it.
+  - **Same gitbook or separate?** Could be a third gitbook, or a section under [VisioAutomation_GitBook_Docs](https://github.com/saveenr/VisioAutomation_GitBook_Docs).
+- **Cross-refs:** *Decide where docs live long-term* (related policy question). *Expand .NET-side doc coverage — Tier 3* (similar shape of work; complete that first to validate the pattern).
+- **Effort:** S to decide. M–L to write if the answer is "yes, document it" (similar in size to Tiers 1+2+4 of the .NET-side coverage).
 
 ### Keep CHANGELOGs current as Phase 1 work lands
 - **What:** Two changelogs were added in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format: [`NuGet/CHANGELOG.md`](../NuGet/CHANGELOG.md) for the `VisioAutomation2010` NuGet, and [`VisioAutomation_2010/VisioPowerShell/CHANGELOG.md`](../VisioAutomation_2010/VisioPowerShell/CHANGELOG.md) for the `Visio` PowerShell module. Each has an `[Unreleased]` section that should accumulate consumer-visible changes until the Phase 2 release cuts a real version.
