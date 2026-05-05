@@ -188,6 +188,7 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 
 ### Expand .NET-side doc coverage — Tier 3 (`VisioAutomation.Models`)
 - **What:** The 2026 audit on [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) reviewed every existing page for accuracy and added 15 new pages over three tiers. Tier 3 is the only group still pending.
+- **External feedback (2026-05-05):** A doc-review pass on the gitbook ([proposed-issues.md issue #2](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md), since converted into a GitHub issue) made the same call from a user's perspective: `VisioAutomation.Models` is "likely the primary reason many users adopt the library" (DOM + automated layouts) yet is entirely undocumented. Reinforces this item's priority.
 - **Tier 1 — common helpers** *(done)*: Hyperlinks, Lock cells, Control handles, Connection points, Connectors.
 - **Tier 2 — structural cell-helper pages** *(done)*: Shape format / layout / xform cells, Page cells, Text formatting, Geometry, Application.
 - **Tier 4 — smaller / niche public surface** *(done)*: Analyzers, Visio error log (LoggingHelper / XmlErrorLog), UndoScope, Exception types, plus a full rewrite of `extension-methods.md` covering all 16 `Extensions/` method classes (LINQ bridges, drawing primitives, drop, ShapeSheet I/O, geometry / coordinates, one-offs).
@@ -205,6 +206,7 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 
 ### Decide whether to document `VisioScripting` as a public API
 - **What:** `VisioScripting` is the .NET layer between the PowerShell cmdlets and the underlying `VisioAutomation` library. Its `Client` object groups commands by topic (`Document`, `Page`, `Selection`, `View`, `Text`, `Shape`, `ShapeSheet`, `Application`, `Master`, `Container`, `Connection`, `Hyperlink`, `Lock`, `CustomProperty`, `UserDefinedCell`, `Output`, `Undo`, `Window`, `Layer`, `Color`, etc.) — most cmdlets are thin wrappers over a `Client.<Group>.<Method>(...)` call.
+- **External feedback (2026-05-05):** A doc-review pass on the gitbook ([proposed-issues.md issue #1](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md), since converted into a GitHub issue) flagged the `VisioScripting` gap as the single highest-priority documentation hole. The argument: the source [`readme.md`](../readme.md) leads with a `VisioScripting.Client` snippet as its quick-start, so a new C# reader's *first impression* is an undocumented type. That moves the open question below ("part of the project's promised surface, or internal?") from theoretical to forcing-function — answer it before deciding whether to fill the gap.
 - **Currently documented:** only as power-user escape hatches. The PS-side `cmdlets/other-cmdlets.md` lists `Get-VisioClient` (which returns a `VisioScripting.Client`); `technical-notes/getting-the-current-scriptingsession.md` and `technical-notes/use-visioautomation.md` give brief pointers to the .NET-side bridge. There is no per-method or per-group reference for `VisioScripting` itself.
 - **Why this is a real question, not just a coverage gap:**
   - **Audience.** `VisioScripting` is a *higher-level* alternative to the raw `VisioAutomation` library — you'd reach for it from .NET when you want commands like "duplicate this page" or "select all shapes" without composing them yourself from `Page.Pages.Add` + `ShapeSheet.Writers.SrcWriter` + ... . That's a real audience, separate from PowerShell users.
@@ -299,6 +301,24 @@ PSGallery and nuget.org publishing is **not** in these workflows yet &mdash; del
 - +M for NuGet (no comparable script exists).
 - +S for GitHub Release attachments (well-trodden action).
 - Total: M&ndash;L depending on how many of the three are tackled in one go.
+
+### Refresh `resources/README.md` on the .NET gitbook
+- **What:** The page currently lists three pointers: the visguy.com forum (largely inactive), the StackOverflow `[visio]` tag (sparse), and *Visio 2003 Developer's Survival Pack* (a 23-year-old book by ISBN). Surfaced by the 2026-05-05 doc-review pass ([proposed-issues.md issue #7](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md)).
+- **Suggested rewrite:** add the [Microsoft Learn Visio developer docs](https://learn.microsoft.com/en-us/office/client-developer/visio/visio-home), link to in-repo `docs/GLOSSARY.md` and `docs/ARCHITECTURE.md`, and demote (or remove) the 2003 book.
+- **Why it's not in Group A/B:** value depends on a deliberate "what current community resources are worth listing" pass, not just a mechanical update. Better to do once thoughtfully than to keep stale.
+- **Effort:** S.
+
+### Annotate the VS 2026 note in `compiling.md` with a tracking link
+- **What:** The .NET gitbook's [`compiling.md`](https://saveenr.gitbook.io/visioautomation/compiling) explains why VS 2026 isn't yet supported (its MSBuild floor is .NET Framework 4.6.2; shipping libs target 4.5.2). The note is accurate but is implicitly time-sensitive — readers should know whether the constraint still applies, and have a way to follow it.
+- **Suggested fix:** add a "tracked in #N" link to a GitHub issue covering the *Move development to Visual Studio 2026* item (and the prerequisite TFM bump). Optionally add a "last verified" date.
+- **Cross-refs:** *Move development to Visual Studio 2026* (the underlying work). *Consolidate target frameworks* step 2 (the prerequisite TFM bump).
+- **Effort:** S — file the GitHub issue, add the link.
+
+### Add a troubleshooting page to the .NET gitbook
+- **What:** Neither gitbook has a Troubleshooting / FAQ page. Surfaced by the 2026-05-05 doc-review pass ([proposed-issues.md issue #8](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md)) which sketched the candidate failure modes: COM-registration failures when Visio isn't installed; PIA-version vs. `VisioAutomation2010`-version mismatches; stencil-filename differences across Visio versions; 32-bit vs. 64-bit PowerShell host with the `Visio` module; "failed to log in to github.com" errors when publishing.
+- **Why deferred (not in Group B):** speculatively-written troubleshooting pages age badly and tend to confuse more than help. Better to wait until we have a real corpus of user-reported failures to ground the page in. The candidate list above is the seed.
+- **How to apply:** when filing real bug reports / issues, tag those that are environmental ("works on my machine"-class) for inclusion. Build the page reactively from accumulated cases rather than upfront.
+- **Effort:** S–M once there's enough real material to justify it.
 
 ### Revise user-facing documentation for accuracy
 - **What:** Audit the public gitbook docs ([VisioAutomation](https://saveenr.gitbook.io/visioautomation/) and [Visio PowerShell](https://saveenr.gitbook.io/visiopowershell/), source repo: [VisioAutomation_GitBook_Docs](https://github.com/saveenr/VisioAutomation_GitBook_Docs)) against the current API surface. Update or remove anything that no longer matches the code, and fill in coverage for cmdlets / APIs that have been added since the docs were last touched.
