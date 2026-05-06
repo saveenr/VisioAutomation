@@ -1,88 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6E4E26FE-E903-474B-80F9-CF8ED12D34B3}</ProjectGuid>
+    <TargetFramework>net452</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VSamples</RootNamespace>
-    <AssemblyName>VSamples</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
     <StartupObject>VSamples.Program</StartupObject>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-    <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>Full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <BaseAddress>4194304</BaseAddress>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
+
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Visio2010.PrimaryInteropAssembly">
       <EmbedInteropTypes>false</EmbedInteropTypes>
@@ -92,112 +23,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Samples\Layouts\Container1.cs" />
-    <Compile Include="Samples\Layouts\DirectedGraphViaMsagl.cs" />
-    <Compile Include="SampleMethod.cs" />
-    <Compile Include="Samples\Developer\DocumentScriptingAPI.cs" />
-    <Compile Include="Samples\Developer\DocumentVisioInterop.cs" />
-    <Compile Include="Samples\Developer\DiagramVANamespaces.cs" />
-    <Compile Include="Samples\Layouts\BoxLayoutSimple.cs" />
-    <Compile Include="Samples\Layouts\BoxLayoutTwoLevelGrouping.cs" />
-    <Compile Include="Samples\Misc\BezierCircle.cs" />
-    <Compile Include="Samples\Misc\BezierEllipse.cs" />
-    <Compile Include="Samples\Misc\BezierSimple.cs" />
-    <Compile Include="Samples\Misc\MonitorResolutions.cs" />
-    <Compile Include="Samples\Layouts\Util.cs" />
-    <Compile Include="Samples\Misc\LinqUtil.cs" />
-    <Compile Include="Samples\Layouts\TreeWithTwoPassLayoutAndFormatting.cs" />
-    <Compile Include="Samples\Misc\Nurbs1.cs" />
-    <Compile Include="Samples\Misc\Nurbs2.cs" />
-    <Compile Include="Samples\Misc\Spirograph.cs" />
-    <Compile Include="Samples\Misc\AllGradients.cs" />
-    <Compile Include="Samples\Misc\ResolutionInfo.cs" />
-    <Compile Include="Samples\Text\NonRotatingText.cs" />
-    <Compile Include="Samples\Text\TextExtensions.cs" />
-    <Compile Include="Samples\Layouts\ColorGrid.cs" />
-    <Compile Include="Samples\Misc\SendConnectorsToBack.cs" />
-    <Compile Include="Samples\Layouts\CompareFonts.cs" />
-    <Compile Include="Samples\Text\TextFields.cs" />
-    <Compile Include="Samples\Text\TextMarkup1.cs" />
-    <Compile Include="Samples\Text\TextMarkup2.cs" />
-    <Compile Include="Samples\Text\TextMarkup3.cs" />
-    <Compile Include="Samples\Text\TextMarkup4.cs" />
-    <Compile Include="Samples\Text\TextMarkup5.cs" />
-    <Compile Include="Samples\Developer\DeveloperSamples.cs" />
-    <Compile Include="Samples\Developer\DebugSamples.cs" />
-    <Compile Include="FormSampleRunner.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSampleRunner.Designer.cs">
-      <DependentUpon>FormSampleRunner.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\Layouts\DirectedGraphLayoutSamples.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\Misc\ProgressBar.cs" />
-    <Compile Include="Samples\Misc\OrgChart1.cs" />
-    <Compile Include="Samples\Misc\GradientTransparencies.cs" />
-    <Compile Include="Samples\Misc\SetCustomProperties.cs" />
-    <Compile Include="Samples\Misc\GridOfMasters.cs" />
-    <Compile Include="Samples\Misc\PathAnalysis.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleEnvironment.cs" />
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj" />
+    <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj" />
+    <ProjectReference Include="..\VisioScripting\VisioScripting.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Models\VisioAutomation.Models.csproj">
-      <Project>{29cb2b65-8e8d-4b2c-935c-453b2b371143}</Project>
-      <Name>VisioAutomation.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisioScripting\VisioScripting.csproj">
-      <Project>{f3e3a5a8-de55-44ed-87f3-7962c3d22a88}</Project>
-      <Name>VisioScripting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
-      <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
-      <Name>VisioAutomation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="FormSampleRunner.resx">
-      <DependentUpon>FormSampleRunner.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
