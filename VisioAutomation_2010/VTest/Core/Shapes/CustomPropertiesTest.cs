@@ -212,17 +212,23 @@ namespace VTest.Core.Shapes
         // Each [Type=X]Characterization test below locks in current behavior so any
         // future fix change surfaces as a deliberate test failure.
         // Full discussion + cross-Type matrix: docs/internal/custom-property-encoding.md.
+        //
+        // Behavior change 2026-05-06: CustomPropertyHelper.Set now wraps Visio's
+        // formula-error COMException (#NAME? etc.) in an ArgumentException with
+        // a self-explanatory message pointing at SetString/SetNumber/SetBool/
+        // SetDate. The throws below now assert ArgumentException, not COMException;
+        // the underlying Visio behavior (which formulas it rejects) is unchanged.
 
         [MUT.TestMethod]
         public void CustomProps_UnencodedValueCharacterization()
         {
-            // Type=String. Behavior matrix (current Visio install, locked 2026-05-06):
+            // Type=String. Behavior matrix (current Visio install):
             //
             // Input                                  | Outcome
             // ---------------------------------------+---------------------------------------
-            // "testVal" plain identifier             | THROWS COMException #NAME?
+            // "testVal" plain identifier             | THROWS ArgumentException (wraps #NAME?)
             // "42"  numeric-looking                  | succeeds, formula=42, result=42.0000
-            // "hello world" spaces                   | THROWS COMException #NAME?
+            // "hello world" spaces                   | THROWS ArgumentException (wraps #NAME?)
             // ""    empty unquoted                   | succeeds, formula=[empty], result=0.0000
             // "\"\""  empty quoted                   | round-trips, formula=\"\", result=[empty]
             // null                                   | HasValue=false, cell unwritten; default formula=0, result=0.0000
@@ -231,8 +237,8 @@ namespace VTest.Core.Shapes
             // "\" \"" single space quoted            | round-trips, formula=\" \", result=[space]
             //
             // Unencoded Label / Format / Prompt with a plain identifier value also
-            // throw COMException #NAME? regardless of Type; the string-typed
-            // constructors propagate the same trap to .Value.
+            // throw ArgumentException regardless of Type; the string-typed
+            // constructors propagate the same trap to .Formula.
 
             var page1 = this.GetNewPage();
             var failures = new System.Collections.Generic.List<string>();
@@ -276,18 +282,18 @@ namespace VTest.Core.Shapes
                 {
                     setup(cp);
                     VA.Shapes.CustomPropertyHelper.Set(s, propName, cp);
-                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                    failures.Add(string.Format("[{0}] expected ArgumentException with [{1}] but Set succeeded", label, expMsgContains));
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (System.ArgumentException ex) when (!(ex is System.ArgumentNullException))
                 {
                     if (!ex.Message.Contains(expMsgContains))
                     {
-                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                        failures.Add(string.Format("[{0}] threw ArgumentException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                    failures.Add(string.Format("[{0}] expected ArgumentException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
                 }
             }
 
@@ -299,40 +305,40 @@ namespace VTest.Core.Shapes
                 {
                     var cp = ctor();
                     VA.Shapes.CustomPropertyHelper.Set(s, propName, cp);
-                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                    failures.Add(string.Format("[{0}] expected ArgumentException with [{1}] but Set succeeded", label, expMsgContains));
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (System.ArgumentException ex) when (!(ex is System.ArgumentNullException))
                 {
                     if (!ex.Message.Contains(expMsgContains))
                     {
-                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                        failures.Add(string.Format("[{0}] threw ArgumentException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                    failures.Add(string.Format("[{0}] expected ArgumentException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
                 }
             }
 
             // === Type=String, Value field ===
-            RunThrows("C1 plain identifier", cp => cp.Value = "testVal", "#NAME?");
-            RunOK("C2 numeric string", cp => cp.Value = "42", "42", "42.0000");
-            RunThrows("C3 spaces in middle", cp => cp.Value = "hello world", "#NAME?");
-            RunOK("C4a empty unquoted", cp => cp.Value = "", "", "0.0000");
-            RunOK("C4b empty quoted", cp => cp.Value = "\"\"", "\"\"", "");
-            RunOK("C5 null Value (cell unwritten, Visio default)", cp => cp.Value = (string)null, "0", "0.0000");
-            RunOK("C6 pre-quoted plain", cp => cp.Value = "\"testVal\"", "\"testVal\"", "testVal");
-            RunOK("C7a single space unquoted", cp => cp.Value = " ", "", "0.0000");
-            RunOK("C7b single space quoted", cp => cp.Value = "\" \"", "\" \"", " ");
+            RunThrows("C1 plain identifier", cp => cp.Formula = "testVal", "SetString");
+            RunOK("C2 numeric string", cp => cp.Formula = "42", "42", "42.0000");
+            RunThrows("C3 spaces in middle", cp => cp.Formula = "hello world", "SetString");
+            RunOK("C4a empty unquoted", cp => cp.Formula = "", "", "0.0000");
+            RunOK("C4b empty quoted", cp => cp.Formula = "\"\"", "\"\"", "");
+            RunOK("C5 null Formula (cell unwritten, Visio default)", cp => cp.Formula = (string)null, "0", "0.0000");
+            RunOK("C6 pre-quoted plain", cp => cp.Formula = "\"testVal\"", "\"testVal\"", "testVal");
+            RunOK("C7a single space unquoted", cp => cp.Formula = " ", "", "0.0000");
+            RunOK("C7b single space quoted", cp => cp.Formula = "\" \"", "\" \"", " ");
 
             // === Other string-formula fields with an unencoded plain identifier ===
-            RunThrows("L1 unencoded Label", cp => { cp.Value = "\"v\""; cp.Label = "labelVal"; }, "#NAME?");
-            RunThrows("F1 unencoded Format", cp => { cp.Value = "\"v\""; cp.Format = "formatVal"; }, "#NAME?");
-            RunThrows("P1 unencoded Prompt", cp => { cp.Value = "\"v\""; cp.Prompt = "promptVal"; }, "#NAME?");
+            RunThrows("L1 unencoded Label", cp => { cp.Formula = "\"v\""; cp.Label = "labelVal"; }, "SetString");
+            RunThrows("F1 unencoded Format", cp => { cp.Formula = "\"v\""; cp.Format = "formatVal"; }, "SetString");
+            RunThrows("P1 unencoded Prompt", cp => { cp.Formula = "\"v\""; cp.Prompt = "promptVal"; }, "SetString");
 
-            // === String-typed constructors propagate the trap to .Value ===
-            RunCtorThrows("K1 ctor(string)", () => new CustomPropertyCells("testVal"), "#NAME?");
-            RunCtorThrows("K2 ctor(string, CustomPropertyType.String)", () => new CustomPropertyCells("testVal", CustomPropertyType.String), "#NAME?");
+            // === String-typed constructors propagate the trap to .Formula ===
+            RunCtorThrows("K1 ctor(string)", () => new CustomPropertyCells("testVal"), "SetString");
+            RunCtorThrows("K2 ctor(string, CustomPropertyType.String)", () => new CustomPropertyCells("testVal", CustomPropertyType.String), "SetString");
 
             if (failures.Count > 0)
             {
@@ -350,13 +356,13 @@ namespace VTest.Core.Shapes
         [MUT.TestMethod]
         public void CustomProps_NumberTypeCharacterization()
         {
-            // Type=Number (Type=2). Behavior matrix (locked 2026-05-06):
+            // Type=Number (Type=2). Behavior matrix:
             //
             // Input             | Outcome
             // ------------------+-------------------------------------------
             // "42"              | succeeds, formula=42, result=42.0000
             // "3.14"            | succeeds, formula=3.14, result=3.1400
-            // "testVal"         | THROWS COMException #NAME?
+            // "testVal"         | THROWS ArgumentException (wraps #NAME?)
             // "\"42\""          | succeeds, formula=\"42\", result=42 (quoted accepted, unquoted in Result)
             // ""    empty       | succeeds, formula=[empty], result=0.0000
             // null              | HasValue=false, cell unwritten; default formula=0, result=0.0000
@@ -403,27 +409,27 @@ namespace VTest.Core.Shapes
                 {
                     setup(cp);
                     VA.Shapes.CustomPropertyHelper.Set(s, propName, cp);
-                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                    failures.Add(string.Format("[{0}] expected ArgumentException with [{1}] but Set succeeded", label, expMsgContains));
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (System.ArgumentException ex) when (!(ex is System.ArgumentNullException))
                 {
                     if (!ex.Message.Contains(expMsgContains))
                     {
-                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                        failures.Add(string.Format("[{0}] threw ArgumentException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                    failures.Add(string.Format("[{0}] expected ArgumentException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
                 }
             }
 
-            RunOK("N1 numeric integer string", cp => cp.Value = "42", "42", "42.0000");
-            RunOK("N2 numeric decimal string", cp => cp.Value = "3.14", "3.14", "3.1400");
-            RunThrows("N3 plain identifier", cp => cp.Value = "testVal", "#NAME?");
-            RunOK("N4 quoted numeric", cp => cp.Value = "\"42\"", "\"42\"", "42");
-            RunOK("N5 empty unquoted", cp => cp.Value = "", "", "0.0000");
-            RunOK("N6 null Value (cell unwritten, Visio default)", cp => cp.Value = (string)null, "0", "0.0000");
+            RunOK("N1 numeric integer string", cp => cp.Formula = "42", "42", "42.0000");
+            RunOK("N2 numeric decimal string", cp => cp.Formula = "3.14", "3.14", "3.1400");
+            RunThrows("N3 plain identifier", cp => cp.Formula = "testVal", "SetString");
+            RunOK("N4 quoted numeric", cp => cp.Formula = "\"42\"", "\"42\"", "42");
+            RunOK("N5 empty unquoted", cp => cp.Formula = "", "", "0.0000");
+            RunOK("N6 null Formula (cell unwritten, Visio default)", cp => cp.Formula = (string)null, "0", "0.0000");
 
             if (failures.Count > 0)
             {
@@ -441,7 +447,7 @@ namespace VTest.Core.Shapes
         [MUT.TestMethod]
         public void CustomProps_BooleanTypeCharacterization()
         {
-            // Type=Boolean (Type=3). Behavior matrix (locked 2026-05-06):
+            // Type=Boolean (Type=3). Behavior matrix:
             //
             // Input          | Outcome
             // ---------------+-------------------------------------------
@@ -452,7 +458,7 @@ namespace VTest.Core.Shapes
             // "true" lower   | succeeds, normalised to formula=TRUE, result=TRUE
             // "1"            | succeeds, formula=1, result=1.0000  (NUMERIC, not bool — Type metadata says Boolean but Result is number)
             // "0"            | succeeds, formula=0, result=0.0000  (same — numeric Result despite Type=Boolean)
-            // "BAR" plain id | THROWS COMException #NAME?
+            // "BAR" plain id | THROWS ArgumentException (wraps #NAME?)
             // ""    empty    | succeeds, formula=[empty], result=0.0000
             // null           | HasValue=false, cell unwritten; default formula=0, result=0.0000
 
@@ -498,31 +504,31 @@ namespace VTest.Core.Shapes
                 {
                     setup(cp);
                     VA.Shapes.CustomPropertyHelper.Set(s, propName, cp);
-                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                    failures.Add(string.Format("[{0}] expected ArgumentException with [{1}] but Set succeeded", label, expMsgContains));
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (System.ArgumentException ex) when (!(ex is System.ArgumentNullException))
                 {
                     if (!ex.Message.Contains(expMsgContains))
                     {
-                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                        failures.Add(string.Format("[{0}] threw ArgumentException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                    failures.Add(string.Format("[{0}] expected ArgumentException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
                 }
             }
 
-            RunOK("B1 literal bool true", cp => cp.Value = true, "TRUE", "TRUE");
-            RunOK("B2 literal bool false", cp => cp.Value = false, "FALSE", "FALSE");
-            RunOK("B3 string TRUE upper", cp => cp.Value = "TRUE", "TRUE", "TRUE");
-            RunOK("B4 string FALSE upper", cp => cp.Value = "FALSE", "FALSE", "FALSE");
-            RunOK("B5 string true lower normalises to TRUE", cp => cp.Value = "true", "TRUE", "TRUE");
-            RunOK("B6 string 1 (numeric, Type metadata mismatch)", cp => cp.Value = "1", "1", "1.0000");
-            RunOK("B7 string 0 (numeric, Type metadata mismatch)", cp => cp.Value = "0", "0", "0.0000");
-            RunThrows("B8 plain identifier", cp => cp.Value = "BAR", "#NAME?");
-            RunOK("B9 empty unquoted", cp => cp.Value = "", "", "0.0000");
-            RunOK("B10 null Value (cell unwritten, Visio default)", cp => cp.Value = (string)null, "0", "0.0000");
+            RunOK("B1 literal bool true", cp => cp.Formula = true, "TRUE", "TRUE");
+            RunOK("B2 literal bool false", cp => cp.Formula = false, "FALSE", "FALSE");
+            RunOK("B3 string TRUE upper", cp => cp.Formula = "TRUE", "TRUE", "TRUE");
+            RunOK("B4 string FALSE upper", cp => cp.Formula = "FALSE", "FALSE", "FALSE");
+            RunOK("B5 string true lower normalises to TRUE", cp => cp.Formula = "true", "TRUE", "TRUE");
+            RunOK("B6 string 1 (numeric, Type metadata mismatch)", cp => cp.Formula = "1", "1", "1.0000");
+            RunOK("B7 string 0 (numeric, Type metadata mismatch)", cp => cp.Formula = "0", "0", "0.0000");
+            RunThrows("B8 plain identifier", cp => cp.Formula = "BAR", "SetString");
+            RunOK("B9 empty unquoted", cp => cp.Formula = "", "", "0.0000");
+            RunOK("B10 null Formula (cell unwritten, Visio default)", cp => cp.Formula = (string)null, "0", "0.0000");
 
             if (failures.Count > 0)
             {
@@ -540,12 +546,12 @@ namespace VTest.Core.Shapes
         [MUT.TestMethod]
         public void CustomProps_DateTypeCharacterization()
         {
-            // Type=Date (Type=5). Behavior matrix (locked 2026-05-06):
+            // Type=Date (Type=5). Behavior matrix:
             //
             // Input                                   | Outcome
             // ----------------------------------------+-----------------------------------------------------
             // DATETIME(\"03/31/2017 14:05:06\")       | succeeds, formula round-trips, result=3/31/2017 2:05:06 PM (locale-formatted)
-            // "testVal" plain identifier              | THROWS COMException #NAME?
+            // "testVal" plain identifier              | THROWS ArgumentException (wraps #NAME?)
             // "\"2017-03-31\"" pre-quoted ISO date    | succeeds as a literal string, formula=\"2017-03-31\", result=2017-03-31 (NOT parsed as a date — Type metadata mismatch)
             // ""    empty                             | succeeds, formula=[empty], result=0.0000
             // null                                    | HasValue=false, cell unwritten; default formula=0, result=0.0000
@@ -592,26 +598,98 @@ namespace VTest.Core.Shapes
                 {
                     setup(cp);
                     VA.Shapes.CustomPropertyHelper.Set(s, propName, cp);
-                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                    failures.Add(string.Format("[{0}] expected ArgumentException with [{1}] but Set succeeded", label, expMsgContains));
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (System.ArgumentException ex) when (!(ex is System.ArgumentNullException))
                 {
                     if (!ex.Message.Contains(expMsgContains))
                     {
-                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                        failures.Add(string.Format("[{0}] threw ArgumentException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                    failures.Add(string.Format("[{0}] expected ArgumentException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
                 }
             }
 
-            RunOK("D1 DATETIME formula", cp => cp.Value = "DATETIME(\"03/31/2017 14:05:06\")", "DATETIME(\"03/31/2017 14:05:06\")", "3/31/2017 2:05:06 PM");
-            RunThrows("D2 plain identifier", cp => cp.Value = "testVal", "#NAME?");
-            RunOK("D3 quoted ISO date (stored as literal string, Type metadata mismatch)", cp => cp.Value = "\"2017-03-31\"", "\"2017-03-31\"", "2017-03-31");
-            RunOK("D4 empty unquoted", cp => cp.Value = "", "", "0.0000");
-            RunOK("D5 null Value (cell unwritten, Visio default)", cp => cp.Value = (string)null, "0", "0.0000");
+            RunOK("D1 DATETIME formula", cp => cp.Formula = "DATETIME(\"03/31/2017 14:05:06\")", "DATETIME(\"03/31/2017 14:05:06\")", "3/31/2017 2:05:06 PM");
+            RunThrows("D2 plain identifier", cp => cp.Formula = "testVal", "SetString");
+            RunOK("D3 quoted ISO date (stored as literal string, Type metadata mismatch)", cp => cp.Formula = "\"2017-03-31\"", "\"2017-03-31\"", "2017-03-31");
+            RunOK("D4 empty unquoted", cp => cp.Formula = "", "", "0.0000");
+            RunOK("D5 null Formula (cell unwritten, Visio default)", cp => cp.Formula = (string)null, "0", "0.0000");
+
+            if (failures.Count > 0)
+            {
+                MUT.Assert.Fail("\n" + string.Join("\n", failures));
+            }
+
+            var app = this.GetVisioApplication();
+            var doc = app.ActiveDocument;
+            if (doc != null)
+            {
+                doc.Close(true);
+            }
+        }
+
+        [MUT.TestMethod]
+        public void CustomProps_TypedSetters_RoundTrip()
+        {
+            // Issue #144 — verify the typed setters produce values that survive
+            // a round-trip through CustomPropertyHelper.Set + GetDictionary.
+            // This is the happy-path test for the new API; the unencoded-input
+            // characterization tests above cover the trap path (F).
+
+            var page1 = this.GetNewPage();
+            var failures = new System.Collections.Generic.List<string>();
+            int caseIndex = 0;
+
+            string MakePropName() { caseIndex++; return "T" + caseIndex; }
+
+            void RunSetter(string label, System.Action<CustomPropertyCells> applySetter, string expFormula, string expResult, int expType)
+            {
+                string propName = MakePropName();
+                var s = page1.DrawRectangle(0, 0, 1, 1);
+                var cp = new CustomPropertyCells();
+                try
+                {
+                    applySetter(cp);
+                    VA.Shapes.CustomPropertyHelper.Set(s, propName, cp);
+                    var fdic = VA.Shapes.CustomPropertyHelper.GetDictionary(s, VisioAutomation.Core.CellValueType.Formula);
+                    var rdic = VA.Shapes.CustomPropertyHelper.GetDictionary(s, VisioAutomation.Core.CellValueType.Result);
+                    string af = fdic.ContainsKey(propName) ? (fdic[propName].Formula.Value ?? "<null>") : "<missing>";
+                    string ar = rdic.ContainsKey(propName) ? (rdic[propName].Formula.Value ?? "<null>") : "<missing>";
+                    string at = fdic.ContainsKey(propName) ? (fdic[propName].Type.Value ?? "<null>") : "<missing>";
+                    if (af != expFormula || ar != expResult || at != expType.ToString())
+                    {
+                        failures.Add(string.Format("[{0}] exp formula=[{1}] result=[{2}] type=[{3}], got formula=[{4}] result=[{5}] type=[{6}]",
+                            label, expFormula, expResult, expType, af, ar, at));
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    failures.Add(string.Format("[{0}] expected success but THREW {1}: {2}", label, ex.GetType().Name, ex.Message));
+                }
+            }
+
+            // SetString — encoded as Visio string formula, Type=0 (String)
+            RunSetter("SetString plain", cp => cp.SetString("hello"), "\"hello\"", "hello", 0);
+            RunSetter("SetString with quotes", cp => cp.SetString("say \"hi\""), "\"say \"\"hi\"\"\"", "say \"hi\"", 0);
+            RunSetter("SetString empty", cp => cp.SetString(""), "", "0.0000", 0);
+
+            // SetNumber — Type=2 (Number)
+            RunSetter("SetNumber int", cp => cp.SetNumber(42), "42", "42.0000", 2);
+            RunSetter("SetNumber double", cp => cp.SetNumber(3.14), "3.14", "3.1400", 2);
+            RunSetter("SetNumber negative", cp => cp.SetNumber(-7), "-7", "-7.0000", 2);
+
+            // SetBool — Type=3 (Boolean)
+            RunSetter("SetBool true", cp => cp.SetBool(true), "TRUE", "TRUE", 3);
+            RunSetter("SetBool false", cp => cp.SetBool(false), "FALSE", "FALSE", 3);
+
+            // SetDate — Type=5 (Date)
+            var dt = new System.DateTime(2017, 3, 31, 14, 5, 6);
+            RunSetter("SetDate", cp => cp.SetDate(dt),
+                "DATETIME(\"03/31/2017 14:05:06\")", "3/31/2017 2:05:06 PM", 5);
 
             if (failures.Count > 0)
             {

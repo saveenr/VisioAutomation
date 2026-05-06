@@ -1,4 +1,4 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VSamples.Docs.Samples
 {
@@ -11,7 +11,7 @@ namespace VSamples.Docs.Samples
             var page = doc.Pages.Add();
             var s1 = page.DrawRectangle(0, 0, 1, 1);
             var cp = new VisioAutomation.Shapes.CustomPropertyCells();
-            cp.Value = "Hello World";
+            cp.SetString("Hello World");
             VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp);
 
             // Retrieve all the Custom properties from a shape
@@ -36,11 +36,11 @@ namespace VSamples.Docs.Samples
             var s2 = page.DrawRectangle(2, 2, 4, 4);
 
             var cp1 = new VisioAutomation.Shapes.CustomPropertyCells();
-            cp1.Value = "Hello";
+            cp1.SetString("Hello");
             VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp1);
 
             var cp2 = new VisioAutomation.Shapes.CustomPropertyCells();
-            cp2.Value = "World";
+            cp2.SetString("World");
             VisioAutomation.Shapes.CustomPropertyHelper.Set(s2, "Propname", cp2);
 
             // Retrieve all the Custom properties from multiple shapes
@@ -67,7 +67,7 @@ namespace VSamples.Docs.Samples
             var s1 = page.DrawRectangle(0, 0, 1, 1);
 
             var cp1 = new VisioAutomation.Shapes.CustomPropertyCells();
-            cp1.Value = "Hello";
+            cp1.SetString("Hello");
             VisioAutomation.Shapes.CustomPropertyHelper.Set(s1, "Propname", cp1);
 
             int num_custom_props = VisioAutomation.Shapes.CustomPropertyHelper.GetCount(s1);

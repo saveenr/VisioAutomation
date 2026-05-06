@@ -44,46 +44,76 @@ namespace VisioAutomation.Shapes
 
             CheckValidName(name);
 
-            if (Contains(shape, name))
+            try
             {
-                // The user-defined cell already exists
-                string full_udcell_name = __GetRowName(name);
-
-                if (cells.Value.HasValue)
+                if (Contains(shape, name))
                 {
-                    string value_cell_name = full_udcell_name;
-                    var cell = shape.CellsU[value_cell_name];
-                    cell.FormulaU = cells.Value.Value;
+                    // The user-defined cell already exists
+                    string full_udcell_name = __GetRowName(name);
+
+                    if (cells.Formula.HasValue)
+                    {
+                        string value_cell_name = full_udcell_name;
+                        var cell = shape.CellsU[value_cell_name];
+                        cell.FormulaU = cells.Formula.Value;
+                    }
+
+                    if (cells.Prompt.HasValue)
+                    {
+                        string prompt_cell_name = full_udcell_name + ".Prompt";
+                        var cell = shape.CellsU[prompt_cell_name];
+                        cell.FormulaU = cells.Prompt.Value;
+                    }
                 }
-
-                if (cells.Prompt.HasValue)
+                else
                 {
-                    string prompt_cell_name = full_udcell_name + ".Prompt";
-                    var cell = shape.CellsU[prompt_cell_name];
-                    cell.FormulaU = cells.Prompt.Value;
+                    // The user-defined cell doesn't already exist
+                    short row = shape.AddNamedRow(_udcell_section, name, (short) IVisio.VisRowIndices.visRowUser);
+                    var src_value = new Core.Src(_udcell_section, row, (short) IVisio.VisCellIndices.visUserValue);
+                    var src_prompt = new Core.Src(_udcell_section, row, (short) IVisio.VisCellIndices.visUserPrompt);
+
+                    var writer = new ShapeSheet.Writers.SrcWriter();
+
+                    if (cells.Formula.HasValue)
+                    {
+                        writer.SetValue(src_value, cells.Formula.Value);
+                    }
+
+                    if (cells.Prompt.HasValue)
+                    {
+                        writer.SetValue(src_prompt, cells.Prompt.Value);
+                    }
+
+                    writer.Commit(shape, Core.CellValueType.Formula);
                 }
             }
-            else
+            catch (System.Runtime.InteropServices.COMException ex) when (__LooksLikeFormulaError(ex))
             {
-                // The user-defined cell doesn't already exist
-                short row = shape.AddNamedRow(_udcell_section, name, (short) IVisio.VisRowIndices.visRowUser);
-                var src_value = new Core.Src(_udcell_section, row, (short) IVisio.VisCellIndices.visUserValue);
-                var src_prompt = new Core.Src(_udcell_section, row, (short) IVisio.VisCellIndices.visUserPrompt);
-
-                var writer = new ShapeSheet.Writers.SrcWriter();
-
-                if (cells.Value.HasValue)
-                {
-                    writer.SetValue(src_value, cells.Value.Value);
-                }
-
-                if (cells.Prompt.HasValue)
-                {
-                    writer.SetValue(src_prompt, cells.Prompt.Value);
-                }
-
-                writer.Commit(shape, Core.CellValueType.Formula);
+                throw new System.ArgumentException(__BuildEncodingDiagnostic(name, ex), ex);
             }
+        }
+
+        // Issue #144 detect-and-rethrow. Mirror of CustomPropertyHelper: wrap a
+        // Visio formula-error COMException with a self-explanatory message
+        // pointing at SetString/EncodeValues.
+        private static bool __LooksLikeFormulaError(System.Runtime.InteropServices.COMException ex)
+        {
+            string msg = ex.Message;
+            if (string.IsNullOrEmpty(msg)) { return false; }
+            return msg.Contains("#NAME?")
+                || msg.Contains("#VALUE!")
+                || msg.Contains("#REF!")
+                || msg.Contains("#NUM!")
+                || msg.Contains("#DIV/0!");
+        }
+
+        private static string __BuildEncodingDiagnostic(
+            string udcellName,
+            System.Runtime.InteropServices.COMException ex)
+        {
+            return string.Format(
+                "Visio rejected the formula for user-defined cell '{0}' ('{1}'). This typically means a UserDefinedCellCells field (Formula or Prompt) was assigned a raw string. Use SetString to set string values, or call EncodeValues() before Set, to ensure values are valid Visio formulas.",
+                udcellName, ex.Message.Trim());
         }
 
         public static UserDefinedCellDictionary GetDictionary(IVisio.Shape shape, Core.CellValueType type)

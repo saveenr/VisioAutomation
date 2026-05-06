@@ -4,6 +4,27 @@ Reference document capturing what Visio actually does when `CustomPropertyCells`
 
 This document exists so the matrix doesn't perish: the "what does Visio do with input X" knowledge is otherwise scattered across the issue tracker, code comments, and engineers' heads. When changing the encoding behavior, treat the tests in `VTest/Core/Shapes/` as ground truth and update this document in the same change.
 
+## API ergonomics (2026-05-06, issue #144)
+
+The recommended API for setting cell values is now the typed setters; raw `Formula` assignment remains the underlying mechanism for advanced cases.
+
+`CustomPropertyCells`:
+
+* `cp.SetString(string)` — encodes a string literal, sets `Type = String`.
+* `cp.SetNumber(int)` / `cp.SetNumber(double)` — sets a numeric formula, sets `Type = Number`.
+* `cp.SetBool(bool)` — emits `TRUE` / `FALSE`, sets `Type = Boolean`.
+* `cp.SetDate(DateTime)` — wraps in `DATETIME(...)`, sets `Type = Date`.
+* `cp.SetFormula(string)` — raw escape hatch, no encoding, leaves `Type` untouched.
+
+`UserDefinedCellCells`:
+
+* `udc.SetString(string)` — encodes as a string formula.
+* `udc.SetFormula(string)` — raw escape hatch.
+
+`Value` was renamed to `Formula` to surface that the cell stores a Visio formula, not a literal value. The old `Value` name is preserved as an `[Obsolete]` soft alias through Phase 3.
+
+When an unencoded value (or any other invalid Visio formula) is passed to `Set`, the helper now wraps Visio's `COMException: #NAME?` in an `ArgumentException` with a self-explanatory message pointing at `SetString` / `EncodeValues`. The original `COMException` is preserved as `InnerException`. Detection markers: `#NAME?`, `#VALUE!`, `#REF!`, `#NUM!`, `#DIV/0!`.
+
 ## Background
 
 `CustomPropertyCells.Value`, `CustomPropertyCells.Label`, `CustomPropertyCells.Format`, `CustomPropertyCells.Prompt`, `UserDefinedCellCells.Value`, and `UserDefinedCellCells.Prompt` are all stored as Visio **formulas**, not literal values. The cell write path is `cell.FormulaU = string`, where Visio parses the string as a ShapeSheet expression at write time.
@@ -48,9 +69,9 @@ All cases below were captured against `CustomPropertyHelper.Set` on a fresh shap
 
 | Input (`cp.Value =`)       | Outcome                                                              |
 |----------------------------|----------------------------------------------------------------------|
-| `"testVal"` plain id       | **THROWS** `COMException` `#NAME?`                                   |
+| `"testVal"` plain id       | **THROWS** `ArgumentException` (wraps `COMException` `#NAME?`)                                   |
 | `"42"` numeric-looking     | succeeds — formula=`42`, result=`42.0000` (numeric Result despite Type=String) |
-| `"hello world"` spaces     | **THROWS** `COMException` `#NAME?`                                   |
+| `"hello world"` spaces     | **THROWS** `ArgumentException` (wraps `COMException` `#NAME?`)                                   |
 | `""` empty unquoted        | succeeds — formula=`[empty]`, result=`0.0000`                        |
 | `"\"\""` empty quoted      | round-trips — formula=`""`, result=`[empty]`                         |
 | `null`                     | `HasValue=false`, value cell not written; default formula=`0`, result=`0.0000` |
@@ -68,7 +89,7 @@ The string-typed constructors `new CustomPropertyCells(string)` and `new CustomP
 |------------------------------------|----------------------------------------------------------------------|
 | `"42"`                             | succeeds — formula=`42`, result=`42.0000`                            |
 | `"3.14"`                           | succeeds — formula=`3.14`, result=`3.1400`                           |
-| `"testVal"` plain id               | **THROWS** `COMException` `#NAME?`                                   |
+| `"testVal"` plain id               | **THROWS** `ArgumentException` (wraps `COMException` `#NAME?`)                                   |
 | `"\"42\""` quoted numeric          | succeeds — formula=`"42"`, result=`42`                               |
 | `""` empty unquoted                | succeeds — formula=`[empty]`, result=`0.0000`                        |
 | `null`                             | `HasValue=false`, cell unwritten; default formula=`0`, result=`0.0000` |
@@ -84,7 +105,7 @@ The string-typed constructors `new CustomPropertyCells(string)` and `new CustomP
 | `"true"` lower                     | succeeds — Visio normalises to formula=`TRUE`, result=`TRUE`         |
 | `"1"` numeric one                  | succeeds — formula=`1`, result=`1.0000` (NUMERIC Result despite Type=Boolean) |
 | `"0"` numeric zero                 | succeeds — formula=`0`, result=`0.0000` (numeric Result despite Type=Boolean) |
-| `"BAR"` plain id                   | **THROWS** `COMException` `#NAME?`                                   |
+| `"BAR"` plain id                   | **THROWS** `ArgumentException` (wraps `COMException` `#NAME?`)                                   |
 | `""` empty unquoted                | succeeds — formula=`[empty]`, result=`0.0000`                        |
 | `null`                             | `HasValue=false`, cell unwritten; default formula=`0`, result=`0.0000` |
 
@@ -93,7 +114,7 @@ The string-typed constructors `new CustomPropertyCells(string)` and `new CustomP
 | Input                                            | Outcome                                                              |
 |--------------------------------------------------|----------------------------------------------------------------------|
 | `DATETIME("03/31/2017 14:05:06")`                | succeeds, round-trips — result=`3/31/2017 2:05:06 PM` (locale-formatted) |
-| `"testVal"` plain id                             | **THROWS** `COMException` `#NAME?`                                   |
+| `"testVal"` plain id                             | **THROWS** `ArgumentException` (wraps `COMException` `#NAME?`)                                   |
 | `"\"2017-03-31\""` pre-quoted ISO date           | succeeds AS A LITERAL STRING — formula=`"2017-03-31"`, result=`2017-03-31` (NOT parsed as a date) |
 | `""` empty unquoted                              | succeeds — formula=`[empty]`, result=`0.0000`                        |
 | `null`                                           | `HasValue=false`, cell unwritten; default formula=`0`, result=`0.0000` |
@@ -102,9 +123,9 @@ The string-typed constructors `new CustomPropertyCells(string)` and `new CustomP
 
 | Input (`udc.Value =`)              | Outcome                                                              |
 |------------------------------------|----------------------------------------------------------------------|
-| `"BAR"` plain id                   | **THROWS** `COMException` `#NAME?`                                   |
+| `"BAR"` plain id                   | **THROWS** `ArgumentException` (wraps `COMException` `#NAME?`)                                   |
 | `"42"`                             | succeeds — formula=`42`, result=`42.0000`                            |
-| `"hello world"`                    | **THROWS** `COMException` `#NAME?`                                   |
+| `"hello world"`                    | **THROWS** `ArgumentException` (wraps `COMException` `#NAME?`)                                   |
 | `""` empty unquoted                | succeeds — formula=`[empty]`, result=`0.0000`                        |
 | `"\"\""` empty quoted              | round-trips — formula=`""`, result=`[empty]`                         |
 | `null`                             | `HasValue=false`, cell unwritten; default formula=`0`, result=`0.0000` |
@@ -115,7 +136,7 @@ The string-typed constructors `new CustomPropertyCells(string)` and `new CustomP
 
 ## Notable findings
 
-1. **The headline trap is loud, not silent.** A common-case unencoded value like `cp.Value = "testVal"` raises `COMException: #NAME?` — users hit an exception, not silently-wrong data. The original framing of issue #144 ("silent foot-gun, substitutes 0") was incomplete; the silent paths are the edge cases below.
+1. **The headline trap is loud, not silent.** A common-case unencoded value like `cp.Formula = "testVal"` raises `ArgumentException` (wrapping the underlying `COMException: #NAME?` since 2026-05-06). The original framing of issue #144 ("silent foot-gun, substitutes 0") was incomplete; the silent paths are the edge cases below.
 
 2. **Type metadata is advisory, not enforced.** Visio stores the Type cell as metadata but doesn't enforce that the Value matches. Examples:
     - Type=String + `"42"` → Result is the numeric `42.0000`, not the string `"42"`.
@@ -126,7 +147,7 @@ The string-typed constructors `new CustomPropertyCells(string)` and `new CustomP
 
 3. **Empty / null silently default to `0`.** The four "default-to-zero" failure modes (`null`, `""`, `" "`, missing-write) all produce a property whose Result mode reads `0.0000`. User reports of "my property reads as 0" almost certainly come from one of these paths, not from the plain-identifier path.
 
-4. **Boolean lowercase is normalised.** `cp.Value = "true"` (lowercase) is rewritten by Visio to `TRUE` at write-time. Unique to Boolean — strings aren't normalised, dates aren't normalised.
+4. **Boolean lowercase is normalised.** `cp.Formula = "true"` (lowercase) is rewritten by Visio to `TRUE` at write-time. Unique to Boolean — strings aren't normalised, dates aren't normalised.
 
 5. **Quoted strings short-circuit Visio's formula parser.** Any input starting with `"` and ending with `"` round-trips as a literal, regardless of declared Type. This is what the library's `EncodeValue` relies on (its idempotence comes from this short-circuit).
 

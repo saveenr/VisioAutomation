@@ -12,7 +12,7 @@ namespace VTest.Core.Shapes
         public static void SetCP(IVisio.Shape shape, string name, string value, string prompt)
         {
             var cells = new VA.Shapes.UserDefinedCellCells();
-            cells.Value = value;
+            cells.Formula = value;
             cells.Prompt = prompt;
             cells.EncodeValues();
             VA.Shapes.UserDefinedCellHelper.Set(shape, name, cells);
@@ -346,22 +346,22 @@ namespace VTest.Core.Shapes
         public void UserDefinedCells_UnencodedValueCharacterization()
         {
             // Issue #144 — UserDefinedCellCells parallel to the CustomPropertyCells
-            // String-type characterization. UDC has no Type concept; both Value and
+            // String-type characterization. UDC has no Type concept; both Formula and
             // Prompt are always string formulas, same encoding rules apply.
             //
-            // Behavior matrix (current Visio install, locked 2026-05-06):
+            // Behavior matrix:
             //
-            // Input                                  | Outcome
-            // ---------------------------------------+---------------------------------------
-            // udc.Value = "BAR" plain identifier     | THROWS COMException #NAME?
-            // udc.Value = "42"                       | succeeds, formula=42, result=42.0000
-            // udc.Value = "hello world"              | THROWS COMException #NAME?
-            // udc.Value = ""                         | succeeds, formula=[empty], result=0.0000
-            // udc.Value = "\"\""                     | round-trips, formula=\"\", result=[empty]
-            // udc.Value = (string)null               | HasValue=false, cell unwritten; default formula=0, result=0.0000
-            // udc.Value = " "                        | succeeds, formula=[empty], result=0.0000
-            // udc.Value = "\" \""                    | round-trips, formula=\" \", result=[space]
-            // udc.Prompt = "PRM" (Value pre-quoted)  | THROWS COMException #NAME?
+            // Input                                    | Outcome
+            // -----------------------------------------+---------------------------------------
+            // udc.Formula = "BAR" plain identifier     | THROWS ArgumentException (wraps #NAME?)
+            // udc.Formula = "42"                       | succeeds, formula=42, result=42.0000
+            // udc.Formula = "hello world"              | THROWS ArgumentException (wraps #NAME?)
+            // udc.Formula = ""                         | succeeds, formula=[empty], result=0.0000
+            // udc.Formula = "\"\""                     | round-trips, formula=\"\", result=[empty]
+            // udc.Formula = (string)null               | HasValue=false, cell unwritten; default formula=0, result=0.0000
+            // udc.Formula = " "                        | succeeds, formula=[empty], result=0.0000
+            // udc.Formula = "\" \""                    | round-trips, formula=\" \", result=[space]
+            // udc.Prompt = "PRM" (Formula pre-quoted)  | THROWS ArgumentException (wraps #NAME?)
 
             var page1 = this.GetNewPage();
             var failures = new System.Collections.Generic.List<string>();
@@ -403,18 +403,18 @@ namespace VTest.Core.Shapes
                 {
                     setup(udc);
                     VA.Shapes.UserDefinedCellHelper.Set(s, name, udc);
-                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                    failures.Add(string.Format("[{0}] expected ArgumentException with [{1}] but Set succeeded", label, expMsgContains));
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (System.ArgumentException ex) when (!(ex is System.ArgumentNullException))
                 {
                     if (!ex.Message.Contains(expMsgContains))
                     {
-                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                        failures.Add(string.Format("[{0}] threw ArgumentException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                    failures.Add(string.Format("[{0}] expected ArgumentException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
                 }
             }
 
@@ -423,38 +423,92 @@ namespace VTest.Core.Shapes
                 string name = MakeName();
                 var s = page1.DrawRectangle(0, 0, 1, 1);
                 var udc = new VA.Shapes.UserDefinedCellCells();
-                udc.Value = "\"v\""; // pre-quoted so Value isn't the variable under test
+                udc.Formula = "\"v\""; // pre-quoted so Formula isn't the variable under test
                 try
                 {
                     setup(udc);
                     VA.Shapes.UserDefinedCellHelper.Set(s, name, udc);
-                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                    failures.Add(string.Format("[{0}] expected ArgumentException with [{1}] but Set succeeded", label, expMsgContains));
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (System.ArgumentException ex) when (!(ex is System.ArgumentNullException))
                 {
                     if (!ex.Message.Contains(expMsgContains))
                     {
-                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                        failures.Add(string.Format("[{0}] threw ArgumentException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                    failures.Add(string.Format("[{0}] expected ArgumentException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
                 }
             }
 
-            // === Value field ===
-            RunValueThrows("U1 plain identifier", udc => udc.Value = "BAR", "#NAME?");
-            RunValueOK("U2 numeric string", udc => udc.Value = "42", "42", "42.0000");
-            RunValueThrows("U3 spaces in middle", udc => udc.Value = "hello world", "#NAME?");
-            RunValueOK("U4a empty unquoted", udc => udc.Value = "", "", "0.0000");
-            RunValueOK("U4b empty quoted", udc => udc.Value = "\"\"", "\"\"", "");
-            RunValueOK("U5 null Value (cell unwritten, Visio default)", udc => udc.Value = (string)null, "0", "0.0000");
-            RunValueOK("U6a single space unquoted", udc => udc.Value = " ", "", "0.0000");
-            RunValueOK("U6b single space quoted", udc => udc.Value = "\" \"", "\" \"", " ");
+            // === Formula field ===
+            RunValueThrows("U1 plain identifier", udc => udc.Formula = "BAR", "SetString");
+            RunValueOK("U2 numeric string", udc => udc.Formula = "42", "42", "42.0000");
+            RunValueThrows("U3 spaces in middle", udc => udc.Formula = "hello world", "SetString");
+            RunValueOK("U4a empty unquoted", udc => udc.Formula = "", "", "0.0000");
+            RunValueOK("U4b empty quoted", udc => udc.Formula = "\"\"", "\"\"", "");
+            RunValueOK("U5 null Formula (cell unwritten, Visio default)", udc => udc.Formula = (string)null, "0", "0.0000");
+            RunValueOK("U6a single space unquoted", udc => udc.Formula = " ", "", "0.0000");
+            RunValueOK("U6b single space quoted", udc => udc.Formula = "\" \"", "\" \"", " ");
 
             // === Prompt field with unencoded plain identifier ===
-            RunPromptThrows("U-PROMPT plain identifier", udc => udc.Prompt = "PRM", "#NAME?");
+            RunPromptThrows("U-PROMPT plain identifier", udc => udc.Prompt = "PRM", "SetString");
+
+            if (failures.Count > 0)
+            {
+                MUT.Assert.Fail("\n" + string.Join("\n", failures));
+            }
+
+            page1.Delete(0);
+        }
+
+        [MUT.TestMethod]
+        public void UserDefinedCells_TypedSetters_RoundTrip()
+        {
+            // Issue #144 — verify SetString / SetFormula produce values that
+            // round-trip through UserDefinedCellHelper.Set + GetDictionary.
+
+            var page1 = this.GetNewPage();
+            var failures = new System.Collections.Generic.List<string>();
+            int caseIndex = 0;
+
+            string MakeName() { caseIndex++; return "T" + caseIndex; }
+
+            void RunSetter(string label, System.Action<VA.Shapes.UserDefinedCellCells> applySetter, string expFormula, string expResult)
+            {
+                string name = MakeName();
+                var s = page1.DrawRectangle(0, 0, 1, 1);
+                var udc = new VA.Shapes.UserDefinedCellCells();
+                try
+                {
+                    applySetter(udc);
+                    VA.Shapes.UserDefinedCellHelper.Set(s, name, udc);
+                    var fdic = VA.Shapes.UserDefinedCellHelper.GetDictionary(s, VisioAutomation.Core.CellValueType.Formula);
+                    var rdic = VA.Shapes.UserDefinedCellHelper.GetDictionary(s, VisioAutomation.Core.CellValueType.Result);
+                    string af = fdic.ContainsKey(name) ? (fdic[name].Formula.Value ?? "<null>") : "<missing>";
+                    string ar = rdic.ContainsKey(name) ? (rdic[name].Formula.Value ?? "<null>") : "<missing>";
+                    if (af != expFormula || ar != expResult)
+                    {
+                        failures.Add(string.Format("[{0}] exp formula=[{1}] result=[{2}], got formula=[{3}] result=[{4}]",
+                            label, expFormula, expResult, af, ar));
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    failures.Add(string.Format("[{0}] expected success but THREW {1}: {2}", label, ex.GetType().Name, ex.Message));
+                }
+            }
+
+            // SetString — encoded as Visio string formula
+            RunSetter("SetString plain", udc => udc.SetString("hello"), "\"hello\"", "hello");
+            RunSetter("SetString with quotes", udc => udc.SetString("say \"hi\""), "\"say \"\"hi\"\"\"", "say \"hi\"");
+            RunSetter("SetString empty", udc => udc.SetString(""), "", "0.0000");
+
+            // SetFormula — raw formula passthrough; numeric formulas are valid
+            RunSetter("SetFormula numeric", udc => udc.SetFormula("42"), "42", "42.0000");
+            RunSetter("SetFormula pre-quoted", udc => udc.SetFormula("\"manual\""), "\"manual\"", "manual");
 
             if (failures.Count > 0)
             {

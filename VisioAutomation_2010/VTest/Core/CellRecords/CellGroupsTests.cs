@@ -82,6 +82,10 @@ namespace VTest.Core.CellRecords
         {
             var props = t.GetProperties().Where(p => p.MemberType == MemberTypes.Property).ToList();
             var cellprops = props.Where(p => p.PropertyType == typeof(VisioAutomation.Core.CellValue)).ToList();
+            // Filter out [Obsolete] aliases (e.g. CustomPropertyCells.Value, the
+            // soft alias for Formula). They reflect as additional properties but
+            // don't have their own GetCellMetadata entry by design.
+            cellprops = cellprops.Where(p => p.GetCustomAttribute<System.ObsoleteAttribute>() == null).ToList();
             return cellprops;
         }
 

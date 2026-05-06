@@ -124,38 +124,47 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
 
         private static CustomPropertyCells _create_cust_prop_from_object(object value)
         {
+            // Use the typed setters (issue #144) so the cmdlet's path doesn't
+            // depend on the EncodeValues() backstop in the Scripting layer to
+            // produce valid Visio formulas. The backstop still runs and is
+            // idempotent on already-encoded values, so this is purely a clarity
+            // improvement.
+            var cp = new CustomPropertyCells();
             if (value is string value_str)
             {
-                return new CustomPropertyCells(value_str);
+                cp.SetString(value_str);
             }
             else if (value is int value_int)
             {
-                return new CustomPropertyCells(value_int);
+                cp.SetNumber(value_int);
             }
             else if (value is double value_double)
             {
-                return new CustomPropertyCells(value_double);
+                cp.SetNumber(value_double);
             }
             else if (value is float value_float)
             {
-                return new CustomPropertyCells(value_float);
+                cp.SetNumber((double)value_float);
             }
             else if (value is bool value_bool)
             {
-                return new CustomPropertyCells(value_bool);
+                cp.SetBool(value_bool);
             }
             else if (value is System.DateTime value_datetime)
             {
-                return new CustomPropertyCells(value_datetime);
+                cp.SetDate(value_datetime);
             }
             else if (value is VisioAutomation.Core.CellValue value_cvl)
             {
-                return new CustomPropertyCells(value_cvl);
+                cp.SetString(value_cvl.Value);
             }
-
-            var value_type = value.GetType();
-            string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
-            throw new System.ArgumentException(msg);
+            else
+            {
+                var value_type = value.GetType();
+                string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
+                throw new System.ArgumentException(msg);
+            }
+            return cp;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.CellRecords;
 using VASS = VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -16,7 +16,17 @@ namespace VisioAutomation.Shapes
         public Core.CellValue Prompt { get; set; }
         public Core.CellValue SortKey { get; set; }
         public Core.CellValue Type { get; set; }
-        public Core.CellValue Value { get; set; }
+        public Core.CellValue Formula { get; set; }
+
+        // Renamed Formula 2026-05-06 (issue #144). The cell stores a Visio formula,
+        // not a literal value; the old name suggested otherwise. The Obsolete shim
+        // preserves source compatibility through the deprecation window.
+        [System.Obsolete("Renamed to Formula. The cell stores a Visio formula, not a literal value. Use SetString/SetNumber/SetBool/SetDate to set typed values without manual encoding.")]
+        public Core.CellValue Value
+        {
+            get { return this.Formula; }
+            set { this.Formula = value; }
+        }
 
         public CustomPropertyCells()
         {
@@ -25,7 +35,7 @@ namespace VisioAutomation.Shapes
         public override IEnumerable<CellMetadata> GetCellMetadata()
         {
             yield return this._create(nameof(this.Label), Core.SrcConstants.CustomPropLabel, this.Label);
-            yield return this._create(nameof(this.Value), Core.SrcConstants.CustomPropValue, this.Value);
+            yield return this._create(nameof(this.Formula), Core.SrcConstants.CustomPropValue, this.Formula);
             yield return this._create(nameof(this.Format), Core.SrcConstants.CustomPropFormat, this.Format);
             yield return this._create(nameof(this.Prompt), Core.SrcConstants.CustomPropPrompt, this.Prompt);
             yield return this._create(nameof(this.Calendar), Core.SrcConstants.CustomPropCalendar, this.Calendar);
@@ -40,14 +50,14 @@ namespace VisioAutomation.Shapes
         public CustomPropertyCells(string value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
-            this.Value = value;
+            this.Formula = value;
             this.Type = type_int;
         }
 
         public CustomPropertyCells(Core.CellValue value, CustomPropertyType type)
         {
             var type_int = CustomPropertyTypeToInt(type);
-            this.Value = value;
+            this.Formula = value;
             this.Type = type_int;
         }
 
@@ -98,43 +108,43 @@ namespace VisioAutomation.Shapes
 
         public CustomPropertyCells(string value)
         {
-            this.Value = value;
+            this.Formula = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
         }
 
         public CustomPropertyCells(int value)
         {
-            this.Value = value;
+            this.Formula = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
         public CustomPropertyCells(long value)
         {
-            this.Value = value;
+            this.Formula = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
         public CustomPropertyCells(float value)
         {
-            this.Value = value;
+            this.Formula = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
         public CustomPropertyCells(double value)
         {
-            this.Value = value;
+            this.Formula = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
         }
 
         public CustomPropertyCells(bool value)
         {
-            this.Value = value;
+            this.Formula = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Boolean);
         }
 
         public CustomPropertyCells(Core.CellValue value)
         {
-            this.Value = value;
+            this.Formula = value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
         }
 
@@ -143,15 +153,62 @@ namespace VisioAutomation.Shapes
             var current_culture = System.Globalization.CultureInfo.InvariantCulture;
             string formatted_dt = value.ToString(current_culture);
             string formatted_value = string.Format("DATETIME(\"{0}\")", formatted_dt);
-            this.Value = formatted_value;
+            this.Formula = formatted_value;
             this.Type = CustomPropertyTypeToInt(CustomPropertyType.Date);
+        }
+
+        // === Typed setters (issue #144) ===
+        // The trap they replace: assigning .Formula = "raw string" produces a Visio
+        // formula that's parsed as a name reference (and rejected with #NAME?).
+        // These setters emit correctly-encoded formulas for each Type without the
+        // caller having to think about Visio's formula grammar.
+
+        public void SetString(string value)
+        {
+            this.Formula = Core.CellValue.EncodeValue(value, true);
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.String);
+        }
+
+        public void SetNumber(double value)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this.Formula = value.ToString(culture);
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
+        }
+
+        public void SetNumber(int value)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this.Formula = value.ToString(culture);
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Number);
+        }
+
+        public void SetBool(bool value)
+        {
+            this.Formula = value ? "TRUE" : "FALSE";
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Boolean);
+        }
+
+        public void SetDate(System.DateTime value)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this.Formula = string.Format("DATETIME(\"{0}\")", value.ToString(culture));
+            this.Type = CustomPropertyTypeToInt(CustomPropertyType.Date);
+        }
+
+        public void SetFormula(string formula)
+        {
+            // Raw escape hatch: assign the formula verbatim, leave Type alone.
+            // For callers who have constructed a valid Visio formula themselves
+            // and want to bypass the typed-setter encoding.
+            this.Formula = formula;
         }
 
         public void EncodeValues()
         {
             // only quote the value when it is a string (no type specified or type equals zero)
             bool quote = (this.Type.Value == null || this.Type.Value == "0");
-            this.Value = Core.CellValue.EncodeValue(this.Value.Value, quote);
+            this.Formula = Core.CellValue.EncodeValue(this.Formula.Value, quote);
             this.Label = Core.CellValue.EncodeValue(this.Label.Value);
             this.Format = Core.CellValue.EncodeValue(this.Format.Value);
             this.Prompt = Core.CellValue.EncodeValue(this.Prompt.Value);
@@ -178,7 +235,7 @@ namespace VisioAutomation.Shapes
             var record = new CustomPropertyCells();
             var getcellvalue = getvalfromrowfunc(row, cols);
 
-            record.Value = getcellvalue(nameof(Value));
+            record.Formula = getcellvalue(nameof(Formula));
             record.Calendar = getcellvalue(nameof(Calendar));
             record.Format = getcellvalue(nameof(Format));
             record.Invisible = getcellvalue(nameof(Invisible));

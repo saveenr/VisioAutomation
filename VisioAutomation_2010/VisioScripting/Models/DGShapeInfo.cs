@@ -34,7 +34,7 @@ namespace VisioScripting.Models
                 string cp_value = customprop_el.Attribute("value").Value;
 
                 var cp = new CustomPropertyCells();
-                cp.Value = cp_value;
+                cp.SetString(cp_value);
 
                 info.CustProps.Add(cp_name,cp);
             }

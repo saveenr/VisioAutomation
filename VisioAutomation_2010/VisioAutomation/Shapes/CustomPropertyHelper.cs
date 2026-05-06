@@ -19,9 +19,14 @@ namespace VisioAutomation.Shapes
             {
                 throw new System.ArgumentNullException(nameof(shape));
             }
+            if (cp == null)
+            {
+                throw new System.ArgumentNullException(nameof(cp));
+            }
 
             __CheckValidCustomPropertyName(name);
 
+            short row;
             if (Contains(shape, name))
             {
                 string full_prop_name = __GetRowName(name);
@@ -33,20 +38,19 @@ namespace VisioAutomation.Shapes
                     throw new Exceptions.InternalAssertionException(msg);
                 }
 
-                var writer = new ShapeSheet.Writers.SrcWriter();
-                writer.SetValues(cp, cell_propname.Row);
-
-                writer.Commit(shape, Core.CellValueType.Formula);
-
-                return;
+                row = cell_propname.Row;
+            }
+            else
+            {
+                row = shape.AddNamedRow(
+                    vis_sec_prop,
+                    name,
+                    (short) IVisio.VisRowIndices.visRowProp);
             }
 
-            short row = shape.AddNamedRow(
-                vis_sec_prop,
-                name,
-                (short) IVisio.VisRowIndices.visRowProp);
-
-            Set(shape, row, cp);
+            var writer = new ShapeSheet.Writers.SrcWriter();
+            writer.SetValues(cp, row);
+            __CommitWithFormulaErrorWrapping(writer, shape, name);
         }
 
         public static void Set(IVisio.Shape shape, short row, CustomPropertyCells cp)
@@ -58,8 +62,50 @@ namespace VisioAutomation.Shapes
 
             var writer = new ShapeSheet.Writers.SrcWriter();
             writer.SetValues(cp, row);
+            __CommitWithFormulaErrorWrapping(writer, shape, null);
+        }
 
-            writer.Commit(shape, Core.CellValueType.Formula);
+        // Issue #144 detect-and-rethrow. Visio raises COMException with message
+        // "#NAME?" (or similar formula-error markers) when a cell formula is
+        // invalid. The most common cause is an unencoded string assigned to a
+        // formula-typed field. Wrap that case with a self-explanatory message
+        // pointing at SetString/EncodeValues so the user knows what to do.
+        private static void __CommitWithFormulaErrorWrapping(
+            ShapeSheet.Writers.SrcWriter writer,
+            IVisio.Shape shape,
+            string propertyName)
+        {
+            try
+            {
+                writer.Commit(shape, Core.CellValueType.Formula);
+            }
+            catch (System.Runtime.InteropServices.COMException ex) when (__LooksLikeFormulaError(ex))
+            {
+                throw new System.ArgumentException(__BuildEncodingDiagnostic(propertyName, ex), ex);
+            }
+        }
+
+        private static bool __LooksLikeFormulaError(System.Runtime.InteropServices.COMException ex)
+        {
+            string msg = ex.Message;
+            if (string.IsNullOrEmpty(msg)) { return false; }
+            return msg.Contains("#NAME?")
+                || msg.Contains("#VALUE!")
+                || msg.Contains("#REF!")
+                || msg.Contains("#NUM!")
+                || msg.Contains("#DIV/0!");
+        }
+
+        private static string __BuildEncodingDiagnostic(
+            string propertyName,
+            System.Runtime.InteropServices.COMException ex)
+        {
+            string ctx = string.IsNullOrEmpty(propertyName)
+                ? "a custom property cell"
+                : string.Format("custom property '{0}'", propertyName);
+            return string.Format(
+                "Visio rejected the formula for {0} ('{1}'). This typically means a CustomPropertyCells field (Formula, Label, Format, or Prompt) was assigned a raw string. Use SetString/SetNumber/SetBool/SetDate to set typed values, or call EncodeValues() before Set, to ensure values are valid Visio formulas.",
+                ctx, ex.Message.Trim());
         }
 
         public static CustomPropertyDictionary GetDictionary(IVisio.Shape shape, Core.CellValueType type)
@@ -214,7 +260,7 @@ namespace VisioAutomation.Shapes
 
             // create a new property
             var cp = new CustomPropertyCells();
-            cp.Value = value;
+            cp.Formula = value;
             cp.Type = type;
 
             Set(shape, name, cp);
