@@ -173,6 +173,63 @@ namespace VTest.Models
         }
 
 
+        [MUT.TestMethod]
+        public void Loader_ConnectorType_DefaultsToCurvedWhenAttributeMissing()
+        {
+            var dg = this.load_two_node_graph(connectortype_attr: null);
+            MUT.Assert.AreEqual(VA.Models.ConnectorType.Curved, dg.Layouts[0].Edges["c1"].ConnectorType);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ConnectorType_StraightFromXml()
+        {
+            var dg = this.load_two_node_graph(connectortype_attr: "Straight");
+            MUT.Assert.AreEqual(VA.Models.ConnectorType.Straight, dg.Layouts[0].Edges["c1"].ConnectorType);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ConnectorType_RightAngleFromXml()
+        {
+            var dg = this.load_two_node_graph(connectortype_attr: "RightAngle");
+            MUT.Assert.AreEqual(VA.Models.ConnectorType.RightAngle, dg.Layouts[0].Edges["c1"].ConnectorType);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ConnectorType_CurvedFromXml()
+        {
+            var dg = this.load_two_node_graph(connectortype_attr: "Curved");
+            MUT.Assert.AreEqual(VA.Models.ConnectorType.Curved, dg.Layouts[0].Edges["c1"].ConnectorType);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ConnectorType_UnrecognizedValueThrows()
+        {
+            MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load_two_node_graph(connectortype_attr: "Wiggly"));
+        }
+
+        private VA.Models.Layouts.DirectedGraph.DirectedGraphDocument load_two_node_graph(string connectortype_attr)
+        {
+            string ct_attr = connectortype_attr == null ? "" : string.Format(" connectortype=\"{0}\"", connectortype_attr);
+            string xml = string.Format(
+                "<autolayoutdrawing>" +
+                "<page>" +
+                "<renderoptions usedynamicconnectors=\"true\" scalingfactor=\"20\"{0} />" +
+                "<shapes>" +
+                "<shape id=\"n1\" label=\"A\" stencil=\"basic_u.vss\" master=\"Rectangle\" />" +
+                "<shape id=\"n2\" label=\"B\" stencil=\"basic_u.vss\" master=\"Rectangle\" />" +
+                "</shapes>" +
+                "<connectors>" +
+                "<connector id=\"c1\" from=\"n1\" to=\"n2\" label=\"\" />" +
+                "</connectors>" +
+                "</page>" +
+                "</autolayoutdrawing>",
+                ct_attr);
+            var dg_xml = SXL.XDocument.Parse(xml);
+            var client = this.GetScriptingClient();
+            return VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, dg_xml);
+        }
+
         private void draw_directed_graph(VisioScripting.Client client, string dg_text)
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);

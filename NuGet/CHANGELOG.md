@@ -15,6 +15,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 - Replaced the deprecated `<licenseUrl>` nuspec element with the modern SPDX `<license type="expression">MIT</license>` form. The license itself is unchanged (still MIT) — only the metadata representation differs, which is what nuget.org's package page now expects.
 - The package now includes a `README.md` at its root (sourced from the repo's [`readme.md`](https://github.com/saveenr/VisioAutomation/blob/master/readme.md)) so the package page on nuget.org renders project content directly instead of just metadata.
 
+### Added
+- `DirectedGraphDocumentLoader.LoadFromXml` now honors a `connectortype` attribute on `<renderoptions>`, accepting `Curved` (default), `Straight`, or `RightAngle`. Previously the connector type was hardcoded to `Curved` regardless of XML, so every directedgraph rendered from XML had curved connectors. Closes [#140](https://github.com/saveenr/VisioAutomation/issues/140) (sub-issue of [#105](https://github.com/saveenr/VisioAutomation/issues/105)).
+
 ### Fixed
 - `OrgChartDocument.Render` no longer fails with `COMException: File not found` on Visio 2013+. The default `OrgChartStyling.Visio2013Template` was hardcoded to `orgch_u.vst`, but Visio 2013 replaced binary `.vst` templates with XML-based `.vstx` and modern Visio installs only ship `orgch_u.vstx`. Updated to `orgch_u.vstx`. Visio 2010 (`Visio2010Template = "orgch_u.vst"`) is unchanged.
 

@@ -55,6 +55,7 @@ namespace VisioScripting.Loaders
         private class PageData
         {
             public MsaglOptions LayoutOptions;
+            public VisioAutomation.Models.ConnectorType ConnectorType;
             public DirectedGraphLayout DirectedGraph;
             public List<Models.DgShapeInfo> ShapeInfos;
             public List<Models.DgConnectorInfo> ConnectorInfos;
@@ -78,8 +79,9 @@ namespace VisioScripting.Loaders
                 pagedatas.Add(pagedata);
                 pagedata.Errors = new List<BuilderError>();
                 pagedata.LayoutOptions = new MsaglOptions();
+                pagedata.ConnectorType = VisioAutomation.Models.ConnectorType.Curved;
                 var renderoptions_el = page_el.Element("renderoptions");
-                DirectedGraphDocumentLoader._get_render_options_from_xml(renderoptions_el, pagedata.LayoutOptions);
+                DirectedGraphDocumentLoader._get_render_options_from_xml(renderoptions_el, pagedata);
 
                 pagedata.DirectedGraph = new DirectedGraphLayout();
                 var shape_els = page_el.Element("shapes").Elements("shape");
@@ -171,16 +173,13 @@ namespace VisioScripting.Loaders
                 client.Output.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    var def_connector_type = VisioAutomation.Models.ConnectorType.Curved;
-                    var connectory_type = def_connector_type;
-
                     var from_shape = pagedata.DirectedGraph.Nodes.Find(con_info.From);
                     var to_shape = pagedata.DirectedGraph.Nodes.Find(con_info.To);
 
                     var def_con_color = new VisioAutomation.Models.Color.ColorRgb(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
-                    var dg_connector = pagedata.DirectedGraph.AddEdge(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
+                    var dg_connector = pagedata.DirectedGraph.AddEdge(con_info.ID, from_shape, to_shape, con_info.Label, pagedata.ConnectorType);
 
                     dg_connector.Cells = new ShapeCells();
                     dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
@@ -197,13 +196,17 @@ namespace VisioScripting.Loaders
             return dgdoc;
         }
 
-        private static void _get_render_options_from_xml(SXL.XElement el, MsaglOptions layoutoptions)
+        private static void _get_render_options_from_xml(SXL.XElement el, PageData pagedata)
         {
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             double DoubleParse(string str) => double.Parse(str, culture);
+            VisioAutomation.Models.ConnectorType ConnectorTypeParse(string str) =>
+                (VisioAutomation.Models.ConnectorType)System.Enum.Parse(
+                    typeof(VisioAutomation.Models.ConnectorType), str, ignoreCase: true);
 
-            layoutoptions.UseDynamicConnectors = el.GetAttributeValue("usedynamicconnectors", bool.Parse);
-            layoutoptions.ScalingFactor = el.GetAttributeValue("scalingfactor", DoubleParse);
+            pagedata.LayoutOptions.UseDynamicConnectors = el.GetAttributeValue("usedynamicconnectors", bool.Parse);
+            pagedata.LayoutOptions.ScalingFactor = el.GetAttributeValue("scalingfactor", DoubleParse);
+            pagedata.ConnectorType = el.GetAttributeValue("connectortype", pagedata.ConnectorType, ConnectorTypeParse);
         }
     }
 }
