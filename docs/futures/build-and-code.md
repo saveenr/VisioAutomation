@@ -44,6 +44,12 @@ Backlog of build-system, tooling, and code/architecture items. For the staged pl
 - **Cross-refs:** *Move development to Visual Studio 2026* above supersedes this for now (do that first; defer the .NET 6/8 question).
 - **Effort:** L — major undertaking.
 
+### PowerShell cmdlet positional-parameter UX audit
+- **What:** Audit every cmdlet in [`VisioAutomation_2010/VisioPowerShell/Commands/`](../../VisioAutomation_2010/VisioPowerShell/Commands/) for positional-parameter consistency. Adopt a standard pattern: `-Name` at position 0, single-target object parameter (`-Document` / `-Page` / `-Shape`) at position 1, everything else named-only. Tracked in [#143](https://github.com/saveenr/VisioAutomation/issues/143).
+- **Why:** Today's parameter-set declarations are inherited defaults rather than deliberate choices. The same trap that bit [#102](https://github.com/saveenr/VisioAutomation/issues/102) (where `get-visiomaster -Name "Group" $grp` silently returned the wrong thing because `$grp` had nowhere to bind positionally) likely exists across the module.
+- **Cross-refs:** [#142](https://github.com/saveenr/VisioAutomation/issues/142) is the narrow fix on `Get-VisioMaster`; this item is the broader audit pass that should also consider whether to add `ValueFromPipeline` on object parameters in the same pass.
+- **Effort:** M.
+
 ### Move `LinqExtensions` out of `Internal/` (or rename the folder)
 - **What:** `LinqExtensions` lives at `VisioAutomation/Internal/Extensions/LinqExtensions.cs` but is `public` and consumed across the assembly boundary by `VisioAutomation.Models` (`ShapeList` calls its `NotOfType<T>` method). The `public` visibility is therefore correct; the **folder name** is misleading.
 - **Why deferred from Phase 1:** Either fix is technically a breaking namespace change for any external code that happens to use the type. Phase 1 was code+docs cleanup only; namespace shifts belong with the broader Phase 3 modernization where breaking changes are acceptable.

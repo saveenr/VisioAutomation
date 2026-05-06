@@ -9,7 +9,7 @@ A running list of cleanup, modernization, and improvement items for the VisioAut
 ## Where to find things
 
 - **[`ROADMAP.md`](ROADMAP.md)** — staged-plan overview (Phase 1 / 2 / 3 status, what shipped per phase, what's still pending). Read this first for orientation.
-- **[`futures/build-and-code.md`](futures/build-and-code.md)** — Build & tooling, Code & architecture. Items: *Consolidate target frameworks*, *Run tests in CI*, *Move development to Visual Studio 2026*, *Consider migrating off Visio 2010 PIA*, *Decide whether to move to .NET 6/8*, *Move `LinqExtensions` out of `Internal/`*.
+- **[`futures/build-and-code.md`](futures/build-and-code.md)** — Build & tooling, Code & architecture. Items: *Consolidate target frameworks*, *Run tests in CI*, *Move development to Visual Studio 2026*, *Consider migrating off Visio 2010 PIA*, *Decide whether to move to .NET 6/8*, *PowerShell cmdlet positional-parameter UX audit*, *Move `LinqExtensions` out of `Internal/`*.
 - **[`futures/tests.md`](futures/tests.md)** — Test-related items. Items: *Tests require a live Visio* (design decision), *Test coverage gaps*, *Evaluate modern testing-stack options*.
 - **[`futures/releases.md`](futures/releases.md)** — Release process and version policy. Items: *Reconcile version numbers across artifacts*, *Switch module-release builds from Debug to Release*, *Automate releases via GitHub CI*.
 - **[`futures/docs.md`](futures/docs.md)** — Documentation items, in-repo and user-facing gitbook. Items: *Decide where docs live long-term*, *Restructure the user-docs repos*, *Expand .NET-side doc coverage — Tier 3*, *Decide whether to document `VisioScripting` as a public API*, *Keep CHANGELOGs current*, plus four smaller gitbook items.
