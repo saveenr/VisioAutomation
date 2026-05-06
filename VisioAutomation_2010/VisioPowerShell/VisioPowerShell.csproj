@@ -65,25 +65,26 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <HintPath>..\packages\Visio2010.PrimaryInteropAssembly.1.0.0.4\lib\net20\Microsoft.Office.Interop.Visio.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.PowerShell.3.ReferenceAssemblies.1.0.0\lib\net4\System.Management.Automation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Visio2010.PrimaryInteropAssembly">
+      <EmbedInteropTypes>false</EmbedInteropTypes>
+      <PrivateAssets>none</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.PowerShell.3.ReferenceAssemblies" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net452">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\VisioShape\MeasureVisioShape.cs" />
@@ -180,7 +181,6 @@
   <ItemGroup>
     <None Include="LoadFromBinDebug.ps1" />
     <None Include="InstallForCurrentUser.ps1" />
-    <None Include="packages.config" />
     <None Include="Visio.Types.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

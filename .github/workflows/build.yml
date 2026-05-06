@@ -31,25 +31,23 @@ jobs:
         with:
           vs-version: '17.0'
 
-      # The shipping libraries target .NET Framework 4.5.2, whose reference
-      # assemblies are not present on the windows-latest runner image.
-      # Install the 4.5.2 Developer Pack via Chocolatey, which is
-      # pre-installed on the runner.
-      # Phase 3 will bump these projects to 4.7.2 (in-box on every
-      # supported Windows) and this step can be deleted.
-      - name: Install .NET Framework 4.5.2 Developer Pack
-        run: choco install netfx-4.5.2-devpack -y --no-progress
+      # NOTE: the .NET Framework 4.5.2 dev-pack install step is deliberately
+      # absent. The shipping libs still target net452, but the reference
+      # assemblies are now supplied by the Microsoft.NETFramework.ReferenceAssemblies.net452
+      # NuGet package (declared in VisioAutomation_2010/Directory.Packages.props).
+      # That package's .targets sets TargetFrameworkRootPath to its own folder,
+      # so MSBuild no longer needs the dev pack on disk.
 
       - name: Cache NuGet packages
         uses: actions/cache@v4
         with:
-          path: VisioAutomation_2010/packages
-          key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/**/packages.config') }}
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/Directory.Packages.props') }}
           restore-keys: |
             nuget-${{ runner.os }}-
 
       - name: Restore NuGet packages
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore -p:RestorePackagesConfig=true
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
 
       - name: Build solution
         run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m

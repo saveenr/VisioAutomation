@@ -1,0 +1,49 @@
+<Project>
+
+  <!--
+    Solution-wide MSBuild defaults. Picked up automatically by every csproj
+    under VisioAutomation_2010/ via MSBuild's Directory.Build.props convention
+    — no <Import> needed in any csproj.
+
+    Keep this file small and explainable. Each property here is a deliberate
+    override of an SDK default; document the reason.
+  -->
+
+  <PropertyGroup>
+
+    <!--
+      Central Package Management. Package versions live in Directory.Packages.props
+      (sibling file), not inline in csprojs. Eliminates version-skew risk across
+      projects and makes the CI cache key trivially correct.
+      Requires NuGet 6.2+ / VS 2022 17.4+; verified locally on MSBuild 17.14.40.
+    -->
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+
+    <!--
+      Modern C# everywhere. We don't multi-target, so a single language version
+      across all 11 projects is consistent. Runtime-independent C# features
+      (file-scoped namespaces, target-typed new(), pattern enhancements, etc.)
+      become available even on net452 / net472.
+    -->
+    <LangVersion>latest</LangVersion>
+
+    <!--
+      Preserve the legacy bin/Debug/ output layout (no TFM suffix).
+      NuGet/VisioAutomation2010.nuspec packs DLLs from bin/Debug/*.dll;
+      VisioPowerShell/InstallForCurrentUser.ps1 and Publish-VisioPSToGallery.ps1
+      assemble the PowerShell module from bin/Debug/. We don't multi-target,
+      so the SDK's TFM-suffixed default (bin/Debug/net452/) buys us nothing.
+    -->
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+    <!--
+      Keep existing Properties/AssemblyInfo.cs files; don't generate from csproj
+      properties. Avoids duplicate-attribute build errors during the SDK-style
+      migration. Future cleanup can flip this to true and move the [assembly: ...]
+      attributes into csproj / Directory.Build.props.
+    -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+  </PropertyGroup>
+
+</Project>
