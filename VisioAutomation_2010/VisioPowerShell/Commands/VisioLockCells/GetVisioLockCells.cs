@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands.VisioLockCells
         {
             var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             var dic = this.Client.Lock.GetLockCells(targetshapes, VisioAutomation.Core.CellValueType.Formula);
-            this.WriteObject(dic, true);
+            this.WriteObject(dic);
         }
     }
 }
