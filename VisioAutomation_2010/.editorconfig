@@ -1,0 +1,16 @@
+root = true
+
+[*.cs]
+
+# MSTEST0030: Type containing [TestMethod] should be marked with [TestClass].
+#
+# Promoted from the analyzer's default warning to error. Driven by the
+# Phase 1 incident where seven test classes derived from Framework.VTest
+# were missing [TestClass] on the class declaration; MSTest 4.x doesn't
+# inherit [TestClass] from a base class, and the build emitted no warning,
+# so 14 tests (~8% of the suite) were silently skipped for years until
+# commit b77a99f0 found and fixed them. Treating this as an error means
+# the regression cannot recur silently.
+#
+# Rule docs: https://learn.microsoft.com/en-us/dotnet/core/testing/mstest-analyzers/mstest0030
+dotnet_diagnostic.MSTEST0030.severity = error

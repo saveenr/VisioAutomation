@@ -98,7 +98,7 @@ namespace VTest.Core
 
             var doc1 = this.GetNewDoc();
             MUT.Assert.AreEqual(documents.Count, old_doc_count + 1);
-            MUT.Assert.AreEqual(doc1.Pages.Count, 1);
+            MUT.Assert.AreEqual(1, doc1.Pages.Count);
             var page1 = doc1.Pages[1];
             MUT.Assert.AreEqual(app.ActivePage, page1);
 
