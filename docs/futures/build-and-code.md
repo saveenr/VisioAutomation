@@ -92,6 +92,78 @@ Recommended path: **Option B** initially, plus a deprecation timeline for PS 5.1
 - **Options on the table** (see [#144](https://github.com/saveenr/VisioAutomation/issues/144) for full details and the recommended path): auto-encode in `CustomPropertyHelper.Set` (the choke-point); or add a clearer factory like `CustomPropertyCells.FromString(...)`; or add an `Encoded` flag on the cells; or leave the API alone and lean on docs.
 - **Effort:** S-M.
 
+### Borrow ideas from VisioBot3000 for VisioPS ergonomics
+- **What:** [`VisioBot3000`](https://github.com/MikeShepard/VisioBot3000) (Mike Shepard, [`PSGallery`](https://www.powershellgallery.com/packages/VisioBot3000)) is a separately-maintained PowerShell module for Visio automation with a meaningfully different design from VisioPS. Worth a deliberate look for techniques to borrow into VisioPS, especially around scripted-diagram ergonomics.
+- **Why:** VisioPS is a binary cmdlet module focused on low-level COM-surface coverage (cells, custom properties, hyperlinks, locks, text formatting). VisioBot3000 is a 100% script-based DSL focused on *composing diagrams quickly*. The two emphases are complementary, and VisioPS users who reach for diagram-composition workflows currently don't have the ergonomic shorthand VisioBot3000 offers.
+
+#### Distinctive ideas in VisioBot3000
+
+(Source material: the [`README`](https://github.com/MikeShepard/VisioBot3000), the two intro blog posts [Part 1](https://powershellstation.com/2016/04/28/introducing-visiobot3000-part-1-clark-kent/) / [Part 2](https://powershellstation.com/2016/04/29/introducing-visiobot3000-part-2-superman/), and the [`PSGallery listing`](https://www.powershellgallery.com/packages/VisioBot3000) which enumerates 44 exported functions.)
+
+1. **Stencil + shape nickname registry.** `Register-VisioStencil -Name Servers -Path C:\temp\SERVER_U.vssx`, then `Register-VisioShape -Name WebServer -From Servers -MasterName 'Web Server'`. After registration the stencil and master can be referenced by their friendly names anywhere in the script. VisioPS today asks the user to keep `$master` variables in scope, threaded into every `New-VisioShape` call.
+2. **Dynamic function generation on registration.** This is the most distinctive idea. Registering a shape *creates a PowerShell function with that name*. So after `Register-VisioShape -Name WebServer ...` the script can call `WebServer -name PrimaryServer` directly, no `New-VisioShape -master ...` boilerplate. PS function-table mutation (`Set-Item function:WebServer ...`) is the mechanism.
+3. **Block-style nested syntax for containers.** Containers take a script block whose contents render inside the container's bounds:
+
+    ```powershell
+    New-VisioContainer -shape (Get-VisioShape Domain) -name MyDomain -contents {
+        New-VisioShape -master WebServer -name PrimaryServer -x 5 -y 5
+        New-VisioShape -master DBServer  -name SQL01         -x 5 -y 7
+    }
+    ```
+
+    Combined with the dynamic-function trick above this reduces to:
+
+    ```powershell
+    Domain MyDomain {
+        WebServer PrimaryServer
+        DBServer SQL01
+    }
+    ```
+
+4. **Relative positioning cursor.** A module-level "next position" cursor with helpers (`Set-NextShapePosition`, `Set-RelativePositionDirection Vertical`). Default places each new shape just to the right of the last; users can flip direction inside a block. Means most diagrams need no explicit `-x`/`-y`. VisioPS today requires either an explicit `Position` or wraps a layout step around the shape drops.
+5. **Connector by nickname.** `New-VisioConnector -from PrimaryServer -to SQL01 -name SQL -color Red -Arrow`. References shapes by their registered name rather than by `$shape` reference. Makes connector-heavy scripts readable.
+6. **Verb-prefixed aliases for the common cmdlets.** `Diagram` for `New-VisioDocument`, `Stencil` for `Register-VisioStencil`, `Shape` / `Container`. Short noun-form reads more like a description than imperative commands.
+7. **`Convert-VisioObjectToPSObject`** &mdash; marshals a live COM object into a flat `PSCustomObject` for pipeline-friendly filtering / inspection. Niche, but a recurring pain point in VisioPS too.
+
+#### What VisioPS does better today (preserve)
+
+- **Lower-level coverage.** ShapeSheet cells, custom properties (per-Type behavior matrix, typed setters), hyperlinks, locks, control handles, connection points, text formatting, page-level cells, layout cells. VisioBot3000 doesn't try to cover this surface.
+- **Strong typing via binary cmdlets.** Parameter binding, IntelliSense in script-pane editors, deterministic error messages. VisioBot3000's dynamic-function generation forfeits some of this (the per-shape function has no static signature).
+- **Test coverage.** 17 PS-side tests today, run against a live Visio in a test-host singleton. VisioBot3000 has no comparable test infrastructure.
+- **Underlying .NET library.** VisioPS rides on `VisioAutomation` / `VisioAutomation.Models`, both publicly consumable for non-PS callers. VisioBot3000 is PowerShell-only.
+
+#### Adoption path
+
+Treat as a series of incremental adoptions, not an all-at-once port:
+
+- **Phase 1 &mdash; nickname registry as opt-in helpers.** New cmdlets: `Register-VisioStencilNickname`, `Register-VisioShapeNickname`, `Get-VisioRegisteredShape`. These store name &rarr; (stencil-doc, master-name) mappings in module-level state and provide convenience lookup. No dynamic functions, no DSL &mdash; just a name registry. Low-risk, easy to test, doesn't perturb existing scripts.
+- **Phase 2 &mdash; block-style script-block parameter on `New-VisioContainer`.** Add a `-Contents { ... }` script block that runs in a context where the container's coordinate frame is implicit. Composes well with both the nickname registry and the existing `New-VisioShape` cmdlet.
+- **Phase 3 &mdash; relative-positioning cursor.** New cmdlets `Set-VisioNextShapePosition`, `Set-VisioRelativePositionDirection`, plus auto-fill behavior on `New-VisioShape` when `-Position` is omitted *and* a cursor is active. Opt-in: existing scripts that pass `-Position` get the same behavior they always did.
+- **Phase 4 &mdash; the dynamic-function trick** (the headline VisioBot3000 idea). Hybrid binary+script module: the existing binary `VisioPS.dll` keeps the cmdlets; a thin companion `.psm1` provides the dynamic-function generation that turns nicknames into callable functions. Substantial complexity (binary + script module bridging, function lifetime per import session, tab-completion behavior on auto-generated functions); save for last.
+
+Phases 1-3 are straightforward additions to the binary cmdlet surface. Phase 4 is the architectural shift &mdash; by then we'd know from real script use whether it's worth the complexity.
+
+#### Open research before adopting
+
+- **Maintenance status of VisioBot3000.** PSGallery shows v1.1 from Jan 2018 (no newer); GitHub has recent commits to master per the repo page. Confirm what's live for users, what's stale, and whether the project is actively maintained before borrowing implementation specifics rather than just ideas.
+- **License compatibility.** Confirm VisioBot3000's license (likely MIT). VisioPS is MIT.
+- **PS host compatibility.** VisioBot3000 is script-only PS, so it loads in PS 5.1 and PS 7. Any borrowed binary-side helper has to track the *Move to C# 14 / .NET 10* item's PS-edition compat decision (see above).
+- **Tab-completion / StrictMode / discoverability** for dynamically-generated functions. PS users running with `Set-StrictMode -Version 2` may not get clean tab-completion on functions that don't exist until a `Register-*` call runs.
+
+#### Cross-refs
+
+- *Move to C# 14 / .NET 10* above &mdash; the PS-edition compat decision there constrains what's safe to ship in the binary half of any hybrid module shape.
+- *Decide whether to document `VisioScripting` as a public API* in [`docs.md`](docs.md) &mdash; tangentially related (any DSL borrowing would presumably go through `VisioScripting.Client` rather than re-implementing automation primitives).
+
+#### Effort
+
+- Phase 1 (nickname registry): S.
+- Phase 2 (block-style container): S.
+- Phase 3 (positioning cursor): S-M.
+- Phase 4 (dynamic-function DSL): M-L. Most of the cost is in the binary+script module bridge; the PS-side function-table manipulation itself is small.
+
+Total: M for phases 1-3 if pursued together; +M-L if Phase 4 is added.
+
 ### Move `LinqExtensions` out of `Internal/` (or rename the folder)
 - **What:** `LinqExtensions` lives at `VisioAutomation/Internal/Extensions/LinqExtensions.cs` but is `public` and consumed across the assembly boundary by `VisioAutomation.Models` (`ShapeList` calls its `NotOfType<T>` method). The `public` visibility is therefore correct; the **folder name** is misleading.
 - **Why deferred from Phase 1:** Either fix is technically a breaking namespace change for any external code that happens to use the type. Phase 1 was code+docs cleanup only; namespace shifts belong with the broader Phase 3 modernization where breaking changes are acceptable.
