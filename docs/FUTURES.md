@@ -34,13 +34,18 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 - *Reconcile version numbers across artifacts* — needs a deeper conversation before a decision; **currently deferred**, do not implement until discussed. The PS module is now at `4.6.1`; the NuGet is at `2.6.0`.
 - ✅ *Investigate flakiness from leftover Visio processes* — done in Phase 1 (orphan-leak fix); resolution detail in [`COMPLETED.md`](COMPLETED.md#investigate-flakiness-from-leftover-visio-processes).
 
-### Phase 3 — Modernization
-- *Move development to Visual Studio 2026*
-- *Consolidate target frameworks* — step 2 (4.5 → 4.7.2)
+### Phase 3 — Modernization *(in progress)*
+
+Phase 3 items completed (so far):
+- ✅ *Migrate from `packages.config` to `PackageReference`* — all 11 csprojs converted; Central Package Management; dev-pack install requirement gone via `Microsoft.NETFramework.ReferenceAssemblies` packages. Detail in [`COMPLETED.md`](COMPLETED.md#migrate-from-packagesconfig-to-packagereference).
+- ✅ *Modernize SDK-style csproj* — all 11 csprojs converted to SDK-style; net -1,322 lines across the three sub-passes (libraries, tests, exes); MSB3270 mismatch + filename-casing fix + 7-year-old dead code surfaced and removed as side benefits. Detail in [`COMPLETED.md`](COMPLETED.md#modernize-sdk-style-csproj).
+- ✅ *Test-discovery linter* (`MSTest.Analyzers` + MSTEST0030 enforcement) and *per-project test READMEs / `docs/TESTING.md`* — closed most of the *General cleanup of the test projects* entry from the Tests section below; only the *Coverage gaps* angle remains. Detail in [`COMPLETED.md`](COMPLETED.md#test-discovery-linter-msttestanalyzers--mstest0030-enforcement).
+
+Phase 3 items still pending:
+- *Move development to Visual Studio 2026* — gated on the TFM bump.
+- *Consolidate target frameworks* — step 2 (4.5 → 4.7.2). **Deferred until 2026-10-13** when Windows 10 LTSB 2016 leaves Extended Support; bumping earlier would block enterprise users on locked LTSB images.
 - *Consider migrating off Visio 2010 PIA*
 - *Decide whether to move to .NET 6/8 (out of .NET Framework)*
-- *Migrate from `packages.config` to `PackageReference`*
-- *Modernize SDK-style csproj*
 - *Automate releases via GitHub CI — NuGet + PowerShell Gallery*
 - *Decide where docs live long-term*
 
@@ -54,22 +59,12 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 - **Why:** Mixed TFMs cause subtle binary-compatibility surprises (a test project on a higher TFM can use APIs the library under test cannot). Step 1 eliminated the production 4.0/4.5 split; step 2 will eliminate the 4.5/4.7.2 split between shipping libs and tests, and let us drop the v4.5 reference-assemblies NuGet workaround.
 - **Effort:** S (already partially done).
 
-### Migrate from `packages.config` to `PackageReference`
-- **What:** Every csproj still uses the old `packages.config` NuGet model.
-- **Why:** `PackageReference` is transitive, lockable, and the only model supported by `dotnet` CLI / SDK-style projects. Required before any modernization beyond Framework.
-- **Effort:** S–M
-
 ### Run tests in CI
 - **What:** [`.github/workflows/build.yml`](../.github/workflows/build.yml) currently builds only — the test suite isn't exercised by CI. The orphan-leak fix in Phase 1 (see *Investigate flakiness from leftover Visio processes* in [`COMPLETED.md`](COMPLETED.md#investigate-flakiness-from-leftover-visio-processes)) is a prerequisite for re-runs to be idempotent, so re-running tests in CI is now feasible from a process-hygiene standpoint.
 - **Why:** Without test runs in CI, regressions only surface on a developer's local machine or after release. The whole point of [the test-cleanup work that landed in Phase 1](COMPLETED.md#investigate-flakiness-from-leftover-visio-processes) was to make the suite trustworthy enough to gate releases on.
 - **Constraint:** Tests need Microsoft Visio installed on the runner. GitHub-hosted Windows runners don't have Visio, so this needs a **self-hosted Windows runner** with Visio installed (or some other arrangement for ephemeral Visio installs).
 - **Cross-refs:** Should land before *Automate releases via GitHub CI — NuGet + PowerShell Gallery* in Phase 3 (a working test gate is the natural pre-publish check). The *Tests require a live Visio* design-decision item below frames the constraint.
 - **Effort:** M (provisioning the self-hosted runner is the bulk; wiring up the workflow is small).
-
-### Modernize SDK-style csproj
-- **What:** Convert the legacy csproj format (long `<Compile Include="..." />` lists, packages.config) to SDK-style csproj.
-- **Why:** Smaller files, no need to enumerate every source file, easier diffs, prerequisite for any later .NET migration.
-- **Effort:** M (depends on PackageReference being done first).
 
 ---
 
@@ -103,20 +98,10 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 - **Why (consider):** This is intentional — the library's whole job is to drive Visio, and mocking COM gives false confidence. But the lack of any non-Visio test surface means there's no quick `dotnet test` that runs anywhere. *Not necessarily a problem*, just worth a deliberate decision before adding CI.
 - **Effort:** N/A — design decision, not a task.
 
-### General cleanup of the test projects *(immediate next item; predates CI work)*
-- **What:** The four test projects (`VTest`, `VTest.Models`, `VTest.Scripting`, `VTest.PowerShell`) accumulated organically. They were upgraded off the MSTest beta in Phase 1 and consolidated to .NET Framework 4.7.2, but the test code itself hasn't had a deliberate review.
-- **Baseline (2026-05-04)** &mdash; all 177 tests across the four projects pass cleanly (VTest 94, VTest.Models 45, VTest.Scripting 34, VTest.PowerShell 4) and runs leave zero Visio orphan processes. Got there in three waves:
-  - **Discovery / runtime fixes:** Removed the legacy MSTest v1 project-type GUID (`{3AC096D0-A1C2-E12C-1390-A8335801FDAB}`) from all four csprojs (`12027821`). Added `System.Threading.Tasks.Extensions 4.5.4` package + reference to all four projects (transitive dep of MSTest's runner that wasn't being picked up). Enabled `<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>` + `<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>` on all four csprojs (`5606adcc`). Removed redundant `[DeploymentItem]` attributes (8 total) from `XmlErrorLogTests`, `DrawModel_DirectedGraph`, `DrawModel_OrgChartTests` (`5cbf11cd`). Data files are already `CopyToOutputDirectory=Always` so they're alongside the test DLL anyway; the attributes were silently triggering VS Test Explorer's deployment mode which dropped runtime dependencies on the floor. **Note:** an attempted `default.runsettings` fix with `DeploymentEnabled=False` was reverted (`fb1799d4`) because it regressed previously-passing tests in VS Test Explorer. Worth understanding why before reaching for runsettings again.
-  - **`Dom_DrawOrgChart` Visio-version fix** (`da9bba0a`) &mdash; the test hardcoded `orgchart.vst` but Visio 2013 (v15) replaced binary `.vst` templates with XML-based `.vstx` and modern installs only ship `orgch_u.vstx`. Fixed by version-guarding the template filename, mirroring the already-version-guarded master name on the line above.
-  - **Silent-skip + orphan fix** (`b77a99f0` and `9a592a9d`) &mdash; turned out 14 test methods (~8% of the suite) weren't running because seven test classes deriving from `Framework.VTest` were missing the `[MUT.TestClass]` attribute on the class declaration; MSTest 4.x doesn't inherit `[TestClass]` from a base class. Adding the attributes raised the test count from 163 to 177 and surfaced 4 real failures from the `OrgChartStyling.cs:9` production bug (same `.vst` &rarr; `.vstx` pattern as `Dom_DrawOrgChart`, fixed in the same commit). Then `9a592a9d` plugged the per-testhost Visio singleton leak via `[AssemblyCleanup]` hooks and refactored three rogue tests in `DrawModel_OrgChartTests.cs` that were spawning their own `new IVisio.Application()`.
-- **Possible angles for the broader cleanup** &mdash; pick what's worth doing:
-  - **Test-discovery linter / build warning.** The `[TestClass]`-attribute regression went unnoticed for years because nothing warns when `[TestMethod]` lives on a class that lacks `[TestClass]`. A simple Roslyn analyzer or even a build-time grep check would catch this. Especially worth doing before CI lands &mdash; once the test suite gates releases, a regression that silently reduces it is much more dangerous.
-  - **Architecture mismatch.** `VTest.csproj` forces `<PlatformTarget>x86</PlatformTarget>` while `VTest.PowerShell` doesn't, producing the long-standing `MSB3270` warning during build. Decide on a single platform target across the four projects. Almost certainly should be either all x86 or all `AnyCPU` &mdash; the choice depends on whether the tests need to pin to 32-bit Visio specifically (probably not, but worth checking the test code that touches the Visio process).
-  - **Modernization.** Decide whether MSTest stays the framework or to consider xUnit / NUnit. Decide whether the four projects should consolidate (a lot of fixture code is similar). Convert test files to use modern C# idioms (the audit fixed a few `var` / `nameof` / target-typed-`new` opportunities incidentally; a deliberate sweep would catch more). The legacy `<TestProjectType>UnitTest</TestProjectType>` / `<VSToolsPath>` / `<IsCodedUITest>` cruft in three of four csprojs is also still there post-GUID-removal &mdash; harmless but worth deleting.
-  - **Documentation.** None of the test projects have READMEs explaining what they cover, what fixtures they need, what state they assume Visio to be in, or how to run them. A per-project README plus a top-level `docs/TESTING.md` would help anyone running the suite for the first time. Inline `///` summaries on test methods explaining *intent* (vs. *what the code does*) is valuable when a test starts failing months later.
-  - **Coverage gaps.** A pass over the public API surface would surface untested types &mdash; the doc-audit Tier 1/2/4 work flagged a lot of helpers that don't seem to have direct tests. Worth making a list before deciding to add tests.
-- **Cross-refs:** *Run tests in CI* under Phase 3 (tests needing a self-hosted runner with Visio &mdash; the orphan-cleanup work above is a prereq for re-runs to be idempotent). *Tests require a live Visio* (the design constraint that shapes anything done here). **Should land before** *Automate releases via GitHub CI* &mdash; a working, fully-discovered test suite is the natural pre-publish gate.
-- **Effort:** S for a test-discovery linter. M for the arch-mismatch + csproj-cleanup sweep. S–M for the documentation pass. Coverage gaps is open-ended.
+### Test coverage gaps
+- **What:** A pass over the public API surface would surface untested types &mdash; the Phase 1 doc-audit Tier 1/2/4 work flagged a lot of helpers that don't seem to have direct tests. Worth making a list before deciding to add tests.
+- **Status (2026-05-06):** This is the only remaining angle of the original *General cleanup of the test projects* entry. The other angles all completed: the test-discovery linter (MSTest.Analyzers + MSTEST0030 enforcement) and per-project READMEs / `docs/TESTING.md` shipped as the test-cleanup pass; the MSB3270 x86/AnyCPU mismatch + `<TestProjectType>` cruft + `Vtest.Models.csproj` filename casing all resolved as side effects of SDK migration Pass 2b. See [`COMPLETED.md`](COMPLETED.md#tests) for detail.
+- **Effort:** Open-ended &mdash; depends on how many gaps a curated audit surfaces and how many are worth closing.
 
 ### Evaluate modern testing-stack options
 - **What:** The test code was written years ago against the framework choices then current (MSTest + standard `Assert.*` calls + a custom `Framework.VTest` base class for shared setup). The 2025-era .NET test ecosystem has evolved meaningfully; some pieces fit this codebase, others don't. This entry is the curated survey, not a commitment.
