@@ -22,6 +22,30 @@ Backlog of items related to release process, version policy, and publishing to p
 - **Cross-refs:** *Automate releases via GitHub CI* below — the CI workflow either flips the constant or stages the release config separately.
 - **Effort:** S.
 
+### PSGallery publish via "release first, then publish from the release artifact"
+- **What:** Move the PSGallery publish off the developer's local machine and into CI, with a deliberate two-step flow:
+  1. **Step 1 &mdash; GitHub Release** *(already shipped):* [`release-psmodule.yml`](../../.github/workflows/release-psmodule.yml) is triggered manually, reads `ModuleVersion` from [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1), builds Debug, stages the module folder, zips it, tags `VisioPS_<version>`, and creates a GitHub Release with the zip attached.
+  2. **Step 2 &mdash; PSGallery publish** *(new):* a second workflow (suggested name `publish-psmodule.yml`) takes a published GitHub Release as input, downloads its zip artifact, extracts it to a staging folder, verifies the module version, runs `Publish-Module -Path <staged> -NuGetApiKey $env:PSGALLERY_API_KEY`, then verifies via `Find-Module`. Optionally posts a comment on the GH Release announcing the PSGallery upload.
+- **Why:**
+  - **Single binary source of truth.** The exact artifact attached to the GH Release is what lands on PSGallery; no risk of a local build differing from the published one. Anyone can audit what actually shipped by downloading the GH Release zip.
+  - **Removes the local-machine dependency.** No PSGallery API key on a developer machine, no "use a fresh PowerShell session" caveat, no Smart App Control surprises like the ones flagged in the 4.7.0 publish session.
+  - **Built-in manual gate.** Publishing the GH Release is a deliberate human step (UI button or `gh release create`), giving a moment to inspect the staged zip before it goes to the gallery.
+  - **Symmetry with how most package-publishing CI flows are shaped** &mdash; release on GitHub, then publish to gallery from the release.
+- **How:**
+  - **Trigger** &mdash; two reasonable options:
+    - `workflow_dispatch` with the release tag as an input (safer; manual kick after inspecting the GH Release).
+    - `on: release: types: [published]` filtered to `VisioPS_*` tags (auto-publish on GH Release creation; tighter coupling, less review).
+    Recommend starting with `workflow_dispatch`; tighten to `release: published` once the workflow is stable.
+  - **Steps** &mdash; download the zip via `gh release download`, `Expand-Archive` into a staging folder, verify `ModuleVersion` matches expectations, run the same `Publish-Module` + `Find-Module` verification pair that's in [`Publish-VisioPSToGallery.ps1`](../../VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) today.
+  - **Secret setup:** `PSGALLERY_API_KEY` as a repository secret (suggested name). Same key used by the local script today; just lives in GitHub Actions instead.
+  - **Tagging responsibility shifts** to the existing `release-psmodule.yml` workflow (it already tags via the GH Release creation). The local `Publish-VisioPSToGallery.ps1` currently both publishes *and* tags; in the new flow it would no longer be the tag source.
+- **Disposition of the local script:** `Publish-VisioPSToGallery.ps1` keeps working as a fallback / dev convenience. Once the CI flow is proven (one or two release cycles), consider retiring it &mdash; or stripping its tag step and keeping only the publish + verification logic for emergency / out-of-band publishes.
+- **Testing strategy:** PSGallery versions are immutable, so we can't safely re-publish a real version to test. First-cut: trigger the new workflow with `workflow_dispatch` against the existing 4.7.0 GH Release, but pass a `-WhatIf` flag through to the `Publish-Module` step so it does everything except the upload. Verify the download / extract / version-check / `Find-Module` steps end-to-end. Then real run on the next legitimate version bump.
+- **Cross-refs:**
+  - *Automate releases via GitHub CI* below &mdash; this item is the PowerShell-module half of the broader plan, sharpened to the GH-Release-first shape. The NuGet half follows the same pattern (a `publish-nuget.yml` from the existing `release-nuget.yml`).
+  - *Address `Visio.psd1` deprecation warnings* above &mdash; the new publish workflow is the natural place to surface those warnings as CI signals so future drift is caught.
+- **Effort:** S&ndash;M. The workflow body is mostly orchestration; the publish-step internals copy from `Publish-VisioPSToGallery.ps1`.
+
 ### Address `Visio.psd1` deprecation warnings on PSGallery publish
 - **What:** The 4.7.0 publish to PSGallery (2026-05-06) emitted three warnings from `Publish-Module`:
   1. `The module manifest member 'ModuleToProcess' has been deprecated. Use the 'RootModule' member instead.` (fires twice &mdash; once during local staging, once on the gallery upload).
