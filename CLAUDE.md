@@ -73,17 +73,23 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 - `b77a99f0` &mdash; **enabled 14 silently-skipped tests** by adding `[MUT.TestClass]` to seven test classes that derived from `Framework.VTest` but lacked the attribute (MSTest 4.x doesn't inherit `[TestClass]` from a base class). The build emitted no warning, so the regression was invisible. Test count went 163 &rarr; 177. Same commit fixed the `OrgChartStyling.cs:9` production bug surfaced by the now-running tests (`Visio2013Template = "orgch_u.vst"` &rarr; `"orgch_u.vstx"`).
 - `9a592a9d` &mdash; fixed Visio-process orphan leak. Each testhost was leaking its `Framework.VTest.app_ref` singleton on exit (4 orphans per clean run, ~945 MB; 18 orphans / 4.5 GB after re-runs). Added `[AssemblyCleanup]` hooks per project that close all docs forcibly then `app.Quit(true)` (mirrors the production `ApplicationCommands.cs` pattern). Refactored 3 rogue tests in `DrawModel_OrgChartTests.cs` to use the singleton instead of spawning a second Visio.
 
-## Resume here: next session is the rest of test cleanup, then release CI
+## Resume here
 
-**Phase 1 of the next session — the broader test-cleanup pass.** All tests pass and zero orphans. The structural cleanup tracked in [`docs/FUTURES.md`](docs/FUTURES.md) under *"General cleanup of the test projects"* is the natural next chunk: the `MSB3270` x86/AnyCPU mismatch on `VTest.PowerShell` (visible in every build), modernization, per-project READMEs explaining what each project covers, coverage gaps, and a possible test-discovery linter / build warning so the missing-`[TestClass]` regression can't repeat.
+**Recent progress (2026-05-05 / 06):**
 
-**Phase 2 of the next session — GitHub Actions release CI.** Only after tests are clean. Three deliverables, full plan in [`docs/FUTURES.md`](docs/FUTURES.md) &rarr; *"Automate releases via GitHub CI"*:
+- **Test-cleanup pass &mdash; the high-leverage parts.**
+  - `7700acf7` &mdash; added `MSTest.Analyzers 4.2.2` to all four test projects; promoted **MSTEST0030** ("Type containing `[TestMethod]` should be marked with `[TestClass]`") to **error** via solution-level [`VisioAutomation_2010/.editorconfig`](VisioAutomation_2010/.editorconfig). The silent-skip regression fixed in `b77a99f0` cannot recur. Also fixed one MSTEST0017 (assertion args swapped) the analyzer caught.
+  - `a41e97bc` &mdash; added per-project READMEs for the four test projects plus the top-level [`docs/TESTING.md`](docs/TESTING.md) (test-suite design, the shared `Framework.VTest` base, `[AssemblyCleanup]` orphan-prevention, MSTEST0030 enforcement, known gotchas).
+  - **Deferred to SDK migration Pass 2b** (will be done by definition during csproj rewrite): the `MSB3270` x86/AnyCPU mismatch on VTest.PowerShell, the legacy `<TestProjectType>` / `<VSToolsPath>` / `<IsCodedUITest>` cruft, the `Vtest.Models.csproj` filename casing.
+  - **Deferred indefinitely:** the coverage-gaps audit (open-ended; not bundled with this work).
 
-1. **PSGallery publish** of the `Visio` PowerShell module (canonical script already exists: [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1)).
-2. **nuget.org publish** of the `VisioAutomation2010` NuGet package (no canonical script yet; metadata in [`NuGet/VisioAutomation2010.nuspec`](NuGet/VisioAutomation2010.nuspec) currently `2.6.0`).
-3. **GitHub Releases** with the built binaries / `.nupkg` / module zip attached as downloadable artifacts.
+- **SDK migration Pass 1 done.** `86ef3984` (PR [#134](https://github.com/saveenr/VisioAutomation/pull/134), squash-merged). All 11 csprojs converted from `packages.config` to versionless `<PackageReference>`. New [`VisioAutomation_2010/Directory.Build.props`](VisioAutomation_2010/Directory.Build.props) enables Central Package Management; [`Directory.Packages.props`](VisioAutomation_2010/Directory.Packages.props) centralizes all 10 package versions. PIA preserves bundle-with-NuGet behavior via `<EmbedInteropTypes>false</EmbedInteropTypes>` + `<PrivateAssets>none</PrivateAssets>`. Hardcoded `System.Management.Automation` paths in VTest and VTest.PowerShell replaced with the `Microsoft.PowerShell.3.ReferenceAssemblies` package. **Dev-pack install pain eliminated** via `Microsoft.NETFramework.ReferenceAssemblies.{net452,net472}` packages; CI now runs ~70s vs the previous 3-10 min. Csprojs are still **legacy format** &mdash; SDK-style conversion is Pass 2.
 
-After CI lands, the other Phase-2-deferred items (version-number policy, leftover-Visio-process flakiness investigation) become the next conversation.
+**Next session priorities:**
+
+1. **SDK migration Pass 2a** &mdash; SDK-style csproj for the 4 shipping libraries (VisioAutomation, .Models, VisioScripting, VisioPowerShell). Plan in the [SDK-modernization-prep.md memory](../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/sdk-modernization-prep.md). Then 2b (test projects, also resolves x86/AnyCPU + cruft above), 2c (exes). All on a single feature branch.
+2. **(After Pass 2 done) Release CI completion** &mdash; PSGallery publish workflow + nuget.org publish workflow. GitHub Releases workflows ([`release-nuget.yml`](.github/workflows/release-nuget.yml), [`release-psmodule.yml`](.github/workflows/release-psmodule.yml)) already exist for the binary-attachment side; the publish-to-public-feeds piece is still pending. Plan in [`docs/FUTURES.md`](docs/FUTURES.md) &rarr; *"Automate releases via GitHub CI"*.
+3. **(Post-2026-10-13) TFM bump** &mdash; only after Windows 10 LTSB 2016 leaves Extended Support. See [enterprise compat memory](../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/enterprise_compat_ltsb2016.md). Unblocks VS 2026 move.
 
 ## Other docs in this repo
 
