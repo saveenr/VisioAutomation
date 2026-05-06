@@ -240,6 +240,45 @@ If the audit confirms gaps, treat as additive cmdlets, no architecture change:
 - S per cmdlet for the additive gap-fillers (Phase A). Probably 3-5 cmdlets total depending on what the audit finds.
 - S total for pipeline-shape polish (Phase B), assuming any existing cmdlets just need an extra parameter set.
 
+### Evaluate NetOffice / NetOfficeFw as a replacement for the Visio PIA
+- **What:** [`NetOffice`](https://netoffice.io/) (originally Sebastian Lange) and its actively-maintained fork [`NetOfficeFw`](https://github.com/NetOfficeFw/NetOffice) (Jozef Izso) provide managed wrapper assemblies that replace the Microsoft Office Primary Interop Assemblies. The Visio binding ships as [`NetOfficeFw.Visio`](https://www.nuget.org/packages/NetOfficeFw.Visio) on NuGet. Two angles to consider: **use directly** as a replacement for our `Microsoft.Office.Interop.Visio` reference, or **learn from** even if we don't adopt &mdash; particularly the COM-proxy cleanup pattern.
+- **Why:** The library is "syntactically and semantically identical to the Microsoft Interop Assemblies" (per [netoffice.io](https://netoffice.io/)) so migration is mostly mechanical, and it provides three practical wins over the bare PIA path:
+  1. **No PIA deployment hurdle.** NetOffice is a regular managed assembly; no PIA registration, no Office-version-specific binding redirect dance.
+  2. **Cross-version Visio support.** One assembly works against multiple Office / Visio versions. We currently bind to the Visio 2010 PIA (`Microsoft.Office.Interop.Visio` v14) and rely on it being forward-compatible at runtime against newer Visio installs (the *Consider migrating off Visio 2010 PIA* item below frames the choice). NetOffice handles multi-version support explicitly.
+  3. **Automatic COM-proxy cleanup.** NetOffice's wrapper objects manage the `Marshal.ReleaseComObject` lifecycle for you. The current codebase has bespoke cleanup patterns (`Framework.VTestAppRef.QuitVisioApplication` swallows COMException during teardown; `ApplicationCommands.cs` does `documents.Close(true); app.Quit(true)` carefully). Adopting NetOffice would eliminate a class of orphan-process bugs we already chased in the test infrastructure (the 2026-05 orphan-leak fix in [`COMPLETED.md`](../COMPLETED.md)).
+
+#### Maintenance status
+- **NetOfficeFw (parent project):** active. v1.9.8 released February 2026; 754 commits on main; 44 total releases. MIT licensed. Recent release cadence is healthy.
+- **`NetOfficeFw.Visio` NuGet:** last published version 1.8.1 (February 2021). Roughly 5 years between the Visio sub-package's last NuGet upload and the parent project's most recent release, which suggests the Visio binding is stable rather than abandoned, but worth confirming by checking the parent repo's `NetOffice.VisioApi` source for activity since 2021.
+- **Original `NetOffice.*` packages:** legacy. NetOfficeFw is the canonical successor; the original packages should not be used for new work.
+
+#### What's needed to evaluate "use directly"
+A spike-grade evaluation would answer:
+1. **Surface coverage.** Does `NetOfficeFw.Visio` expose the full set of Visio COM types VisioAutomation uses? Quick audit against [`VisioAutomation/Shapes/`](../../VisioAutomation_2010/VisioAutomation/Shapes/), [`VisioAutomation/Pages/`](../../VisioAutomation_2010/VisioAutomation/Pages/), and the rest of the helpers, looking for any IVisio.* type that might not have a NetOffice wrapper.
+2. **Modern .NET targeting.** `NetOfficeFw.Visio` 1.8.1 targets `net40`-`net481` per the NuGet metadata (.NET Framework only). For the [*Move to C# 14 / .NET 10*](#move-to-c-14--net-10) item, NetOffice's modern-.NET support is a load-bearing input. Confirm whether the parent project ships modern-.NET TFMs (the README notes ".NET Framework 4.6 or higher"; would need to check the build to see what TFMs the actual binaries support).
+3. **API translation cost.** NetOffice claims syntactic compatibility with the Microsoft PIA; verify by translating a representative slice of the codebase (e.g. [`CustomPropertyHelper.cs`](../../VisioAutomation_2010/VisioAutomation/Shapes/CustomPropertyHelper.cs)) and seeing what changes. Expected pattern: `using IVisio = Microsoft.Office.Interop.Visio;` becomes `using IVisio = NetOffice.VisioApi;`. If the change is one-line per file, the bulk migration is low-cost.
+4. **Performance.** NetOffice wraps every COM call. VisioAutomation has high-throughput call paths (Section reads, batched ShapeSheet writes via `SrcWriter`/`SidSrcWriter`). Run the existing test suite under both stacks and compare wall-clock; the COM overhead is typically per-call, so the impact varies with call shape.
+5. **Test-suite re-validation.** All four test projects re-run end-to-end. Particular attention to the singleton-Visio + `[AssemblyCleanup]` orphan-prevention pattern in [`Framework.AssemblyHooks`](../../VisioAutomation_2010/VTest/Framework/AssemblyHooks.cs) and equivalents &mdash; NetOffice's automatic-cleanup behavior may interact unexpectedly with our explicit `app.Quit(true)` calls.
+
+#### What we could learn even if we don't adopt
+- **COM-proxy cleanup pattern.** NetOffice's release-on-dispose model is more disciplined than what we do today. Could lift the pattern (an `IDisposable` wrapper that releases a referenced COM object on disposal) into a tiny internal helper, used at strategic points (test teardown, scripting `Client` lifetime).
+- **Cross-version dispatch pattern.** How NetOffice handles "this method exists on Visio 16 but not 14" without breaking compile-time binding. We've never needed this because we bind to v14 and rely on forward-compat, but it's a useful pattern to have catalogued for any future Visio-version-aware features.
+- **Diagnostic surface.** NetOffice surfaces "method invoke failed" errors with richer context (target, member, args) than the bare COMException we get from the PIA today. If we don't migrate, we could still copy the diagnostic-wrapping shape (similar to what [#144](https://github.com/saveenr/VisioAutomation/issues/144)'s detect-and-rethrow already does for the formula-error case).
+
+#### Trade-offs against staying on the Visio PIA
+- **Adopt NetOffice (use directly):** lose the official-Microsoft pedigree of the PIA, gain version-agility and cleanup hygiene. Risk: we depend on a third-party project; if NetOfficeFw.Visio falls behind on a future Visio API surface we need, we have no Microsoft-supported path to that surface without re-wiring back to the PIA.
+- **Stay on the PIA (status quo):** lose nothing; gain nothing new. The current setup works.
+- **Hybrid:** keep PIA for shipping libs; use NetOffice in tests only where the cleanup hygiene is most useful. Probably not worth the complexity unless the test suite specifically benefits.
+
+#### Cross-refs
+- *Move to C# 14 / .NET 10* above &mdash; NetOffice's modern-.NET support status (or lack of it) is a key input. If NetOfficeFw doesn't ship modern-.NET TFMs, we can't adopt it on the path to .NET 10 and would be stuck choosing between the modern Microsoft PIA package and continuing on .NET Framework.
+- *Consider migrating off Visio 2010 PIA* above &mdash; NetOffice is one concrete answer to that item ("yes, leave the 2010 PIA, migrate to NetOffice's cross-version wrappers"). The two items resolve together.
+
+#### Effort
+- **Spike** (answer the five questions above): S-M. ~1 day of focused work; produces a go / no-go memo.
+- **Full migration** if the spike says "go": M-L. Mechanical search-and-replace across ~30 csproj files for the namespace change, plus full test-suite re-validation. The bulk of the effort is in re-running tests and fixing whatever doesn't translate cleanly.
+- **Pattern-mine without migrating:** S. Lift the COM-cleanup `IDisposable` pattern as an internal helper, ~half-day.
+
 ### Move `LinqExtensions` out of `Internal/` (or rename the folder)
 - **What:** `LinqExtensions` lives at `VisioAutomation/Internal/Extensions/LinqExtensions.cs` but is `public` and consumed across the assembly boundary by `VisioAutomation.Models` (`ShapeList` calls its `NotOfType<T>` method). The `public` visibility is therefore correct; the **folder name** is misleading.
 - **Why deferred from Phase 1:** Either fix is technically a breaking namespace change for any external code that happens to use the type. Phase 1 was code+docs cleanup only; namespace shifts belong with the broader Phase 3 modernization where breaking changes are acceptable.
