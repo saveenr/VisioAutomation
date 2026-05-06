@@ -17,6 +17,11 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ### Added
 - `DirectedGraphDocumentLoader.LoadFromXml` now honors a `connectortype` attribute on `<renderoptions>`, accepting `Curved` (default), `Straight`, or `RightAngle`. Previously the connector type was hardcoded to `Curved` regardless of XML, so every directedgraph rendered from XML had curved connectors. Closes [#140](https://github.com/saveenr/VisioAutomation/issues/140) (sub-issue of [#105](https://github.com/saveenr/VisioAutomation/issues/105)).
+- `DirectedGraphDocumentLoader.LoadFromXml` now honors a `direction` attribute on `<renderoptions>`, accepting `TopToBottom` (default), `BottomToTop`, `LeftToRight`, or `RightToLeft`. Also accepts a `layout` attribute, currently `Sugiyama`-only (any other value raises `ArgumentException` with a descriptive message). Closes [#141](https://github.com/saveenr/VisioAutomation/issues/141) (sub-issue of [#105](https://github.com/saveenr/VisioAutomation/issues/105)).
+- `DirectedGraphLayout.LayoutOptions` (new public `MsaglOptions` property) carries per-page layout settings parsed from `<renderoptions>`. Defaults to a fresh `MsaglOptions()` for programmatically constructed layouts.
+
+### Changed
+- `Client.Model.DrawDirectedGraphDocument` now respects each layout's `LayoutOptions` (the per-page `MsaglOptions`) when rendering, instead of always overriding `UseDynamicConnectors` to `false` and ignoring the parsed `usedynamicconnectors` / `scalingfactor` from XML. **Behavior change:** XML `<renderoptions>` attributes that were previously parsed but silently dropped now actually take effect; programmatic callers who relied on the hardcoded `UseDynamicConnectors=false` should set it explicitly on `dg_layout.LayoutOptions` before calling.
 
 ### Fixed
 - `OrgChartDocument.Render` no longer fails with `COMException: File not found` on Visio 2013+. The default `OrgChartStyling.Visio2013Template` was hardcoded to `orgch_u.vst`, but Visio 2013 replaced binary `.vst` templates with XML-based `.vstx` and modern Visio installs only ship `orgch_u.vstx`. Updated to `orgch_u.vstx`. Visio 2010 (`Visio2010Template = "orgch_u.vst"`) is unchanged.

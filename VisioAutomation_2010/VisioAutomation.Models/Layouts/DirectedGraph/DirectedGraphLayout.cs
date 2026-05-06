@@ -4,11 +4,13 @@
     {
         public readonly IDList<Node> Nodes;
         public readonly IDList<Edge> Edges;
+        public MsaglOptions LayoutOptions { get; set; }
 
         public DirectedGraphLayout()
         {
             this.Nodes = new IDList<Node>();
             this.Edges = new IDList<Edge>();
+            this.LayoutOptions = new MsaglOptions();
         }
 
         public Node AddNode(string id, string label, string stencil_name, string master_name)

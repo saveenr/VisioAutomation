@@ -177,7 +177,7 @@ namespace VisioScripting.Commands
                 this._client.Output.WriteVerbose("Rendering on page: \"{0}\",{1}", page.Name, i + 1);
 
                 var renderer = new GRAPH.MsaglRenderer();
-                renderer.LayoutOptions.UseDynamicConnectors = false;
+                renderer.LayoutOptions = dg_layout.LayoutOptions;
                 renderer.Render(page, dg_layout);
 
                 var targetpages = new VisioScripting.TargetPages(page);

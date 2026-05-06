@@ -54,7 +54,6 @@ namespace VisioScripting.Loaders
 
         private class PageData
         {
-            public MsaglOptions LayoutOptions;
             public VisioAutomation.Models.ConnectorType ConnectorType;
             public DirectedGraphLayout DirectedGraph;
             public List<Models.DgShapeInfo> ShapeInfos;
@@ -78,12 +77,10 @@ namespace VisioScripting.Loaders
                 var pagedata = new PageData();
                 pagedatas.Add(pagedata);
                 pagedata.Errors = new List<BuilderError>();
-                pagedata.LayoutOptions = new MsaglOptions();
                 pagedata.ConnectorType = VisioAutomation.Models.ConnectorType.Curved;
+                pagedata.DirectedGraph = new DirectedGraphLayout();
                 var renderoptions_el = page_el.Element("renderoptions");
                 DirectedGraphDocumentLoader._get_render_options_from_xml(renderoptions_el, pagedata);
-
-                pagedata.DirectedGraph = new DirectedGraphLayout();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
@@ -203,10 +200,27 @@ namespace VisioScripting.Loaders
             VisioAutomation.Models.ConnectorType ConnectorTypeParse(string str) =>
                 (VisioAutomation.Models.ConnectorType)System.Enum.Parse(
                     typeof(VisioAutomation.Models.ConnectorType), str, ignoreCase: true);
+            MsaglDirection DirectionParse(string str) =>
+                (MsaglDirection)System.Enum.Parse(typeof(MsaglDirection), str, ignoreCase: true);
+            string LayoutParse(string str)
+            {
+                if (!string.Equals(str, "Sugiyama", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    string msg = string.Format(
+                        culture,
+                        "Unsupported layout \"{0}\". Only \"Sugiyama\" is currently supported.",
+                        str);
+                    throw new System.ArgumentException(msg);
+                }
+                return str;
+            }
 
-            pagedata.LayoutOptions.UseDynamicConnectors = el.GetAttributeValue("usedynamicconnectors", bool.Parse);
-            pagedata.LayoutOptions.ScalingFactor = el.GetAttributeValue("scalingfactor", DoubleParse);
+            var layoutoptions = pagedata.DirectedGraph.LayoutOptions;
+            layoutoptions.UseDynamicConnectors = el.GetAttributeValue("usedynamicconnectors", bool.Parse);
+            layoutoptions.ScalingFactor = el.GetAttributeValue("scalingfactor", DoubleParse);
             pagedata.ConnectorType = el.GetAttributeValue("connectortype", pagedata.ConnectorType, ConnectorTypeParse);
+            layoutoptions.Direction = el.GetAttributeValue("direction", layoutoptions.Direction, DirectionParse);
+            el.GetAttributeValue("layout", (string)null, LayoutParse);
         }
     }
 }

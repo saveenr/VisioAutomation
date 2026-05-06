@@ -208,9 +208,100 @@ namespace VTest.Models
                 () => this.load_two_node_graph(connectortype_attr: "Wiggly"));
         }
 
+        [MUT.TestMethod]
+        public void Loader_Direction_DefaultsToTopToBottomWhenAttributeMissing()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions("");
+            MUT.Assert.AreEqual(VADG.MsaglDirection.TopToBottom, dg.Layouts[0].LayoutOptions.Direction);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_Direction_LeftToRightFromXml()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions(" direction=\"LeftToRight\"");
+            MUT.Assert.AreEqual(VADG.MsaglDirection.LeftToRight, dg.Layouts[0].LayoutOptions.Direction);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_Direction_RightToLeftFromXml()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions(" direction=\"RightToLeft\"");
+            MUT.Assert.AreEqual(VADG.MsaglDirection.RightToLeft, dg.Layouts[0].LayoutOptions.Direction);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_Direction_BottomToTopFromXml()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions(" direction=\"BottomToTop\"");
+            MUT.Assert.AreEqual(VADG.MsaglDirection.BottomToTop, dg.Layouts[0].LayoutOptions.Direction);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_Direction_UnrecognizedValueThrows()
+        {
+            MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load_two_node_graph_with_renderoptions(" direction=\"Diagonal\""));
+        }
+
+        [MUT.TestMethod]
+        public void Loader_Layout_SugiyamaIsAccepted()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions(" layout=\"Sugiyama\"");
+            MUT.Assert.AreEqual(1, dg.Layouts.Count);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_Layout_UnrecognizedValueThrows()
+        {
+            MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load_two_node_graph_with_renderoptions(" layout=\"Foo\""));
+        }
+
+        [MUT.TestMethod]
+        public void DirectedGraph_LeftToRight_RendersHorizontally()
+        {
+            var dg = new VADG.DirectedGraphLayout();
+            dg.LayoutOptions.Direction = VADG.MsaglDirection.LeftToRight;
+            var basic_stencil = "basic_u.vss";
+            var n0 = dg.AddNode("n0", "Node 0", basic_stencil, "Rectangle");
+            var n1 = dg.AddNode("n1", "Node 1", basic_stencil, "Rectangle");
+            var n2 = dg.AddNode("n2", "Node 2", basic_stencil, "Rectangle");
+            dg.AddEdge("c0", n0, n1, "0 -> 1", VA.Models.ConnectorType.Curved);
+            dg.AddEdge("c1", n1, n2, "1 -> 2", VA.Models.ConnectorType.Curved);
+
+            var visapp = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = visapp.ActivePage;
+
+            var renderer = new VADG.MsaglRenderer();
+            renderer.LayoutOptions = dg.LayoutOptions;
+            renderer.Render(page, dg);
+
+            double pinx_n0 = n0.VisioShape.Cells["PinX"].ResultIU;
+            double pinx_n1 = n1.VisioShape.Cells["PinX"].ResultIU;
+            double pinx_n2 = n2.VisioShape.Cells["PinX"].ResultIU;
+            double piny_n0 = n0.VisioShape.Cells["PinY"].ResultIU;
+            double piny_n2 = n2.VisioShape.Cells["PinY"].ResultIU;
+
+            // For LeftToRight, the chain should flow horizontally: each downstream node strictly to the right.
+            MUT.Assert.IsTrue(pinx_n0 < pinx_n1, string.Format("Expected n0.PinX < n1.PinX, got {0} vs {1}", pinx_n0, pinx_n1));
+            MUT.Assert.IsTrue(pinx_n1 < pinx_n2, string.Format("Expected n1.PinX < n2.PinX, got {0} vs {1}", pinx_n1, pinx_n2));
+            // And the spread along Y should be small relative to the X spread.
+            double dx = System.Math.Abs(pinx_n2 - pinx_n0);
+            double dy = System.Math.Abs(piny_n2 - piny_n0);
+            MUT.Assert.IsTrue(dx > dy, string.Format("Expected horizontal spread > vertical spread, got dx={0} dy={1}", dx, dy));
+
+            doc.Close();
+        }
+
         private VA.Models.Layouts.DirectedGraph.DirectedGraphDocument load_two_node_graph(string connectortype_attr)
         {
             string ct_attr = connectortype_attr == null ? "" : string.Format(" connectortype=\"{0}\"", connectortype_attr);
+            return this.load_two_node_graph_with_renderoptions(ct_attr);
+        }
+
+        private VA.Models.Layouts.DirectedGraph.DirectedGraphDocument load_two_node_graph_with_renderoptions(string extra_attrs)
+        {
             string xml = string.Format(
                 "<autolayoutdrawing>" +
                 "<page>" +
@@ -224,7 +315,7 @@ namespace VTest.Models
                 "</connectors>" +
                 "</page>" +
                 "</autolayoutdrawing>",
-                ct_attr);
+                extra_attrs ?? "");
             var dg_xml = SXL.XDocument.Parse(xml);
             var client = this.GetScriptingClient();
             return VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, dg_xml);
