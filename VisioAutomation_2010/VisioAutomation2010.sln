@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation", "VisioAutomation\VisioAutomation.csproj", "{920C7842-10E0-48C3-A439-C785FC2B234E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioAutomation", "VisioAutomation\VisioAutomation.csproj", "{920C7842-10E0-48C3-A439-C785FC2B234E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell", "VisioPowerShell\VisioPowerShell.csproj", "{6DFB7C5E-7AC1-48EE-A065-2075921A7413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioPowerShell", "VisioPowerShell\VisioPowerShell.csproj", "{6DFB7C5E-7AC1-48EE-A065-2075921A7413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioScripting", "VisioScripting\VisioScripting.csproj", "{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioScripting", "VisioScripting\VisioScripting.csproj", "{F3E3A5A8-DE55-44ED-87F3-7962C3D22A88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Models", "VisioAutomation.Models\VisioAutomation.Models.csproj", "{29CB2B65-8E8D-4B2C-935C-453B2B371143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioAutomation.Models", "VisioAutomation.Models\VisioAutomation.Models.csproj", "{29CB2B65-8E8D-4B2C-935C-453B2B371143}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTest", "VTest\VTest.csproj", "{F04E9277-48D2-4822-9AE6-E7E6ADB262C9}"
 EndProject
