@@ -116,3 +116,10 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
   - Use the new [`docs/ARCHITECTURE.md`](../ARCHITECTURE.md) and [`docs/GLOSSARY.md`](../GLOSSARY.md) as the source of truth for terminology and structure.
 - **Cross-refs:** Related to but distinct from *Decide where docs live long-term* — that item is about the gitbook-vs-in-repo *policy*; this item is about *accuracy of the existing user-facing content*.
 - **Effort:** L (the cmdlet inventory alone is substantial).
+
+### Extend gitbook custom-properties page with Visio behavior matrix
+- **What:** The .NET gitbook's [Custom properties](https://saveenr.gitbook.io/visioautomation/custom-properties) page tells users *what to do* (call `EncodeValues()` or pre-quote) but not *what Visio actually does* with each input. Roll a user-friendly subset of [`docs/internal/custom-property-encoding.md`](../internal/custom-property-encoding.md) onto the page so users can diagnose "my property reads as 0" without grepping the source.
+- **Why:** The recent docs patch addressed the immediate pointer but stopped short of documenting failure modes (the four default-to-zero paths: `null` / `""` / `" "` / missing write) and the Type-metadata-vs-Result mismatches (Type=Boolean + `"1"` renders as `1.0000`; Type=Date + a quoted ISO string stores as literal text, not a parsed date).
+- **How to apply:** Use [`docs/internal/custom-property-encoding.md`](../internal/custom-property-encoding.md) as source of truth. Trim the engineering detail; keep the per-Type matrix and "Notable findings" highlights. Same content shape may also fit on the parallel PS-side page.
+- **Cross-refs:** Tracked in [#145](https://github.com/saveenr/VisioAutomation/issues/145). Independent of [#144](https://github.com/saveenr/VisioAutomation/issues/144) (the API-ergonomics question): whatever fix lands there, the docs still need the matrix.
+- **Effort:** S — the data is locked in; just drafting the user-readable version.

@@ -341,5 +341,127 @@ namespace VTest.Core.Shapes
 
             page1.Delete(0);
         }
+
+        [MUT.TestMethod]
+        public void UserDefinedCells_UnencodedValueCharacterization()
+        {
+            // Issue #144 — UserDefinedCellCells parallel to the CustomPropertyCells
+            // String-type characterization. UDC has no Type concept; both Value and
+            // Prompt are always string formulas, same encoding rules apply.
+            //
+            // Behavior matrix (current Visio install, locked 2026-05-06):
+            //
+            // Input                                  | Outcome
+            // ---------------------------------------+---------------------------------------
+            // udc.Value = "BAR" plain identifier     | THROWS COMException #NAME?
+            // udc.Value = "42"                       | succeeds, formula=42, result=42.0000
+            // udc.Value = "hello world"              | THROWS COMException #NAME?
+            // udc.Value = ""                         | succeeds, formula=[empty], result=0.0000
+            // udc.Value = "\"\""                     | round-trips, formula=\"\", result=[empty]
+            // udc.Value = (string)null               | HasValue=false, cell unwritten; default formula=0, result=0.0000
+            // udc.Value = " "                        | succeeds, formula=[empty], result=0.0000
+            // udc.Value = "\" \""                    | round-trips, formula=\" \", result=[space]
+            // udc.Prompt = "PRM" (Value pre-quoted)  | THROWS COMException #NAME?
+
+            var page1 = this.GetNewPage();
+            var failures = new System.Collections.Generic.List<string>();
+            int caseIndex = 0;
+
+            string MakeName() { caseIndex++; return "U" + caseIndex; }
+
+            void RunValueOK(string label, System.Action<VA.Shapes.UserDefinedCellCells> setup, string expFormula, string expResult)
+            {
+                string name = MakeName();
+                var s = page1.DrawRectangle(0, 0, 1, 1);
+                var udc = new VA.Shapes.UserDefinedCellCells();
+                try
+                {
+                    setup(udc);
+                    VA.Shapes.UserDefinedCellHelper.Set(s, name, udc);
+                    var fdic = VA.Shapes.UserDefinedCellHelper.GetDictionary(s, VisioAutomation.Core.CellValueType.Formula);
+                    var rdic = VA.Shapes.UserDefinedCellHelper.GetDictionary(s, VisioAutomation.Core.CellValueType.Result);
+                    string af = fdic.ContainsKey(name) ? (fdic[name].Value.Value ?? "<null>") : "<missing>";
+                    string ar = rdic.ContainsKey(name) ? (rdic[name].Value.Value ?? "<null>") : "<missing>";
+                    if (af != expFormula || ar != expResult)
+                    {
+                        failures.Add(string.Format("[{0}] exp formula=[{1}] result=[{2}], got formula=[{3}] result=[{4}]",
+                            label, expFormula, expResult, af, ar));
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    failures.Add(string.Format("[{0}] expected success but THREW {1}: {2}", label, ex.GetType().Name, ex.Message));
+                }
+            }
+
+            void RunValueThrows(string label, System.Action<VA.Shapes.UserDefinedCellCells> setup, string expMsgContains)
+            {
+                string name = MakeName();
+                var s = page1.DrawRectangle(0, 0, 1, 1);
+                var udc = new VA.Shapes.UserDefinedCellCells();
+                try
+                {
+                    setup(udc);
+                    VA.Shapes.UserDefinedCellHelper.Set(s, name, udc);
+                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    if (!ex.Message.Contains(expMsgContains))
+                    {
+                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                }
+            }
+
+            void RunPromptThrows(string label, System.Action<VA.Shapes.UserDefinedCellCells> setup, string expMsgContains)
+            {
+                string name = MakeName();
+                var s = page1.DrawRectangle(0, 0, 1, 1);
+                var udc = new VA.Shapes.UserDefinedCellCells();
+                udc.Value = "\"v\""; // pre-quoted so Value isn't the variable under test
+                try
+                {
+                    setup(udc);
+                    VA.Shapes.UserDefinedCellHelper.Set(s, name, udc);
+                    failures.Add(string.Format("[{0}] expected COMException with [{1}] but Set succeeded", label, expMsgContains));
+                }
+                catch (System.Runtime.InteropServices.COMException ex)
+                {
+                    if (!ex.Message.Contains(expMsgContains))
+                    {
+                        failures.Add(string.Format("[{0}] threw COMException but message [{1}] doesn't contain [{2}]", label, ex.Message, expMsgContains));
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    failures.Add(string.Format("[{0}] expected COMException but threw {1}: {2}", label, ex.GetType().Name, ex.Message));
+                }
+            }
+
+            // === Value field ===
+            RunValueThrows("U1 plain identifier", udc => udc.Value = "BAR", "#NAME?");
+            RunValueOK("U2 numeric string", udc => udc.Value = "42", "42", "42.0000");
+            RunValueThrows("U3 spaces in middle", udc => udc.Value = "hello world", "#NAME?");
+            RunValueOK("U4a empty unquoted", udc => udc.Value = "", "", "0.0000");
+            RunValueOK("U4b empty quoted", udc => udc.Value = "\"\"", "\"\"", "");
+            RunValueOK("U5 null Value (cell unwritten, Visio default)", udc => udc.Value = (string)null, "0", "0.0000");
+            RunValueOK("U6a single space unquoted", udc => udc.Value = " ", "", "0.0000");
+            RunValueOK("U6b single space quoted", udc => udc.Value = "\" \"", "\" \"", " ");
+
+            // === Prompt field with unencoded plain identifier ===
+            RunPromptThrows("U-PROMPT plain identifier", udc => udc.Prompt = "PRM", "#NAME?");
+
+            if (failures.Count > 0)
+            {
+                MUT.Assert.Fail("\n" + string.Join("\n", failures));
+            }
+
+            page1.Delete(0);
+        }
     }
 }
