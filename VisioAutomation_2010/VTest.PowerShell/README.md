@@ -20,11 +20,6 @@ Unlike `VTest.Models` and `VTest.Scripting`, this project does **not** inherit f
 
 `VisioPS_Basic_Tests` uses `[ClassInitialize]` to spin up the session and `[ClassCleanup]` to tear it down (closing Visio via the cmdlet, then disposing the runspace). The teardown swallows exceptions deliberately — a teardown failure shouldn't fail an otherwise-green test run.
 
-## Quirks
-
-- **Hardcoded `System.Management.Automation` reference.** This project's csproj references the PSv3 SMA assembly via an absolute GAC path (`C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.Management.Automation\v4.0_3.0.0.0__31bf3856ad364e35\...`). `VTest` has the same problem to a different path. Phase 3 SDK migration's Pass 1 swaps both to the `Microsoft.PowerShell.3.ReferenceAssemblies` package.
-- **`MSB3270` warning.** Every build of this project emits a "processor architecture mismatch" warning because it's `AnyCPU` while `VTest` (which it references) is pinned to `x86`. Tracked in [docs/FUTURES.md](../../docs/FUTURES.md) under *General cleanup of the test projects*; resolved as part of Phase 3 SDK migration's Pass 2b.
-
 ## Running
 
 See [docs/BUILDING.md](../../docs/BUILDING.md) and [docs/TESTING.md](../../docs/TESTING.md).

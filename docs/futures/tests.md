@@ -1,0 +1,31 @@
+# Futures — Tests
+
+Backlog of test-related items. For test-suite design and conventions see [`../TESTING.md`](../TESTING.md). For what's already shipped see [`../COMPLETED.md`](../COMPLETED.md). Index of all backlog files: [`../FUTURES.md`](../FUTURES.md).
+
+---
+
+### Tests require a live Visio
+- **What:** Every test project spins up a real Visio process via COM. There is no mock/fake layer.
+- **Why (consider):** This is intentional — the library's whole job is to drive Visio, and mocking COM gives false confidence. But the lack of any non-Visio test surface means there's no quick `dotnet test` that runs anywhere. *Not necessarily a problem*, just worth a deliberate decision before adding CI.
+- **Effort:** N/A — design decision, not a task.
+
+### Test coverage gaps
+- **What:** A pass over the public API surface would surface untested types &mdash; the Phase 1 doc-audit Tier 1/2/4 work flagged a lot of helpers that don't seem to have direct tests. Worth making a list before deciding to add tests.
+- **Status (2026-05-06):** This is the only remaining angle of the original *General cleanup of the test projects* entry. The other angles all completed: the test-discovery linter (MSTest.Analyzers + MSTEST0030 enforcement) and per-project READMEs / `docs/TESTING.md` shipped as the test-cleanup pass; the MSB3270 x86/AnyCPU mismatch + `<TestProjectType>` cruft + `Vtest.Models.csproj` filename casing all resolved as side effects of SDK migration Pass 2b. See [`../COMPLETED.md`](../COMPLETED.md#tests) for detail.
+- **Effort:** Open-ended &mdash; depends on how many gaps a curated audit surfaces and how many are worth closing.
+
+### Evaluate modern testing-stack options
+- **What:** The test code was written years ago against the framework choices then current (MSTest + standard `Assert.*` calls + a custom `Framework.VTest` base class for shared setup). The 2025-era .NET test ecosystem has evolved meaningfully; some pieces fit this codebase, others don't. This entry is the curated survey, not a commitment.
+- **Worth considering, in priority order:**
+  - **Verify (snapshot / approval testing) for diagram-rendering tests.** Tests like `OrgChart_FiveNodes` carry fragility comments today &mdash; `// trimming because extra ending space is added (don't know why)` &mdash; symptomatic of trying to express "the rendered output is correct" through individual `Assert.AreEqual` calls. Snapshot tests invert this: render once, capture the result as a baseline file, future runs diff against it. Especially good fit for a library whose output *is* a Visio doc; you'd snapshot serialized shape lists, geometry, page XML. Works alongside MSTest, no migration needed. Pilot with a single test before wider adoption.
+  - **Shouldly for new tests' assertions.** FluentAssertions was the gold standard for years but **changed to a commercial license in 2025**; **[Shouldly](https://github.com/shouldly/shouldly)** is the open-source successor. `count.ShouldBe(5)` produces dramatically better failure messages than `Assert.AreEqual(5, count)` (caller context, expression text, expected-vs-actual diff). Add for new tests; don't migrate existing ones unless touching them.
+  - **Property-based testing (FsCheck) for geometry / layout math.** Tests like `BezierTests`, `BoundingBoxHelperTests` express invariants ("bounding box always contains all input points") that fit property-based testing naturally. Lower priority; experiment in one place first.
+  - **xUnit migration &mdash; defer to Phase 3.** xUnit became the de facto .NET standard during the period these tests were written; **its big advantage for this codebase is that it doesn't require a `[TestClass]`-equivalent attribute**, which means the silent-skip regression of 2026-05-04 (`b77a99f0`) couldn't have happened. `IClassFixture` / collection fixtures would also be a more idiomatic replacement for the static-singleton + `[AssemblyCleanup]` pattern just built. **But:** the MSTest 4.x upgrade just landed in Phase 1, switching frameworks again so soon is churn. Pair this decision with the SDK-style csproj + `PackageReference` migration on the existing Phase 3 backlog &mdash; same files, same review. The MSTest.Analyzers / MSTEST0030 enforcement that landed during the test-cleanup pass substantially reduces the urgency by closing the specific regression vector that motivated this comparison.
+- **NOT worth chasing for this codebase:**
+  - **Parallel test execution.** Visio doesn't tolerate concurrent COM clients well; sequential is correct. Bottleneck is Visio cold-start, not test-runner overhead.
+  - **Cloud test runners / TestContainers.** Visio has no headless mode and no cloud SaaS; self-hosted Windows runner with installed Visio is the only path. Tracked under *Run tests in CI* in [`build-and-code.md`](build-and-code.md#run-tests-in-ci).
+  - **Mocking COM.** Validated by industry's general shift away from heavy mocking. The existing "no mocks" rule is correct &mdash; documented in [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md).
+  - **Mutation testing (Stryker.NET), Live Unit Testing.** Both useful in pure-logic codebases; Visio cold-start makes them impractical.
+  - **`Microsoft.Testing.Platform` (MTP) migration today.** It's the long-term replacement for VSTest, supported by MSTest / xUnit / NUnit, but the ecosystem is still maturing. Now that the SDK-style csproj migration has landed (the structural prerequisite), MTP is technically unblocked — but still on the watch-and-wait list given ecosystem maturity.
+- **Cross-refs:** xUnit migration paired with the now-completed SDK-style csproj migration. Snapshot testing complements (doesn't replace) the *Test coverage gaps* item above.
+- **Effort:** S to pilot Verify on one test, then incremental as adopted. S to add Shouldly for new tests. S–M to pilot FsCheck on geometry tests. M–L for an xUnit migration of the full suite (size of the original Phase 1 MSTest upgrade plus a no-mass-rewrite premium).

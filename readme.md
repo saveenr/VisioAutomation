@@ -51,7 +51,8 @@ Developer / architecture docs in this repo:
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — what each project does and how they fit together
 - [`docs/BUILDING.md`](docs/BUILDING.md) — build, test, install
 - [`docs/GLOSSARY.md`](docs/GLOSSARY.md) — Visio and codebase terminology
-- [`docs/FUTURES.md`](docs/FUTURES.md) — staged backlog of cleanup / modernization work
+- [`docs/ROADMAP.md`](docs/ROADMAP.md) — staged plan (Phase 1 / 2 / 3) and what shipped per phase
+- [`docs/FUTURES.md`](docs/FUTURES.md) — index of the topic-split backlog of cleanup / modernization work
 
 Release notes:
 

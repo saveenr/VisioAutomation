@@ -1,18 +1,18 @@
 # Completed — 2026 Refresh Done Work
 
-A historical record of FUTURES.md items that have landed. The point is institutional memory: *what was done, why, what was tried, what didn't work*. This file is append-only — entries shouldn't be edited after landing except for typo or link fixes.
+A historical record of backlog items that have landed. The point is institutional memory: *what was done, why, what was tried, what didn't work*. This file is append-only — entries shouldn't be edited after landing except for typo or link fixes.
 
-Forward-looking work lives in [`FUTURES.md`](FUTURES.md). The high-level "what shipped in Phase N" headline summary also lives in [`FUTURES.md`](FUTURES.md) (under each phase header); this file is the per-item detail behind those bullets.
+Forward-looking work lives in the topic-split backlog under [`futures/`](futures/) (indexed by [`FUTURES.md`](FUTURES.md)). The high-level "what shipped in Phase N" headline summary lives in [`ROADMAP.md`](ROADMAP.md) (under each phase header); this file is the per-item detail behind those bullets.
 
-When something on the FUTURES.md backlog completes, the Resolution paragraph moves here verbatim, the FUTURES.md body entry is deleted, and a one-line bullet is added to the relevant phase summary in FUTURES.md. See [`CONTRIBUTING.md`](../CONTRIBUTING.md) for the convention.
+When something on the backlog completes, the Resolution paragraph moves here verbatim, the body entry is deleted from its `futures/*.md` file, and a one-line bullet is added to the relevant phase summary in `ROADMAP.md`. See [`CONTRIBUTING.md`](../CONTRIBUTING.md) for the convention.
 
-Items are grouped by **phase**, then by the same **category** they had in FUTURES.md (Build & tooling, Code & architecture, Tests, Documentation). Within a category they appear in the order they completed.
+Items are grouped by **phase**, then by the same **category** they had in the backlog (Build & tooling, Code & architecture, Tests, Documentation). Within a category they appear in the order they completed.
 
 ---
 
 ## Phase 1 — VS 2022 cleanup (done; merged to master 2026-05-03)
 
-Headline summary in [`FUTURES.md`](FUTURES.md#phase-1--vs-2022-cleanup-done-merged-to-master-2026-05-03). Full detail per item below.
+Headline summary in [`ROADMAP.md`](ROADMAP.md#phase-1--vs-2022-cleanup-done-merged-to-master-2026-05-03). Full detail per item below.
 
 ### Build & tooling
 
@@ -22,7 +22,7 @@ Headline summary in [`FUTURES.md`](FUTURES.md#phase-1--vs-2022-cleanup-done-merg
 
 #### Add CI (build-only)
 - **Resolution:** [`.github/workflows/build.yml`](../.github/workflows/build.yml) added. Builds the solution in Debug on every push to `master` / `2026_Refresh` and on every PR. Pinned to VS 2022's MSBuild (`vs-version: '17.0'`) since VS 2026's MSBuild can't resolve the .NET Framework 4.5.2 reference assemblies the shipping libs need. The workflow also installs the .NET Framework 4.5.2 Developer Pack via chocolatey before building (those reference assemblies aren't on the runner image). NuGet packages are cached keyed on the hash of all `packages.config` files. Build status surfaces as a badge in the root README.
-- **Tail (still active in FUTURES.md):** Running the tests themselves in CI requires a self-hosted Windows runner with Visio installed; tracked under *Run tests in CI* in [`FUTURES.md`](FUTURES.md).
+- **Tail (still active in the backlog):** Running the tests themselves in CI requires a self-hosted Windows runner with Visio installed; tracked under *Run tests in CI* in [`futures/build-and-code.md`](futures/build-and-code.md#run-tests-in-ci).
 
 #### Fix the misnamed PowerShell loader script
 - **What:** `DownloadFromPowerShellGallery.ps1` did not download from the PowerShell Gallery — it `Import-Module`d the local `bin\Debug` build.
@@ -38,7 +38,7 @@ Headline summary in [`FUTURES.md`](FUTURES.md#phase-1--vs-2022-cleanup-done-merg
   - ✅ Moved `[InternalsVisibleTo("VTest")]` and `[InternalsVisibleTo("VTest.Scripting")]` from `Internal/ArraySegmentEnumerator.cs` to `Properties/AssemblyInfo.cs` where they belong.
   - ✅ Deleted `Vtest/FormatStringParserTest.cs` and `VTest/Core/Extensions/AsEnumerableTest.cs` — turned out to be fully orphaned (not in csproj, contained syntax errors and references to long-gone types like `Isotope.Text.FormatStringParser` and a `VisioAutomationTest` base class). Pure dead code.
   - ✅ Removed `VisioAutomation2010.sln.metaproj` from version control and added `*.sln.metaproj` / `*.sln.metaproj.tmp` to `.gitignore` so it gets regenerated on demand instead of accumulating stale paths.
-- **Tail (still active in FUTURES.md):** `LinqExtensions` visibility-vs-folder mismatch is tracked under *Move `LinqExtensions` out of `Internal/` (or rename the folder)* in [`FUTURES.md`](FUTURES.md).
+- **Tail (still active in the backlog):** `LinqExtensions` visibility-vs-folder mismatch is tracked under *Move `LinqExtensions` out of `Internal/` (or rename the folder)* in [`futures/build-and-code.md`](futures/build-and-code.md#move-linqextensions-out-of-internal-or-rename-the-folder).
 
 ### Tests
 
@@ -64,7 +64,7 @@ Headline summary in [`FUTURES.md`](FUTURES.md#phase-1--vs-2022-cleanup-done-merg
 
 ## Phase 3 — Modernization *(in progress)*
 
-Headline summary in [`FUTURES.md`](FUTURES.md#phase-3--modernization). Full detail per item below.
+Headline summary in [`ROADMAP.md`](ROADMAP.md#phase-3--modernization-in-progress). Full detail per item below.
 
 ### Build & tooling
 
@@ -88,4 +88,4 @@ Headline summary in [`FUTURES.md`](FUTURES.md#phase-3--modernization). Full deta
 #### Per-project test READMEs and top-level `docs/TESTING.md`
 - **What:** None of the four test projects had READMEs explaining what they cover, what fixtures they need, or what state they assume Visio to be in. The shared infrastructure (`Framework.VTest` base class, per-testhost Visio singleton, `[AssemblyCleanup]` orphan-prevention) had no top-level documentation.
 - **Resolution (`a41e97bc`):** Added per-project `README.md` for [`VTest/`](../VisioAutomation_2010/VTest/README.md), [`VTest.Models/`](../VisioAutomation_2010/VTest.Models/README.md), [`VTest.Scripting/`](../VisioAutomation_2010/VTest.Scripting/README.md), and [`VTest.PowerShell/`](../VisioAutomation_2010/VTest.PowerShell/README.md). Added top-level [`docs/TESTING.md`](TESTING.md) covering the test-suite design (the three load-bearing constraints: real Visio, sequential execution, per-testhost singleton); shared infrastructure (`Framework.VTest`, `VTestAppRef`, `[AssemblyCleanup]` per-assembly pattern, datafiles convention); MSTest.Analyzers + MSTEST0030 enforcement; how-to-run pointers; and known gotchas. Cross-linked from `CLAUDE.md` and `docs/OVERVIEW.md`.
-- **Tail (still active in FUTURES.md):** The *coverage-gaps* angle of the original "General cleanup of the test projects" entry was deliberately not bundled with this work; deferred indefinitely as too open-ended to scope.
+- **Tail (still active in the backlog):** The *coverage-gaps* angle of the original "General cleanup of the test projects" entry was deliberately not bundled with this work; deferred indefinitely as too open-ended to scope. Tracked under *Test coverage gaps* in [`futures/tests.md`](futures/tests.md#test-coverage-gaps).

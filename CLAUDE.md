@@ -8,13 +8,13 @@ A .NET Framework library plus a PowerShell module that automate Microsoft Visio 
 
 ## The 2026 refresh — read this before making changes
 
-Active branch: `master`. Phase 1 of the refresh has merged; Phase 2 (the final release of the `VisioAutomation2010` NuGet) and Phase 3 (modernization) are still ahead. Work is staged in three phases per [docs/FUTURES.md](docs/FUTURES.md):
+Active branch: `master`. Phase 1 of the refresh has merged; Phase 2 (the final release of the `VisioAutomation2010` NuGet) and Phase 3 (modernization) are still ahead. Work is staged in three phases per [docs/ROADMAP.md](docs/ROADMAP.md):
 
 1. **Phase 1 — VS 2022 cleanup** *(done; merged to master 2026-05-03)*. Stayed on the then-current TFMs (.NET Framework 4.5.2 for shipping libs, .NET Framework 4.7.2 for tests) and shipped the **Visio PowerShell 4.6.1** release as the conclusion of this phase.
 2. **Phase 2 — Cut a final release** of the `VisioAutomation2010` NuGet (currently `2.6.0`) with refreshed docs. Two prereqs are deferred and need user discussion: the version-number policy (NuGet `2.6.0` vs PS module `4.6.1`) and a leftover-Visio-process flakiness investigation.
 3. **Phase 3 — Modernization.** Move to VS 2026 (which requires bumping TFMs to 4.7.2), modern C#, possibly modern .NET, automated releases.
 
-When in doubt whether a change fits the current phase, check [docs/FUTURES.md](docs/FUTURES.md).
+When in doubt whether a change fits the current phase, check [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Build prerequisites
 
@@ -59,7 +59,7 @@ The 4.6.1 release bundles all the Phase 1 cleanup work plus four cmdlet bug fixe
 
 The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 default, PowerShellGet 1.x silent-error bug, PS 5.1 vs 7 user-module path divergence, .ps1 file encoding). All are documented in [VisioPowerShellDocs/developer-info/publishing-to-powershell-gallery.md](https://saveenr.gitbook.io/visiopowershell/developer-info/publishing-to-powershell-gallery) and worked around by [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1).
 
-**Doc audit:** complete on both gitbook repos. Reader-facing summaries at [VisioPowerShellDocs/documentation-changes.md](https://saveenr.gitbook.io/visiopowershell/documentation-changes) and [VisioAutomation_GitBook_Docs/documentation-changes.md](https://saveenr.gitbook.io/visioautomation/documentation-changes). Every cmdlet has a complete page in the standard `## Syntax` / `## Parameters` / `## Examples` / `## See also` layout, and the .NET-side helper-class coverage was extended in three tiers (Tier 1: Hyperlinks / Lock cells / Control handles / Connection points / Connectors. Tier 2: Shape format-layout-xform / Page cells / Text formatting / Geometry / Application. Tier 4: Analyzers / Visio error log / UndoScope / Exceptions / full Extension-methods rewrite). Only Tier 3 (the `VisioAutomation.Models` project) is still pending and is recorded in `docs/FUTURES.md` under *"Expand .NET-side doc coverage"*.
+**Doc audit:** complete on both gitbook repos. Reader-facing summaries at [VisioPowerShellDocs/documentation-changes.md](https://saveenr.gitbook.io/visiopowershell/documentation-changes) and [VisioAutomation_GitBook_Docs/documentation-changes.md](https://saveenr.gitbook.io/visioautomation/documentation-changes). Every cmdlet has a complete page in the standard `## Syntax` / `## Parameters` / `## Examples` / `## See also` layout, and the .NET-side helper-class coverage was extended in three tiers (Tier 1: Hyperlinks / Lock cells / Control handles / Connection points / Connectors. Tier 2: Shape format-layout-xform / Page cells / Text formatting / Geometry / Application. Tier 4: Analyzers / Visio error log / UndoScope / Exceptions / full Extension-methods rewrite). Only Tier 3 (the `VisioAutomation.Models` project) is still pending and is recorded in [`docs/futures/docs.md`](docs/futures/docs.md#expand-net-side-doc-coverage--tier-3-visioautomationmodels) under *"Expand .NET-side doc coverage — Tier 3"*.
 
 **Repo state:** all three repos in sync with origin, working trees clean. No in-flight branches.
 
@@ -86,7 +86,7 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 
 **Next session priorities:**
 
-1. **Release CI completion** &mdash; PSGallery publish workflow + nuget.org publish workflow. GitHub Releases workflows ([`release-nuget.yml`](.github/workflows/release-nuget.yml), [`release-psmodule.yml`](.github/workflows/release-psmodule.yml)) already exist for the binary-attachment side; the publish-to-public-feeds piece is still pending. Plan in [`docs/FUTURES.md`](docs/FUTURES.md) &rarr; *"Automate releases via GitHub CI"*.
+1. **Release CI completion** &mdash; PSGallery publish workflow + nuget.org publish workflow. GitHub Releases workflows ([`release-nuget.yml`](.github/workflows/release-nuget.yml), [`release-psmodule.yml`](.github/workflows/release-psmodule.yml)) already exist for the binary-attachment side; the publish-to-public-feeds piece is still pending. Plan in [`docs/futures/releases.md`](docs/futures/releases.md#automate-releases-via-github-ci-in-progress).
 2. **Small follow-ups deferred from the migration** &mdash; the `<frameworkAssembly assemblyName="Microsoft.Office.Interop.Visio" />` line in [`NuGet/VisioAutomation2010.nuspec`](NuGet/VisioAutomation2010.nuspec) is now redundant with the bundled-PIA-via-NuGet behavior (PIA package's `lib/` ships in the .nupkg). Trim as a small standalone commit when convenient.
 3. **(Post-2026-10-13) TFM bump** &mdash; only after Windows 10 LTSB 2016 leaves Extended Support. See [enterprise compat memory](../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/enterprise_compat_ltsb2016.md). Unblocks VS 2026 move.
 
@@ -96,5 +96,6 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 - [docs/BUILDING.md](docs/BUILDING.md) — full build / test / install reference (incl. dev-pack install commands)
 - [docs/TESTING.md](docs/TESTING.md) — test-suite design and conventions (shared `Framework.VTest` base, per-testhost Visio singleton, `[AssemblyCleanup]` orphan-prevention, MSTEST0030 enforcement). Per-project READMEs sit next to each test csproj.
 - [docs/GLOSSARY.md](docs/GLOSSARY.md) — Visio and codebase terminology
-- [docs/FUTURES.md](docs/FUTURES.md) — staged backlog of cleanup/modernization work
+- [docs/ROADMAP.md](docs/ROADMAP.md) — staged plan (Phase 1 / 2 / 3); read first for orientation
+- [docs/FUTURES.md](docs/FUTURES.md) — index of backlog items, split by topic into [`docs/futures/*.md`](docs/futures/)
 - [docs/OVERVIEW.md](docs/OVERVIEW.md) — entry point, links to the above

@@ -51,4 +51,5 @@ Run from inside the `Demo/` folder, after the module is imported (e.g., via `Loa
 - [`docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md) — solution-wide architecture and dependencies
 - [`docs/BUILDING.md`](../../docs/BUILDING.md) — how to build, test, and install
 - [`docs/GLOSSARY.md`](../../docs/GLOSSARY.md) — Visio and codebase terminology
-- [`docs/FUTURES.md`](../../docs/FUTURES.md) — backlog of planned cleanup and modernization work
+- [`docs/ROADMAP.md`](../../docs/ROADMAP.md) — staged plan (Phase 1 / 2 / 3) for the 2026 refresh
+- [`docs/FUTURES.md`](../../docs/FUTURES.md) — index of the topic-split backlog of planned cleanup and modernization work

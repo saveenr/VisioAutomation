@@ -6,7 +6,7 @@ name: Build
 #
 # Pinned to VS 2022's MSBuild because the .NET Framework 4.5.2 reference
 # assemblies needed to build the shipping libs are not resolved by VS 2026's
-# MSBuild. See docs/BUILDING.md and docs/FUTURES.md.
+# MSBuild. See docs/BUILDING.md and docs/futures/build-and-code.md.
 
 on:
   push:

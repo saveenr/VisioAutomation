@@ -4,7 +4,7 @@ Thanks for your interest in contributing. This is a small, focused project — p
 
 ## Active branch
 
-Development is on **`master`**. Target it for pull requests, and consult [`docs/FUTURES.md`](docs/FUTURES.md) to see what's in scope for the current phase of the [2026 refresh](docs/FUTURES.md). (Phase 1 merged into `master` on 2026-05-03; Phase 2 / 3 work is upcoming.)
+Development is on **`master`**. Target it for pull requests, and consult [`docs/ROADMAP.md`](docs/ROADMAP.md) to see what's in scope for the current phase of the [2026 refresh](docs/ROADMAP.md). (Phase 1 merged into `master` on 2026-05-03; Phase 2 / 3 work is upcoming.)
 
 ## Setup
 
@@ -17,7 +17,7 @@ In short:
 
 ## Running the tests
 
-All tests exercise real Visio COM calls. There is no mock layer (intentional — see [`docs/FUTURES.md`](docs/FUTURES.md) for context). You cannot run the tests on a machine without Visio installed.
+All tests exercise real Visio COM calls. There is no mock layer (intentional — see [`docs/futures/tests.md`](docs/futures/tests.md#tests-require-a-live-visio) for context). You cannot run the tests on a machine without Visio installed.
 
 ## Code style
 
@@ -64,20 +64,20 @@ This is a manual post-release step — the workflows don't auto-edit the CHANGEL
 
 ## Backlog hygiene
 
-The forward-looking backlog lives in [`docs/FUTURES.md`](docs/FUTURES.md). Completed items live in [`docs/COMPLETED.md`](docs/COMPLETED.md), grouped by phase. The split exists so FUTURES.md stays scannable as a "what's left" view while institutional memory (what was tried, why decisions were made, commit hashes) is preserved separately.
+The forward-looking backlog is split into topic files under [`docs/futures/`](docs/futures/) (indexed by [`docs/FUTURES.md`](docs/FUTURES.md)): `build-and-code.md`, `tests.md`, `releases.md`, `docs.md`. The phase-level "what shipped" headlines live in [`docs/ROADMAP.md`](docs/ROADMAP.md). Completed items' full detail lives in [`docs/COMPLETED.md`](docs/COMPLETED.md), grouped by phase. The split exists so each topic file stays scannable as a "what's left in this area" view while institutional memory (what was tried, why decisions were made, commit hashes) is preserved separately.
 
-**When you finish a FUTURES.md item:**
+**When you finish a backlog item:**
 
 1. Move the entry's body — the `**Resolution:**` paragraph and any sub-bullets — to the right phase + category section of `docs/COMPLETED.md`, verbatim.
-2. Delete the body from `docs/FUTURES.md`.
-3. If the entry had a tail (a "Still to do" or "Deferred to Phase N" note pointing to follow-up work), extract that tail as a new active item in `docs/FUTURES.md` so the follow-up isn't lost.
-4. Add a one-line bullet to the relevant phase's "items completed" checklist at the top of `docs/FUTURES.md` summarizing what shipped.
+2. Delete the body from the appropriate `docs/futures/*.md` file.
+3. If the entry had a tail (a "Still to do" or "Deferred to Phase N" note pointing to follow-up work), extract that tail as a new active item in the appropriate `docs/futures/*.md` so the follow-up isn't lost.
+4. Add a one-line bullet to the relevant phase's "items completed" checklist in `docs/ROADMAP.md` summarizing what shipped.
 
-The headline phase summary in FUTURES.md (e.g. "Phase 1 items completed:") and the body in COMPLETED.md play different roles: the headline is the project arc you scan to see "what got done"; COMPLETED.md is where you go when you actually need the detail.
+The headline phase summary in `ROADMAP.md` (e.g. "Phase 1 items completed:") and the body in `COMPLETED.md` play different roles: the headline is the project arc you scan to see "what got done"; `COMPLETED.md` is where you go when you actually need the detail.
 
 ## What's in scope right now
 
-The 2026 refresh is staged in three phases (see [`docs/FUTURES.md`](docs/FUTURES.md)).
+The 2026 refresh is staged in three phases (see [`docs/ROADMAP.md`](docs/ROADMAP.md)).
 
 **Phase 1 *(current)*** accepts code and docs improvements with no new features, no TFM bumps, no IDE upgrades, no csproj-format changes, and no breaking API changes. PRs that violate those guardrails will be deferred to Phase 3.
 

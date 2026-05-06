@@ -5,7 +5,7 @@ Practical notes on building the solution, running the tests, and trying things o
 ## Prerequisites
 
 - **Microsoft Visio**, installed locally. The solution targets the Visio 2010 Primary Interop Assembly (`Microsoft.Office.Interop.Visio` v14) but works against newer Visio versions at runtime. Tests and samples instantiate a real Visio process, so Visio must be present on any machine that runs them.
-- **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [FUTURES.md](FUTURES.md).
+- **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [futures/build-and-code.md](futures/build-and-code.md#move-development-to-visual-studio-2026).
 - **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
 
 The shipping libraries target .NET Framework 4.5.2, but you do **not** need to install the 4.5.2 Developer Pack — the reference assemblies are supplied by the [`Microsoft.NETFramework.ReferenceAssemblies.net452`](../VisioAutomation_2010/Directory.Packages.props) NuGet package, restored automatically with the rest of the solution. The 4.7.2 reference assemblies (used by the test projects) ship in-box on every supported Windows.
@@ -41,7 +41,7 @@ The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutoma
 
 Every push to `master` (and every PR targeting it) is built by [`.github/workflows/build.yml`](../.github/workflows/build.yml) on a GitHub-hosted `windows-latest` runner. The workflow pins MSBuild to VS 2022 (matching local builds) and runs the same restore + build commands documented above.
 
-The CI is **build-only**. Tests need a live Visio install and would require a self-hosted Windows runner; that's planned for Phase 3 alongside automated releases (see [FUTURES.md](FUTURES.md)).
+The CI is **build-only**. Tests need a live Visio install and would require a self-hosted Windows runner; that's planned for Phase 3 alongside automated releases (see [futures/build-and-code.md](futures/build-and-code.md#run-tests-in-ci) and [futures/releases.md](futures/releases.md#automate-releases-via-github-ci-in-progress)).
 
 The current build status appears as a badge in the [root README](../readme.md).
 
@@ -106,7 +106,7 @@ nuget pack NuGet\VisioAutomation2010.nuspec
 
 ## Known rough edges (cleanup candidates for the 2026 refresh)
 
-See [FUTURES.md](FUTURES.md) for the full backlog and phasing. The build-relevant ones:
+See [ROADMAP.md](ROADMAP.md) for the staged plan and [FUTURES.md](FUTURES.md) for the topic-split backlog. The build-relevant ones:
 
 - **Mixed target frameworks**: shipping libs are now on .NET 4.5; test projects on .NET 4.7.2. Convergence on a single TFM (4.7.2 across the whole solution) is a Phase 3 item; it also enables moving to VS 2026.
 - **`packages.config`** is still in use rather than PackageReference. Modernizing would simplify NuGet handling and CI.

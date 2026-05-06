@@ -17,7 +17,7 @@ All under `VisioAutomation_2010/`:
 
 ## Framework: MSTest 4.x
 
-Tests use **MSTest 4.x** (`MSTest.TestAdapter` + `MSTest.TestFramework` 4.2.2). The MSTest 4.x upgrade landed in Phase 1 of the 2026 refresh; the suite was previously on the MSTest beta. See [FUTURES.md](FUTURES.md) → *Evaluate modern testing-stack options* for the survey of alternatives (Verify, Shouldly, FsCheck, xUnit) considered and what we picked / deferred / rejected.
+Tests use **MSTest 4.x** (`MSTest.TestAdapter` + `MSTest.TestFramework` 4.2.2). The MSTest 4.x upgrade landed in Phase 1 of the 2026 refresh; the suite was previously on the MSTest beta. See [futures/tests.md](futures/tests.md#evaluate-modern-testing-stack-options) → *Evaluate modern testing-stack options* for the survey of alternatives (Verify, Shouldly, FsCheck, xUnit) considered and what we picked / deferred / rejected.
 
 `MSTest.Analyzers` 4.2.2 is wired into all four test projects. Severity defaults are kept for most rules; **MSTEST0030 is promoted to `error`** in [`VisioAutomation_2010/.editorconfig`](../VisioAutomation_2010/.editorconfig). See *Quality gates* below.
 
@@ -31,7 +31,7 @@ There is no mock or fake Visio. Tests instantiate `Microsoft.Office.Interop.Visi
 
 **Why.** The library is a thin layer over Visio COM. A mock would have to reproduce Visio's behavior, including its undocumented quirks; tests against the mock would prove the mock matches itself rather than that the library matches Visio.
 
-**Consequence.** Tests cannot run on a machine without Visio installed. CI today is build-only for the same reason; running tests in CI is gated on a self-hosted Windows runner with Visio installed (a [FUTURES.md](FUTURES.md) item).
+**Consequence.** Tests cannot run on a machine without Visio installed. CI today is build-only for the same reason; running tests in CI is gated on a self-hosted Windows runner with Visio installed (tracked in [futures/build-and-code.md](futures/build-and-code.md#run-tests-in-ci)).
 
 ### 2. Tests run sequentially, not in parallel
 
@@ -97,6 +97,4 @@ See [BUILDING.md](BUILDING.md) for IDE flow, `vstest.console.exe` invocation, an
 
 - **`[TestClass]` doesn't inherit.** Covered above; MSTEST0030 catches this now.
 - **`[AssemblyCleanup]` doesn't inherit either.** Each test project needs its own `AssemblyHooks.cs`. (Same MSTest-attribute-inheritance gotcha as above.)
-- **`MSB3270` warning on `VTest.PowerShell` builds.** Long-standing processor-architecture mismatch — `VTest` is `x86`, `VTest.PowerShell` is `AnyCPU`. Tracked in [FUTURES.md](FUTURES.md) → *General cleanup of the test projects*; gets resolved as part of Phase 3 SDK migration's Pass 2b.
-- **Hardcoded `System.Management.Automation` paths** in `VTest.csproj` and `VTest.PowerShell.csproj`. Each points to a different location (4.5.2 reference assemblies vs the GAC). Phase 3 SDK migration swaps both to the `Microsoft.PowerShell.3.ReferenceAssemblies` NuGet package.
 - **Orgchart template filename changed in Visio 2013** (`.vst` → `.vstx`). Tests opening the orgchart stencil version-guard on `app.Version` — see commit `da9bba0a` and `OrgChartStyling.cs`. New tests touching that stencil should follow the same pattern.
