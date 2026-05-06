@@ -164,6 +164,82 @@ Phases 1-3 are straightforward additions to the binary cmdlet surface. Phase 4 i
 
 Total: M for phases 1-3 if pursued together; +M-L if Phase 4 is added.
 
+### Borrow ideas from PSVA for VisioPS bulk-operation cmdlets
+- **What:** [`PSVA`](https://github.com/jrich523/PSVA) (jrich523) is a small script-only PS module for Visio automation. Much narrower than VisioBot3000 (10 commits, 6 stars, demo-driven), so the value is in specific high-level helpers, not an architectural pattern.
+- **Why:** Two of PSVA's demo scripts ([`VisioDemo.ps1`](https://github.com/jrich523/PSVA/blob/master/VisioDemo.ps1), [`StackDemo.ps1`](https://github.com/jrich523/PSVA/blob/master/StackDemo.ps1)) showcase patterns VisioPS doesn't currently expose ergonomically: pipeline-friendly bulk shape operations, distribute-along-a-line layouts, side-and-alignment-based shape decoration, layer visibility toggles. Worth lifting the *cmdlet shapes* from PSVA even though the underlying implementation in PSVA is "pure COM" PowerShell (no DLLs) and VisioPS would implement them as binary cmdlets over the existing `VisioAutomation` library.
+
+#### Distinctive helpers in PSVA
+
+(Source material: the [`README`](https://github.com/jrich523/PSVA), [`VisioDemo.ps1`](https://github.com/jrich523/PSVA/blob/master/VisioDemo.ps1), [`StackDemo.ps1`](https://github.com/jrich523/PSVA/blob/master/StackDemo.ps1).)
+
+1. **`Set-visShapeDistribution`** &mdash; distributes a list of shapes evenly along a horizontal or vertical axis with explicit spacing and start coordinates:
+
+    ```powershell
+    Set-visShapeDistribution -shape $shareShapes -type Horizontal -space .5 -startX 2 -startY 3
+    ```
+
+   Useful for laying out an unknown-cardinality result set (each item from a `Get-WmiObject`, etc.) in a row.
+
+2. **`Add-visShapeConnection` as a pipeline target** &mdash; star-topology connections in one line:
+
+    ```powershell
+    $connections = $shareShapes | Add-visShapeConnection -FromShape $servershape
+    ```
+
+   Each shape on the pipeline becomes a connector from the named source shape. Bulk wire-up.
+
+3. **`Attach-visShape`** &mdash; attach a shape to one or more "base" shapes on a chosen side with an alignment policy:
+
+    ```powershell
+    Attach-visShape -Shape $top    -Selection ($s1,$s2) -Side Top    -Alignment Stretch
+    Attach-visShape -Shape $bottom -Selection ($s1,$s2) -Side Bottom -Alignment RightOrBottom
+    ```
+
+   Sides: `Top` / `Bottom` / `Left` / `Right`. Alignments: `Stretch` / `LeftOrTop` / `RightOrBottom`. The "border-decorate this group of shapes" pattern is common for labelled boxes, sidebars, headers, footers; VisioPS has no direct cmdlet for it today. Note that PSVA's README acknowledges the "VERB warning for the use of Attach" &mdash; a `Set-`/`Add-` verb would replace it cleanly in a VisioPS port.
+
+4. **Layer cmdlets** &mdash; `Add-visShapeToLayer` (pipe shapes onto a named layer, `-Force` creates the layer) and `Switch-visLayerVisibility` (toggle visibility for one or many layers by name):
+
+    ```powershell
+    $connLayer = $connections | Add-visShapeToLayer -Layer ConnLayer -Force
+    Switch-visLayerVisibility $connLayer,"connector"
+    ```
+
+5. **`Set-visShapeAutoAlignment`** &mdash; auto-align selected shapes via Visio's built-in alignment feature.
+
+#### What VisioPS already covers
+
+A pre-adoption audit pass should map each PSVA helper against the existing VisioPS / VisioScripting surface:
+
+- **Connectors:** VisioPS has `Connect-VisioShape` and `Get-VisioConnection`. Whether it supports the `... | Connect-VisioShape -From $src` pipeline shape needs confirming.
+- **Layers:** the underlying `VisioScripting.Client.Layer` group has helpers; whether they're surfaced as cmdlets needs confirming.
+- **Distribution / alignment:** Visio's COM API exposes `Page.Layout` / `Selection.AlignShapes` / `Selection.DistributeShapes`; whether VisioPS has thin cmdlet wrappers around those needs confirming.
+- **Side-attach:** no existing equivalent in VisioPS.
+
+The audit work is small (~half-day) and is the gating step before deciding which cmdlet shapes to adopt vs. which already exist under different names.
+
+#### Adoption path
+
+If the audit confirms gaps, treat as additive cmdlets, no architecture change:
+
+- **Phase A &mdash; missing primitives:** add cmdlets for any PSVA helper that has no VisioPS equivalent. `Set-VisioShapeDistribution` (numeric-arg overload of distribute), `Set-VisioShapeAttachment` (the side-attach), and any layer-cmdlet gaps the audit surfaces.
+- **Phase B &mdash; pipeline-shape polish:** if any existing VisioPS cmdlet has the right *function* but the wrong *parameter shape* for pipeline use (e.g. `Connect-VisioShape` doesn't accept shapes from the pipeline), add `[Parameter(ValueFromPipeline=$true)]` overloads. Back-compat-safe.
+
+#### Open research before adopting
+
+- **Project activity.** PSVA has 10 total commits on master, no recent activity, no PSGallery listing observed. Treat as a pattern-mine, not a live dependency. Nothing to wait on or coordinate with the upstream.
+- **License.** PSVA's repo doesn't show a `LICENSE` file in the top-level listing. Confirm before lifting any *implementation*; lifting cmdlet *shapes* and *parameter names* is fine on its own.
+- **Existing cmdlet inventory.** The audit step above is the prerequisite to filing concrete subtasks.
+
+#### Cross-refs
+
+- *Borrow ideas from VisioBot3000 for VisioPS ergonomics* above &mdash; complementary direction. VisioBot3000 emphasises *composition* (DSL, nicknames, dynamic functions); PSVA emphasises *bulk operations on existing shapes* (distribute, attach, pipe-connect, layer-toggle). Both could be pursued in parallel; they don't conflict.
+
+#### Effort
+
+- Half-day audit pass to map PSVA helpers against existing VisioPS / VisioScripting surface.
+- S per cmdlet for the additive gap-fillers (Phase A). Probably 3-5 cmdlets total depending on what the audit finds.
+- S total for pipeline-shape polish (Phase B), assuming any existing cmdlets just need an extra parameter set.
+
 ### Move `LinqExtensions` out of `Internal/` (or rename the folder)
 - **What:** `LinqExtensions` lives at `VisioAutomation/Internal/Extensions/LinqExtensions.cs` but is `public` and consumed across the assembly boundary by `VisioAutomation.Models` (`ShapeList` calls its `NotOfType<T>` method). The `public` visibility is therefore correct; the **folder name** is misleading.
 - **Why deferred from Phase 1:** Either fix is technically a breaking namespace change for any external code that happens to use the type. Phase 1 was code+docs cleanup only; namespace shifts belong with the broader Phase 3 modernization where breaking changes are acceptable.
