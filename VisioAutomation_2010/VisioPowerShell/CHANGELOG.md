@@ -10,12 +10,36 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+_No consumer-visible changes yet._
+
+## [4.7.0] - 2026-05-06
+
+Headline change: typed setters on `CustomPropertyCells` / `UserDefinedCellCells` plus a friendly diagnostic on bad formulas, closing the long-running thread that started with [#117](https://github.com/saveenr/VisioAutomation/issues/117). Plus an audit-pass making `Get-*` cmdlets' positional bindings consistent across the module.
+
+### Added
+- **Typed setters on `CustomPropertyCells` and `UserDefinedCellCells`** for setting cell values without having to think about Visio's formula encoding. Each setter writes a correctly-encoded Visio formula and (where applicable) sets the `Type` cell to match. From PowerShell:
+
+  ```powershell
+  $cp = New-Object VisioAutomation.Shapes.CustomPropertyCells
+  $cp.SetString("hello")        # Type=0 (String)
+  $cp.SetNumber(42)             # Type=2 (Number)
+  $cp.SetBool($true)            # Type=3 (Boolean)
+  $cp.SetDate([datetime]::Now)  # Type=5 (Date)
+  $cp.SetFormula("=...")        # raw escape hatch
+  ```
+
+  `UserDefinedCellCells` exposes `SetString` and `SetFormula`. The setters become the recommended replacement for raw `$cells.Formula = ...` assignment. Closes [#144](https://github.com/saveenr/VisioAutomation/issues/144).
+- **`Formula` property on `CustomPropertyCells` and `UserDefinedCellCells`** as the canonical name (renamed from `Value` to surface that the cell stores a Visio formula, not a literal value).
+
+### Deprecated
+- **`CustomPropertyCells.Value` and `UserDefinedCellCells.Value`** are now `[Obsolete]` aliases for `Formula`. Existing PowerShell scripts that read or write `$cells.Value` keep working unchanged through the deprecation window. Migration: rename `$cells.Value` to `$cells.Formula`, or use the new typed setters. Part of [#144](https://github.com/saveenr/VisioAutomation/issues/144).
+
 ### Fixed
 - **`Get-VisioShape`** now declares an explicit `DefaultParameterSetName = "shapebyname"`. Previously the cmdlet had three parameter sets (`active`, `shapebyname`, `shapebyid`) but no default, so a no-args `Get-VisioShape` call relied on PowerShell nondeterministically picking a set; under stricter PowerShell configurations it could throw `AmbiguousParameterSet`. The "no args returns every shape on the page" behavior is now an explicit, documented part of the cmdlet rather than an accidental fallthrough. Closes [#130](https://github.com/saveenr/VisioAutomation/issues/130).
 - **`Get-VisioLockCells`** now calls `WriteObject(dic)` instead of `WriteObject(dic, true)`, matching its three sibling "Get a dictionary keyed by shape" cmdlets (`Get-VisioCustomProperty`, `Get-VisioHyperlink`, `Get-VisioUserDefinedCell`). Pure consistency fix: PowerShell special-cases `IDictionary` and doesn't enumerate it across the pipeline regardless of the flag, so observable behavior is unchanged. Closes [#129](https://github.com/saveenr/VisioAutomation/issues/129).
 
 ### Changed
-- **`Set-VisioCustomProperty`** &mdash; when callers pass a manually-constructed `CustomPropertyCells` via `-Cells` whose `Formula` (formerly `Value`) field is set to a raw string instead of an encoded Visio formula, the cmdlet now surfaces an `ArgumentException` with a self-explanatory message pointing at the new typed setters (`SetString` / `SetNumber` / `SetBool` / `SetDate`) and `EncodeValues()`. Previously this path raised an opaque `COMException: #NAME?` from the underlying COM call. The default `Set-VisioCustomProperty -Value "x"` flow is unaffected (the cmdlet pre-encodes via `EncodeValues()` internally). Part of [#144](https://github.com/saveenr/VisioAutomation/issues/144).
+- **`Set-VisioCustomProperty`** &mdash; when callers pass a manually-constructed `CustomPropertyCells` via `-Cells` whose `Formula` (formerly `Value`) field is set to a raw string instead of an encoded Visio formula, the cmdlet now surfaces an `ArgumentException` with a self-explanatory message pointing at the new typed setters (`SetString` / `SetNumber` / `SetBool` / `SetDate`) and `EncodeValues()`. Previously this path raised an opaque `COMException: #NAME?` from the underlying COM call. The default `Set-VisioCustomProperty -Value "x"` flow is unaffected (the cmdlet pre-encodes internally). Part of [#144](https://github.com/saveenr/VisioAutomation/issues/144).
 - **Get-* cmdlet positional parameters &mdash; full audit pass.** Eleven `Get-*` cmdlets gain consistent positional bindings so the natural shorthand forms (`Get-VisioPage "Page-1" $doc`, `Get-VisioCustomProperty $shape`, etc.) work as users intuit. Closes [#143](https://github.com/saveenr/VisioAutomation/issues/143) (and supersedes the narrow [#142](https://github.com/saveenr/VisioAutomation/issues/142) entry below). The convention adopted is: cmdlets with both `-Name` and a single object context have `-Name` at position 0 and the object (`-Document` / `-Page`) at position 1; cmdlets with just an object context have it at position 0.
   - `Get-VisioPage`: `-Document` at position 1, `-ID` at position 0 (in its `pagebyid` set), explicit `DefaultParameterSetName = "pagebyname"` to make the no-args case deterministic (same fix shape as [#130](https://github.com/saveenr/VisioAutomation/issues/130) on `Get-VisioShape`).
   - `Get-VisioShape`: `-Name` and `-ID` at position 0 (each in its own set), `-Page` at position 1.
