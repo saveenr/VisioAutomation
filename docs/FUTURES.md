@@ -185,6 +185,47 @@ Phase 2 prerequisites (must be settled before the NuGet release ships):
 - **What:** User docs are in a separate repo on gitbook ([`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs)); developer docs are now in `docs/` here.
 - **Why:** Two-repo doc setups drift. Either keep them split with a clear policy (which doc lives where) or consolidate. No urgent action needed — just call out the policy in `OVERVIEW.md` once decided.
 - **Effort:** S (policy) — or M (consolidation).
+- **Cross-refs:** *Restructure the user-docs repos* below covers the related-but-distinct question of how the two user-doc gitbooks are themselves arranged.
+
+### Restructure the user-docs repos
+- **What:** User-facing docs currently live in **two** separate gitbook repos: [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) (.NET, on `main`) and [`VisioPowerShellDocs`](https://github.com/saveenr/VisioPowerShellDocs) (PowerShell, on a version-pinned `visiops_v4_docs` branch). Three repos total counting the code repo. Question: is this the right shape?
+- **Why this came up:** The 2026-05 doc-audit work (compile-checking C# snippets via VPlayground, parser-checking PowerShell blocks across both gitbooks, fanning out atomic doc-fix commits to multiple remotes) made the cross-repo workflow visibly expensive. `CLAUDE.md` already flags "Two-repo doc setups drift" as a known concern. The recently-filed [#131](https://github.com/saveenr/VisioAutomation/issues/131) / [#132](https://github.com/saveenr/VisioAutomation/issues/132) (large doc-coverage issues) and [#133](https://github.com/saveenr/VisioAutomation/issues/133) (troubleshooting page) will all be more painful in a multi-repo setup.
+
+#### Options surveyed (2026-05-05 discussion)
+
+1. **Status quo — 3 repos.** Code in `VisioAutomation`; .NET docs in `VisioAutomation_GitBook_Docs`; PS docs in `VisioPowerShellDocs`. Most cross-repo friction. Highest drift risk (3 places to keep in sync).
+2. **Orphan branches in the code repo.** Add `docs-dotnet` / `docs-powershell-v4` orphan branches to `VisioAutomation`. One repo total. Removes a remote, but still loses code+doc atomic commits (different branches), and code-repo workflows (`git log`, GitHub UI) gain noise from doc churn.
+3. **Subdirectory on code-repo master.** A `docs-site/dotnet/` and `docs-site/powershell/` tree on `master`. One repo, one branch, one log. **Enables atomic code+doc commits** — the structural fix for drift. CI could compile-check doc snippets against current source. Heaviest change to existing workflows; biggest payoff.
+4. **Single separate docs repo, orphan branches per doc set.** Collapse the two doc repos into one (e.g. `VisioAutomation_Docs` with `dotnet` and `powershell-v4` orphan branches). Cuts 3 repos to 2. Cheapest migration (~2 hours). Doesn't fix atomic commits or audit friction — the structural doc-drift mechanic is unchanged, just spread across fewer remotes.
+
+#### Decision factors
+
+- **What kind of doc work do we actually do?** If most doc work is "doc-only sessions" like the 2026-05 audit, options 1 and 4 are tolerable. If most doc work is "code change + doc update in same session", only option 3 actually helps.
+- **How much do we care about CI compile-checking doc snippets?** Today the audits do it manually via VPlayground. Automating it requires the source to be in the same checkout as the docs. Option 3 enables it cheaply; the others require cross-repo CI.
+- **How much do we value clean separation of code and docs in `git log` / GitHub UI?** If high, options 1 / 2 / 4 win. If low, option 3 is the simplest model.
+- **Is GitBook config flexible enough for any of these?** Yes — GitBook can read any branch + any subpath of any repo. None of the options is mechanically blocked by the publishing platform.
+
+#### Migration cost
+
+- Option 1 → option 4: **~2 hours.** Rename one doc repo, push the other's content as a new orphan branch, repoint one GitBook space, archive the now-redundant repo.
+- Option 1 → option 3: **half a day to a full day.** Move both doc trees into `docs-site/` subdirs on master, repoint both GitBook spaces, archive both old repos, update `CLAUDE.md` and `reference_doc_repos.md` memory entries.
+- Option 1 → option 2: similar to option 3 minus the subdir-vs-orphan-branch difference.
+
+#### Status
+
+- **Held for further discussion.** Not blocking; the status quo works, just expensive. Tackle when the next big doc-audit or cross-cutting code+doc change makes the cost concrete again.
+- **Forcing function:** there isn't one; doc structure can change at any time. But aligning with a NuGet/PSGallery release would be a natural moment, since that's already a coordinated cross-product event.
+
+#### Cross-refs
+
+- *Decide where docs live long-term* (above) — the dev-docs-vs-user-docs policy question. This entry is about the user-docs side specifically.
+- [#131](https://github.com/saveenr/VisioAutomation/issues/131), [#132](https://github.com/saveenr/VisioAutomation/issues/132), [#133](https://github.com/saveenr/VisioAutomation/issues/133) — large doc-coverage work that will benefit from whichever structure is chosen.
+
+#### Effort
+
+- S for option 4 (~2 hours).
+- M for option 3 or option 2 (half a day to a full day).
+- N/A (no work) for option 1.
 
 ### Expand .NET-side doc coverage — Tier 3 (`VisioAutomation.Models`)
 - **What:** The 2026 audit on [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) reviewed every existing page for accuracy and added 15 new pages over three tiers. Tier 3 is the only group still pending.
