@@ -26,6 +26,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ### Fixed
 - `OrgChartDocument.Render` no longer fails with `COMException: File not found` on Visio 2013+. The default `OrgChartStyling.Visio2013Template` was hardcoded to `orgch_u.vst`, but Visio 2013 replaced binary `.vst` templates with XML-based `.vstx` and modern Visio installs only ship `orgch_u.vstx`. Updated to `orgch_u.vstx`. Visio 2010 (`Visio2010Template = "orgch_u.vst"`) is unchanged.
+- `GeometrySection.Render` now returns the section index Visio assigned to the newly-added geometry section, instead of always returning the literal `0`. This matches the API's stated intent (and the [Geometry](https://saveenr.gitbook.io/visioautomation/geometry) gitbook page's claim) so that callers adding multiple geometry sections can target a specific one by index. Closes [#128](https://github.com/saveenr/VisioAutomation/issues/128).
 
 ## Earlier versions
 

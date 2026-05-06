@@ -1,5 +1,6 @@
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VTest.Core.Shapes
 {
@@ -21,7 +22,13 @@ namespace VTest.Core.Shapes
             geom1.AddLineTo("0", "1");
             geom1.AddLineTo("0", "0");
 
-            geom1.Render(shape);
+            short sec_index = geom1.Render(shape);
+
+            // Render must return the section index Visio assigned to the newly-added
+            // geometry section (issue #128). The rectangle started with one geometry
+            // section, so Render adds a second at visSectionFirstComponent + 1.
+            MUT.Assert.AreEqual(2, shape.GeometryCount);
+            MUT.Assert.AreEqual((short)((short)IVisio.VisSectionIndices.visSectionFirstComponent + 1), sec_index);
 
             page.Delete(0);
         }

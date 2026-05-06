@@ -63,7 +63,7 @@ namespace VisioAutomation.Shapes
 
             writer.Commit(shape, Core.CellValueType.Formula);
 
-            return 0;
+            return sec_index;
         }
 
         public GeometryRow AddMoveTo(Core.CellValue x, Core.CellValue y)
