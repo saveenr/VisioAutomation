@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTest.Scripting", "VTest.Sc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VTest.PowerShell", "VTest.PowerShell\VTest.PowerShell.csproj", "{669CDDEB-7609-4294-9D0E-721F47129D0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSamples", "VSamples\VSamples.csproj", "{6E4E26FE-E903-474B-80F9-CF8ED12D34B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSamples", "VSamples\VSamples.csproj", "{6E4E26FE-E903-474B-80F9-CF8ED12D34B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSamples.Docs", "VSamples.Docs\VSamples.Docs.csproj", "{DCC18B41-41BB-42B8-B6CE-247588DE4EC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSamples.Docs", "VSamples.Docs\VSamples.Docs.csproj", "{DCC18B41-41BB-42B8-B6CE-247588DE4EC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPlayground", "VPlayground\VPlayground.csproj", "{A4400856-038C-4E7C-AC17-DD02DE9D9453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VPlayground", "VPlayground\VPlayground.csproj", "{A4400856-038C-4E7C-AC17-DD02DE9D9453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
