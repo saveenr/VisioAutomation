@@ -87,6 +87,7 @@ After CI lands, the other Phase-2-deferred items (version-number policy, leftove
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — projects, dependencies, central concepts
 - [docs/BUILDING.md](docs/BUILDING.md) — full build / test / install reference (incl. dev-pack install commands)
+- [docs/TESTING.md](docs/TESTING.md) — test-suite design and conventions (shared `Framework.VTest` base, per-testhost Visio singleton, `[AssemblyCleanup]` orphan-prevention, MSTEST0030 enforcement). Per-project READMEs sit next to each test csproj.
 - [docs/GLOSSARY.md](docs/GLOSSARY.md) — Visio and codebase terminology
 - [docs/FUTURES.md](docs/FUTURES.md) — staged backlog of cleanup/modernization work
 - [docs/OVERVIEW.md](docs/OVERVIEW.md) — entry point, links to the above
