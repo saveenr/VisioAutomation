@@ -61,10 +61,20 @@ namespace VisioScripting.Loaders
             public List<BuilderError> Errors;
         }
 
+        public const string RootElementName = "directedgraph";
+
         private static List<PageData> _load_page_data_from_xml(Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = new List<PageData>();
             // LOAD and ANALYZE EACH PAGE
+
+            if (xmldoc.Root.Name.LocalName != RootElementName)
+            {
+                string msg = string.Format(
+                    "Expected root element <{0}> in directed graph XML, got <{1}>.",
+                    RootElementName, xmldoc.Root.Name.LocalName);
+                throw new System.ArgumentException(msg);
+            }
 
             int pagenum = 0;
             var page_els = xmldoc.Root.Elements("page");

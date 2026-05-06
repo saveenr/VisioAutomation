@@ -258,6 +258,20 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
+        public void Loader_RootElement_WrongNameThrows()
+        {
+            string xml = "<wrongroot><page>" +
+                "<renderoptions usedynamicconnectors=\"true\" scalingfactor=\"20\" />" +
+                "<shapes><shape id=\"n1\" label=\"A\" stencil=\"basic_u.vss\" master=\"Rectangle\" /></shapes>" +
+                "<connectors></connectors>" +
+                "</page></wrongroot>";
+            var dg_xml = SXL.XDocument.Parse(xml);
+            var client = this.GetScriptingClient();
+            MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => VisioScripting.Loaders.DirectedGraphDocumentLoader.LoadFromXml(client, dg_xml));
+        }
+
+        [MUT.TestMethod]
         public void DirectedGraph_LeftToRight_RendersHorizontally()
         {
             var dg = new VADG.DirectedGraphLayout();
@@ -303,7 +317,7 @@ namespace VTest.Models
         private VA.Models.Layouts.DirectedGraph.DirectedGraphDocument load_two_node_graph_with_renderoptions(string extra_attrs)
         {
             string xml = string.Format(
-                "<autolayoutdrawing>" +
+                "<directedgraph>" +
                 "<page>" +
                 "<renderoptions usedynamicconnectors=\"true\" scalingfactor=\"20\"{0} />" +
                 "<shapes>" +
@@ -314,7 +328,7 @@ namespace VTest.Models
                 "<connector id=\"c1\" from=\"n1\" to=\"n2\" label=\"\" />" +
                 "</connectors>" +
                 "</page>" +
-                "</autolayoutdrawing>",
+                "</directedgraph>",
                 extra_attrs ?? "");
             var dg_xml = SXL.XDocument.Parse(xml);
             var client = this.GetScriptingClient();

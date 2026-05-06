@@ -1,4 +1,5 @@
-<autolayoutdrawing>
+<!-- Schema reference: https://saveenr.gitbook.io/visioautomation/directed-graph-xml -->
+<directedgraph>
   <page>
     <renderoptions
       usedynamicconnectors="true"
@@ -27,4 +28,4 @@
 
   </page>
 
-</autolayoutdrawing>
+</directedgraph>

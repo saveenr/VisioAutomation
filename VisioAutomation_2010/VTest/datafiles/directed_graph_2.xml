@@ -1,4 +1,4 @@
-<autolayoutdrawing>
+<directedgraph>
   <page>
     
   <renderoptions
@@ -40,6 +40,6 @@
     </connectors>
 
   </page>
-</autolayoutdrawing>
+</directedgraph>
 
 
