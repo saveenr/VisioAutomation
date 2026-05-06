@@ -1,0 +1,53 @@
+<Project>
+
+  <!--
+    Central Package Management — every NuGet package version this solution
+    consumes is declared here, exactly once. Csprojs reference packages
+    without versions: <PackageReference Include="X" />.
+
+    Enabled by <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    in Directory.Build.props.
+  -->
+
+  <ItemGroup>
+
+    <!-- Visio PIA. Used by every project; <EmbedInteropTypes>false</EmbedInteropTypes>
+         is set at the PackageReference site (in each csproj) because the public API
+         surface exposes Visio COM types — embedded interop would break type identity. -->
+    <PackageVersion Include="Visio2010.PrimaryInteropAssembly" Version="1.0.0.4" />
+
+    <!-- Library dependencies. -->
+    <PackageVersion Include="Microsoft.Automatic.Graph.Layout" Version="2.0.0" />
+    <PackageVersion Include="GenTreeOps" Version="1.0.0" />
+
+    <!-- PowerShell reference assemblies. Used by VisioPowerShell, VTest, and
+         VTest.PowerShell. Replaces the hardcoded absolute paths to
+         System.Management.Automation that VTest and VTest.PowerShell carried
+         (different paths in each csproj). -->
+    <PackageVersion Include="Microsoft.PowerShell.3.ReferenceAssemblies" Version="1.0.0" />
+
+    <!-- MSTest 4.x test stack. -->
+    <PackageVersion Include="MSTest.TestAdapter" Version="4.2.2" />
+    <PackageVersion Include="MSTest.TestFramework" Version="4.2.2" />
+    <PackageVersion Include="MSTest.Analyzers" Version="4.2.2" />
+
+    <!-- Transitive deps of MSTest 4.x runner. With PackageReference these flow
+         transitively without explicit declaration, but we pin the versions to
+         prevent drift if a future MSTest bump pulls in different transitives. -->
+    <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
+
+    <!-- .NET Framework reference assemblies as packages. Eliminates the need
+         for the netfx-4.5.2 Developer Pack to be installed on dev machines /
+         CI runners. The package supplies the targeting-pack reference DLLs
+         and overrides MSBuild's normal lookup via FrameworkPathOverride.
+         Lets us defer the TFM bump beyond the LTSB 2016 sunset (2026-10-13)
+         without paying the dev-pack-install pain in the meantime.
+         Net452 for shipping libs and the 4.5.2 samples; net472 for tests
+         and VPlayground. -->
+    <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies.net452" Version="1.0.3" />
+    <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="1.0.3" />
+
+  </ItemGroup>
+
+</Project>

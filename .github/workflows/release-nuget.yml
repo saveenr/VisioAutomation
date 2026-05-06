@@ -41,22 +41,20 @@ jobs:
         with:
           vs-version: '17.0'
 
-      # Mirror build.yml: shipping libs target .NET Framework 4.5.2,
-      # whose reference assemblies aren't on the runner image.
-      # Phase 3 will bump TFMs to 4.7.2 and this step can be deleted.
-      - name: Install .NET Framework 4.5.2 Developer Pack
-        run: choco install netfx-4.5.2-devpack -y --no-progress
+      # The .NET Framework 4.5.2 reference assemblies are supplied by the
+      # Microsoft.NETFramework.ReferenceAssemblies.net452 package; no dev-pack
+      # install needed. See VisioAutomation_2010/Directory.Packages.props.
 
       - name: Cache NuGet packages
         uses: actions/cache@v4
         with:
-          path: VisioAutomation_2010/packages
-          key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/**/packages.config') }}
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/Directory.Packages.props') }}
           restore-keys: |
             nuget-${{ runner.os }}-
 
       - name: Restore solution NuGet packages
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore -p:RestorePackagesConfig=true
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
 
       - name: Build solution (Debug)
         run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m

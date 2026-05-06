@@ -6,37 +6,9 @@ Practical notes on building the solution, running the tests, and trying things o
 
 - **Microsoft Visio**, installed locally. The solution targets the Visio 2010 Primary Interop Assembly (`Microsoft.Office.Interop.Visio` v14) but works against newer Visio versions at runtime. Tests and samples instantiate a real Visio process, so Visio must be present on any machine that runs them.
 - **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [FUTURES.md](FUTURES.md).
-- **.NET Framework 4.5.2 reference assemblies.** The shipping libraries target .NET Framework 4.5.2, but modern Windows install media don't include the v4.5.2 targeting pack — the reference DLLs are missing on disk. Without them, neither VS nor MSBuild can build the libs. Install the **.NET Framework 4.5.2 Developer Pack** — see commands below. The 4.7.2 reference assemblies for the test projects ship in-box on every supported Windows.
 - **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
 
-### Installing the .NET Framework 4.5.2 Developer Pack
-
-**.NET Framework Developer Packs are NOT cumulative** — each pack ships only its own version's reference assemblies. The shipping libraries target v4.5.2 specifically, so you need the **4.5.2 Developer Pack**. Installing a newer pack (4.6.2 / 4.7 / 4.8) populates a different folder and does not satisfy the v4.5.2 build requirement.
-
-Microsoft does **not** publish a winget manifest for the 4.5.2 Developer Pack — only for 4.6.2 and later (which doesn't help, since dev packs aren't cumulative). Use chocolatey or a direct download.
-
-All commands below need an **elevated shell** (the installer requires admin).
-
-**Chocolatey** (recommended — matches what CI uses):
-
-```powershell
-choco install netfx-4.5.2-devpack -y
-```
-
-If chocolatey isn't installed, one-line install:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force
-iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-```
-
-**Manual download** (no package manager needed): go to the official Microsoft download page and run the installer as administrator:
-
-→ https://www.microsoft.com/en-us/download/details.aspx?id=42637
-
-After install, restart Visual Studio (or the Developer Command Prompt) so it picks up the new reference assemblies.
-
-> **Note for CI:** the GitHub Actions workflow uses the chocolatey command above (chocolatey is pre-installed on the `windows-latest` runner). Phase 3 of the [refresh](FUTURES.md) bumps the libraries to v4.7.2 (in-box reference assemblies on every supported Windows), at which point this dev-pack install requirement goes away.
+The shipping libraries target .NET Framework 4.5.2, but you do **not** need to install the 4.5.2 Developer Pack — the reference assemblies are supplied by the [`Microsoft.NETFramework.ReferenceAssemblies.net452`](../VisioAutomation_2010/Directory.Packages.props) NuGet package, restored automatically with the rest of the solution. The 4.7.2 reference assemblies (used by the test projects) ship in-box on every supported Windows.
 
 ## Building
 
@@ -46,9 +18,8 @@ The exact MSBuild path depends on your VS 2022 install location. From a regular 
 # from the repo root, using VS 2022 Community at the default install path
 MSBUILD="/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
 
-# 1. Restore NuGet packages (packages.config style — needs the explicit flag)
-"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln \
-    -t:Restore -p:RestorePackagesConfig=true
+# 1. Restore NuGet packages
+"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln -t:Restore
 
 # 2. Build
 "$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln \
@@ -58,13 +29,13 @@ MSBUILD="/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current
 From the **Developer Command Prompt for VS 2022** (or Developer PowerShell), `MSBuild.exe` is on PATH and you can drop the full path:
 
 ```cmd
-msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore -p:RestorePackagesConfig=true
+msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
 msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
 ```
 
 Or open [`VisioAutomation_2010/VisioAutomation2010.sln`](../VisioAutomation_2010/VisioAutomation2010.sln) in Visual Studio 2022 and build the solution — the IDE handles restore automatically.
 
-The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutomation_2010/VisioAutomation/packages.config) NuGet package, so a clean machine without Visio's developer tools installed will still restore the interop reference.
+The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutomation_2010/Directory.Packages.props) NuGet package, so a clean machine without Visio's developer tools installed will still restore the interop reference. Package versions are centralized in [`Directory.Packages.props`](../VisioAutomation_2010/Directory.Packages.props) (Central Package Management); individual csprojs reference packages without versions.
 
 ## Continuous integration
 

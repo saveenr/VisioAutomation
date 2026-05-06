@@ -18,22 +18,24 @@ When in doubt whether a change fits the current phase, check [docs/FUTURES.md](d
 
 ## Build prerequisites
 
-The shipping libs target .NET Framework 4.5.2. Modern Windows install media don't include the v4.5.2 reference assemblies, so **the .NET Framework 4.5.2 Developer Pack must be installed** on every dev machine and CI runner. Microsoft does not publish a winget manifest for 4.5.x — use chocolatey (`choco install netfx-4.5.2-devpack -y`) or the Microsoft download page. Full instructions in [docs/BUILDING.md](docs/BUILDING.md).
+The shipping libs target .NET Framework 4.5.2. The reference assemblies are supplied by the [`Microsoft.NETFramework.ReferenceAssemblies.net452`](VisioAutomation_2010/Directory.Packages.props) NuGet package — **no .NET Framework Developer Pack install required** (this changed during Phase 3's SDK migration; before that, the 4.5.2 Developer Pack had to be installed via chocolatey).
 
-If you see `MSB3644: The reference assemblies for .NETFramework,Version=v4.5.2 were not found` — that's the dev pack not being installed.
+If you see `MSB3644: The reference assemblies for .NETFramework,Version=v4.5.2 were not found`, NuGet restore didn't run; run `msbuild -t:Restore` first.
 
 ## Build commands (verified working)
 
 ```bash
 MSBUILD="/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
-"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln -t:Restore -p:RestorePackagesConfig=true
+"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln -t:Restore
 "$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln -p:Configuration=Debug -m
 ```
 
-- **Do not** use `dotnet build` — projects are legacy csproj + packages.config.
-- **Do not** use VS 2026's MSBuild (under `Program Files\Microsoft Visual Studio\18\`) — its .NET Framework floor is 4.6.2 and the shipping libs are on 4.5.2. This is a Phase 3 unblocker.
+- **Do not** use `dotnet build` — projects are still legacy csproj (SDK-style migration is Phase 3 Pass 2).
+- **Do not** use VS 2026's MSBuild (under `Program Files\Microsoft Visual Studio\18\`) — its .NET Framework floor is 4.6.2 and the shipping libs are on 4.5.2. This is a Phase 3 unblocker (deferred until after the LTSB 2016 sunset on 2026-10-13).
 
-Full reference (IDE flow, test invocation, dev-pack install commands): [docs/BUILDING.md](docs/BUILDING.md).
+Package versions live in [`VisioAutomation_2010/Directory.Packages.props`](VisioAutomation_2010/Directory.Packages.props) (Central Package Management); individual csprojs use versionless `<PackageReference>` items.
+
+Full reference (IDE flow, test invocation): [docs/BUILDING.md](docs/BUILDING.md).
 
 ## Tests need a live Visio
 
