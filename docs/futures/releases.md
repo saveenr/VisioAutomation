@@ -22,6 +22,23 @@ Backlog of items related to release process, version policy, and publishing to p
 - **Cross-refs:** *Automate releases via GitHub CI* below — the CI workflow either flips the constant or stages the release config separately.
 - **Effort:** S.
 
+### Address `Visio.psd1` deprecation warnings on PSGallery publish
+- **What:** The 4.7.0 publish to PSGallery (2026-05-06) emitted three warnings from `Publish-Module`:
+  1. `The module manifest member 'ModuleToProcess' has been deprecated. Use the 'RootModule' member instead.` (fires twice &mdash; once during local staging, once on the gallery upload).
+  2. `This module ... has exported cmdlets. As a best practice, include exported cmdlets in the module manifest file (.psd1). You can run Update-ModuleManifest -CmdletsToExport to update the manifest with ExportedCmdlets field.`
+- **Why each warning fires:**
+  - **`ModuleToProcess`** &mdash; [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) line 8 sets `ModuleToProcess = 'VisioPS.dll'` with an inline comment ("Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0") and the manifest declares `PowerShellVersion = '2.0'`. The compatibility target is essentially dead: PS 2.0 was removed from Windows 11; PSGallery's `Install-Module` requires PS 5.1+; `Publish-VisioPSToGallery.ps1` itself refuses to run below PS 5.1.
+  - **`CmdletsToExport = '*'`** &mdash; the wildcard works, but it slows module-load (PS reflects over the assembly to enumerate cmdlets) and trips the publish-time best-practice check. Best practice is to enumerate the ~50 exported cmdlets explicitly.
+- **How to apply:**
+  - Switch `ModuleToProcess` to `RootModule` in [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) (toggle the comment on lines 7-8). Bump `PowerShellVersion = '2.0'` to `'5.1'` to match the publish script's own minimum check. Optionally drop `CLRVersion = '4.0'` (paired with .NET Framework 4.0; the shipping libs target 4.5.2).
+  - Replace `CmdletsToExport = '*'` with an explicit array. Generate the initial list via `Update-ModuleManifest -CmdletsToExport @(...)` against a staged `Visio.psd1`. Maintenance: adding a new cmdlet now means updating the manifest list. Two ways to enforce: (a) manual reminder in `CONTRIBUTING.md` / cmdlet-author docs, or (b) add a pre-publish check that diffs the static list against the assembly's actually-exported cmdlets and fails if drift exists.
+- **Impact:**
+  - **Users on PS 2.0 / 3.0:** zero affected. PS 2.0 is gone from Windows 11; PS 3.0 shipped with Windows 8 only and was superseded a decade ago. PSGallery itself requires PS 5.1+ to install.
+  - **Users on PS 5.1 / 7:** no change. `RootModule` has been the canonical name since PS 3.0; both runtimes accept it.
+  - **Module-load performance:** marginally faster (no wildcard reflection at import time).
+- **Cross-refs:** *Automate releases via GitHub CI* below &mdash; the publish workflow should also surface these warnings as a CI signal so future drift is caught early.
+- **Effort:** S. Single commit, no behavior change for any extant user. Enumerating `CmdletsToExport` is the bulk of the diff; the `RootModule` swap is one line.
+
 ### Automate releases via GitHub CI *(in progress)*
 - **What:** Replace the current manual release process with GitHub Actions workflows that handle **three deliverables** end-to-end:
   1. **PSGallery publish** of the `Visio` PowerShell module.
