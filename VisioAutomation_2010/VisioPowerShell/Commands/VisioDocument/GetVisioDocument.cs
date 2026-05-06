@@ -4,13 +4,19 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioDocument
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDocument)]
+    // Parameter sets:
+    //   "active"     -> -ActiveDocument switch: return the active document.
+    //   "docbyname"  -> -Name <string[]>:       return open documents with those names.
+    //                                           Also the DEFAULT set: a no-args call lands
+    //                                           here with Name == null and returns every
+    //                                           open document.
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioDocument, DefaultParameterSetName = "docbyname")]
     public class GetVisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
         public SMA.SwitchParameter ActiveDocument;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "docbyname")]
+        [SMA.Parameter(Position = 0, Mandatory = false, ParameterSetName = "docbyname")]
         public string[] Name = null;
         
         

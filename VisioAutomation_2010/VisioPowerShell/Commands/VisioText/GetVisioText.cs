@@ -6,9 +6,8 @@ namespace VisioPowerShell.Commands.VisioText
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioText)]
     public class GetVisioText : VisioCmdlet
     {
-        // CONTEXT:SHAPES 
-
-        [SMA.Parameter(Mandatory = false)]
+        // CONTEXT:SHAPES
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public IVisio.Shape[] Shape;
         protected override void ProcessRecord()
         {

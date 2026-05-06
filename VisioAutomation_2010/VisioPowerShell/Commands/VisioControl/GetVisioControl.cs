@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioControl
     public class GetVisioControl : VisioCmdlet
     {
         // CONTEXT:SHAPES
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public IVisio.Shape[] Shape;
         
         protected override void ProcessRecord()

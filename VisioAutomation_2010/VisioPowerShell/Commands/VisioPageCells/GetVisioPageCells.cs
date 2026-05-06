@@ -21,7 +21,7 @@ namespace VisioPowerShell.Commands.VisioPageCells
         public Models.ResultType ResultType = ResultType.String;
 
         // CONTEXT:PAGES
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public IVisio.Page[] Page { get; set; }
 
         protected override void ProcessRecord()

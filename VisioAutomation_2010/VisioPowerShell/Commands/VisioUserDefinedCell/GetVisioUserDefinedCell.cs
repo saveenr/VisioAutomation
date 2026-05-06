@@ -6,8 +6,8 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
     [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioUserDefinedCell)]
     public class GetVisioUserDefinedCell : VisioCmdlet
     {
-        // CONTEXT:SHAPES 
-        [SMA.Parameter(Mandatory = false)]
+        // CONTEXT:SHAPES
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()

@@ -4,19 +4,27 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioPage
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPage)]
+    // Parameter sets:
+    //   "active"      -> -ActivePage switch:    return the active page.
+    //   "pagebyid"    -> -ID <int[]>:           return pages with those IDs.
+    //   "pagebyname"  -> -Name <string[]>:      return pages with those names.
+    //                                           Also the DEFAULT set: a no-args call lands
+    //                                           here with Name == null and returns every
+    //                                           page on the (resolved) document.
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioPage, DefaultParameterSetName = "pagebyname")]
     public class GetVisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
         public SMA.SwitchParameter ActivePage;
 
-        [SMA.Parameter(Position=0, Mandatory = false, ParameterSetName = "pagebyname")]
+        [SMA.Parameter(Position = 0, Mandatory = false, ParameterSetName = "pagebyname")]
         public string[] Name;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "pagebyid")]
+        [SMA.Parameter(Position = 0, Mandatory = false, ParameterSetName = "pagebyid")]
         public int[] ID;
 
-        [SMA.Parameter(Mandatory = false)]
+        // CONTEXT:DOCUMENT
+        [SMA.Parameter(Position = 1, Mandatory = false)]
         public IVisio.Document Document;
         
         protected override void ProcessRecord()

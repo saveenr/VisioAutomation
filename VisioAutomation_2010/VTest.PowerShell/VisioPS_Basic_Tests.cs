@@ -106,6 +106,173 @@ namespace VTest.PowerShell
             VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
         }
 
+        // Issue #143: positional-parameter UX audit. Each test below exercises
+        // the cmdlet's parameter binder via the runspace path (InvokeScript),
+        // because direct cmdlet.Invoke() bypasses PowerShell's parameter binder
+        // and so cannot verify positional binding. The pattern is:
+        //   - cmdlets with -Name + object context: -Name at Position 0, object at Position 1
+        //   - cmdlets with single object context : object at Position 0
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioPage_NameAndDocumentArePositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var pages = VisioPS_Basic_Tests.Session.InvokeScript<Microsoft.Office.Interop.Visio.Page>(
+                "Get-VisioPage \"Page-1\" $doc",
+                ("doc", doc));
+            MUT.Assert.AreEqual(1, pages.Count);
+            MUT.Assert.AreEqual("Page-1", pages[0].Name);
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioShape_NameAndPageArePositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.Cmd_Set_VisioText(VTestPsArray.From("Hello"), VTestPsArray.From((Microsoft.Office.Interop.Visio.Shape)s));
+            // Sanity: at least exercise the Page=Position 1 form (Name not provided).
+            var page = ((Microsoft.Office.Interop.Visio.Shape)s).ContainingPage;
+            VisioPS_Basic_Tests.Session.InvokeScript<Microsoft.Office.Interop.Visio.Shape>(
+                "Get-VisioShape -Page $p",
+                ("p", page));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioDocument_NameIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            // -Name at Position 0; the call must not throw a binder error.
+            // We don't assert a specific result count because the active document's
+            // generated name varies, but binding alone is the contract under test.
+            VisioPS_Basic_Tests.Session.InvokeScript<Microsoft.Office.Interop.Visio.Document>(
+                "Get-VisioDocument \"basic_u.vss\"");
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioCustomProperty_ShapeIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.InvokeScript<object>(
+                "Get-VisioCustomProperty $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioText_ShapeIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.Cmd_Set_VisioText(VTestPsArray.From("Hello"), VTestPsArray.From((Microsoft.Office.Interop.Visio.Shape)s));
+            var text = VisioPS_Basic_Tests.Session.InvokeScript<object>(
+                "Get-VisioText $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+            MUT.Assert.IsTrue(text.Count > 0);
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioHyperlink_ShapeIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.InvokeScript<object>(
+                "Get-VisioHyperlink $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioLockCells_ShapeIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.InvokeScript<object>(
+                "Get-VisioLockCells $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioControl_ShapeIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.InvokeScript<object>(
+                "Get-VisioControl $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioUserDefinedCell_ShapeIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.InvokeScript<object>(
+                "Get-VisioUserDefinedCell $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioShapeCells_ShapeIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.InvokeScript<System.Data.DataTable>(
+                "Get-VisioShapeCells $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
+        public void VisioPS_GetVisioPageCells_PageIsPositional()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var page = VisioPS_Basic_Tests.Session.Cmd_Get_VisioPage(activepage: true, name: null);
+            VisioPS_Basic_Tests.Session.InvokeScript<System.Data.DataTable>(
+                "Get-VisioPageCells $p",
+                ("p", new[] { page }));
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
         [MUT.TestMethod]
         public void VisioPS_GetVisioShape_NoArgs_ReturnsAllShapesOnPage()
         {

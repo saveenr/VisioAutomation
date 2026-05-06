@@ -7,7 +7,7 @@ namespace VisioPowerShell.Commands.VisioLockCells
     public class GetVisioLockCells : VisioCmdlet
     {
         // CONTEXT:SHAPES
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()

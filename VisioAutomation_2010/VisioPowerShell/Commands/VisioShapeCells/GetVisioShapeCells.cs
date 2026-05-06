@@ -21,8 +21,8 @@ namespace VisioPowerShell.Commands.VisioShapeCells
         [SMA.Parameter(Mandatory = false)]
         public Models.ResultType ResultType = ResultType.String;
 
-        // CONTEXT:SHAPES 
-        [SMA.Parameter(Mandatory = false)]
+        // CONTEXT:SHAPES
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public IVisio.Shape[] Shape { get; set; }
 
         protected override void ProcessRecord()

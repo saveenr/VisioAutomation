@@ -16,14 +16,14 @@ namespace VisioPowerShell.Commands.VisioShape
         [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
         public SMA.SwitchParameter ActiveSelection;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "shapebyname")]
+        [SMA.Parameter(Position = 0, Mandatory = false, ParameterSetName = "shapebyname")]
         public string[] Name;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "shapebyid")]
+        [SMA.Parameter(Position = 0, Mandatory = false, ParameterSetName = "shapebyid")]
         public int[] ID;
 
         // CONTEXT:PAGE
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Position = 1, Mandatory = false)]
         public IVisio.Page Page;
 
         protected override void ProcessRecord()
