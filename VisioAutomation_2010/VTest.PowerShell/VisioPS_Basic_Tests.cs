@@ -88,6 +88,25 @@ namespace VTest.PowerShell
         }
 
         [MUT.TestMethod]
+        public void VisioPS_GetVisioMaster_DocumentIsPositional()
+        {
+            // Issue #142: -Document is now Position = 1, so the natural
+            // positional form Get-VisioMaster "Group" $doc binds correctly.
+            // Use the runspace path (not the direct-Invoke path) because
+            // direct invocation bypasses PowerShell's parameter binder.
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var basic_u = VisioPS_Basic_Tests.Session.Cmd_Open_VisioDocument("basic_u.vss");
+
+            var masters = VisioPS_Basic_Tests.Session.InvokeScript<Microsoft.Office.Interop.Visio.Master>(
+                "Get-VisioMaster \"Rectangle\" $stencil",
+                ("stencil", basic_u));
+
+            MUT.Assert.AreEqual(1, masters.Count);
+            MUT.Assert.AreEqual("Rectangle", masters[0].Name);
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
         public void VisioPS_GetVisioShape_NoArgs_ReturnsAllShapesOnPage()
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();

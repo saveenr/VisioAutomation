@@ -12,7 +12,7 @@ namespace VisioPowerShell.Commands.VisioMaster
         public string[] Name;
 
         // CONTEXT:DOCUMENT
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Position = 1, Mandatory = false)]
         public IVisio.Document Document;
 
         protected override void ProcessRecord()

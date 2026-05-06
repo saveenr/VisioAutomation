@@ -14,6 +14,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 - **`Get-VisioShape`** now declares an explicit `DefaultParameterSetName = "shapebyname"`. Previously the cmdlet had three parameter sets (`active`, `shapebyname`, `shapebyid`) but no default, so a no-args `Get-VisioShape` call relied on PowerShell nondeterministically picking a set; under stricter PowerShell configurations it could throw `AmbiguousParameterSet`. The "no args returns every shape on the page" behavior is now an explicit, documented part of the cmdlet rather than an accidental fallthrough. Closes [#130](https://github.com/saveenr/VisioAutomation/issues/130).
 - **`Get-VisioLockCells`** now calls `WriteObject(dic)` instead of `WriteObject(dic, true)`, matching its three sibling "Get a dictionary keyed by shape" cmdlets (`Get-VisioCustomProperty`, `Get-VisioHyperlink`, `Get-VisioUserDefinedCell`). Pure consistency fix: PowerShell special-cases `IDictionary` and doesn't enumerate it across the pipeline regardless of the flag, so observable behavior is unchanged. Closes [#129](https://github.com/saveenr/VisioAutomation/issues/129).
 
+### Changed
+- **`Get-VisioMaster`** &mdash; `-Document` parameter is now positional at `Position = 1`, so the natural form `Get-VisioMaster "Group" $doc` works as users intuit. Previously only `-Name` had a position; an unnamed second positional argument either errored or got string-coerced into `-Name`'s array. The bind change is back-compat-safe (no idiomatic existing usage relied on the old behavior). Closes [#142](https://github.com/saveenr/VisioAutomation/issues/142). The broader audit of positional-parameter consistency across the module is tracked separately in [#143](https://github.com/saveenr/VisioAutomation/issues/143).
+
 ## [4.6.1] - 2026-05-03
 
 First release cut from the `2026_Refresh` work. Bundles the Phase 1 cleanup work and four cmdlet bug fixes.

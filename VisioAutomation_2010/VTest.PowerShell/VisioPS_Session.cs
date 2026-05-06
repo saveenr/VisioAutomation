@@ -186,6 +186,22 @@ namespace VTest.PowerShell
             return shapes;
         }
 
+        // Run a PowerShell script through the session's runspace.
+        // Unlike the direct cmdlet-Invoke path used elsewhere in this class,
+        // this goes through PowerShell's parameter binder, so it's the right
+        // tool for testing positional / pipeline binding on cmdlets.
+        public List<T> InvokeScript<T>(string script, params (string name, object value)[] variables)
+        {
+            this._powershell.Commands.Clear();
+            foreach (var v in variables)
+            {
+                this._powershell.Runspace.SessionStateProxy.SetVariable(v.name, v.value);
+            }
+            this._powershell.AddScript(script);
+            var results = this._powershell.Invoke<T>();
+            return results.ToList();
+        }
+
         public VisioPowerShell.Models.ShapeCells Cmd_New_VisioShapeCells()
         {
             var cmd = new VisioPowerShell.Commands.VisioShapeCells.NewVisioShapeCells();
