@@ -169,7 +169,7 @@ namespace VTest.PowerShell
         }
 
         public IVisio.Page Cmd_Get_VisioPage(
-            bool activepage, 
+            bool activepage,
             string name)
         {
             var cmd = new VisioPowerShell.Commands.VisioPage.GetVisioPage();
@@ -177,6 +177,13 @@ namespace VTest.PowerShell
             cmd.Name = new [] {name};
             var page = cmd.InvokeFirst<IVisio.Page>();
             return page;
+        }
+
+        public List<IVisio.Shape> Cmd_Get_VisioShape()
+        {
+            var cmd = new VisioPowerShell.Commands.VisioShape.GetVisioShape();
+            var shapes = cmd.Invoke<IVisio.Shape>().ToList();
+            return shapes;
         }
 
         public VisioPowerShell.Models.ShapeCells Cmd_New_VisioShapeCells()

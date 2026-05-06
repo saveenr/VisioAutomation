@@ -88,6 +88,31 @@ namespace VTest.PowerShell
         }
 
         [MUT.TestMethod]
+        public void VisioPS_GetVisioShape_NoArgs_ReturnsAllShapesOnPage()
+        {
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+
+            // Drop two rectangles on the page.
+            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+            VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(3.0, 4.0),
+                new VisioAutomation.Core.Point(5.0, 6.0)
+            });
+
+            // Get-VisioShape with no args must return every shape on the page (the default
+            // parameter set's no-filter fallthrough). See issue #130 on the source repo.
+            var shapes = VisioPS_Basic_Tests.Session.Cmd_Get_VisioShape();
+
+            MUT.Assert.AreEqual(2, shapes.Count);
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
+
+        [MUT.TestMethod]
         public void VisioPS_CreateContainer()
         {
             var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();

@@ -3,7 +3,14 @@ using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands.VisioShape
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape)]
+    // Parameter sets:
+    //   "active"       -> -ActiveSelection switch: return the current selection.
+    //   "shapebyid"    -> -ID <int[]>:           return shapes on the page with those IDs.
+    //   "shapebyname"  -> -Name <string[]>:      return shapes on the page with those names.
+    //                                            Also the DEFAULT set: a no-args call lands
+    //                                            here with Name == null and returns every
+    //                                            shape on the (resolved) page.
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, Nouns.VisioShape, DefaultParameterSetName = "shapebyname")]
     public class GetVisioShape : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, ParameterSetName = "active")]
@@ -23,18 +30,14 @@ namespace VisioPowerShell.Commands.VisioShape
         {
             if (this.ActiveSelection)
             {
-                // If we arrive here then it just means get the selected shapes
-                this.WriteVerbose("Returning selected shapes ");
+                this.WriteVerbose("Returning selected shapes");
                 var shapes_selected = this.Client.Selection.GetSelectedShapes(VisioScripting.TargetSelection.Auto);
                 this.WriteObject(shapes_selected, true);
                 return;
             }
 
-            // If the active selection is not specified then work on all the shapes in a page (user-specified or auto)
-
             var targetpage = new VisioScripting.TargetPage(this.Page);
 
-            // First, the ID case
             if (this.ID != null)
             {
                 var shapes_by_id = this.Client.Page.GetShapesOnPageByID(targetpage, this.ID);
@@ -42,7 +45,6 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            // Then, handle the name case
             if (this.Name != null)
             {
                 var shapes_by_name = this.Client.Page.GetShapesOnPageByName(targetpage, this.Name);
@@ -50,12 +52,9 @@ namespace VisioPowerShell.Commands.VisioShape
                 return;
             }
 
-            // Finally return all the shapes on the page
-
+            // No filter (default parameter set, with -Name unset): return every shape on the resolved page.
             var shapes_on_page = this.Client.Page.GetShapesOnPage(targetpage);
             this.WriteObject(shapes_on_page, true);
-            return;
-
         }
     }
 }
