@@ -44,6 +44,12 @@ Backlog of build-system, tooling, and code/architecture items. For the staged pl
 - **Cross-refs:** *Move development to Visual Studio 2026* above supersedes this for now (do that first; defer the .NET 6/8 question).
 - **Effort:** L — major undertaking.
 
+### Make `CustomPropertyCells` values not require manual `EncodeValues()`
+- **What:** `CustomPropertyCells.Value` is stored as a Visio formula, so a literal string written as `cp.Value = "testVal"` produces the formula `testVal` (no quotes), which Visio tries to evaluate as a name reference and fails. To get a string literal stored, the caller has to either pre-quote (`"\"testVal\""`) or call `cp.EncodeValues()` before writing. Surfaced by [#117](https://github.com/saveenr/VisioAutomation/issues/117); tracked in [#144](https://github.com/saveenr/VisioAutomation/issues/144).
+- **Why:** The trap is silent &mdash; the property gets created, just with the wrong value (typically `0`). The PowerShell `Set-VisioCustomProperty` cmdlet sidesteps it by calling `EncodeValues()` internally, but model-level callers (`CustomPropertyHelper.Set`, the DOM `ShapeList`, the directed-graph render path) get no help. Docs were patched to call out the encoding step explicitly as the immediate fix; the API ergonomics are still a foot-gun.
+- **Options on the table** (see [#144](https://github.com/saveenr/VisioAutomation/issues/144) for full details and the recommended path): auto-encode in `CustomPropertyHelper.Set` (the choke-point); or add a clearer factory like `CustomPropertyCells.FromString(...)`; or add an `Encoded` flag on the cells; or leave the API alone and lean on docs.
+- **Effort:** S-M.
+
 ### Move `LinqExtensions` out of `Internal/` (or rename the folder)
 - **What:** `LinqExtensions` lives at `VisioAutomation/Internal/Extensions/LinqExtensions.cs` but is `public` and consumed across the assembly boundary by `VisioAutomation.Models` (`ShapeList` calls its `NotOfType<T>` method). The `public` visibility is therefore correct; the **folder name** is misleading.
 - **Why deferred from Phase 1:** Either fix is technically a breaking namespace change for any external code that happens to use the type. Phase 1 was code+docs cleanup only; namespace shifts belong with the broader Phase 3 modernization where breaking changes are acceptable.
