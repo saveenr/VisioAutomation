@@ -62,6 +62,19 @@ _No consumer-visible changes yet._
 
 This is a manual post-release step — the workflows don't auto-edit the CHANGELOG.
 
+## Backlog hygiene
+
+The forward-looking backlog lives in [`docs/FUTURES.md`](docs/FUTURES.md). Completed items live in [`docs/COMPLETED.md`](docs/COMPLETED.md), grouped by phase. The split exists so FUTURES.md stays scannable as a "what's left" view while institutional memory (what was tried, why decisions were made, commit hashes) is preserved separately.
+
+**When you finish a FUTURES.md item:**
+
+1. Move the entry's body — the `**Resolution:**` paragraph and any sub-bullets — to the right phase + category section of `docs/COMPLETED.md`, verbatim.
+2. Delete the body from `docs/FUTURES.md`.
+3. If the entry had a tail (a "Still to do" or "Deferred to Phase N" note pointing to follow-up work), extract that tail as a new active item in `docs/FUTURES.md` so the follow-up isn't lost.
+4. Add a one-line bullet to the relevant phase's "items completed" checklist at the top of `docs/FUTURES.md` summarizing what shipped.
+
+The headline phase summary in FUTURES.md (e.g. "Phase 1 items completed:") and the body in COMPLETED.md play different roles: the headline is the project arc you scan to see "what got done"; COMPLETED.md is where you go when you actually need the detail.
+
 ## What's in scope right now
 
 The 2026 refresh is staged in three phases (see [`docs/FUTURES.md`](docs/FUTURES.md)).
