@@ -18,12 +18,14 @@ namespace VTest.Core
 
         public void VerifyFormulaLiteralSize()
         {
-            // A FormulaLiteral only has a reference to a string
-            // so it should be as big as a reference to a string
+            // CellValue is a struct holding one managed-string reference, so its
+            // marshalled size should equal the pointer size for the running
+            // process: 4 on 32-bit, 8 on 64-bit. Hardcoding 4 was a 32-bit-only
+            // assumption that broke once the testhost ran 64-bit.
 
             var instance = new VisioAutomation.Core.CellValue();
             int actual_size = System.Runtime.InteropServices.Marshal.SizeOf(instance);
-            MUT.Assert.AreEqual(4, actual_size);
+            MUT.Assert.AreEqual(System.IntPtr.Size, actual_size);
         }
 
         [MUT.TestMethod]
