@@ -10,7 +10,8 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+### Fixed
+- **`Set-VisioUserDefinedCell`** &mdash; `-Value` and `-Prompt` parameters now encode their string arguments as Visio formulas before passing them to the underlying `UserDefinedCellHelper.Set`. Regression introduced by the #144 cross-layer migration in [4.7.0]: `Set-VisioUserDefinedCell -Name 'X' -Value 'foo'` would surface an `ArgumentException` ("Visio rejected the formula ... use SetString ... see #144") from the .NET-side detect-and-rethrow, because &mdash; unlike the parallel `Set-VisioCustomProperty` cmdlet, where `VisioScripting.CustomPropertyCommands` calls `EncodeValues()` as a backstop &mdash; the UDC scripting layer has no equivalent backstop. Cmdlet now uses the new typed setter (`SetString`) for `-Value` and explicit `Core.CellValue.EncodeValue` for `-Prompt`. New regression test in `VTest.PowerShell` covers the path going forward.
 
 ## [4.7.0] - 2026-05-06
 

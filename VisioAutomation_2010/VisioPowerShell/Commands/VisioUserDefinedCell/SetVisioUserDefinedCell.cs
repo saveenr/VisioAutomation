@@ -24,13 +24,21 @@ namespace VisioPowerShell.Commands.VisioUserDefinedCell
             var targetshapes = new VisioScripting.TargetShapes(this.Shape);
             var udcell = new VisioAutomation.Shapes.UserDefinedCellCells();
 
+            // Encode -Value via SetString and -Prompt via EncodeValue: both
+            // fields are Visio formulas, not literal strings. Without this,
+            // a typical -Value 'foo' arg would reach UserDefinedCellHelper.Set
+            // unencoded, which #144's detect-and-rethrow then surfaces as
+            // ArgumentException ("Visio rejected the formula ... use SetString
+            // ... see #144"). Unlike Set-VisioCustomProperty, the UDC
+            // VisioScripting layer has no EncodeValues backstop, so the
+            // encoding has to happen here.
             if (this.Value != null)
             {
-                udcell.Value = this.Value;
+                udcell.SetString(this.Value);
             }
             if (this.Prompt != null)
             {
-                udcell.Prompt = this.Prompt;
+                udcell.Prompt = VisioAutomation.Core.CellValue.EncodeValue(this.Prompt);
             }
 
             this.Client.UserDefinedCell.SetUserDefinedCell(targetshapes, this.Name, udcell);

@@ -325,5 +325,37 @@ namespace VTest.PowerShell
 
             VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
         }
+
+        [MUT.TestMethod]
+        public void VisioPS_SetVisioUserDefinedCell_EncodesValueAndPrompt()
+        {
+            // Regression test (#144 follow-up). The cmdlet must encode -Value
+            // and -Prompt as Visio string formulas before reaching
+            // UserDefinedCellHelper.Set; otherwise a typical "Set-VisioUserDefinedCell
+            // -Value 'foo'" call fails with ArgumentException from #144's
+            // detect-and-rethrow. (Unlike Set-VisioCustomProperty, the UDC
+            // VisioScripting layer has no EncodeValues backstop.)
+
+            var doc = VisioPS_Basic_Tests.Session.Cmd_New_VisioDocument();
+            var s = VisioPS_Basic_Tests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 1.0),
+                new VisioAutomation.Core.Point(2.0, 3.0)
+            });
+
+            VisioPS_Basic_Tests.Session.InvokeScript<object>(
+                "Set-VisioUserDefinedCell -Name 'TestUDC' -Value 'bar' -Prompt 'a hint' -Shape $s",
+                ("s", new[] { (Microsoft.Office.Interop.Visio.Shape)s }));
+
+            var udcs = VisioAutomation.Shapes.UserDefinedCellHelper.GetDictionary(
+                (Microsoft.Office.Interop.Visio.Shape)s,
+                VisioAutomation.Core.CellValueType.Result);
+
+            MUT.Assert.IsTrue(udcs.ContainsKey("TestUDC"));
+            MUT.Assert.AreEqual("bar", udcs["TestUDC"].Formula.Value);
+            MUT.Assert.AreEqual("a hint", udcs["TestUDC"].Prompt.Value);
+
+            VisioPS_Basic_Tests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+        }
     }
 }
