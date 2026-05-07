@@ -1,6 +1,6 @@
 VisioAutomation
 
-Copyright (c) 2016 Saveen Reddy
+Copyright (c) 2016 SevenPens
 
 MIT License
 

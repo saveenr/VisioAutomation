@@ -2,7 +2,7 @@
   <metadata>
     <id>VisioAutomation2010</id>
     <version>3.0.0</version>
-    <authors>saveenr</authors>
+    <authors>SevenPens</authors>
     <owners>saveenr</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/saveenr/VisioAutomation</projectUrl>
@@ -12,7 +12,7 @@
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools.
 </description>
     <releaseNotes>See https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md</releaseNotes>
-    <copyright>Copyright Saveen Reddy</copyright>
+    <copyright>Copyright SevenPens</copyright>
     <tags>Visio</tags>
     <dependencies>
       <group targetFramework="net452">

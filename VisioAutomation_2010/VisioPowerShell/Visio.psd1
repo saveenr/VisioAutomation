@@ -14,13 +14,13 @@ ModuleVersion = '4.7.2'
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
 
 # Author of this module
-Author = 'Saveen Reddy'
+Author = 'SevenPens'
 
 # Company or vendor of this module
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = 'Saveen Reddy'
+Copyright = 'SevenPens'
 
 # Description of the functionality provided by this module
 Description = 'Visio PowerShell - Automation cmdlets for Visio version 2010 and above'

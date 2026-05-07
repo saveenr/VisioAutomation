@@ -106,7 +106,7 @@ We can get data from a CSV file
 create a CSV file in Excel
 
 And then load it as a DataTable and let Visio Draw it
->>> datatable = vi.Data.ImportCSV( r"D:\saveenr\data1.csv" ) 
+>>> datatable = vi.Data.ImportCSV( r"D:\sample\data1.csv" )
 >>> vi.Draw.Table( datatable )
 
 Of course, you can load an XLSX file. In this case, you’ll have to identify the name of the worksheet also…

@@ -65,4 +65,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Development happens on `master`.
 
 ## License
 
-[MIT](LICENSE.txt). Copyright (c) Saveen Reddy.
+[MIT](LICENSE.txt). Copyright (c) SevenPens.

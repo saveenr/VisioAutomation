@@ -10,7 +10,8 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+### Changed
+- Module manifest's `Author` and `Copyright` fields updated from `Saveen Reddy` to `SevenPens` to reflect the new dev-team identity. No functional change; the displayed-author string on the [PSGallery package page](https://www.powershellgallery.com/packages/Visio) updates on the next release. Legal copyright record (LICENSE.txt) updated correspondingly.
 
 ## [4.7.2] - 2026-05-06
 

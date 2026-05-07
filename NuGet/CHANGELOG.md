@@ -10,6 +10,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Changed
+- Package metadata's `<authors>` and `<copyright>` fields updated from `saveenr` / `Copyright Saveen Reddy` to `SevenPens` / `Copyright SevenPens` to reflect the new dev-team identity. No functional change; the displayed-author string on the [nuget.org package page](https://www.nuget.org/packages/VisioAutomation2010) updates on the next release. Legal copyright record (LICENSE.txt) updated correspondingly.
+
 ## [3.0.0] - 2026-05-07
 
 Major version bump. Several behavior changes that affect callers:

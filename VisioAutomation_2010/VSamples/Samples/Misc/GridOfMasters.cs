@@ -9,8 +9,6 @@ namespace VSamples.Samples.Misc
     {
         public override void Run()
         {
-            // http://blogs.msdn.com/saveenr/archive/2008/08/06/visioautoext-simplifying-dropmany-to-quickly-draw-a-grid.aspx
-
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             // Resize the page to a sqaure

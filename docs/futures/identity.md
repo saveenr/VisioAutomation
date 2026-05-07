@@ -23,54 +23,57 @@ Backlog of items related to the dev-team identity used across this codebase, its
 - **Cost of waiting:** zero today (the saveenr key still works on PSGallery), but if PSGallery tightens enforcement we hit the same surprise that happened with nuget.org 3.0.0 on 2026-05-07.
 - **Effort:** S (~30 min user-side; no repo changes).
 
-#### Axis 4: Display authorship in artifact metadata *(pending; decision-coupled)*
-- **What:** the displayed-author / copyright fields in shipped artifact metadata are still `Saveen Reddy` / `saveenr`:
-  - [`VisioAutomation_2010/VisioPowerShell/Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) line 17: `Author = 'Saveen Reddy'`
-  - [`VisioAutomation_2010/VisioPowerShell/Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) line 23: `Copyright = 'Saveen Reddy'`
-  - [`NuGet/VisioAutomation2010.nuspec`](../../NuGet/VisioAutomation2010.nuspec) line 5: `<authors>saveenr</authors>`
-  - [`NuGet/VisioAutomation2010.nuspec`](../../NuGet/VisioAutomation2010.nuspec) line 15: `<copyright>Copyright Saveen Reddy</copyright>`
-  - [`VisioAutomation_2010/VPlayground/Properties/AssemblyInfo.cs`](../../VisioAutomation_2010/VPlayground/Properties/AssemblyInfo.cs) line 9: `[assembly: AssemblyCopyright("Copyright Saveen Reddy")]`
-- **Why this is a decision, not just a rename:** the displayed-author field is *separate from legal copyright* (Axis 7 below). Many open-source projects display a brand or handle in `Author` while legal copyright stays in LICENSE.txt, but the two need to tell a coherent story. Three options:
-  - **A &mdash; Author "SevenPens", Copyright "Saveen Reddy":** displayed author is the brand, legal copyright is the human. Common pattern for solo developers using a publishing handle.
-  - **B &mdash; Both "SevenPens":** treats SevenPens as the canonical name in all artifact-facing surfaces. Legal copyright in LICENSE.txt then needs to align (Axis 7).
-  - **C &mdash; Both "Saveen Reddy":** keep status quo on these specific fields; identity transition stops at publishing/commit identity.
-- **Effort to apply once decided:** S. Five line-edits across three files. The .nupkg's nuspec is regenerated on every release, so it picks up the new value at the next NuGet release; the .psd1 ships as-is on the next PSGallery release.
-- **Coupling:** to Axis 7. Don't change displayed-author without thinking about LICENSE.txt at the same time.
+#### Axis 4: Display authorship in artifact metadata *(done 2026-05-07)*
+- All five displayed-author / copyright fields rewritten from `saveenr` / `Saveen Reddy` to `SevenPens`:
+  - [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) `Author` and `Copyright`.
+  - [`VisioAutomation2010.nuspec`](../../NuGet/VisioAutomation2010.nuspec) `<authors>` and `<copyright>`.
+  - [`VPlayground/Properties/AssemblyInfo.cs`](../../VisioAutomation_2010/VPlayground/Properties/AssemblyInfo.cs) `AssemblyCopyright`.
+- Both CHANGELOGs got an `[Unreleased]` "Changed" entry noting the brand swap. Picked up by the next NuGet release (already-published 3.0.0 retains the old `Copyright Saveen Reddy` line on its nuget.org page; that's frozen) and the next PSGallery release. Coupled to Axis 7 (handled together).
+- **Adjacent inconsistency noticed but not addressed:** 10 of the 11 csproj `AssemblyInfo.cs` files have `AssemblyCopyright("Copyright © 2021")` (no name, just year). VPlayground was the only one with a person name. The "Copyright © 2021" form is an existing inconsistency unrelated to this identity transition; if the codebase wants to harmonize on a single canonical form (e.g., `"Copyright © 2026 SevenPens"`), that's its own one-shot pass &mdash; flag as a follow-up if desired.
 
-#### Axis 5: Hosting URLs (`github.com/saveenr/...`, `saveenr.gitbook.io/...`) *(pending; gated on external moves)*
-- **What:** every link to a hosted resource currently points at saveenr-owned spaces:
-  - **GitHub:** `https://github.com/saveenr/VisioAutomation/...` (issues, PRs, file links, badges).
-  - **gitbook:** `https://saveenr.gitbook.io/visioautomation/`, `https://saveenr.gitbook.io/visiopowershell/`.
-- **Why URL replacement isn't a string-find-and-replace:** the URLs follow the underlying resource location. To change `github.com/saveenr/VisioAutomation` &rarr; `github.com/sevenpens/VisioAutomation` we have to actually transfer or fork the GitHub repo first. Same for the gitbook spaces. Until those moves happen, replacing the URLs in code/docs would just produce 404s.
-- **Inventory** of files containing saveenr URLs (for the eventual rewrite pass &mdash; do not edit before the underlying moves):
+#### Axis 5: Hosting URLs (`github.com/saveenr/...`, `saveenr.gitbook.io/...`) *(plan agreed 2026-05-07; pending external moves + in-repo rewrite)*
+- **Decision (2026-05-07):** do the migration with redirects from the old locations preserved. New canonical URLs live under SevenPens-owned hosting; old saveenr-prefixed URLs continue to resolve via redirects so external consumers don't break.
+- **Three-phase plan:**
+  - **Phase 5a &mdash; set up new locations.** *(user-side; not yet done)*
+    1. Transfer `github.com/saveenr/VisioAutomation` to a SevenPens-owned GitHub account/org. GitHub auto-creates a permanent redirect from old URLs to new on transfer; existing forks, clones, and `origin` remotes keep working.
+    2. Migrate the two gitbook spaces (`saveenr.gitbook.io/visioautomation`, `saveenr.gitbook.io/visiopowershell`) to a SevenPens gitbook account. Set up gitbook custom redirects (or leave placeholder pages) so old URLs resolve to new ones.
+    3. Verify ~5 representative URLs (issue, gitbook deep page, raw file link) redirect correctly.
+  - **Phase 5b &mdash; in-repo URL rewrite.** *(single mechanical commit, after 5a)*
+    - Sed-replace `github.com/saveenr` &rarr; new owner, and `saveenr.gitbook.io` &rarr; new gitbook subdomain, across the inventory below. Skip past CHANGELOG entries (frozen historical record) and git history.
+  - **Phase 5c &mdash; leave redirects in place permanently.** GitHub's auto-redirect doesn't expire and gitbook's custom redirects persist.
+- **Inventory** of files containing `saveenr` URLs (for Phase 5b):
   - `readme.md` (badge URL, gitbook user-guide links, copyright line).
   - `CLAUDE.md`, `docs/ROADMAP.md`, `docs/COMPLETED.md`, `docs/OVERVIEW.md`, `docs/internal/custom-property-encoding.md`, `docs/futures/*.md` (links to issues / PRs / gitbook pages, both in body and in cross-refs).
-  - `NuGet/CHANGELOG.md`, `VisioAutomation_2010/VisioPowerShell/CHANGELOG.md` (issue links from prior entries).
+  - `NuGet/CHANGELOG.md`, `VisioAutomation_2010/VisioPowerShell/CHANGELOG.md` (issue links from prior entries &mdash; **prefer to leave these as-is** since they're frozen historical record; the redirects ensure they keep working).
   - `VisioAutomation_2010/VisioPowerShell/Visio.psd1` (`PrivateData` URLs &mdash; ProjectUri, LicenseUri, etc., if present).
   - `VisioAutomation_2010/VTest/datafiles/directed_graph_1.xml` (XML schema-reference comment pointing at gitbook).
   - `.github/workflows/release-nuget.yml` and `.github/workflows/release-psmodule.yml` (release-notes templates linking back at github.com/saveenr/... and saveenr.gitbook.io/...).
-- **Open question:** is the move actually planned? GitHub repo transfer is irreversible-ish (URL redirects work but are best-effort) and affects every external consumer who has the URL bookmarked. gitbook space migration is also externally visible. Until these moves are committed to, leave the URLs alone.
-- **Effort to apply once moves happen:** M. ~13 files with URL-shape replacements; mostly mechanical sed-style rewrites once the destination URL is known. CHANGELOG entries from past releases probably stay as-is (they're frozen historical record).
+- **Decision points before starting Phase 5a:**
+  - Confirm the destination GitHub account/org name (e.g., `sevenpens`, `SevenPens`, or some other org).
+  - Confirm the destination gitbook account/subdomain.
+  - Decide whether GitHub move and gitbook move happen at the same time, or stagger.
+- **Effort:** Phase 5a is user-side &mdash; ~30 min for the GitHub transfer, ~15 min per gitbook space migration. Phase 5b is M, ~13 files of mechanical replacement; one-shot commit after 5a verifies.
 
-#### Axis 6: Code-comment references *(pending; trivial)*
-- **What:** two source-file references that mention `saveenr` outside any author/copyright context:
-  - [`VisioAutomation_2010/VSamples/Samples/Misc/GridOfMasters.cs:12`](../../VisioAutomation_2010/VSamples/Samples/Misc/GridOfMasters.cs): `// http://blogs.msdn.com/saveenr/archive/2008/08/06/visioautoext-...` &mdash; a comment pointing at an old MSDN blog post. **The MSDN blogs platform was retired**, so this URL is dead regardless. Could be removed entirely, or replaced with a working equivalent if the post was preserved on a successor blog.
-  - [`VisioAutomation_2010/DemoIronPython/demo.py:109`](../../VisioAutomation_2010/DemoIronPython/demo.py): `>>> datatable = vi.Data.ImportCSV( r"D:\saveenr\data1.csv" )` &mdash; a fake example path in a docstring. Trivial rename to anything (`r"D:\sample\data1.csv"` etc.).
-- **Effort:** S. Two one-line edits, no behavior change, no review subtlety.
+#### Axis 6: Code-comment references *(done 2026-05-07)*
+- [`GridOfMasters.cs:12`](../../VisioAutomation_2010/VSamples/Samples/Misc/GridOfMasters.cs): the dead-MSDN-blog comment line removed entirely. The URL pointed at an old `blogs.msdn.com/saveenr/...` post; the MSDN blogs platform was retired, so the URL was already dead.
+- [`DemoIronPython/demo.py:109`](../../VisioAutomation_2010/DemoIronPython/demo.py): `r"D:\saveenr\data1.csv"` &rarr; `r"D:\sample\data1.csv"` (neutral placeholder path).
 
-#### Axis 7: Legal copyright in LICENSE.txt *(decision-needed; do not touch casually)*
-- **What:** [`LICENSE.txt`](../../LICENSE.txt) line 3: `Copyright (c) 2016 Saveen Reddy`. [`readme.md`](../../readme.md) line 68 mirrors: `[MIT](LICENSE.txt). Copyright (c) Saveen Reddy.`
-- **Why this is its own axis, not just another metadata rename:** LICENSE.txt names the legal copyright holder of the source code. It is not a display field. Changing it asserts that someone other than Saveen Reddy holds the copyright, which is only correct if (a) `SevenPens` is a legal entity (LLC, sole proprietorship, etc.) that has acquired the copyright by formal transfer, OR (b) `SevenPens` is being used as a pen-name for the same legal person. In case (b) the legal copyright is *still* held by Saveen Reddy regardless of what the file prints, and rewriting the LICENSE could create downstream legal ambiguity for consumers.
-- **Decision options:**
-  - **Keep `Copyright (c) 2016 Saveen Reddy` as-is.** Most defensible. The displayed brand can transition (Axis 4) without disturbing the legal record.
-  - **Rewrite to a SevenPens entity** *only* if a real legal entity exists and there's an executed copyright assignment. Otherwise this is risky.
-  - **Add a second line acknowledging the SevenPens brand** alongside the existing copyright line. Cosmetic, doesn't change the legal substance, makes the relationship visible to readers.
-- **Coupling:** to Axis 4. The story across LICENSE.txt and the displayed-author fields should be coherent.
-- **Effort:** S to apply, but the *decision* is the load-bearing part &mdash; not work that should be done without the user's explicit call.
+#### Axis 7: Legal copyright in LICENSE.txt *(done 2026-05-07; brand swap)*
+- **Decision recorded 2026-05-07:** treat the change as a brand swap. SevenPens is the handle / pen-name the same legal person uses; legal authorship of the code traces through the historical record (git author lines, the LICENSE file in earlier tags, etc.) without depending on the current LICENSE.txt's exact spelling.
+- Applied:
+  - [`LICENSE.txt`](../../LICENSE.txt) line 3: `Copyright (c) 2016 Saveen Reddy` &rarr; `Copyright (c) 2016 SevenPens`. Year preserved.
+  - [`readme.md`](../../readme.md) license line: `[MIT](LICENSE.txt). Copyright (c) Saveen Reddy.` &rarr; `[MIT](LICENSE.txt). Copyright (c) SevenPens.`
+- If the situation ever changes (e.g., SevenPens becomes a real legal entity that owns the IP via formal assignment), the LICENSE.txt line should be re-revisited then. For now the displayed-author and legal-copyright stories are coherent at "SevenPens" across all surfaces.
 
-#### Axis 8: Test fixtures and historical artifacts *(do not change)*
-- The XML / log fixtures under [`VisioAutomation_2010/VTest/datafiles/`](../../VisioAutomation_2010/VTest/datafiles/) (`XMLErrorLog_Visio_2010_1.txt`, `XMLErrorLog_Visio_2013_1.txt`, `VSDX_Log_Visio_2013.txt`) contain captured 2015-era Visio error-log output that embeds machine paths like `C:\Users\Saveen\`, `C:\Users\saveenr\`, and machine names like `Saveen_ASGARD9` / `saveenr_SAVEENR3`. These are real recorded fixtures, used by the error-log parser tests, and tests likely depend on the exact bytes. Don't touch.
-- Historical changelog entries, docs, and commit messages that reference saveenr likewise stay frozen &mdash; rewriting the past introduces drift between docs and the git history they reference.
+#### Axis 8: Test fixtures and historical artifacts *(recommendation: leave alone; technically editable)*
+- The XML / log fixtures under [`VisioAutomation_2010/VTest/datafiles/`](../../VisioAutomation_2010/VTest/datafiles/) (`XMLErrorLog_Visio_2010_1.txt`, `XMLErrorLog_Visio_2013_1.txt`, `VSDX_Log_Visio_2013.txt`) contain captured 2015-era Visio error-log output that embeds machine paths like `C:\Users\Saveen\`, `C:\Users\saveenr\`, and machine names like `Saveen_ASGARD9` / `saveenr_SAVEENR3`. These are real recorded fixtures consumed by [`XmlErrorLogTests.cs`](../../VisioAutomation_2010/VTest/Core/Application/XmlErrorLogTests.cs).
+- **Initial concern (since walked back):** that tests depended on exact-string equality of those paths. They don't &mdash; `XmlErrorLogTests` only checks filename suffixes via `EndsWith(...)`, plus session/record counts, types, and subtypes. The user/machine-name substrings are not load-bearing for any test, so a mechanical `s/Saveen/.../g; s/saveenr/.../g` inside the fixtures would pass.
+- **Recommendation: still leave alone**, for softer reasons:
+  - They're recordings of real Visio output, not hand-authored fixtures. Editing converts a real recording into a hand-edited synthesis &mdash; small loss of fixture authenticity for the parser tests.
+  - The "Saveen" / "saveenr" inside is a 2015 Windows username, not a current branding claim. Same as a screenshot of an old terminal session: keeping it isn't endorsing the username, it's recording an event.
+  - These files are internal test data that consumers of the package never see.
+- **If the user wants to scrub on principle anyway:** safe to do (tests still pass), and the operation is `sed -i 's/Saveen/Tester/g; s/saveenr/tester/g'` on the three .txt fixtures plus one re-run of VTest to confirm. Captured here so the option is explicit, not foreclosed.
+- **Same logic, more strongly, for git history / past CHANGELOG entries / past commit messages.** Rewriting the past has a much bigger blast radius (commit hashes change, every external link to a specific commit breaks, tag verification fails) and gains nothing branding-wise. Don't.
 
 #### Cross-refs
 
