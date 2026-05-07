@@ -141,21 +141,27 @@ jobs:
             throw "[Unreleased] section in $changelogPath is empty -- nothing to release. Add the changes for this version under [Unreleased] first."
           }
           $version = '${{ steps.version.outputs.version }}'
-          $template = @'
-{0}
 
-## Artifacts
-
-- `VisioAutomation2010.{1}.nupkg` — the NuGet package. Place in a folder, add that folder as a NuGet package source for your project, then `Install-Package VisioAutomation2010`.
-- `VisioAutomation2010-binaries-{1}.zip` — raw DLLs for projects that don't use NuGet.
-
-## Related
-
-- The companion [Visio PowerShell module](https://www.powershellgallery.com/packages/Visio) wraps this NuGet for PowerShell use.
-- [Project documentation](https://saveenr.gitbook.io/visioautomation/).
-- [Full changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md).
-'@
-          $body = $template -f $changelogSection, $version
+          # Build the release-notes body as a string array, NOT as a PowerShell
+          # here-string. PowerShell requires the closing `'@` marker at column 0
+          # of its line; YAML literal block scalars (`run: |`) require every
+          # content line to be indented at or beyond the parent's indent. Those
+          # two rules are mutually exclusive, so here-strings cannot be used
+          # inside a `run: |` block. Each line below is its own string.
+          $lines = @()
+          $lines += $changelogSection
+          $lines += ''
+          $lines += '## Artifacts'
+          $lines += ''
+          $lines += "- ``VisioAutomation2010.$version.nupkg`` is the NuGet package. Place in a folder, add that folder as a NuGet package source for your project, then ``Install-Package VisioAutomation2010``."
+          $lines += "- ``VisioAutomation2010-binaries-$version.zip`` is the raw DLLs for projects that do not use NuGet."
+          $lines += ''
+          $lines += '## Related'
+          $lines += ''
+          $lines += '- The companion [Visio PowerShell module](https://www.powershellgallery.com/packages/Visio) wraps this NuGet for PowerShell use.'
+          $lines += '- [Project documentation](https://saveenr.gitbook.io/visioautomation/).'
+          $lines += '- [Full changelog](https://github.com/saveenr/VisioAutomation/blob/master/NuGet/CHANGELOG.md).'
+          $body = $lines -join "`n"
           $notesPath = "release-notes-$version.md"
           $body | Set-Content -Path $notesPath -Encoding utf8
           "notes_path=$notesPath" >> $env:GITHUB_OUTPUT
