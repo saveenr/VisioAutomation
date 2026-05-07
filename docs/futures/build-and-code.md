@@ -231,8 +231,8 @@ The "Adoption path" sub-section below is unchanged by these findings &mdash; Pha
 
 If the audit confirms gaps, treat as additive cmdlets, no architecture change:
 
-- **Phase A &mdash; missing primitives:** add cmdlets for the four real gaps the audit confirmed: `Set-VisioShapeDistribution` (positional distribute with explicit start + spacing), `Add-VisioShapeAttachment` (the side-attach), `Add-VisioShapeToLayer` (with `-Force` to create the layer), `Set-VisioLayerVisibility` (toggle named layers). The two layer items need `VisioScripting.LayerCommands` extended with `CreateLayer` / `AddShapeToLayer` / `SetLayerVisibility` first; cmdlets are thin wrappers on top.
-- **Phase B &mdash; pipeline-shape polish:** if any existing VisioPS cmdlet has the right *function* but the wrong *parameter shape* for pipeline use (e.g. `Connect-VisioShape` doesn't accept shapes from the pipeline), add `[Parameter(ValueFromPipeline=$true)]` overloads. Back-compat-safe.
+- **Phase A &mdash; missing primitives:** add cmdlets for the four real gaps the audit confirmed: `Set-VisioShapeDistribution` (positional distribute with explicit start + spacing), `Add-VisioShapeAttachment` (the side-attach), `Add-VisioShapeToLayer` (with `-Force` to create the layer), `Set-VisioLayerVisibility` (toggle named layers). The two layer items need `VisioScripting.LayerCommands` extended with `CreateLayer` / `AddShapeToLayer` / `SetLayerVisibility` first; cmdlets are thin wrappers on top. **Per-cmdlet semantics + test plans tracked in [#162](https://github.com/saveenr/VisioAutomation/issues/162) (CY26Q3).** Implementation issues file from #162's outcome.
+- **Phase B &mdash; pipeline-shape polish:** add a `ValueFromPipeline=$true` parameter set to `Connect-VisioShape` so star-topology bulk-connect (`$shapes | Connect-VisioShape -From $src`) works. Back-compat-safe. **Tracked in [#163](https://github.com/saveenr/VisioAutomation/issues/163) (CY26Q2).**
 
 #### Open research before adopting
 

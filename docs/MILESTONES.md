@@ -27,6 +27,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 |---|---|---|
 | Scoping review (May 2026): VisioBot3000 + PSVA borrowed-ideas backlog | D | [#149](https://github.com/saveenr/VisioAutomation/issues/149) |
 | PSVA cmdlet-surface audit (feeds the May review) | D | [#150](https://github.com/saveenr/VisioAutomation/issues/150) |
+| Phase B: pipeline-friendly parameter set on `Connect-VisioShape` | D | [#163](https://github.com/saveenr/VisioAutomation/issues/163) |
 | Q2 2026 issue triage pass (#80, #82, #102, #105, #117) | Triage | [#151](https://github.com/saveenr/VisioAutomation/issues/151) |
 | Visio repo portfolio audit Phase H1 (centralized index + per-repo READMEs) | H | [#152](https://github.com/saveenr/VisioAutomation/issues/152) |
 | Tests-need-Visio design-decision write-up | F | [#153](https://github.com/saveenr/VisioAutomation/issues/153) |
@@ -46,7 +47,8 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Discussion: doc-sample-as-test linkage mechanism | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) |
 | Decide: VisioScripting public-API status | E | [#156](https://github.com/saveenr/VisioAutomation/issues/156) |
 | Decide: long-term docs location | E | [#157](https://github.com/saveenr/VisioAutomation/issues/157) |
-| (Cmdlet ergonomics implementation work from the May shortlist) | D | (issues filed in CY26Q2 from the [#149](https://github.com/saveenr/VisioAutomation/issues/149) outcome) |
+| Phase A scoping: PSVA candidate cmdlets (semantics + test plans) | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) |
+| (Cmdlet ergonomics implementation work from Phase A scoping) | D | (issues filed from [#162](https://github.com/saveenr/VisioAutomation/issues/162) outcome) |
 
 ### CY26Q4 &mdash; October&ndash;December 2026
 [GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/1) &mdash; due 2026-12-31
