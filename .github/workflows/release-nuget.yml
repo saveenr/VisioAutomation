@@ -125,22 +125,24 @@ jobs:
         id: notes
         shell: pwsh
         run: |
-          # Source the release body from NuGet/CHANGELOG.md's [Unreleased]
-          # section, not from auto-generated PR-title lists. The [Unreleased]
-          # entries are the curated, consumer-meaningful changes; PR titles
-          # like "Wip3" or "Beta" are noise.
+          # Source the release body from NuGet/CHANGELOG.md's [<version>]
+          # section. Convention: contributors accumulate entries under
+          # [Unreleased], then on release-prep roll [Unreleased] -> [<version>]
+          # in the version-bump commit. The workflow reads the rolled section,
+          # not [Unreleased] (which is the staging area for the *next* release).
+          $version = '${{ steps.version.outputs.version }}'
           $changelogPath = 'NuGet\CHANGELOG.md'
           $content = Get-Content -Raw $changelogPath
-          $pattern = '(?ms)^## \[Unreleased\]\s*\r?\n(.*?)(?=^## |\z)'
+          $escapedVersion = [regex]::Escape($version)
+          $pattern = "(?ms)^## \[$escapedVersion\][^\r\n]*\r?\n(.*?)(?=^## |\z)"
           $regexMatch = [regex]::Match($content, $pattern)
           if (-not $regexMatch.Success) {
-            throw "Could not find [Unreleased] section in $changelogPath"
+            throw "Could not find [$version] section in $changelogPath. Roll [Unreleased] -> [$version] in the version-bump commit before triggering the release workflow."
           }
           $changelogSection = $regexMatch.Groups[1].Value.Trim()
           if (-not $changelogSection) {
-            throw "[Unreleased] section in $changelogPath is empty -- nothing to release. Add the changes for this version under [Unreleased] first."
+            throw "[$version] section in $changelogPath is empty. Nothing to release."
           }
-          $version = '${{ steps.version.outputs.version }}'
 
           # Build the release-notes body as a string array, NOT as a PowerShell
           # here-string. PowerShell requires the closing `'@` marker at column 0

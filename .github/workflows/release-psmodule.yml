@@ -115,19 +115,23 @@ jobs:
         shell: pwsh
         run: |
           # Source the release body from VisioPowerShell/CHANGELOG.md's
-          # [Unreleased] section, not from auto-generated PR-title lists.
+          # [<version>] section, not from auto-generated PR-title lists.
+          # Convention: contributors accumulate entries under [Unreleased],
+          # then on release-prep roll [Unreleased] -> [<version>] in the
+          # version-bump commit. The workflow reads the rolled section.
+          $version = '${{ steps.version.outputs.version }}'
           $changelogPath = 'VisioAutomation_2010\VisioPowerShell\CHANGELOG.md'
           $content = Get-Content -Raw $changelogPath
-          $pattern = '(?ms)^## \[Unreleased\]\s*\r?\n(.*?)(?=^## |\z)'
+          $escapedVersion = [regex]::Escape($version)
+          $pattern = "(?ms)^## \[$escapedVersion\][^\r\n]*\r?\n(.*?)(?=^## |\z)"
           $regexMatch = [regex]::Match($content, $pattern)
           if (-not $regexMatch.Success) {
-            throw "Could not find [Unreleased] section in $changelogPath"
+            throw "Could not find [$version] section in $changelogPath. Roll [Unreleased] -> [$version] in the version-bump commit before triggering the release workflow."
           }
           $changelogSection = $regexMatch.Groups[1].Value.Trim()
-          if (-not $changelogSection -or $changelogSection -match '^_No consumer-visible changes yet\._\s*$') {
-            throw "[Unreleased] section in $changelogPath has no real entries -- nothing to release. Add the changes for this version under [Unreleased] first."
+          if (-not $changelogSection) {
+            throw "[$version] section in $changelogPath is empty. Nothing to release."
           }
-          $version = '${{ steps.version.outputs.version }}'
 
           # Build the release-notes body as a string array, NOT as a PowerShell
           # here-string. PowerShell requires the closing `'@` marker at column 0
