@@ -30,6 +30,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Q2 2026 issue triage pass (#80, #82, #102, #105, #117) | Triage | [#151](https://github.com/saveenr/VisioAutomation/issues/151) |
 | Visio repo portfolio audit Phase H1 (centralized index + per-repo READMEs) | H | [#152](https://github.com/saveenr/VisioAutomation/issues/152) |
 | Tests-need-Visio design-decision write-up | F | [#153](https://github.com/saveenr/VisioAutomation/issues/153) |
+| Version compatibility tables on user-facing gitbooks | E | [#161](https://github.com/saveenr/VisioAutomation/issues/161) |
 
 ### CY26Q3 &mdash; July&ndash;September 2026
 [GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/3) &mdash; due 2026-09-30
