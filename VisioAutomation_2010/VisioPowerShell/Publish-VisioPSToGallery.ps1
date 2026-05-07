@@ -6,7 +6,23 @@
 #   1. Read the version from Visio.psd1
 #   2. Stage the Debug build into the user's modules folder (calls InstallForCurrentUser.ps1)
 #   3. Publish the staged module to the PowerShell Gallery
-#   4. Tag HEAD as VisioPS_<version> and push the tag to origin
+#   4. Tag HEAD as VisioPS_<version> and push the tag to origin (idempotent:
+#      if the tag already exists at HEAD, skipped silently -- supports running
+#      this script after .github/workflows/publish-psmodule.yml has already
+#      created the tag).
+#
+# CANONICAL RELEASE FLOW
+# ----------------------
+# The preferred release flow is now CI-driven:
+#   1. Trigger .github/workflows/release-psmodule.yml manually. Builds Debug,
+#      stages the module, creates the GitHub Release tagged VisioPS_<version>
+#      with the staged module zip attached.
+#   2. Trigger .github/workflows/publish-psmodule.yml with the tag from step 1.
+#      Downloads the GH Release zip, publishes to PSGallery, verifies via
+#      Find-Module.
+# This script remains as a fallback / dev-convenience path for out-of-band
+# publishes. It coexists with the workflow because the tag step here is
+# idempotent.
 #
 # USAGE
 # -----
@@ -193,14 +209,31 @@ try {
         throw "Local '$branch' is not in sync with origin. Push commits before tagging."
     }
 
-    # Refuse to overwrite an existing tag.
+    # Refresh local tag knowledge so we see tags that may have been created
+    # by the publish-psmodule.yml CI workflow but not yet fetched locally.
+    git fetch --tags origin --quiet 2>$null
+
+    # Tag-creation rules (idempotent so this script can run after the CI
+    # workflow has already tagged):
+    #   - Tag does not exist:                    create + push
+    #   - Tag exists and points to HEAD:         re-push (no-op if already on origin)
+    #   - Tag exists and points elsewhere:       fail loudly (refuse to silently re-tag)
     $existing = git tag -l $tag
     if ($existing) {
-        throw "Tag '$tag' already exists. Bump the version in Visio.psd1 if you need to re-release."
+        $tag_sha  = git rev-parse "$tag^{commit}"
+        $head_sha = git rev-parse HEAD
+        if ($tag_sha -ne $head_sha) {
+            throw "Tag '$tag' already exists at $tag_sha, but HEAD is $head_sha. Refusing to silently re-tag. Bump the version in Visio.psd1 if you need to re-release."
+        }
     }
 
     if ($WhatIf) {
         Write-Host "[3/3] WhatIf: skipping git tag and push."
+    }
+    elseif ($existing) {
+        Write-Host "[3/3] Tag '$tag' already exists at HEAD; ensuring it's pushed to origin."
+        # `git push origin <tag>` is a no-op for tags already on origin.
+        git push origin $tag
     }
     else {
         Write-Host "[3/3] Tagging $tag and pushing ..."

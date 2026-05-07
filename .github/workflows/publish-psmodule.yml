@@ -1,0 +1,195 @@
+name: Publish Visio PowerShell module to PSGallery
+
+# Manual-trigger workflow that publishes a previously-built GitHub Release
+# of the Visio PowerShell module to the PowerShell Gallery. Designed to be
+# run AFTER release-psmodule.yml has created the GH Release with the staged
+# module zip attached as `Visio-<version>.zip`.
+#
+# Two-step release flow:
+#   1. release-psmodule.yml      builds + creates GH Release tagged
+#                                VisioPS_<version>, with Visio-<version>.zip
+#                                attached.
+#   2. publish-psmodule.yml      (this workflow) downloads the GH Release
+#                                zip, extracts it, verifies the staged
+#                                manifest, runs Publish-Module to PSGallery,
+#                                and verifies the upload via Find-Module.
+#
+# Why the split: the staged zip on the GH Release is the single binary
+# source of truth. Splitting the GH Release step from the PSGallery publish
+# step lets a human inspect the zip before committing to the immutable
+# PSGallery upload, and keeps the API key off developer workstations.
+#
+# Setup required (one-time):
+#   - Add a repository secret named PSGALLERY_API_KEY containing a
+#     PowerShell Gallery API key with publish permissions on the Visio
+#     package.
+#
+# The canonical local-machine flow is still
+# `VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1`. The
+# script's tag step is idempotent (skips if the tag already exists at HEAD)
+# so it can run after this workflow without conflicting; useful as a
+# fallback for out-of-band publishes.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (e.g. VisioPS_4.7.0). Must already exist as a GitHub Release with Visio-<version>.zip attached.'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run: download + extract + verify, but skip the Publish-Module call'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read   # to download the GH Release artifact via gh CLI
+
+concurrency:
+  group: publish-psmodule-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to PSGallery
+    runs-on: windows-latest
+
+    steps:
+      - name: Validate tag input and extract version
+        id: validate
+        shell: pwsh
+        run: |
+          $tag = '${{ inputs.tag }}'
+          if (-not $tag.StartsWith('VisioPS_')) {
+            throw "Tag must start with 'VisioPS_' (got: $tag)"
+          }
+          $version = $tag.Substring('VisioPS_'.Length)
+          $parsed = $null
+          if (-not [Version]::TryParse($version, [ref]$parsed)) {
+            throw "Tag suffix is not a valid version: $version"
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+          Write-Host "Tag    : $tag"
+          Write-Host "Version: $version"
+
+      - name: Download release zip
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $tag = '${{ steps.validate.outputs.tag }}'
+          New-Item -ItemType Directory -Path artifacts | Out-Null
+          gh release download $tag --repo ${{ github.repository }} --pattern 'Visio-*.zip' --dir artifacts
+          if ($LASTEXITCODE -ne 0) { throw "gh release download failed (exit $LASTEXITCODE)" }
+          $zip = Get-ChildItem artifacts -Filter 'Visio-*.zip' | Select-Object -First 1
+          if (-not $zip) { throw "No Visio-*.zip found in artifacts after download" }
+          Write-Host "Downloaded: $($zip.Name) ($([math]::Round($zip.Length/1KB,1)) KB)"
+
+      - name: Extract and verify staged manifest
+        shell: pwsh
+        run: |
+          $version = '${{ steps.validate.outputs.version }}'
+          New-Item -ItemType Directory -Path 'staging\Visio' | Out-Null
+          $zip = Get-ChildItem artifacts -Filter 'Visio-*.zip' | Select-Object -First 1
+          Expand-Archive -Path $zip.FullName -DestinationPath 'staging\Visio' -Force
+          $psd1 = 'staging\Visio\Visio.psd1'
+          if (-not (Test-Path $psd1)) {
+            throw "Expected $psd1 to exist after extracting the release zip"
+          }
+          $stagedVersion = (Import-PowerShellDataFile $psd1).ModuleVersion
+          if ($stagedVersion -ne $version) {
+            throw "Staged Visio.psd1 has ModuleVersion $stagedVersion but the release tag implies $version"
+          }
+          Write-Host "Staged manifest version: $stagedVersion (matches tag)"
+
+      - name: Verify CmdletsToExport drift
+        shell: pwsh
+        run: |
+          # Drift check: the manifest's CmdletsToExport list should match what
+          # the binary actually exports. Catches the case where a new cmdlet
+          # was added to the source but the manifest list wasn't updated.
+          $psd1 = 'staging\Visio\Visio.psd1'
+          $manifest = Import-PowerShellDataFile $psd1
+          $declared = @($manifest.CmdletsToExport) | Sort-Object
+
+          # Load the module to enumerate ExportedCmdlets, then unload.
+          $modulePath = (Resolve-Path 'staging\Visio').Path
+          Import-Module $modulePath -Force
+          $actual = (Get-Module -Name Visio).ExportedCmdlets.Keys | Sort-Object
+          Remove-Module Visio
+
+          $missingFromManifest = @($actual | Where-Object { $_ -notin $declared })
+          $extraInManifest     = @($declared | Where-Object { $_ -notin $actual })
+
+          if ($missingFromManifest.Count -gt 0 -or $extraInManifest.Count -gt 0) {
+            $msg = "CmdletsToExport drift detected:"
+            if ($missingFromManifest.Count -gt 0) {
+              $msg += "`n  Missing from manifest: $($missingFromManifest -join ', ')"
+            }
+            if ($extraInManifest.Count -gt 0) {
+              $msg += "`n  Extra in manifest:     $($extraInManifest -join ', ')"
+            }
+            throw $msg
+          }
+          Write-Host "CmdletsToExport drift check: OK ($($declared.Count) cmdlets)"
+
+      - name: Force TLS 1.2 (PowerShellGet 1.x requirement on PS 5.1)
+        shell: pwsh
+        run: |
+          # Harmless on PS 7+ which negotiates TLS 1.2 automatically. Required
+          # on PS 5.1 because PowerShellGet 1.x defaults to TLS 1.0/1.1 in
+          # many configs and PSGallery only accepts 1.2+.
+          [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+
+      - name: Publish to PowerShell Gallery
+        if: ${{ !inputs.dry_run }}
+        env:
+          PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+        shell: pwsh
+        run: |
+          if (-not $env:PSGALLERY_API_KEY) {
+            throw "PSGALLERY_API_KEY repository secret is not set. Add it under Settings > Secrets and variables > Actions."
+          }
+          $modulePath = (Resolve-Path 'staging\Visio').Path
+          Write-Host "Publishing $modulePath to PSGallery ..."
+          # -ErrorAction Stop is necessary because PowerShellGet 1.x catches
+          # its own internal failures and re-emits via Write-Error in a nested
+          # scope; without explicit ErrorAction Stop the script-level
+          # ErrorActionPreference doesn't reliably terminate.
+          Publish-Module -Path $modulePath -NuGetApiKey $env:PSGALLERY_API_KEY -ErrorAction Stop
+
+      - name: Verify publish landed on PSGallery
+        if: ${{ !inputs.dry_run }}
+        shell: pwsh
+        run: |
+          $version = '${{ steps.validate.outputs.version }}'
+          # Retry: gallery's version index is sometimes a few seconds behind
+          # the actual upload completion.
+          $found = $null
+          for ($attempt = 1; $attempt -le 6; $attempt++) {
+            Start-Sleep -Seconds 5
+            try {
+              $found = Find-Module -Name 'Visio' -RequiredVersion $version -Repository PSGallery -ErrorAction Stop
+              if ($found) { break }
+            }
+            catch {
+              if ($attempt -eq 6) { throw }
+            }
+          }
+          if (-not $found) {
+            throw "Publish appeared to run but version $version is not visible on PSGallery after 30s. Check https://www.powershellgallery.com/packages/Visio/$version directly."
+          }
+          Write-Host "Confirmed: Visio $version is on PSGallery"
+          Write-Host "URL: https://www.powershellgallery.com/packages/Visio/$version"
+
+      - name: Dry-run summary
+        if: ${{ inputs.dry_run }}
+        shell: pwsh
+        run: |
+          Write-Host "Dry-run complete. Steps performed:"
+          Write-Host "  - Downloaded the release zip from VisioPS_${{ steps.validate.outputs.version }}"
+          Write-Host "  - Extracted and verified the staged manifest version"
+          Write-Host "  - Verified CmdletsToExport drift (no drift)"
+          Write-Host "  - Skipped Publish-Module and the Find-Module verification"
