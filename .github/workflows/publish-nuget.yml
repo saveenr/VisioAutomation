@@ -1,0 +1,173 @@
+name: Publish VisioAutomation NuGet to nuget.org
+
+# Manual-trigger workflow that publishes a previously-built GitHub Release
+# of the VisioAutomation NuGet package to nuget.org. Designed to be run
+# AFTER release-nuget.yml has created the GH Release with the staged
+# .nupkg attached.
+#
+# Two-step release flow:
+#   1. release-nuget.yml         builds + creates GH Release tagged
+#                                VisioAutomation_<version>, with
+#                                VisioAutomation2010.<version>.nupkg
+#                                attached.
+#   2. publish-nuget.yml         (this workflow) downloads the GH Release
+#                                .nupkg, verifies the embedded version
+#                                metadata, runs `dotnet nuget push`,
+#                                and verifies via nuget.org's V3 flat
+#                                container index.
+#
+# Why the split: same as publish-psmodule.yml -- the .nupkg on the GH
+# Release is the single binary source of truth. Splitting the GH Release
+# step from the nuget.org publish lets a human inspect the package before
+# committing to the immutable upload, and keeps the API key off
+# developer workstations.
+#
+# Setup required (one-time):
+#   - Add a repository secret named NUGET_API_KEY containing a nuget.org
+#     API key with push permissions on the VisioAutomation2010 package.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (e.g. VisioAutomation_2.6.0). Must already exist as a GitHub Release with VisioAutomation2010.<version>.nupkg attached.'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run: download + verify, but skip the dotnet nuget push call'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read   # to download the GH Release artifact via gh CLI
+
+concurrency:
+  group: publish-nuget-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to nuget.org
+    runs-on: windows-latest
+
+    steps:
+      - name: Validate tag input and extract version
+        id: validate
+        shell: pwsh
+        run: |
+          $tag = '${{ inputs.tag }}'
+          if (-not $tag.StartsWith('VisioAutomation_')) {
+            throw "Tag must start with 'VisioAutomation_' (got: $tag)"
+          }
+          $version = $tag.Substring('VisioAutomation_'.Length)
+          $parsed = $null
+          if (-not [Version]::TryParse($version, [ref]$parsed)) {
+            throw "Tag suffix is not a valid version: $version"
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+          Write-Host "Tag    : $tag"
+          Write-Host "Version: $version"
+
+      - name: Download release nupkg
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $tag = '${{ steps.validate.outputs.tag }}'
+          New-Item -ItemType Directory -Path artifacts | Out-Null
+          gh release download $tag --repo ${{ github.repository }} --pattern '*.nupkg' --dir artifacts
+          if ($LASTEXITCODE -ne 0) { throw "gh release download failed (exit $LASTEXITCODE)" }
+          $nupkg = Get-ChildItem artifacts -Filter '*.nupkg' | Select-Object -First 1
+          if (-not $nupkg) { throw "No .nupkg found in artifacts after download" }
+          Write-Host "Downloaded: $($nupkg.Name) ($([math]::Round($nupkg.Length/1KB,1)) KB)"
+
+      - name: Verify staged nupkg metadata
+        shell: pwsh
+        run: |
+          # Treat the .nupkg as a zip, extract the .nuspec from its root,
+          # and verify the <id> + <version> match the release tag. Catches
+          # the case where the wrong .nupkg was attached to the release, or
+          # the release-nuget.yml run packed against a stale nuspec.
+          $version = '${{ steps.validate.outputs.version }}'
+          $nupkg = Get-ChildItem artifacts -Filter '*.nupkg' | Select-Object -First 1
+          $extractDir = 'artifacts\nupkg-inspect'
+          New-Item -ItemType Directory -Path $extractDir | Out-Null
+          Expand-Archive -Path $nupkg.FullName -DestinationPath $extractDir -Force
+          $nuspec = Get-ChildItem $extractDir -Filter '*.nuspec' | Select-Object -First 1
+          if (-not $nuspec) {
+            throw "Could not find a .nuspec inside $($nupkg.Name)"
+          }
+          [xml]$xml = Get-Content $nuspec.FullName
+          $stagedVersion = $xml.package.metadata.version
+          $stagedId = $xml.package.metadata.id
+          if ($stagedId -ne 'VisioAutomation2010') {
+            throw "Staged .nupkg has <id>$stagedId</id>; expected VisioAutomation2010"
+          }
+          if ($stagedVersion -ne $version) {
+            throw "Staged .nupkg has <version>$stagedVersion</version> but the release tag implies $version"
+          }
+          Write-Host "Staged nupkg: id=$stagedId, version=$stagedVersion (matches tag)"
+
+      - name: Publish to nuget.org
+        if: ${{ !inputs.dry_run }}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        shell: pwsh
+        run: |
+          if (-not $env:NUGET_API_KEY) {
+            throw "NUGET_API_KEY repository secret is not set. Add it under Settings > Secrets and variables > Actions."
+          }
+          $nupkg = Get-ChildItem artifacts -Filter '*.nupkg' | Select-Object -First 1
+          Write-Host "Pushing $($nupkg.Name) to nuget.org ..."
+          # --skip-duplicate is intentional: makes re-runs of this workflow
+          # idempotent when the upload landed but a later step failed. nuget.org
+          # rejects same-version-different-content pushes regardless of the
+          # flag, so this can't accidentally overwrite a published version.
+          dotnet nuget push $nupkg.FullName --api-key $env:NUGET_API_KEY --source 'https://api.nuget.org/v3/index.json' --skip-duplicate
+          if ($LASTEXITCODE -ne 0) { throw "dotnet nuget push failed (exit $LASTEXITCODE)" }
+
+      - name: Verify publish landed on nuget.org
+        if: ${{ !inputs.dry_run }}
+        shell: pwsh
+        run: |
+          # Poll nuget.org's V3 flat-container index for the new version.
+          # Indexing typically lags the push by 1-3 minutes; full validation
+          # (which gates the package's "Listed" status on the website) can
+          # take 15+ minutes but the flat-container listing usually appears
+          # before validation finishes. ~5 min cap is reasonable: if the
+          # version still is not in the index by then, something is wrong
+          # (validation rejected, signing failure, etc.) and the workflow
+          # should fail loudly. The package id is lowercased in the URL --
+          # that is V3 flat-container's contract.
+          $version = '${{ steps.validate.outputs.version }}'
+          $url = 'https://api.nuget.org/v3-flatcontainer/visioautomation2010/index.json'
+          $found = $false
+          for ($attempt = 1; $attempt -le 20; $attempt++) {
+            Start-Sleep -Seconds 15
+            try {
+              $resp = Invoke-RestMethod -Uri $url -ErrorAction Stop
+              if ($resp.versions -contains $version) {
+                $found = $true
+                break
+              }
+            }
+            catch {
+              if ($attempt -eq 20) { throw }
+            }
+          }
+          if (-not $found) {
+            throw "Push appeared to run but version $version is not visible on nuget.org after ~5 minutes. Check https://www.nuget.org/packages/VisioAutomation2010/$version directly. If listing is just slow, re-running this workflow once the version appears will succeed via --skip-duplicate."
+          }
+          Write-Host "Confirmed: VisioAutomation2010 $version is on nuget.org"
+          Write-Host "URL: https://www.nuget.org/packages/VisioAutomation2010/$version"
+
+      - name: Dry-run summary
+        if: ${{ inputs.dry_run }}
+        shell: pwsh
+        run: |
+          Write-Host "Dry-run complete. Steps performed:"
+          Write-Host "  - Downloaded the release nupkg from VisioAutomation_${{ steps.validate.outputs.version }}"
+          Write-Host "  - Verified the staged .nupkg id and version"
+          Write-Host "  - Skipped dotnet nuget push and the nuget.org verification"
