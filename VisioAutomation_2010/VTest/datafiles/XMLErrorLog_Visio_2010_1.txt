@@ -1,6 +1,6 @@
 Open VDX Processing Log
 
-Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Saveen_ASGARD9 2015-01-10 20_09_08\Out\datafiles\vdx_with_warnings_1.vdx
+Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Tester_TESTBOX 2015-01-10 20_09_08\Out\datafiles\vdx_with_warnings_1.vdx
 
 Sat Jan 10 20:09:12 2015 Begin Session
 
@@ -27,7 +27,7 @@ Sat Jan 10 20:09:12 2015 End Session
 
 Open VDX Processing Log
 
-Source: C:\Users\Saveen\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_MultiPageDocument2015-10-1--20-09-10.vdx
+Source: C:\Users\Tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_MultiPageDocument2015-10-1--20-09-10.vdx
 
 Sat Jan 10 20:09:10 2015 Begin Session
 

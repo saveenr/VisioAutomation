@@ -1,6 +1,6 @@
 Open VSDX Processing Log
 
-Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Saveen_ASGARD9 2015-01-10 20_12_22\Out\datafiles\template_router.vdx
+Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Tester_TESTBOX 2015-01-10 20_12_22\Out\datafiles\template_router.vdx
 
 Sat Jan 10 20:12:32 2015 Begin Session
 
@@ -24,7 +24,7 @@ Sat Jan 10 20:12:32 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Saveen_ASGARD9 2015-01-10 20_12_22\Out\datafiles\vdx_with_warnings_1.vdx
+Source: E:\code\github\visioautomation\VisioAutomation_2010\TestResults\Tester_TESTBOX 2015-01-10 20_12_22\Out\datafiles\vdx_with_warnings_1.vdx
 
 Sat Jan 10 20:12:30 2015 Begin Session
 

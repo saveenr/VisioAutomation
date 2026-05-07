@@ -65,15 +65,15 @@ Backlog of items related to the dev-team identity used across this codebase, its
   - [`readme.md`](../../readme.md) license line: `[MIT](LICENSE.txt). Copyright (c) Saveen Reddy.` &rarr; `[MIT](LICENSE.txt). Copyright (c) SevenPens.`
 - If the situation ever changes (e.g., SevenPens becomes a real legal entity that owns the IP via formal assignment), the LICENSE.txt line should be re-revisited then. For now the displayed-author and legal-copyright stories are coherent at "SevenPens" across all surfaces.
 
-#### Axis 8: Test fixtures and historical artifacts *(recommendation: leave alone; technically editable)*
-- The XML / log fixtures under [`VisioAutomation_2010/VTest/datafiles/`](../../VisioAutomation_2010/VTest/datafiles/) (`XMLErrorLog_Visio_2010_1.txt`, `XMLErrorLog_Visio_2013_1.txt`, `VSDX_Log_Visio_2013.txt`) contain captured 2015-era Visio error-log output that embeds machine paths like `C:\Users\Saveen\`, `C:\Users\saveenr\`, and machine names like `Saveen_ASGARD9` / `saveenr_SAVEENR3`. These are real recorded fixtures consumed by [`XmlErrorLogTests.cs`](../../VisioAutomation_2010/VTest/Core/Application/XmlErrorLogTests.cs).
-- **Initial concern (since walked back):** that tests depended on exact-string equality of those paths. They don't &mdash; `XmlErrorLogTests` only checks filename suffixes via `EndsWith(...)`, plus session/record counts, types, and subtypes. The user/machine-name substrings are not load-bearing for any test, so a mechanical `s/Saveen/.../g; s/saveenr/.../g` inside the fixtures would pass.
-- **Recommendation: still leave alone**, for softer reasons:
-  - They're recordings of real Visio output, not hand-authored fixtures. Editing converts a real recording into a hand-edited synthesis &mdash; small loss of fixture authenticity for the parser tests.
-  - The "Saveen" / "saveenr" inside is a 2015 Windows username, not a current branding claim. Same as a screenshot of an old terminal session: keeping it isn't endorsing the username, it's recording an event.
-  - These files are internal test data that consumers of the package never see.
-- **If the user wants to scrub on principle anyway:** safe to do (tests still pass), and the operation is `sed -i 's/Saveen/Tester/g; s/saveenr/tester/g'` on the three .txt fixtures plus one re-run of VTest to confirm. Captured here so the option is explicit, not foreclosed.
-- **Same logic, more strongly, for git history / past CHANGELOG entries / past commit messages.** Rewriting the past has a much bigger blast radius (commit hashes change, every external link to a specific commit breaks, tag verification fails) and gains nothing branding-wise. Don't.
+#### Axis 8: Test fixtures *(done 2026-05-07)*
+- The XML / log fixtures under [`VisioAutomation_2010/VTest/datafiles/`](../../VisioAutomation_2010/VTest/datafiles/) (`XMLErrorLog_Visio_2010_1.txt`, `XMLErrorLog_Visio_2013_1.txt`, `VSDX_Log_Visio_2013.txt`) used to embed machine paths and hostnames from the user's 2015 dev machines (`C:\Users\Saveen\`, `C:\Users\saveenr\`, `Saveen_ASGARD9`, `saveenr_SAVEENR3`). All three files have been mechanically scrubbed:
+  - `Saveen_ASGARD9` &rarr; `Tester_TESTBOX`
+  - `saveenr_SAVEENR3` &rarr; `tester_TESTBOX`
+  - `Saveen` &rarr; `Tester` (in path components like `C:\Users\Saveen\...`)
+  - `saveenr` &rarr; `tester` (in path components like `C:\Users\saveenr\...`)
+  - `SAVEENR` &rarr; `TESTBOX` (in any leftover hostname suffixes)
+- **Verification:** [`XmlErrorLogTests.cs`](../../VisioAutomation_2010/VTest/Core/Application/XmlErrorLogTests.cs) confirms its assertions only use `EndsWith` on filenames plus session/record counts and types &mdash; none check the user/machine-name substrings. The three relevant tests (`VSD_Load_Visio2013`, `XmlErrorLog_Load_Visio2010_1`, `XmlErrorLog_Load_Visio2013_1`) all pass post-scrub. They're pure file-I/O parser tests and run in under 1s total without needing a live Visio.
+- **Out of scope of this axis:** historical CHANGELOG entries, prior commit messages, and the git author lines themselves still reference saveenr where they did at write time. Rewriting the past has a much bigger blast radius (commit hashes change, every external link to a specific commit breaks, tag verification fails) and gains nothing branding-wise. Don't.
 
 #### Cross-refs
 

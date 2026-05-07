@@ -24,7 +24,7 @@ Thu Feb 12 08:29:19 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: D:\github\visioautomation\VisioAutomation_2010\TestResults\saveenr_SAVEENR3 2015-02-12 08_24_32\Out\datafiles\vdx_with_warnings_1.vdx
+Source: D:\github\visioautomation\VisioAutomation_2010\TestResults\tester_TESTBOX 2015-02-12 08_24_32\Out\datafiles\vdx_with_warnings_1.vdx
 
 Thu Feb 12 08:25:02 2015 Begin Session
 
@@ -128,7 +128,7 @@ Wed Jan 21 16:58:44 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckWeCanDetectLoadingErrors2015-08-1--12-42-03.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckWeCanDetectLoadingErrors2015-08-1--12-42-03.vdx
 
 Thu Jan 08 12:42:05 2015 Begin Session
 
@@ -144,7 +144,7 @@ Description: An attribute in this file contains data that is valid but inconsist
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-41-21.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-41-21.vdx
 
 Thu Jan 08 12:41:23 2015 Begin Session
 
@@ -168,7 +168,7 @@ Thu Jan 08 12:41:23 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-39-04.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-39-04.vdx
 
 Thu Jan 08 12:39:06 2015 Begin Session
 
@@ -192,7 +192,7 @@ Thu Jan 08 12:39:06 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-38-20.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-38-20.vdx
 
 Thu Jan 08 12:38:22 2015 Begin Session
 
@@ -216,7 +216,7 @@ Thu Jan 08 12:38:22 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-29-02.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--12-29-02.vdx
 
 Thu Jan 08 12:29:05 2015 Begin Session
 
@@ -264,7 +264,7 @@ Thu Jan 08 08:19:44 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckWeCanDetectLoadingErrors2015-08-1--08-14-55.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckWeCanDetectLoadingErrors2015-08-1--08-14-55.vdx
 
 Thu Jan 08 08:14:57 2015 Begin Session
 
@@ -280,7 +280,7 @@ Description: An attribute in this file contains data that is valid but inconsist
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--08-14-51.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckNoErrorOnLoad2015-08-1--08-14-51.vdx
 
 Thu Jan 08 08:14:53 2015 Begin Session
 
@@ -304,7 +304,7 @@ Thu Jan 08 08:14:53 2015 Begin Session
 
 Insert SVG 1.0 Processing Log
 
-Source: C:\Users\saveenr\Downloads\Visio\Visio\svg.svg
+Source: C:\Users\tester\Downloads\Visio\Visio\svg.svg
 
 Thu Jan 08 07:28:41 2015 Begin Session
 
@@ -480,7 +480,7 @@ Description: Unsupported property value stroke-miterlimit='4'.  Only property va
 
 Insert SVG 1.0 Processing Log
 
-Source: C:\Users\saveenr\Downloads\Visio\Visio\svg.svg
+Source: C:\Users\tester\Downloads\Visio\Visio\svg.svg
 
 Thu Jan 08 07:25:16 2015 Begin Session
 
@@ -760,7 +760,7 @@ Wed Jan 07 17:13:35 2015 Begin Session
 
 Open VSDX Processing Log
 
-Source: C:\Users\saveenr\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckErrorOnLoadLogFileExists.vdx
+Source: C:\Users\tester\Documents\VisioAutomation_Unit_Test_Output\VDX_Tests.VDX_CheckErrorOnLoadLogFileExists.vdx
 
 Wed Jan 07 17:08:53 2015 Begin Session
 
