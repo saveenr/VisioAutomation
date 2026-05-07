@@ -10,7 +10,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-## [3.0.0] - 2026-05-08
+## [3.0.0] - 2026-05-07
 
 Major version bump. Several behavior changes that affect callers:
 
