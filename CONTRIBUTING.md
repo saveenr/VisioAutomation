@@ -17,7 +17,7 @@ In short:
 
 ## Running the tests
 
-All tests exercise real Visio COM calls. There is no mock layer (intentional — see [`docs/futures/tests.md`](docs/futures/tests.md#tests-require-a-live-visio) for context). You cannot run the tests on a machine without Visio installed.
+All tests exercise real Visio COM calls. There is no mock layer (intentional — see [`docs/decisions/tests-need-visio.md`](docs/decisions/tests-need-visio.md) for the full decision record). You cannot run the tests on a machine without Visio installed.
 
 ## Code style
 

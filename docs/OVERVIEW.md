@@ -17,6 +17,7 @@ This `docs/` folder contains the **internal / developer-facing** documentation f
 - **[ROADMAP.md](ROADMAP.md)** — staged plan for the 2026 refresh (Phase 1 / 2 / 3 status, what shipped per phase, what's still pending). Read first for orientation.
 - **[MILESTONES.md](MILESTONES.md)** — themed milestones with proposed target windows, sitting between `ROADMAP.md` (high-level phases) and `FUTURES.md` (backlog index). Forward-looking only.
 - **[FUTURES.md](FUTURES.md)** — index of the backlog. Items are split by topic into [`futures/build-and-code.md`](futures/build-and-code.md), [`futures/tests.md`](futures/tests.md), [`futures/releases.md`](futures/releases.md), [`futures/docs.md`](futures/docs.md), [`futures/identity.md`](futures/identity.md).
+- **[decisions/](decisions/)** — architectural decision records. One file per long-lived structural choice (currently: [`tests-need-visio.md`](decisions/tests-need-visio.md)). Index in [`decisions/README.md`](decisions/README.md).
 
 ## Release history
 

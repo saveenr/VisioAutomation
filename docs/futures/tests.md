@@ -5,9 +5,7 @@ Backlog of test-related items. For test-suite design and conventions see [`../TE
 ---
 
 ### Tests require a live Visio
-- **What:** Every test project spins up a real Visio process via COM. There is no mock/fake layer.
-- **Why (consider):** This is intentional — the library's whole job is to drive Visio, and mocking COM gives false confidence. But the lack of any non-Visio test surface means there's no quick `dotnet test` that runs anywhere. *Not necessarily a problem*, just worth a deliberate decision before adding CI.
-- **Effort:** N/A — design decision, not a task.
+- **Status:** No longer a backlog item &mdash; formalized as a decision record on 2026-05-07. See [`../decisions/tests-need-visio.md`](../decisions/tests-need-visio.md) for the full *why*, the consequences, and the no-Visio test bucket emerging beneath this rule.
 
 ### Test coverage gaps
 - **What:** A pass over the public API surface would surface untested types &mdash; the Phase 1 doc-audit Tier 1/2/4 work flagged a lot of helpers that don't seem to have direct tests. Worth making a list before deciding to add tests.

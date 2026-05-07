@@ -27,11 +27,9 @@ These three are load-bearing — every other choice in the test infrastructure f
 
 ### 1. Tests run against a real Visio install
 
-There is no mock or fake Visio. Tests instantiate `Microsoft.Office.Interop.Visio.Application`, manipulate real shapes, and verify behavior by reading back actual ShapeSheet values. Documented as a hard rule in [CONTRIBUTING.md](../CONTRIBUTING.md).
+There is no mock or fake Visio. Tests instantiate `Microsoft.Office.Interop.Visio.Application`, manipulate real shapes, and verify behavior by reading back actual ShapeSheet values.
 
-**Why.** The library is a thin layer over Visio COM. A mock would have to reproduce Visio's behavior, including its undocumented quirks; tests against the mock would prove the mock matches itself rather than that the library matches Visio.
-
-**Consequence.** Tests cannot run on a machine without Visio installed. CI today is build-only for the same reason; running tests in CI is gated on a self-hosted Windows runner with Visio installed (tracked in [futures/build-and-code.md](futures/build-and-code.md#run-tests-in-ci)).
+**Full decision record:** [`decisions/tests-need-visio.md`](decisions/tests-need-visio.md) covers the *why* (mocks would have to reproduce Visio's undocumented quirks), the consequences (no `dotnet test` that runs anywhere; CI today is build-only; self-hosted Windows runner gated for any future test-CI per [`futures/build-and-code.md`](futures/build-and-code.md#run-tests-in-ci)), and the de-facto no-Visio test bucket that's emerging (`VisioPS_Manifest_Tests`, `XmlErrorLogTests`).
 
 ### 2. Tests run sequentially, not in parallel
 

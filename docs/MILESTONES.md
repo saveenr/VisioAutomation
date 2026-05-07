@@ -158,7 +158,7 @@ The semester schedule above is the *when*. The themed milestones below are the *
 
 **Semesters:** CY26Q2 (design-decision write-up) &rarr; CY26Q3 (coverage audit) &rarr; CY26Q4+ (implementation as bandwidth allows).
 
-**Items:** see CY26Q2 and CY26Q3 schedules above. Detail in [`futures/build-and-code.md`](futures/build-and-code.md) and [`futures/tests.md`](futures/tests.md). The no-Visio test split has *de facto* started: [`VisioPS_Manifest_Tests`](../VisioAutomation_2010/VTest.PowerShell/VisioPS_Manifest_Tests.cs) and [`XmlErrorLogTests`](../VisioAutomation_2010/VTest/Core/Application/XmlErrorLogTests.cs) are existing examples of the no-Visio bucket.
+**Items:** see CY26Q2 and CY26Q3 schedules above. Detail in [`futures/build-and-code.md`](futures/build-and-code.md) and [`futures/tests.md`](futures/tests.md). The "tests need a live Visio" rule that gates CI today is now formalized in [`decisions/tests-need-visio.md`](decisions/tests-need-visio.md). The no-Visio test split has *de facto* started: [`VisioPS_Manifest_Tests`](../VisioAutomation_2010/VTest.PowerShell/VisioPS_Manifest_Tests.cs) and [`XmlErrorLogTests`](../VisioAutomation_2010/VTest/Core/Application/XmlErrorLogTests.cs) are existing examples of the no-Visio bucket; the planned tagging work to turn the implicit split explicit is part of this milestone.
 
 ### Milestone G &mdash; Visio 2013 baseline migration
 **Theme:** Move the codebase's baseline Visio version from 2010 to 2013.
