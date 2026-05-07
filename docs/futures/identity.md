@@ -16,12 +16,10 @@ Backlog of items related to the dev-team identity used across this codebase, its
 - `SevenPens` is co-owner of [`VisioAutomation2010`](https://www.nuget.org/packages/VisioAutomation2010/) (saveenr remains co-owner for historical continuity). The GitHub repo's `NUGET_API_KEY` secret is generated under SevenPens. nuget.org's Microsoft-package compliance gate fires on uploader account, so SevenPens uploads pass cleanly while saveenr uploads fail. Detail in [`releases.md`](releases.md#microsoft-package-compliance-gate-on-the-saveenr-nugetorg-account-operational-quirk-discovered-2026-05-07-during-the-300-publish).
 - No further action on this axis.
 
-#### Axis 3: PSGallery publishing identity *(pending; small effort)*
-- **What:** mirror the nuget.org workaround on PSGallery. Have `SevenPens` request co-owner status on the [`Visio` module](https://www.powershellgallery.com/packages/Visio) (saveenr the current sole owner), then generate a SevenPens-scoped API key and rotate the GitHub repo's `PSGALLERY_API_KEY` secret to that key.
-- **Why:** symmetry with nuget.org. Also future-proofs against PSGallery enforcing analogous Microsoft-package compliance rules &mdash; the same story would play out and the workaround would be the same. Doing it preemptively means we never get caught with a failed publish.
-- **How:** PSGallery owner-management is at https://www.powershellgallery.com/packages/Visio/Manage. Co-owner invitation flow same shape as nuget.org. After secret rotation, `publish-psmodule.yml` runs unchanged.
-- **Cost of waiting:** zero today (the saveenr key still works on PSGallery), but if PSGallery tightens enforcement we hit the same surprise that happened with nuget.org 3.0.0 on 2026-05-07.
-- **Effort:** S (~30 min user-side; no repo changes).
+#### Axis 3: PSGallery publishing identity *(done 2026-05-07)*
+- `SevenPens` is now co-owner of the [`Visio` PSGallery module](https://www.powershellgallery.com/packages/Visio); saveenr remains co-owner. `PSGALLERY_API_KEY` rotated to a SevenPens-generated key on 2026-05-07.
+- **End-to-end validation deferred** to the next PSGallery release. Unlike axis 2, where the rotation was forced by an actual rejection on the saveenr key, axis 3 was preemptive &mdash; PSGallery hasn't tightened enforcement yet. So we know the rotation happened (secret timestamp confirms), but the new key hasn't been exercised against an upload. The next PSGallery release (whenever it ships) is the implicit smoke test.
+- Memory rule covering both feeds: [`nuget_publish_identity.md`](../../../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/nuget_publish_identity.md) now consolidates the rule for both `NUGET_API_KEY` and `PSGALLERY_API_KEY` &mdash; same reasoning, same workaround.
 
 #### Axis 4: Display authorship in artifact metadata *(done 2026-05-07)*
 - All five displayed-author / copyright fields rewritten from `saveenr` / `Saveen Reddy` to `SevenPens`:
