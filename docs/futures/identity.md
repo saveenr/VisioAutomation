@@ -29,14 +29,12 @@ Backlog of items related to the dev-team identity used across this codebase, its
 - Both CHANGELOGs got an `[Unreleased]` "Changed" entry noting the brand swap. Picked up by the next NuGet release (already-published 3.0.0 retains the old `Copyright Saveen Reddy` line on its nuget.org page; that's frozen) and the next PSGallery release. Coupled to Axis 7 (handled together).
 - **Adjacent inconsistency noticed but not addressed:** 10 of the 11 csproj `AssemblyInfo.cs` files have `AssemblyCopyright("Copyright © 2021")` (no name, just year). VPlayground was the only one with a person name. The "Copyright © 2021" form is an existing inconsistency unrelated to this identity transition; if the codebase wants to harmonize on a single canonical form (e.g., `"Copyright © 2026 SevenPens"`), that's its own one-shot pass &mdash; flag as a follow-up if desired.
 
-#### Axis 5: Hosting URLs (`github.com/saveenr/...`, `saveenr.gitbook.io/...`) *(plan agreed 2026-05-07; pending external moves + in-repo rewrite)*
+#### Axis 5: Hosting URLs (`github.com/saveenr/...`, `saveenr.gitbook.io/...`) *(scheduled December 2026 via [milestone](https://github.com/saveenr/VisioAutomation/milestone/1); tracked in [#146](https://github.com/saveenr/VisioAutomation/issues/146) and [#147](https://github.com/saveenr/VisioAutomation/issues/147))*
 - **Decision (2026-05-07):** do the migration with redirects from the old locations preserved. New canonical URLs live under SevenPens-owned hosting; old saveenr-prefixed URLs continue to resolve via redirects so external consumers don't break.
-- **Three-phase plan:**
-  - **Phase 5a &mdash; set up new locations.** *(user-side; not yet done)*
-    1. Transfer `github.com/saveenr/VisioAutomation` to a SevenPens-owned GitHub account/org. GitHub auto-creates a permanent redirect from old URLs to new on transfer; existing forks, clones, and `origin` remotes keep working.
-    2. Migrate the two gitbook spaces (`saveenr.gitbook.io/visioautomation`, `saveenr.gitbook.io/visiopowershell`) to a SevenPens gitbook account. Set up gitbook custom redirects (or leave placeholder pages) so old URLs resolve to new ones.
-    3. Verify ~5 representative URLs (issue, gitbook deep page, raw file link) redirect correctly.
-  - **Phase 5b &mdash; in-repo URL rewrite.** *(single mechanical commit, after 5a)*
+- **Three-phase plan, with phase 5a split into two GitHub issues for separate tracking:**
+  - **Phase 5a-1 &mdash; transfer the GitHub repo.** Tracked in [#146](https://github.com/saveenr/VisioAutomation/issues/146) (milestone `2026-12`). GitHub auto-creates a permanent redirect from old URLs to new on transfer; existing forks, clones, and `origin` remotes keep working.
+  - **Phase 5a-2 &mdash; migrate the gitbook spaces.** Tracked in [#147](https://github.com/saveenr/VisioAutomation/issues/147) (milestone `2026-12`). Custom redirects (or placeholder pages) cover the old URLs.
+  - **Phase 5b &mdash; in-repo URL rewrite.** *(single mechanical commit, after 5a-1 and 5a-2 are done)*
     - Sed-replace `github.com/saveenr` &rarr; new owner, and `saveenr.gitbook.io` &rarr; new gitbook subdomain, across the inventory below. Skip past CHANGELOG entries (frozen historical record) and git history.
   - **Phase 5c &mdash; leave redirects in place permanently.** GitHub's auto-redirect doesn't expire and gitbook's custom redirects persist.
 - **Inventory** of files containing `saveenr` URLs (for Phase 5b):
@@ -46,10 +44,10 @@ Backlog of items related to the dev-team identity used across this codebase, its
   - `VisioAutomation_2010/VisioPowerShell/Visio.psd1` (`PrivateData` URLs &mdash; ProjectUri, LicenseUri, etc., if present).
   - ~~`VisioAutomation_2010/VTest/datafiles/directed_graph_1.xml` (XML schema-reference comment pointing at gitbook).~~ Already handled 2026-05-07: the comment was throwaway-informational, so removed entirely rather than rewritten. One less file for Phase 5b.
   - `.github/workflows/release-nuget.yml` and `.github/workflows/release-psmodule.yml` (release-notes templates linking back at github.com/saveenr/... and saveenr.gitbook.io/...).
-- **Decision points before starting Phase 5a:**
-  - Confirm the destination GitHub account/org name (e.g., `sevenpens`, `SevenPens`, or some other org).
-  - Confirm the destination gitbook account/subdomain.
-  - Decide whether GitHub move and gitbook move happen at the same time, or stagger.
+- **Decision points still open** (the two issues both note these):
+  - Destination GitHub account/org name (e.g., `sevenpens`, `SevenPens`, or some other org).
+  - Destination gitbook account/subdomain.
+  - Whether the two moves happen at the same time, or stagger.
 - **Effort:** Phase 5a is user-side &mdash; ~30 min for the GitHub transfer, ~15 min per gitbook space migration. Phase 5b is M, ~13 files of mechanical replacement; one-shot commit after 5a verifies.
 
 #### Axis 6: Code-comment references *(done 2026-05-07)*
@@ -73,8 +71,15 @@ Backlog of items related to the dev-team identity used across this codebase, its
 - **Verification:** [`XmlErrorLogTests.cs`](../../VisioAutomation_2010/VTest/Core/Application/XmlErrorLogTests.cs) confirms its assertions only use `EndsWith` on filenames plus session/record counts and types &mdash; none check the user/machine-name substrings. The three relevant tests (`VSD_Load_Visio2013`, `XmlErrorLog_Load_Visio2010_1`, `XmlErrorLog_Load_Visio2013_1`) all pass post-scrub. They're pure file-I/O parser tests and run in under 1s total without needing a live Visio.
 - **Out of scope of this axis:** historical CHANGELOG entries, prior commit messages, and the git author lines themselves still reference saveenr where they did at write time. Rewriting the past has a much bigger blast radius (commit hashes change, every external link to a specific commit breaks, tag verification fails) and gains nothing branding-wise. Don't.
 
+#### Axis 9: Retire unused legacy publish-identity accounts *(tracked in [#148](https://github.com/saveenr/VisioAutomation/issues/148))*
+- **What:** the [`Visio` PSGallery module](https://www.powershellgallery.com/packages/Visio) currently has three owners: `saveenr` (historical, retained), `SevenPens` (active going forward), and `VisioAutomation` (created years ago to separate work-from-hobby identity, never actually used). The `VisioAutomation` co-owner adds surface area without value and should be retired.
+- **Why this is its own axis:** discovered 2026-05-07 while confirming SevenPens co-ownership. Wasn't part of the original 8-axis plan because the account hadn't surfaced. Now that `SevenPens` actively fulfills the "generic dev / team identity" role, the `VisioAutomation` account is redundant.
+- **Plan:** remove `VisioAutomation` from the PSGallery owners list; delete the underlying account if PSGallery supports it, otherwise leave dormant. Check nuget.org and other feeds for the same identity for symmetry. Detail in [#148](https://github.com/saveenr/VisioAutomation/issues/148).
+- **Effort:** S, user-side, no repo changes. Independent of other axes (in particular, doesn't gate or get gated by Axis 5).
+
 #### Cross-refs
 
 - [`releases.md`](releases.md#microsoft-package-compliance-gate-on-the-saveenr-nugetorg-account-operational-quirk-discovered-2026-05-07-during-the-300-publish) for the operational quirk that drove Axis 2.
-- The [`nuget_publish_identity.md` project memory](../../../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/nuget_publish_identity.md) for the sticky operational rule on Axis 2 and the prereq for Axis 3.
+- The [`nuget_publish_identity.md` project memory](../../../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/nuget_publish_identity.md) for the sticky operational rule on Axes 2 and 3 (the rule covers both feeds).
 - [`docs.md`](docs.md) for the gitbook-side identity question, which couples to Axis 5.
+- GitHub issues: [#146](https://github.com/saveenr/VisioAutomation/issues/146) (Axis 5a-1, GitHub repo move), [#147](https://github.com/saveenr/VisioAutomation/issues/147) (Axis 5a-2, gitbook moves), [#148](https://github.com/saveenr/VisioAutomation/issues/148) (Axis 9, retire VisioAutomation account). Issues 146 and 147 are scheduled to the [`2026-12` milestone](https://github.com/saveenr/VisioAutomation/milestone/1).
