@@ -206,29 +206,39 @@ Total: M for phases 1-3 if pursued together; +M-L if Phase 4 is added.
 
 5. **`Set-visShapeAutoAlignment`** &mdash; auto-align selected shapes via Visio's built-in alignment feature.
 
-#### What VisioPS already covers
+#### Gap audit (completed 2026-05-07, [#150](https://github.com/saveenr/VisioAutomation/issues/150))
 
-A pre-adoption audit pass should map each PSVA helper against the existing VisioPS / VisioScripting surface:
+Each PSVA helper mapped against the current VisioPS cmdlet surface (64 cmdlets in `Visio.psd1` `CmdletsToExport` as of 4.7.2) and the underlying `VisioScripting.Client.*` command groups:
 
-- **Connectors:** VisioPS has `Connect-VisioShape` and `Get-VisioConnection`. Whether it supports the `... | Connect-VisioShape -From $src` pipeline shape needs confirming.
-- **Layers:** the underlying `VisioScripting.Client.Layer` group has helpers; whether they're surfaced as cmdlets needs confirming.
-- **Distribution / alignment:** Visio's COM API exposes `Page.Layout` / `Selection.AlignShapes` / `Selection.DistributeShapes`; whether VisioPS has thin cmdlet wrappers around those needs confirming.
-- **Side-attach:** no existing equivalent in VisioPS.
+| PSVA helper | Coverage today | Classification |
+|---|---|---|
+| **`Set-visShapeDistribution`** (place N shapes on a horizontal/vertical line at explicit `-startX` / `-startY` with `-space N` spacing) | `Format-VisioShape -DistributeHorizontal` / `-DistributeVertical` exists, but it calls Visio's built-in `visCmdDistributeHSpace` / `visCmdDistributeVSpace` &mdash; *redistribute existing extents*, not place-at-coordinates. Underlying `VisioScripting.Arrange.DistributeOnAxis` has the same shape. | **Real gap.** Different operation than what's there today. |
+| **`Add-visShapeConnection`** as pipeline target (`$shapes \| Add-visShapeConnection -FromShape $src` for star-topology bulk connect) | `Connect-VisioShape` exists ([VisioAutomation_2010/VisioPowerShell/Commands/VisioShape/ConnectVisioShape.cs:9-13](../../VisioAutomation_2010/VisioPowerShell/Commands/VisioShape/ConnectVisioShape.cs)). Both `From` and `To` are `IVisio.Shape[]` with `[Parameter(Position, Mandatory)]` &mdash; **no `ValueFromPipeline=true`**. | **Partial.** Function present, pipeline shape missing. Phase B fix: add a pipeline-friendly parameter set. |
+| **`Attach-visShape`** (border-decorate: attach shape to one side of a group with Stretch / LeftOrTop / RightOrBottom alignment) | No equivalent. Neither cmdlet surface nor `VisioScripting.Client.*` has a side-attach primitive. Could in principle compose from `XForm*` cell writes, but there is no helper. | **Real gap.** Net-new cmdlet (verb correction: `Set-VisioShapeAttachment` or `Add-VisioShapeAttachment`). |
+| **`Add-visShapeToLayer`** (`-Force` creates the named layer if missing; pipe shapes onto it) | No `*-VisioLayer` cmdlet at all. `VisioScripting.Client.Layer` exposes only `FindLayersOnPageByName` and `GetLayersOnPage` ([VisioAutomation_2010/VisioScripting/Commands/LayerCommands.cs:15-49](../../VisioAutomation_2010/VisioScripting/Commands/LayerCommands.cs)). No "create layer", no "add shape to layer", no visibility toggle. | **Real gap at both layers** (cmdlet surface *and* scripting library). VisioScripting.LayerCommands needs `CreateLayer`, `AddShapeToLayer`, `SetLayerVisibility` first; cmdlets are thin wrappers on top. |
+| **`Switch-visLayerVisibility`** (toggle visibility for one or many layers by name) | Same as above &mdash; nothing on either layer of the stack. | **Real gap** (couples to the `Add-visShapeToLayer` work; same VisioScripting.LayerCommands extension would carry both). |
+| **`Set-visShapeAutoAlignment`** (auto-align selected shapes via Visio's built-in alignment) | `Format-VisioShape -AlignHorizontal` (Left/Center/Right) and `-AlignVertical` (Top/Center/Bottom) exist ([VisioAutomation_2010/VisioPowerShell/Commands/VisioShape/FormatVisioShape.cs:24-29](../../VisioAutomation_2010/VisioPowerShell/Commands/VisioShape/FormatVisioShape.cs)) and call `VisioScripting.Arrange.AlignHorizontal`/`AlignVertical`, which use `Selection.Align(...)` directly. | **Already exists** &mdash; different cmdlet shape (omnibus `Format-VisioShape` rather than dedicated `Set-VisioShapeAutoAlignment`), same function. |
 
-The audit work is small (~half-day) and is the gating step before deciding which cmdlet shapes to adopt vs. which already exist under different names.
+#### Audit summary
+
+- **4 real gaps** worth lifting: positional distribution; side-attach; layer create/add; layer-visibility toggle. The two layer gaps couple together and need VisioScripting.LayerCommands extended first.
+- **1 partial:** `Connect-VisioShape` needs a pipeline-friendly parameter set. Back-compat-safe Phase B work.
+- **1 already covered:** `Set-visShapeAutoAlignment` &harr; `Format-VisioShape -Align*`. The May scoping review can decide whether the standalone cmdlet shape is worth duplicating for ergonomics or whether the omnibus is fine.
+
+The "Adoption path" sub-section below is unchanged by these findings &mdash; Phase A is the four real gaps; Phase B is the `Connect-VisioShape` pipeline polish.
 
 #### Adoption path
 
 If the audit confirms gaps, treat as additive cmdlets, no architecture change:
 
-- **Phase A &mdash; missing primitives:** add cmdlets for any PSVA helper that has no VisioPS equivalent. `Set-VisioShapeDistribution` (numeric-arg overload of distribute), `Set-VisioShapeAttachment` (the side-attach), and any layer-cmdlet gaps the audit surfaces.
+- **Phase A &mdash; missing primitives:** add cmdlets for the four real gaps the audit confirmed: `Set-VisioShapeDistribution` (positional distribute with explicit start + spacing), `Add-VisioShapeAttachment` (the side-attach), `Add-VisioShapeToLayer` (with `-Force` to create the layer), `Set-VisioLayerVisibility` (toggle named layers). The two layer items need `VisioScripting.LayerCommands` extended with `CreateLayer` / `AddShapeToLayer` / `SetLayerVisibility` first; cmdlets are thin wrappers on top.
 - **Phase B &mdash; pipeline-shape polish:** if any existing VisioPS cmdlet has the right *function* but the wrong *parameter shape* for pipeline use (e.g. `Connect-VisioShape` doesn't accept shapes from the pipeline), add `[Parameter(ValueFromPipeline=$true)]` overloads. Back-compat-safe.
 
 #### Open research before adopting
 
 - **Project activity.** PSVA has 10 total commits on master, no recent activity, no PSGallery listing observed. Treat as a pattern-mine, not a live dependency. Nothing to wait on or coordinate with the upstream.
 - **License.** PSVA's repo doesn't show a `LICENSE` file in the top-level listing. Confirm before lifting any *implementation*; lifting cmdlet *shapes* and *parameter names* is fine on its own.
-- **Existing cmdlet inventory.** The audit step above is the prerequisite to filing concrete subtasks.
+- **Existing cmdlet inventory.** ~~The audit step above is the prerequisite to filing concrete subtasks.~~ Audit completed 2026-05-07 ([#150](https://github.com/saveenr/VisioAutomation/issues/150)); see *Gap audit* table above.
 
 #### Cross-refs
 
@@ -236,9 +246,9 @@ If the audit confirms gaps, treat as additive cmdlets, no architecture change:
 
 #### Effort
 
-- Half-day audit pass to map PSVA helpers against existing VisioPS / VisioScripting surface.
-- S per cmdlet for the additive gap-fillers (Phase A). Probably 3-5 cmdlets total depending on what the audit finds.
-- S total for pipeline-shape polish (Phase B), assuming any existing cmdlets just need an extra parameter set.
+- ~~Half-day audit pass to map PSVA helpers against existing VisioPS / VisioScripting surface.~~ **Done 2026-05-07** ([#150](https://github.com/saveenr/VisioAutomation/issues/150)).
+- S per cmdlet for the four additive gap-fillers (Phase A). The two layer cmdlets share an underlying `VisioScripting.LayerCommands` extension that's done once.
+- S total for pipeline-shape polish (Phase B): one extra parameter set on `Connect-VisioShape`.
 
 ### Evaluate NetOffice / NetOfficeFw as a replacement for the Visio PIA
 - **What:** [`NetOffice`](https://netoffice.io/) (originally Sebastian Lange) and its actively-maintained fork [`NetOfficeFw`](https://github.com/NetOfficeFw/NetOffice) (Jozef Izso) provide managed wrapper assemblies that replace the Microsoft Office Primary Interop Assemblies. The Visio binding ships as [`NetOfficeFw.Visio`](https://www.nuget.org/packages/NetOfficeFw.Visio) on NuGet. Two angles to consider: **use directly** as a replacement for our `Microsoft.Office.Interop.Visio` reference, or **learn from** even if we don't adopt &mdash; particularly the COM-proxy cleanup pattern.
