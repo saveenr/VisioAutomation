@@ -1,0 +1,168 @@
+name: Release Visio PowerShell module
+
+# Manual-trigger workflow for cutting a binary release of the Visio
+# PowerShell module. Reads the version from Visio.psd1, builds the
+# solution Debug, stages the module's bin/Debug into a zip, and
+# creates a GitHub Release tagged VisioPS_<version> with the zip
+# attached.
+#
+# Does NOT publish to PowerShell Gallery. That's a separate workflow
+# planned for after this one is proven; the canonical publish flow
+# already exists at VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1
+# and the PSGallery workflow will wrap that script.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run: build artifacts but do not create the GitHub Release or push the tag'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # to push the tag and create the GitHub Release
+
+concurrency:
+  group: release-psmodule
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release Visio PowerShell module
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need full history so tag-existence check sees all tags
+
+      - name: Setup MSBuild (Visual Studio 2022)
+        uses: microsoft/setup-msbuild@v2
+        with:
+          vs-version: '17.0'
+
+      # The .NET Framework 4.5.2 reference assemblies are supplied by the
+      # Microsoft.NETFramework.ReferenceAssemblies.net452 package; no dev-pack
+      # install needed. See VisioAutomation_2010/Directory.Packages.props.
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/Directory.Packages.props') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      - name: Restore solution NuGet packages
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
+
+      - name: Build solution (Debug)
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
+
+      - name: Read module version and check tag does not exist
+        id: version
+        shell: pwsh
+        run: |
+          $manifest = Import-PowerShellDataFile VisioAutomation_2010\VisioPowerShell\Visio.psd1
+          $version = $manifest.ModuleVersion
+          if (-not $version) { throw "Could not read ModuleVersion from Visio.psd1" }
+          $tag = "VisioPS_$version"
+          $existing = git tag -l $tag
+          if ($existing) { throw "Tag '$tag' already exists. Bump ModuleVersion in Visio.psd1 first." }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+          Write-Host "Version: $version"
+          Write-Host "Tag    : $tag"
+
+      - name: Stage module folder and build zip
+        shell: pwsh
+        run: |
+          $version = '${{ steps.version.outputs.version }}'
+          $bin = 'VisioAutomation_2010\VisioPowerShell\bin\Debug'
+          $staging = 'artifacts\Visio'
+          New-Item -ItemType Directory -Force -Path $staging | Out-Null
+          # Mirror bin/Debug into the staging folder. Same content
+          # InstallForCurrentUser.ps1 copies for dev installs, just to
+          # a workspace path instead of $home\Documents\WindowsPowerShell\Modules.
+          Copy-Item -Path "$bin\*" -Destination $staging -Recurse -Force
+          # Sanity-check that the manifest and key DLLs landed
+          $required = @('Visio.psd1', 'Visio.Types.ps1xml', 'VisioPS.dll', 'VisioScripting.dll')
+          foreach ($f in $required) {
+            $p = Join-Path $staging $f
+            if (-not (Test-Path $p)) { throw "Staged module is missing required file: $f" }
+          }
+          # Verify staged manifest has the expected version
+          $stagedVersion = (Import-PowerShellDataFile (Join-Path $staging 'Visio.psd1')).ModuleVersion
+          if ($stagedVersion -ne $version) {
+            throw "Staged Visio.psd1 has version $stagedVersion but expected $version. Did the build copy a stale manifest?"
+          }
+          # Zip it
+          $zipPath = "artifacts\Visio-$version.zip"
+          Compress-Archive -Path "$staging\*" -DestinationPath $zipPath -Force
+          Write-Host "Artifacts:"
+          Get-ChildItem artifacts -File | ForEach-Object { Write-Host "  $($_.Name)  ($([math]::Round($_.Length/1KB,1)) KB)" }
+
+      - name: Upload workflow artifacts (always, including dry-runs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: VisioPS-${{ steps.version.outputs.version }}
+          path: artifacts/Visio-*.zip
+
+      - name: Build release notes from CHANGELOG
+        id: notes
+        shell: pwsh
+        run: |
+          # Source the release body from VisioPowerShell/CHANGELOG.md's
+          # [Unreleased] section, not from auto-generated PR-title lists.
+          $changelogPath = 'VisioAutomation_2010\VisioPowerShell\CHANGELOG.md'
+          $content = Get-Content -Raw $changelogPath
+          $pattern = '(?ms)^## \[Unreleased\]\s*\r?\n(.*?)(?=^## |\z)'
+          $regexMatch = [regex]::Match($content, $pattern)
+          if (-not $regexMatch.Success) {
+            throw "Could not find [Unreleased] section in $changelogPath"
+          }
+          $changelogSection = $regexMatch.Groups[1].Value.Trim()
+          if (-not $changelogSection -or $changelogSection -match '^_No consumer-visible changes yet\._\s*$') {
+            throw "[Unreleased] section in $changelogPath has no real entries -- nothing to release. Add the changes for this version under [Unreleased] first."
+          }
+          $version = '${{ steps.version.outputs.version }}'
+          $template = @'
+{0}
+
+## Install
+
+```powershell
+Install-Module Visio
+```
+
+Or download the attached zip and extract it to `$home\Documents\WindowsPowerShell\Modules\Visio` (Windows PowerShell 5.1) / `$home\Documents\PowerShell\Modules\Visio` (PowerShell 7+).
+
+## Artifacts
+
+- `Visio-{1}.zip` — the staged module folder.
+
+## Related
+
+- The bundled [VisioAutomation NuGet](https://www.nuget.org/packages/VisioAutomation2010/) is the underlying .NET library this module wraps.
+- [Project documentation](https://saveenr.gitbook.io/visiopowershell/).
+- [Full changelog](https://github.com/saveenr/VisioAutomation/blob/master/VisioAutomation_2010/VisioPowerShell/CHANGELOG.md).
+'@
+          $body = $template -f $changelogSection, $version
+          $notesPath = "release-notes-$version.md"
+          $body | Set-Content -Path $notesPath -Encoding utf8
+          "notes_path=$notesPath" >> $env:GITHUB_OUTPUT
+          Write-Host "----- Generated release notes -----"
+          Write-Host $body
+          Write-Host "----- End -----"
+
+      - name: Create GitHub Release
+        if: ${{ !inputs.dry_run }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: Visio PowerShell ${{ steps.version.outputs.version }}
+          body_path: ${{ steps.notes.outputs.notes_path }}
+          files: artifacts/Visio-*.zip
+          fail_on_unmatched_files: true
