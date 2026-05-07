@@ -75,8 +75,10 @@ FunctionsToExport = '*'
 # Cmdlets to export from this module.
 # Enumerated explicitly (rather than '*') to satisfy the PSGallery publish-time
 # best-practice check and to skip module-load reflection over the binary. When
-# adding a new cmdlet, append it here; see docs/futures/releases.md for the
-# pre-publish drift-check that's been proposed to make this self-policing.
+# adding a new cmdlet, append it here. Drift between this list and the cmdlets
+# VisioPS.dll actually exports is caught by VisioPS_Manifest_Tests in
+# VTest.PowerShell (every test run) and as a defense-in-depth check by
+# publish-psmodule.yml (every publish run).
 CmdletsToExport = @(
     'Close-VisioApplication',
     'Close-VisioDocument',

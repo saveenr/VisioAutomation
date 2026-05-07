@@ -34,4 +34,10 @@
     <ProjectReference Include="..\VTest\VTest.csproj" />
   </ItemGroup>
 
+  <!-- Visio.psd1 is the module manifest under test by VisioPS_Manifest_Tests;
+       copy it into the test bin so the test can read it next to its assembly. -->
+  <ItemGroup>
+    <None Include="..\VisioPowerShell\Visio.psd1" Link="Visio.psd1" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
