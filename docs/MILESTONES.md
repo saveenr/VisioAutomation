@@ -192,12 +192,13 @@ The semester schedule above is the *when*. The themed milestones below are the *
 
 ## Triage backlog (handled in [#151](https://github.com/saveenr/VisioAutomation/issues/151), CY26Q2)
 
-Older issues that need a closer look. The triage pass is itself a tracked task; outcomes (keep / close / convert) are decided in [#151](https://github.com/saveenr/VisioAutomation/issues/151).
+Older issues triaged on 2026-05-07. Per-issue rationale in [#151's decision comment](https://github.com/saveenr/VisioAutomation/issues/151#issuecomment-4401101627). Summary of outcomes:
 
-- [#80](https://github.com/saveenr/VisioAutomation/issues/80) &mdash; New logo for Visio Automation.
-- [#82](https://github.com/saveenr/VisioAutomation/issues/82), [#102](https://github.com/saveenr/VisioAutomation/issues/102) &mdash; older user-help questions.
-- [#105](https://github.com/saveenr/VisioAutomation/issues/105) &mdash; directed-graph layout/direction umbrella.
-- [#117](https://github.com/saveenr/VisioAutomation/issues/117) &mdash; custom-properties on directed graph; awaiting reporter close.
+- [#80](https://github.com/saveenr/VisioAutomation/issues/80) &mdash; New logo. **Closed as not-planned** (any branding work belongs in Axis 5, CY26Q4).
+- [#82](https://github.com/saveenr/VisioAutomation/issues/82) &mdash; Size + Cells on directed graph node. **Real bug, fix in flight on a branch this session.** Milestoned to CY26Q2; closes when the fix lands on master.
+- [#102](https://github.com/saveenr/VisioAutomation/issues/102) &mdash; Problem creating shape from template. **Closed as completed** (both questions answered in-thread on 2026-05-06).
+- [#105](https://github.com/saveenr/VisioAutomation/issues/105) &mdash; directed-graph layout/direction umbrella. **Closed as completed** (sub-items shipped in NuGet 3.0.0; docs page live).
+- [#117](https://github.com/saveenr/VisioAutomation/issues/117) &mdash; Custom-properties on directed graph. **Open, revisit ~2026-05-27.** Fix shipped in [Visio PowerShell 4.7.0](https://github.com/saveenr/VisioAutomation/releases/tag/VisioPS_4.7.0) on 2026-05-06; awaiting reporter confirmation.
 
 ---
 
