@@ -46,7 +46,7 @@ Backlog of items related to the dev-team identity used across this codebase, its
   - `CLAUDE.md`, `docs/ROADMAP.md`, `docs/COMPLETED.md`, `docs/OVERVIEW.md`, `docs/internal/custom-property-encoding.md`, `docs/futures/*.md` (links to issues / PRs / gitbook pages, both in body and in cross-refs).
   - `NuGet/CHANGELOG.md`, `VisioAutomation_2010/VisioPowerShell/CHANGELOG.md` (issue links from prior entries &mdash; **prefer to leave these as-is** since they're frozen historical record; the redirects ensure they keep working).
   - `VisioAutomation_2010/VisioPowerShell/Visio.psd1` (`PrivateData` URLs &mdash; ProjectUri, LicenseUri, etc., if present).
-  - `VisioAutomation_2010/VTest/datafiles/directed_graph_1.xml` (XML schema-reference comment pointing at gitbook).
+  - ~~`VisioAutomation_2010/VTest/datafiles/directed_graph_1.xml` (XML schema-reference comment pointing at gitbook).~~ Already handled 2026-05-07: the comment was throwaway-informational, so removed entirely rather than rewritten. One less file for Phase 5b.
   - `.github/workflows/release-nuget.yml` and `.github/workflows/release-psmodule.yml` (release-notes templates linking back at github.com/saveenr/... and saveenr.gitbook.io/...).
 - **Decision points before starting Phase 5a:**
   - Confirm the destination GitHub account/org name (e.g., `sevenpens`, `SevenPens`, or some other org).
