@@ -10,6 +10,19 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Fixed
+- `MsaglRenderer` now honors `Node.Size` when `Node.Cells` is also set on a directed-graph node. Previously the `Cells` assignment overwrote the entire `shape_node.Cells` object, silently dropping the `XFormWidth` / `XFormHeight` populated from `Size`, so the rendered shape came out at the master's default size instead of the requested `Size`. Now the user's `Cells` is merged onto the existing cells via `ApplyFormulasTo`, which preserves Size-derived width/height. Closes [#82](https://github.com/saveenr/VisioAutomation/issues/82).
+
+  Precedence is now field-by-field rather than all-or-nothing. Only the styling-only row's behavior changes; all other scenarios are unaffected:
+
+  | Scenario | Pre-fix | Post-fix |
+  |---|---|---|
+  | Only `Size` set | `Size` | `Size` |
+  | Only `Cells.XFormWidth/Height` set | `Cells` | `Cells` |
+  | Both `Size` AND `Cells.XFormWidth/Height` set | `Cells` | `Cells` |
+  | `Size` set + `Cells` styling-only (no width/height) | **Master default** (bug) | **`Size`** (fix) |
+  | Neither set | Master default | Master default |
+
 ### Changed
 - Package metadata's `<authors>` and `<copyright>` fields updated from `saveenr` / `Copyright Saveen Reddy` to `SevenPens` / `Copyright SevenPens` to reflect the new dev-team identity. No functional change; the displayed-author string on the [nuget.org package page](https://www.nuget.org/packages/VisioAutomation2010) updates on the next release. Legal copyright record (LICENSE.txt) updated correspondingly.
 

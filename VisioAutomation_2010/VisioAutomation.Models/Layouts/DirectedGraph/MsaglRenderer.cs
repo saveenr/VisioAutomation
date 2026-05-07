@@ -494,7 +494,15 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             if (layout_shape.Cells != null)
             {
-                shape_node.Cells = layout_shape.Cells.ShallowCopy();
+                // Field-by-field overlay (not wholesale replacement): only cells the
+                // user explicitly set in layout_shape.Cells win over what's already in
+                // shape_node.Cells. This preserves the XFormWidth/XFormHeight populated
+                // above from layout_shape.Size whenever the user's Cells is used for
+                // styling without setting width/height. Precedence summary for size:
+                //   Cells.XFormWidth/Height set     -> Cells wins
+                //   Size set, Cells styling-only    -> Size survives
+                //   neither                         -> master default
+                layout_shape.Cells.ApplyFormulasTo(shape_node.Cells);
             }
         }
 

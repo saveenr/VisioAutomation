@@ -48,6 +48,37 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
+        public void DirectedGraph_NodeSizeIsHonored_WhenCellsAlsoSet()
+        {
+            // Regression test for #82. Setting Cells used to overwrite the entire
+            // shape_node.Cells, silently dropping the XFormWidth/XFormHeight that
+            // had been populated from layout_shape.Size — so the rendered shape
+            // came out at the master's default size instead of the requested 1.25 x 0.25.
+            var dg = new VADG.DirectedGraphLayout();
+            var n = dg.AddNode("n0", "Sized", "basic_u.vss", "Rectangle");
+            n.Size = new VA.Core.Size(1.25, 0.25);
+            n.Cells = new VA.Models.Dom.ShapeCells();
+            n.Cells.FillForeground = "rgb(0,255,0)";
+            n.Cells.FillPattern = 1;
+
+            var visapp = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = visapp.ActivePage;
+
+            var renderer = new VADG.MsaglRenderer();
+            renderer.Render(page, dg);
+
+            MUT.Assert.IsNotNull(n.VisioShape);
+            double width = n.VisioShape.Cells["Width"].ResultIU;
+            double height = n.VisioShape.Cells["Height"].ResultIU;
+            const double tol = 1e-6;
+            MUT.Assert.AreEqual(1.25, width, tol, "Width should reflect Size, not master default");
+            MUT.Assert.AreEqual(0.25, height, tol, "Height should reflect Size, not master default");
+
+            doc.Close();
+        }
+
+        [MUT.TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
             var d = new VADG.DirectedGraphLayout();
