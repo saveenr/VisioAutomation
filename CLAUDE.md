@@ -133,5 +133,6 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 - [docs/TESTING.md](docs/TESTING.md) — test-suite design and conventions (shared `Framework.VTest` base, per-testhost Visio singleton, `[AssemblyCleanup]` orphan-prevention, MSTEST0030 enforcement). Per-project READMEs sit next to each test csproj.
 - [docs/GLOSSARY.md](docs/GLOSSARY.md) — Visio and codebase terminology
 - [docs/ROADMAP.md](docs/ROADMAP.md) — staged plan (Phase 1 / 2 / 3); read first for orientation
+- [docs/MILESTONES.md](docs/MILESTONES.md) — themed milestones with proposed target windows. Sits between ROADMAP.md (phases) and FUTURES.md (backlog index)
 - [docs/FUTURES.md](docs/FUTURES.md) — index of backlog items, split by topic into [`docs/futures/*.md`](docs/futures/)
 - [docs/OVERVIEW.md](docs/OVERVIEW.md) — entry point, links to the above

@@ -9,6 +9,7 @@ A running list of cleanup, modernization, and improvement items for the VisioAut
 ## Where to find things
 
 - **[`ROADMAP.md`](ROADMAP.md)** — staged-plan overview (Phase 1 / 2 / 3 status, what shipped per phase, what's still pending). Read this first for orientation.
+- **[`MILESTONES.md`](MILESTONES.md)** — themed milestones with proposed target windows. Sits between this backlog index and `ROADMAP.md`: the same items grouped by when they're proposed to land, not by topic.
 - **[`futures/build-and-code.md`](futures/build-and-code.md)** — Build & tooling, Code & architecture. Items: *Consolidate target frameworks*, *Run tests in CI*, *Move development to Visual Studio 2026*, *Consider migrating off Visio 2010 PIA*, *Move to C# 14 / .NET 10*, *Make `CustomPropertyCells` values not require manual `EncodeValues()`*, *Borrow ideas from VisioBot3000 for VisioPS ergonomics*, *Borrow ideas from PSVA for VisioPS bulk-operation cmdlets*, *Evaluate NetOffice / NetOfficeFw as a replacement for the Visio PIA*, *Move `LinqExtensions` out of `Internal/`*.
 - **[`futures/tests.md`](futures/tests.md)** — Test-related items. Items: *Tests require a live Visio* (design decision), *Test coverage gaps*, *Evaluate modern testing-stack options*.
 - **[`futures/releases.md`](futures/releases.md)** — Release process and version policy. Items: *Reconcile version numbers across artifacts*, *Switch module-release builds from Debug to Release*, *Address `Visio.psd1` deprecation warnings on PSGallery publish*, *Automate releases via GitHub CI*.
