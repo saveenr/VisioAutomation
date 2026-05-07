@@ -10,6 +10,17 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-05-08
+
+Major version bump. Several behavior changes that affect callers:
+
+- The exception type thrown by `CustomPropertyHelper.Set` and `UserDefinedCellHelper.Set` for malformed values changes from `COMException` to `ArgumentException` (with the original `COMException` preserved as `InnerException`).
+- `Client.Model.DrawDirectedGraphDocument` now respects each layout's `UseDynamicConnectors` setting from XML, instead of hardcoding it to `false`.
+- `DirectedGraphDocumentLoader.LoadFromXml` now rejects non-`<directedgraph>` root elements that previously parsed silently.
+- Minimum supported .NET Framework rises from 4.0 to 4.5.2 (binary-breaking for consumers still on net40).
+
+Source compatibility for property accesses is preserved: the new `Formula` property on `CustomPropertyCells` and `UserDefinedCellCells` is paired with an `[Obsolete]` `Value` alias scheduled for removal in a later release.
+
 ### Changed
 - Minimum required .NET Framework raised from 4.0 to **4.5.2**. .NET Framework 4.5.2 was released in 2014 and has shipped via Windows Update for years, so consumers on a current Windows machine are essentially unaffected. The package's `lib\` folder also moves from `lib\net40` to `lib\net452`, correctly reflecting the binaries' actual target framework — the previous `lib\net40` claim would silently install the assemblies into a `net40` project where they would fail to load.
 - Replaced the deprecated `<licenseUrl>` nuspec element with the modern SPDX `<license type="expression">MIT</license>` form. The license itself is unchanged (still MIT) — only the metadata representation differs, which is what nuget.org's package page now expects.

@@ -1,7 +1,7 @@
 <package>
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>2.6.0</version>
+    <version>3.0.0</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <license type="expression">MIT</license>
