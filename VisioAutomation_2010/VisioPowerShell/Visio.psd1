@@ -72,8 +72,77 @@ NestedModules = @()
 # Functions to export from this module
 FunctionsToExport = '*'
 
-# Cmdlets to export from this module
-CmdletsToExport = '*'
+# Cmdlets to export from this module.
+# Enumerated explicitly (rather than '*') to satisfy the PSGallery publish-time
+# best-practice check and to skip module-load reflection over the binary. When
+# adding a new cmdlet, append it here; see docs/futures/releases.md for the
+# pre-publish drift-check that's been proposed to make this self-policing.
+CmdletsToExport = @(
+    'Close-VisioApplication',
+    'Close-VisioDocument',
+    'Connect-VisioShape',
+    'Copy-VisioPage',
+    'Copy-VisioShape',
+    'Export-VisioPage',
+    'Export-VisioShape',
+    'Format-VisioPage',
+    'Format-VisioShape',
+    'Format-VisioWindow',
+    'Get-VisioApplication',
+    'Get-VisioClient',
+    'Get-VisioControl',
+    'Get-VisioCustomProperty',
+    'Get-VisioDocument',
+    'Get-VisioHyperlink',
+    'Get-VisioLockCells',
+    'Get-VisioMaster',
+    'Get-VisioPage',
+    'Get-VisioPageCells',
+    'Get-VisioShape',
+    'Get-VisioShapeCells',
+    'Get-VisioText',
+    'Get-VisioUserDefinedCell',
+    'Import-VisioModel',
+    'Join-VisioShape',
+    'Lock-VisioShape',
+    'Measure-VisioPage',
+    'Measure-VisioShape',
+    'New-VisioApplication',
+    'New-VisioContainer',
+    'New-VisioControl',
+    'New-VisioDocument',
+    'New-VisioHyperlink',
+    'New-VisioPage',
+    'New-VisioPageCells',
+    'New-VisioPoint',
+    'New-VisioRectangle',
+    'New-VisioShape',
+    'New-VisioShapeCells',
+    'Open-VisioDocument',
+    'Out-VisioApplication',
+    'Redo-VisioApplication',
+    'Remove-VisioControl',
+    'Remove-VisioCustomProperty',
+    'Remove-VisioHyperlink',
+    'Remove-VisioPage',
+    'Remove-VisioShape',
+    'Remove-VisioUserDefinedCell',
+    'Save-VisioDocument',
+    'Select-VisioDocument',
+    'Select-VisioPage',
+    'Select-VisioShape',
+    'Set-VisioCustomProperty',
+    'Set-VisioPageCells',
+    'Set-VisioShapeCells',
+    'Set-VisioText',
+    'Set-VisioUserDefinedCell',
+    'Split-VisioShape',
+    'Test-VisioApplication',
+    'Test-VisioDocument',
+    'Test-VisioShape',
+    'Undo-VisioApplication',
+    'Unlock-VisioShape'
+)
 
 # Variables to export from this module
 VariablesToExport = '*'
