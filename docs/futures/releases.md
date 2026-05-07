@@ -4,16 +4,16 @@ Backlog of items related to release process, version policy, and publishing to p
 
 ---
 
-### Reconcile version numbers across artifacts *(Phase 2 prereq — deferred, needs discussion)*
-- **What:** The NuGet [`VisioAutomation2010.nuspec`](../../NuGet/VisioAutomation2010.nuspec) is at `2.6.0`; the PowerShell [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) is at `4.6.0`; csproj `AssemblyVersion`s are independent again.
-- **Why:** Hard to tell at a glance which library version corresponds to which module version. Same code (the PS module bundles the NuGet's DLLs) shipping under two different version numbers makes bug reports ambiguous and release coordination loose.
-- **Status (2026-05-03):** Held for further discussion. Three options on the table:
-  - **A — Converge:** both artifacts ship at the same number going forward; pick a number for the Phase 2 release.
-  - **B — Document the divergence policy:** keep them independent, write down the rule.
-  - **C — Single technical source of truth:** `Directory.Build.props` + token substitution into nuspec/psd1. Better suited now that csprojs are SDK-style (Phase 3 SDK migration done 2026-05-06).
-- **Forcing function:** must be answered before the Phase 2 release ships, since release time is when the version strings get bumped.
-- **Cross-refs:** Subsumed indirectly by *Automate releases via GitHub CI* below — that workflow has to handle two version sources until this is settled.
-- **Effort:** S for the policy decision and doc updates; M if Option C is chosen.
+### Reconcile version numbers across artifacts *(decision: stay divergent for now; revisit at PS 5.1 manifest bump)*
+- **What:** The NuGet [`VisioAutomation2010.nuspec`](../../NuGet/VisioAutomation2010.nuspec) is at `2.6.0`; the PowerShell [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) is at `4.7.2`; csproj `AssemblyVersion`s are independent again.
+- **Why the question came up:** Hard to tell at a glance which library version corresponds to which module version. Same code (the PS module bundles the NuGet's DLLs) shipping under two different version numbers makes bug reports ambiguous and release coordination loose.
+- **Decision (2026-05-08):** Stay divergent. NuGet continues on the `2.x` line, PS module on the `4.x` line. Re-evaluate convergence (or Option C: single source of truth via `Directory.Build.props` token substitution) when the [`Visio.psd1` deprecation warnings](#address-visiopsd1-deprecation-warnings-on-psgallery-publish) item is picked up &mdash; that's the manifest's `PowerShellVersion '2.0'` &rarr; `'5.1'` bump, which is itself a forcing function for re-touching the manifest. Reasoning: at this point the divergence is established, contributors and downstream consumers reason about the two version lines independently, and merging them mid-flight risks confusion during a release cycle. The PS-5.1 manifest bump is a natural integration point because it is already a "we are revisiting Visio.psd1's declared metadata" event, so adding a version-policy decision to the same change is low marginal cost.
+- **History of options considered:**
+  - **A &mdash; Converge:** both artifacts ship at the same number going forward. Rejected for now; revisit at the PS-5.1 bump.
+  - **B &mdash; Document the divergence policy:** keep them independent, write down the rule. **Chosen for now** &mdash; this section *is* the documentation.
+  - **C &mdash; Single technical source of truth:** `Directory.Build.props` + token substitution into nuspec/psd1. Better suited now that csprojs are SDK-style (Phase 3 SDK migration done 2026-05-06). Re-evaluate at the PS-5.1 bump.
+- **Cross-refs:** [*Address `Visio.psd1` deprecation warnings*](#address-visiopsd1-deprecation-warnings-on-psgallery-publish) below &mdash; the convergence-revisit trigger. *Automate releases via GitHub CI* below already handles two version sources (each `release-*.yml` reads its own version from its own metadata file), so no workflow changes are required by this decision.
+- **Effort to revisit:** S for the policy decision and doc updates; M if Option C is chosen at that point.
 
 ### Switch module-release builds from Debug to Release
 - **What:** The release-prep script [`InstallForCurrentUser.ps1`](../../VisioAutomation_2010/VisioPowerShell/InstallForCurrentUser.ps1) hardcodes `$release = "Debug"` (line 69). The 4.6.1 release was published from the Debug build to keep the workflow unchanged, but for future releases we should ship the Release build — smaller binaries, no `DEBUG` symbols, no JIT debug overhead.
