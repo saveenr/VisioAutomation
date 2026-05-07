@@ -10,6 +10,12 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+_No consumer-visible changes yet._
+
+## [4.7.2] - 2026-05-06
+
+A small patch release: a long-standing bug fix on `Set-VisioUserDefinedCell`, plus the first release published end-to-end via the new CI flow ([`release-psmodule.yml`](https://github.com/saveenr/VisioAutomation/blob/master/.github/workflows/release-psmodule.yml) + [`publish-psmodule.yml`](https://github.com/saveenr/VisioAutomation/blob/master/.github/workflows/publish-psmodule.yml)) instead of the local `Publish-VisioPSToGallery.ps1` script.
+
 ### Fixed
 - **`Set-VisioUserDefinedCell`** &mdash; `-Value` and `-Prompt` parameters now actually work for plain string arguments. The cmdlet was assigning these to `.Value` and `.Prompt` as raw strings, which Visio's COM layer rejected because both cells store Visio *formulas*, not literals. The bug is long-standing (predates [4.7.0] by years; latent because anyone who hit it could work around with pre-quoted values like `-Value '"foo"'`). Pre-4.7.0 the cmdlet threw `COMException: #NAME?`; 4.7.0's detect-and-rethrow on the .NET side wrapped that as `ArgumentException` with a friendly diagnostic ("Visio rejected the formula ... use SetString ..."), but didn't actually fix the cmdlet's behavior &mdash; only made the failure more diagnosable. This fix uses the new `SetString` typed setter for `-Value` and `Core.CellValue.EncodeValue` for `-Prompt`, so a typical `Set-VisioUserDefinedCell -Name 'X' -Value 'foo'` succeeds. New regression test in `VTest.PowerShell` covers the path going forward.
 
