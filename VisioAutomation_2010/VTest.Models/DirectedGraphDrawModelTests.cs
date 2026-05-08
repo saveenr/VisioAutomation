@@ -1,5 +1,6 @@
 using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Extensions;
 using VADG = VisioAutomation.Models.Layouts.DirectedGraph;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -26,7 +27,7 @@ namespace VTest.Models
             
             string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(DirectedGraph_WithBezierConnectors),".vsd");
             doc.SaveAs(output_filename);
-            doc.Close();
+            doc.Close(true);
         }
 
         [MUT.TestMethod]
@@ -44,7 +45,7 @@ namespace VTest.Models
 
             string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(DirectedGraph_WithDynamicConnectors),".vsd");
             doc.SaveAs(output_filename);
-            doc.Close();
+            doc.Close(true);
         }
 
         [MUT.TestMethod]
@@ -75,7 +76,7 @@ namespace VTest.Models
             MUT.Assert.AreEqual(1.25, width, tol, "Width should reflect Size, not master default");
             MUT.Assert.AreEqual(0.25, height, tol, "Height should reflect Size, not master default");
 
-            doc.Close();
+            doc.Close(true);
         }
 
         [MUT.TestMethod]
@@ -111,7 +112,7 @@ namespace VTest.Models
 
             string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(RenderDirectedGraphWithCustomProps),".vsd");
             doc.SaveAs(output_filename);
-            doc.Close();
+            doc.Close(true);
         }
 
         private VADG.DirectedGraphLayout create_sample_graph()
@@ -336,7 +337,7 @@ namespace VTest.Models
             double dy = System.Math.Abs(piny_n2 - piny_n0);
             MUT.Assert.IsTrue(dx > dy, string.Format("Expected horizontal spread > vertical spread, got dx={0} dy={1}", dx, dy));
 
-            doc.Close();
+            doc.Close(true);
         }
 
         private VA.Models.Layouts.DirectedGraph.DirectedGraphDocument load_two_node_graph(string connectortype_attr)
