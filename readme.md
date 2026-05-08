@@ -53,6 +53,7 @@ Developer / architecture docs in this repo:
 - [`docs/GLOSSARY.md`](docs/GLOSSARY.md) — Visio and codebase terminology
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — staged plan (Phase 1 / 2 / 3) and what shipped per phase
 - [`docs/FUTURES.md`](docs/FUTURES.md) — index of the topic-split backlog of cleanup / modernization work
+- [`docs/RELATED-REPOS.md`](docs/RELATED-REPOS.md) — portfolio map of the sibling Visio-related repos under the same GitHub account
 
 Release notes:
 
