@@ -8,10 +8,33 @@ namespace VTest.Scripting
     public class SelectionTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Selection_Scenarios()
+        public void DrawRectangle_FollowedByActiveWindowSelection_LastDrawnShapeIsSelected()
         {
             var client = this.GetScriptingClient();
-            var page_size = new VisioAutomation.Core.Size(10,5);
+            var page_size = new VisioAutomation.Core.Size(10, 5);
+            var doc = client.Document.NewDocument(page_size);
+
+            var page1 = doc.Pages[1];
+            var app = page1.Application;
+
+            page1.DrawRectangle(0, 0, 1, 1);
+            page1.DrawRectangle(1, 0, 2, 1);
+            page1.DrawRectangle(0, 1, 1, 2);
+            var s4 = page1.DrawRectangle(1, 1, 2, 2);
+
+            var active_window = app.ActiveWindow;
+            var selected = active_window.Selection.ToEnumerable().ToDictionary(s => s);
+            MUT.Assert.AreEqual(1, selected.Count);
+            MUT.Assert.IsTrue(selected.ContainsKey(s4));
+
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
+        }
+
+        [MUT.TestMethod]
+        public void InvertSelection_OnPageWithFourShapesAndOneSelected_LeavesOtherThreeSelected()
+        {
+            var client = this.GetScriptingClient();
+            var page_size = new VisioAutomation.Core.Size(10, 5);
             var doc = client.Document.NewDocument(page_size);
 
             var page1 = doc.Pages[1];
@@ -23,31 +46,63 @@ namespace VTest.Scripting
             var s4 = page1.DrawRectangle(1, 1, 2, 2);
 
             var active_window = app.ActiveWindow;
-
-
-            var selection = active_window.Selection;
-            var x1 = selection.ToEnumerable().ToDictionary(s => s);
-            MUT.Assert.AreEqual(1, x1.Count);
-            MUT.Assert.IsTrue(x1.ContainsKey(s4));
-
             client.Selection.InvertSelection(VisioScripting.TargetWindow.Auto);
 
-            var x2 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
-            MUT.Assert.AreEqual(3, x2.Count);
-            MUT.Assert.IsTrue(x2.ContainsKey(s1));
-            MUT.Assert.IsTrue(x2.ContainsKey(s2));
-            MUT.Assert.IsTrue(x2.ContainsKey(s3));
-            MUT.Assert.IsTrue(!x2.ContainsKey(s4));
+            var selected = active_window.Selection.ToEnumerable().ToDictionary(s => s);
+            MUT.Assert.AreEqual(3, selected.Count);
+            MUT.Assert.IsTrue(selected.ContainsKey(s1));
+            MUT.Assert.IsTrue(selected.ContainsKey(s2));
+            MUT.Assert.IsTrue(selected.ContainsKey(s3));
+            MUT.Assert.IsFalse(selected.ContainsKey(s4));
 
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
+        }
+
+        [MUT.TestMethod]
+        public void SelectAll_OnPageWithFourShapes_SelectsAllFour()
+        {
+            var client = this.GetScriptingClient();
+            var page_size = new VisioAutomation.Core.Size(10, 5);
+            var doc = client.Document.NewDocument(page_size);
+
+            var page1 = doc.Pages[1];
+            var app = page1.Application;
+
+            page1.DrawRectangle(0, 0, 1, 1);
+            page1.DrawRectangle(1, 0, 2, 1);
+            page1.DrawRectangle(0, 1, 1, 2);
+            page1.DrawRectangle(1, 1, 2, 2);
+
+            var active_window = app.ActiveWindow;
             active_window.SelectAll();
-            //app.ActiveWindows.Selection.SelectAll() selects 3 items
-            var x3 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
-            MUT.Assert.AreEqual(4, x3.Count);
 
+            var selected = active_window.Selection.ToEnumerable().ToDictionary(s => s);
+            MUT.Assert.AreEqual(4, selected.Count);
+
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
+        }
+
+        [MUT.TestMethod]
+        public void DeselectAll_AfterSelectAll_LeavesNothingSelected()
+        {
+            var client = this.GetScriptingClient();
+            var page_size = new VisioAutomation.Core.Size(10, 5);
+            var doc = client.Document.NewDocument(page_size);
+
+            var page1 = doc.Pages[1];
+            var app = page1.Application;
+
+            page1.DrawRectangle(0, 0, 1, 1);
+            page1.DrawRectangle(1, 0, 2, 1);
+            page1.DrawRectangle(0, 1, 1, 2);
+            page1.DrawRectangle(1, 1, 2, 2);
+
+            var active_window = app.ActiveWindow;
+            active_window.SelectAll();
             active_window.DeselectAll();
-            //app.ActiveWindows.Selection.DeselectAll() keeps all 4 selection
-            var x4 = active_window.Selection.ToEnumerable().ToDictionary(s => s);
-            MUT.Assert.AreEqual(0, x4.Count);
+
+            var selected = active_window.Selection.ToEnumerable().ToDictionary(s => s);
+            MUT.Assert.AreEqual(0, selected.Count);
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }

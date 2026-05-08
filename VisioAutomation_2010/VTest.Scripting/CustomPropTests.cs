@@ -38,10 +38,9 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void CustomProps_Scenarios()
+        public void GetCustomPropertiesAsShapeDictionary_OnFreshShapes_ReturnsZeroPerShape()
         {
             var client = this.GetScriptingClient();
-           
             client.Document.NewDocument();
             client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Core.Size(4, 4), false);
 
@@ -54,43 +53,81 @@ namespace VTest.Scripting
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
             client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
-            var prop_dic0 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            MUT.Assert.AreEqual(3, prop_dic0.Count);
-            MUT.Assert.AreEqual(0, prop_dic0[s1].Count);
-            MUT.Assert.AreEqual(0, prop_dic0[s2].Count);
-            MUT.Assert.AreEqual(0, prop_dic0[s3].Count);
+            var props = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
+            MUT.Assert.AreEqual(3, props.Count);
+            MUT.Assert.AreEqual(0, props[s1].Count);
+            MUT.Assert.AreEqual(0, props[s2].Count);
+            MUT.Assert.AreEqual(0, props[s3].Count);
+
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
+        }
+
+        [MUT.TestMethod]
+        public void SetCustomProperty_OnSelectedShapes_AppendsOnePropertyPerShapeWithMatchingValue()
+        {
+            var client = this.GetScriptingClient();
+            client.Document.NewDocument();
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Core.Size(4, 4), false);
+
+            var s1 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 1.25, 1.5);
+            var s2 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 2, 3, 2.5, 3.5);
+            var s3 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 4.5, 2.5, 6, 3.5);
+
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s1);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
 
             var cp = new CustomPropertyCells();
             cp.Value = "\"BAR\"";
-            client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Auto, "FOO",cp);
+            client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Auto, "FOO", cp);
 
-            var prop_dic1 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            MUT.Assert.AreEqual(3, prop_dic1.Count);
-            MUT.Assert.AreEqual(1, prop_dic1[s1].Count);
-            MUT.Assert.AreEqual(1, prop_dic1[s2].Count);
-            MUT.Assert.AreEqual(1, prop_dic1[s3].Count);
+            var props = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
+            MUT.Assert.AreEqual(3, props.Count);
+            MUT.Assert.AreEqual(1, props[s1].Count);
+            MUT.Assert.AreEqual(1, props[s2].Count);
+            MUT.Assert.AreEqual(1, props[s3].Count);
 
-            var cp1 = prop_dic1[s1]["FOO"];
-            var cp2 = prop_dic1[s2]["FOO"];
-            var cp3 = prop_dic1[s3]["FOO"];
-            MUT.Assert.AreEqual("\"BAR\"", cp1.Value.Value);
-            MUT.Assert.AreEqual("\"BAR\"", cp2.Value.Value);
-            MUT.Assert.AreEqual("\"BAR\"", cp3.Value.Value);
-            
+            MUT.Assert.AreEqual("\"BAR\"", props[s1]["FOO"].Value.Value);
+            MUT.Assert.AreEqual("\"BAR\"", props[s2]["FOO"].Value.Value);
+            MUT.Assert.AreEqual("\"BAR\"", props[s3]["FOO"].Value.Value);
 
-            var hasprops0 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
-            MUT.Assert.IsTrue(hasprops0.All(v => v == true));
+            var has_props = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
+            MUT.Assert.IsTrue(has_props.All(v => v == true));
+
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
+        }
+
+        [MUT.TestMethod]
+        public void DeleteCustomPropertyWithName_OnShapesWithThatProperty_RemovesItFromAllShapes()
+        {
+            var client = this.GetScriptingClient();
+            client.Document.NewDocument();
+            client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VA.Core.Size(4, 4), false);
+
+            var s1 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 1, 1, 1.25, 1.5);
+            var s2 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 2, 3, 2.5, 3.5);
+            var s3 = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto, 4.5, 2.5, 6, 3.5);
+
+            client.Selection.SelectNone(VisioScripting.TargetWindow.Auto);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s1);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s2);
+            client.Selection.SelectShapesById(VisioScripting.TargetWindow.Auto, s3);
+
+            var cp = new CustomPropertyCells();
+            cp.Value = "\"BAR\"";
+            client.CustomProperty.SetCustomProperty(VisioScripting.TargetShapes.Auto, "FOO", cp);
 
             client.CustomProperty.DeleteCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
 
-            var prop_dic2 = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
-            MUT.Assert.AreEqual(3, prop_dic2.Count);
-            MUT.Assert.AreEqual(0, prop_dic2[s1].Count);
-            MUT.Assert.AreEqual(0, prop_dic2[s2].Count);
-            MUT.Assert.AreEqual(0, prop_dic2[s3].Count);
-            
-            var hasprops1 = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
-            MUT.Assert.IsTrue(hasprops1.All(v => v == false));
+            var props = client.CustomProperty.GetCustomPropertiesAsShapeDictionary(VisioScripting.TargetShapes.Auto, VisioAutomation.Core.CellValueType.Formula);
+            MUT.Assert.AreEqual(3, props.Count);
+            MUT.Assert.AreEqual(0, props[s1].Count);
+            MUT.Assert.AreEqual(0, props[s2].Count);
+            MUT.Assert.AreEqual(0, props[s3].Count);
+
+            var has_props = client.CustomProperty.ContainCustomPropertyWithName(VisioScripting.TargetShapes.Auto, "FOO");
+            MUT.Assert.IsTrue(has_props.All(v => v == false));
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }

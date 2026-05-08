@@ -53,7 +53,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Undo_Scenarios()
+        public void UndoLastAction_AfterDrawingShape_RestoresEmptyPage()
         {
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Core.Size(8.5,11);
@@ -69,7 +69,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void CloseDocument_Scenarios()
+        public void CloseAllDocumentsWithoutSaving_LeavesNoActiveDocument()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
             var client = this.GetScriptingClient();

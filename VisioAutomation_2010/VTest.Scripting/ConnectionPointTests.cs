@@ -6,7 +6,7 @@ namespace VTest.Scripting
     public class ConnectionPointTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void ConnectionPoints_Scenarios()
+        public void AddConnectionPoint_OnSelectedShapes_AppendsAtIndexZero()
         {
             var client = this.GetScriptingClient();
 
