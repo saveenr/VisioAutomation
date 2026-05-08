@@ -12,7 +12,7 @@ namespace VTest.Core.ShapeSheet
     public class ShapeSheetQueryTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void ShapeSheet_Query_GetResults_SingleShape()
+        public void GetResults_SingleShape()
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
@@ -69,7 +69,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Query_GetResults_MultipleShapes()
+        public void GetResults_MultipleShapes()
         {
             var page1 = this.GetNewPage();
 
@@ -125,7 +125,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Query_SectionRowHandling()
+        public void SectionRowHandling()
         {
             var page1 = this.GetNewPage();
             var shape_a = page1.DrawRectangle(0, 0, 2, 2);
@@ -185,7 +185,7 @@ namespace VTest.Core.ShapeSheet
 
 
         [MUT.TestMethod]
-        public void ShapeSheet_Query_Demo_MultipleShapes()
+        public void Demo_MultipleShapes()
         {
             var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
 
@@ -228,7 +228,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Query_Demo_MultipleShapes_Verify_Out_Of_order()
+        public void Demo_MultipleShapes_Verify_Out_Of_order()
         {
             var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
 
@@ -276,7 +276,7 @@ namespace VTest.Core.ShapeSheet
 
 
         [MUT.TestMethod]
-        public void ShapeSheet_Query_NonExistentSections()
+        public void NonExistentSections()
         {
             var page1 = this.GetNewPage();
             var shape_a = page1.DrawRectangle(0, 0, 2, 2);
@@ -397,7 +397,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Query_TestDuplicates()
+        public void TestDuplicates()
         {
             // Ensure that duplicate cells cannot be added to a cell query
             var cell_query_1 = new VASS.Query.CellQuery();

@@ -162,8 +162,8 @@ All test projects use **MSTest** (`MSTest.TestFramework` 4.2.2) and **require a 
 | Project | TFM | Tests |
 |---|---|---|
 | [`VTest`](../VisioAutomation_2010/VTest/) | .NET 4.7.2 | Core library — ShapeSheet, geometry, connectors, hyperlinks, custom properties, analyzers. The `Framework/` folder owns shared infrastructure: `VTest` base class, `VTestAppRef` (Visio COM lifecycle), `VTestHelper`, `VTestScriptingClient`. |
-| [`VTest.Models`](../VisioAutomation_2010/VTest.Models/) | .NET 4.7.2 | DOM + layouts — `DrawModel_OrgChartTests`, `DrawModel_DirectedGraph`, `DrawModel_Grid`, `Layout_BoxTests`, `Tree_Tests`, `BezierTests`. |
-| [`VTest.Scripting`](../VisioAutomation_2010/VTest.Scripting/) | .NET 4.7.2 | Scripting facade — `Scripting_ApplicationTests`, `Scripting_DocumentTests`, `Scripting_ShapeSheetTests`, `Scripting_ExportTests`, `Scripting_GroupTests`, `Scripting_PageTests`. |
+| [`VTest.Models`](../VisioAutomation_2010/VTest.Models/) | .NET 4.7.2 | DOM + layouts — `OrgChartDrawModelTests`, `DirectedGraphDrawModelTests`, `GridDrawModelTests`, `BoxLayoutTests`, `TreeTests`, `BezierTests`. |
+| [`VTest.Scripting`](../VisioAutomation_2010/VTest.Scripting/) | .NET 4.7.2 | Scripting facade — `ApplicationTests`, `DocumentTests`, `ShapeSheetTests`, `ExportTests`, `GroupTests`, `PageTests`. |
 | [`VTest.PowerShell`](../VisioAutomation_2010/VTest.PowerShell/) | .NET 4.7.2 | PowerShell cmdlet integration — uses `VTestPowerShellSession` to spin up an in-process PS session and execute cmdlets against live Visio. |
 
 > Note the TFM mismatch: the production libraries target .NET 4.0 but several test projects target .NET 4.7.2. This is a known cleanup item for the 2026 refresh.

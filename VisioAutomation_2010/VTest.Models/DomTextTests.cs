@@ -9,20 +9,20 @@ namespace VTest.Models
     public class DomTextTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void DomText_CharacterFormatting()
+        public void CharacterFormatting()
         {
-            this.DomText_CharacterBold();
-            this.DomText_CharacterComplex();
-            this.DomText_CharacterFont();
-            this.DomText_CharacterItalic();
-            this.DomText_CharacterPlain();
-            this.DomText_ParagraphCenter();
-            this.DomText_ParagraphDefault();
-            this.DomText_ParagraphLeft();
-            this.DomText_ParagraphRight();
+            this.CharacterBold();
+            this.CharacterComplex();
+            this.CharacterFont();
+            this.CharacterItalic();
+            this.CharacterPlain();
+            this.ParagraphCenter();
+            this.ParagraphDefault();
+            this.ParagraphLeft();
+            this.ParagraphRight();
         }
 
-        public void DomText_CharacterPlain()
+        public void CharacterPlain()
         {
             var m = new VisioAutomation.Models.Text.Element("{Normal}");
             var page1 = this.GetNewPage(new VisioAutomation.Core.Size(5, 5));
@@ -36,7 +36,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_CharacterBold()
+        public void CharacterBold()
         {
             var m = new VisioAutomation.Models.Text.Element("{Bold}");
             m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Bold;
@@ -52,7 +52,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_CharacterItalic()
+        public void CharacterItalic()
         {
             var m = new VisioAutomation.Models.Text.Element("{Italic}");
             m.CharacterFormatting.Style = (int)VA.Models.Text.CharStyle.Italic;
@@ -68,7 +68,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_CharacterFont()
+        public void CharacterFont()
         {
             var page1 = this.GetNewPage(new VisioAutomation.Core.Size(5, 5));
 
@@ -89,7 +89,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_CharacterComplex()
+        public void CharacterComplex()
         {
             var page1 = this.GetNewPage(new VisioAutomation.Core.Size(5, 5));
             var doc = page1.Document;
@@ -158,7 +158,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_ParagraphDefault()
+        public void ParagraphDefault()
         {
             var m = new VisioAutomation.Models.Text.Element("{DefaultPara}");
             var page1 = this.GetNewPage(new VisioAutomation.Core.Size(5, 5));
@@ -172,7 +172,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_ParagraphLeft()
+        public void ParagraphLeft()
         {
             var m = new VisioAutomation.Models.Text.Element("{LeftHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)VABOX.AlignmentHorizontal.Left;
@@ -189,7 +189,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_ParagraphCenter()
+        public void ParagraphCenter()
         {
             var m = new VisioAutomation.Models.Text.Element("{CenterHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)VABOX.AlignmentHorizontal.Center;
@@ -206,7 +206,7 @@ namespace VTest.Models
             page1.Delete(0);
         }
 
-        public void DomText_ParagraphRight()
+        public void ParagraphRight()
         {
             var m = new VisioAutomation.Models.Text.Element("{RightHAlign}");
             m.ParagraphFormatting.HorizontalAlign = (int)VABOX.AlignmentHorizontal.Right;

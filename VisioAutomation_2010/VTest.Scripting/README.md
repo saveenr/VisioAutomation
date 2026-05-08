@@ -10,17 +10,17 @@ One file per VisioScripting subsystem under test:
 
 | Area | File |
 |---|---|
-| Application client | `Scripting_ApplicationTests.cs`, `Scripting_ClientTests.cs` |
-| Document operations | `Scripting_DocumentTests.cs` |
-| Page operations | `Scripting_PageTests.cs` |
-| Shape arrangement | `Scripting_ArrangeTests.cs`, `Scripting_GroupTests.cs`, `Scripting_SelectionTests.cs` |
-| Connections | `Scripting_ConnectTests.cs`, `Scripting_ConnectionPointTests.cs` |
-| Shape attributes | `Scripting_ControlTests.cs`, `Scripting_CustomPropTests.cs`, `Scripting_HyperlinkTests.cs` |
-| Text | `Scripting_ShapeText_Tests.cs` |
-| ShapeSheet | `Scripting_ShapeSheetTests.cs` |
-| Drop / draw | `Scripting_DrawManualShapes.cs`, `Scripting_DropContainerTests.cs`, `Scripting_DropMasterTests.cs` |
-| Export | `Scripting_ExportTests.cs` |
-| Developer-mode toggles | `Scripting_DevTests.cs` |
+| Application client | `ApplicationTests.cs`, `ClientTests.cs` |
+| Document operations | `DocumentTests.cs` |
+| Page operations | `PageTests.cs` |
+| Shape arrangement | `ArrangeTests.cs`, `GroupTests.cs`, `SelectionTests.cs` |
+| Connections | `ConnectTests.cs`, `ConnectionPointTests.cs` |
+| Shape attributes | `ControlTests.cs`, `CustomPropTests.cs`, `HyperlinkTests.cs` |
+| Text | `ShapeTextTests.cs` |
+| ShapeSheet | `ShapeSheetTests.cs` |
+| Drop / draw | `DrawManualShapesTests.cs`, `DropContainerTests.cs`, `DropMasterTests.cs` |
+| Export | `ExportTests.cs` |
+| Developer-mode toggles | `DevTests.cs` |
 
 ## Test pattern
 

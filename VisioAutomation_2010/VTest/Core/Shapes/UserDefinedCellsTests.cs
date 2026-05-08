@@ -19,7 +19,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_GetSet()
+        public void GetSet()
         {
             var page1 = this.GetNewPage();
 
@@ -81,7 +81,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_GetFromMultipleShapes()
+        public void GetFromMultipleShapes()
         {
             var page1 = this.GetNewPage();
 
@@ -102,7 +102,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_GetFromMultipleShapes_WithAdditionalProps()
+        public void GetFromMultipleShapes_WithAdditionalProps()
         {
             var page1 = this.GetNewPage();
 
@@ -147,7 +147,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_SetMultipleTimes()
+        public void SetMultipleTimes()
         {
             var page1 = this.GetNewPage();
 
@@ -178,7 +178,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_InvalidNames()
+        public void InvalidNames()
         {
             if (!VA.Shapes.UserDefinedCellHelper.IsValidName("A"))
             {
@@ -202,7 +202,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_CheckInvalidNamesNotAllowed()
+        public void CheckInvalidNamesNotAllowed()
         {
             bool caught = false;
             var page1 = this.GetNewPage();
@@ -225,7 +225,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_SetAdditionalProperties()
+        public void SetAdditionalProperties()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -237,7 +237,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_GetNames()
+        public void GetNames()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -278,7 +278,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_SetForMultipleShapes()
+        public void SetForMultipleShapes()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -313,7 +313,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_ValueQuoting()
+        public void ValueQuoting()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -343,7 +343,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_UnencodedValueCharacterization()
+        public void UnencodedValueCharacterization()
         {
             // Issue #144 — UserDefinedCellCells parallel to the CustomPropertyCells
             // String-type characterization. UDC has no Type concept; both Formula and
@@ -465,7 +465,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void UserDefinedCells_TypedSetters_RoundTrip()
+        public void TypedSetters_RoundTrip()
         {
             // Issue #144 — verify SetString / SetFormula produce values that
             // round-trip through UserDefinedCellHelper.Set + GetDictionary.

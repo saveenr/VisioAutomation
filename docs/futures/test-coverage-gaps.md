@@ -38,8 +38,8 @@ For orientation. These are areas where a reasonable reader looking for "what's t
 - `VisioAutomation.Application.UndoScope` — 6 tests covering simple, nested, abort, and abort-nested scenarios.
 - `VisioAutomation.ShapeSheet.Writers` and `Query` — 13 tests covering single/multi-shape, formulas, results-int/string/double, consistency checking, section-row handling, out-of-order verification.
 - `VisioAutomation.Shapes.UserDefinedCellHelper` and `CustomPropertyHelper` — 21 tests across the two helpers covering get/set, multi-shape, name validation, value quoting, encoded-vs-raw characterization, typed-setters round-trip.
-- `VisioAutomation.Models.DOM` core types (Document, Page, Shape, Connector, ShapeList, ...) — 17 tests in `DOM_Tests.cs`.
-- `VisioAutomation.Models.Layouts.DirectedGraph` — 22 tests in `DrawModel_DirectedGraph.cs` covering renderer + MSAGL options + node sizing (incl. the [#82](https://github.com/saveenr/VisioAutomation/issues/82) regression).
+- `VisioAutomation.Models.DOM` core types (Document, Page, Shape, Connector, ShapeList, ...) — 17 tests in `DomTests.cs`.
+- `VisioAutomation.Models.Layouts.DirectedGraph` — 22 tests in `DirectedGraphDrawModelTests.cs` covering renderer + MSAGL options + node sizing (incl. the [#82](https://github.com/saveenr/VisioAutomation/issues/82) regression).
 - `VisioAutomation.Models.Documents.OrgCharts` — 5 tests covering layout direction, styling, hierarchy.
 
 ## Gap list — High priority
@@ -78,7 +78,7 @@ Public command-set classes consumed by cmdlets, no dedicated `Scripting_*Tests.c
 - `LockCommands` — direct backing for `Lock-VisioShape` / `Unlock-VisioShape`. Adding tests here also helps secure the 4.6.1 fix surface.
 - `ModelCommands` — backing for `Import-VisioModel`. The DOM/DirectedGraph/OrgChart drawing flows in `VTest.Models` exercise this transitively but no direct test pins the command-set surface.
 - `OutputCommands` — backing for `Out-Visio`. Probably small surface but currently unverified.
-- `UndoCommands` — `client.Undo.UndoLastAction()` is touched once in `Scripting_ApplicationTests`, but undo/redo at the command-set level (incl. `BeginUndoScope` / `EndUndoScope` shapes) is not directly tested.
+- `UndoCommands` — `client.Undo.UndoLastAction()` is touched once in `ApplicationTests`, but undo/redo at the command-set level (incl. `BeginUndoScope` / `EndUndoScope` shapes) is not directly tested.
 - `UserDefinedCellCommands` — `VisioAutomation.Shapes.UserDefinedCellHelper` is well tested; the scripting-layer wrapper that aggregates over `TargetShapes` is not.
 - `ViewCommands` — zoom / view-mode scripting; surface is small but unguarded.
 
@@ -122,18 +122,18 @@ These are exercised transitively, so the priority here is medium not high. Still
 
 ### `VisioAutomation.Models.Layouts.Grid` and `Layouts.Tree`
 
-- `GridLayout` — 1 test (`DrawModel_Grid.Scripting_Draw_DataTable` analog). Column-direction, row-direction, mixed-orientation untested.
-- `TreeLayout` — 2 tests (`Tree_Tests`: SingleNode, MultiNode). Layout-direction variants, connector-type variants, orientation untested.
+- `GridLayout` — 1 test (`GridDrawModelTests.RenderGrid_FromSampleData_DoesNotThrow` analog). Column-direction, row-direction, mixed-orientation untested.
+- `TreeLayout` — 2 tests (`TreeTests`: SingleNode, MultiNode). Layout-direction variants, connector-type variants, orientation untested.
 
 For comparison: `Layouts.DirectedGraph` (similar complexity) has 22 tests. Grid and Tree are under-covered relative to their public surface.
 
 ### `VisioAutomation.Models.LayoutStyles`
 
-12 styling-config classes (`CircularLayoutStyle`, `CompactTreeLayout`, `FlowchartLayoutStyle`, `HierarchyLayoutStyle`, `RadialLayoutStyle`, plus enum companions). Tested only insofar as a `DrawModel_*` test happens to use one. No dedicated style-construction or style-effect tests.
+12 styling-config classes (`CircularLayoutStyle`, `CompactTreeLayout`, `FlowchartLayoutStyle`, `HierarchyLayoutStyle`, `RadialLayoutStyle`, plus enum companions). Tested only insofar as a `*DrawModelTests` test happens to use one. No dedicated style-construction or style-effect tests.
 
 ### `VisioAutomation.Models.Text` (DOM-side text formatting)
 
-12 text-tree types (`Field`, `CustomField`, `FieldBase`, `Element`, `Literal`, `CharacterFormatting`, `ParagraphFormatting`, `NodeList<T>`, `Node`, `NodeType`, `CharStyle`, `FieldConstants`). 1 dedicated test (`Dom_Text_Tests`). The model side of the rich-text DOM is significantly under-covered.
+12 text-tree types (`Field`, `CustomField`, `FieldBase`, `Element`, `Literal`, `CharacterFormatting`, `ParagraphFormatting`, `NodeList<T>`, `Node`, `NodeType`, `CharStyle`, `FieldConstants`). 1 dedicated test (`DomTextTests`). The model side of the rich-text DOM is significantly under-covered.
 
 ### `VisioScripting` core types (target/wildcard resolution)
 
@@ -170,21 +170,21 @@ Tested only when their parent type is tested:
 - `VisioAutomation.Exceptions.{AutomationException, VisioOperationException, InternalAssertionException}` — exception types with no custom logic.
 - `VisioAutomation.Models.Data.XmlModel` — used internally by `DataTableModel`; tested transitively.
 - `VisioScripting/Helpers/{InteropHelper, ReflectionHelper, SelectionHelper}` — small reflection/coercion helpers; tested transitively. `ReflectionHelper.NamingOptions` is consumed by `DeveloperCommands` which has 1 test.
-- `VisioScripting/Models/{EnumType, EnumValue, ShapeSheetReader, ShapeSheetWriter, PageDimensions, ShapeDimensions}` — `ShapeSheetReader` / `ShapeSheetWriter` are non-trivial; tested transitively via `Scripting_ShapeSheetTests`.
-- `VisioScripting/Loaders/{OrgChartDocumentLoader, DirectedGraphDocumentLoader}` — covered transitively by `VTest.Models.DrawModel_OrgChartTests` (5) and `DrawModel_DirectedGraph` (22).
+- `VisioScripting/Models/{EnumType, EnumValue, ShapeSheetReader, ShapeSheetWriter, PageDimensions, ShapeDimensions}` — `ShapeSheetReader` / `ShapeSheetWriter` are non-trivial; tested transitively via `ShapeSheetTests`.
+- `VisioScripting/Loaders/{OrgChartDocumentLoader, DirectedGraphDocumentLoader}` — covered transitively by `VTest.Models.OrgChartDrawModelTests` (5) and `DirectedGraphDrawModelTests` (22).
 - `VisioAutomation.ShapeSheet.Streams.{StreamArray, StreamType}` — covered transitively by writer tests.
 - `VisioAutomation.ShapeSheet.Data.{DataColumns, DataColumn, DataRows<T>, DataRow<T>, DataRowGroups<T>, DataRowGroup<T>}` — covered transitively by `SectionQuery` tests.
 - `VisioAutomation.ShapeSheet.CellRecords.{CellRecord, CellRecords<T>, CellRecordsGroup<T>, CellRecordBuilderCellQuery<T>, CellRecordBuilderSectionQuery<T>}` — base types for the cell-record hierarchy; tested transitively.
 - `VisioAutomation.Models.Layouts.InternalTree.{AlignmentVertical, ParentChildConnection<U>}` — internal helpers for `TreeLayout`.
-- `VisioAutomation.Models.DOM.{NodeList<T>, Node, BaseShape, MasterRef, RenderPerformanceSettings, Hyperlink}` — DOM scaffolding; tested transitively via `DOM_Tests`.
-- `VisioAutomation.Models.Documents.OrgCharts.{Node, NodeList}` — covered transitively by `DrawModel_OrgChartTests`.
+- `VisioAutomation.Models.DOM.{NodeList<T>, Node, BaseShape, MasterRef, RenderPerformanceSettings, Hyperlink}` — DOM scaffolding; tested transitively via `DomTests`.
+- `VisioAutomation.Models.Documents.OrgCharts.{Node, NodeList}` — covered transitively by `OrgChartDrawModelTests`.
 
 ## Suggested first slice for follow-up implementation
 
 If this list is pulled into actual test-writing work, the highest leverage cuts are:
 
 1. **PowerShell cmdlet binding tests for `Lock-`, `Unlock-`, `Export-VisioShape`, `New-VisioShape`, and `Connect-VisioShape`.** Five cmdlets, ~10 tests, directly guards the regression class that shipped in 4.6.1 and unblocks closing [#163](https://github.com/saveenr/VisioAutomation/issues/163) once [#164](https://github.com/saveenr/VisioAutomation/issues/164) is decided.
-2. **A `Scripting_LockTests.cs` and `Scripting_LayerTests.cs` in `VTest.Scripting`.** Two new files at the same shape as the existing 19, ~5 tests total, covers two of the eight fully-untested command sets and reinforces (1).
+2. **A `LockTests.cs` and `LayerTests.cs` in `VTest.Scripting`.** Two new files at the same shape as the existing 19, ~5 tests total, covers two of the eight fully-untested command sets and reinforces (1).
 3. **A `VTest.Models\FormsTests.cs`.** Closes the only sub-package of `VisioAutomation.Models` with zero coverage and pins the gitbook `models/forms` snippet.
 
 The remainder of the list is hygiene: each item is small but the aggregate is open-ended. Any follow-up implementation issue should pick a cap (e.g. "add 30-50 tests targeting the high-priority list") rather than chase the whole audit.

@@ -5,7 +5,7 @@ namespace VTest.Core
     {
 
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
-        public void CellValueLiteral_Equivalence()
+        public void Equivalence()
         {
             // uninitialized CVTs are equal
             VisioAutomation.Core.CellValue c0;
@@ -39,7 +39,7 @@ namespace VTest.Core
         }
 
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
-        public void CellValueLiteral_Creation()
+        public void Creation()
         {
             // unitialized means it has no value
             VisioAutomation.Core.CellValue c0;
@@ -68,7 +68,7 @@ namespace VTest.Core
         }
 
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
-        public void CellValueLiteral_EncodeValue()
+        public void EncodeValue()
         {
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(null, VisioAutomation.Core.CellValue.EncodeValue(null));
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("", VisioAutomation.Core.CellValue.EncodeValue(""));

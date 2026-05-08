@@ -12,7 +12,7 @@ namespace VTest.Core.ShapeSheet
         private static readonly VisioAutomation.Core.Src LinePattern = VisioAutomation.Core.SrcConstants.LinePattern;
 
         [MUT.TestMethod]
-        public void ShapeSheet_Writer_Formulas_MultipleShapes()
+        public void Formulas_MultipleShapes()
         {
             var page1 = this.GetNewPage();
 
@@ -53,7 +53,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Writer_ResultsInt_SingleShape()
+        public void ResultsInt_SingleShape()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -80,7 +80,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Writer_Write_nothing()
+        public void Write_nothing()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -93,7 +93,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Writer_ResultsString_SingleShape()
+        public void ResultsString_SingleShape()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -119,7 +119,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Writer_ResultsDouble_MultipleShapes()
+        public void ResultsDouble_MultipleShapes()
         {
             var page1 = this.GetNewPage();
 
@@ -160,7 +160,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void ShapeSheet_Writer_ConsistencyChecking()
+        public void ConsistencyChecking()
         {
             this.Check_Consistent_ResultTypes();
         }

@@ -8,12 +8,12 @@ Test project for the **VisioAutomation.Models** library — DOM, geometry, layou
 
 | Area | Files |
 |---|---|
-| DOM (declarative shape construction) | `Dom_Tests.cs`, `Dom_Text_Tests.cs` |
-| Layout primitives (boxes, containers) | `Layout_BoxTests.cs`, `Layout_ContainerTests.cs` |
+| DOM (declarative shape construction) | `DomTests.cs`, `DomTextTests.cs` |
+| Layout primitives (boxes, containers) | `BoxLayoutTests.cs`, `ContainerLayoutTests.cs` |
 | Geometry / math | `BezierTests.cs`, `BoundingBoxHelperTests.cs` |
-| Tree algorithms (used by orgchart) | `Tree_Tests.cs` |
-| Drawing scenarios | `DrawModel_DirectedGraph.cs`, `DrawModel_OrgChartTests.cs`, `DrawModel_Grid.cs`, `DrawModel_DataTable.cs` |
-| Scripting × Models integration | `Scripting_DropContainerTests.cs` |
+| Tree algorithms (used by orgchart) | `TreeTests.cs` |
+| Drawing scenarios | `DirectedGraphDrawModelTests.cs`, `OrgChartDrawModelTests.cs`, `GridDrawModelTests.cs`, `DataTableDrawModelTests.cs` |
+| Scripting × Models integration | `DropContainerScriptingTests.cs` |
 
 ## Test pattern
 
@@ -23,7 +23,7 @@ This project's own `AssemblyHooks.cs` carries the `[AssemblyCleanup]` that close
 
 ## Visio version sensitivity
 
-`DrawModel_OrgChartTests` and `Dom_DrawOrgChart` opens a stencil whose filename changed in Visio 2013. The test code version-guards on `app.Version` to pick `orgchart.vst` (Visio < 15) vs `orgch_u.vstx` (Visio ≥ 15) — see commit `da9bba0a`. If you add new orgchart-flavored tests, follow the same pattern.
+`OrgChartDrawModelTests` and `DomTests.DrawOrgChart` open a stencil whose filename changed in Visio 2013. The test code version-guards on `app.Version` to pick `orgchart.vst` (Visio < 15) vs `orgch_u.vstx` (Visio ≥ 15) — see commit `da9bba0a`. If you add new orgchart-flavored tests, follow the same pattern.
 
 ## Running
 
