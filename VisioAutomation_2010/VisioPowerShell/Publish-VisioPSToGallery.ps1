@@ -4,7 +4,8 @@
 #
 # Steps performed:
 #   1. Read the version from Visio.psd1
-#   2. Stage the Debug build into the user's modules folder (calls InstallForCurrentUser.ps1)
+#   2. Stage the Release build into the user's modules folder (calls
+#      InstallForCurrentUser.ps1 -Configuration Release)
 #   3. Publish the staged module to the PowerShell Gallery
 #   4. Tag HEAD as VisioPS_<version> and push the tag to origin (idempotent:
 #      if the tag already exists at HEAD, skipped silently -- supports running
@@ -14,7 +15,7 @@
 # CANONICAL RELEASE FLOW
 # ----------------------
 # The preferred release flow is now CI-driven:
-#   1. Trigger .github/workflows/release-psmodule.yml manually. Builds Debug,
+#   1. Trigger .github/workflows/release-psmodule.yml manually. Builds Release,
 #      stages the module, creates the GitHub Release tagged VisioPS_<version>
 #      with the staged module zip attached.
 #   2. Trigger .github/workflows/publish-psmodule.yml with the tag from step 1.
@@ -35,7 +36,9 @@
 # PREREQUISITES
 # -------------
 # - You must be the package owner of "Visio" on the PowerShell Gallery.
-# - The solution must already be built (Debug). Run MSBuild beforehand if needed.
+# - The solution must already be built in Release. Run
+#   `msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Release -m`
+#   beforehand if needed.
 # - Working tree should be clean and HEAD should be the commit you want to tag.
 # - Use a fresh PowerShell session -- if another session has the Visio module
 #   loaded, the staging step will fail (locked DLLs).
@@ -124,8 +127,8 @@ if ($ps_edition -eq 'Core') {
 }
 
 # ----- Step 1: stage the build -----
-Write-Host "[1/3] Staging module via InstallForCurrentUser.ps1 ..."
-& $install_script
+Write-Host "[1/3] Staging Release build via InstallForCurrentUser.ps1 -Configuration Release ..."
+& $install_script -Configuration Release
 # Don't trust $LASTEXITCODE here -- InstallForCurrentUser.ps1's last native
 # command is robocopy, which uses bit-flag exit codes where 0 means "no files
 # copied" and 1 means "files copied successfully". Both are non-failures, but

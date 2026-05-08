@@ -2,7 +2,7 @@ name: Release Visio PowerShell module
 
 # Manual-trigger workflow for cutting a binary release of the Visio
 # PowerShell module. Reads the version from Visio.psd1, builds the
-# solution Debug, stages the module's bin/Debug into a zip, and
+# solution Release, stages the module's bin/Release into a zip, and
 # creates a GitHub Release tagged VisioPS_<version> with the zip
 # attached.
 #
@@ -58,8 +58,8 @@ jobs:
       - name: Restore solution NuGet packages
         run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
 
-      - name: Build solution (Debug)
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
+      - name: Build solution (Release)
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Release -m
 
       - name: Read module version and check tag does not exist
         id: version
@@ -80,12 +80,13 @@ jobs:
         shell: pwsh
         run: |
           $version = '${{ steps.version.outputs.version }}'
-          $bin = 'VisioAutomation_2010\VisioPowerShell\bin\Debug'
+          $bin = 'VisioAutomation_2010\VisioPowerShell\bin\Release'
           $staging = 'artifacts\Visio'
           New-Item -ItemType Directory -Force -Path $staging | Out-Null
-          # Mirror bin/Debug into the staging folder. Same content
-          # InstallForCurrentUser.ps1 copies for dev installs, just to
-          # a workspace path instead of $home\Documents\WindowsPowerShell\Modules.
+          # Mirror bin/Release into the staging folder. Same content
+          # InstallForCurrentUser.ps1 -Configuration Release would copy for
+          # local publish, just to a workspace path instead of
+          # $home\Documents\WindowsPowerShell\Modules.
           Copy-Item -Path "$bin\*" -Destination $staging -Recurse -Force
           # Sanity-check that the manifest and key DLLs landed
           $required = @('Visio.psd1', 'Visio.Types.ps1xml', 'VisioPS.dll', 'VisioScripting.dll')

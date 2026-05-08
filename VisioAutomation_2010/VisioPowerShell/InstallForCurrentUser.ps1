@@ -2,14 +2,24 @@
 # -------
 # Manually installs the Visio PowerShell module into the user's PowerShell folder
 #
-# This is useful when you want to try out the module without going through all the work of 
+# This is useful when you want to try out the module without going through all the work of
 # creating a module an then installing it with Import-Modile
+#
+# Defaults to staging the Debug build (faster dev iteration). Pass -Configuration Release
+# to stage the Release build instead; that's what Publish-VisioPSToGallery.ps1 uses for
+# actual public-feed releases.
 #
 # NOTES
 # -----
-# - If another PowerShell session has the Visio PS module loaded, then the VisioPS binaries cannot 
+# - If another PowerShell session has the Visio PS module loaded, then the VisioPS binaries cannot
 #   be replaced by this script because those binaries are locked. In this case, those PS sessions
 #   must be terminated before the script will work
+
+[CmdletBinding()]
+param(
+    [ValidateSet('Debug','Release')]
+    [string]$Configuration = 'Debug'
+)
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
@@ -66,7 +76,7 @@ function Test-Locked($filePath)
 # -------------------------------------------
 # User-supplied information about this module
 $module_foldername = "Visio"
-$release = "Debug"
+$release = $Configuration
 
 # -------------------
 # Calculate the paths

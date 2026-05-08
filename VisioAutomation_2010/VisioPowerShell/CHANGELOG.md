@@ -14,6 +14,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ### Changed
 - Module manifest's `Author` and `Copyright` fields updated from `Saveen Reddy` to `SevenPens` to reflect the new dev-team identity. No functional change; the displayed-author string on the [PSGallery package page](https://www.powershellgallery.com/packages/Visio) updates on the next release. Legal copyright record (LICENSE.txt) updated correspondingly.
+- Module is now built and published as **Release** instead of Debug. The published `.zip` and PSGallery package contain optimized binaries with no `[Debuggable]` attribute and no `.pdb` symbol files. No source-level behavior change (the C# source has no `#if DEBUG` blocks) but assemblies are smaller and JIT optimizations are no longer suppressed. Closes [#177](https://github.com/saveenr/VisioAutomation/issues/177).
 
 ## [4.7.2] - 2026-05-06
 
