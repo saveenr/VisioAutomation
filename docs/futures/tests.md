@@ -13,6 +13,18 @@ Backlog of test-related items. For test-suite design and conventions see [`../TE
 - **History:** This was the only remaining angle of the original *General cleanup of the test projects* entry. The other angles all completed: the test-discovery linter (MSTest.Analyzers + MSTEST0030 enforcement) and per-project READMEs / `docs/TESTING.md` shipped as the test-cleanup pass; the MSB3270 x86/AnyCPU mismatch + `<TestProjectType>` cruft + `Vtest.Models.csproj` filename casing all resolved as side effects of SDK migration Pass 2b. See [`../COMPLETED.md`](../COMPLETED.md#tests) for detail.
 - **Effort:** Audit itself was ~1 day. Closing the gaps is open-ended; the audit doc suggests a capped first slice rather than chasing the whole list.
 
+### Test naming drift
+- **What:** A 2026-05-07 audit of all 211 test method names found four competing styles and ~25 worst-offender names that are vague or numbered without scenario hints. Convention now codified in [`../TESTING.md`](../TESTING.md#naming-conventions). The forward-looking question (new tests follow the convention) is closed; the backward-looking question (rename existing offenders) is open.
+- **Worst offenders &mdash; rename targets:**
+  - **Numbered-suffix series with no scenario hint:** `Path_TestTransitiveClosure0/1/2/3/4` (5), `Scripting_Connects_Scenario_0/1/3` (3, with no `_2`), `Scripting_Draw_DirectedGraph1/2/3/4` (4), `Container_Diagram1/2` (2), `Scripting_Test_Resize_Application_Window1/2` (2), `Dom_ConnectShapes` + `Dom_ConnectShapes2` (2, the second has no scenario hint), `XmlErrorLog_Load_Visio2010_1` and `XmlErrorLog_Load_Visio2013_1` (solitary `_1` of nothing), `Scripting_Nudge2` (no `Nudge1`), `Scripting_Page_DuplicationToDoc1`, `Scripting_Draw_RectangleLineOval_0`, `Scripting_Draw_BezierPolyLine_0`, `Connect1`.
+  - **Redundant `Test_` infix:** `Scripting_Test_App_to_Front`, `Scripting_Test_Export_Selection_SVGHTML`, `BoxLayout_Test_empty/single_node/single_node_padding`, `TestBezierFromArcs`, `TestStencilLocation`.
+  - **Inconsistent prefix within file:** `XmlErrorLogTests.cs` mixes `VSD_Load_*` and `XmlErrorLog_Load_*`; `Scripting_ClientTests.cs` mixes `Scripting_*`, `DrawVA*`, and bare names.
+  - **Vague single-word names:** `Basics`, `QueryPage`, `Connect1`.
+  - **File-name drift:** `Path_Test.cs` &rarr; `PathTests.cs`, `ConnectionPoint_Tests.cs` &rarr; `ConnectionPointTests.cs`, `Dom_Text_Tests.cs` &rarr; `DomTextTests.cs`.
+- **Out of scope here:** the *"Scenarios" kitchen-sink* tests (`Scripting_Hyperlinks_Scenarios`, `Scripting_Selection_Scenarios`, etc.). Splitting them is real test-writing work and overlaps with the medium-priority list in [`test-coverage-gaps.md`](test-coverage-gaps.md). Track those there, not here.
+- **Status:** Tracked as [#165](https://github.com/saveenr/VisioAutomation/issues/165) in CY26Q2. Forward-looking convention shipped 2026-05-07.
+- **Effort:** S &mdash; the rename pass itself is mechanical. Pure test-method renames are safe (no external consumers found in `.runsettings` / `.vsmdi` / `.playlist` / CI filters; only MSTest discovery, which is attribute-based, and IDE Test Explorer, which is display-only).
+
 ### Evaluate modern testing-stack options
 - **What:** The test code was written years ago against the framework choices then current (MSTest + standard `Assert.*` calls + a custom `Framework.VTest` base class for shared setup). The 2025-era .NET test ecosystem has evolved meaningfully; some pieces fit this codebase, others don't. This entry is the curated survey, not a commitment.
 - **Worth considering, in priority order:**

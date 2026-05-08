@@ -82,6 +82,39 @@ The rule excludes `abstract` classes by design, so a `[TestClass]`-less abstract
 
 The other MSTEST00xx rules ship at default severity (mostly warnings). They've found one real issue so far (an `Assert.AreEqual` argument-order swap, fixed alongside the analyzer wiring). If you bump a rule's severity, document the reason in `.editorconfig` so the choice is explainable later.
 
+## Naming conventions
+
+### Test methods
+
+New tests should follow `Subject_Scenario_ExpectedOutcome`:
+
+- `Loader_ConnectorType_DefaultsToCurvedWhenAttributeMissing`
+- `DirectedGraph_NodeSizeIsHonored_WhenCellsAlsoSet`
+- `Application_UndoScope_NestedInner`
+- `VisioPS_GetVisioShape_NoArgs_ReturnsAllShapesOnPage`
+- `VisioPS_SetVisioUserDefinedCell_EncodesValueAndPrompt`
+
+Each segment carries information: `Subject` says *what* is under test, `Scenario` says *under what conditions*, `ExpectedOutcome` says *what should happen*. A failure message that includes only the test name should be enough to know roughly what broke.
+
+### Anti-patterns to avoid
+
+- **Numbered suffixes without a scenario hint.** `Path_TestTransitiveClosure0/1/2/3/4`, `Container_Diagram1/2`, `Dom_ConnectShapes2`, solitary `_1` of nothing (`XmlErrorLog_Load_Visio2010_1`). Numbers are fine *after* a descriptive scenario (`OrgChart_FiveNodes` is OK), but `_2` alone is uninformative.
+- **"Scenarios" / "Scenario" kitchen-sinks.** `Scripting_Hyperlinks_Scenarios` admits the test does many things in one method — when it fails, the failure tells you nothing about which scenario broke. Split into separately-named tests; one assertion-focused method per scenario.
+- **Redundant `Test_` infix.** `Scripting_Test_Resize_Application_Window1` is two redundant words: `Scripting_` is the prefix, every method is a test. Drop both — `Application_ResizeWindow_TaskbarHidden` says more in less.
+- **Vague single-word names.** `Basics`, `QueryPage`, `Connect1` — open the body to know what's being verified.
+- **Inconsistent prefix within a single file.** Pick one prefix per file (the area or class under test) and stick to it. Mixing `VSD_Load_*` with `XmlErrorLog_Load_*` in the same class is purely historical drift.
+
+### Test files
+
+`<Subject>Tests.cs`. PascalCase, plural `Tests`, no underscores between subject and `Tests`:
+
+- ✅ `BoundingBoxHelperTests.cs`, `ApplicationHelperTests.cs`, `DOM_Tests.cs` (the `DOM_` is the subject; the tail is bare `Tests`).
+- ❌ `Path_Test.cs` (singular), `ConnectionPoint_Tests.cs` (extra underscore), `Dom_Text_Tests.cs` (extra underscore).
+
+### Test classes
+
+Match the file name. Marked `[TestClass]` directly on the concrete class — MSTest 4.x doesn't inherit it from `Framework.VTest`, and MSTEST0030 (promoted to error) catches violations at build time. See *Quality gates* above.
+
 ## Running
 
 See [BUILDING.md](BUILDING.md) for IDE flow, `vstest.console.exe` invocation, and the dev-pack install requirement. Quick reminders:
