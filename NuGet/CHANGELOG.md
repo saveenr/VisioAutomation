@@ -28,6 +28,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 ### Changed
 - Package metadata's `<authors>` and `<copyright>` fields updated from `saveenr` / `Copyright Saveen Reddy` to `SevenPens` / `Copyright SevenPens` to reflect the new dev-team identity. No functional change; the displayed-author string on the [nuget.org package page](https://www.nuget.org/packages/VisioAutomation2010) updates on the next release. Legal copyright record (LICENSE.txt) updated correspondingly.
 
+### Removed
+- Vestigial `<frameworkAssembly>` reference to `Microsoft.Office.Interop.Visio` in `VisioAutomation2010.nuspec`. The PIA is already bundled directly through the package's `<files>` section, so the additional declaration was redundant and was technically misleading (a `<frameworkAssembly>` reference implies the assembly ships with the .NET Framework itself, which the Visio PIA does not). No consumer behavior change. Closes [#176](https://github.com/saveenr/VisioAutomation/issues/176).
+
 ## [3.0.0] - 2026-05-07
 
 Major version bump. Several behavior changes that affect callers:
