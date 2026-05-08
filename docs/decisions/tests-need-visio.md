@@ -40,7 +40,7 @@ Approach 2, exclusively. There is no mock or fake Visio. Every test in `VTest`, 
 
 A small subset of tests does *not* need Visio because it tests pure file-I/O or metadata, not COM behavior. Two extant examples as of 2026-05-07:
 
-- [`VisioPS_Manifest_Tests`](../../VisioAutomation_2010/VTest.PowerShell/VisioPS_Manifest_Tests.cs) &mdash; `CmdletsToExport` drift check between the compiled assembly and the `Visio.psd1` manifest.
+- [`ManifestTests`](../../VisioAutomation_2010/VTest.PowerShell/ManifestTests.cs) &mdash; `CmdletsToExport` drift check between the compiled assembly and the `Visio.psd1` manifest.
 - [`XmlErrorLogTests`](../../VisioAutomation_2010/VTest/Core/Application/XmlErrorLogTests.cs) &mdash; XML parsing of pre-captured Visio error logs.
 
 These tests don't reference `IVisio.Application`, don't go through `Framework.VTest.GetVisioApplication()`, and don't trip the singleton lifecycle. They run identically with or without a Visio install.

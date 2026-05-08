@@ -19,7 +19,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void GetSet()
+        public void Set_AndGet_AndDelete_RoundTripSinglePropertyAndPrompt()
         {
             var page1 = this.GetNewPage();
 
@@ -178,7 +178,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void InvalidNames()
+        public void IsValidName_AcceptsValidIdentifiersAndRejectsInvalidOnes()
         {
             if (!VA.Shapes.UserDefinedCellHelper.IsValidName("A"))
             {
@@ -237,7 +237,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void GetNames()
+        public void GetNames_ReturnsKeysOfAllUserDefinedCellsOnShape()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -313,7 +313,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void ValueQuoting()
+        public void Set_QuotesValueAndPromptStrings_BackslashesAreEscaped()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);

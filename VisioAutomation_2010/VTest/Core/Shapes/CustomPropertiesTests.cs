@@ -10,7 +10,7 @@ namespace VTest.Core.Shapes
     public class CustomPropertiesTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Names()
+        public void IsValidName_AcceptsValidIdentifiersAndRejectsInvalidOnes()
         {
             MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName(null));
             MUT.Assert.IsFalse(VA.Shapes.CustomPropertyHelper.IsValidName(string.Empty));
@@ -22,7 +22,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void SimpleCP()
+        public void Set_AddsSinglePropertyToShape()
         {
             var page1 = this.GetNewPage();
 
@@ -122,7 +122,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void AllTypes()
+        public void Set_RoundTripsAllSupportedPropertyTypes()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 1, 1);

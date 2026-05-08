@@ -6,7 +6,7 @@ namespace VTest.Scripting
     public class GroupTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Grouping()
+        public void Group_AndUngroup_OnFourShapes_RoundTripsSelectionCount()
         {
             var client = this.GetScriptingClient();
 

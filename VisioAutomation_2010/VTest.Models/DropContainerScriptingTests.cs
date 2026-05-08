@@ -10,7 +10,7 @@ namespace VTest.Models
 
 
         [MUT.TestMethod]
-        public void DropContainer_ByMasterName_AddsContainerToPage()
+        public void DropContainer_ByMasterName_AroundSelectedShape_PutsShapeIntoContainer()
         {
             var pagesize = new VA.Core.Size(4, 4);
             var client = this.GetScriptingClient();

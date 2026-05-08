@@ -8,7 +8,7 @@ namespace VTest.Scripting
     public class PageTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Page_NewPage()
+        public void NewPage_OnNewDocument_DoesNotThrow()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
             var client = this.GetScriptingClient();
@@ -19,7 +19,7 @@ namespace VTest.Scripting
 
 
         [MUT.TestMethod]
-        public void Page_Navigation()
+        public void SetActivePage_NavigatesByRelativePosition_AndClampsAtEnds()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
             var client = this.GetScriptingClient();
@@ -59,7 +59,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Page_Duplication()
+        public void DuplicatePage_OnSameDocument_DoesNotThrow()
         {
             var page_size = new VisioAutomation.Core.Size(8.5, 11);
             var client = this.GetScriptingClient();

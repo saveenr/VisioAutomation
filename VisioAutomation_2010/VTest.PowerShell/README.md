@@ -8,8 +8,8 @@ Test project for the **VisioPowerShell** module — the cmdlets shipped to the P
 
 | File | Purpose |
 |---|---|
-| `VisioPS_Basic_Tests.cs` | Cmdlet smoke tests run through an in-process PowerShell session. |
-| `VisioPS_Session.cs` | Wrapper around a `System.Management.Automation.Runspaces` runspace plus the registered cmdlets. |
+| `BasicTests.cs` | Cmdlet smoke tests run through an in-process PowerShell session. |
+| `VisioPSSession.cs` | Wrapper around a `System.Management.Automation.Runspaces` runspace plus the registered cmdlets. |
 | `Framework/VTestPowerShellSession.cs` | Helpers for invoking cmdlets and consuming their pipeline output. |
 | `Framework/VTestPsArray.cs` | Marshaling for cmdlet results that come back as `PSObject[]` / `Array`. |
 | `Framework/Extensions/VTestCmdletExtensions.cs` | Convenience extensions on the session for common cmdlet patterns. |
@@ -18,7 +18,7 @@ Test project for the **VisioPowerShell** module — the cmdlets shipped to the P
 
 Unlike `VTest.Models` and `VTest.Scripting`, this project does **not** inherit from `VTest.Framework.VTest`. The shared base class is built around a Visio singleton accessed directly via COM; here, Visio is created and torn down via the cmdlets themselves through a PowerShell session. Different lifecycle, different test surface.
 
-`VisioPS_Basic_Tests` uses `[ClassInitialize]` to spin up the session and `[ClassCleanup]` to tear it down (closing Visio via the cmdlet, then disposing the runspace). The teardown swallows exceptions deliberately — a teardown failure shouldn't fail an otherwise-green test run.
+`BasicTests` uses `[ClassInitialize]` to spin up the session and `[ClassCleanup]` to tear it down (closing Visio via the cmdlet, then disposing the runspace). The teardown swallows exceptions deliberately — a teardown failure shouldn't fail an otherwise-green test run.
 
 ## Running
 

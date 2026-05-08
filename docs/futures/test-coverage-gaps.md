@@ -20,7 +20,7 @@ The ~211 enumerated method count is slightly under the 215-test runtime count fr
 
 ## Cross-cutting observations
 
-1. **PowerShell cmdlet coverage is the single biggest gap.** 70 cmdlets ship in the module; `VTest.PowerShell\VisioPS_Basic_Tests` covers ~14 of them with functional tests, plus 2 manifest-export tests. The remaining ~56 cmdlets have no dedicated test. Their underlying business logic generally lives in `VisioScripting` command-set classes that *are* tested at the .NET level, but cmdlet-level tests catch a distinct regression class — parameter binding (positional, mandatory, switches), `ParameterSetName` resolution, pipeline binding, output piping. **The four bug fixes shipped in PowerShell module 4.6.1 (Lock/Unlock switch binding, Export inverted file-existence check, `New-VisioShape` polyline minimum-point validation) are exactly the regression class that cmdlet-level tests would have caught.** `VisioPS_Basic_Tests` already has the harness (`VisioPS_Session.InvokeScript<T>`); the gap is fixture-style coverage breadth, not infrastructure.
+1. **PowerShell cmdlet coverage is the single biggest gap.** 70 cmdlets ship in the module; `VTest.PowerShell\BasicTests` covers ~14 of them with functional tests, plus 2 manifest-export tests. The remaining ~56 cmdlets have no dedicated test. Their underlying business logic generally lives in `VisioScripting` command-set classes that *are* tested at the .NET level, but cmdlet-level tests catch a distinct regression class — parameter binding (positional, mandatory, switches), `ParameterSetName` resolution, pipeline binding, output piping. **The four bug fixes shipped in PowerShell module 4.6.1 (Lock/Unlock switch binding, Export inverted file-existence check, `New-VisioShape` polyline minimum-point validation) are exactly the regression class that cmdlet-level tests would have caught.** `BasicTests` already has the harness (`VisioPSSession.InvokeScript<T>`); the gap is fixture-style coverage breadth, not infrastructure.
 
 2. **`VisioScripting` command-set tests are broad but shallow.** 19 of the ~30 `*Commands` classes have a dedicated test file in `VTest.Scripting`, mostly with 1-3 happy-path tests each. Edge cases (multi-shape selection, empty selection, no-active-document, error paths, wildcards) are largely untested. Eight command-set classes have no dedicated test file at all (LayerCommands, LockCommands, ModelCommands, OutputCommands, UndoCommands, UserDefinedCellCommands, ViewCommands; ContainerCommands has only one DropContainer scenario).
 
@@ -48,7 +48,7 @@ Public API, no direct test, and behaviorally meaningful. Closing these gaps catc
 
 ### `VisioPowerShell/Commands` (the big one)
 
-The 56 cmdlets without a `VTest.PowerShell\VisioPS_Basic_Tests` test, grouped by surface area. Suggested coverage shape per cmdlet: 1-2 tests asserting parameter binding (positional / pipeline / switch) plus a happy-path execution returning a non-null result. Heavier behavioral coverage already lives in `VTest.Scripting`.
+The 56 cmdlets without a `VTest.PowerShell\BasicTests` test, grouped by surface area. Suggested coverage shape per cmdlet: 1-2 tests asserting parameter binding (positional / pipeline / switch) plus a happy-path execution returning a non-null result. Heavier behavioral coverage already lives in `VTest.Scripting`.
 
 | Surface | Cmdlets without dedicated tests |
 |---|---|

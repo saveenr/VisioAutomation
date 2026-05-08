@@ -9,7 +9,7 @@ namespace VTest.Core.Extensions
     {
 
         [MUT.TestMethod]
-        public void SetCustomProps1()
+        public void Set_AddsSinglePropertyToShapeViaExtensionMethod()
         {
             var page1 = this.GetNewPage();
 
@@ -120,7 +120,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void PropertyNames()
+        public void GetNames_ReturnsKeysOfAllCustomPropertiesOnShape()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -201,7 +201,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void TryAllTypes()
+        public void Set_RoundTripsAllSupportedPropertyTypesViaExtensionMethod()
         {
             var page1 = this.GetNewPage();
 

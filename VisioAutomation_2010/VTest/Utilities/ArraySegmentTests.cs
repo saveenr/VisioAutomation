@@ -29,7 +29,7 @@ namespace VTest.Utilities
         }
 
         [MUT.TestMethod]
-        public void Segment_read_full_array_exactly()
+        public void GetNextSegment_FillsArrayInThreeChunks_OffsetsAreContiguous()
         {
             // Can fully accomodate an array
 
@@ -52,7 +52,7 @@ namespace VTest.Utilities
         }
 
         [MUT.TestMethod]
-        public void Segment_read_full_array_exactly_multiple_empty_at_end()
+        public void GetNextSegment_AfterArrayConsumed_ReturnsEmptySegmentsAtEndOffset()
         {
             // Can fully accomodate an array and get multiple empty segments at end
 
@@ -83,7 +83,7 @@ namespace VTest.Utilities
         }
 
         [MUT.TestMethod]
-        public void Segment_error_if_asked_to_produce_too_much_1()
+        public void GetNextSegment_RequestPastEnd_ThrowsArgumentOutOfRange()
         {
             // fails if asks too much - current position is in middle of array
 
@@ -98,7 +98,7 @@ namespace VTest.Utilities
         }
 
         [MUT.TestMethod]
-        public void Segment_error_if_asked_to_produce_too_much_2()
+        public void GetNextSegment_RequestOneBeyondLengthAfterEmptyRequest_ThrowsArgumentOutOfRange()
         {
             // fails if asks too much - current position is at start middle strt of array after asking for empty segment
 
@@ -113,7 +113,7 @@ namespace VTest.Utilities
         }
 
         [MUT.TestMethod]
-        public void Segment_ask_for_entire_array_at_once()
+        public void GetNextSegment_RequestEntireArrayInOneChunk_NextRequestThrows()
         {
             // fails if asks too much - current position is at start middle of array
 

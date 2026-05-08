@@ -10,7 +10,7 @@ Test project for the **VisioAutomation** core library, and home of the shared te
 |---|---|
 | Core types | `Core/CellValueLiteralTests.cs`, `Core/TypeTests.cs`, `Core/PageHelperTests.cs`, `Core/ConnectionPoint_Tests.cs` |
 | Application-level | `Core/Application/ApplicationHelperTests.cs`, `Core/Application/XmlErrorLogTests.cs` |
-| Cell records | `Core/CellRecords/CellGroupsTests.cs` |
+| Cell records | `Core/CellRecords/CellRecordTests.cs` |
 | Shape APIs | `Core/Shapes/*.cs` (Connector, Hyperlink, Geometry, CustomProperties, UserDefinedCells, Control, ShapeHelper) |
 | ShapeSheet read/write | `Core/ShapeSheet/ShapeSheetWriterTests.cs`, `Core/ShapeSheet/ShapeSheetQueryTests.cs` |
 | Text formatting | `Core/Text/TextFormatTests.cs`, `Core/Text/TextUtilTests.cs` |

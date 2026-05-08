@@ -167,7 +167,7 @@ namespace VTest.Core.ShapeSheet
         
 
 
-        public void Check_Consistent_ResultTypes()
+        private void Check_Consistent_ResultTypes()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);

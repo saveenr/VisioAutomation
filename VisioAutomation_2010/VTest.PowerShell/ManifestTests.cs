@@ -16,7 +16,7 @@ namespace VTest.PowerShell
     // Pure metadata: no Visio runtime, no PS runspace, no [ClassInitialize].
 
     [MUT.TestClass]
-    public class VisioPS_Manifest_Tests
+    public class ManifestTests
     {
         private static HashSet<string> GetActualCmdletNames()
         {
@@ -36,7 +36,7 @@ namespace VTest.PowerShell
         private static HashSet<string> GetDeclaredCmdletNames()
         {
             // Visio.psd1 is copied next to the test assembly via VTest.PowerShell.csproj.
-            var asmDir = Path.GetDirectoryName(typeof(VisioPS_Manifest_Tests).Assembly.Location);
+            var asmDir = Path.GetDirectoryName(typeof(ManifestTests).Assembly.Location);
             var psd1Path = Path.Combine(asmDir, "Visio.psd1");
             MUT.Assert.IsTrue(
                 File.Exists(psd1Path),
@@ -89,7 +89,7 @@ namespace VTest.PowerShell
         }
 
         [MUT.TestMethod]
-        public void VisioPS_Manifest_CmdletsToExport_HasNoMissingEntries()
+        public void Manifest_CmdletsToExport_HasNoMissingEntries()
         {
             var actual = GetActualCmdletNames();
             var declared = GetDeclaredCmdletNames();
@@ -103,7 +103,7 @@ namespace VTest.PowerShell
         }
 
         [MUT.TestMethod]
-        public void VisioPS_Manifest_CmdletsToExport_HasNoExtraEntries()
+        public void Manifest_CmdletsToExport_HasNoExtraEntries()
         {
             var actual = GetActualCmdletNames();
             var declared = GetDeclaredCmdletNames();

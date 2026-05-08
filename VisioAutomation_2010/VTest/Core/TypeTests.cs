@@ -6,7 +6,7 @@ namespace VTest.Core
     public class TypeTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void VerifySrcSize()
+        public void Src_StructSize_IsSixBytes()
         {
             // Srcs must be 6 bytes
             var c1 = new VisioAutomation.Core.Src();
@@ -16,7 +16,7 @@ namespace VTest.Core
             this.VerifyFormulaLiteralSize();
         }
 
-        public void VerifyFormulaLiteralSize()
+        private void VerifyFormulaLiteralSize()
         {
             // CellValue is a struct holding one managed-string reference, so its
             // marshalled size should equal the pointer size for the running
@@ -29,7 +29,7 @@ namespace VTest.Core
         }
 
         [MUT.TestMethod]
-        public void Construct2DBitArray()
+        public void BitArray2D_Constructor_RequiresPositiveDimensions()
         {
             // check that cols and rows must be > 0
             bool caught = false;

@@ -22,7 +22,7 @@ namespace VTest.Core.Extensions
             this.EnumerateShapes();
         }
 
-        public void EnumerateShapes()
+        private void EnumerateShapes()
         {
             var page1 = this.GetNewPage();
             var app = page1.Application;
@@ -69,7 +69,7 @@ namespace VTest.Core.Extensions
             page1.Delete(0);
         }
 
-        public void EnumeratePages()
+        private void EnumeratePages()
         {
             var doc1 = this.GetNewDoc();
             var docpages = doc1.Pages;
@@ -92,7 +92,7 @@ namespace VTest.Core.Extensions
             doc1.Close(true);
         }
 
-        public void Fonts()
+        private void Fonts()
         {
             var page1 = this.GetNewPage();
             var doc1 = page1.Document;
@@ -110,7 +110,7 @@ namespace VTest.Core.Extensions
             page1.Delete(0);
         }
 
-        public void Masters()
+        private void Masters()
         {
             var doc1 = this.GetNewDoc();
             var app = doc1.Application;
@@ -129,7 +129,7 @@ namespace VTest.Core.Extensions
             doc1.Close(true);
         }
 
-        public void Windows()
+        private void Windows()
         {
             var doc1 = this.GetNewDoc();
             var app = doc1.Application;
@@ -144,7 +144,7 @@ namespace VTest.Core.Extensions
             doc1.Close(true);
         }
 
-        public void Documents()
+        private void Documents()
         {
             var app = this.GetVisioApplication();
             var documents = app.Documents;
@@ -167,7 +167,7 @@ namespace VTest.Core.Extensions
             doc3.Close(true);
         }
 
-        public void Layers()
+        private void Layers()
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
@@ -187,7 +187,7 @@ namespace VTest.Core.Extensions
             doc1.Close(true);
         }
 
-        public void Colors()
+        private void Colors()
         {
             var doc1 = this.GetNewDoc();
             var colors = doc1.Colors;

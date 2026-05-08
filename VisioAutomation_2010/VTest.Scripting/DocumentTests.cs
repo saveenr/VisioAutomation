@@ -7,7 +7,7 @@ namespace VTest.Scripting
     public class DocumentTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Document_Activation()
+        public void ActivateDocument_AmongMultipleOpenDocs_UpdatesActiveDocument()
         {
             var client = this.GetScriptingClient();
             var app = client.Application.GetApplication();

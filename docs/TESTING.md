@@ -29,7 +29,7 @@ These three are load-bearing — every other choice in the test infrastructure f
 
 There is no mock or fake Visio. Tests instantiate `Microsoft.Office.Interop.Visio.Application`, manipulate real shapes, and verify behavior by reading back actual ShapeSheet values.
 
-**Full decision record:** [`decisions/tests-need-visio.md`](decisions/tests-need-visio.md) covers the *why* (mocks would have to reproduce Visio's undocumented quirks), the consequences (no `dotnet test` that runs anywhere; CI today is build-only; self-hosted Windows runner gated for any future test-CI per [`futures/build-and-code.md`](futures/build-and-code.md#run-tests-in-ci)), and the de-facto no-Visio test bucket that's emerging (`VisioPS_Manifest_Tests`, `XmlErrorLogTests`).
+**Full decision record:** [`decisions/tests-need-visio.md`](decisions/tests-need-visio.md) covers the *why* (mocks would have to reproduce Visio's undocumented quirks), the consequences (no `dotnet test` that runs anywhere; CI today is build-only; self-hosted Windows runner gated for any future test-CI per [`futures/build-and-code.md`](futures/build-and-code.md#run-tests-in-ci)), and the de-facto no-Visio test bucket that's emerging (`ManifestTests`, `XmlErrorLogTests`).
 
 ### 2. Tests run sequentially, not in parallel
 
@@ -91,8 +91,8 @@ New tests should follow `Subject_Scenario_ExpectedOutcome`:
 - `Loader_ConnectorType_DefaultsToCurvedWhenAttributeMissing`
 - `DirectedGraph_NodeSizeIsHonored_WhenCellsAlsoSet`
 - `Application_UndoScope_NestedInner`
-- `VisioPS_GetVisioShape_NoArgs_ReturnsAllShapesOnPage`
-- `VisioPS_SetVisioUserDefinedCell_EncodesValueAndPrompt`
+- `GetVisioShape_NoArgs_ReturnsAllShapesOnPage`
+- `SetVisioUserDefinedCell_EncodesValueAndPrompt`
 
 Each segment carries information: `Subject` says *what* is under test, `Scenario` says *under what conditions*, `ExpectedOutcome` says *what should happen*. A failure message that includes only the test name should be enough to know roughly what broke.
 

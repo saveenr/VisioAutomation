@@ -12,7 +12,7 @@ namespace VTest.Scripting
 
       
         [MUT.TestMethod]
-        public void Drop_Master()
+        public void DropMaster_RectangleAtPoint_AddsOneShapeToPage()
         {
             var pagesize = new VA.Core.Size(4, 4);
             var client = this.GetScriptingClient();
@@ -42,7 +42,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Drop_Many()
+        public void DropMasters_AlternatingMastersAtFourPoints_AddsFourShapesToPage()
         {
             var pagesize = new VA.Core.Size(10, 10);
             var client = this.GetScriptingClient();
@@ -73,7 +73,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Drop_Container_Master_Object()
+        public void DropContainerMaster_AroundSelectedShape_PutsShapeIntoContainer()
         {
             var pagesize = new VA.Core.Size(4, 4);
             var client = this.GetScriptingClient();

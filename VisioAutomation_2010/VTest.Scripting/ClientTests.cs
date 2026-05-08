@@ -13,7 +13,7 @@ namespace VTest.Scripting
             this.DrawVANamespaceDiagram();
         }
 
-        public void DrawVAScriptingAPIDiagram()
+        private void DrawVAScriptingAPIDiagram()
         {
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawScriptingDocumentation();
@@ -21,7 +21,7 @@ namespace VTest.Scripting
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
-        public void DrawVANamespaceDiagram()
+        private void DrawVANamespaceDiagram()
         {
             var client = this.GetScriptingClient();
             var doc = client.Developer.DrawNamespaces();
