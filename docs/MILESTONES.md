@@ -44,6 +44,8 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | `VisioAutomation.Models` undocumented (DOM + Layouts) | E | [#132](https://github.com/saveenr/VisioAutomation/issues/132) |
 | Add troubleshooting page to .NET gitbook | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133) |
 | Audit: test coverage gaps on the public API surface | F | [#154](https://github.com/saveenr/VisioAutomation/issues/154) |
+| Cmdlet-binding test coverage (first slice from [#154](https://github.com/saveenr/VisioAutomation/issues/154) audit) | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) |
+| Trim redundant `<frameworkAssembly>` from VisioAutomation2010.nuspec | B | [#176](https://github.com/saveenr/VisioAutomation/issues/176) |
 | Discussion: doc-sample-as-test linkage mechanism | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) |
 | Decide: VisioScripting public-API status | E | [#156](https://github.com/saveenr/VisioAutomation/issues/156) |
 | Decide: long-term docs location | E | [#157](https://github.com/saveenr/VisioAutomation/issues/157) |
@@ -61,6 +63,8 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Migrate gitbook spaces to SevenPens-owned hosting | A | [#147](https://github.com/saveenr/VisioAutomation/issues/147) |
 | Phase 5b: in-repo URL rewrite (single commit after #146 + #147 land) | A | (no issue; one-shot commit) |
 | Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (ride-along) |
+| Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) |
+| Revise user-facing gitbook docs for accuracy across cmdlets and library APIs | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
 
 ### CY27Q1 &mdash; January&ndash;March 2027
 [GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31
@@ -69,13 +73,14 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| TFM bump shipping-libs 4.5.2 &rarr; 4.7.2 | B | (no issue yet; file when starting) |
-| Move dev environment to VS 2026 | B | (no issue yet) |
-| `Visio.psd1` deprecation cleanups (`ModuleToProcess`/`PowerShellVersion`) | B | (no issue yet) |
+| TFM bump shipping-libs 4.5.2 &rarr; 4.7.2 | B | [#174](https://github.com/saveenr/VisioAutomation/issues/174) |
+| Move dev environment to VS 2026 | B | [#171](https://github.com/saveenr/VisioAutomation/issues/171) |
+| `Visio.psd1` deprecation cleanups (`ModuleToProcess`/`PowerShellVersion`) | B | [#178](https://github.com/saveenr/VisioAutomation/issues/178) |
 | Re-evaluate version-policy decision | B | (no issue yet) |
-| Switch module-release builds Debug &rarr; Release | B | (no issue yet) |
+| Switch module-release builds Debug &rarr; Release | B | [#177](https://github.com/saveenr/VisioAutomation/issues/177) |
 | Spike: NetOffice / NetOfficeFw as a Visio PIA replacement | C | [#158](https://github.com/saveenr/VisioAutomation/issues/158) |
 | Audit: identify Visio-2010-only paths in the codebase | G | [#159](https://github.com/saveenr/VisioAutomation/issues/159) |
+| ShapeSheet query ergonomics spike (LINQ and other shapes) | F | [#170](https://github.com/saveenr/VisioAutomation/issues/170) |
 
 ### CY27Q2 &mdash; April&ndash;June 2027
 [GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/5) &mdash; due 2027-06-30
@@ -84,7 +89,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| C# 14 / .NET 10 multi-target migration (informed by [#158](https://github.com/saveenr/VisioAutomation/issues/158)) | C | (no issue yet; file from #158 outcome) |
+| C# 14 / .NET 10 multi-target migration (informed by [#158](https://github.com/saveenr/VisioAutomation/issues/158)) | C | [#175](https://github.com/saveenr/VisioAutomation/issues/175) |
 | Visio PIA replacement decision (informed by [#158](https://github.com/saveenr/VisioAutomation/issues/158)) | C | (folded into #158's deliverable) |
 | Decide: Visio 2013 baseline branding | G | [#160](https://github.com/saveenr/VisioAutomation/issues/160) |
 | Visio 2013 baseline migration implementation (gated on #160) | G | (no issue yet) |
@@ -147,9 +152,7 @@ The semester schedule above is the *when*. The themed milestones below are the *
 **Items:** see CY26Q3 schedule above. Detail in [`futures/docs.md`](futures/docs.md).
 
 **Plus longer-running items not yet semester-assigned** (will be picked up as bandwidth allows):
-- Tier 3 .NET-side coverage (`VisioAutomation.Models` project) &mdash; covered by [#132](https://github.com/saveenr/VisioAutomation/issues/132).
 - Restructure user-docs repos &mdash; gated on the docs-location decision ([#157](https://github.com/saveenr/VisioAutomation/issues/157)).
-- Five smaller gitbook items &mdash; see [`futures/docs.md`](futures/docs.md).
 - Keep CHANGELOGs current (process item, not a one-shot).
 - **Visio version &harr; PIA mapping reference page** &mdash; new doc page explaining the version-number table (Visio 2010 = 14, 2013 = 15, ...) and where to get each PIA. Couples to the [`Visio-PIAs`](https://github.com/saveenr/Visio-PIAs) sibling repo.
 

@@ -42,7 +42,7 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
 #### Cross-refs
 
 - *Decide where docs live long-term* (above) — the dev-docs-vs-user-docs policy question. This entry is about the user-docs side specifically.
-- [#131](https://github.com/saveenr/VisioAutomation/issues/131), [#132](https://github.com/saveenr/VisioAutomation/issues/132), [#133](https://github.com/saveenr/VisioAutomation/issues/133) — large doc-coverage work that will benefit from whichever structure is chosen.
+- [#131](https://github.com/saveenr/VisioAutomation/issues/131), [#133](https://github.com/saveenr/VisioAutomation/issues/133), [#172](https://github.com/saveenr/VisioAutomation/issues/172) — large doc-coverage work that will benefit from whichever structure is chosen. ([#132](https://github.com/saveenr/VisioAutomation/issues/132) closed; the original `VisioAutomation.Models` Tier 3 audit shipped 2026-05-07.)
 
 #### Effort
 
@@ -61,7 +61,7 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
 - **Decisions to make first:**
   - **Is `VisioScripting` part of the project's promised surface, or an internal that shouldn't be relied on?** Affects whether documentation should exist at all and whether the cmdlets should keep wrapping it.
   - **Same gitbook or separate?** Could be a third gitbook, or a section under [VisioAutomation_GitBook_Docs](https://github.com/saveenr/VisioAutomation_GitBook_Docs).
-- **Cross-refs:** *Decide where docs live long-term* (related policy question). *Expand .NET-side doc coverage — Tier 3* (similar shape of work; complete that first to validate the pattern).
+- **Cross-refs:** *Decide where docs live long-term* (related policy question). The recently-completed Tiers 1+2+4 .NET-side coverage work is the validated pattern this would follow.
 - **Effort:** S to decide. M–L to write if the answer is "yes, document it" (similar in size to Tiers 1+2+4 of the .NET-side coverage).
 
 ### Keep CHANGELOGs current as Phase 1 work lands
