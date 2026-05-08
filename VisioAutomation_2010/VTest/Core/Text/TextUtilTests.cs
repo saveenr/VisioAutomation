@@ -5,14 +5,14 @@ namespace VTest.Core.Text
     [MUT.TestClass]
     public class TextUtilTests : Framework.VTest
     {
-        public bool Match(string pat, string text)
+        private bool Match(string pat, string text)
         {
             var regex = VisioScripting.Helpers.WildcardHelper.GetRegexForWildcardPattern(pat,true);
             return regex.IsMatch(text);
         }
 
         [MUT.TestMethod]
-        public void Text_Case1()
+        public void GetRegexForWildcardPattern_StarAndQuestionMarkPatterns_MatchExpectedStrings()
         {
             MUT.Assert.IsTrue(this.Match("*","") );
             MUT.Assert.IsTrue(this.Match("*", "AbC"));

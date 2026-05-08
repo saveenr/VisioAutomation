@@ -7,7 +7,7 @@ namespace VTest.Core.Extensions
     public class DocumentTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Document_ForceClose()
+        public void ForceClose_OnDirtyDocument_ClosesWithoutSavePrompt()
         {
             var app = this.GetVisioApplication();
             var documents = app.Documents;

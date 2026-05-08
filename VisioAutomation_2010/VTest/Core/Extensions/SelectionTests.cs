@@ -9,7 +9,7 @@ namespace VTest.Core.Extensions
     public class SelectionTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Selection_GetShapeIDs()
+        public void GetShapeIDs()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -33,7 +33,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Selection_ToEnumerable()
+        public void ToEnumerable()
         {
             // Selection Object: http://msdn.microsoft.com/en-us/library/ms408990(v=office.12).aspx
             // this is a 1-based collection

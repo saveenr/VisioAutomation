@@ -6,7 +6,7 @@ namespace VTest.Core.Shapes
     public class ShapeHelperTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void ShapeHelper_Test_GetNestedShapes_SingleShapeNoSubShapes()
+        public void GetNestedShapes_SingleShapeNoSubShapes()
         {
             // For a single shape with no subshapes, GetNestedShapes returns the single starting shape
             var page = this.GetNewPage();
@@ -20,7 +20,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void ShapeHelper_Test_GetNestedShapes_GroupWithTwoSubShapes()
+        public void GetNestedShapes_GroupWithTwoSubShapes()
         {
             // group with two shapes
             var page = this.GetNewPage();
@@ -39,7 +39,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void ShapeHelper_Test_GetNestedShapes_GroupWithSubGroups()
+        public void GetNestedShapes_GroupWithSubGroups()
         {
             // group with subgroups
             var page = this.GetNewPage();

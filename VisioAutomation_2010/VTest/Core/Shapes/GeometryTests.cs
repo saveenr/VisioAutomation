@@ -8,7 +8,7 @@ namespace VTest.Core.Shapes
     public class GeometryTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Geometry_AddGeometrySection()
+        public void AddGeometrySection()
         {
             var page = this.GetNewPage();
             var shape = page.DrawRectangle(1, 1, 3, 3);
@@ -34,7 +34,7 @@ namespace VTest.Core.Shapes
         }
 
         [MUT.TestMethod]
-        public void Geometry_DeleteGeometry()
+        public void DeleteGeometry()
         {
             var page = this.GetNewPage();
 

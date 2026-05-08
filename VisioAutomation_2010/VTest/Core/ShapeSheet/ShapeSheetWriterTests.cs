@@ -80,7 +80,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void Write_nothing()
+        public void Commit_WithEmptyWriter_DoesNotThrow()
         {
             var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);

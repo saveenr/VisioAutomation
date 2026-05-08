@@ -9,7 +9,7 @@ namespace VTest.Core.Extensions
     public class PageDropTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Page_Drop_ManyU()
+        public void ManyU()
         {
             var page1 = this.GetNewPage();            
             var stencil = "basic_u.vss";

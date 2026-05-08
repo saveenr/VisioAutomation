@@ -10,7 +10,7 @@ namespace VTest.Core
     public class PageHelperTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Page_Query()
+        public void Query()
         {
             var size = new VA.Core.Size(4, 3);
             var page1 = this.GetNewPage(size);
@@ -35,7 +35,7 @@ namespace VTest.Core
         }
 
         [MUT.TestMethod]
-        public void Page_Orientation()
+        public void Orientation()
         {
             var size = new VA.Core.Size(4, 3);
 
@@ -63,7 +63,7 @@ namespace VTest.Core
         }
 
         [MUT.TestMethod]
-        public void Page_Duplicate()
+        public void Duplicate()
         {
             var page_size = new VA.Core.Size(4, 3);
             var page1 = this.GetNewPage(page_size);
@@ -89,7 +89,7 @@ namespace VTest.Core
         }
 
         [MUT.TestMethod]
-        public void Page_SwitchPages()
+        public void SwitchPages()
         {
             var app = this.GetVisioApplication();
 
@@ -116,7 +116,7 @@ namespace VTest.Core
         }
 
         [MUT.TestMethod]
-        public void Page_ResizeBorder()
+        public void ResizeBorder()
         {
             var doc = this.GetNewDoc();
             var shapesize = new VisioAutomation.Core.Size(1, 2);

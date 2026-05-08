@@ -7,34 +7,48 @@ namespace VTest.Core.Shapes
     public class ControlTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Controls_AddRemove()
+        public void GetCount_OnFreshShape_ReturnsZero()
         {
             var page1 = this.GetNewPage();
-
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
 
-            // Ensure we start with 0 controls
             MUT.Assert.AreEqual(0, ControlHelper.GetCount(s1));
 
-            // Add the first control
-            int ci1 = ControlHelper.Add(s1);
+            page1.Delete(0);
+        }
+
+        [MUT.TestMethod]
+        public void Add_TwoControlsToShape_GetCellsReturnsBothWithRowDynamics()
+        {
+            var page1 = this.GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 1);
+
+            ControlHelper.Add(s1);
             MUT.Assert.AreEqual(1, ControlHelper.GetCount(s1));
 
-            // Add the second control
-            int ci2 = ControlHelper.Add(s1);
+            ControlHelper.Add(s1);
             MUT.Assert.AreEqual(2, ControlHelper.GetCount(s1));
-            
-            // retrieve the control information
-            var controls = ControlCells.GetCells(s1, VisioAutomation.Core.CellValueType.Formula);
 
-            // verify that the controls were set propery
+            var controls = ControlCells.GetCells(s1, VisioAutomation.Core.CellValueType.Formula);
             MUT.Assert.AreEqual(2, controls.Count);
             MUT.Assert.AreEqual("Width*0", controls[0].X.Value);
             MUT.Assert.AreEqual("Controls.Row_1", controls[0].XDynamics.Value);
             MUT.Assert.AreEqual("Width*0", controls[1].X.Value);
             MUT.Assert.AreEqual("Controls.Row_2", controls[1].XDynamics.Value);
 
-            // Delete both controls
+            page1.Delete(0);
+        }
+
+        [MUT.TestMethod]
+        public void Delete_RemovesControlsOneAtATime_CountDropsToZero()
+        {
+            var page1 = this.GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 1);
+
+            ControlHelper.Add(s1);
+            ControlHelper.Add(s1);
+            MUT.Assert.AreEqual(2, ControlHelper.GetCount(s1));
+
             ControlHelper.Delete(s1, 0);
             MUT.Assert.AreEqual(1, ControlHelper.GetCount(s1));
             ControlHelper.Delete(s1, 0);

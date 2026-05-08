@@ -7,7 +7,7 @@ namespace VTest.Core.Extensions
     public class PageTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Page_CreatePage()
+        public void CreatePage()
         {
             var page1 = this.GetNewPage();
             var doc1 = page1.Document;

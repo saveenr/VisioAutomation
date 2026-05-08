@@ -30,7 +30,7 @@ namespace VTest.Core.Extensions
         */
 
         [MUT.TestMethod]
-        public void Application_UndoScope_Simple()
+        public void UndoScope_Simple()
         {
             var page1 = this.GetNewPage();
             var app = page1.Application;
@@ -58,7 +58,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Application_UndoScope_NestedInner()
+        public void UndoScope_NestedInner()
         {
             var page1 = this.GetNewPage();
             var app = page1.Application;
@@ -84,7 +84,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Application_UndoScope_NestedOuter()
+        public void UndoScope_NestedOuter()
         {
             var page1 = this.GetNewPage();
             var app = page1.Application;
@@ -111,7 +111,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Application_UndoScope_Abort()
+        public void UndoScope_Abort()
         {
             var page1 = this.GetNewPage();
             var app = page1.Application;
@@ -136,7 +136,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Application_UndoScope_AbortNested()
+        public void UndoScope_AbortNested()
         {
 
             var page1 = this.GetNewPage();
@@ -165,7 +165,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Application_UndoScope_AbortOuter()
+        public void UndoScope_AbortOuter()
         {
 
             var page1 = this.GetNewPage();

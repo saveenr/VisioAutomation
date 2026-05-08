@@ -7,7 +7,7 @@ namespace VTest.Core.Text
     public class TextFormatTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Text_TabStops_Set()
+        public void TabStops_Set_PersistsOnShape()
         {
             var no_tab_stops = new VisioAutomation.Text.TabStop[] { };
             var tabstops = new[]

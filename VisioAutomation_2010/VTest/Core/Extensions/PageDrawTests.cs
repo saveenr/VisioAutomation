@@ -10,7 +10,7 @@ namespace VTest.Core.Extensions
     public class PageDrawTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Page_Draw_Line()
+        public void Line()
         {
             var page1 = this.GetNewPage();
             var p0 = new VA.Core.Point(0, 0);
@@ -20,7 +20,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Page_Draw_Spline()
+        public void Spline()
         {
             var page1 = this.GetNewPage();
             var points = new[]
@@ -37,7 +37,7 @@ namespace VTest.Core.Extensions
         }
 
         [MUT.TestMethod]
-        public void Page_Draw_RoundedRectangle()
+        public void RoundedRectangle()
         {
             var page1 = this.GetNewPage();
             var rect = new VA.Core.Rectangle(1, 1, 3, 2);

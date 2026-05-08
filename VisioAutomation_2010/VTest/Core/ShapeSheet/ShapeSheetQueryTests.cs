@@ -185,7 +185,7 @@ namespace VTest.Core.ShapeSheet
 
 
         [MUT.TestMethod]
-        public void Demo_MultipleShapes()
+        public void GetFormulasAndResults_OnThreeShapes_ReturnsValuesPerShapePerColumn()
         {
             var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
 
@@ -228,7 +228,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void Demo_MultipleShapes_Verify_Out_Of_order()
+        public void GetFormulasAndResults_WithOutOfOrderShapeIds_ReturnsValuesInRequestedOrder()
         {
             var page1 = this.GetNewPage(new VA.Core.Size(10, 10));
 
@@ -397,7 +397,7 @@ namespace VTest.Core.ShapeSheet
         }
 
         [MUT.TestMethod]
-        public void TestDuplicates()
+        public void CellQuery_AddDuplicateColumn_ThrowsArgumentException()
         {
             // Ensure that duplicate cells cannot be added to a cell query
             var cell_query_1 = new VASS.Query.CellQuery();

@@ -73,7 +73,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Page_DuplicateToOtherDocument_AppendsCopiedPageToDestination()
+        public void DuplicateToOtherDocument_AppendsCopiedPageToDestination()
         {
             var client = this.GetScriptingClient();
 
