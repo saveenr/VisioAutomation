@@ -70,18 +70,6 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
 - **How to apply:** When a Phase 1 commit changes anything a consumer of the NuGet or PS module would notice (public API, parameter behavior, supported runtime, dependencies), add an entry to the corresponding CHANGELOG's `[Unreleased]` in the same commit. Pure internal/build/docs changes don't need entries.
 - **Effort:** ~zero per change, if done in the same commit.
 
-### Refresh `resources/README.md` on the .NET gitbook
-- **What:** The page currently lists three pointers: the visguy.com forum (largely inactive), the StackOverflow `[visio]` tag (sparse), and *Visio 2003 Developer's Survival Pack* (a 23-year-old book by ISBN). Surfaced by the 2026-05-05 doc-review pass ([proposed-issues.md issue #7](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md)).
-- **Suggested rewrite:** add the [Microsoft Learn Visio developer docs](https://learn.microsoft.com/en-us/office/client-developer/visio/visio-home), link to in-repo `docs/GLOSSARY.md` and `docs/ARCHITECTURE.md`, and demote (or remove) the 2003 book.
-- **Why it's not in Group A/B:** value depends on a deliberate "what current community resources are worth listing" pass, not just a mechanical update. Better to do once thoughtfully than to keep stale.
-- **Effort:** S.
-
-### Annotate the VS 2026 note in `compiling.md` with a tracking link
-- **What:** The .NET gitbook's [`compiling.md`](https://saveenr.gitbook.io/visioautomation/compiling) explains why VS 2026 isn't yet supported (its MSBuild floor is .NET Framework 4.6.2; shipping libs target 4.5.2). The note is accurate but is implicitly time-sensitive — readers should know whether the constraint still applies, and have a way to follow it.
-- **Suggested fix:** add a "tracked in #N" link to a GitHub issue covering the *Move development to Visual Studio 2026* item (and the prerequisite TFM bump). Optionally add a "last verified" date.
-- **Cross-refs:** *Move development to Visual Studio 2026* in [`build-and-code.md`](build-and-code.md#move-development-to-visual-studio-2026) (the underlying work). *Consolidate target frameworks* step 2 in the same file (the prerequisite TFM bump).
-- **Effort:** S — file the GitHub issue, add the link.
-
 ### Add a troubleshooting page to the .NET gitbook
 - **What:** Neither gitbook has a Troubleshooting / FAQ page. Surfaced by the 2026-05-05 doc-review pass ([proposed-issues.md issue #8](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md)) which sketched the candidate failure modes: COM-registration failures when Visio isn't installed; PIA-version vs. `VisioAutomation2010`-version mismatches; stencil-filename differences across Visio versions; 32-bit vs. 64-bit PowerShell host with the `Visio` module; "failed to log in to github.com" errors when publishing.
 - **Why deferred (not in Group B):** speculatively-written troubleshooting pages age badly and tend to confuse more than help. Better to wait until we have a real corpus of user-reported failures to ground the page in. The candidate list above is the seed.
