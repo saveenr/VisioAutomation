@@ -4,6 +4,8 @@ All notable changes to the [`VisioAutomation2010`](https://www.nuget.org/package
 
 This package bundles `VisioAutomation.dll`, `VisioAutomation.Models.dll`, `VisioScripting.dll`, plus the supporting `Microsoft.Msagl.dll` and `GenTreeOps.dll`. For the related PowerShell module's release history see [`VisioAutomation_2010/VisioPowerShell/CHANGELOG.md`](../VisioAutomation_2010/VisioPowerShell/CHANGELOG.md).
 
+For a per-version table of target frameworks, language levels, and Visio baselines see the [Version compatibility](https://saveenr.gitbook.io/visioautomation/version-compatibility) reference page on the user-facing gitbook.
+
 The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) and the package follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 > **Contributors:** when a change affects what consumers of this NuGet package see (public API, behavior, supported runtime), add an entry under `[Unreleased]`. Pure internal/build/docs changes don't need to appear here.

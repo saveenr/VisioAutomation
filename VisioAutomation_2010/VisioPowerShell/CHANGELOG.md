@@ -4,6 +4,8 @@ All notable changes to the [`Visio`](https://www.powershellgallery.com/packages/
 
 For the bundled .NET library's release history see [`NuGet/CHANGELOG.md`](../../NuGet/CHANGELOG.md).
 
+For a per-version table of supported PowerShell editions, target frameworks, and Visio baselines see the [Version compatibility](https://saveenr.gitbook.io/visiopowershell/developer-info/version-compatibility) reference page on the user-facing gitbook.
+
 The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) and the module follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 > **Contributors:** when a change affects what consumers of this module see (cmdlets added/changed/removed, parameter changes, behavior changes, minimum supported PowerShell or .NET Framework version), add an entry under `[Unreleased]`. Pure internal/build/docs changes don't need to appear here.

@@ -59,6 +59,11 @@ Release notes:
 - [NuGet CHANGELOG](NuGet/CHANGELOG.md)
 - [PowerShell module CHANGELOG](VisioAutomation_2010/VisioPowerShell/CHANGELOG.md)
 
+Per-version compatibility tables (which TFM, which Visio, which PowerShell host):
+
+- [VisioAutomation NuGet version compatibility](https://saveenr.gitbook.io/visioautomation/version-compatibility)
+- [Visio PowerShell version compatibility](https://saveenr.gitbook.io/visiopowershell/developer-info/version-compatibility)
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Development happens on `master`.
