@@ -50,24 +50,6 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
 - M for option 3 or option 2 (half a day to a full day).
 - N/A (no work) for option 1.
 
-### Expand .NET-side doc coverage — Tier 3 (`VisioAutomation.Models`)
-- **What:** The 2026 audit on [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs) reviewed every existing page for accuracy and added 15 new pages over three tiers. Tier 3 is the only group still pending.
-- **External feedback (2026-05-05):** A doc-review pass on the gitbook ([proposed-issues.md issue #2](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md), since converted into a GitHub issue) made the same call from a user's perspective: `VisioAutomation.Models` is "likely the primary reason many users adopt the library" (DOM + automated layouts) yet is entirely undocumented. Reinforces this item's priority.
-- **Tier 1 — common helpers** *(done)*: Hyperlinks, Lock cells, Control handles, Connection points, Connectors.
-- **Tier 2 — structural cell-helper pages** *(done)*: Shape format / layout / xform cells, Page cells, Text formatting, Geometry, Application.
-- **Tier 4 — smaller / niche public surface** *(done)*: Analyzers, Visio error log (LoggingHelper / XmlErrorLog), UndoScope, Exception types, plus a full rewrite of `extension-methods.md` covering all 16 `Extensions/` method classes (LINQ bridges, drawing primitives, drop, ShapeSheet I/O, geometry / coordinates, one-offs).
-- **Why Tier 3 still:** It's the most useful unwritten chunk &mdash; `VisioAutomation.Models` covers the high-level "build a diagram declaratively / render it" flow that powers the `Out-VisioApplication` cmdlet on the PS side. Library users currently have to read the source to discover `OrgChartDocument`, `DirectedGraphDocument`, the layout-style classes, the DOM model, etc.
-- **Tier 3 page list (~6–8 pages):**
-  - **DOM document model** — `Document`, `Page`, `MasterRef`, `Connector`, `Line`, `Oval`, `BezierCurve`, `PolyLine`, `Hyperlink`, the `Node`/`NodeList` containment pattern. The declarative way to build a Visio document.
-  - **Layouts** — `LayoutStyleBase` and its subclasses (`FlowchartLayoutStyle`, `RadialLayoutStyle`, `CompactTreeLayoutStyle`, `HierarchyLayoutStyle`, `CircularLayoutStyle`, `OrganizationalChartLayoutStyle`).
-  - **OrgChart** — `OrgChartDocument`, `OrgChartStyling`, `OrgChartLayoutOptions`. The model side of the existing `Out-VisioApplication -OrgChart` flow on the PowerShell side.
-  - **DirectedGraph** — `DirectedGraphDocument` and node/edge types. The richer of the two graph models.
-  - **DataTable** — `DataTableModel` for tabular layouts.
-  - **XmlModel** — generic XML-backed renderer.
-  - **Forms** — `FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock` (the lightweight form-builder). Probably worth one page.
-- **Effort:** M (6–8 pages).
-- **How to apply:** Same pattern as Tiers 1 / 2 / 4: one paragraph of conceptual framing, a field/method table when the surface is bigger than two methods, code examples for the common operations. Each new page goes into [SUMMARY.md](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/SUMMARY.md) and gets a one-line entry in [`documentation-changes.md`](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/documentation-changes.md) under "Pages added".
-
 ### Decide whether to document `VisioScripting` as a public API
 - **What:** `VisioScripting` is the .NET layer between the PowerShell cmdlets and the underlying `VisioAutomation` library. Its `Client` object groups commands by topic (`Document`, `Page`, `Selection`, `View`, `Text`, `Shape`, `ShapeSheet`, `Application`, `Master`, `Container`, `Connection`, `Hyperlink`, `Lock`, `CustomProperty`, `UserDefinedCell`, `Output`, `Undo`, `Window`, `Layer`, `Color`, etc.) — most cmdlets are thin wrappers over a `Client.<Group>.<Method>(...)` call.
 - **External feedback (2026-05-05):** A doc-review pass on the gitbook ([proposed-issues.md issue #1](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md), since converted into a GitHub issue) flagged the `VisioScripting` gap as the single highest-priority documentation hole. The argument: the source [`readme.md`](../../readme.md) leads with a `VisioScripting.Client` snippet as its quick-start, so a new C# reader's *first impression* is an undocumented type. That moves the open question below ("part of the project's promised surface, or internal?") from theoretical to forcing-function — answer it before deciding whether to fill the gap.
@@ -116,14 +98,6 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
   - Use the new [`docs/ARCHITECTURE.md`](../ARCHITECTURE.md) and [`docs/GLOSSARY.md`](../GLOSSARY.md) as the source of truth for terminology and structure.
 - **Cross-refs:** Related to but distinct from *Decide where docs live long-term* — that item is about the gitbook-vs-in-repo *policy*; this item is about *accuracy of the existing user-facing content*.
 - **Effort:** L (the cmdlet inventory alone is substantial).
-
-### Version compatibility tables on user-facing gitbooks
-- **What:** Add a "Version compatibility" reference page to each user-facing gitbook ([VisioAutomation_GitBook_Docs](https://github.com/saveenr/VisioAutomation_GitBook_Docs) and [VisioPowerShellDocs](https://github.com/saveenr/VisioPowerShellDocs)) listing each released version against the runtime / language / Visio versions it supports. NuGet table columns: NuGet version, release date, .NET TFM, C# language, Visio baseline, PIA-bundled?, changelog link. VisioPS table columns: module version, release date, PowerShell editions (5.1 / 7+), .NET runtime, Visio baseline, bundled VisioAutomation NuGet, release notes link. Cross-link both pages; link from `readme.md` and both `CHANGELOG.md` files.
-- **Why:** As Phase 3 modernization fragments the support matrix (TFM bumps once LTSB 2016 sunsets 2026-10-13; eventual `net10.0-windows` multi-targeting per Milestone C), users will land asking *"I'm on PS 5.1 with Visio 2013 on a .NET 4.5.2-only LTSB image &mdash; which version do I install?"*. A single canonical table per product lets them self-serve. Also gives external linkers (blog posts, Stack Overflow answers, the [`Visio-PIAs`](https://github.com/saveenr/Visio-PIAs) sibling repo) a stable URL to point at.
-- **Scope:** All known tagged releases. NuGet 2.6.0 &rarr; 3.0.0 and VisioPS 4.6.1 &rarr; 4.7.2 are well-documented in the in-repo `CHANGELOG.md` files; pre-changelog rows are best-effort with a footnote rather than perfectly backfilled.
-- **Distinct from** the planned *Visio version &harr; PIA mapping reference page* under Milestone E (Visio 2010 = 14, 2013 = 15, ...), which is about Visio's own version numbers and where to obtain each PIA. Different artifact.
-- **Cross-refs:** Tracked in [#161](https://github.com/saveenr/VisioAutomation/issues/161). Milestone E. Scheduled CY26Q2.
-- **Effort:** M. The page structure is small; gathering and verifying the historical data per row is the bulk of the work. Estimate ~½ day per gitbook with verification &mdash; ~1 day total. Best done as a single focused work session.
 
 ### Extend gitbook custom-properties page with Visio behavior matrix
 - **What:** The .NET gitbook's [Custom properties](https://saveenr.gitbook.io/visioautomation/custom-properties) page tells users *what to do* (call `EncodeValues()` or pre-quote) but not *what Visio actually does* with each input. Roll a user-friendly subset of [`docs/internal/custom-property-encoding.md`](../internal/custom-property-encoding.md) onto the page so users can diagnose "my property reads as 0" without grepping the source.
