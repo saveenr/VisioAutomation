@@ -5,10 +5,10 @@ using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VTest.Analyzers
 {
     [MUT.TestClass]
-    public class Path_Test
+    public class PathTests
     {
         [MUT.TestMethod]
-        public void Path_TestTransitiveClosure0()
+        public void TransitiveClosure_SingleSelfLoop_ProducesNoEdges()
         {
             // v0->v0
             // doesn't yield any edges (nodes are implictly connected to themselves)
@@ -21,7 +21,7 @@ namespace VTest.Analyzers
         }
 
         [MUT.TestMethod]
-        public void Path_TestTransitiveClosure1()
+        public void TransitiveClosure_MultipleSelfLoops_ProducesNoEdges()
         {
             // v0->v0
             // v1->v1
@@ -34,10 +34,9 @@ namespace VTest.Analyzers
         }
 
         [MUT.TestMethod]
-        public void Path_TestTransitiveClosure2()
+        public void TransitiveClosure_SingleEdge_ProducesThatEdge()
         {
             // v0->v1
-            // doesn't yield any edges (nodes are implictly connected to themselves)
             var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
                 {
                     new VisioAutomation.Analyzers.DirectedEdge<string, object>("v0", "v1", null)
@@ -50,7 +49,7 @@ namespace VTest.Analyzers
 
 
         [MUT.TestMethod]
-        public void Path_TestTransitiveClosure3()
+        public void TransitiveClosure_TwoEdgeChain_AddsTransitiveEdge()
         {
             var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
                 {
@@ -71,7 +70,7 @@ namespace VTest.Analyzers
         }
 
         [MUT.TestMethod]
-        public void Path_TestTransitiveClosure4()
+        public void TransitiveClosure_ThreeNodeCycle_ProducesFullClosure()
         {
             var input = new List<VisioAutomation.Analyzers.DirectedEdge<string, object>>
                 {

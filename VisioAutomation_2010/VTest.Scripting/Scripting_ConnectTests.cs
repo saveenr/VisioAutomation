@@ -9,7 +9,7 @@ namespace VTest.Scripting
     public class Scripting_ConnectTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Scripting_Connects_Scenario_0()
+        public void ConnectShapes_WithArrowsSet_AnalyzerYields2DirectedEdges()
         {
             var client = this.GetScriptingClient();
 
@@ -73,7 +73,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Scripting_Connects_Scenario_1()
+        public void ConnectShapes_WithoutArrows_NoArrowsHandlingDeterminesEdgeCount()
         {
             var client = this.GetScriptingClient();
 
@@ -122,7 +122,7 @@ namespace VTest.Scripting
 
 
         [MUT.TestMethod]
-        public void Scripting_Connects_Scenario_3()
+        public void ConnectShapes_NullMaster_UsesDefaultConnector()
         {
             var client = this.GetScriptingClient();
             client.Document.NewDocument();

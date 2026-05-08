@@ -8,7 +8,7 @@ namespace VTest.Scripting
     public class Scripting_ExportTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Scripting_Test_Export_Selection_SVGHTML()
+        public void Export_SelectionToHtml_WritesHtmlFileToOutputPath()
         {
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Core.Size(10,5);
@@ -24,7 +24,7 @@ namespace VTest.Scripting
 
             client.Selection.SelectAllShapes(VisioScripting.TargetWindow.Auto);
 
-            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(Scripting_Test_Export_Selection_SVGHTML),".html");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(Export_SelectionToHtml_WritesHtmlFileToOutputPath),".html");
 
             if (File.Exists(output_filename))
             {

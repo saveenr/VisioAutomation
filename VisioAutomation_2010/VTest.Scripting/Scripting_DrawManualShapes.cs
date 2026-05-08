@@ -7,7 +7,7 @@ namespace VTest.Scripting
     public class Scripting_DrawManualShapes : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Scripting_Draw_RectangleLineOval_0()
+        public void Draw_RectangleLineOval_DrawsAllThreePrimitivesWithoutThrowing()
         {
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
@@ -24,7 +24,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Scripting_Draw_BezierPolyLine_0()
+        public void Draw_BezierAndPolyLine_DrawBothFromSameFourPointSet()
         {
             var points = new[]
                 {

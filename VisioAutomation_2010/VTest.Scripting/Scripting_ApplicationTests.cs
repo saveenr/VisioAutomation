@@ -7,7 +7,7 @@ namespace VTest.Scripting
     public class Scripting_ApplicationTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Scripting_Test_Resize_Application_Window1()
+        public void Application_SetWindowRectangle_RoundTripsThroughGetWindowRectangle()
         {
 
             var desired_size = new System.Drawing.Size(600, 700);
@@ -27,7 +27,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Scripting_Test_Resize_Application_Window2()
+        public void NewDocument_WithPageSize_AppliesPageSizeAndStartsWithEmptySelection()
         {
             var client = this.GetScriptingClient();
             var page_size = new VisioAutomation.Core.Size(10,5);
@@ -46,7 +46,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Scripting_Test_App_to_Front()
+        public void Application_MoveWindowToFront_DoesNotThrow()
         {
             var client = this.GetScriptingClient();
             client.Application.MoveWindowToFront();

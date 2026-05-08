@@ -8,7 +8,7 @@ namespace VTest.Core.Shapes
     public class ConnectorTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Connect1()
+        public void ConnectorHelper_ConnectShapes_AttachesDroppedDynamicConnectorBetweenTwoShapes()
         {
             var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(1, 1, 2, 2);

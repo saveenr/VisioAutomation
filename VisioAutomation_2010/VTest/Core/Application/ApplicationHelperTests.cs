@@ -7,7 +7,7 @@ namespace VTest.Core.Application
     public class ApplicationHelperTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void TestStencilLocation()
+        public void GetContentLocation_ReturnsExistingDirectoryWithStencilFiles()
         {
             var app = this.GetVisioApplication();
             string path = VisioAutomation.Application.ApplicationHelper.GetContentLocation(app);

@@ -39,7 +39,7 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void Container_Diagram1()
+        public void Container_SingleContainerWithOneItem_Renders()
         {
 
             // Purpose: Simple test to make sure that both Containers and Non-Container
@@ -62,7 +62,7 @@ namespace VTest.Models
 
 
         [MUT.TestMethod]
-        public void Container_Diagram2()
+        public void Container_EmptyContainerSibling_Renders()
         {
             // Make sure that empty containers can be drawn
             var doc = this.GetNewDoc();

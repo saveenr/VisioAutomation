@@ -9,7 +9,7 @@ namespace VTest.Scripting
     public class Scripting_ArrangeTests : Framework.VTest
     {     
         [MUT.TestMethod]
-        public void Scripting_Distribute()
+        public void Arrange_DistributeHorizontalCenter_DoesNotThrow()
         {
             var client = this.GetScriptingClient();
             var pagesize = new VA.Core.Size(4, 4);
@@ -44,7 +44,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Scripting_Nudge2()
+        public void Arrange_Nudge_OffsetsAllSelectedShapesByDelta()
         {
             var client = this.GetScriptingClient();
 

@@ -9,7 +9,7 @@ namespace VTest.Core.Application
     public class XmlErrorLogTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void VSD_Load_Visio2013()
+        public void XmlErrorLog_Visio2013VSDXLog_Reads51Sessions()
         {
             string input_filename = this._get_test_results_out_path(@"datafiles\VSDX_Log_Visio_2013.txt");
 
@@ -21,7 +21,7 @@ namespace VTest.Core.Application
         }
 
         [MUT.TestMethod]
-        public void XmlErrorLog_Load_Visio2010_1()
+        public void XmlErrorLog_Visio2010Sample_ParsesSessionsAndDataTypeWarnings()
         {
             string input_filename = this._get_test_results_out_path(@"datafiles\XMLErrorLog_Visio_2010_1.txt");
 
@@ -48,7 +48,7 @@ namespace VTest.Core.Application
         }
 
         [MUT.TestMethod]
-        public void XmlErrorLog_Load_Visio2013_1()
+        public void XmlErrorLog_Visio2013Sample_ParsesFourSessionsWithWarningsInLast()
         {
             string input_filename = this._get_test_results_out_path(@"datafiles\XMLErrorLog_Visio_2013_1.txt");
 

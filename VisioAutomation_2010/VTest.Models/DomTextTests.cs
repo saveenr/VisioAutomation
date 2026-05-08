@@ -6,7 +6,7 @@ using VA=VisioAutomation;
 namespace VTest.Models
 {
     [MUT.TestClass]
-    public class Dom_Text_Tests : Framework.VTest
+    public class DomTextTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void DomText_CharacterFormatting()

@@ -6,8 +6,7 @@ namespace VTest.Scripting
     public class Scripting_ClientTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Scripting_DevDocumentationScenarios
-            ()
+        public void Developer_DrawScriptingAndNamespaceDiagrams_DoesNotThrow()
         {
             var client = this.GetScriptingClient();
             this.DrawVAScriptingAPIDiagram();
@@ -31,7 +30,7 @@ namespace VTest.Scripting
         }
 
         [MUT.TestMethod]
-        public void Scripting_CanCloseUnsavedDrawings()
+        public void Document_CloseAllDocumentsWithoutSaving_NewDocStartsWithNoSelection()
         {
             var client = this.GetScriptingClient();
             client.Document.CloseAllDocumentsWithoutSaving();

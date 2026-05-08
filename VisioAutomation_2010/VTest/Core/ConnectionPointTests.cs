@@ -5,7 +5,7 @@ using VA=VisioAutomation;
 namespace VTest.Core
 {
     [MUT.TestClass]
-    public class ConnectionPoint_Tests : Framework.VTest
+    public class ConnectionPointTests : Framework.VTest
     {
         [MUT.TestMethod]
         public void ConnectionPoints_AddRemove()

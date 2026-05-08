@@ -8,7 +8,7 @@ namespace VTest.Models
     public class Layout_BoxTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void BoxLayout_Test_empty()
+        public void BoxLayout_EmptyContainer_PerformLayoutThrowsArgumentException()
         {
             var layout = new VABOX.BoxLayout();
             layout.Root = new VABOX.Container(VABOX.Direction.BottomToTop);
@@ -32,7 +32,7 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void BoxLayout_Test_single_node()
+        public void BoxLayout_SingleBoxNoPadding_RectangleMatchesBoxBounds()
         {
             var layout = new VABOX.BoxLayout();
             layout.Root = new VABOX.Container(VABOX.Direction.BottomToTop);
@@ -50,7 +50,7 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void BoxLayout_Test_single_node_padding()
+        public void BoxLayout_SingleBoxWithUniformPadding_BoxIsOffsetByPadding()
         {
             var layout = new VABOX.BoxLayout();
             layout.Root = new VABOX.Container(VABOX.Direction.BottomToTop);

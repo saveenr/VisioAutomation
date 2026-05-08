@@ -8,7 +8,7 @@ namespace VTest.Scripting
     public class Scripting_ShapeSheetTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void QueryPage()
+        public void ShapeSheetReader_GetFormulas_ReturnsPinXFormulasForEachShape()
         {
             var client = this.GetScriptingClient();
             var doc = client.Document.NewDocument();

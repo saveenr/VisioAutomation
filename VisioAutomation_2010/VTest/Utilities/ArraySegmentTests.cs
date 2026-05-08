@@ -9,7 +9,7 @@ namespace VTest.Utilities
     {
 
         [MUT.TestMethod]
-        public void Basics()
+        public void Constructor_NullArray_ThrowsArgumentNullException()
         {
             // Check that nulls cannot be passed in
             bool caught = false;

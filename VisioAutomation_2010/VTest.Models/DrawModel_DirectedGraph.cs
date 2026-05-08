@@ -137,7 +137,7 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void Scripting_Draw_DirectedGraph1()
+        public void RenderDirectedGraph_Fixture1_Smoke()
         {
             // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_1.xml");
@@ -147,14 +147,14 @@ namespace VTest.Models
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph1), ".vsd");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(RenderDirectedGraph_Fixture1_Smoke), ".vsd");
 
             client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [MUT.TestMethod]
-        public void Scripting_Draw_DirectedGraph2()
+        public void RenderDirectedGraph_Fixture2_Smoke()
         {
             // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_2.xml");
@@ -164,13 +164,13 @@ namespace VTest.Models
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph2), ".vsd");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(RenderDirectedGraph_Fixture2_Smoke), ".vsd");
             client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [MUT.TestMethod]
-        public void Scripting_Draw_DirectedGraph3()
+        public void RenderDirectedGraph_Fixture3_Smoke()
         {
             // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_3.xml");
@@ -180,14 +180,14 @@ namespace VTest.Models
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph3), ".vsd");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(RenderDirectedGraph_Fixture3_Smoke), ".vsd");
 
             client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
         [MUT.TestMethod]
-        public void Scripting_Draw_DirectedGraph4()
+        public void RenderDirectedGraph_Fixture4_Smoke()
         {
             // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_4.xml");
@@ -197,7 +197,7 @@ namespace VTest.Models
             this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(Scripting_Draw_DirectedGraph4), ".vsd");
+            string output_filename = VTestGlobals.VTestHelper.GetOutputFilename(nameof(RenderDirectedGraph_Fixture4_Smoke), ".vsd");
 
             client.Document.SaveDocumentAs(VisioScripting.TargetDocument.Auto, output_filename);
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);

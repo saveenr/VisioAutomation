@@ -274,7 +274,7 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void Dom_ConnectShapes()
+        public void Dom_ConnectShapes_PreloadedMasters_ConnectsTwoNodes()
         {
             var doc = this.GetNewDoc();
             var page_node = new VADOM.Page();
@@ -300,7 +300,7 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void Dom_ConnectShapes2()
+        public void Dom_ConnectShapes_DeferredMasterLoad_LoadsStencilsAtRenderTime()
         {
             // Deferred means that the stencils (and thus masters) are loaded when rendering
             // and are no loaded by the caller before Render() is called

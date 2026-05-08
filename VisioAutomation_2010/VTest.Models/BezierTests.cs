@@ -11,7 +11,7 @@ namespace VTest.Models
         private double piquarter = System.Math.PI/4;
 
         [MUT.TestMethod]
-        public void TestBezierFromArcs()
+        public void BezierSegment_FromArc_VariousAngleSpans_YieldExpectedSegmentCount()
         {
             // 0 width slice - 0 degrees
             var s1 = VisioAutomation.Models.Geometry.BezierSegment.FromArc(0.0, 0.0);
