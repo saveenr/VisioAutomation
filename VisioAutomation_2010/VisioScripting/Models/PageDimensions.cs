@@ -17,7 +17,7 @@ namespace VisioScripting.Models
         public double PrintBottomMargin;
 
 
-        public static List<PageDimensions> Get_PageDimensions(IList<IVisio.Page> pages)
+        internal static List<PageDimensions> Get_PageDimensions(IList<IVisio.Page> pages)
         {
             var list_pagedim = new List<VisioScripting.Models.PageDimensions>(pages.Count);
 

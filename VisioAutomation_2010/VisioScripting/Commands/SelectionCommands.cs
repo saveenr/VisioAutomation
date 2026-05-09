@@ -267,5 +267,19 @@ namespace VisioScripting.Commands
             bool v = num_selected >= min_items;
             return v;
         }
+
+        public List<Models.ShapeDimensions> GetShapeDimensions(TargetShapes targetshapes)
+        {
+            targetshapes = targetshapes.ResolveToShapes(this._client);
+
+            if (targetshapes.Shapes.Count < 1)
+            {
+                return new List<Models.ShapeDimensions>(0);
+            }
+
+            var shapeids = VisioAutomation.Core.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
+            var page = targetshapes.Shapes[0].ContainingPage;
+            return Models.ShapeDimensions.Get_ShapeDimensions(page, shapeids);
+        }
     }
 }

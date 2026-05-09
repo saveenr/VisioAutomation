@@ -22,7 +22,7 @@ namespace VisioScripting.Models
         public double OneDEndY;
 
 
-        public static List<ShapeDimensions> Get_ShapeDimensions(IVisio.Page page, List<int> shapeids)
+        internal static List<ShapeDimensions> Get_ShapeDimensions(IVisio.Page page, List<int> shapeids)
         {
             var query = new VASS.Query.CellQuery();
 

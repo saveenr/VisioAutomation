@@ -60,6 +60,18 @@ namespace VisioScripting.Commands
             return sizes;
         }
 
+        public List<Models.PageDimensions> GetPageDimensions(TargetPages targetpages)
+        {
+            targetpages = targetpages.ResolveToPages(this._client);
+
+            if (targetpages.Pages.Count < 1)
+            {
+                return new List<Models.PageDimensions>(0);
+            }
+
+            return Models.PageDimensions.Get_PageDimensions(targetpages.Pages);
+        }
+
         public IVisio.Page NewPage(VisioScripting.TargetDocument targetdoc, VisioAutomation.Core.Size? size, bool isbackgroundpage)
         {
             targetdoc = targetdoc.ResolveToDocument(this._client);

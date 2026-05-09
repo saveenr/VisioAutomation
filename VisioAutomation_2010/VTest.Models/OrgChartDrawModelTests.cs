@@ -29,7 +29,7 @@ namespace VTest.Models
         private void draw_org_chart(VisioScripting.Client client, string text)
         {
             var xmldoc = SXL.XDocument.Parse(text);
-            var orgchart = VisioScripting.Loaders.OrgChartDocumentLoader.LoadFromXml(client, xmldoc);
+            var orgchart = client.Model.LoadOrgChartFromXml(xmldoc);
 
             client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
         }
