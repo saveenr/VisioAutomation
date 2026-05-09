@@ -1,4 +1,3 @@
-using System.Linq;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -7,29 +6,15 @@ namespace VisioPowerShell.Commands.VisioShape
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Measure, Nouns.VisioShape)]
     public class MeasureVisioShape: VisioCmdlet
     {
-        // CONTEXT:SHAPES 
+        // CONTEXT:SHAPES
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shape;
 
         protected override void ProcessRecord()
         {
-
-            var targetshapes = new VisioScripting.TargetShapes(this.Shape).ResolveToShapes(this.Client);
-
-            if (targetshapes.Shapes.Count < 1)
-            {
-                return;
-            }
-
-
-            var shapeids = VisioAutomation.Core.ShapeIDPairs.FromShapes(targetshapes.Shapes).Select(i => i.ShapeID).ToList();
-            var page = targetshapes.Shapes[0].ContainingPage;
-            var list_shapedim = VisioScripting.Models.ShapeDimensions.Get_ShapeDimensions(page, shapeids);
-
+            var targetshapes = new VisioScripting.TargetShapes(this.Shape);
+            var list_shapedim = this.Client.Selection.GetShapeDimensions(targetshapes);
             this.WriteObject(list_shapedim,true);
-
         }
-
-
     }
 }

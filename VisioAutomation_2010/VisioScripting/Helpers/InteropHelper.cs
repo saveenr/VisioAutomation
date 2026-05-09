@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Helpers
 {
-    public static class InteropHelper
+    internal static class InteropHelper
     {
         private static bool _static_initialized = false;
         private static Dictionary<string, Models.EnumType> _static_g_name_to_enum;

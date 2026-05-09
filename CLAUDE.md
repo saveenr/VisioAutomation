@@ -44,6 +44,7 @@ All test projects exercise real Visio COM calls. There is no mock/fake layer (in
 ## Per-commit conventions
 
 - **Changelogs:** when a change is consumer-visible (public API, behavior, supported runtime, dependencies) add an entry to the matching `[Unreleased]` section of [`NuGet/CHANGELOG.md`](NuGet/CHANGELOG.md) or [`VisioAutomation_2010/VisioPowerShell/CHANGELOG.md`](VisioAutomation_2010/VisioPowerShell/CHANGELOG.md) in the **same commit**. Pure internal / build / docs changes don't need entries.
+- **`VisioScripting` public-API contract:** the `Client` facade and the public method signatures on each `*Commands` class are public-stable per [`docs/decisions/visioscripting-public-api.md`](docs/decisions/visioscripting-public-api.md). **Renaming or removing** a public method on `Client` or any `*Commands` class is a **breaking change** &mdash; treat it accordingly. Adding methods is non-breaking. The plumbing (`Helpers/`, `Loaders/`, `CommandTarget`, `CommandTargetFlags`, `Get_*Dimensions` static factories) is `internal` and free to change without notice. When the line is unclear, the ADR has the authoritative table.
 - **PowerShell loader scripts** in `VisioAutomation_2010/VisioPowerShell/`: `Load*` does in-session imports; `Install*` does persistent installs to the user's PS modules folder; `*.ISE.ps1` is the ISE-launched variant. See the folder's [README.md](VisioAutomation_2010/VisioPowerShell/README.md).
 
 ## Tooling notes

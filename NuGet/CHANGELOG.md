@@ -12,6 +12,21 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Added
+- New facade methods on `VisioScripting.Client` for operations that previously required reaching past the facade. These are the canonical entry points going forward and align with the hybrid public-API contract decided in [#156](https://github.com/saveenr/VisioAutomation/issues/156):
+  - `Client.Model.LoadDirectedGraphFromXml(XDocument)` returns a `DirectedGraphDocument` (replaces `DirectedGraphDocumentLoader.LoadFromXml`).
+  - `Client.Model.LoadOrgChartFromXml(XDocument)` returns an `OrgChartDocument` (replaces `OrgChartDocumentLoader.LoadFromXml`).
+  - `Client.Page.GetPageDimensions(TargetPages)` returns `List<PageDimensions>` (replaces the static `PageDimensions.Get_PageDimensions`).
+  - `Client.Selection.GetShapeDimensions(TargetShapes)` returns `List<ShapeDimensions>` (replaces the static `ShapeDimensions.Get_ShapeDimensions`).
+
+  Part of [#182](https://github.com/saveenr/VisioAutomation/issues/182).
+
+### Removed
+- `VisioScripting.Loaders.DirectedGraphDocumentLoader` and `VisioScripting.Loaders.OrgChartDocumentLoader` are now `internal`. Direct consumers should switch to `Client.Model.LoadDirectedGraphFromXml` / `Client.Model.LoadOrgChartFromXml`. Part of [#182](https://github.com/saveenr/VisioAutomation/issues/182).
+- Static `Get_PageDimensions` / `Get_ShapeDimensions` factory methods on `VisioScripting.Models.PageDimensions` / `Models.ShapeDimensions` are now `internal`. Use `Client.Page.GetPageDimensions` / `Client.Selection.GetShapeDimensions` instead. The data-carrier types themselves remain `public` (they are return values). Part of [#182](https://github.com/saveenr/VisioAutomation/issues/182).
+- Unused `LoadFromXml(Client, string filename)` overloads on both `DirectedGraphDocumentLoader` and `OrgChartDocumentLoader`. Each was an internal convenience that loaded the XML file and deferred to the `XDocument` overload; no external caller ever invoked them. Part of [#182](https://github.com/saveenr/VisioAutomation/issues/182).
+- The plumbing types `VisioScripting.CommandTarget`, `VisioScripting.CommandTargetFlags`, and `Client.GetCommandTarget(CommandTargetFlags)` are now `internal`. The remaining `public` helpers in `VisioScripting.Helpers` (`WildcardHelper`, `InteropHelper`, `SelectionHelper`) are also now `internal`. None of these appear in any documented `*Commands` method signature; they are implementation detail of the `Client` facade. The new public-API contract is captured in [`docs/decisions/visioscripting-public-api.md`](https://github.com/saveenr/VisioAutomation/blob/master/docs/decisions/visioscripting-public-api.md). Phase C of [#182](https://github.com/saveenr/VisioAutomation/issues/182).
+
 ### Fixed
 - `MsaglRenderer` now honors `Node.Size` when `Node.Cells` is also set on a directed-graph node. Previously the `Cells` assignment overwrote the entire `shape_node.Cells` object, silently dropping the `XFormWidth` / `XFormHeight` populated from `Size`, so the rendered shape came out at the master's default size instead of the requested `Size`. Now the user's `Cells` is merged onto the existing cells via `ApplyFormulasTo`, which preserves Size-derived width/height. Closes [#82](https://github.com/saveenr/VisioAutomation/issues/82).
 

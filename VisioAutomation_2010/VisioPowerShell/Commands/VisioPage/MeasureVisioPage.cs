@@ -17,18 +17,9 @@ namespace VisioPowerShell.Commands.VisioPage
 
         protected override void ProcessRecord()
         {
-
-            var targetpages = new VisioScripting.TargetPages(this.Page).ResolveToPages(this.Client);
-
-            if (targetpages.Pages.Count < 1)
-            {
-                return;
-            }
-
-            var list_pagedim = VisioScripting.Models.PageDimensions.Get_PageDimensions(targetpages.Pages);
-
+            var targetpages = new VisioScripting.TargetPages(this.Page);
+            var list_pagedim = this.Client.Page.GetPageDimensions(targetpages);
             this.WriteObject(list_pagedim,true);
-
         }
     }
 }

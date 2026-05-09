@@ -5,14 +5,8 @@ using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Loaders
 {
-    public class OrgChartDocumentLoader
+    internal class OrgChartDocumentLoader
     {
-        public static VAORGCHART.OrgChartDocument LoadFromXml(Client client, string filename)
-        {
-            var xdoc = SXL.XDocument.Load(filename);
-            return OrgChartDocumentLoader.LoadFromXml(client, xdoc);
-        }
-
         public static VAORGCHART.OrgChartDocument LoadFromXml(Client client, SXL.XDocument xdoc)
         {
             var root = xdoc.Root;

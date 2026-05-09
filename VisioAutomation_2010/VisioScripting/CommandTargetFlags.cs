@@ -1,7 +1,7 @@
 namespace VisioScripting
 {
     [System.Flags]
-    public enum CommandTargetFlags
+    internal enum CommandTargetFlags
     {
         RequireApplication,
         RequireDocument,

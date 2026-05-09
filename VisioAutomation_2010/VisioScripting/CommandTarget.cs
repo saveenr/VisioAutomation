@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting
 {
-    public class CommandTarget
+    internal class CommandTarget
     {
         private readonly Client _client;
         public IVisio.Application Application { get; private set; }

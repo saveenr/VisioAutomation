@@ -8,7 +8,7 @@ using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Loaders
 {
-    public class DirectedGraphDocumentLoader
+    internal class DirectedGraphDocumentLoader
     {
         private class BuilderError
         {
@@ -44,12 +44,6 @@ namespace VisioScripting.Loaders
                     pagenum, conid, toid);
                 return new BuilderError(msg);
             }
-        }
-
-        public static DirectedGraphDocument LoadFromXml(Client client, string filename)
-        {
-            var xmldoc = SXL.XDocument.Load(filename);
-            return DirectedGraphDocumentLoader.LoadFromXml(client, xmldoc);
         }
 
         private class PageData

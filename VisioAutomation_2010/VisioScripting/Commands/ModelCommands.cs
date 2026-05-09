@@ -4,6 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using ORG = VisioAutomation.Models.Documents.OrgCharts;
 using GRAPH = VisioAutomation.Models.Layouts.DirectedGraph;
 using GRID = VisioAutomation.Models.Layouts.Grid;
+using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Commands
 {
@@ -191,6 +192,16 @@ namespace VisioScripting.Commands
 
             this._client.Output.WriteVerbose("Finished rendering all pages");
             this._client.Output.WriteVerbose("Finished rendering directed graph.");
+        }
+
+        public GRAPH.DirectedGraphDocument LoadDirectedGraphFromXml(SXL.XDocument xmldoc)
+        {
+            return Loaders.DirectedGraphDocumentLoader.LoadFromXml(this._client, xmldoc);
+        }
+
+        public ORG.OrgChartDocument LoadOrgChartFromXml(SXL.XDocument xmldoc)
+        {
+            return Loaders.OrgChartDocumentLoader.LoadFromXml(this._client, xmldoc);
         }
     }
 }
