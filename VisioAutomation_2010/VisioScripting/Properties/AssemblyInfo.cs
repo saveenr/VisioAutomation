@@ -1,7 +1,13 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
+// VTest exercises a couple of VisioScripting helpers (e.g. WildcardHelper)
+// directly. The helpers are not part of the hybrid public-API contract
+// (see docs/decisions/visioscripting-public-api.md) and stay `internal`.
+[assembly: InternalsVisibleTo("VTest")]
+
+// General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("VisioScripting")]

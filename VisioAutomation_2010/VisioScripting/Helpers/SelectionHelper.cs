@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioScripting.Helpers
 {
-    public static class SelectionHelper
+    internal static class SelectionHelper
     {
         public static List<IVisio.Shape> GetSelectedShapes(IVisio.Selection selection)
         {

@@ -74,7 +74,7 @@ namespace VisioScripting
             get { return this._client_context; }
         }
         
-        public CommandTarget GetCommandTarget(CommandTargetFlags flags)
+        internal CommandTarget GetCommandTarget(CommandTargetFlags flags)
         {
             var command_target = new CommandTarget(this, flags);
             return command_target;

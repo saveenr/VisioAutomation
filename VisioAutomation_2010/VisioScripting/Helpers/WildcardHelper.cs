@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace VisioScripting.Helpers
 {
-    public static class WildcardHelper
+    internal static class WildcardHelper
     {
         public static bool NullOrStar(string s)
         {
