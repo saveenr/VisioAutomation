@@ -22,39 +22,6 @@ Backlog of items related to release process, version policy, and publishing to p
 - **Cross-refs:** *Automate releases via GitHub CI* below — the CI workflow either flips the constant or stages the release config separately.
 - **Effort:** S.
 
-### Address `Visio.psd1` deprecation warnings on PSGallery publish
-- **Status (2026-05-06):** the `CmdletsToExport` half landed (manifest now lists 64 cmdlets explicitly; the publish-time best-practice warning will be silent on the next release). The `ModuleToProcess` &rarr; `RootModule` rename and `PowerShellVersion` bump are still pending; deferred deliberately, not blocked. Customer-impact analysis below.
-- **What's left:** The 4.7.0 publish to PSGallery (2026-05-06) emitted these still-active warnings from `Publish-Module`:
-  - `The module manifest member 'ModuleToProcess' has been deprecated. Use the 'RootModule' member instead.` (fires twice &mdash; once during local staging, once on the gallery upload).
-- **Why the warning fires:** [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) line 8 sets `ModuleToProcess = 'VisioPS.dll'` with an inline comment ("Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0") and the manifest declares `PowerShellVersion = '2.0'`. The compatibility target is essentially dead: PS 2.0 was removed from Windows 11; PSGallery's `Install-Module` requires PS 5.1+; [`Publish-VisioPSToGallery.ps1`](../../VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) itself refuses to run below PS 5.1.
-- **How to apply when picked up:**
-  - Switch `ModuleToProcess` to `RootModule` in [`Visio.psd1`](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1) (toggle the comment on lines 7-8). Bump `PowerShellVersion = '2.0'` to `'5.1'` to match the publish script's own minimum check. Optionally drop `CLRVersion = '4.0'` (paired with .NET Framework 4.0; the shipping libs target 4.5.2).
-
-#### Customer impact of the `PowerShellVersion = '2.0'` &rarr; `'5.1'` bump
-
-(Pre-derived 2026-05-06 so it doesn't have to be reasoned through again when this is picked up.)
-
-| PS version | Ships with | Status | Impact of bump |
-|---|---|---|---|
-| 7.x | separate install, cross-platform | current | unaffected (7 satisfies the `>= 5.1` floor) |
-| 5.1 | Windows 10 1607+ (2016), Win 11, Server 2016+ | current | **unaffected** &mdash; this is the de facto floor today |
-| 5.0 | Windows 10 1507/1511 only (2015-2016) | unsupported Windows | newly blocked, but Windows itself is end-of-life |
-| 4.0 | Windows 8.1, Server 2012 R2 | OOS since 2023 | newly blocked, but unlikely to be a VisioPS user |
-| 3.0 | Windows 8 | OOS since 2023 | same |
-| 2.0 | Windows 7 | OOS since 2020 | already broken &mdash; the binary cmdlets are compiled against `Microsoft.PowerShell.3.ReferenceAssemblies` and won't load on PS 2.0 regardless of what the manifest claims |
-
-Effective customer impact: **zero**. The current `PowerShellVersion = '2.0'` is aspirational, not real; the binary already won't run on anything below PS 3.0, and the entire installation path (PSGallery + `Publish-VisioPSToGallery.ps1`) gates at 5.1. Bumping the manifest aligns the declaration with what the module actually requires; no extant user becomes unable to run it. LTSB 2016 (the ongoing compat constraint until 2026-10-13) ships with PS 5.1, so the bump does not affect those users either.
-
-#### Maintenance note on `CmdletsToExport`
-The list now has 64 entries. Adding a new cmdlet requires also adding it to the manifest. Two options to enforce when convenient:
-- (a) Manual reminder in cmdlet-author docs / `CONTRIBUTING.md`.
-- (b) Pre-publish check that loads the staged module, diffs `Get-Module -Name Visio | Select-Object -ExpandProperty ExportedCmdlets` against the manifest's `CmdletsToExport`, and fails if they differ. Drop into `Publish-VisioPSToGallery.ps1` between the staging step and the `Publish-Module` call.
-
-Option (b) is a few lines of PowerShell; worth adding when the *PSGallery publish via "release first..."* item below lands, since that's the natural place to put the check.
-
-- **Cross-refs:** *Automate releases via GitHub CI* below &mdash; the publish workflow should also surface these warnings as a CI signal so future drift is caught early.
-- **Effort to finish:** S. Single commit, no behavior change for any extant user. The `RootModule` swap is one line; the `PowerShellVersion` bump is one line.
-
 ### Automate releases via GitHub CI *(in progress)*
 - **What:** Replace the current manual release process with GitHub Actions workflows that handle **three deliverables** end-to-end:
   1. **PSGallery publish** of the `Visio` PowerShell module &mdash; ✅ landed, see below.

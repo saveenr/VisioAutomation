@@ -4,8 +4,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = 'VisioPS.dll' - Commented this out because having RootModule defined causes the module to fail to load with PowerShell 2.0
-ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
+RootModule = 'VisioPS.dll'
 
 # Version number of this module.
 ModuleVersion = '4.7.2'
@@ -26,7 +25,7 @@ Copyright = 'SevenPens'
 Description = 'Visio PowerShell - Automation cmdlets for Visio version 2010 and above'
 
 # Minimum version of the Windows PowerShell engine required by this module
-PowerShellVersion = '2.0'
+PowerShellVersion = '5.1'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''
@@ -38,7 +37,7 @@ PowerShellVersion = '2.0'
 # DotNetFrameworkVersion = ''
 
 # Minimum version of the common language runtime (CLR) required by this module
-CLRVersion = '4.0'
+# CLRVersion = ''
 
 # Processor architecture (None, X86, Amd64) required by this module
 # ProcessorArchitecture = ''
