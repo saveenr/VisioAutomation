@@ -50,20 +50,6 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
 - M for option 3 or option 2 (half a day to a full day).
 - N/A (no work) for option 1.
 
-### Decide whether to document `VisioScripting` as a public API
-- **What:** `VisioScripting` is the .NET layer between the PowerShell cmdlets and the underlying `VisioAutomation` library. Its `Client` object groups commands by topic (`Document`, `Page`, `Selection`, `View`, `Text`, `Shape`, `ShapeSheet`, `Application`, `Master`, `Container`, `Connection`, `Hyperlink`, `Lock`, `CustomProperty`, `UserDefinedCell`, `Output`, `Undo`, `Window`, `Layer`, `Color`, etc.) — most cmdlets are thin wrappers over a `Client.<Group>.<Method>(...)` call.
-- **External feedback (2026-05-05):** A doc-review pass on the gitbook ([proposed-issues.md issue #1](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md), since converted into a GitHub issue) flagged the `VisioScripting` gap as the single highest-priority documentation hole. The argument: the source [`readme.md`](../../readme.md) leads with a `VisioScripting.Client` snippet as its quick-start, so a new C# reader's *first impression* is an undocumented type. That moves the open question below ("part of the project's promised surface, or internal?") from theoretical to forcing-function — answer it before deciding whether to fill the gap.
-- **Currently documented:** only as power-user escape hatches. The PS-side `cmdlets/other-cmdlets.md` lists `Get-VisioClient` (which returns a `VisioScripting.Client`); `technical-notes/getting-the-current-scriptingsession.md` and `technical-notes/use-visioautomation.md` give brief pointers to the .NET-side bridge. There is no per-method or per-group reference for `VisioScripting` itself.
-- **Why this is a real question, not just a coverage gap:**
-  - **Audience.** `VisioScripting` is a *higher-level* alternative to the raw `VisioAutomation` library — you'd reach for it from .NET when you want commands like "duplicate this page" or "select all shapes" without composing them yourself from `Page.Pages.Add` + `ShapeSheet.Writers.SrcWriter` + ... . That's a real audience, separate from PowerShell users.
-  - **Stability.** Right now `VisioScripting` is treated as an internal implementation detail of the cmdlets — APIs may shift to suit cmdlet needs. Documenting it elevates it to a public surface, which changes the cost of API churn.
-  - **Surface size.** Roughly one Helper / Commands class per topic, each with 5–20 methods. Order-of-magnitude similar to the .NET-side Tier 1+2+4 work that was just done (~15 pages).
-- **Decisions to make first:**
-  - **Is `VisioScripting` part of the project's promised surface, or an internal that shouldn't be relied on?** Affects whether documentation should exist at all and whether the cmdlets should keep wrapping it.
-  - **Same gitbook or separate?** Could be a third gitbook, or a section under [VisioAutomation_GitBook_Docs](https://github.com/saveenr/VisioAutomation_GitBook_Docs).
-- **Cross-refs:** *Decide where docs live long-term* (related policy question). The recently-completed Tiers 1+2+4 .NET-side coverage work is the validated pattern this would follow.
-- **Effort:** S to decide. M–L to write if the answer is "yes, document it" (similar in size to Tiers 1+2+4 of the .NET-side coverage).
-
 ### Keep CHANGELOGs current as Phase 1 work lands
 - **What:** Two changelogs were added in [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format: [`NuGet/CHANGELOG.md`](../../NuGet/CHANGELOG.md) for the `VisioAutomation2010` NuGet, and [`VisioAutomation_2010/VisioPowerShell/CHANGELOG.md`](../../VisioAutomation_2010/VisioPowerShell/CHANGELOG.md) for the `Visio` PowerShell module. Each has an `[Unreleased]` section that should accumulate consumer-visible changes until the Phase 2 release cuts a real version.
 - **Why:** The whole point of cutting a final release in Phase 2 is to give consumers a clean, well-documented checkpoint. If Unreleased sections drift behind reality during Phase 1, the release notes will be wrong.
