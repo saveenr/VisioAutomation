@@ -47,7 +47,7 @@ namespace VTest.PowerShell
                 new VisioAutomation.Core.Point(2.0, 2.0)
             });
 
-            CmdletBindingTests.Session.InvokeScript<object>(
+            CmdletBindingTests.Session.InvokeScriptStrict<object>(
                 "Lock-VisioShape -MoveX -Shape $s",
                 ("s", new[] { (IVisio.Shape)shape }));
 
@@ -70,13 +70,13 @@ namespace VTest.PowerShell
             });
 
             // First lock, then unlock, to verify the unlock path actually flips back.
-            CmdletBindingTests.Session.InvokeScript<object>(
+            CmdletBindingTests.Session.InvokeScriptStrict<object>(
                 "Lock-VisioShape -MoveX -Shape $s",
                 ("s", new[] { (IVisio.Shape)shape }));
             string after_lock = ((IVisio.Shape)shape).CellsU["LockMoveX"].FormulaU;
             MUT.Assert.AreEqual("1", after_lock, "Pre-condition: lock should set LockMoveX = 1");
 
-            CmdletBindingTests.Session.InvokeScript<object>(
+            CmdletBindingTests.Session.InvokeScriptStrict<object>(
                 "Unlock-VisioShape -MoveX -Shape $s",
                 ("s", new[] { (IVisio.Shape)shape }));
 
@@ -111,10 +111,8 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    // $ErrorActionPreference = 'Stop' forces the cmdlet's thrown exception
-                    // to propagate as a runtime error rather than landing on the error stream.
-                    CmdletBindingTests.Session.InvokeScript<object>(
-                        "$ErrorActionPreference = 'Stop'; Export-VisioShape -Filename $f -Shape $s",
+                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
+                        "Export-VisioShape -Filename $f -Shape $s",
                         ("f", export_path),
                         ("s", new[] { (IVisio.Shape)shape }));
                 }
@@ -167,10 +165,8 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    // $ErrorActionPreference = 'Stop' makes cmdlet-thrown exceptions propagate
-                    // as runtime errors rather than landing silently on the error stream.
-                    CmdletBindingTests.Session.InvokeScript<object>(
-                        "$ErrorActionPreference = 'Stop'; New-VisioShape -Polyline -Points $p",
+                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
+                        "New-VisioShape -Polyline -Points $p",
                         ("p", new[] { new VisioAutomation.Core.Point(1.0, 1.0) }));
                 }
                 catch (System.Exception)
@@ -197,10 +193,8 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    // $ErrorActionPreference = 'Stop' makes cmdlet-thrown exceptions propagate
-                    // as runtime errors rather than landing silently on the error stream.
-                    CmdletBindingTests.Session.InvokeScript<object>(
-                        "$ErrorActionPreference = 'Stop'; New-VisioShape -Bezier -Points $p",
+                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
+                        "New-VisioShape -Bezier -Points $p",
                         ("p", new[]
                         {
                             new VisioAutomation.Core.Point(0.0, 0.0),

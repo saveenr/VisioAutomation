@@ -202,6 +202,18 @@ namespace VTest.PowerShell
             return results.ToList();
         }
 
+        // InvokeScript<T> with $ErrorActionPreference = 'Stop' prepended.
+        // PowerShell catches cmdlet-thrown exceptions and writes them to the error stream
+        // by default; without 'Stop', a thrown exception doesn't propagate, so a try/catch
+        // around InvokeScript never sees it. Use InvokeScriptStrict for tests that
+        // (a) expect the cmdlet to throw, so the test can catch the propagated exception, or
+        // (b) want any unexpected error from the cmdlet to surface as a test failure rather
+        //     than be silently dropped on the error stream.
+        public List<T> InvokeScriptStrict<T>(string script, params (string name, object value)[] variables)
+        {
+            return this.InvokeScript<T>("$ErrorActionPreference = 'Stop'; " + script, variables);
+        }
+
         public VisioPowerShell.Models.ShapeCells Cmd_New_VisioShapeCells()
         {
             var cmd = new VisioPowerShell.Commands.VisioShapeCells.NewVisioShapeCells();
