@@ -68,6 +68,22 @@ Test fixtures (`VTest/datafiles/*`) are tagged `<Content Include="..." CopyToOut
 
 **Don't add `[DeploymentItem]` attributes.** Phase 1 commit `5cbf11cd` removed them — they were redundant given the `CopyToOutputDirectory` flag, and their only effect was triggering VS Test Explorer's deployment-mode behavior, which in turn dropped runtime dependencies on the floor.
 
+### `VTest.PowerShell`: cmdlet-binding tests via `InvokeScript` / `InvokeScriptStrict`
+
+`VTest.PowerShell` doesn't share the `Framework.VTest` base class; it tests cmdlets via a real PowerShell runspace hosted by [`VisioPSSession`](../VisioAutomation_2010/VTest.PowerShell/VisioPSSession.cs). Two paths are available:
+
+- **`Cmd_*` helpers** (e.g. `Cmd_New_VisioDocument`) — instantiate a cmdlet object in C# and call `cmd.Invoke()` directly. Bypasses PowerShell's parameter binder. Convenient for setup, but **wrong for tests of binding behavior**.
+- **`InvokeScript<T>` / `InvokeScriptStrict<T>`** — execute a PowerShell script through the runspace, exercising the real binder. Required for any test of positional binding, switch parameters, parameter sets, or pipeline binding.
+
+#### When to use which `InvokeScript` variant
+
+`InvokeScriptStrict<T>` is `InvokeScript<T>` with `$ErrorActionPreference = 'Stop'` prepended. PowerShell catches cmdlet-thrown exceptions and writes them to the error stream by default; without `'Stop'`, a thrown exception **does not propagate** to the caller, so a `try`/`catch` around `InvokeScript<T>` never sees it.
+
+- Use **`InvokeScriptStrict<T>`** for tests that expect the cmdlet to throw (so the test can catch the propagated exception), or that want any unexpected error from the cmdlet to surface as a test failure rather than be silently dropped on the error stream. **This is the right default for cmdlet-binding tests** ([`CmdletBindingTests.cs`](../VisioAutomation_2010/VTest.PowerShell/CmdletBindingTests.cs) is the canonical example).
+- Use plain **`InvokeScript<T>`** when the cmdlet is allowed to write non-fatal records to the error stream and the test only cares about the success-path return value.
+
+The longer-term cleanup (migrating cmdlets from raw `throw` to `ThrowTerminatingError(ErrorRecord)`, which always propagates regardless of `$ErrorActionPreference`) is tracked in [#191](https://github.com/saveenr/VisioAutomation/issues/191). Until that lands, `InvokeScriptStrict<T>` is the correct workaround for binding-test exception assertions.
+
 ## Quality gates
 
 ### MSTEST0030 enforced as error
