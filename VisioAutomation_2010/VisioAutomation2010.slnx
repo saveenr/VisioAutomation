@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../global.json" />
+    <File Path="../NuGet.config" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Project Path="VisioAutomation.Models/VisioAutomation.Models.csproj" />
+  <Project Path="VisioAutomation/VisioAutomation.csproj" />
+  <Project Path="VisioPowerShell/VisioPowerShell.csproj" />
+  <Project Path="VisioScripting/VisioScripting.csproj" />
+  <Project Path="VPlayground/VPlayground.csproj" />
+  <Project Path="VSamples.Docs/VSamples.Docs.csproj" />
+  <Project Path="VSamples/VSamples.csproj" />
+  <Project Path="VTest.Models/VTest.Models.csproj" />
+  <Project Path="VTest.PowerShell/VTest.PowerShell.csproj" />
+  <Project Path="VTest.Scripting/VTest.Scripting.csproj" />
+  <Project Path="VTest/VTest.csproj" />
+</Solution>

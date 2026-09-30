@@ -12,7 +12,7 @@ Build prerequisites and exact commands: [`docs/BUILDING.md`](docs/BUILDING.md).
 
 In short:
 - Microsoft Visio installed locally to run integration tests; compilation does not require Visio.
-- Visual Studio 2022, the toolchain used for local verification and CI.
+- Visual Studio 2026 and the .NET 10 SDK, the shared build-tool baseline with VisioAutomation.VDX. Runtime targets remain unchanged.
 - A regular `git clone` and a build via the IDE or the documented `MSBuild.exe` invocation.
 
 ## Running the tests

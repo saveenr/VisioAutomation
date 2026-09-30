@@ -30,25 +30,30 @@ concurrency:
 jobs:
   release:
     name: Release Visio PowerShell module
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0   # need full history so tag-existence check sees all tags
 
-      - name: Setup MSBuild (Visual Studio 2022)
-        uses: microsoft/setup-msbuild@v2
+      - name: Setup MSBuild (Visual Studio 2026)
+        uses: microsoft/setup-msbuild@v3
         with:
-          vs-version: '17.0'
+          vs-version: '[18.0,19.0)'
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
 
       # The .NET Framework 4.5.2 reference assemblies are supplied by the
       # Microsoft.NETFramework.ReferenceAssemblies.net452 package; no dev-pack
       # install needed. See VisioAutomation_2010/Directory.Packages.props.
 
       - name: Cache NuGet packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.nuget/packages
           key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/Directory.Packages.props') }}
@@ -56,10 +61,10 @@ jobs:
             nuget-${{ runner.os }}-
 
       - name: Restore solution NuGet packages
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.slnx -t:Restore
 
       - name: Build solution (Release)
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Release -m
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.slnx -p:Configuration=Release -m
 
       - name: Read module version and check tag does not exist
         id: version
@@ -106,7 +111,7 @@ jobs:
           Get-ChildItem artifacts -File | ForEach-Object { Write-Host "  $($_.Name)  ($([math]::Round($_.Length/1KB,1)) KB)" }
 
       - name: Upload workflow artifacts (always, including dry-runs)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: VisioPS-${{ steps.version.outputs.version }}
           path: artifacts/Visio-*.zip

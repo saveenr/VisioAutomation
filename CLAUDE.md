@@ -2,7 +2,11 @@
 
 Project-specific guidance for Claude Code sessions in this repo. Loaded automatically.
 
-## Current handover baseline (2026-09-29)
+## Current build baseline
+
+VisioAutomation and VisioAutomation.VDX now share VS 2026, the .NET 10 SDK selected by `global.json`, explicit C# 14, SDK-style projects, and SLNX solutions. Runtime targets remain net452 for shipping libraries and net472 for tests. Build and release workflows use `windows-2025-vs2026`. Use [docs/BUILDING.md](docs/BUILDING.md) for current commands; the VS 2022 commands and phase plans below are historical and are superseded by this baseline.
+
+## Historical handover baseline (2026-09-29)
 
 Read [docs/HANDOVER.md](docs/HANDOVER.md) and [docs/BUILDING.md](docs/BUILDING.md) first. The session snapshots below preserve earlier decisions and are not current status. All projects are SDK-style; Debug and Release build with VS 2022. The Release suite passes 237 tests with no skips. The PowerShell harness now imports the local module before opening its runspace and uses the current thread; the export-overwrite test is enabled. NuGet packaging now uses Release binaries. Release notes come from versioned changelog sections prepared before release. No release or ownership transfer was performed in this readiness pass.
 

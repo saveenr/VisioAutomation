@@ -37,7 +37,7 @@
 # -------------
 # - You must be the package owner of "Visio" on the PowerShell Gallery.
 # - The solution must already be built in Release. Run
-#   `msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Release -m`
+#   `msbuild VisioAutomation_2010\VisioAutomation2010.slnx -p:Configuration=Release -m`
 #   beforehand if needed.
 # - Working tree should be clean and HEAD should be the commit you want to tag.
 # - Use a fresh PowerShell session -- if another session has the Visio module

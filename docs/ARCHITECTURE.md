@@ -12,7 +12,7 @@ For a glossary of Visio-specific terms (ShapeSheet, SRC, master, etc.) see [GLOS
 
 The solution is focused on **out-of-process automation** of a running Visio instance — it is not a Visio add-in framework, and it does not render Visio diagrams without Visio.
 
-The solution file is [`VisioAutomation_2010/VisioAutomation2010.sln`](../VisioAutomation_2010/VisioAutomation2010.sln) and contains 10 projects.
+The solution file is [`VisioAutomation_2010/VisioAutomation2010.slnx`](../VisioAutomation_2010/VisioAutomation2010.slnx) and contains 11 projects.
 
 ---
 

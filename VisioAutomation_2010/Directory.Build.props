@@ -15,7 +15,7 @@
       Central Package Management. Package versions live in Directory.Packages.props
       (sibling file), not inline in csprojs. Eliminates version-skew risk across
       projects and makes the CI cache key trivially correct.
-      Requires NuGet 6.2+ / VS 2022 17.4+; verified locally on MSBuild 17.14.40.
+      Shared toolchain baseline with VDX: VS 2026 and the .NET 10 SDK.
     -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
@@ -25,7 +25,7 @@
       (file-scoped namespaces, target-typed new(), pattern enhancements, etc.)
       become available even on net452 / net472.
     -->
-    <LangVersion>latest</LangVersion>
+    <LangVersion>14.0</LangVersion>
 
     <!--
       Preserve the legacy bin/Debug/ output layout (no TFM suffix).

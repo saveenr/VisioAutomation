@@ -4,7 +4,8 @@ Run these commands from the repository root. See [ARCHITECTURE.md](ARCHITECTURE.
 
 ## Prerequisites
 
-- Windows and Visual Studio 2022 (or its Build Tools) with .NET desktop build tools. VS 2022 MSBuild is the verified toolchain used by CI.
+- Windows and Visual Studio 2026 (or its Build Tools) with .NET desktop build tools, matching VisioAutomation.VDX.
+- The .NET 10 SDK. The root `global.json` selects the latest installed stable 10.0 feature band, starting at 10.0.100. This is a build-tool dependency, not a runtime retargeting to .NET 10.
 - NuGet access for the first restore. All 11 projects are SDK-style and use PackageReference with versions in [Directory.Packages.props](../VisioAutomation_2010/Directory.Packages.props).
 - Microsoft Visio for integration tests, samples, and automation. **Compilation does not require Visio**: the Visio 2010 interop assembly comes from NuGet.
 - **Windows PowerShell 5.1** for the verified `Visio` automation workflow. Native PowerShell 7 automation and its compatibility shim were not verified in this pass.
@@ -13,18 +14,20 @@ Shipping libraries target .NET Framework 4.5.2; tests and VPlayground target 4.7
 
 ## Build
 
-From PowerShell, locate VS 2022 and restore/build:
+From PowerShell, locate VS 2026 and restore/build:
 
 ```powershell
 $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-$vs = & $vswhere -version '[17.0,18.0)' -products '*' -requires Microsoft.Component.MSBuild -latest -property installationPath
-if (-not $vs) { throw 'Visual Studio 2022 MSBuild was not found.' }
+$vs = & $vswhere -version '[18.0,19.0)' -products '*' -requires Microsoft.Component.MSBuild -latest -property installationPath
+if (-not $vs) { throw 'Visual Studio 2026 MSBuild was not found.' }
 $msbuild = Join-Path $vs 'MSBuild\Current\Bin\MSBuild.exe'
-& $msbuild VisioAutomation_2010\VisioAutomation2010.sln -restore -p:Configuration=Debug -m
+& $msbuild VisioAutomation_2010\VisioAutomation2010.slnx -restore -p:Configuration=Debug -m
 if ($LASTEXITCODE -ne 0) { throw 'Build failed.' }
 ```
 
-For shipping artifacts use `-p:Configuration=Release`. Outputs stay in `bin\Debug` or `bin\Release`, without a target-framework suffix. In a VS 2022 Developer Command Prompt, `msbuild` is already on PATH. Opening the solution in VS 2022 also works.
+For shipping artifacts use `-p:Configuration=Release`. Outputs stay in `bin\Debug` or `bin\Release`, without a target-framework suffix. In a VS 2026 Developer Command Prompt, `msbuild` is already on PATH. Opening the SLNX solution in VS 2026 also works.
+
+The canonical solution is `VisioAutomation2010.slnx`. Debug and Release build all eleven projects as Any CPU; legacy platform mappings that skipped projects have been removed. C# 14 is selected explicitly, independently of the .NET Framework runtime targets. The root `NuGet.config` clears machine-local feeds and restores from nuget.org.
 
 ## Run all four test projects
 
@@ -47,7 +50,7 @@ See [TESTING.md](TESTING.md) for suite design and coverage limitations.
 
 ## Continuous integration
 
-[build.yml](../.github/workflows/build.yml) builds Debug and Release on Windows with VS 2022 and runs `ManifestTests` and `SessionTests`, which need no Visio installation. Hosted runners do not have Visio, so a green CI run does not establish that COM integration tests pass. Run the complete suite locally before releasing and retain the TRX evidence.
+[build.yml](../.github/workflows/build.yml) builds Debug and Release on `windows-2025-vs2026` with VS 2026 and the SDK selected in `global.json`, matching VDX. It runs `ManifestTests` and `SessionTests`, which need no Visio installation. The two release-build workflows use the same toolchain and solution. Hosted runners do not have Visio, so a green CI run does not establish that COM integration tests pass. Run the complete suite locally before releasing and retain the TRX evidence.
 
 ## Load the PowerShell module
 

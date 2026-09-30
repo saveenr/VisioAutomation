@@ -4,7 +4,9 @@ Readiness assessment dated **2026-09-29**, against source commit `9653b207` plus
 
 ## Verified baseline
 
-The full solution builds with VS 2022 MSBuild. Release integration tests pass against installed Visio 16.0.20326.20158 using the x64 VSTest runner. The module loads in Windows PowerShell 5.1.26100.9444 with all 64 cmdlets exported.
+The current build baseline is shared with VDX: VS 2026, the .NET 10 SDK, C# 14, and SLNX solutions. Debug and Release rebuilds pass; all 238 Release tests pass using VS 2026's x64 VSTest runner against installed Visio 16.0.20326.20158. No Visio processes remain after the completed runs. Evidence: `TestResults/aligned-*-build.log` and `TestResults/aligned-release.trx`. Release NuGet packaging also succeeds. Runtime targets and package versions are unchanged.
+
+The earlier VS 2022 verification below is retained as historical evidence. The module loads in Windows PowerShell 5.1.26100.9444 with all 64 cmdlets exported.
 
 | Check | Result | Local evidence |
 |---|---|---|
@@ -41,7 +43,7 @@ The sibling [VisioAutomation.VDX](https://github.com/saveenr/VisioAutomation.VDX
 
 The 2026-09-29 pass fixed repeat-save corruption, rejected-add ownership changes, stale name lookups, sparse font-ID allocation, and cross-page connector acceptance. File saving and the new independent `ToXml()` snapshots share one serializer. The font tool reuses library helpers and accepts an output path.
 
-VDX builds Debug and Release; 21 pure tests pass in both configurations, and all 6 integration-project tests (5 using installed Visio) pass in Release. Its local package contains only the verified Release VDX DLL under `lib/net452`, README, and license. VDX has separate CI and build/architecture notes. Its published-package log adapter works around the single-digit-date parser bug fixed here; remove the adapter after adopting a release containing this fix.
+VDX now shares the VS 2026 / .NET 10 SDK / C# 14 build baseline. Debug and Release rebuilds and 23 pure tests pass in both configurations; all 6 integration-project tests (5 using installed Visio) pass in Release. Its local package contains only the verified Release VDX DLL under `lib/net452`, README, and license. VDX has separate CI and build/architecture notes. Its published-package log adapter works around the single-digit-date parser bug fixed here; remove the adapter after adopting a release containing this fix.
 
 The net40-to-net452 change is consumer-visible and needs an explicit release/version decision. No VDX package was published and its stored 1.1.3 version was not bumped. The checks are not an exhaustive XML-schema audit or a multi-version Visio certification.
 

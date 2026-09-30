@@ -19,7 +19,7 @@ permissions:
 jobs:
   build:
     name: Build (${{ matrix.configuration }})
-    runs-on: windows-latest
+    runs-on: windows-2025-vs2026
     strategy:
       fail-fast: false
       matrix:
@@ -27,12 +27,17 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Setup MSBuild (Visual Studio 2022)
-        uses: microsoft/setup-msbuild@v2
+      - name: Setup MSBuild (Visual Studio 2026)
+        uses: microsoft/setup-msbuild@v3
         with:
-          vs-version: '17.0'
+          vs-version: '[18.0,19.0)'
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
 
       # NOTE: the .NET Framework 4.5.2 dev-pack install step is deliberately
       # absent. The shipping libs still target net452, but the reference
@@ -42,7 +47,7 @@ jobs:
       # so MSBuild no longer needs the dev pack on disk.
 
       - name: Cache NuGet packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.nuget/packages
           key: nuget-${{ runner.os }}-${{ hashFiles('VisioAutomation_2010/Directory.Packages.props') }}
@@ -50,24 +55,24 @@ jobs:
             nuget-${{ runner.os }}-
 
       - name: Restore NuGet packages
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.slnx -t:Restore
 
       - name: Build solution
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=${{ matrix.configuration }} -m
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.slnx -p:Configuration=${{ matrix.configuration }} -m
 
       - name: Test module metadata and runspace isolation (no Visio required)
         shell: powershell
         run: |
           $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-          $vs = & $vswhere -version '[17.0,18.0)' -products '*' -requires Microsoft.Component.MSBuild -latest -property installationPath
-          if (-not $vs) { throw 'Visual Studio 2022 was not found.' }
+          $vs = & $vswhere -version '[18.0,19.0)' -products '*' -requires Microsoft.Component.MSBuild -latest -property installationPath
+          if (-not $vs) { throw 'Visual Studio 2026 was not found.' }
           $vstest = Join-Path $vs 'Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
           & $vstest 'VisioAutomation_2010\VTest.PowerShell\bin\${{ matrix.configuration }}\VTest.PowerShell.dll' /Platform:x64 '/TestCaseFilter:FullyQualifiedName~VTest.PowerShell.ManifestTests|FullyQualifiedName~VTest.PowerShell.SessionTests' '/Logger:trx;LogFileName=module-checks.trx' /ResultsDirectory:TestResults
           if ($LASTEXITCODE -ne 0) { throw 'Module checks failed.' }
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: module-checks-${{ matrix.configuration }}
           path: TestResults/*.trx
