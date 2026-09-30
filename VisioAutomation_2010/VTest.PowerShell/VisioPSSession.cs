@@ -8,11 +8,8 @@ namespace VTest.PowerShell
     public class VisioPSSession : VTest.PowerShell.Framework.VTestPowerShellSession
     {
         public VisioPSSession()
+            : base(typeof(VisioPowerShell.Commands.VisioCmdlet).Assembly.Location)
         {
-            // Find the path to the assembly
-            var visiops_asm = typeof(VisioPowerShell.Commands.VisioCmdlet).Assembly;
-            var modules = new[] { visiops_asm.Location };
-            this._sessionstate.ImportPSModule(modules);
         }
 
         public IVisio.ShapeClass Cmd_New_VisioContainer(

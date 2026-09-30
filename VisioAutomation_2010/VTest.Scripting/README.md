@@ -2,7 +2,7 @@
 
 Test project for the **VisioScripting** library — the high-level scripting facade that wraps the lower-level VisioAutomation API into per-subsystem clients (Page, Shape, Text, Document, etc.).
 
-34 tests as of 2026-05-04.
+Current verified counts and environment are recorded in [HANDOVER.md](../../docs/HANDOVER.md).
 
 ## What it covers
 

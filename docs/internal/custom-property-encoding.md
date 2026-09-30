@@ -156,7 +156,7 @@ The string-typed constructors `new CustomPropertyCells(string)` and `new CustomP
 ## See also
 
 - Characterization tests:
-    - [`VTest/Core/Shapes/CustomPropertiesTest.cs`](../../VisioAutomation_2010/VTest/Core/Shapes/CustomPropertiesTest.cs) — `CustomProps_UnencodedValueCharacterization`, `CustomProps_NumberTypeCharacterization`, `CustomProps_BooleanTypeCharacterization`, `CustomProps_DateTypeCharacterization`.
+    - [`VTest/Core/Shapes/CustomPropertiesTests.cs`](../../VisioAutomation_2010/VTest/Core/Shapes/CustomPropertiesTests.cs) - `UnencodedValueCharacterization`, `NumberTypeCharacterization`, `BooleanTypeCharacterization`, `DateTypeCharacterization`.
     - [`VTest/Core/Shapes/UserDefinedCellsTests.cs`](../../VisioAutomation_2010/VTest/Core/Shapes/UserDefinedCellsTests.cs) — `UserDefinedCells_UnencodedValueCharacterization`.
 - Encoding-aware code paths (search for callers of `EncodeValues()`):
     - [`VisioAutomation/Shapes/CustomPropertyCells.cs`](../../VisioAutomation_2010/VisioAutomation/Shapes/CustomPropertyCells.cs) — definition.

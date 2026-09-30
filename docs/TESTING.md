@@ -8,12 +8,12 @@ All under `VisioAutomation_2010/`:
 
 | Project | Tests | Library under test | README |
 |---|---:|---|---|
-| `VTest` | 94 | `VisioAutomation` (core) | [VTest/README.md](../VisioAutomation_2010/VTest/README.md) |
-| `VTest.Models` | 45 | `VisioAutomation.Models` (DOM, layouts) | [VTest.Models/README.md](../VisioAutomation_2010/VTest.Models/README.md) |
-| `VTest.Scripting` | 34 | `VisioScripting` (high-level facade) | [VTest.Scripting/README.md](../VisioAutomation_2010/VTest.Scripting/README.md) |
-| `VTest.PowerShell` | 4 | `VisioPowerShell` (cmdlets) | [VTest.PowerShell/README.md](../VisioAutomation_2010/VTest.PowerShell/README.md) |
+| `VTest` | 107 | `VisioAutomation` (core) | [VTest/README.md](../VisioAutomation_2010/VTest/README.md) |
+| `VTest.Models` | 60 | `VisioAutomation.Models` (DOM, layouts) | [VTest.Models/README.md](../VisioAutomation_2010/VTest.Models/README.md) |
+| `VTest.Scripting` | 43 | `VisioScripting` (high-level facade) | [VTest.Scripting/README.md](../VisioAutomation_2010/VTest.Scripting/README.md) |
+| `VTest.PowerShell` | 27 | `VisioPowerShell` (cmdlets) | [VTest.PowerShell/README.md](../VisioAutomation_2010/VTest.PowerShell/README.md) |
 
-177 tests total. Counts as of 2026-05-04.
+237 tests passed with no skips on 2026-09-29. Counts come from the Release TRX; see [HANDOVER.md](HANDOVER.md) for environment and evidence.
 
 ## Framework: MSTest 4.x
 
@@ -29,7 +29,7 @@ These three are load-bearing — every other choice in the test infrastructure f
 
 There is no mock or fake Visio. Tests instantiate `Microsoft.Office.Interop.Visio.Application`, manipulate real shapes, and verify behavior by reading back actual ShapeSheet values.
 
-**Full decision record:** [`decisions/tests-need-visio.md`](decisions/tests-need-visio.md) covers the *why* (mocks would have to reproduce Visio's undocumented quirks), the consequences (no `dotnet test` that runs anywhere; CI today is build-only; self-hosted Windows runner gated for any future test-CI per [`futures/build-and-code.md`](futures/build-and-code.md#run-tests-in-ci)), and the de-facto no-Visio test bucket that's emerging (`ManifestTests`, `XmlErrorLogTests`).
+**Full decision record:** [`decisions/tests-need-visio.md`](decisions/tests-need-visio.md) explains why mocks cannot replace Visio integration tests. CI runs only `ManifestTests` and `SessionTests`, which need no Visio; the full suite runs locally. Some additional pure-data tests also need no Visio, but they are not part of the CI filter.
 
 ### 2. Tests run sequentially, not in parallel
 
@@ -60,7 +60,7 @@ Lives in `VTest/Framework/VTest.cs`. Marked `[TestClass]` itself but contains no
 
 ### `[AssemblyCleanup]` orphan-prevention
 
-Each test project carries its own `AssemblyHooks.cs` with an `[AssemblyCleanup]` that calls `VTestAppRef.QuitVisioApplication()`. **Don't try to share this via the base class** — `[AssemblyCleanup]` is per-assembly and not inherited. Phase 1 commit `9a592a9d` added these hooks after discovering each testhost was leaking its singleton on exit (4 orphans per clean run, ~945 MB).
+`VTest`, `VTest.Models`, and `VTest.Scripting` each carry an `AssemblyHooks.cs` with `[AssemblyCleanup]` calling `VTestAppRef.QuitVisioApplication()`. **Don't try to share this via the base class**: `[AssemblyCleanup]` is per-assembly and not inherited. `VTest.PowerShell` instead closes its cmdlet-owned application during class cleanup and disposes its runspace.
 
 ### Data files
 
@@ -71,6 +71,8 @@ Test fixtures (`VTest/datafiles/*`) are tagged `<Content Include="..." CopyToOut
 ### `VTest.PowerShell`: cmdlet-binding tests via `InvokeScript` / `InvokeScriptStrict`
 
 `VTest.PowerShell` doesn't share the `Framework.VTest` base class; it tests cmdlets via a real PowerShell runspace hosted by [`VisioPSSession`](../VisioAutomation_2010/VTest.PowerShell/VisioPSSession.cs). Two paths are available:
+
+The harness registers the exact test-build assembly before opening the runspace and uses `PSThreadOptions.UseCurrentThread`. This keeps direct helpers and script execution on the same thread when sharing Visio COM objects. `SessionTests` verifies that cmdlets are available with module autoloading disabled and come from the expected assembly. The export tests cover shared-object selection and file overwrite behavior.
 
 - **`Cmd_*` helpers** (e.g. `Cmd_New_VisioDocument`) — instantiate a cmdlet object in C# and call `cmd.Invoke()` directly. Bypasses PowerShell's parameter binder. Convenient for setup, but **wrong for tests of binding behavior**.
 - **`InvokeScript<T>` / `InvokeScriptStrict<T>`** — execute a PowerShell script through the runspace, exercising the real binder. Required for any test of positional binding, switch parameters, parameter sets, or pipeline binding.
@@ -133,11 +135,11 @@ Match the file name. Marked `[TestClass]` directly on the concrete class — MST
 
 ## Running
 
-See [BUILDING.md](BUILDING.md) for IDE flow, `vstest.console.exe` invocation, and the dev-pack install requirement. Quick reminders:
+See [BUILDING.md](BUILDING.md) for IDE flow and an invocation covering all four assemblies. Reference assemblies are restored from NuGet. Quick reminders:
 
 - Visio must be installed locally.
 - Tests are sequential — don't expect parallel speedup.
-- A clean run of all 177 tests should leave **zero** Visio orphan processes. If you see Visio in Task Manager after a green run, that's a regression in the assembly-cleanup wiring (commit `9a592a9d` is the canonical fix to look at).
+- A completed full run should leave **zero new** Visio processes. Compare the process inventory before and after the run; do not terminate unrelated user sessions. Check both assembly and PowerShell class cleanup if tests leave an orphan.
 - Interrupted runs (Ctrl-C, debugger detach) can leave orphans behind; close them in Task Manager before re-running, or successive runs may hit file locks on stencils / templates.
 
 ## Known gotchas

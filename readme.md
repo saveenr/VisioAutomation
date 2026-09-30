@@ -50,6 +50,7 @@ Developer / architecture docs in this repo:
 - [`docs/OVERVIEW.md`](docs/OVERVIEW.md) — index of all developer docs
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — what each project does and how they fit together
 - [`docs/BUILDING.md`](docs/BUILDING.md) — build, test, install
+- [`docs/HANDOVER.md`](docs/HANDOVER.md) - verified readiness, release responsibilities, and remaining transfer decisions
 - [`docs/GLOSSARY.md`](docs/GLOSSARY.md) — Visio and codebase terminology
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — staged plan (Phase 1 / 2 / 3) and what shipped per phase
 - [`docs/FUTURES.md`](docs/FUTURES.md) — index of the topic-split backlog of cleanup / modernization work

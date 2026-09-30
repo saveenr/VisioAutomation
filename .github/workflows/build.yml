@@ -1,12 +1,8 @@
 name: Build
 
-# Build-only CI. Compiles the full solution to catch regressions; does NOT run
-# tests (tests need a live Visio install, which requires a self-hosted runner --
-# that's planned for Phase 3 when releases are also automated).
-#
-# Pinned to VS 2022's MSBuild because the .NET Framework 4.5.2 reference
-# assemblies needed to build the shipping libs are not resolved by VS 2026's
-# MSBuild. See docs/BUILDING.md and docs/futures/build-and-code.md.
+# Builds both development and shipping configurations and runs the PowerShell
+# metadata/session checks that do not require Visio. Full COM integration tests
+# still need a local Visio installation. See docs/BUILDING.md.
 
 on:
   push:
@@ -17,10 +13,17 @@ on:
       - master
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
-    name: Build (Debug)
+    name: Build (${{ matrix.configuration }})
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        configuration: [Debug, Release]
 
     steps:
       - name: Checkout
@@ -50,4 +53,22 @@ jobs:
         run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
 
       - name: Build solution
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=${{ matrix.configuration }} -m
+
+      - name: Test module metadata and runspace isolation (no Visio required)
+        shell: powershell
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $vs = & $vswhere -version '[17.0,18.0)' -products '*' -requires Microsoft.Component.MSBuild -latest -property installationPath
+          if (-not $vs) { throw 'Visual Studio 2022 was not found.' }
+          $vstest = Join-Path $vs 'Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
+          & $vstest 'VisioAutomation_2010\VTest.PowerShell\bin\${{ matrix.configuration }}\VTest.PowerShell.dll' /Platform:x64 '/TestCaseFilter:FullyQualifiedName~VTest.PowerShell.ManifestTests|FullyQualifiedName~VTest.PowerShell.SessionTests' '/Logger:trx;LogFileName=module-checks.trx' /ResultsDirectory:TestResults
+          if ($LASTEXITCODE -ne 0) { throw 'Module checks failed.' }
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: module-checks-${{ matrix.configuration }}
+          path: TestResults/*.trx
+          if-no-files-found: ignore

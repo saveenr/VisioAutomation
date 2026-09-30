@@ -1,112 +1,93 @@
 # Building, Testing, and Running
 
-Practical notes on building the solution, running the tests, and trying things out locally. For the structure of the projects themselves see [ARCHITECTURE.md](ARCHITECTURE.md).
+Run these commands from the repository root. See [ARCHITECTURE.md](ARCHITECTURE.md) for project structure and [HANDOVER.md](HANDOVER.md) for readiness and release responsibilities.
 
 ## Prerequisites
 
-- **Microsoft Visio**, installed locally. The solution targets the Visio 2010 Primary Interop Assembly (`Microsoft.Office.Interop.Visio` v14) but works against newer Visio versions at runtime. Tests and samples instantiate a real Visio process, so Visio must be present on any machine that runs them.
-- **Visual Studio 2022** (the .sln declares `VisualStudioVersion = 17.0`). The Build Tools alternative also works. **VS 2026 is not yet supported** — its MSBuild does not resolve targeting packs older than .NET Framework 4.6.2, and most projects target 4.5. Moving to VS 2026 is a Phase 3 item; see [futures/build-and-code.md](futures/build-and-code.md#move-development-to-visual-studio-2026).
-- **PowerShell** — required only if you are building/testing/running the `VisioPowerShell` module.
+- Windows and Visual Studio 2022 (or its Build Tools) with .NET desktop build tools. VS 2022 MSBuild is the verified toolchain used by CI.
+- NuGet access for the first restore. All 11 projects are SDK-style and use PackageReference with versions in [Directory.Packages.props](../VisioAutomation_2010/Directory.Packages.props).
+- Microsoft Visio for integration tests, samples, and automation. **Compilation does not require Visio**: the Visio 2010 interop assembly comes from NuGet.
+- **Windows PowerShell 5.1** for the verified `Visio` automation workflow. Native PowerShell 7 automation and its compatibility shim were not verified in this pass.
 
-The shipping libraries target .NET Framework 4.5.2, but you do **not** need to install the 4.5.2 Developer Pack — the reference assemblies are supplied by the [`Microsoft.NETFramework.ReferenceAssemblies.net452`](../VisioAutomation_2010/Directory.Packages.props) NuGet package, restored automatically with the rest of the solution. The 4.7.2 reference assemblies (used by the test projects) ship in-box on every supported Windows.
+Shipping libraries target .NET Framework 4.5.2; tests and VPlayground target 4.7.2. Reference assemblies for both targets are restored from NuGet; separate Developer Pack installations are unnecessary. C# language selection is controlled by `LangVersion` in [Directory.Build.props](../VisioAutomation_2010/Directory.Build.props).
 
-## Building
+## Build
 
-The exact MSBuild path depends on your VS 2022 install location. From a regular shell (Bash/PowerShell), use the full path:
+From PowerShell, locate VS 2022 and restore/build:
 
-```sh
-# from the repo root, using VS 2022 Community at the default install path
-MSBUILD="/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/MSBuild.exe"
-
-# 1. Restore NuGet packages
-"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln -t:Restore
-
-# 2. Build
-"$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln \
-    -p:Configuration=Debug -m
+```powershell
+$vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+$vs = & $vswhere -version '[17.0,18.0)' -products '*' -requires Microsoft.Component.MSBuild -latest -property installationPath
+if (-not $vs) { throw 'Visual Studio 2022 MSBuild was not found.' }
+$msbuild = Join-Path $vs 'MSBuild\Current\Bin\MSBuild.exe'
+& $msbuild VisioAutomation_2010\VisioAutomation2010.sln -restore -p:Configuration=Debug -m
+if ($LASTEXITCODE -ne 0) { throw 'Build failed.' }
 ```
 
-From the **Developer Command Prompt for VS 2022** (or Developer PowerShell), `MSBuild.exe` is on PATH and you can drop the full path:
+For shipping artifacts use `-p:Configuration=Release`. Outputs stay in `bin\Debug` or `bin\Release`, without a target-framework suffix. In a VS 2022 Developer Command Prompt, `msbuild` is already on PATH. Opening the solution in VS 2022 also works.
 
-```cmd
-msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
-msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
+## Run all four test projects
+
+The complete suite needs installed, activated Visio and an interactive Windows session. Tests use real COM automation and must run sequentially. Save personal Visio work before starting; tests open and close their own documents and applications.
+
+Using `$vs` from the build command:
+
+```powershell
+$vstest = Join-Path $vs 'Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
+$configuration = 'Debug' # Use Release to validate shipping builds.
+$assemblies = 'VTest', 'VTest.Models', 'VTest.Scripting', 'VTest.PowerShell' |
+    ForEach-Object { "VisioAutomation_2010\$_\bin\$configuration\$_.dll" }
+& $vstest $assemblies /Platform:x64 '/Logger:trx;LogFileName=handover.trx' /ResultsDirectory:TestResults
+if ($LASTEXITCODE -ne 0) { throw 'Tests failed. Inspect TestResults\handover.trx.' }
 ```
 
-Or open [`VisioAutomation_2010/VisioAutomation2010.sln`](../VisioAutomation_2010/VisioAutomation2010.sln) in Visual Studio 2022 and build the solution — the IDE handles restore automatically.
+Do not add `/Parallel`. Test Explorer also works. Inspect the TRX for failed and skipped tests. Compare Visio processes before and after the run: a completed run should leave no new processes. Interrupted runs may require manual cleanup; do not terminate unrelated Visio sessions.
 
-The Visio PIA comes from the [`Visio2010.PrimaryInteropAssembly`](../VisioAutomation_2010/Directory.Packages.props) NuGet package, so a clean machine without Visio's developer tools installed will still restore the interop reference. Package versions are centralized in [`Directory.Packages.props`](../VisioAutomation_2010/Directory.Packages.props) (Central Package Management); individual csprojs reference packages without versions.
+See [TESTING.md](TESTING.md) for suite design and coverage limitations.
 
 ## Continuous integration
 
-Every push to `master` (and every PR targeting it) is built by [`.github/workflows/build.yml`](../.github/workflows/build.yml) on a GitHub-hosted `windows-latest` runner. The workflow pins MSBuild to VS 2022 (matching local builds) and runs the same restore + build commands documented above.
+[build.yml](../.github/workflows/build.yml) builds Debug and Release on Windows with VS 2022 and runs `ManifestTests` and `SessionTests`, which need no Visio installation. Hosted runners do not have Visio, so a green CI run does not establish that COM integration tests pass. Run the complete suite locally before releasing and retain the TRX evidence.
 
-The CI is **build-only**. Tests need a live Visio install and would require a self-hosted Windows runner; that's planned for Phase 3 alongside automated releases (see [futures/build-and-code.md](futures/build-and-code.md#run-tests-in-ci) and [futures/releases.md](futures/releases.md#automate-releases-via-github-ci-in-progress)).
+## Load the PowerShell module
 
-The current build status appears as a badge in the [root README](../readme.md).
-
-## Running the tests
-
-All test projects use **MSTest** and **require a live Visio installation** because they exercise real COM calls.
-
-- From Visual Studio: open Test Explorer, build, run all.
-- From the command line:
-  ```sh
-  vstest.console.exe VisioAutomation_2010\VTest\bin\Debug\VTest.dll
-  ```
-
-Tests will launch one or more Visio processes during a run. If a previous run was interrupted, leftover Visio processes can hold file locks — close them before re-running.
-
-| Project | Scope |
-|---|---|
-| `VTest` | Core library |
-| `VTest.Models` | DOM and layouts |
-| `VTest.Scripting` | High-level scripting facade |
-| `VTest.PowerShell` | PowerShell cmdlets (spins up an in-process PS session) |
-
-## Running the samples
-
-[`VSamples`](../VisioAutomation_2010/VSamples/) is a WinForms exe — set it as the startup project, build, run. The form lists the built-in samples by category; pick one and click run. It will start Visio (if not already running) and execute against a fresh document.
-
-[`VSamples.Docs`](../VisioAutomation_2010/VSamples.Docs/) is a smaller console exe holding the curated examples that appear in the public docs.
-
-## Working with the PowerShell module
-
-For a fast inner loop, build the solution in **Debug** and then in PowerShell:
+Build Debug, then open a fresh **Windows PowerShell 5.1** session:
 
 ```powershell
-cd VisioAutomation_2010\VisioPowerShell
-. .\LoadFromBinDebug.ps1
+Import-Module .\VisioAutomation_2010\VisioPowerShell\bin\Debug\Visio.psd1 -Force
+Get-Command -Module Visio
 ```
 
-This imports `bin\Debug\Visio.psd1` directly so you can iterate on cmdlets without installing the module.
+`LoadFromBinDebug.ps1` performs the development import. Substitute `Release` in the path to verify a Release build. Restart the PowerShell process after rebuilding: removing a module does not unload its .NET assemblies.
 
-To install the module for your user (so any PowerShell session can `Import-Module Visio`):
+For a persistent user installation:
 
 ```powershell
-cd VisioAutomation_2010\VisioPowerShell
-. .\InstallForCurrentUser.ps1
+& .\VisioAutomation_2010\VisioPowerShell\InstallForCurrentUser.ps1 -Configuration Debug
 ```
 
-The script robocopies the build artifacts to `Documents\WindowsPowerShell\Modules\Visio\`. It will warn if any DLLs are locked by a running PowerShell process — close those sessions first.
+This replaces `Documents\WindowsPowerShell\Modules\Visio`. Close sessions using its DLLs first. Importing directly from the build directory avoids replacing an installed module.
 
-## Trying it from IronPython
+## Produce release artifacts
 
-[`DemoIronPython`](../VisioAutomation_2010/DemoIronPython/) contains stand-alone scripts. The bootstrap loader [`visio.py`](../VisioAutomation_2010/DemoIronPython/visio.py) finds the assemblies (NuGet cache or local build output) and `clr.AddReference`s them. Run e.g. `ipy demo_01_basics.py` with the assemblies on the load path.
+Build the solution in **Release** first. The NuGet specification packs six runtime DLLs from `VisioScripting\bin\Release` into `lib\net452`, plus the root README:
 
-## Producing the NuGet package
-
-The package metadata lives in [`NuGet/VisioAutomation2010.nuspec`](../NuGet/VisioAutomation2010.nuspec). It packs the built DLLs from `VisioScripting/bin/debug/` into `lib/net40/` and declares `Microsoft.Office.Interop.Visio` as a framework reference. Build the solution first, then:
-
-```sh
-nuget pack NuGet\VisioAutomation2010.nuspec
+```powershell
+nuget pack NuGet\VisioAutomation2010.nuspec -OutputDirectory TestResults
+if ($LASTEXITCODE -ne 0) { throw 'NuGet packaging failed.' }
 ```
 
-[`NuGet/AcquireNuGetExe.ps1`](../NuGet/AcquireNuGetExe.ps1) helps fetch `nuget.exe` if you don't already have it.
+[AcquireNuGetExe.ps1](../NuGet/AcquireNuGetExe.ps1) can acquire `nuget.exe` if needed. Packaging does not publish anything.
 
-## Known rough edges (cleanup candidates for the 2026 refresh)
+Releases have two workflow stages:
 
-See [ROADMAP.md](ROADMAP.md) for the staged plan and [FUTURES.md](FUTURES.md) for the topic-split backlog. The build-relevant ones:
+| Artifact | Build and create GitHub Release | Publish existing release artifact |
+|---|---|---|
+| NuGet | [release-nuget.yml](../.github/workflows/release-nuget.yml) | [publish-nuget.yml](../.github/workflows/publish-nuget.yml) |
+| PowerShell | [release-psmodule.yml](../.github/workflows/release-psmodule.yml) | [publish-psmodule.yml](../.github/workflows/publish-psmodule.yml) |
 
-- **Mixed target frameworks**: shipping libs are now on .NET 4.5; test projects on .NET 4.7.2. Convergence on a single TFM (4.7.2 across the whole solution) is a Phase 3 item; it also enables moving to VS 2026.
-- **`packages.config`** is still in use rather than PackageReference. Modernizing would simplify NuGet handling and CI.
+Both release flows use Release binaries. Before triggering them, bump the artifact version and roll its `[Unreleased]` changelog entries into a matching `[<version>]` section. Workflows read that **versioned** section. Both stages support `dry_run`; the publish stage requires an existing GitHub Release tag. A release dry run still requires a version whose tag does not already exist.
+
+## Samples
+
+`VSamples` is a WinForms application: select it as the startup project and run a sample against installed Visio. `VSamples.Docs` contains curated documentation examples. `DemoIronPython` holds standalone IronPython examples and loader instructions.

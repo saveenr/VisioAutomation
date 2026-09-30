@@ -2,7 +2,7 @@
 
 Test project for the **VisioAutomation.Models** library — DOM, geometry, layout algorithms, and the directed-graph / orgchart drawing models.
 
-45 tests as of 2026-05-04.
+Current verified counts and environment are recorded in [HANDOVER.md](../../docs/HANDOVER.md).
 
 ## What it covers
 

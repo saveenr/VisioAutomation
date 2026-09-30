@@ -116,8 +116,9 @@ namespace VTest.PowerShell
                         ("f", export_path),
                         ("s", new[] { (IVisio.Shape)shape }));
                 }
-                catch (System.Exception)
+                catch (System.Management.Automation.RuntimeException ex)
                 {
+                    MUT.StringAssert.Contains(ex.Message, "already exists");
                     threw = true;
                 }
                 MUT.Assert.IsTrue(threw, "Export-VisioShape should throw when target exists and -Overwrite is not set");
@@ -140,13 +141,35 @@ namespace VTest.PowerShell
         }
 
         [MUT.TestMethod]
-        [MUT.Ignore("Blocked by #164: cmdlets that call TargetShapes.ResolveToSelection through the runspace path hit "
-            + "'CommandTarget: application does not match doc.application' because the runspace's Client and the test-host's "
-            + "Client disagree on which app/doc is active. The no-Overwrite path above doesn't bite because the cmdlet "
-            + "throws at the file-existence check before reaching ResolveToSelection. Re-enable when #164 lands.")]
         public void ExportVisioShape_TargetExists_WithOverwrite_ReplacesFile()
         {
-            // Intentionally empty body. Re-implement when #164 is resolved.
+            var doc = CmdletBindingTests.Session.Cmd_New_VisioDocument();
+            var shape = CmdletBindingTests.Session.Cmd_New_VisioShape_rectangle(new[]
+            {
+                new VisioAutomation.Core.Point(0.0, 0.0),
+                new VisioAutomation.Core.Point(2.0, 2.0)
+            });
+            string export_path = System.IO.Path.Combine(System.IO.Path.GetTempPath(),
+                "vtest_export_" + System.Guid.NewGuid().ToString("N") + ".png");
+            System.IO.File.WriteAllText(export_path, "pre-existing stub content");
+
+            try
+            {
+                CmdletBindingTests.Session.InvokeScriptStrict<object>(
+                    "Export-VisioShape -Filename $f -Shape $s -Overwrite",
+                    ("f", export_path), ("s", new[] { (IVisio.Shape)shape }));
+
+                using (var exported = System.Drawing.Image.FromFile(export_path))
+                {
+                    MUT.Assert.AreEqual(System.Drawing.Imaging.ImageFormat.Png.Guid, exported.RawFormat.Guid);
+                    MUT.Assert.IsTrue(exported.Width > 0 && exported.Height > 0);
+                }
+            }
+            finally
+            {
+                System.IO.File.Delete(export_path);
+                CmdletBindingTests.Session.Cmd_Close_VisioDocument(VTestPsArray.From(doc), true);
+            }
         }
 
         // -- New-VisioShape: polyline / Bezier minimum-point validation -----------
@@ -169,8 +192,9 @@ namespace VTest.PowerShell
                         "New-VisioShape -Polyline -Points $p",
                         ("p", new[] { new VisioAutomation.Core.Point(1.0, 1.0) }));
                 }
-                catch (System.Exception)
+                catch (System.Management.Automation.RuntimeException ex)
                 {
+                    MUT.StringAssert.Contains(ex.Message, "Need at least 2 points");
                     threw = true;
                 }
                 MUT.Assert.IsTrue(threw, "New-VisioShape -Polyline should throw when given fewer than 2 points");
@@ -201,8 +225,9 @@ namespace VTest.PowerShell
                             new VisioAutomation.Core.Point(1.0, 1.0)
                         }));
                 }
-                catch (System.Exception)
+                catch (System.Management.Automation.RuntimeException ex)
                 {
+                    MUT.StringAssert.Contains(ex.Message, "Need at least 4 points");
                     threw = true;
                 }
                 MUT.Assert.IsTrue(threw, "New-VisioShape -Bezier should throw when given fewer than 4 points");

@@ -10,6 +10,7 @@ This `docs/` folder contains the **internal / developer-facing** documentation f
 
 ## Documents in this folder
 
+- **[HANDOVER.md](HANDOVER.md)** - dated build, test, and packaging evidence; repository/service ownership map; remaining transfer decisions.
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — projects in the solution, what each is responsible for, how they depend on one another, and the central concepts (ShapeSheet addressing, batch I/O, the DOM, the scripting Client).
 - **[BUILDING.md](BUILDING.md)** — prerequisites, how to build, how to run the tests, how to load the PowerShell module locally, and known rough edges worth cleaning up.
 - **[TESTING.md](TESTING.md)** — design and conventions of the test suite: shared `Framework.VTest` base class, the per-testhost Visio singleton, `[AssemblyCleanup]` orphan-prevention, and the MSTEST0030 quality gate. Per-project READMEs live next to each test csproj.

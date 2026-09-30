@@ -2,6 +2,12 @@
 
 Project-specific guidance for Claude Code sessions in this repo. Loaded automatically.
 
+## Current handover baseline (2026-09-29)
+
+Read [docs/HANDOVER.md](docs/HANDOVER.md) and [docs/BUILDING.md](docs/BUILDING.md) first. The session snapshots below preserve earlier decisions and are not current status. All projects are SDK-style; Debug and Release build with VS 2022. The Release suite passes 237 tests with no skips. The PowerShell harness now imports the local module before opening its runspace and uses the current thread; the export-overwrite test is enabled. NuGet packaging now uses Release binaries. Release notes come from versioned changelog sections prepared before release. No release or ownership transfer was performed in this readiness pass.
+
+Before publishing, resolve the compatibility implications of the public APIs internalized under `[Unreleased]`; historical planned version numbers below are not release approval. Use the checked-in handover guide instead of author-local memory for operational setup.
+
 ## What this is
 
 A .NET Framework library plus a PowerShell module that automate Microsoft Visio via COM interop. Full picture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
@@ -30,8 +36,7 @@ MSBUILD="/c/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current
 "$MSBUILD" VisioAutomation_2010/VisioAutomation2010.sln -p:Configuration=Debug -m
 ```
 
-- **Do not** use `dotnet build` — projects are still legacy csproj (SDK-style migration is Phase 3 Pass 2).
-- **Do not** use VS 2026's MSBuild (under `Program Files\Microsoft Visual Studio\18\`) — its .NET Framework floor is 4.6.2 and the shipping libs are on 4.5.2. This is a Phase 3 unblocker (deferred until after the LTSB 2016 sunset on 2026-10-13).
+- Use the documented VS 2022 MSBuild invocation. Projects are SDK-style, but alternative toolchains are not part of the verified handover baseline.
 
 Package versions live in [`VisioAutomation_2010/Directory.Packages.props`](VisioAutomation_2010/Directory.Packages.props) (Central Package Management); individual csprojs use versionless `<PackageReference>` items.
 
@@ -39,7 +44,7 @@ Full reference (IDE flow, test invocation): [docs/BUILDING.md](docs/BUILDING.md)
 
 ## Tests need a live Visio
 
-All test projects exercise real Visio COM calls. There is no mock/fake layer (intentional). Tests cannot be run on a machine without Microsoft Visio installed — flag this rather than claiming a green run.
+The full suite exercises real Visio COM calls with no mock/fake layer. CI runs only the module metadata and runspace-isolation checks without Visio; do not represent those as a full integration run.
 
 ## Per-commit conventions
 
@@ -50,7 +55,7 @@ All test projects exercise real Visio COM calls. There is no mock/fake layer (in
 ## Tooling notes
 
 - **Shell:** Windows host. Both Bash and PowerShell are available. Use Bash for git and Unix-style tooling; use PowerShell for `.ps1` parse checks (`[System.Management.Automation.PSParser]::Tokenize`) and Windows-specific operations.
-- **GitHub access:** the `TheSevenPens` git identity has push access to all three repos in play (this repo, [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs), and [`VisioPowerShellDocs`](https://github.com/saveenr/VisioPowerShellDocs)). The user-facing docs live in those last two repos as siblings of this repo (cloned to `C:\Users\savee\Documents\GitHub\VisioAutomation_GitBook_Docs\` and `C:\Users\savee\Documents\GitHub\VisioPowerShellDocs\`). PS docs use a version-pinned branch (`visiops_v4_docs`), not master — see [reference_doc_repos.md memory](../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/reference_doc_repos.md).
+- **GitHub access:** the `TheSevenPens` git identity has push access to all three repos in play (this repo, [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs), and [`VisioPowerShellDocs`](https://github.com/saveenr/VisioPowerShellDocs)). The user-facing docs live in those last two repos as siblings of this repo (cloned to `C:\Users\savee\Documents\GitHub\VisioAutomation_GitBook_Docs\` and `C:\Users\savee\Documents\GitHub\VisioPowerShellDocs\`). PS docs use a version-pinned branch (`visiops_v4_docs`), not master — see [repository/service map](docs/HANDOVER.md#repository-and-service-map).
 
 ## Current state (resume here)
 
@@ -90,7 +95,7 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 
 **Previous session (2026-05-07b) summary:** Big session, four threads of work.
 
-1. **[#163](https://github.com/saveenr/VisioAutomation/issues/163) attempted, abandoned, deferred CY26Q2 &rarr; CY26Q3.** Pipeline parameter set on `Connect-VisioShape`. Cmdlet itself works (verified manually in PS 5.1), but regression tests routed through `VTest.PowerShell`'s `InvokeScript<T>` runspace plumbing failed with `CommandTarget: application does not match doc.application`, distinct from cmdlet logic. Surfaced the underlying constraint: `VisioCmdlet : SMA.Cmdlet` (not `PSCmdlet`) was a deliberate early-on choice for testability reasons, and several cmdlet designs (incl. detecting `ParameterSetName`) want PSCmdlet's surface. Rather than work around it for #163 alone, filed [#164](https://github.com/saveenr/VisioAutomation/issues/164) "Investigate switching VisioCmdlet base from Cmdlet to PSCmdlet" (CY26Q3, Milestone B) and parked #163 behind it. All in-progress code reverted; the constraint is captured in the [feedback_pscmdlet_avoid memory](../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/feedback_pscmdlet_avoid.md).
+1. **[#163](https://github.com/saveenr/VisioAutomation/issues/163) attempted, abandoned, deferred CY26Q2 &rarr; CY26Q3.** Pipeline parameter set on `Connect-VisioShape`. Cmdlet itself works (verified manually in PS 5.1), but regression tests routed through `VTest.PowerShell`'s `InvokeScript<T>` runspace plumbing failed with `CommandTarget: application does not match doc.application`, distinct from cmdlet logic. Surfaced the underlying constraint: `VisioCmdlet : SMA.Cmdlet` (not `PSCmdlet`) was a deliberate early-on choice for testability reasons, and several cmdlet designs (incl. detecting `ParameterSetName`) want PSCmdlet's surface. Rather than work around it for #163 alone, filed [#164](https://github.com/saveenr/VisioAutomation/issues/164) "Investigate switching VisioCmdlet base from Cmdlet to PSCmdlet" (CY26Q3, Milestone B) and parked #163 behind it. All in-progress code reverted; current test harness behavior is documented in [docs/TESTING.md](docs/TESTING.md).
 
 2. **[#161](https://github.com/saveenr/VisioAutomation/issues/161) closed.** Two new gitbook pages live: [VA NuGet version compatibility](https://saveenr.gitbook.io/visioautomation/version-compatibility) and [VisioPS module version compatibility](https://saveenr.gitbook.io/visiopowershell/developer-info/version-compatibility). Each row's data sourced from per-tag `csproj` / `nuspec` / `Visio.psd1`. Linked from [`readme.md`](readme.md)'s Documentation section and from both `CHANGELOG.md` preambles. PS-side page also documents that `Visio.psd1`'s historical `PowerShellVersion = '2.0'` claim is stale: actual minimum is PS 5.1 on net452.
 
@@ -121,7 +126,7 @@ Plus filed [#170](https://github.com/saveenr/VisioAutomation/issues/170) for nex
 
 **Previous session (2026-05-08b) summary:** Long working session, three major implementation threads plus broad backlog hygiene.
 
-1. **[#170](https://github.com/saveenr/VisioAutomation/issues/170) LINQ for ShapeSheet &mdash; motivation doc, spike deferred.** Rather than spike the implementation, drafted [`docs/futures/linq-shapesheet-before-after.md`](docs/futures/linq-shapesheet-before-after.md) (~250 lines) showing 9 ShapeSheet-query scenarios in today's API vs. a hypothetical LINQ shape, with an honest verdict per scenario (where LINQ wins, where it's a wash, where it may not fit). Doc closes with 7 design questions for whoever picks the spike up. Doc lives on the `experiment/linq-shapesheet` branch (commit `ac422911`, pushed to origin); spike code itself was deferred. **Issue [#170](https://github.com/saveenr/VisioAutomation/issues/170) rescoped from "LINQ provider for ShapeSheet queries" to "ShapeSheet query ergonomics (LINQ and other shapes)" and moved CY26Q2 &rarr; CY27Q1** at user request, since the user wanted to keep thinking about it (may yield non-LINQ ideas).
+1. **[#170](https://github.com/saveenr/VisioAutomation/issues/170) LINQ for ShapeSheet &mdash; motivation doc, spike deferred.** Rather than spike the implementation, drafted `docs/futures/linq-shapesheet-before-after.md` (on the experiment branch) (~250 lines) showing 9 ShapeSheet-query scenarios in today's API vs. a hypothetical LINQ shape, with an honest verdict per scenario (where LINQ wins, where it's a wash, where it may not fit). Doc closes with 7 design questions for whoever picks the spike up. Doc lives on the `experiment/linq-shapesheet` branch (commit `ac422911`, pushed to origin); spike code itself was deferred. **Issue [#170](https://github.com/saveenr/VisioAutomation/issues/170) rescoped from "LINQ provider for ShapeSheet queries" to "ShapeSheet query ergonomics (LINQ and other shapes)" and moved CY26Q2 &rarr; CY27Q1** at user request, since the user wanted to keep thinking about it (may yield non-LINQ ideas).
 
 2. **[#152](https://github.com/saveenr/VisioAutomation/issues/152) Phase H1 closed.** Owner status calls confirmed all 8 surviving sibling repos. [`docs/RELATED-REPOS.md`](docs/RELATED-REPOS.md) updated to drop "(preliminary)" tags, reflect Visio-Font-Compare reclassification (abandoned &rarr; paused), remove the deleted `visio-templates` row, and record CY27 work links per row. Per-repo `README.md` updates pushed to all 8 sibling repos with consistent Status blockquotes. `visio-templates` deleted (by user via UI; gh CLI auth lacked `delete_repo` scope). #152 closed with summary comment. Surfaced `gh auth refresh -h github.com -s delete_repo` as the way to grant the scope if ever needed in future.
 

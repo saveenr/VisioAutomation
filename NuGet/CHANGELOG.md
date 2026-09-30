@@ -20,6 +20,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
   - `Client.Selection.GetShapeDimensions(TargetShapes)` returns `List<ShapeDimensions>` (replaces the static `ShapeDimensions.Get_ShapeDimensions`).
 
 ### Changed
+- NuGet packages and raw-DLL release archives now contain Release builds instead of Debug builds. Local packaging requires building the Release configuration first.
 - Package metadata's `<authors>` and `<copyright>` fields updated from `saveenr` / `Copyright Saveen Reddy` to `SevenPens` / `Copyright SevenPens` to reflect the new dev-team identity. No functional change; the displayed-author string on the [nuget.org package page](https://www.nuget.org/packages/VisioAutomation2010) updates on the next release. Legal copyright record (LICENSE.txt) updated correspondingly.
 
 ### Removed

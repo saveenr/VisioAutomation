@@ -1,21 +1,21 @@
 # VTest
 
-Test project for the **VisioAutomation** core library, and home of the shared test infrastructure used by the other three test projects (`VTest.Models`, `VTest.Scripting`, `VTest.PowerShell`).
+Test project for the **VisioAutomation** core library, and home of the shared Visio lifecycle infrastructure used by `VTest.Models` and `VTest.Scripting`. `VTest.PowerShell` manages its own cmdlet session lifecycle.
 
-94 tests as of 2026-05-04. The largest of the four test projects.
+The largest of the four test projects. Current verified counts and environment are recorded in [HANDOVER.md](../../docs/HANDOVER.md).
 
 ## What it covers
 
 | Area | Files |
 |---|---|
-| Core types | `Core/CellValueLiteralTests.cs`, `Core/TypeTests.cs`, `Core/PageHelperTests.cs`, `Core/ConnectionPoint_Tests.cs` |
+| Core types | `Core/CellValueLiteralTests.cs`, `Core/TypeTests.cs`, `Core/PageHelperTests.cs`, `Core/ConnectionPointTests.cs` |
 | Application-level | `Core/Application/ApplicationHelperTests.cs`, `Core/Application/XmlErrorLogTests.cs` |
 | Cell records | `Core/CellRecords/CellRecordTests.cs` |
 | Shape APIs | `Core/Shapes/*.cs` (Connector, Hyperlink, Geometry, CustomProperties, UserDefinedCells, Control, ShapeHelper) |
 | ShapeSheet read/write | `Core/ShapeSheet/ShapeSheetWriterTests.cs`, `Core/ShapeSheet/ShapeSheetQueryTests.cs` |
 | Text formatting | `Core/Text/TextFormatTests.cs`, `Core/Text/TextUtilTests.cs` |
 | Extension methods | `Core/Extensions/*.cs` (Application, Document, Page, Selection, etc.) |
-| Connectivity analyzers | `Analyzers/ConnectionAnalysisTests.cs`, `Analyzers/Path_Test.cs`, `Analyzers/ConnectivityMap.cs` |
+| Connectivity analyzers | `Analyzers/ConnectionAnalysisTests.cs`, `Analyzers/PathTests.cs`, `Analyzers/ConnectivityMap.cs` |
 | Misc utilities | `Utilities/ArraySegmentTests.cs` |
 
 ## Shared infrastructure (in `Framework/`)

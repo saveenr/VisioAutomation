@@ -20,11 +20,11 @@ It simplifies common tasks and makes it easier to build Visio add-ins and automa
     </dependencies>
   </metadata>
   <files>
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\Microsoft.Office.Interop.Visio.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\GenTreeOps.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\Microsoft.Msagl.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\VisioAutomation*.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\debug\VisioScripting*.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\Microsoft.Office.Interop.Visio.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\GenTreeOps.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\Microsoft.Msagl.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\VisioAutomation*.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\VisioScripting*.dll" target="lib\net452" />
     <file src="..\readme.md" target="README.md" />
   </files>
 </package>

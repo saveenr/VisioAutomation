@@ -2,12 +2,11 @@ name: Release VisioAutomation NuGet
 
 # Manual-trigger workflow for cutting a binary release of the
 # VisioAutomation NuGet. Reads the version from
-# NuGet/VisioAutomation2010.nuspec, builds the solution Debug,
+# NuGet/VisioAutomation2010.nuspec, builds the solution Release,
 # packs the .nupkg and a raw-DLL zip, and creates a GitHub Release
 # tagged VisioAutomation_<version> with both attached.
 #
-# Does NOT publish to nuget.org. That's a separate workflow planned
-# for after this one is proven to work end-to-end.
+# Publishing to nuget.org is handled by publish-nuget.yml after this step.
 
 on:
   workflow_dispatch:
@@ -56,8 +55,8 @@ jobs:
       - name: Restore solution NuGet packages
         run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -t:Restore
 
-      - name: Build solution (Debug)
-        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Debug -m
+      - name: Build solution (Release)
+        run: msbuild VisioAutomation_2010\VisioAutomation2010.sln -p:Configuration=Release -m
 
       - name: Read version and check tag does not exist
         id: version
@@ -92,7 +91,7 @@ jobs:
         shell: pwsh
         run: |
           $version = '${{ steps.version.outputs.version }}'
-          $bin = 'VisioAutomation_2010\VisioScripting\bin\Debug'
+          $bin = 'VisioAutomation_2010\VisioScripting\bin\Release'
           $staging = 'artifacts\binaries'
           New-Item -ItemType Directory -Force -Path $staging | Out-Null
           # Same DLL list as the nuspec <files> section -- keep these in sync

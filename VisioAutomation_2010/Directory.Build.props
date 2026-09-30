@@ -29,9 +29,9 @@
 
     <!--
       Preserve the legacy bin/Debug/ output layout (no TFM suffix).
-      NuGet/VisioAutomation2010.nuspec packs DLLs from bin/Debug/*.dll;
-      VisioPowerShell/InstallForCurrentUser.ps1 and Publish-VisioPSToGallery.ps1
-      assemble the PowerShell module from bin/Debug/. We don't multi-target,
+      NuGet/VisioAutomation2010.nuspec packs DLLs from bin/Release/*.dll;
+      VisioPowerShell/InstallForCurrentUser.ps1 defaults to Debug for development,
+      while Publish-VisioPSToGallery.ps1 stages Release. We don't multi-target,
       so the SDK's TFM-suffixed default (bin/Debug/net452/) buys us nothing.
     -->
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

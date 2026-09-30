@@ -4,25 +4,25 @@ Thanks for your interest in contributing. This is a small, focused project — p
 
 ## Active branch
 
-Development is on **`master`**. Target it for pull requests, and consult [`docs/ROADMAP.md`](docs/ROADMAP.md) to see what's in scope for the current phase of the [2026 refresh](docs/ROADMAP.md). (Phase 1 merged into `master` on 2026-05-03; Phase 2 / 3 work is upcoming.)
+Development is on **`master`**. Target it for pull requests. Consult [`docs/MILESTONES.md`](docs/MILESTONES.md) for planned work and [`docs/HANDOVER.md`](docs/HANDOVER.md) for maintainer readiness.
 
 ## Setup
 
 Build prerequisites and exact commands: [`docs/BUILDING.md`](docs/BUILDING.md).
 
 In short:
-- Microsoft Visio installed locally (required to build *and* run the tests).
-- Visual Studio 2022 (VS 2026 is not yet supported — Phase 3 work).
+- Microsoft Visio installed locally to run integration tests; compilation does not require Visio.
+- Visual Studio 2022, the toolchain used for local verification and CI.
 - A regular `git clone` and a build via the IDE or the documented `MSBuild.exe` invocation.
 
 ## Running the tests
 
-All tests exercise real Visio COM calls. There is no mock layer (intentional — see [`docs/decisions/tests-need-visio.md`](docs/decisions/tests-need-visio.md) for the full decision record). You cannot run the tests on a machine without Visio installed.
+The full suite exercises real Visio COM calls and needs Visio installed. Some metadata and pure-data tests can run without it. There is no mock Visio layer (intentional; see [`docs/decisions/tests-need-visio.md`](docs/decisions/tests-need-visio.md)). Run all four test assemblies using [`docs/BUILDING.md`](docs/BUILDING.md), and report failures and skips.
 
 ## Code style
 
 - The codebase predates many modern C# conventions. **Don't reformat existing code** in a PR that's about something else — keep the diff focused on the actual change.
-- New code should be reasonable C# 8 (the language version the projects compile with).
+- Follow the language settings in `VisioAutomation_2010/Directory.Build.props` and preserve the existing .NET Framework targets.
 - Don't add new files unless they're required by the change.
 - Default to no comments. Only add one when the *why* is non-obvious. Identifier names should carry the *what*.
 
@@ -45,9 +45,9 @@ Pure internal / build / docs changes don't need changelog entries.
 
 ### Release flow
 
-The release workflows ([`release-nuget.yml`](.github/workflows/release-nuget.yml), [`release-psmodule.yml`](.github/workflows/release-psmodule.yml)) source each release's GitHub Release notes from the matching CHANGELOG's `[Unreleased]` section. The workflow refuses to run if `[Unreleased]` is empty or still contains the placeholder `_No consumer-visible changes yet._` — populate it before triggering a release.
+The release workflows ([`release-nuget.yml`](.github/workflows/release-nuget.yml), [`release-psmodule.yml`](.github/workflows/release-psmodule.yml)) read notes from the matching CHANGELOG's **versioned** `[<version>]` section. They fail if that section is missing or empty.
 
-After a release lands, the maintainer converts the `[Unreleased]` section into a versioned section in the same CHANGELOG (per the Keep a Changelog convention):
+In the version-bump commit, **before triggering a release**, move the `[Unreleased]` entries into a versioned section and create a fresh `[Unreleased]` section:
 
 ```markdown
 ## [Unreleased]
@@ -60,7 +60,7 @@ _No consumer-visible changes yet._
 - ...
 ```
 
-This is a manual post-release step — the workflows don't auto-edit the CHANGELOG.
+This is a manual release-preparation step; workflows do not edit the CHANGELOG. Build and test Release, then use the release workflow followed by its publish workflow. See [`docs/BUILDING.md`](docs/BUILDING.md).
 
 ## Backlog hygiene
 
@@ -77,15 +77,9 @@ The headline phase summary in `ROADMAP.md` (e.g. "Phase 1 items completed:") and
 
 ## What's in scope right now
 
-The 2026 refresh is staged in three phases (see [`docs/ROADMAP.md`](docs/ROADMAP.md)).
+Handover work prioritizes reproducible builds and releases, reliable tests, and accurate documentation. SDK-style projects, central package management, and release automation are already implemented. Historical phase summaries live in [`docs/ROADMAP.md`](docs/ROADMAP.md); use [`docs/MILESTONES.md`](docs/MILESTONES.md) for the forward plan.
 
-**Phase 1 *(current)*** accepts code and docs improvements with no new features, no TFM bumps, no IDE upgrades, no csproj-format changes, and no breaking API changes. PRs that violate those guardrails will be deferred to Phase 3.
-
-**Phase 2** is the final release of the old-shape NuGet and PowerShell module.
-
-**Phase 3** is the modernization (VS 2026, modern C#, possibly modern .NET, automated releases) and accepts changes that Phase 1 explicitly defers.
-
-When in doubt about scope, open an issue first to discuss.
+Runtime upgrades and public API changes need compatibility review. The [`VisioScripting` API contract](docs/decisions/visioscripting-public-api.md) describes the stable facade. Keep unrelated refactors out of readiness fixes.
 
 ## Where to ask questions
 

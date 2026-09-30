@@ -9,10 +9,14 @@ namespace VTest.PowerShell.Framework
         protected SMA.Runspaces.Runspace _runspace;
         protected SMA.RunspaceInvoke _invoker;
 
-        public VTestPowerShellSession()
+        public VTestPowerShellSession(params string[] modules)
         {
             this._sessionstate = SMA.Runspaces.InitialSessionState.CreateDefault();
+            // Imports must be registered before the runspace snapshots its initial state.
+            this._sessionstate.ImportPSModule(modules);
             this._runspace = SMA.Runspaces.RunspaceFactory.CreateRunspace(this._sessionstate);
+            // Direct cmdlet helpers and scripts share COM objects; keep them on one thread.
+            this._runspace.ThreadOptions = SMA.Runspaces.PSThreadOptions.UseCurrentThread;
             this._runspace.Open();
             this._powershell = SMA.PowerShell.Create();
             this._powershell.Runspace = this._runspace;
@@ -35,6 +39,7 @@ namespace VTest.PowerShell.Framework
             if (this._runspace != null)
             {
                 this._runspace.Close();
+                this._runspace.Dispose();
                 this._runspace = null;
             }
 

@@ -19,7 +19,7 @@ Backlog of items related to the dev-team identity used across this codebase, its
 #### Axis 3: PSGallery publishing identity *(done 2026-05-07)*
 - `SevenPens` is now co-owner of the [`Visio` PSGallery module](https://www.powershellgallery.com/packages/Visio); saveenr remains co-owner. `PSGALLERY_API_KEY` rotated to a SevenPens-generated key on 2026-05-07.
 - **End-to-end validation deferred** to the next PSGallery release. Unlike axis 2, where the rotation was forced by an actual rejection on the saveenr key, axis 3 was preemptive &mdash; PSGallery hasn't tightened enforcement yet. So we know the rotation happened (secret timestamp confirms), but the new key hasn't been exercised against an upload. The next PSGallery release (whenever it ships) is the implicit smoke test.
-- Memory rule covering both feeds: [`nuget_publish_identity.md`](../../../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/nuget_publish_identity.md) now consolidates the rule for both `NUGET_API_KEY` and `PSGALLERY_API_KEY` &mdash; same reasoning, same workaround.
+- Publishing access for both feeds is part of the [maintainer handover](../HANDOVER.md). Confirm the incoming maintainer's package ownership and configure their scoped keys as `NUGET_API_KEY` and `PSGALLERY_API_KEY`; author-local memory is not required.
 
 #### Axis 4: Display authorship in artifact metadata *(done 2026-05-07)*
 - All five displayed-author / copyright fields rewritten from `saveenr` / `Saveen Reddy` to `SevenPens`:
@@ -58,7 +58,7 @@ Backlog of items related to the dev-team identity used across this codebase, its
 - **Decision recorded 2026-05-07:** treat the change as a brand swap. SevenPens is the handle / pen-name the same legal person uses; legal authorship of the code traces through the historical record (git author lines, the LICENSE file in earlier tags, etc.) without depending on the current LICENSE.txt's exact spelling.
 - Applied:
   - [`LICENSE.txt`](../../LICENSE.txt) line 3: `Copyright (c) 2016 Saveen Reddy` &rarr; `Copyright (c) 2016 SevenPens`. Year preserved.
-  - [`readme.md`](../../readme.md) license line: `[MIT](LICENSE.txt). Copyright (c) Saveen Reddy.` &rarr; `[MIT](LICENSE.txt). Copyright (c) SevenPens.`
+  - [`readme.md`](../../readme.md) license line: copyright attribution changed from Saveen Reddy to SevenPens; the [MIT license](../../LICENSE.txt) remains in place.
 - If the situation ever changes (e.g., SevenPens becomes a real legal entity that owns the IP via formal assignment), the LICENSE.txt line should be re-revisited then. For now the displayed-author and legal-copyright stories are coherent at "SevenPens" across all surfaces.
 
 #### Axis 8: Test fixtures *(done 2026-05-07)*
@@ -80,6 +80,6 @@ Backlog of items related to the dev-team identity used across this codebase, its
 #### Cross-refs
 
 - [`releases.md`](releases.md#microsoft-package-compliance-gate-on-the-saveenr-nugetorg-account-operational-quirk-discovered-2026-05-07-during-the-300-publish) for the operational quirk that drove Axis 2.
-- The [`nuget_publish_identity.md` project memory](../../../../.claude/projects/C--Users-savee-Documents-GitHub-VisioAutomation/memory/nuget_publish_identity.md) for the sticky operational rule on Axes 2 and 3 (the rule covers both feeds).
+- [Maintainer handover](../HANDOVER.md) for the repository, documentation, and publishing access that must be verified for a new owner.
 - [`docs.md`](docs.md) for the gitbook-side identity question, which couples to Axis 5.
 - GitHub issues: [#146](https://github.com/saveenr/VisioAutomation/issues/146) (Axis 5a-1, GitHub repo move), [#147](https://github.com/saveenr/VisioAutomation/issues/147) (Axis 5a-2, gitbook moves), [#148](https://github.com/saveenr/VisioAutomation/issues/148) (Axis 9, retire VisioAutomation account). Issues 146 and 147 are scheduled to the [`CY26Q4` milestone](https://github.com/saveenr/VisioAutomation/milestone/1).
