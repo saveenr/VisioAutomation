@@ -61,14 +61,14 @@ namespace VisioAutomation.Application.Logging
                     }
                     else if (line.EndsWith("Begin Session"))
                     {
-                        var tokens = line.Split();
+                        var tokens = line.Split((char[])null, System.StringSplitOptions.RemoveEmptyEntries);
                         var cur_session = this.GetMostRecentSession();
                         cur_session.StartTimeRaw = string.Join(" ", tokens.Take(5));
 
                         // Dates are in this format "Sat Jan 10 20:09:12 2015"
 
                         var culture = System.Globalization.CultureInfo.InvariantCulture;
-                        cur_session.StartTime = System.DateTime.ParseExact(cur_session.StartTimeRaw, "ddd MMM dd HH:mm:ss yyyy",
+                        cur_session.StartTime = System.DateTime.ParseExact(cur_session.StartTimeRaw, "ddd MMM d HH:mm:ss yyyy",
                             culture);
 
                     }

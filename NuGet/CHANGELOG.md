@@ -31,6 +31,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 - Vestigial `<frameworkAssembly>` reference to `Microsoft.Office.Interop.Visio` in `VisioAutomation2010.nuspec`. The PIA is already bundled directly through the package's `<files>` section, so the additional declaration was redundant and was technically misleading (a `<frameworkAssembly>` reference implies the assembly ships with the .NET Framework itself, which the Visio PIA does not). No consumer behavior change. Closes [#176](https://github.com/saveenr/VisioAutomation/issues/176).
 
 ### Fixed
+- XML error-log parsing now accepts Visio's space-padded single-digit dates (for example, `Mon May  4`) instead of failing when older sessions occur in a log.
 - `MsaglRenderer` now honors `Node.Size` when `Node.Cells` is also set on a directed-graph node. Previously the `Cells` assignment overwrote the entire `shape_node.Cells` object, silently dropping the `XFormWidth` / `XFormHeight` populated from `Size`, so the rendered shape came out at the master's default size instead of the requested `Size`. Now the user's `Cells` is merged onto the existing cells via `ApplyFormulasTo`, which preserves Size-derived width/height. Closes [#82](https://github.com/saveenr/VisioAutomation/issues/82).
 
   Precedence is now field-by-field rather than all-or-nothing. Only the styling-only row's behavior changes; all other scenarios are unaffected:

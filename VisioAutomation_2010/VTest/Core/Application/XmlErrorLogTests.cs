@@ -9,6 +9,27 @@ namespace VTest.Core.Application
     public class XmlErrorLogTests : Framework.VTest
     {
         [MUT.TestMethod]
+        public void XmlErrorLog_SpacePaddedSingleDigitDay_ParsesTimestamp()
+        {
+            string filename = Path.GetTempFileName();
+            try
+            {
+                File.WriteAllText(filename,
+                    "Open VDX Processing Log\n\nSource: sample.vdx\n\n" +
+                    "Mon May  4 05:41:19 2026 Begin Session\n\n" +
+                    "[Warning] DataType:\nDescription: Example\n\n");
+                var log = new XmlErrorLog(filename);
+                MUT.Assert.AreEqual(1, log.LogSessions.Count);
+                MUT.Assert.AreEqual(new System.DateTime(2026, 5, 4, 5, 41, 19), log.LogSessions[0].StartTime);
+                MUT.Assert.AreEqual("Warning", log.LogSessions[0].LogRecords[0].Type);
+            }
+            finally
+            {
+                File.Delete(filename);
+            }
+        }
+
+        [MUT.TestMethod]
         public void XmlErrorLog_Visio2013VSDXLog_Reads51Sessions()
         {
             string input_filename = this._get_test_results_out_path(@"datafiles\VSDX_Log_Visio_2013.txt");

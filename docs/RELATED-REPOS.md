@@ -30,6 +30,8 @@ The 9th sibling, `visio-templates`, was confirmed empty during the audit and was
 
 ## Caveats
 
+- **VDX handoff update (2026-09-29):** the inventory's stars/push dates above are the historical H1 snapshot. VisioAutomation.VDX is now included in the ownership handoff, with net452/net472 alignment, correctness fixes, separate pure/integration tests, CI, and maintainer guidance. Feature-development status remains paused. See [HANDOVER.md](HANDOVER.md) and the [VDX architecture notes](https://github.com/saveenr/VisioAutomation.VDX/blob/master/ARCHITECTURE.md).
+
 - **License coverage is uneven.** Of the 8 siblings, only `VisioAutomation2007` and `VisioAutomation.VDX` have a `LICENSE` file in the repo root. The others have no GitHub-detected license. Phase H1 does not change that (it's a docs-only pass), but consumers should ask before depending on the unlicensed siblings.
 - **Out of scope:** the gitbook docs repos for the .NET library and the PowerShell module ([`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs), [`VisioPowerShellDocs`](https://github.com/saveenr/VisioPowerShellDocs)) are also under `saveenr`, but they're tooling for VisioAutomation rather than standalone projects, so they're not included in the table above. The issue body's repo list explicitly scoped them out.
 - **Other `saveenr/visio-*` or related repos** that aren't listed here weren't named in [issue #152](https://github.com/saveenr/VisioAutomation/issues/152). If new ones turn up they can be added as Phase H1 follow-up rows.
