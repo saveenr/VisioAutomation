@@ -6,6 +6,9 @@
     <AssemblyName>VisioPS</AssemblyName>
     <!-- AssemblyName != RootNamespace here; preserve the existing namespace. -->
     <RootNamespace>VisioPowerShell</RootNamespace>
+    <Description>PowerShell automation cmdlets for Microsoft Visio.</Description>
+    <AssemblyTitle>Visio PowerShell</AssemblyTitle>
+    <Product>Visio PowerShell</Product>
   </PropertyGroup>
 
   <ItemGroup>

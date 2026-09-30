@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <Description>Integration tests for VisioAutomation diagram models.</Description>
   </PropertyGroup>
 
   <ItemGroup>

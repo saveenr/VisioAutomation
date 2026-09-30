@@ -29,6 +29,23 @@ For shipping artifacts use `-p:Configuration=Release`. Outputs stay in `bin\Debu
 
 The canonical solution is `VisioAutomation2010.slnx`. Debug and Release build all eleven projects as Any CPU; legacy platform mappings that skipped projects have been removed. C# 14 is selected explicitly, independently of the .NET Framework runtime targets. The root `NuGet.config` clears machine-local feeds and restores from nuget.org.
 
+## Assembly metadata
+
+The SDK generates descriptive and version attributes from `Directory.Build.props` and project properties. Source `AssemblyInfo.cs` files retain only COM visibility, existing GUIDs, and friend-assembly declarations; test parallelization controls remain unchanged. Existing copyright notices are preserved.
+
+Assembly identity stays at `1.0.0.0`. File versions use the three-part `VersionPrefix` plus a zero revision: core libraries, tests, and samples follow the NuGet version; `VisioPS.dll` follows the module version. Informational versions contain the release version and Git commit. SDK generation includes the commit in a Git checkout; source archives without Git metadata have only the release version. A commit stamp does not assert that the working tree was clean.
+
+When preparing a release, update the corresponding `VersionPrefix` in `Directory.Build.props` along with the nuspec or module manifest. These are deliberately validated against one another; a mismatch blocks CI and release workflows. Release versions have not been bumped by this cleanup.
+
+Run the same validation locally in a fresh Windows PowerShell process:
+
+```powershell
+powershell.exe -NoProfile -File scripts\Test-AssemblyMetadata.ps1 -Solution VisioAutomation_2010\VisioAutomation2010.slnx -PackageMetadata NuGet\VisioAutomation2010.nuspec -ModuleManifest VisioAutomation_2010\VisioPowerShell\Visio.psd1 -Configuration Release
+if ($LASTEXITCODE -ne 0) { throw 'Assembly metadata checks failed.' }
+```
+
+The check covers all eleven assemblies and detects missing attributes, changed assembly identity, version drift, stale commit stamps, incorrect configuration, and COM visibility.
+
 ## Run all four test projects
 
 The complete suite needs installed, activated Visio and an interactive Windows session. Tests use real COM automation and must run sequentially. Save personal Visio work before starting; tests open and close their own documents and applications.

@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <Description>Metadata and integration tests for Visio PowerShell.</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -5,6 +5,7 @@
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <Description>Integration tests for the VisioScripting facade.</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <OutputType>Exe</OutputType>
+    <Description>Throwaway harness for ad-hoc Visio API exploration and old-issue repros.</Description>
+    <Copyright>Copyright SevenPens</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

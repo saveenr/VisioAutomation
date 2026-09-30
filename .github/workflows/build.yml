@@ -60,6 +60,10 @@ jobs:
       - name: Build solution
         run: msbuild VisioAutomation_2010\VisioAutomation2010.slnx -p:Configuration=${{ matrix.configuration }} -m
 
+      - name: Verify assembly metadata
+        shell: powershell
+        run: .\scripts\Test-AssemblyMetadata.ps1 -Solution VisioAutomation_2010\VisioAutomation2010.slnx -PackageMetadata NuGet\VisioAutomation2010.nuspec -ModuleManifest VisioAutomation_2010\VisioPowerShell\Visio.psd1 -Configuration ${{ matrix.configuration }}
+
       - name: Test module metadata and runspace isolation (no Visio required)
         shell: powershell
         run: |

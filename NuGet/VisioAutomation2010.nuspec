@@ -2,8 +2,7 @@
   <metadata>
     <id>VisioAutomation2010</id>
     <version>3.0.0</version>
-    <authors>SevenPens</authors>
-    <owners>saveenr</owners>
+    <authors>VisioAutomation contributors</authors>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/saveenr/VisioAutomation</projectUrl>
     <readme>README.md</readme>

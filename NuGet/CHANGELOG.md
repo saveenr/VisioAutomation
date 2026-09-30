@@ -20,8 +20,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
   - `Client.Selection.GetShapeDimensions(TargetShapes)` returns `List<ShapeDimensions>` (replaces the static `ShapeDimensions.Get_ShapeDimensions`).
 
 ### Changed
+- Assembly metadata is SDK-generated. Assembly identity remains 1.0.0.0; file versions track the package version and informational versions include the source commit. Package authorship now uses `VisioAutomation contributors`; copyright notices are retained and obsolete `owners` metadata is removed.
 - NuGet packages and raw-DLL release archives now contain Release builds instead of Debug builds. Local packaging requires building the Release configuration first.
-- Package metadata's `<authors>` and `<copyright>` fields updated from `saveenr` / `Copyright Saveen Reddy` to `SevenPens` / `Copyright SevenPens` to reflect the new dev-team identity. No functional change; the displayed-author string on the [nuget.org package page](https://www.nuget.org/packages/VisioAutomation2010) updates on the next release. Legal copyright record (LICENSE.txt) updated correspondingly.
+- Package copyright text uses `Copyright SevenPens`, matching the existing LICENSE.txt notice.
 
 ### Removed
 - `VisioScripting.Loaders.DirectedGraphDocumentLoader` and `VisioScripting.Loaders.OrgChartDocumentLoader` are now `internal`. Direct consumers should switch to `Client.Model.LoadDirectedGraphFromXml` / `Client.Model.LoadOrgChartFromXml`. Part of [#182](https://github.com/saveenr/VisioAutomation/issues/182) (Phase B).

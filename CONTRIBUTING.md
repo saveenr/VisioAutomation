@@ -47,7 +47,7 @@ Pure internal / build / docs changes don't need changelog entries.
 
 The release workflows ([`release-nuget.yml`](.github/workflows/release-nuget.yml), [`release-psmodule.yml`](.github/workflows/release-psmodule.yml)) read notes from the matching CHANGELOG's **versioned** `[<version>]` section. They fail if that section is missing or empty.
 
-In the version-bump commit, **before triggering a release**, move the `[Unreleased]` entries into a versioned section and create a fresh `[Unreleased]` section:
+In the version-bump commit, update the matching `VersionPrefix` in `VisioAutomation_2010/Directory.Build.props` along with the nuspec or module manifest. The assembly metadata check blocks release workflows if those versions disagree. **Before triggering a release**, move the `[Unreleased]` entries into a versioned section and create a fresh `[Unreleased]` section:
 
 ```markdown
 ## [Unreleased]

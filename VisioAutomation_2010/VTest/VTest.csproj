@@ -9,6 +9,7 @@
          emit .dll.config with the redirects MSTest 4.x's runner needs). -->
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <Description>Integration tests for VisioAutomation.</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -13,7 +13,7 @@ ModuleVersion = '4.7.2'
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
 
 # Author of this module
-Author = 'SevenPens'
+Author = 'VisioAutomation contributors'
 
 # Company or vendor of this module
 CompanyName = ''

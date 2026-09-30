@@ -66,6 +66,10 @@ jobs:
       - name: Build solution (Release)
         run: msbuild VisioAutomation_2010\VisioAutomation2010.slnx -p:Configuration=Release -m
 
+      - name: Verify assembly metadata
+        shell: powershell
+        run: .\scripts\Test-AssemblyMetadata.ps1 -Solution VisioAutomation_2010\VisioAutomation2010.slnx -PackageMetadata NuGet\VisioAutomation2010.nuspec -ModuleManifest VisioAutomation_2010\VisioPowerShell\Visio.psd1 -Configuration Release
+
       - name: Read module version and check tag does not exist
         id: version
         shell: pwsh

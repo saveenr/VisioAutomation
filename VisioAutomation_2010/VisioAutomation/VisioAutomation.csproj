@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <Description>Low-level .NET helpers for Microsoft Visio automation.</Description>
+    <AssemblyTitle>VisioAutomation 2010</AssemblyTitle>
+    <Product>VisioAutomation 2010</Product>
   </PropertyGroup>
 
   <ItemGroup>

@@ -4,6 +4,8 @@
     <TargetFramework>net452</TargetFramework>
     <OutputType>Exe</OutputType>
     <StartupObject>VSamples.Program</StartupObject>
+    <Description>Interactive samples for Microsoft Visio automation.</Description>
+    <Product>VisioAutomationSamples</Product>
   </PropertyGroup>
 
   <ItemGroup>

@@ -36,13 +36,19 @@
     -->
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
-    <!--
-      Keep existing Properties/AssemblyInfo.cs files; don't generate from csproj
-      properties. Avoids duplicate-attribute build errors during the SDK-style
-      migration. Future cleanup can flip this to true and move the [assembly: ...]
-      attributes into csproj / Directory.Build.props.
-    -->
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Release stamps are checked against the nuspec and module manifest in CI.
+         Keep assembly identity stable independently of the release version. -->
+    <VersionPrefix>3.0.0</VersionPrefix>
+    <VersionPrefix Condition="'$(MSBuildProjectName)' == 'VisioPowerShell'">4.7.2</VersionPrefix>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>$(VersionPrefix).0</FileVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Authors>VisioAutomation contributors</Authors>
+    <Company>$(Authors)</Company>
+    <AssemblyTitle>$(MSBuildProjectName)</AssemblyTitle>
+    <Product>$(MSBuildProjectName)</Product>
+    <Copyright>Copyright &#169; 2021</Copyright>
+    <RepositoryUrl>https://github.com/saveenr/VisioAutomation</RepositoryUrl>
 
   </PropertyGroup>
 

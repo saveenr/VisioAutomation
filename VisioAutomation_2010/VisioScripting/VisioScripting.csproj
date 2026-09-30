@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
+    <Description>High-level scripting facade for Microsoft Visio automation.</Description>
   </PropertyGroup>
 
   <ItemGroup>
