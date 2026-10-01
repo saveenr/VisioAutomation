@@ -7,7 +7,7 @@
 RootModule = 'VisioPS.dll'
 
 # Version number of this module.
-ModuleVersion = '4.7.3'
+ModuleVersion = '4.8.0'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
