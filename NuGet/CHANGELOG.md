@@ -12,7 +12,10 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+### Fixed
+- `Client.Model.DrawDataTable` now honors its `widths` and `heights` arguments, and `DataTableModel.CellWidth` / `CellHeight` now take effect. Previously every cell was drawn 1 x 1 inch and only the spacing was used. **Behavior change:** a caller that passed sizes other than 1 inch will now get a resized table. A column or row beyond the end of its list keeps the 1 inch default, a zero or negative size throws `ArgumentOutOfRangeException`, and `DataTableModel` now defaults `CellWidth` and `CellHeight` to 1.0 so a model that does not set them draws exactly as before. Closes [#206](https://github.com/saveenr/VisioAutomation/issues/206).
+- `Client.Model.DrawDataTableModel` now draws on the `TargetPage` it is given. Previously it resolved the argument and then always drew on the active page. Closes [#207](https://github.com/saveenr/VisioAutomation/issues/207).
+- `Client.Model.DrawXmlModel` now draws the document element as the root of the tree, labelled with its name. Previously the top node was labelled `#document` and the document element's own name was never drawn. **Behavior change:** the top label of every XML tree changes from `#document` to the document element's name. An `XmlDocument` with no document element now throws `ArgumentException` instead of `NullReferenceException`. Closes [#208](https://github.com/saveenr/VisioAutomation/issues/208).
 
 ## [3.1.0] - 2026-09-30
 
