@@ -19,6 +19,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
   - On `<connector>`: a per-edge `connectortype` that overrides the page setting, a `<cells>` child (explicit cells win over the `color`, `weight` and arrow defaults), and `<customprop>` children.
 
 ### Fixed
+- `Client.Model.DrawOrgChart`, and so `Out-VisioApplication -OrgChart`, no longer resizes the page passed as its `TargetPage`. The chart is drawn in a new document, and each of its pages is already sized by the render, but the call also resized the caller's own page to fit its contents, which shrank that page for no reason. The `TargetPage` now only supplies the application. Closes [#219](https://github.com/saveenr/VisioAutomation/issues/219).
 - Custom properties set on a directed graph connector (`Edge.CustomProperties`) are now applied to the drawn connector, for both dynamic and Bezier connectors. Previously the renderer ignored them.
 - `Client.Model.DrawDirectedGraphDocument` now honors its `DirectedGraphStyling` parameter. Previously the argument was accepted and ignored, so every page was drawn with the default styling (the `Dynamic Connector` master from `connec_u.vss`). A null styling still means the default. Closes [#197](https://github.com/saveenr/VisioAutomation/issues/197).
 - `Client.Model.DrawXmlModel` is now wrapped in an undo scope, like `DrawGrid` and `DrawDataTable`, so a single Undo removes the whole drawing. Previously Undo did not remove it. Closes [#222](https://github.com/saveenr/VisioAutomation/issues/222).
