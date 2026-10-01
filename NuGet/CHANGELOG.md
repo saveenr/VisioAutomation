@@ -12,6 +12,12 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+_No consumer-visible changes yet._
+
+## [3.1.0] - 2026-09-30
+
+A minor release. It adds directed-graph spacing options (also available as XML `<renderoptions>` attributes) and four `VisioScripting.Client` facade methods, fixes two `VisioAutomation.Models` bugs (org chart multiple roots and Box right-to-left placement), and ships Release builds. Several `VisioScripting` plumbing types that were public are now `internal` (see Removed); the usage audit in [#156](https://github.com/saveenr/VisioAutomation/issues/156) found no external consumers.
+
 ### Added
 - `MsaglOptions.EdgeLabelBoxSize` and `MsaglOptions.LayerSeparation` for tuning directed-graph layout spacing. `EdgeLabelBoxSize` (default 1.0 x 0.5 inches, the previous hardcoded value) is the space reserved for every edge's label, even unlabeled edges; smaller values give tighter layers. `LayerSeparation` (default null = MSAGL's own default) sets the minimum distance between layers in inches. Defaults preserve existing layouts. The directed graph XML `<renderoptions>` element accepts matching optional attributes: `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` (inches).
 - New facade methods on `VisioScripting.Client` for operations that previously required reaching past the facade. These are the canonical entry points going forward and align with the hybrid public-API contract decided in [#156](https://github.com/saveenr/VisioAutomation/issues/156). Part of [#182](https://github.com/saveenr/VisioAutomation/issues/182).
