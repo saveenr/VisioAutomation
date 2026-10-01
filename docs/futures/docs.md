@@ -56,6 +56,12 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
 - **How to apply:** When a Phase 1 commit changes anything a consumer of the NuGet or PS module would notice (public API, parameter behavior, supported runtime, dependencies), add an entry to the corresponding CHANGELOG's `[Unreleased]` in the same commit. Pure internal/build/docs changes don't need entries.
 - **Effort:** ~zero per change, if done in the same commit.
 
+### Fill remaining `VisioAutomation.Models` documentation gaps
+- **What:** The .NET gitbook has `models/` pages for the DOM, Tree/Grid/Box layouts, directed graph, layout styles, org charts and forms. Still missing: pages for `DataTableModel` and `XmlModel`, a page for the container layout, PowerShell examples for grid / data table / XML model (they appear only in the `Out-VisioApplication` page), and a decision on whether `Models.Color`, `Models.Text` and `Models.Geometry` need pages.
+- **Why:** [#132](https://github.com/saveenr/VisioAutomation/issues/132) closed describing the .NET gitbook as fully covered, but the data models are reachable only through one-line rows in `visio-scripting/model.md` and the `Out-VisioApplication` cmdlet page, so a reader cannot learn to build them. The 2026-05 `documentation-changes` page still says this work is tracked here; this entry restores that.
+- **Cross-refs:** [#200](https://github.com/saveenr/VisioAutomation/issues/200) tracks the work. The new directed-graph options (`EdgeLabelBoxSize`, `LayerSeparation`) need documenting once released.
+- **Effort:** M (two or three short pages plus examples).
+
 ### Add a troubleshooting page to the .NET gitbook
 - **What:** Neither gitbook has a Troubleshooting / FAQ page. Surfaced by the 2026-05-05 doc-review pass ([proposed-issues.md issue #8](https://github.com/saveenr/VisioAutomation_GitBook_Docs/blob/main/proposed-issues.md)) which sketched the candidate failure modes: COM-registration failures when Visio isn't installed; PIA-version vs. `VisioAutomation2010`-version mismatches; stencil-filename differences across Visio versions; 32-bit vs. 64-bit PowerShell host with the `Visio` module; "failed to log in to github.com" errors when publishing.
 - **Why deferred (not in Group B):** speculatively-written troubleshooting pages age badly and tend to confuse more than help. Better to wait until we have a real corpus of user-reported failures to ground the page in. The candidate list above is the seed.
