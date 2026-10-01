@@ -38,6 +38,7 @@ Phase 3 items completed (so far):
 - ✅ *Migrate from `packages.config` to `PackageReference`* — all 11 csprojs converted; Central Package Management; dev-pack install requirement gone via `Microsoft.NETFramework.ReferenceAssemblies` packages. Detail in [`COMPLETED.md`](COMPLETED.md#migrate-from-packagesconfig-to-packagereference).
 - ✅ *Modernize SDK-style csproj* — all 11 csprojs converted to SDK-style; net -1,322 lines across the three sub-passes (libraries, tests, exes); MSB3270 mismatch + filename-casing fix + 7-year-old dead code surfaced and removed as side benefits. Detail in [`COMPLETED.md`](COMPLETED.md#modernize-sdk-style-csproj).
 - ✅ *Test-discovery linter* (`MSTest.Analyzers` + MSTEST0030 enforcement) and *per-project test READMEs / `docs/TESTING.md`* — closed most of the *General cleanup of the test projects* entry from the Tests section below; only the *Coverage gaps* angle remains. Detail in [`COMPLETED.md`](COMPLETED.md#test-discovery-linter-msttestanalyzers--mstest0030-enforcement).
+- ✅ *Fill remaining `VisioAutomation.Models` documentation gaps* — data table and XML model pages, a container layout section, PowerShell pages for grids / data tables / XML trees, and an accuracy pass over every Models page. Detail in [`COMPLETED.md`](COMPLETED.md#fill-remaining-visioautomationmodels-documentation-gaps).
 
 Phase 3 items still pending:
 - *Move development to Visual Studio 2026* — gated on the TFM bump. See [`futures/build-and-code.md`](futures/build-and-code.md#move-development-to-visual-studio-2026).
