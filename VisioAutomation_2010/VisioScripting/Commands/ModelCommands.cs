@@ -57,6 +57,19 @@ namespace VisioScripting.Commands
             layout.Origin = new VisioAutomation.Core.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
             layout.RowDirection = GRID.RowDirection.TopToBottom;
+
+            // Honor the requested column widths and row heights. A column or row beyond
+            // the end of its list keeps the default size of 1 inch.
+            foreach (var i in Enumerable.Range(0, System.Math.Min(widths.Count, layout.Columns.Count)))
+            {
+                layout.Columns[i].Width = widths[i];
+            }
+
+            foreach (var i in Enumerable.Range(0, System.Math.Min(heights.Count, layout.Rows.Count)))
+            {
+                layout.Rows[i].Height = heights[i];
+            }
+
             layout.PerformLayout();
 
             foreach (var i in Enumerable.Range(0, datatable.Rows.Count))
@@ -100,7 +113,7 @@ namespace VisioScripting.Commands
             var widths = Enumerable.Repeat<double>(dt_model.CellWidth, dt_model.DataTable.Columns.Count).ToList();
             var heights = Enumerable.Repeat<double>(dt_model.CellHeight, dt_model.DataTable.Rows.Count).ToList();
             var spacing = new VisioAutomation.Core.Size(dt_model.CellSpacing, dt_model.CellSpacing);
-            var shapes = this._client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt_model.DataTable, widths, heights, spacing);
+            var shapes = this._client.Model.DrawDataTable(targetpage, dt_model.DataTable, widths, heights, spacing);
         }
 
         public void DrawXmlModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.XmlModel xmlmodel)
@@ -116,10 +129,16 @@ namespace VisioScripting.Commands
 
         private void _build_from_xml_doc(System.Xml.XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
         {
+            var document_element = xml_document.DocumentElement;
+            if (document_element == null)
+            {
+                throw new System.ArgumentException("The XML document has no document element", nameof(xml_document));
+            }
+
             var n = new VisioAutomation.Models.Layouts.Tree.Node();
             tree_drawing.Root = n;
-            n.Text = new VisioAutomation.Models.Text.Element(xml_document.Name);
-            this._build_from_xml_element(xml_document.DocumentElement, n);
+            n.Text = new VisioAutomation.Models.Text.Element(document_element.Name);
+            this._build_from_xml_element(document_element, n);
 
         }
 
