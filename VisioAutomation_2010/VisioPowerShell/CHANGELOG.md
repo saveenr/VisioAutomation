@@ -12,6 +12,12 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Added
+- `Get-VisioPage -Index <int[]>` returns the pages at those **1-based positions** in the document (the first page is 1, matching Visio's own page numbering and `Page.Index`). It has its own parameter set, `pagebyindex`, so it cannot be combined with `-ID`, `-Name` or `-ActivePage`.
+
+### Changed
+- **Behavior change:** `Get-VisioPage -ID` now looks pages up by their real Visio page ID (`Page.ID`), as its documentation always said and as `Get-VisioShape -ID` does for shapes. Previously the numbers were silently treated as positions in the document, so a real ID gave the wrong page or threw (`-ID 0` threw although the first page of a new document has ID 0). **Scripts that used `-ID` as a position should switch to `-Index`**, which takes the same 1-based numbers the old behavior accepted. The `PageID` column of `Get-VisioPageCells` is now directly usable with `Get-VisioPage -ID`. Closes [#232](https://github.com/saveenr/VisioAutomation/issues/232).
+
 ### Fixed
 - `Format-VisioPage -Width` and `-Height` now work. Previously the cmdlet always threw a `COMException` when either was given, because the page format cells were written to the page object instead of its page sheet. (`-Orientation`, `-FitContents` and the other parameters were not affected.)
 - `New-VisioHyperlink -NewWindow`, `-Default`, `-Invisible` and `-SortKey` now take effect. Previously the cmdlet accepted them and ignored them, so those hyperlink cells always stayed `FALSE` (or unset).

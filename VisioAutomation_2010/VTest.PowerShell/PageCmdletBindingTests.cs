@@ -65,6 +65,84 @@ namespace VTest.PowerShell
             MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "Parameter set cannot be resolved");
         }
 
+        // -- Get-VisioPage: -ID is a real Visio page ID, -Index is a 1-based position (#232) ------
+        //
+        // In a new document, "Page-1" has Page.ID 0 and Index 1. A page added afterward gets the next free ID
+        // (not 1), so IDs and positions differ, which is what these tests rely on to tell them apart.
+
+        [MUT.TestMethod]
+        public void GetVisioPage_ID_ReturnsThePageWithThatPageID()
+        {
+            var names = PageCmdletBindingTests.Session.RunInNewDocument<string>(
+                "$second = New-VisioPage -Name 'second'; (Get-VisioPage -ID $second.ID).Name");
+            MUT.Assert.AreEqual("second", names.Single());
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_ID_ZeroFindsThePageWhoseIDIsZero()
+        {
+            // Regression: -ID was used as a position, so -ID 0 threw although the first page's ID is 0.
+            var names = PageCmdletBindingTests.Session.RunInNewDocument<string>(
+                "$null = New-VisioPage -Name 'second'; (Get-VisioPage -ID 0).Name");
+            MUT.Assert.AreEqual("Page-1", names.Single());
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_ID_IsNotThePosition()
+        {
+            // The added page's ID differs from its position (2), so a position-based lookup cannot satisfy this.
+            var differs = PageCmdletBindingTests.Session.RunInNewDocument<bool>(
+                "$second = New-VisioPage -Name 'second'; $second.ID -ne $second.Index");
+            MUT.Assert.IsTrue(differs.Single(), "the test needs a page whose ID differs from its position");
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_ID_AcceptsSeveralIDs()
+        {
+            var counts = PageCmdletBindingTests.Session.RunInNewDocument<int>(
+                "$second = New-VisioPage -Name 'second'; (Get-VisioPage -ID 0,$second.ID | Measure-Object).Count");
+            MUT.Assert.AreEqual(2, counts.Single());
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_ID_ThatDoesNotExist_Throws()
+        {
+            var ex = PageCmdletBindingTests.Session.ExpectFailureInNewDocument("Get-VisioPage -ID 999");
+            MUT.Assert.IsFalse(CmdletScriptExtensions.MessageOf(ex).Contains("ParameterBindingException"), "should fail in the lookup, not in binding");
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_Index_ReturnsThePageAtThatOneBasedPosition()
+        {
+            var names = PageCmdletBindingTests.Session.RunInNewDocument<string>(
+                "$null = New-VisioPage -Name 'second'; \"$((Get-VisioPage -Index 1).Name),$((Get-VisioPage -Index 2).Name)\"");
+            MUT.Assert.AreEqual("Page-1,second", names.Single());
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_Index_OutOfRange_Throws()
+        {
+            foreach (string script in new[] { "Get-VisioPage -Index 0", "Get-VisioPage -Index 5" })
+            {
+                var ex = PageCmdletBindingTests.Session.ExpectFailureInNewDocument(script);
+                MUT.Assert.IsFalse(CmdletScriptExtensions.MessageOf(ex).Contains("ParameterBindingException"), "should fail in the lookup, not in binding: " + script);
+            }
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_IDAndIndexTogether_FailToResolveAParameterSet()
+        {
+            var ex = PageCmdletBindingTests.Session.ExpectFailureInNewDocument("Get-VisioPage -ID 0 -Index 1");
+            MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "Parameter set cannot be resolved");
+        }
+
+        [MUT.TestMethod]
+        public void GetVisioPage_IndexAndName_FailToResolveAParameterSet()
+        {
+            var ex = PageCmdletBindingTests.Session.ExpectFailureInNewDocument("Get-VisioPage -Index 1 -Name 'Page-1'");
+            MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "Parameter set cannot be resolved");
+        }
+
         // -- New-VisioPage ----------------------------------------------------------
 
         [MUT.TestMethod]
