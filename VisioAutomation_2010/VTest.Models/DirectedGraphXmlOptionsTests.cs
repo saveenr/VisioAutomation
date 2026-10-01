@@ -315,6 +315,22 @@ namespace VTest.Models
                 string.Format("expected a larger border to widen the page: default {0}, wide {1}", default_width, wide_width));
         }
 
+        [MUT.TestMethod]
+        public void Draw_DocumentTemplateFromXml_IsAcceptedAndTheGraphStillDraws()
+        {
+            // DirectedGraphDocument.Template goes to NewDocumentFromTemplate, which currently opens the template as a
+            // docked stencil and returns a blank document instead of basing the document on it (#229). This test only
+            // checks that the option is accepted and the graph is still drawn.
+            var client = this.GetScriptingClient();
+            string template = client.Application.ApplicationVersion.Major >= 15 ? "basflo_u.vstx" : "basflo_u.vst";
+
+            var dgdoc = this.draw(this.build_xml(root_children: "<documentoptions template='" + template + "' />"));
+
+            var shape = dgdoc.Layouts[0].Nodes["n1"].VisioShape;
+            MUT.Assert.IsNotNull(shape);
+            shape.ContainingPage.Document.Close(true);
+        }
+
         private double draw_and_get_page_width(string xml)
         {
             this.draw(xml);
