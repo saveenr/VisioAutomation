@@ -139,6 +139,7 @@ namespace VisioScripting.Loaders
         {
             var dgdoc = new DirectedGraphDocument();
             var pagedatas = DirectedGraphDocumentLoader._load_page_data_from_xml(client, xmldoc);
+            DirectedGraphDocumentLoader._get_document_options_from_xml(xmldoc.Root.Element("documentoptions"), dgdoc);
 
             // STOP IF ANY ERRORS
             int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();
@@ -169,6 +170,25 @@ namespace VisioScripting.Loaders
                         cp_cells.EncodeValues();
                         dg_shape.CustomProperties[kv.Key] = kv.Value;
                     }
+
+                    dg_shape.Size = Models.DgXml.GetShapeSize(shape_info.Element, shape_info.ID);
+
+                    var hyperlinks = Models.DgXml.ParseHyperlinks(shape_info.Element);
+                    if (hyperlinks.Count > 0)
+                    {
+                        // The renderer uses Hyperlinks instead of Url when both are set, so keep the url attribute's link first.
+                        if (!string.IsNullOrEmpty(shape_info.Url))
+                        {
+                            hyperlinks.Insert(0, new Hyperlink("Row_1", shape_info.Url));
+                        }
+                        dg_shape.Hyperlinks = hyperlinks;
+                    }
+
+                    var shape_cells = new ShapeCells();
+                    if (Models.DgXml.ApplyCells(shape_info.Element, shape_cells, shape_info.ID))
+                    {
+                        dg_shape.Cells = shape_cells;
+                    }
                 }
 
                 client.Output.WriteVerbose( "Creating connector AutoLayout nodes");
@@ -180,12 +200,26 @@ namespace VisioScripting.Loaders
                     var def_con_color = new VisioAutomation.Models.Color.ColorRgb(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
-                    var dg_connector = pagedata.DirectedGraph.AddEdge(con_info.ID, from_shape, to_shape, con_info.Label, pagedata.ConnectorType);
+                    var con_type = con_info.Element.GetAttributeValue("connectortype", pagedata.ConnectorType, Models.DgXml.ParseConnectorType);
+                    var dg_connector = pagedata.DirectedGraph.AddEdge(con_info.ID, from_shape, to_shape, con_info.Label, con_type);
 
                     dg_connector.Cells = new ShapeCells();
                     dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
                     dg_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
                     dg_connector.Cells.LineEndArrow = def_end_arrow;
+
+                    // cells set explicitly in <cells> win over the color, weight and arrow defaults above
+                    Models.DgXml.ApplyCells(con_info.Element, dg_connector.Cells, con_info.ID);
+
+                    if (con_info.CustProps.Count > 0)
+                    {
+                        dg_connector.CustomProperties = new CustomPropertyDictionary();
+                        foreach (var kv in con_info.CustProps)
+                        {
+                            kv.Value.EncodeValues();
+                            dg_connector.CustomProperties[kv.Key] = kv.Value;
+                        }
+                    }
                 }
                 client.Output.WriteVerbose( "Rendering AutoLayout...");
             }
@@ -195,6 +229,23 @@ namespace VisioScripting.Loaders
             dgdoc.Layouts.AddRange(layouts);
 
             return dgdoc;
+        }
+
+        private static void _get_document_options_from_xml(SXL.XElement el, DirectedGraphDocument dgdoc)
+        {
+            // <documentoptions> is optional, and so is each of its attributes
+            if (el == null)
+            {
+                return;
+            }
+
+            dgdoc.Template = el.GetAttributeValue("template", dgdoc.Template);
+
+            var border = Models.DgXml.GetOptionalSizePair(el, "borderwidth", "borderheight", dgdoc.BorderSize);
+            if (border.HasValue)
+            {
+                dgdoc.BorderSize = border.Value;
+            }
         }
 
         private static void _get_render_options_from_xml(SXL.XElement el, PageData pagedata)
@@ -225,6 +276,13 @@ namespace VisioScripting.Loaders
             pagedata.ConnectorType = el.GetAttributeValue("connectortype", pagedata.ConnectorType, ConnectorTypeParse);
             layoutoptions.Direction = el.GetAttributeValue("direction", layoutoptions.Direction, DirectionParse);
             el.GetAttributeValue("layout", (string)null, LayoutParse);
+
+            // Optional page border: if only one of the two attributes is given the other keeps its default
+            var page_border = Models.DgXml.GetOptionalSizePair(el, "pageborderwidth", "pageborderheight", layoutoptions.PageBorderWidth);
+            if (page_border.HasValue)
+            {
+                layoutoptions.PageBorderWidth = page_border.Value;
+            }
 
             // Optional spacing attributes; when absent the MsaglOptions defaults are kept
             layoutoptions.LayerSeparation = el.GetAttributeValue("layerseparation", layoutoptions.LayerSeparation, s => (double?)DoubleParse(s));

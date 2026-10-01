@@ -12,7 +12,15 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Added
+- More of the directed graph model can now be set from the directed graph XML format. Every addition is optional, so existing XML loads as before. Part of [#225](https://github.com/saveenr/VisioAutomation/issues/225):
+  - `<documentoptions template="..." borderwidth="..." borderheight="..." />` as a child of `<directedgraph>` sets `DirectedGraphDocument.Template` and `BorderSize`. If only one border attribute is given, the other keeps its default.
+  - `pageborderwidth` and `pageborderheight` on `<renderoptions>` set `MsaglOptions.PageBorderWidth`.
+  - On `<shape>`: `width` and `height` (both or neither) set the node `Size`; `<hyperlink name address subaddress description />` children add hyperlinks (the `url` attribute's link stays first); a `<cells><cell name="..." value="..." /></cells>` child sets any cell of `VisioAutomation.Models.Dom.ShapeCells` by property name (for example `FillForeground`, `LineColor`, `CharSize`); and `<customprop>` takes optional `type` (`string`, `number`, `boolean` or `date`), `label`, `prompt` and `format` attributes.
+  - On `<connector>`: a per-edge `connectortype` that overrides the page setting, a `<cells>` child (explicit cells win over the `color`, `weight` and arrow defaults), and `<customprop>` children.
+
 ### Fixed
+- Custom properties set on a directed graph connector (`Edge.CustomProperties`) are now applied to the drawn connector, for both dynamic and Bezier connectors. Previously the renderer ignored them.
 - `Client.Model.DrawDirectedGraphDocument` now honors its `DirectedGraphStyling` parameter. Previously the argument was accepted and ignored, so every page was drawn with the default styling (the `Dynamic Connector` master from `connec_u.vss`). A null styling still means the default. Closes [#197](https://github.com/saveenr/VisioAutomation/issues/197).
 - `Client.Model.DrawXmlModel` is now wrapped in an undo scope, like `DrawGrid` and `DrawDataTable`, so a single Undo removes the whole drawing. Previously Undo did not remove it. Closes [#222](https://github.com/saveenr/VisioAutomation/issues/222).
 - `Client.Model.DrawDataTable` now honors its `widths` and `heights` arguments, and `DataTableModel.CellWidth` / `CellHeight` now take effect. Previously every cell was drawn 1 x 1 inch and only the spacing was used. **Behavior change:** a caller that passed sizes other than 1 inch will now get a resized table. A column or row beyond the end of its list keeps the 1 inch default, a zero or negative size throws `ArgumentOutOfRangeException`, and `DataTableModel` now defaults `CellWidth` and `CellHeight` to 1.0 so a model that does not set them draws exactly as before. Closes [#206](https://github.com/saveenr/VisioAutomation/issues/206).

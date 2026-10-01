@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes;
 using SXL = System.Xml.Linq;
 
 namespace VisioScripting.Models
@@ -10,6 +11,8 @@ namespace VisioScripting.Models
         public string To;
         public SXL.XElement Element;
 
+        public CustomPropertyDictionary CustProps;
+
         public static DgConnectorInfo FromXml(Client client, SXL.XElement shape_el)
         {
             var info = new DgConnectorInfo();
@@ -21,6 +24,7 @@ namespace VisioScripting.Models
             info.To = shape_el.Attribute("to").Value;
 
             info.Element = shape_el;
+            info.CustProps = DgXml.ParseCustomProps(shape_el, info.ID);
             return info;
         }
     }
