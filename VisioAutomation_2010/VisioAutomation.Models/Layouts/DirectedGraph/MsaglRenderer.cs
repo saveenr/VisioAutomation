@@ -359,11 +359,13 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
                 var ud = (ElementUserData)mg_edge.UserData;
                 var layout_connector = ud.Edge;
 
+                var bezier_node = (Dom.BezierCurve)layout_connector.DomNode;
                 if (layout_connector.Cells != null)
                 {
-                    var bezier_node = (Dom.BezierCurve)layout_connector.DomNode;
                     bezier_node.Cells = layout_connector.Cells.ShallowCopy();
                 }
+
+                bezier_node.CustomProperties = MsaglRenderer._copy_custom_properties(layout_connector.CustomProperties);
             }
 
             foreach (var mg_edge in mg_graph.Edges)
@@ -429,7 +431,24 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
                 vconnector.Cells.ShapeLayoutConLineRouteExt = con_route_style;
                 vconnector.Cells.ShapeLayoutRouteStyle = shape_route_style;
+
+                vconnector.CustomProperties = MsaglRenderer._copy_custom_properties(layoutconnector.CustomProperties);
             }
+        }
+
+        private static VA.Shapes.CustomPropertyDictionary _copy_custom_properties(VA.Shapes.CustomPropertyDictionary source)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+
+            var copy = new VA.Shapes.CustomPropertyDictionary();
+            foreach (var kv in source)
+            {
+                copy[kv.Key] = kv.Value;
+            }
+            return copy;
         }
 
         private void format_shape(Node layout_shape, Dom.BaseShape shape_node)

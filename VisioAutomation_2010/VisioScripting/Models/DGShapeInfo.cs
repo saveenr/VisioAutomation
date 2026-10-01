@@ -27,17 +27,7 @@ namespace VisioScripting.Models
             info.Element = shape_el;
             info.Url = shape_el.GetAttributeValue("url", null);
 
-            info.CustProps = new CustomPropertyDictionary();
-            foreach (var customprop_el in shape_el.Elements("customprop"))
-            {
-                string cp_name = customprop_el.Attribute("name").Value;
-                string cp_value = customprop_el.Attribute("value").Value;
-
-                var cp = new CustomPropertyCells();
-                cp.SetString(cp_value);
-
-                info.CustProps.Add(cp_name,cp);
-            }
+            info.CustProps = DgXml.ParseCustomProps(shape_el, info.ID);
 
             return info;
         }
