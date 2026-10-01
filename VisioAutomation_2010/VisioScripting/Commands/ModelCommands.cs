@@ -165,10 +165,11 @@ namespace VisioScripting.Commands
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
 
+            // The chart is rendered into a new document, and each of its pages is sized by the render itself.
+            // The target page is only used to find the application and is left unchanged.
             var application = targetpage.Page.Application;
             chartdocument.Render(application);
 
-            targetpage.Page.ResizeToFitContents();
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
         }
 

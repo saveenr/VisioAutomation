@@ -26,6 +26,31 @@ namespace VTest.Models
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }
 
+        [MUT.TestMethod]
+        public void DrawOrgChart_DrawsInANewDocumentAndLeavesTheTargetPageAlone()
+        {
+            var orgchart = new VAORGCHART.OrgChartDocument();
+            orgchart.OrgCharts.Add(new VAORGCHART.Node("A"));
+
+            var client = this.GetScriptingClient();
+            client.Document.NewDocument();
+            var app = this.GetVisioApplication();
+            var target_doc = app.ActiveDocument;
+            var target_page = app.ActivePage;
+            target_page.DrawRectangle(new VA.Core.Rectangle(1, 1, 2, 2));
+            double width_before = target_page.PageSheet.CellsU["PageWidth"].ResultIU;
+            double height_before = target_page.PageSheet.CellsU["PageHeight"].ResultIU;
+
+            client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
+
+            MUT.Assert.AreNotEqual(target_doc.ID, app.ActiveDocument.ID, "the chart should be drawn in a new document");
+            MUT.Assert.AreEqual(width_before, target_page.PageSheet.CellsU["PageWidth"].ResultIU, 1e-9, "the target page width should not change");
+            MUT.Assert.AreEqual(height_before, target_page.PageSheet.CellsU["PageHeight"].ResultIU, 1e-9, "the target page height should not change");
+
+            app.ActiveDocument.Close(true);
+            target_doc.Close(true);
+        }
+
         private void draw_org_chart(VisioScripting.Client client, string text)
         {
             var xmldoc = SXL.XDocument.Parse(text);
