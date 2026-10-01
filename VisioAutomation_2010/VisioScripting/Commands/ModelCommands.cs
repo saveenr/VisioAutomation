@@ -123,8 +123,10 @@ namespace VisioScripting.Commands
             var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
             this._build_from_xml_doc(xmlmodel.XmlDocument, tree_drawing);
 
-            tree_drawing.Render(targetpage.Page);
-
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawXmlModel)))
+            {
+                tree_drawing.Render(targetpage.Page);
+            }
         }
 
         private void _build_from_xml_doc(System.Xml.XmlDocument xml_document, VisioAutomation.Models.Layouts.Tree.Drawing tree_drawing)
@@ -198,6 +200,10 @@ namespace VisioScripting.Commands
 
                 var renderer = new GRAPH.MsaglRenderer();
                 renderer.LayoutOptions = dg_layout.LayoutOptions;
+                if (dgstyling != null)
+                {
+                    renderer.Styling = dgstyling;
+                }
                 renderer.Render(page, dg_layout);
 
                 var targetpages = new VisioScripting.TargetPages(page);
