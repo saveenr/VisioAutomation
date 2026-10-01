@@ -290,6 +290,72 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
+        public void Loader_LayerSeparation_DefaultsToNullWhenAttributeMissing()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions("");
+            MUT.Assert.IsNull(dg.Layouts[0].LayoutOptions.LayerSeparation);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_LayerSeparation_FromXml()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions(" layerseparation=\"0.25\"");
+            MUT.Assert.AreEqual(0.25, dg.Layouts[0].LayoutOptions.LayerSeparation.Value, 1e-9);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_LayerSeparation_NonNumericValueThrows()
+        {
+            MUT.Assert.ThrowsExactly<System.FormatException>(
+                () => this.load_two_node_graph_with_renderoptions(" layerseparation=\"wide\""));
+        }
+
+        [MUT.TestMethod]
+        public void Loader_EdgeLabelBoxSize_DefaultsWhenAttributesMissing()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions("");
+            var size = dg.Layouts[0].LayoutOptions.EdgeLabelBoxSize;
+            MUT.Assert.AreEqual(1.0, size.Width, 1e-9);
+            MUT.Assert.AreEqual(0.5, size.Height, 1e-9);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_EdgeLabelBoxSize_FromXml()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions(" edgelabelboxwidth=\"0.8\" edgelabelboxheight=\"0.12\"");
+            var size = dg.Layouts[0].LayoutOptions.EdgeLabelBoxSize;
+            MUT.Assert.AreEqual(0.8, size.Width, 1e-9);
+            MUT.Assert.AreEqual(0.12, size.Height, 1e-9);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_EdgeLabelBoxSize_OnlyHeightSet_KeepsDefaultWidth()
+        {
+            var dg = this.load_two_node_graph_with_renderoptions(" edgelabelboxheight=\"0.1\"");
+            var size = dg.Layouts[0].LayoutOptions.EdgeLabelBoxSize;
+            MUT.Assert.AreEqual(1.0, size.Width, 1e-9);
+            MUT.Assert.AreEqual(0.1, size.Height, 1e-9);
+        }
+
+        [MUT.TestMethod]
+        public void DirectedGraph_SmallerLayerSeparation_GivesShorterPage()
+        {
+            double tight = this.render_three_node_chain_and_get_page_height(0.1);
+            double loose = this.render_three_node_chain_and_get_page_height(1.0);
+            MUT.Assert.IsTrue(tight < loose,
+                string.Format("expected tight ({0}) < loose ({1})", tight, loose));
+        }
+
+        [MUT.TestMethod]
+        public void DirectedGraph_SmallerEdgeLabelBox_GivesShorterPage()
+        {
+            double small = this.render_three_node_chain_and_get_page_height(null, new VA.Core.Size(0.8, 0.12));
+            double large = this.render_three_node_chain_and_get_page_height(null, new VA.Core.Size(1.0, 0.5));
+            MUT.Assert.IsTrue(small < large,
+                string.Format("expected small ({0}) < large ({1})", small, large));
+        }
+
+        [MUT.TestMethod]
         public void Loader_RootElement_WrongNameThrows()
         {
             string xml = "<wrongroot><page>" +
@@ -338,6 +404,33 @@ namespace VTest.Models
             MUT.Assert.IsTrue(dx > dy, string.Format("Expected horizontal spread > vertical spread, got dx={0} dy={1}", dx, dy));
 
             doc.Close(true);
+        }
+
+        private double render_three_node_chain_and_get_page_height(double? layer_separation, VA.Core.Size? edge_label_box_size = null)
+        {
+            var dg = new VADG.DirectedGraphLayout();
+            var n0 = dg.AddNode("n0", "A", "basic_u.vss", "Rectangle");
+            var n1 = dg.AddNode("n1", "B", "basic_u.vss", "Rectangle");
+            var n2 = dg.AddNode("n2", "C", "basic_u.vss", "Rectangle");
+            dg.AddEdge("c0", n0, n1, "", VA.Models.ConnectorType.Straight);
+            dg.AddEdge("c1", n1, n2, "", VA.Models.ConnectorType.Straight);
+
+            var visapp = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = visapp.ActivePage;
+
+            var renderer = new VADG.MsaglRenderer();
+            renderer.LayoutOptions.Direction = VADG.MsaglDirection.TopToBottom;
+            renderer.LayoutOptions.LayerSeparation = layer_separation;
+            if (edge_label_box_size.HasValue)
+            {
+                renderer.LayoutOptions.EdgeLabelBoxSize = edge_label_box_size.Value;
+            }
+            renderer.Render(page, dg);
+
+            double height = page.PageSheet.CellsU["PageHeight"].ResultIU;
+            doc.Close(true);
+            return height;
         }
 
         private VA.Models.Layouts.DirectedGraph.DirectedGraphDocument load_two_node_graph(string connectortype_attr)

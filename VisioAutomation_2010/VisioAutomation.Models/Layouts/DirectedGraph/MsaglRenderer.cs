@@ -15,7 +15,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
         private double _scale_to_document => 1.0 / this.LayoutOptions.ScalingFactor;
 
         private Dom.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
-        private VA.Core.Size DefaultBezierConnectorLabelBoxSize { get; set; }
         public MsaglOptions LayoutOptions { get; set; }
 
         public DirectedGraphStyling Styling;
@@ -30,7 +29,6 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
             this.DefaultBezierConnectorShapeCells.LinePattern = 0;
             this.DefaultBezierConnectorShapeCells.LineWeight = 0.0;
             this.DefaultBezierConnectorShapeCells.FillPattern = 0;
-            this.DefaultBezierConnectorLabelBoxSize = new VA.Core.Size(1.0, 0.5);
         }
 
         private VA.Core.Point _to_document_coordinates(VA.Core.Point point)
@@ -88,7 +86,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             this.validate_connectors(dglayout);
 
-            var mg_coordinates = this._to_mg_coordinates(this.DefaultBezierConnectorLabelBoxSize);
+            var mg_coordinates = this._to_mg_coordinates(this.LayoutOptions.EdgeLabelBoxSize);
 
             var map_id_to_ud = new Dictionary<string, MSAGL.Core.Layout.Node>();
             foreach (var n in msagl_graph.Nodes)
@@ -127,6 +125,11 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
 
             var msagl_graphs = MSAGL.Core.Layout.GraphConnectedComponents.CreateComponents(msagl_graph.Nodes, msagl_graph.Edges);
             var msagl_sugiyamasettings = new MSAGL.Layout.Layered.SugiyamaLayoutSettings();
+
+            if (this.LayoutOptions.LayerSeparation.HasValue)
+            {
+                msagl_sugiyamasettings.LayerSeparation = this.LayoutOptions.LayerSeparation.Value * this._scale_to_msagl;
+            }
 
             if (this.LayoutOptions.Direction == MsaglDirection.TopToBottom)
             {

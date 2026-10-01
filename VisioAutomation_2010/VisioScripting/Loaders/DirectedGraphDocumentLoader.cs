@@ -225,6 +225,12 @@ namespace VisioScripting.Loaders
             pagedata.ConnectorType = el.GetAttributeValue("connectortype", pagedata.ConnectorType, ConnectorTypeParse);
             layoutoptions.Direction = el.GetAttributeValue("direction", layoutoptions.Direction, DirectionParse);
             el.GetAttributeValue("layout", (string)null, LayoutParse);
+
+            // Optional spacing attributes; when absent the MsaglOptions defaults are kept
+            layoutoptions.LayerSeparation = el.GetAttributeValue("layerseparation", layoutoptions.LayerSeparation, s => (double?)DoubleParse(s));
+            double label_box_width = el.GetAttributeValue("edgelabelboxwidth", layoutoptions.EdgeLabelBoxSize.Width, DoubleParse);
+            double label_box_height = el.GetAttributeValue("edgelabelboxheight", layoutoptions.EdgeLabelBoxSize.Height, DoubleParse);
+            layoutoptions.EdgeLabelBoxSize = new VisioAutomation.Core.Size(label_box_width, label_box_height);
         }
     }
 }

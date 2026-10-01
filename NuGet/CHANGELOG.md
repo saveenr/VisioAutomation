@@ -13,6 +13,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 ## [Unreleased]
 
 ### Added
+- `MsaglOptions.EdgeLabelBoxSize` and `MsaglOptions.LayerSeparation` for tuning directed-graph layout spacing. `EdgeLabelBoxSize` (default 1.0 x 0.5 inches, the previous hardcoded value) is the space reserved for every edge's label, even unlabeled edges; smaller values give tighter layers. `LayerSeparation` (default null = MSAGL's own default) sets the minimum distance between layers in inches. Defaults preserve existing layouts. The directed graph XML `<renderoptions>` element accepts matching optional attributes: `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` (inches).
 - New facade methods on `VisioScripting.Client` for operations that previously required reaching past the facade. These are the canonical entry points going forward and align with the hybrid public-API contract decided in [#156](https://github.com/saveenr/VisioAutomation/issues/156). Part of [#182](https://github.com/saveenr/VisioAutomation/issues/182).
   - `Client.Model.LoadDirectedGraphFromXml(XDocument)` returns a `DirectedGraphDocument` (replaces `DirectedGraphDocumentLoader.LoadFromXml`).
   - `Client.Model.LoadOrgChartFromXml(XDocument)` returns an `OrgChartDocument` (replaces `OrgChartDocumentLoader.LoadFromXml`).
