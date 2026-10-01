@@ -38,8 +38,8 @@
 
     <!-- Release stamps are checked against the nuspec and module manifest in CI.
          Keep assembly identity stable independently of the release version. -->
-    <VersionPrefix>3.1.0</VersionPrefix>
-    <VersionPrefix Condition="'$(MSBuildProjectName)' == 'VisioPowerShell'">4.7.3</VersionPrefix>
+    <VersionPrefix>3.2.0</VersionPrefix>
+    <VersionPrefix Condition="'$(MSBuildProjectName)' == 'VisioPowerShell'">4.8.0</VersionPrefix>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>$(VersionPrefix).0</FileVersion>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>

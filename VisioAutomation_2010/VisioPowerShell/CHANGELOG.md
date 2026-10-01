@@ -12,10 +12,17 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+_No consumer-visible changes yet._
+
+## [4.8.0] - 2026-10-01
+
+A minor release. It adds `Get-VisioPage -Index`, changes two behaviors (`Get-VisioPage -ID` is now a real page ID, and `New-VisioDocument -Template` creates the document from the template), fixes two cmdlets that failed or ignored parameters (`Format-VisioPage -Width` / `-Height`, and the boolean and sort-key parameters of `New-VisioHyperlink`), and bundles the updated VisioAutomation 3.2.0 library.
+
 ### Added
 - `Get-VisioPage -Index <int[]>` returns the pages at those **1-based positions** in the document (the first page is 1, matching Visio's own page numbering and `Page.Index`). It has its own parameter set, `pagebyindex`, so it cannot be combined with `-ID`, `-Name` or `-ActivePage`.
 
 ### Changed
+- The bundled VisioAutomation library is updated to 3.2.0 (see the [NuGet changelog](../../NuGet/CHANGELOG.md)). For scripts that build models with `New-Object` or pipe them to `Out-VisioApplication`: the directed graph XML format accepts more options (document options, shape sizes, hyperlinks, cells, typed custom properties, per-connector options); `-DataTableModel` honors cell sizes and draws on the active page; `-XmlModel` roots the tree at the document element and one Undo removes the drawing; and `-OrgChart` no longer resizes the active page.
 - **Behavior change:** `Get-VisioPage -ID` now looks pages up by their real Visio page ID (`Page.ID`), as its documentation always said and as `Get-VisioShape -ID` does for shapes. Previously the numbers were silently treated as positions in the document, so a real ID gave the wrong page or threw (`-ID 0` threw although the first page of a new document has ID 0). **Scripts that used `-ID` as a position should switch to `-Index`**, which takes the same 1-based numbers the old behavior accepted. The `PageID` column of `Get-VisioPageCells` is now directly usable with `Get-VisioPage -ID`. Closes [#232](https://github.com/saveenr/VisioAutomation/issues/232).
 
 ### Fixed

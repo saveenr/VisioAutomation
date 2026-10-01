@@ -12,6 +12,12 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+_No consumer-visible changes yet._
+
+## [3.2.0] - 2026-10-01
+
+A minor release. It exposes more of the directed graph model through the XML format and fixes ten bugs in `VisioScripting` and `VisioAutomation.Models`. Two behaviors change: `Client.Document.NewDocumentFromTemplate` now creates the drawing from the template (it used to create a blank drawing and open the template as a separate stencil), and `Client.Model.DrawOrgChart` no longer resizes the page you pass it. The other fixes make documented behavior work. There are no removed or renamed public members.
+
 ### Added
 - More of the directed graph model can now be set from the directed graph XML format. Every addition is optional, so existing XML loads as before. Part of [#225](https://github.com/saveenr/VisioAutomation/issues/225):
   - `<documentoptions template="..." borderwidth="..." borderheight="..." />` as a child of `<directedgraph>` sets `DirectedGraphDocument.Template` and `BorderSize`. If only one border attribute is given, the other keeps its default.
