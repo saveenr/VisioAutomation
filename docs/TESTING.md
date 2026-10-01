@@ -13,7 +13,7 @@ All under `VisioAutomation_2010/`:
 | `VTest.Scripting` | 43 | `VisioScripting` (high-level facade) | [VTest.Scripting/README.md](../VisioAutomation_2010/VTest.Scripting/README.md) |
 | `VTest.PowerShell` | 27 | `VisioPowerShell` (cmdlets) | [VTest.PowerShell/README.md](../VisioAutomation_2010/VTest.PowerShell/README.md) |
 
-256 tests passed with no skips on 2026-09-30 (Release build of `master` at `581ad539`). Three regression tests (`DrawXmlModel_IsUndoneByASingleUndo`, `DrawDirectedGraphDocument_UsesTheEdgeMasterFromTheStylingParameter` and `DrawOrgChart_DrawsInANewDocumentAndLeavesTheTargetPageAlone`) and the 23 tests in `DirectedGraphXmlOptionsTests` have since been added to `VTest.Models`; Debug runs of `VTest.Models`, `VTest.Scripting` and `VTest.PowerShell` on 2026-10-01 passed 103 (before the `DrawOrgChart` test merged), 43 and 27 tests. Counts come from the Release TRX. [HANDOVER.md](HANDOVER.md) records the environment and the original evidence, taken at 237 tests on 2026-09-29.
+256 tests passed with no skips on 2026-09-30 (Release build of `master` at `581ad539`). Three regression tests (`DrawXmlModel_IsUndoneByASingleUndo`, `DrawDirectedGraphDocument_UsesTheEdgeMasterFromTheStylingParameter` and `DrawOrgChart_DrawsInANewDocumentAndLeavesTheTargetPageAlone`) and the 23 tests in `DirectedGraphXmlOptionsTests` have since been added to `VTest.Models`; Debug runs of `VTest.Models`, `VTest.Scripting` and `VTest.PowerShell` on 2026-10-01 passed 104, 43 and 27 tests. Counts come from the Release TRX. [HANDOVER.md](HANDOVER.md) records the environment and the original evidence, taken at 237 tests on 2026-09-29.
 
 ## Framework: MSTest 4.x
 
