@@ -12,7 +12,11 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+### Fixed
+- `Format-VisioPage -Width` and `-Height` now work. Previously the cmdlet always threw a `COMException` when either was given, because the page format cells were written to the page object instead of its page sheet. (`-Orientation`, `-FitContents` and the other parameters were not affected.)
+- `New-VisioHyperlink -NewWindow`, `-Default`, `-Invisible` and `-SortKey` now take effect. Previously the cmdlet accepted them and ignored them, so those hyperlink cells always stayed `FALSE` (or unset).
+
+Both were found by the second slice of cmdlet-binding tests ([#173](https://github.com/saveenr/VisioAutomation/issues/173)).
 
 ## [4.7.3] - 2026-09-30
 
