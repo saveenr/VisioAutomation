@@ -406,6 +406,29 @@ namespace VTest.Models
             doc.Close(true);
         }
 
+        [MUT.TestMethod]
+        public void DrawDirectedGraphDocument_UsesTheEdgeMasterFromTheStylingParameter()
+        {
+            var layout = new VADG.DirectedGraphLayout();
+            var n0 = layout.AddNode("n0", "A", "basic_u.vss", "Rectangle");
+            var n1 = layout.AddNode("n1", "B", "basic_u.vss", "Rectangle");
+            var edge = layout.AddEdge("c0", n0, n1, "", VA.Models.ConnectorType.Curved);
+
+            var dgdoc = new VADG.DirectedGraphDocument();
+            dgdoc.Layouts.Add(layout);
+
+            var styling = new VADG.DirectedGraphStyling();
+            styling.EdgeMasterName = "Line-curve connector";   // anything other than the default "Dynamic Connector"
+
+            var client = this.GetScriptingClient();
+            client.Model.DrawDirectedGraphDocument(dgdoc, styling);
+            var doc = this.GetVisioApplication().ActiveDocument;
+
+            MUT.Assert.AreEqual("Line-curve connector", edge.VisioShape.Master.NameU);
+
+            doc.Close(true);
+        }
+
         private double render_three_node_chain_and_get_page_height(double? layer_separation, VA.Core.Size? edge_label_box_size = null)
         {
             var dg = new VADG.DirectedGraphLayout();

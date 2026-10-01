@@ -31,6 +31,29 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
+        public void DrawXmlModel_IsUndoneByASingleUndo()
+        {
+            var xml = new System.Xml.XmlDocument();
+            xml.LoadXml("<root><child1><leaf/></child1><child2/></root>");
+            var model = new VisioAutomation.Models.Data.XmlModel();
+            model.XmlDocument = xml;
+
+            var client = this.GetScriptingClient();
+            client.Document.NewDocument();
+            var page = this.GetVisioApplication().ActivePage;
+            int shapes_before = page.Shapes.Count;
+
+            client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, model);
+            MUT.Assert.IsTrue(page.Shapes.Count > shapes_before, "the model should have drawn shapes");
+
+            client.Undo.UndoLastAction();
+
+            MUT.Assert.AreEqual(shapes_before, page.Shapes.Count, "one Undo should remove everything the draw added");
+
+            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
+        }
+
+        [MUT.TestMethod]
         public void DrawXmlModel_DocumentWithoutADocumentElement_ThrowsArgumentException()
         {
             var model = new VisioAutomation.Models.Data.XmlModel();
