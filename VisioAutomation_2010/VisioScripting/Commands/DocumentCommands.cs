@@ -160,24 +160,40 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
-            this._client.Output.WriteVerbose("Creating Empty Drawing");
             var documents = cmdtarget.Application.Documents;
-            
-            if (template == null)
-            {
-                var doc = documents.Add(string.Empty);
-                return doc;
-            }
-            else
-            {
 
-                var doc = documents.Add(string.Empty);
-                var template_doc = documents.AddEx(template, IVisio.VisMeasurementSystem.visMSDefault,
-                              (int)IVisio.VisOpenSaveArgs.visAddStencil +
-                              (int)IVisio.VisOpenSaveArgs.visOpenDocked,
-                              0);
-                return doc;
+            // No template (null, empty or whitespace): a blank drawing
+            if (string.IsNullOrWhiteSpace(template))
+            {
+                this._client.Output.WriteVerbose("Creating Empty Drawing");
+                return documents.Add(string.Empty);
             }
+
+            template = template.Trim();
+
+            // A stencil is not a template. Handing one to AddEx fails with an opaque COM error, so say what is wrong
+            // before anything is created.
+            if (DocumentCommands._is_stencil_file(template))
+            {
+                string msg = string.Format(
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    "\"{0}\" is a stencil, not a template. Templates end in .vst or .vstx. To open a stencil, use OpenStencilDocument (New-VisioDocument -Stencil).",
+                    template);
+                throw new System.ArgumentException(msg, nameof(template));
+            }
+
+            // A real template: Visio creates a drawing based on it, copies its styles and settings, and opens the
+            // stencils in the template's workspace. (The document used to be created blank and the template opened
+            // beside it as a docked stencil, which left the drawing unrelated to the template; see #229.)
+            this._client.Output.WriteVerbose("Creating a drawing from template \"{0}\"", template);
+            var doc = documents.AddEx(template, IVisio.VisMeasurementSystem.visMSDefault, 0, 0);
+            return doc;
+        }
+
+        private static bool _is_stencil_file(string filename)
+        {
+            return filename.EndsWith(".vss", System.StringComparison.OrdinalIgnoreCase)
+                || filename.EndsWith(".vssx", System.StringComparison.OrdinalIgnoreCase);
         }
 
         public void SaveDocument(TargetDocument targetdoc)
