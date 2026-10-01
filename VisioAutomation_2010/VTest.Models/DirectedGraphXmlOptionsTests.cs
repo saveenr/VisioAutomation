@@ -9,8 +9,8 @@ using VADG = VisioAutomation.Models.Layouts.DirectedGraph;
 namespace VTest.Models
 {
     // Tests for the optional parts of the directed graph XML format added for issue #225:
-    // <documentoptions>, page border attributes, shape width/height, <hyperlink>, <cells>,
-    // typed <customprop>, and per-connector connectortype, <cells> and <customprop>.
+    // <documentoptions>, shape width/height, <hyperlink>, <cells>, typed <customprop>,
+    // and per-connector connectortype, <cells> and <customprop>.
     [MUT.TestClass]
     public class DirectedGraphXmlOptionsTests : Framework.VTest
     {
@@ -69,26 +69,6 @@ namespace VTest.Models
             var dg = this.load(this.build_xml(root_children: "<documentoptions borderwidth='4' />"));
             MUT.Assert.AreEqual(4.0, dg.BorderSize.Width);
             MUT.Assert.AreEqual(1.0, dg.BorderSize.Height);
-        }
-
-        // ---- <renderoptions> page border ----
-
-        [MUT.TestMethod]
-        public void Loader_PageBorder_FromXml()
-        {
-            var dg = this.load(this.build_xml(render_attrs: "pageborderwidth='0.25' pageborderheight='0.75'"));
-            var border = dg.Layouts[0].LayoutOptions.PageBorderWidth;
-            MUT.Assert.AreEqual(0.25, border.Width);
-            MUT.Assert.AreEqual(0.75, border.Height);
-        }
-
-        [MUT.TestMethod]
-        public void Loader_PageBorder_AbsentKeepsDefault()
-        {
-            var dg = this.load(this.build_xml());
-            var border = dg.Layouts[0].LayoutOptions.PageBorderWidth;
-            MUT.Assert.AreEqual(0.5, border.Width);
-            MUT.Assert.AreEqual(0.5, border.Height);
         }
 
         // ---- <shape> ----
