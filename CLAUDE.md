@@ -61,7 +61,20 @@ The full suite exercises real Visio COM calls with no mock/fake layer. CI runs o
 - **Shell:** Windows host. Both Bash and PowerShell are available. Use Bash for git and Unix-style tooling; use PowerShell for `.ps1` parse checks (`[System.Management.Automation.PSParser]::Tokenize`) and Windows-specific operations.
 - **GitHub access:** the `TheSevenPens` git identity has push access to all three repos in play (this repo, [`VisioAutomation_GitBook_Docs`](https://github.com/saveenr/VisioAutomation_GitBook_Docs), and [`VisioPowerShellDocs`](https://github.com/saveenr/VisioPowerShellDocs)). The user-facing docs live in those last two repos as siblings of this repo (cloned to `C:\Users\savee\Documents\GitHub\VisioAutomation_GitBook_Docs\` and `C:\Users\savee\Documents\GitHub\VisioPowerShellDocs\`). PS docs use a version-pinned branch (`visiops_v4_docs`), not master — see [repository/service map](docs/HANDOVER.md#repository-and-service-map).
 
-## Current state (resume here)
+## State as of 2026-10-01
+
+**Start here; the sections below this one that describe earlier sessions are historical.** For build and test setup use [docs/BUILDING.md](docs/BUILDING.md) and [docs/TESTING.md](docs/TESTING.md).
+
+- **Releases:** NuGet `VisioAutomation2010` **3.1.0** (tag `VisioAutomation_3.1.0`) and Visio PowerShell module **4.7.3** (tag `VisioPS_4.7.3`) shipped on 2026-09-30. The Release-build change for the NuGet flow ([#181](https://github.com/saveenr/VisioAutomation/issues/181)) is done and closed.
+- **Repo:** `master` at `78fe8c6a` (PRs up to #226 merged), no open PRs, working trees clean. The older `claude/*` and `experiment/linq-shapesheet` branches are leftovers from earlier sessions.
+- **Unreleased changes** (`NuGet/CHANGELOG.md` `[Unreleased]`, all Fixed): `DrawDataTable` honors widths and heights, `DrawDataTableModel` draws on the target page, `DrawXmlModel` roots the tree at the document element and now has an undo scope, and `DrawDirectedGraphDocument` honors its `DirectedGraphStyling`. The next version is not decided; these are fixes only, so a patch release is the likely fit.
+- **Tests:** 258 tests across four projects (VTest 108, VTest.Models 80, VTest.Scripting 43, VTest.PowerShell 27). The last full Release run (256) was on 2026-09-30; the two newest tests are the regression tests for [#197](https://github.com/saveenr/VisioAutomation/issues/197) and [#222](https://github.com/saveenr/VisioAutomation/issues/222).
+- **Docs:** the .NET GitBook's Diagram models section was reorganized on 2026-10-01 (docs repo PRs 8 and 9, live). Every model page now has a "Where the output goes" section; the DOM page has a render performance page beneath it. The 2026-09 entries on the docs-updates page record each change. The "Models docs follow-ups" entry in [`docs/futures/docs.md`](docs/futures/docs.md) lists which doc statements to revisit when each source issue below is decided, and the release-gated "unreleased" notes to turn into version statements at the next release. The fixes for [#197](https://github.com/saveenr/VisioAutomation/issues/197) and [#222](https://github.com/saveenr/VisioAutomation/issues/222) are not yet described in the docs.
+- **Docs conventions:** no em-dashes in either GitBook. The docs repos publish when a PR merges to `main`, and each PR gets a GitBook preview. Cite the issue number on any page that describes behavior an open issue may change.
+- **Docs viewer:** the local GitBook viewer now lives in its own private repo, `TheSevenPens/LocalGitbookviewer` (cloned at `C:/Users/savee/Documents/GitHub/LocalGitbookviewer`). Run `view.cmd <docs folder>` from that checkout. Its backlog is in that repo's `BACKLOG.md`.
+- **GitHub accounts:** the `gh` CLI is logged in as both `saveenr` and `TheSevenPens`, with `saveenr` active (this repo and the docs repos live under `saveenr`). Commits are authored as `TheSevenPens`. Switch with `gh auth switch --user TheSevenPens` before running `gh` against a `TheSevenPens` repo.
+
+## Earlier state (2026-05-04, historical)
 
 **Phase 1 done. Visio PowerShell module 4.6.1 shipped to PSGallery on 2026-05-03** (tag `VisioPS_4.6.1`). The `2026_Refresh` feature branch has been fast-forwarded into `master` and deleted; new work goes on `master` directly or on a fresh feature branch.
 
@@ -83,7 +96,7 @@ The first publish run surfaced several PSGallery / PS 5.1 gotchas (TLS 1.2 defau
 - `b77a99f0` &mdash; **enabled 14 silently-skipped tests** by adding `[MUT.TestClass]` to seven test classes that derived from `Framework.VTest` but lacked the attribute (MSTest 4.x doesn't inherit `[TestClass]` from a base class). The build emitted no warning, so the regression was invisible. Test count went 163 &rarr; 177. Same commit fixed the `OrgChartStyling.cs:9` production bug surfaced by the now-running tests (`Visio2013Template = "orgch_u.vst"` &rarr; `"orgch_u.vstx"`).
 - `9a592a9d` &mdash; fixed Visio-process orphan leak. Each testhost was leaking its `Framework.VTest.app_ref` singleton on exit (4 orphans per clean run, ~945 MB; 18 orphans / 4.5 GB after re-runs). Added `[AssemblyCleanup]` hooks per project that close all docs forcibly then `app.Quit(true)` (mirrors the production `ApplicationCommands.cs` pattern). Refactored 3 rogue tests in `DrawModel_OrgChartTests.cs` to use the singleton instead of spawning a second Visio.
 
-## Resume here
+## Earlier sessions (2026-05-07 to 2026-05-09, historical)
 
 **Planning is now semester-based.** [`docs/MILESTONES.md`](docs/MILESTONES.md) is the canonical forward-looking work plan, organized by quarter (CY26Q2, CY26Q3, CY26Q4, CY27Q1, CY27Q2 &mdash; with matching [GitHub milestones](https://github.com/saveenr/VisioAutomation/milestones)). Themed milestones (A&ndash;H) tag each item by *what kind of work* it is; the semester is *when*. Twelve meta-task issues filed (#149&ndash;#160). Existing docs issues (#131&ndash;#133) and identity issues (#146&ndash;#148) re-tagged to their semesters. **Guiding principle:** improve before audience-reducing changes &mdash; 2026 is dedicated to docs / ergonomics / tests / identity; 2027+ is when audience-reducing modernization (TFM bumps, modern .NET, Visio 2013 baseline) begins.
 
@@ -170,35 +183,19 @@ Issues closed: [#131](https://github.com/saveenr/VisioAutomation/issues/131), [#
 
 ## Next session priorities
 
-**Start next session with [#181](https://github.com/saveenr/VisioAutomation/issues/181) &mdash; mirror [#177](https://github.com/saveenr/VisioAutomation/issues/177) for the NuGet release flow.** This is the last "must-do" gating item before cutting NuGet 3.1.0. Without it, the next NuGet release ships a Debug build (the exact same bug [#177](https://github.com/saveenr/VisioAutomation/issues/177) fixed for the PS module). CY26Q3, S effort, ~30 min.
+Roughly in the order worth doing. Pick from the top.
 
-**Background to load:**
+1. **[#219](https://github.com/saveenr/VisioAutomation/issues/219) `DrawOrgChart` resizes the wrong page.** Small, well understood fix: remove the stray `targetpage.Page.ResizeToFitContents()` in `ModelCommands.DrawOrgChart`. Needs a changelog entry under Fixed, a test, and a docs update (the org chart page and the `client.Model` reference row cite the issue). Reproduction is in the issue.
+2. **Decide the three public types with no real caller, together:** [#218](https://github.com/saveenr/VisioAutomation/issues/218) Box layout, [#220](https://github.com/saveenr/VisioAutomation/issues/220) form page model, [#221](https://github.com/saveenr/VisioAutomation/issues/221) `ContainerLayout` (draws plain rectangles; the `ContainerMaster` option is never read). The options are in each issue; the docs side of each is listed in the "Models docs follow-ups" backlog entry.
+3. **Cut the next release when ready.** Versions are not decided (fixes only, so likely 3.1.1 and a PS module patch). The flow is in [`docs/futures/releases.md`](docs/futures/releases.md). At release time also turn the "unreleased" notes in both GitBooks into version statements and add the new versions to both version-compatibility pages.
+4. **Design discussions, not yet quick:** [#223](https://github.com/saveenr/VisioAutomation/issues/223) `client.Model` draw methods are inconsistent, [#225](https://github.com/saveenr/VisioAutomation/issues/225) expose every directed graph option in the XML format, and [#198](https://github.com/saveenr/VisioAutomation/issues/198) / [#199](https://github.com/saveenr/VisioAutomation/issues/199) drawing a single directed graph onto the current page.
+5. **Earlier backlog:** [#191](https://github.com/saveenr/VisioAutomation/issues/191) migrate cmdlets to `ThrowTerminatingError` (makes `InvokeScriptStrict` redundant), [#190](https://github.com/saveenr/VisioAutomation/issues/190) the `VTest.PowerShell` two-Client mismatch, [#183](https://github.com/saveenr/VisioAutomation/issues/183) VisioScripting dead-method removal (CY27Q1; re-verify zero callers first), [#173](https://github.com/saveenr/VisioAutomation/issues/173) more cmdlet-binding tests (about 50 cmdlets still untested), [#163](https://github.com/saveenr/VisioAutomation/issues/163) and [#164](https://github.com/saveenr/VisioAutomation/issues/164) (the `PSCmdlet` question; see the memory note on why cmdlets derive from `Cmdlet`).
 
-- [#181](https://github.com/saveenr/VisioAutomation/issues/181) issue body for scope.
-- [#177](https://github.com/saveenr/VisioAutomation/issues/177)'s closure (commit `b8710d96`) for the pattern to mirror. Three things changed on the PS-module side:
-  1. Parameterized [`InstallForCurrentUser.ps1`](VisioAutomation_2010/VisioPowerShell/InstallForCurrentUser.ps1) with `-Configuration` (default `Debug` for dev convenience).
-  2. Updated [`Publish-VisioPSToGallery.ps1`](VisioAutomation_2010/VisioPowerShell/Publish-VisioPSToGallery.ps1) to pass `-Configuration Release`.
-  3. Switched [`release-psmodule.yml`](.github/workflows/release-psmodule.yml) CI build + stage to Release.
-- The NuGet-side equivalents to look at:
-  - [`release-nuget.yml`](.github/workflows/release-nuget.yml) &mdash; currently builds Debug; reads `<version>` from `.nuspec`, packs `.nupkg`, builds raw-DLL zip, creates GH Release. Switch CI build + stage to Release.
-  - [`NuGet/VisioAutomation2010.nuspec`](NuGet/VisioAutomation2010.nuspec) &mdash; nuspec `<files>` paths reference `bin\Debug\` paths; flip to `bin\Release\` to match.
-  - There's no NuGet equivalent of `Publish-VisioPSToGallery.ps1`; NuGet publish goes through [`publish-nuget.yml`](.github/workflows/publish-nuget.yml) (CI workflow, not a local script).
+**Calendar-bound**
 
-**Deliverable:** one PR mirroring [#177](https://github.com/saveenr/VisioAutomation/issues/177) for NuGet. Add CHANGELOG entry under [`NuGet/CHANGELOG.md`](NuGet/CHANGELOG.md) `[Unreleased]` Changed. Closes [#181](https://github.com/saveenr/VisioAutomation/issues/181).
-
-**After [#181](https://github.com/saveenr/VisioAutomation/issues/181) lands, the NuGet 3.1.0 + PS module 4.7.3 releases are ready to cut.** Versions are pre-decided (per [`docs/futures/releases.md`](docs/futures/releases.md)). The release-cut is a separate session: bump `<version>` in [`NuGet/VisioAutomation2010.nuspec`](NuGet/VisioAutomation2010.nuspec) and `ModuleVersion` in [`Visio.psd1`](VisioAutomation_2010/VisioPowerShell/Visio.psd1), promote each `[Unreleased]` to a versioned section in the respective CHANGELOG, trigger [`release-nuget.yml`](.github/workflows/release-nuget.yml) and [`release-psmodule.yml`](.github/workflows/release-psmodule.yml), then [`publish-{nuget,psmodule}.yml`](.github/workflows/) to publish to public feeds.
-
-**Calendar-bound:**
-
-- **[#151](https://github.com/saveenr/VisioAutomation/issues/151)** triage tracker &mdash; revisit ~2026-05-27. If `@tcox8` hasn't confirmed [Visio PS 4.7.0](https://github.com/saveenr/VisioAutomation/releases/tag/VisioPS_4.7.0) fixed their case by then, close [#117](https://github.com/saveenr/VisioAutomation/issues/117) as fixed-by-[#144](https://github.com/saveenr/VisioAutomation/issues/144) then close [#151](https://github.com/saveenr/VisioAutomation/issues/151).
-
-**Longer-term backlog (filed; no urgency):**
-
-- **[#191](https://github.com/saveenr/VisioAutomation/issues/191)** CY26Q3 &mdash; migrate cmdlets from raw `throw` to `ThrowTerminatingError`. When this lands, the `InvokeScriptStrict` workaround becomes redundant.
-- **[#190](https://github.com/saveenr/VisioAutomation/issues/190)** CY26Q4 &mdash; `VTest.PowerShell` two-Client mismatch (the runspace-vs-direct-path issue blocking the `[Ignore]`'d Export-Overwrite test).
-- **[#183](https://github.com/saveenr/VisioAutomation/issues/183)** CY27Q1 &mdash; dead-method removal (Phase A of the VisioScripting public-API work). Audit list preserved on the issue body; re-verify zero-callers immediately before deletion since usage may have developed between now and CY27.
-- **[#173](https://github.com/saveenr/VisioAutomation/issues/173)** subsequent slices &mdash; first slice landed; ~50+ cmdlets still without dedicated tests.
-- Other CY26Q3 / CY26Q4 backlog: see [`docs/MILESTONES.md`](docs/MILESTONES.md).
+- **After 2026-10-13:** Windows 10 LTSB 2016 leaves Extended Support, which was the stated reason not to bump the shipping libraries from .NET Framework 4.5.2. [#174](https://github.com/saveenr/VisioAutomation/issues/174) (bump to 4.7.2, CY27Q1) can be reconsidered then.
+- **CY26Q4:** the SevenPens moves ([#146](https://github.com/saveenr/VisioAutomation/issues/146) repo, [#147](https://github.com/saveenr/VisioAutomation/issues/147) gitbook spaces), [#148](https://github.com/saveenr/VisioAutomation/issues/148) retire the unused PSGallery co-owner account, and [#179](https://github.com/saveenr/VisioAutomation/issues/179) the NuGet support case for the `saveenr` account. These are owner tasks, not code.
+- Everything else by quarter: [`docs/MILESTONES.md`](docs/MILESTONES.md).
 
 ## Other docs in this repo
 
