@@ -296,11 +296,10 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void Draw_DocumentTemplateFromXml_IsAcceptedAndTheGraphStillDraws()
+        public void Draw_DocumentTemplateFromXml_CreatesTheDrawingFromThatTemplate()
         {
-            // DirectedGraphDocument.Template goes to NewDocumentFromTemplate, which currently opens the template as a
-            // docked stencil and returns a blank document instead of basing the document on it (#229). This test only
-            // checks that the option is accepted and the graph is still drawn.
+            // Regression (#229): the template used to be opened as a docked stencil beside a blank drawing,
+            // so the drawing was not based on it.
             var client = this.GetScriptingClient();
             string template = client.Application.ApplicationVersion.Major >= 15 ? "basflo_u.vstx" : "basflo_u.vst";
 
@@ -308,7 +307,9 @@ namespace VTest.Models
 
             var shape = dgdoc.Layouts[0].Nodes["n1"].VisioShape;
             MUT.Assert.IsNotNull(shape);
-            shape.ContainingPage.Document.Close(true);
+            var doc = shape.ContainingPage.Document;
+            MUT.Assert.IsTrue(doc.Template.ToLowerInvariant().Contains("basflo_u"), "the drawing should be based on the template: '" + doc.Template + "'");
+            doc.Close(true);
         }
 
         private double draw_and_get_page_width(string xml)

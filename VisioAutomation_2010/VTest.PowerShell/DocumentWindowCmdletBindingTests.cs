@@ -62,6 +62,26 @@ namespace VTest.PowerShell
             MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "Parameter set cannot be resolved");
         }
 
+        // -- New-VisioDocument: -Template creates the drawing from the template (#229) ---------------
+
+        [MUT.TestMethod]
+        public void NewVisioDocument_Template_CreatesTheDrawingFromThatTemplate()
+        {
+            var results = DocumentWindowCmdletBindingTests.Session.InvokeScriptStrict<string>(
+                "$ver = (Get-VisioApplication).Version; " +
+                "$name = if ([int]($ver -split '[.,]')[0] -ge 15) { 'basflo_u.vstx' } else { 'basflo_u.vst' }; " +
+                "$d = New-VisioDocument -Template $name; " +
+                "try { $d.Template } finally { try { $d.Saved = $true; $d.Close() } catch { } }");
+            MUT.Assert.IsTrue(results.Single().ToLowerInvariant().Contains("basflo_u"), "the new drawing should be based on the template: '" + results.Single() + "'");
+        }
+
+        [MUT.TestMethod]
+        public void NewVisioDocument_TemplateThatIsAStencil_FailsWithAClearMessage()
+        {
+            var ex = DocumentWindowCmdletBindingTests.Session.ExpectFailureInNewDocument("New-VisioDocument -Template 'basic_u.vss'");
+            MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "is a stencil, not a template");
+        }
+
         // -- Format-VisioWindow: three parameter sets ----------------------------------
 
         [MUT.TestMethod]
