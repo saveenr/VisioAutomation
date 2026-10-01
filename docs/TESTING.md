@@ -8,12 +8,12 @@ All under `VisioAutomation_2010/`:
 
 | Project | Tests | Library under test | README |
 |---|---:|---|---|
-| `VTest` | 107 | `VisioAutomation` (core) | [VTest/README.md](../VisioAutomation_2010/VTest/README.md) |
-| `VTest.Models` | 60 | `VisioAutomation.Models` (DOM, layouts) | [VTest.Models/README.md](../VisioAutomation_2010/VTest.Models/README.md) |
+| `VTest` | 108 | `VisioAutomation` (core) | [VTest/README.md](../VisioAutomation_2010/VTest/README.md) |
+| `VTest.Models` | 70 | `VisioAutomation.Models` (DOM, layouts) | [VTest.Models/README.md](../VisioAutomation_2010/VTest.Models/README.md) |
 | `VTest.Scripting` | 43 | `VisioScripting` (high-level facade) | [VTest.Scripting/README.md](../VisioAutomation_2010/VTest.Scripting/README.md) |
 | `VTest.PowerShell` | 27 | `VisioPowerShell` (cmdlets) | [VTest.PowerShell/README.md](../VisioAutomation_2010/VTest.PowerShell/README.md) |
 
-237 tests passed with no skips on 2026-09-29. Counts come from the Release TRX; see [HANDOVER.md](HANDOVER.md) for environment and evidence.
+248 tests passed with no skips on 2026-09-30 (Release build of `master` at `c829d9a0`). Counts come from the Release TRX. [HANDOVER.md](HANDOVER.md) records the environment and the original evidence, taken at 237 tests on 2026-09-29.
 
 ## Framework: MSTest 4.x
 
