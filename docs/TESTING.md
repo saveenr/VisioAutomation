@@ -11,7 +11,7 @@ All under `VisioAutomation_2010/`:
 | `VTest` | 108 | `VisioAutomation` (core) | [VTest/README.md](../VisioAutomation_2010/VTest/README.md) |
 | `VTest.Models` | 104 | `VisioAutomation.Models` (DOM, layouts) | [VTest.Models/README.md](../VisioAutomation_2010/VTest.Models/README.md) |
 | `VTest.Scripting` | 43 | `VisioScripting` (high-level facade) | [VTest.Scripting/README.md](../VisioAutomation_2010/VTest.Scripting/README.md) |
-| `VTest.PowerShell` | 27 | `VisioPowerShell` (cmdlets) | [VTest.PowerShell/README.md](../VisioAutomation_2010/VTest.PowerShell/README.md) |
+| `VTest.PowerShell` | 73 | `VisioPowerShell` (cmdlets) | [VTest.PowerShell/README.md](../VisioAutomation_2010/VTest.PowerShell/README.md) |
 
 256 tests passed with no skips on 2026-09-30 (Release build of `master` at `581ad539`). Three regression tests (`DrawXmlModel_IsUndoneByASingleUndo`, `DrawDirectedGraphDocument_UsesTheEdgeMasterFromTheStylingParameter` and `DrawOrgChart_DrawsInANewDocumentAndLeavesTheTargetPageAlone`) and the 23 tests in `DirectedGraphXmlOptionsTests` have since been added to `VTest.Models`; Debug runs of `VTest.Models`, `VTest.Scripting` and `VTest.PowerShell` on 2026-10-01 passed 104, 43 and 27 tests. Counts come from the Release TRX. [HANDOVER.md](HANDOVER.md) records the environment and the original evidence, taken at 237 tests on 2026-09-29.
 
@@ -83,6 +83,10 @@ The harness registers the exact test-build assembly before opening the runspace 
 
 - Use **`InvokeScriptStrict<T>`** for tests that expect the cmdlet to throw (so the test can catch the propagated exception), or that want any unexpected error from the cmdlet to surface as a test failure rather than be silently dropped on the error stream. **This is the right default for cmdlet-binding tests** ([`CmdletBindingTests.cs`](../VisioAutomation_2010/VTest.PowerShell/CmdletBindingTests.cs) is the canonical example).
 - Use plain **`InvokeScript<T>`** when the cmdlet is allowed to write non-fatal records to the error stream and the test only cares about the success-path return value.
+
+#### Script-driven tests: `RunInNewDocument` and `ExpectFailureInNewDocument`
+
+The second slice of binding tests ([#173](https://github.com/saveenr/VisioAutomation/issues/173): `PageCmdletBindingTests`, `ShapeCmdletBindingTests` and `DocumentWindowCmdletBindingTests`) builds everything inside one script and returns plain values (counts, strings, numbers) so that no COM objects cross between the script and the test. The extension methods in [`CmdletScriptExtensions`](../VisioAutomation_2010/VTest.PowerShell/CmdletScriptExtensions.cs) support that: `RunInNewDocument<T>(body)` creates a document, runs the body through `InvokeScriptStrict`, and closes the document without a save prompt; `ExpectFailureInNewDocument(body)` returns the exception from a body that must fail, and `MessageOf` flattens its message chain so a test can look for a phrase such as `Parameter set cannot be resolved` or `Cannot bind parameter 'Orientation'`. Two things these tests rely on: a script run in this runspace never prompts for a missing mandatory parameter (it fails with a binding error instead), and `New-Object` in a script only finds assemblies that are already loaded, so a test class that creates model types touches the assembly in `ClassInitialize`.
 
 The longer-term cleanup (migrating cmdlets from raw `throw` to `ThrowTerminatingError(ErrorRecord)`, which always propagates regardless of `$ErrorActionPreference`) is tracked in [#191](https://github.com/saveenr/VisioAutomation/issues/191). Until that lands, `InvokeScriptStrict<T>` is the correct workaround for binding-test exception assertions.
 
