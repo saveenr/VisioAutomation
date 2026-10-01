@@ -269,10 +269,11 @@ namespace VisioScripting.Commands
             {
                 foreach (var page in targetpages.Pages)
                 {
+                    // the page format cells live in the page sheet, so commit to it (committing the Page itself throws a COMException)
                     var writer = new VisioAutomation.ShapeSheet.Writers.SrcWriter();
                     writer.SetValues(cells);
                     writer.BlastGuards = true;
-                    writer.Commit(page, VisioAutomation.Core.CellValueType.Formula);
+                    writer.Commit(page.PageSheet, VisioAutomation.Core.CellValueType.Formula);
                 }
             }
         }

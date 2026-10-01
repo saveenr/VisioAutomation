@@ -41,11 +41,24 @@ namespace VisioAutomation.Shapes
             hlinks_object.SubAddress = hyperlink.SubAddress.Value;
             hlinks_object.ExtraInfo = hyperlink.ExtraInfo.Value;
 
-            //hlinks_object.NewWindow = hyperlink.NewWindow.Formula.Value;
-            //hlinks_object.IsDefaultLink = hyperlink.Default.Formula.Value;
-            // hlinks_object.XXX = hyperlink.Invisible.Formula.Value;
+            // The Hyperlink object has no property for these cells, so write them to the shape sheet.
+            // Cells that were not set are skipped by the writer.
+            var other_cells = new HyperlinkCells();
+            if (hyperlink.SortKey.HasValue)
+            {
+                // the sort key is a string cell, so it needs quoting to be a valid formula
+                other_cells.SortKey = Core.CellValue.EncodeValue(hyperlink.SortKey.Value);
+            }
+            other_cells.NewWindow = hyperlink.NewWindow;
+            other_cells.Default = hyperlink.Default;
+            other_cells.Invisible = hyperlink.Invisible;
 
-            return hlinks_object.Row;
+            short row = hlinks_object.Row;
+            var writer = new ShapeSheet.Writers.SrcWriter();
+            writer.SetValues(other_cells, row);
+            writer.Commit(shape, Core.CellValueType.Formula);
+
+            return row;
         }
 
         public static int Set(
