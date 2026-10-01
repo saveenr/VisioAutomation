@@ -161,6 +161,37 @@ namespace VTest.Models
             app.ActiveDocument.Close(true);
         }
 
+        [MUT.TestMethod]
+        public void OrgChart_MultipleOrgCharts_EachPageShowsItsOwnRoot()
+        {
+            var orgchart = new VAORGCHART.OrgChartDocument();
 
+            var n_a = new VAORGCHART.Node("A");
+            var n_b = new VAORGCHART.Node("B");
+            n_a.Children.Add(n_b);
+
+            var n_x = new VAORGCHART.Node("X");
+            var n_y = new VAORGCHART.Node("Y");
+            n_x.Children.Add(n_y);
+
+            orgchart.OrgCharts.Add(n_a);
+            orgchart.OrgCharts.Add(n_x);
+
+            var app = this.GetVisioApplication();
+            orgchart.Render(app);
+            var doc = app.ActiveDocument;
+
+            MUT.Assert.AreEqual(2, doc.Pages.Count);
+
+            var page1_texts = doc.Pages[1].Shapes.Cast<IVisio.Shape>().Select(s => s.Text).ToList();
+            var page2_texts = doc.Pages[2].Shapes.Cast<IVisio.Shape>().Select(s => s.Text).ToList();
+
+            MUT.Assert.IsTrue(page1_texts.Contains("A") && page1_texts.Contains("B"), "page 1 should show the first chart");
+            MUT.Assert.IsFalse(page1_texts.Contains("X") || page1_texts.Contains("Y"), "page 1 should not show the second chart");
+            MUT.Assert.IsTrue(page2_texts.Contains("X") && page2_texts.Contains("Y"), "page 2 should show the second chart");
+            MUT.Assert.IsFalse(page2_texts.Contains("A") || page2_texts.Contains("B"), "page 2 should not show the first chart");
+
+            doc.Close(true);
+        }
     }
 }

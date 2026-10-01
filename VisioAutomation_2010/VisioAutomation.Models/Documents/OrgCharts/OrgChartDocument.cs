@@ -70,7 +70,7 @@ namespace VisioAutomation.Models.Documents.OrgCharts
             {
                 // Construct a layout tree from the hierarchy
                 var treenodes = GenTreeOps.Algorithms.CopyTree(
-                    orgchartdrawing.OrgCharts[0],
+                    root,
                     n => n.Children,
                     n => this.node_to_layout_node(n),
                     (p, c) => p.AddChild(c));

@@ -153,7 +153,7 @@ namespace VisioAutomation.Models.Layouts.Box
 
             if (this.Direction == Direction.RightToLeft)
             {
-                x = origin.Y + this.Size.Width - this.PaddingRight;
+                x = origin.X + this.Size.Width - this.PaddingRight;
             }
             else
             {
