@@ -12,7 +12,14 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+_No consumer-visible changes yet._
+
+## [4.7.3] - 2026-09-30
+
+A patch release. There are no cmdlet changes. The module is now built and published as Release, and it bundles the updated VisioAutomation 3.1.0 library.
+
 ### Changed
+- The bundled VisioAutomation library is updated to 3.1.0 (see the [NuGet changelog](../../NuGet/CHANGELOG.md)). For scripts that build models with `New-Object`: `MsaglOptions.EdgeLabelBoxSize` and `LayerSeparation` (and the matching `layerseparation`, `edgelabelboxwidth` and `edgelabelboxheight` XML render options) tighten directed-graph layouts; `OrgChartDocument.Render` now draws each root on its own page; and Box layouts with `Direction.RightToLeft` place nested containers correctly.
 - Assembly metadata is SDK-generated. VisioPS keeps assembly identity 1.0.0.0, uses the module version for its file version, and includes the source commit in its informational version. Module authorship now uses `VisioAutomation contributors`; copyright notices are retained.
 - Module manifest copyright text uses `SevenPens`, matching the existing LICENSE.txt notice.
 - Module is now built and published as **Release** instead of Debug. The published `.zip` and PSGallery package contain optimized binaries with no `[Debuggable]` attribute and no `.pdb` symbol files. No source-level behavior change (the C# source has no `#if DEBUG` blocks) but assemblies are smaller and JIT optimizations are no longer suppressed. Closes [#177](https://github.com/saveenr/VisioAutomation/issues/177).
