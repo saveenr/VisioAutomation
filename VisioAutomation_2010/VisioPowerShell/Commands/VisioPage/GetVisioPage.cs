@@ -6,7 +6,10 @@ namespace VisioPowerShell.Commands.VisioPage
 {
     // Parameter sets:
     //   "active"      -> -ActivePage switch:    return the active page.
-    //   "pagebyid"    -> -ID <int[]>:           return pages with those IDs.
+    //   "pagebyid"    -> -ID <int[]>:           return pages with those Visio page IDs (Page.ID, so the
+    //                                           first page of a new document is 0).
+    //   "pagebyindex" -> -Index <int[]>:        return the pages at those 1-based positions in the document
+    //                                           (Page.Index, so the first page is 1).
     //   "pagebyname"  -> -Name <string[]>:      return pages with those names.
     //                                           Also the DEFAULT set: a no-args call lands
     //                                           here with Name == null and returns every
@@ -22,6 +25,8 @@ namespace VisioPowerShell.Commands.VisioPage
 
         [SMA.Parameter(Position = 0, Mandatory = false, ParameterSetName = "pagebyid")]
         public int[] ID;
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "pagebyindex")]
+        public int[] Index;
 
         // CONTEXT:DOCUMENT
         [SMA.Parameter(Position = 1, Mandatory = false)]
@@ -40,13 +45,27 @@ namespace VisioPowerShell.Commands.VisioPage
 
             var targetdoc = new VisioScripting.TargetDocument(this.Document);
 
-            // First, the ID case
+            // First, the ID case: the real Visio page ID, as Get-VisioShape -ID does for shapes
             if (this.ID != null)
             {
                 var t = targetdoc.ResolveToDocument(this.Client);
+                var pages = t.Document.Pages;
                 foreach (var id in this.ID)
                 {
-                    var page = t.Document.Pages[id];
+                    var page = pages.ItemFromID[id];
+                    this.WriteObject(page);
+                }
+                return;
+            }
+
+            // Then the position case: Pages[n] is a 1-based index
+            if (this.Index != null)
+            {
+                var t = targetdoc.ResolveToDocument(this.Client);
+                var pages = t.Document.Pages;
+                foreach (var index in this.Index)
+                {
+                    var page = pages[index];
                     this.WriteObject(page);
                 }
                 return;
