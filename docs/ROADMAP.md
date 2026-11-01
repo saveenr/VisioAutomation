@@ -41,7 +41,7 @@ Phase 3 items completed (so far):
 - ✅ *Fill remaining `VisioAutomation.Models` documentation gaps* — data table and XML model pages, a container layout section, PowerShell pages for grids / data tables / XML trees, and an accuracy pass over every Models page. Detail in [`COMPLETED.md`](COMPLETED.md#fill-remaining-visioautomationmodels-documentation-gaps).
 
 Phase 3 items still pending:
-- *Move development to Visual Studio 2026* — gated on the TFM bump. See [`futures/build-and-code.md`](futures/build-and-code.md#move-development-to-visual-studio-2026).
+- *Move development to Visual Studio 2026* — done ([#171](https://github.com/saveenr/VisioAutomation/issues/171)). See [`futures/build-and-code.md`](futures/build-and-code.md#move-development-to-visual-studio-2026).
 - *Consolidate target frameworks* — step 2 (4.5 → 4.7.2). **Deferred until 2026-10-13** when Windows 10 LTSB 2016 leaves Extended Support. See [`futures/build-and-code.md`](futures/build-and-code.md#consolidate-target-frameworks).
 - *Consider migrating off Visio 2010 PIA* — see [`futures/build-and-code.md`](futures/build-and-code.md#consider-migrating-off-visio-2010-pia).
 - *Decide whether to move to .NET 6/8 (out of .NET Framework)* — see [`futures/build-and-code.md`](futures/build-and-code.md#decide-whether-to-move-to-net-68-out-of-net-framework).

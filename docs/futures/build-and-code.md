@@ -7,12 +7,7 @@ Backlog of build-system, tooling, and code/architecture items. For the staged pl
 ## Build & tooling
 
 ### Consolidate target frameworks
-- **Status:** Step 1 done. All shipping libraries (`VisioAutomation`, `VisioAutomation.Models`, `VisioScripting`, `VisioPowerShell`) and both sample projects (`VSamples`, `VSamples.Docs`) are now on **.NET Framework 4.5.2** (originally bumped from 4.0 → 4.5 in commit `2fd6b466`, then 4.5 → 4.5.2 to satisfy the available Developer Pack — see BUILDING.md). Test projects on **.NET Framework 4.7.2** (VTest moved there as part of the MSTest 4.x upgrade; the others were already there).
-- **Step 2 (remaining):** Bump the shipping fleet again to clear the **VS 2026** floor (Framework 4.6.2 minimum). Recommended landing point: **4.7.2** — same TFM the test projects already use, so the whole solution converges on one number.
-- **Why:** Mixed TFMs cause subtle binary-compatibility surprises (a test project on a higher TFM can use APIs the library under test cannot). Step 1 eliminated the production 4.0/4.5 split; step 2 will eliminate the 4.5/4.7.2 split between shipping libs and tests.
-- **Deferred until 2026-10-13** when Windows 10 LTSB 2016 leaves Extended Support; bumping earlier would block enterprise users on locked LTSB images. See `enterprise_compat_ltsb2016.md` in the project memory.
-- **Cross-refs:** *Move development to Visual Studio 2026* below — drives this. The Phase 3 SDK migration already eliminated the 4.5.2 Developer Pack install requirement via `Microsoft.NETFramework.ReferenceAssemblies` packages, so the dev-pack pain is no longer a forcing function for this bump.
-- **Effort:** S (already partially done).
+- **Status:** Done. Step 2 (shipping libraries and both sample projects from .NET Framework 4.5.2 to **4.7.2**) merged in [PR 240](https://github.com/saveenr/VisioAutomation/pull/240) after the Windows 10 LTSB 2016 sunset on 2026-10-13, closing [#174](https://github.com/saveenr/VisioAutomation/issues/174). The whole solution is now on 4.7.2. Remaining at release time: bump the versions (planned NuGet 4.0.0 and module 5.0.0, see the `[Unreleased]` changelog entries) and update the supported-runtime statements and version-compatibility pages in both GitBooks.
 
 ### Run tests in CI
 - **What:** [`.github/workflows/build.yml`](../../.github/workflows/build.yml) currently builds only — the test suite isn't exercised by CI. The orphan-leak fix in Phase 1 (see *Investigate flakiness from leftover Visio processes* in [`../COMPLETED.md`](../COMPLETED.md#investigate-flakiness-from-leftover-visio-processes)) is a prerequisite for re-runs to be idempotent, so re-running tests in CI is now feasible from a process-hygiene standpoint.
@@ -22,12 +17,8 @@ Backlog of build-system, tooling, and code/architecture items. For the staged pl
 - **Effort:** M (provisioning the self-hosted runner is the bulk; wiring up the workflow is small).
 
 ### Move development to Visual Studio 2026
-- **What:** Bump the solution from VS 2022 (`VisualStudioVersion = 17.0` in the .sln) to VS 2026. Stay on .NET Framework — do not migrate to modern .NET (Core).
-- **Constraint discovered during research:** VS 2026 supports .NET Framework targets **4.6.2, 4.7, 4.7.1, 4.7.2, 4.8, 4.8.1** only. Framework 4.0 / 4.5 / 4.5.x / 4.6 / 4.6.1 are **not** supported targets in VS 2026. Source: [Visual Studio 2026 Compatibility](https://learn.microsoft.com/en-us/visualstudio/releases/2026/compatibility).
-- **Implication:** the shipping fleet (currently on 4.5.2 after step 1 of *Consolidate target frameworks*) must bump again before VS 2026 can build it. Recommended landing point: **4.7.2** — clears the VS 2026 floor *and* converges with the existing test-project TFM in one move.
-- **VisioPowerShell older-PowerShell support is preserved** by this bump: the older-PS floor is set by the `System.Management.Automation` v3 reference and the `ModuleToProcess`/`PowerShellVersion = 2.0` choices in [Visio.psd1](../../VisioAutomation_2010/VisioPowerShell/Visio.psd1), not by the .NET Framework TFM. Bumping 4.5 → 4.7.2 doesn't change that.
-- **Cross-refs:** Drives step 2 of *Consolidate target frameworks* above. Supersedes *Decide whether to move to .NET 6/8* below for now (defer that decision).
-- **Effort:** S — bump TFMs, bump `VisualStudioVersion` in the .sln, open in VS 2026, full rebuild.
+- **Status:** Done. The solution is an SLNX file built with Visual Studio 2026, the .NET 10 SDK pinned by `global.json`, and explicit C# 14; CI uses the `windows-2025-vs2026` image. The shipping libraries now target 4.7.2, which clears the VS 2026 floor (4.6.2). Closes [#171](https://github.com/saveenr/VisioAutomation/issues/171). Current commands: [`../BUILDING.md`](../BUILDING.md).
+- **Still open elsewhere:** moving the libraries to modern .NET is a separate item, *Move to C# 14 / .NET 10* below ([#175](https://github.com/saveenr/VisioAutomation/issues/175)).
 
 ---
 
