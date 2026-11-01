@@ -12,9 +12,14 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-Planned as a major release (5.0.0) because the runtime floor rises.
+_No consumer-visible changes yet._
+
+## [5.0.0] - 2026-11-01
+
+A major release. The minimum .NET Framework runtime rises from 4.5.2 to 4.7.2, validation failures in eight cmdlets now stop the cmdlet reliably, and the module bundles VisioAutomation 4.0.0.
 
 ### Changed
+- The bundled VisioAutomation library is updated to 4.0.0 (see the [NuGet changelog](../../NuGet/CHANGELOG.md)); the only change in it is the .NET Framework 4.7.2 minimum.
 - Validation failures now use PowerShell's terminating-error mechanism (`ThrowTerminatingError`) instead of a raw `throw`, so they always stop the cmdlet regardless of `$ErrorActionPreference` and carry a stable `FullyQualifiedErrorId` and `ErrorCategory` (for example `VisioAutomation.NewVisioShape.PolylineNeeds2Points`). Affected cmdlets: `New-VisioShape`, `Export-VisioShape`, `Import-VisioModel`, `Out-VisioApplication`, `New-VisioPage`, `Set-VisioCustomProperty`, `Get-VisioPageCells` and `Get-VisioShapeCells`. The original exception is kept as the error record's `Exception`, so catching by type still works. Previously, without `$ErrorActionPreference = 'Stop'`, these errors were written to the error stream and the script continued. Closes [#191](https://github.com/saveenr/VisioAutomation/issues/191).
 - **Breaking: the minimum .NET Framework runtime is now 4.7.2** (was 4.5.2). `VisioPS.dll` and the bundled libraries target `net472`. PowerShell 5.1 on a machine with .NET Framework 4.5.2 through 4.7.1 will fail to load the module until .NET Framework 4.7.2 is installed; 4.7.2 is built in to Windows 10 1809 / Windows Server 2019 and later. Closes [#174](https://github.com/saveenr/VisioAutomation/issues/174).
 
