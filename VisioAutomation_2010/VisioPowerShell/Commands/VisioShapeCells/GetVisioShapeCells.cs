@@ -71,7 +71,10 @@ namespace VisioPowerShell.Commands.VisioShapeCells
             if (invalid_names.Count > 0)
             {
                 string msg = "Invalid cell names: " + string.Join(",", invalid_names);
-                throw new System.ArgumentException(msg);
+                this.ThrowError(new System.ArgumentException(msg),
+                    "VisioAutomation.GetVisioShapeCells.InvalidCellNames",
+                    SMA.ErrorCategory.InvalidArgument,
+                    cellnames);
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();

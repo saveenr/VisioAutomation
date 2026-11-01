@@ -122,7 +122,7 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
             this.Client.CustomProperty.SetCustomProperty(targetshapes, this.Name, this.Cells);
         }
 
-        private static CustomPropertyCells _create_cust_prop_from_object(object value)
+        private CustomPropertyCells _create_cust_prop_from_object(object value)
         {
             // Use the typed setters (issue #144) so the cmdlet's path doesn't
             // depend on the EncodeValues() backstop in the Scripting layer to
@@ -162,9 +162,12 @@ namespace VisioPowerShell.Commands.VisioCustomProperty
             {
                 var value_type = value.GetType();
                 string msg = string.Format("Unsupported type for value \"{0}\" of type \"{1}\"", value, value_type.Name);
-                throw new System.ArgumentException(msg);
+                this.ThrowError(new System.ArgumentException(msg),
+                    "VisioAutomation.SetVisioCustomProperty.UnsupportedValueType",
+                    SMA.ErrorCategory.InvalidArgument,
+                    value);
             }
             return cp;
         }
     }
-}
+}

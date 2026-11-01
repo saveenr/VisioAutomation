@@ -45,6 +45,20 @@ namespace VisioPowerShell.Commands
         }
 
 
+        // Reports a terminating error through the PowerShell error system, so it
+        // propagates regardless of $ErrorActionPreference and carries a stable
+        // FullyQualifiedErrorId and ErrorCategory. The original exception is
+        // preserved as ErrorRecord.Exception so catch-by-type keeps working.
+        // Only valid inside BeginProcessing, ProcessRecord and EndProcessing.
+        protected void ThrowError(
+            System.Exception exc,
+            string error_id,
+            SMA.ErrorCategory category,
+            object target = null)
+        {
+            this.ThrowTerminatingError(new SMA.ErrorRecord(exc, error_id, category, target));
+        }
+
         public void WriteVerbose(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);

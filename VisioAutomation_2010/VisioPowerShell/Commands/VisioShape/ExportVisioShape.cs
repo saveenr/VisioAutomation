@@ -39,7 +39,10 @@ namespace VisioPowerShell.Commands.VisioShape
                 {
                     string msg = string.Format("File \"{0}\" already exists", this.Filename);
                     var exc = new System.ArgumentException(msg);
-                    throw exc;
+                    this.ThrowError(exc,
+                        "VisioAutomation.ExportVisioShape.FileExists",
+                        SMA.ErrorCategory.ResourceExists,
+                        this.Filename);
                 }
             }
 

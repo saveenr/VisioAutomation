@@ -37,7 +37,10 @@ namespace VisioPowerShell.Commands.VisioModel
             else
             {
                 var exc = new System.ArgumentOutOfRangeException("Unknown root element for XML");
-                throw exc;
+                this.ThrowError(exc,
+                    "VisioAutomation.ImportVisioModel.UnknownRootElement",
+                    SMA.ErrorCategory.InvalidData,
+                    root.Name.ToString());
             }
         }
 

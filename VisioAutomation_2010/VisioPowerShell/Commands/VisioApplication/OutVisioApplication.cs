@@ -29,7 +29,9 @@ namespace VisioPowerShell.Commands.VisioApplication
             {
                 string msg = "A Visio Application Instance is not attached";
                 this.WriteVerbose(msg);
-                throw new System.ArgumentOutOfRangeException(msg);
+                this.ThrowError(new System.ArgumentOutOfRangeException(msg),
+                    "VisioAutomation.OutVisioApplication.NoApplicationAttached",
+                    SMA.ErrorCategory.ResourceUnavailable);
             }
 
             if (this.DirectedGraphDocument != null)

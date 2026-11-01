@@ -111,7 +111,7 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
+                    CmdletBindingTests.Session.InvokeScript<object>(
                         "Export-VisioShape -Filename $f -Shape $s",
                         ("f", export_path),
                         ("s", new[] { (IVisio.Shape)shape }));
@@ -119,6 +119,7 @@ namespace VTest.PowerShell
                 catch (System.Management.Automation.RuntimeException ex)
                 {
                     MUT.StringAssert.Contains(ex.Message, "already exists");
+                    MUT.StringAssert.StartsWith(ex.ErrorRecord.FullyQualifiedErrorId, "VisioAutomation.ExportVisioShape.FileExists" + ",");
                     threw = true;
                 }
                 MUT.Assert.IsTrue(threw, "Export-VisioShape should throw when target exists and -Overwrite is not set");
@@ -188,13 +189,14 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
+                    CmdletBindingTests.Session.InvokeScript<object>(
                         "New-VisioShape -Polyline -Points $p",
                         ("p", new[] { new VisioAutomation.Core.Point(1.0, 1.0) }));
                 }
                 catch (System.Management.Automation.RuntimeException ex)
                 {
                     MUT.StringAssert.Contains(ex.Message, "Need at least 2 points");
+                    MUT.StringAssert.StartsWith(ex.ErrorRecord.FullyQualifiedErrorId, "VisioAutomation.NewVisioShape.PolylineNeeds2Points" + ",");
                     threw = true;
                 }
                 MUT.Assert.IsTrue(threw, "New-VisioShape -Polyline should throw when given fewer than 2 points");
@@ -217,7 +219,7 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
+                    CmdletBindingTests.Session.InvokeScript<object>(
                         "New-VisioShape -Bezier -Points $p",
                         ("p", new[]
                         {
@@ -228,6 +230,7 @@ namespace VTest.PowerShell
                 catch (System.Management.Automation.RuntimeException ex)
                 {
                     MUT.StringAssert.Contains(ex.Message, "Need at least 4 points");
+                    MUT.StringAssert.StartsWith(ex.ErrorRecord.FullyQualifiedErrorId, "VisioAutomation.NewVisioShape.BezierNeeds4Points" + ",");
                     threw = true;
                 }
                 MUT.Assert.IsTrue(threw, "New-VisioShape -Bezier should throw when given fewer than 4 points");
