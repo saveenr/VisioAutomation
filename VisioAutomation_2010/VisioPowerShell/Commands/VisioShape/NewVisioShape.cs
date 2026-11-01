@@ -91,7 +91,9 @@ namespace VisioPowerShell.Commands.VisioShape
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException();
+                this.ThrowError(new System.ArgumentOutOfRangeException(),
+                    "VisioAutomation.NewVisioShape.NoShapeKindSelected",
+                    SMA.ErrorCategory.InvalidArgument);
             }
         }
 
@@ -101,7 +103,10 @@ namespace VisioPowerShell.Commands.VisioShape
             {
                 if (this.Points.Length < 2)
                 {
-                    throw new System.ArgumentOutOfRangeException(nameof(this.Points), "Need at least 2 points for a polyline");
+                    this.ThrowError(new System.ArgumentOutOfRangeException(nameof(this.Points), "Need at least 2 points for a polyline"),
+                        "VisioAutomation.NewVisioShape.PolylineNeeds2Points",
+                        SMA.ErrorCategory.InvalidArgument,
+                        this.Points);
                 }
             }
             else if (this.Bezier)
@@ -110,7 +115,10 @@ namespace VisioPowerShell.Commands.VisioShape
                 {
                     // two points
                     // two control points
-                    throw new System.ArgumentOutOfRangeException(nameof(this.Points), "Need at least 4 points for a bezier");
+                    this.ThrowError(new System.ArgumentOutOfRangeException(nameof(this.Points), "Need at least 4 points for a bezier"),
+                        "VisioAutomation.NewVisioShape.BezierNeeds4Points",
+                        SMA.ErrorCategory.InvalidArgument,
+                        this.Points);
                 }
             }
         }

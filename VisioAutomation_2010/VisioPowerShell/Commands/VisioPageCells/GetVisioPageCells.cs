@@ -75,7 +75,10 @@ namespace VisioPowerShell.Commands.VisioPageCells
             {
                 var quoted_names = invalid_names.Select( s=> string.Format("\"{0}\"",s));
                 string msg = "Invalid cell names: " + string.Join(",", quoted_names);
-                throw new System.ArgumentException(nameof(cellnames),msg);
+                this.ThrowError(new System.ArgumentException(nameof(cellnames),msg),
+                    "VisioAutomation.GetVisioPageCells.InvalidCellNames",
+                    SMA.ErrorCategory.InvalidArgument,
+                    cellnames);
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();

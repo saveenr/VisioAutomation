@@ -36,14 +36,20 @@ namespace VisioPowerShell.Commands.VisioPage
             {
                 if (this.Name.Length == 0)
                 {
-                    throw new System.ArgumentException("Name can't be empty");
+                    this.ThrowError(new System.ArgumentException("Name can't be empty"),
+                        "VisioAutomation.NewVisioPage.EmptyName",
+                        SMA.ErrorCategory.InvalidArgument,
+                        this.Name);
                 }
 
                 string n = this.Name.Trim();
 
                 if (n.Length == 0)
                 {
-                    throw new System.ArgumentException("Name can't be empty");
+                    this.ThrowError(new System.ArgumentException("Name can't be empty"),
+                        "VisioAutomation.NewVisioPage.EmptyName",
+                        SMA.ErrorCategory.InvalidArgument,
+                        this.Name);
                 }
 
                 this.Client.Output.WriteVerbose("Setting page name \"{0}\"", n);
