@@ -59,7 +59,7 @@ Auxiliary external dependencies (used by the Models layer): **Microsoft.Msagl** 
 ### 3.1 Production projects
 
 #### `VisioAutomation` — the core wrapper
-Path: [`VisioAutomation_2010/VisioAutomation/`](../VisioAutomation_2010/VisioAutomation/) · TFM: .NET Framework 4.5.2
+Path: [`VisioAutomation_2010/VisioAutomation/`](../VisioAutomation_2010/VisioAutomation/) · TFM: .NET Framework 4.7.2
 
 The foundation of the solution. Wraps the Visio COM API and adds:
 
@@ -84,7 +84,7 @@ The foundation of the solution. Wraps the Visio COM API and adds:
 ---
 
 #### `VisioAutomation.Models` — declarative DOM and layouts
-Path: [`VisioAutomation_2010/VisioAutomation.Models/`](../VisioAutomation_2010/VisioAutomation.Models/) · TFM: .NET Framework 4.5.2
+Path: [`VisioAutomation_2010/VisioAutomation.Models/`](../VisioAutomation_2010/VisioAutomation.Models/) · TFM: .NET Framework 4.7.2
 
 A higher-level **declarative document model**. Build a tree of plain objects describing the diagram you want, then call `Render(visioApp)` to materialize it as a real Visio document. This decouples diagram authoring from COM bookkeeping.
 
@@ -108,7 +108,7 @@ A higher-level **declarative document model**. Build a tree of plain objects des
 ---
 
 #### `VisioScripting` — high-level facade
-Path: [`VisioAutomation_2010/VisioScripting/`](../VisioAutomation_2010/VisioScripting/) · TFM: .NET Framework 4.5.2
+Path: [`VisioAutomation_2010/VisioScripting/`](../VisioAutomation_2010/VisioScripting/) · TFM: .NET Framework 4.7.2
 
 A scripting-friendly facade over the core library. Organizes operations into ~25 verb-noun **command groups** hung off a single [`Client`](../VisioAutomation_2010/VisioScripting/Client.cs) instance.
 
@@ -133,7 +133,7 @@ client.Text.SetText(TargetShapes.Auto, "Hello");
 ---
 
 #### `VisioPowerShell` — PowerShell module
-Path: [`VisioAutomation_2010/VisioPowerShell/`](../VisioAutomation_2010/VisioPowerShell/) · TFM: .NET Framework 4.5.2
+Path: [`VisioAutomation_2010/VisioPowerShell/`](../VisioAutomation_2010/VisioPowerShell/) · TFM: .NET Framework 4.7.2
 
 Binary PowerShell module (`VisioPS.dll`) shipped as the `Visio` module. Module manifest: [`Visio.psd1`](../VisioAutomation_2010/VisioPowerShell/Visio.psd1) (version 4.6.0). Cmdlets follow strict verb-noun naming (`Get-VisioShape`, `New-VisioShape`, `Set-VisioShapeCells`, `Select-VisioShape`, `Close-VisioApplication`, …) and are organized under `Commands/` by noun (`VisioApplication/`, `VisioDocument/`, `VisioPage/`, `VisioShape/`, `VisioShapeCells/`, `VisioPageCells/`, `VisioControl/`, `VisioCustomProperty/`, `VisioHyperlink/`, `VisioUserDefinedCell/`, `VisioText/`, `VisioMaster/`, `VisioWindow/`, …).
 

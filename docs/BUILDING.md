@@ -10,7 +10,7 @@ Run these commands from the repository root. See [ARCHITECTURE.md](ARCHITECTURE.
 - Microsoft Visio for integration tests, samples, and automation. **Compilation does not require Visio**: the Visio 2010 interop assembly comes from NuGet.
 - **Windows PowerShell 5.1** for the verified `Visio` automation workflow. Native PowerShell 7 automation and its compatibility shim were not verified in this pass.
 
-Shipping libraries target .NET Framework 4.5.2; tests and VPlayground target 4.7.2. Reference assemblies for both targets are restored from NuGet; separate Developer Pack installations are unnecessary. C# language selection is controlled by `LangVersion` in [Directory.Build.props](../VisioAutomation_2010/Directory.Build.props).
+Shipping libraries, tests and VPlayground target .NET Framework 4.7.2. Reference assemblies for both targets are restored from NuGet; separate Developer Pack installations are unnecessary. C# language selection is controlled by `LangVersion` in [Directory.Build.props](../VisioAutomation_2010/Directory.Build.props).
 
 ## Build
 
