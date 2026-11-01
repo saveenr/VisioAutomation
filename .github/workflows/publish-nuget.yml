@@ -19,12 +19,23 @@ name: Publish VisioAutomation NuGet to nuget.org
 # Why the split: same as publish-psmodule.yml -- the .nupkg on the GH
 # Release is the single binary source of truth. Splitting the GH Release
 # step from the nuget.org publish lets a human inspect the package before
-# committing to the immutable upload, and keeps the API key off
+# committing to the immutable upload, and keeps credentials off
 # developer workstations.
 #
-# Setup required (one-time):
-#   - Add a repository secret named NUGET_API_KEY containing a nuget.org
-#     API key with push permissions on the VisioAutomation2010 package.
+# Authentication: nuget.org Trusted Publishing (OIDC). The job requests a
+# GitHub OIDC token, NuGet/login exchanges it for a temporary API key
+# (valid 1 hour), and the push uses that key. No long-lived API key is
+# stored. nuget.org now caps new API keys at 30 days, which is why this
+# replaced the NUGET_API_KEY secret.
+#
+# Setup required (one-time, on nuget.org as the SevenPens account):
+#   Account > Trusted Publishing > add a policy with
+#     Repository Owner: saveenr
+#     Repository:       VisioAutomation
+#     Workflow File:    publish-nuget.yml   (file name only)
+#     Environment:      (empty)
+#   with a scope that allows publishing VisioAutomation2010 versions.
+#   Renaming this workflow file requires updating the policy.
 
 on:
   workflow_dispatch:
@@ -41,6 +52,7 @@ on:
 
 permissions:
   contents: read   # to download the GH Release artifact via gh CLI
+  id-token: write  # to request the OIDC token for nuget.org Trusted Publishing
 
 concurrency:
   group: publish-nuget-${{ inputs.tag }}
@@ -110,14 +122,23 @@ jobs:
           }
           Write-Host "Staged nupkg: id=$stagedId, version=$stagedVersion (matches tag)"
 
+      # Requested immediately before the push: the temporary key is valid
+      # for only 1 hour.
+      - name: NuGet login (OIDC to temporary API key)
+        if: ${{ !inputs.dry_run }}
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: SevenPens   # nuget.org profile name (not an email address)
+
       - name: Publish to nuget.org
         if: ${{ !inputs.dry_run }}
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
         shell: pwsh
         run: |
           if (-not $env:NUGET_API_KEY) {
-            throw "NUGET_API_KEY repository secret is not set. Add it under Settings > Secrets and variables > Actions."
+            throw "NuGet login did not return an API key. Check the Trusted Publishing policy on nuget.org (owner saveenr, repo VisioAutomation, workflow publish-nuget.yml)."
           }
           $nupkg = Get-ChildItem artifacts -Filter '*.nupkg' | Select-Object -First 1
           Write-Host "Pushing $($nupkg.Name) to nuget.org ..."
