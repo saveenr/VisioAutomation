@@ -23,7 +23,7 @@
       Modern C# everywhere. We don't multi-target, so a single language version
       across all 11 projects is consistent. Runtime-independent C# features
       (file-scoped namespaces, target-typed new(), pattern enhancements, etc.)
-      become available even on net452 / net472.
+      become available even on net472.
     -->
     <LangVersion>14.0</LangVersion>
 
@@ -32,7 +32,7 @@
       NuGet/VisioAutomation2010.nuspec packs DLLs from bin/Release/*.dll;
       VisioPowerShell/InstallForCurrentUser.ps1 defaults to Debug for development,
       while Publish-VisioPSToGallery.ps1 stages Release. We don't multi-target,
-      so the SDK's TFM-suffixed default (bin/Debug/net452/) buys us nothing.
+      so the SDK's TFM-suffixed default (bin/Debug/net472/) buys us nothing.
     -->
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 

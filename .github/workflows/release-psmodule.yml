@@ -48,8 +48,8 @@ jobs:
         with:
           global-json-file: global.json
 
-      # The .NET Framework 4.5.2 reference assemblies are supplied by the
-      # Microsoft.NETFramework.ReferenceAssemblies.net452 package; no dev-pack
+      # The .NET Framework 4.7.2 reference assemblies are supplied by the
+      # Microsoft.NETFramework.ReferenceAssemblies.net472 package; no dev-pack
       # install needed. See VisioAutomation_2010/Directory.Packages.props.
 
       - name: Cache NuGet packages

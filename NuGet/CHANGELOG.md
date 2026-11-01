@@ -12,7 +12,10 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+Planned as a major release (4.0.0) because the runtime floor rises.
+
+### Changed
+- **Breaking: the minimum .NET Framework runtime is now 4.7.2** (was 4.5.2). `VisioAutomation.dll`, `VisioAutomation.Models.dll` and `VisioScripting.dll` now target `net472`, and the package's `lib` folder and dependency group are `net472`. Consumers on .NET Framework 4.5.2 through 4.7.1 must move to 4.7.2 or stay on 3.2.0. 4.7.2 is built in to Windows 10 1809 / Windows Server 2019 and later; the Windows 10 LTSB 2016 constraint that held this back ended on 2026-10-13. Closes [#174](https://github.com/saveenr/VisioAutomation/issues/174).
 
 ## [3.2.0] - 2026-10-01
 

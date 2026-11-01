@@ -38,14 +38,10 @@
     <PackageVersion Include="System.ValueTuple" Version="4.5.0" />
 
     <!-- .NET Framework reference assemblies as packages. Eliminates the need
-         for the netfx-4.5.2 Developer Pack to be installed on dev machines /
+         for the netfx-4.7.2 Developer Pack to be installed on dev machines /
          CI runners. The package supplies the targeting-pack reference DLLs
          and overrides MSBuild's normal lookup via FrameworkPathOverride.
-         Lets us defer the TFM bump beyond the LTSB 2016 sunset (2026-10-13)
-         without paying the dev-pack-install pain in the meantime.
-         Net452 for shipping libs and the 4.5.2 samples; net472 for tests
-         and VPlayground. -->
-    <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies.net452" Version="1.0.3" />
+         net472 is used by the shipping libs, samples, tests and VPlayground. -->
     <PackageVersion Include="Microsoft.NETFramework.ReferenceAssemblies.net472" Version="1.0.3" />
 
   </ItemGroup>

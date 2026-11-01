@@ -12,7 +12,10 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+Planned as a major release (5.0.0) because the runtime floor rises.
+
+### Changed
+- **Breaking: the minimum .NET Framework runtime is now 4.7.2** (was 4.5.2). `VisioPS.dll` and the bundled libraries target `net472`. PowerShell 5.1 on a machine with .NET Framework 4.5.2 through 4.7.1 will fail to load the module until .NET Framework 4.7.2 is installed; 4.7.2 is built in to Windows 10 1809 / Windows Server 2019 and later. Closes [#174](https://github.com/saveenr/VisioAutomation/issues/174).
 
 ## [4.8.0] - 2026-10-01
 

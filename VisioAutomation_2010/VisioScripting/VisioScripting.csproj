@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <Description>High-level scripting facade for Microsoft Visio automation.</Description>
   </PropertyGroup>
 
@@ -21,7 +21,7 @@
       <PrivateAssets>none</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Automatic.Graph.Layout" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net452">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
