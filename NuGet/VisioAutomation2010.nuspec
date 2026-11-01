@@ -14,16 +14,16 @@ It simplifies common tasks and makes it easier to build Visio add-ins and automa
     <copyright>Copyright SevenPens</copyright>
     <tags>Visio</tags>
     <dependencies>
-      <group targetFramework="net452">
+      <group targetFramework="net472">
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\Microsoft.Office.Interop.Visio.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\GenTreeOps.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\Microsoft.Msagl.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\VisioAutomation*.dll" target="lib\net452" />
-    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\VisioScripting*.dll" target="lib\net452" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\Microsoft.Office.Interop.Visio.dll" target="lib\net472" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\GenTreeOps.dll" target="lib\net472" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\Microsoft.Msagl.dll" target="lib\net472" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\VisioAutomation*.dll" target="lib\net472" />
+    <file src="..\VisioAutomation_2010\VisioScripting\bin\Release\VisioScripting*.dll" target="lib\net472" />
     <file src="..\readme.md" target="README.md" />
   </files>
 </package>

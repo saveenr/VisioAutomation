@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <!-- Visio.psd1's ModuleToProcess = 'VisioPS.dll' references this exact name. -->
     <AssemblyName>VisioPS</AssemblyName>
     <!-- AssemblyName != RootNamespace here; preserve the existing namespace. -->
@@ -27,7 +27,7 @@
       <PrivateAssets>none</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.PowerShell.3.ReferenceAssemblies" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net452">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>

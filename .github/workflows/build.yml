@@ -39,9 +39,9 @@ jobs:
         with:
           global-json-file: global.json
 
-      # NOTE: the .NET Framework 4.5.2 dev-pack install step is deliberately
-      # absent. The shipping libs still target net452, but the reference
-      # assemblies are now supplied by the Microsoft.NETFramework.ReferenceAssemblies.net452
+      # NOTE: the .NET Framework 4.7.2 dev-pack install step is deliberately
+      # absent. The shipping libs still target net472, but the reference
+      # assemblies are now supplied by the Microsoft.NETFramework.ReferenceAssemblies.net472
       # NuGet package (declared in VisioAutomation_2010/Directory.Packages.props).
       # That package's .targets sets TargetFrameworkRootPath to its own folder,
       # so MSBuild no longer needs the dev pack on disk.

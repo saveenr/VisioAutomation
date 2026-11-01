@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <Description>Low-level .NET helpers for Microsoft Visio automation.</Description>
     <AssemblyTitle>VisioAutomation 2010</AssemblyTitle>
     <Product>VisioAutomation 2010</Product>
@@ -20,7 +20,7 @@
       <EmbedInteropTypes>false</EmbedInteropTypes>
       <PrivateAssets>none</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net452">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
