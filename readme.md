@@ -16,6 +16,20 @@ The project ships two artifacts:
 
 ## Quick example
 
+Each example starts Visio, creates a document, draws a rectangle and sets its text to "Hello, Visio!".
+
+C# (using the library directly, without the scripting facade):
+
+```csharp
+using VisioAutomation.Extensions;
+
+var app = new Microsoft.Office.Interop.Visio.Application();
+app.Documents.Add(string.Empty);
+
+var shape = app.ActivePage.DrawRectangle(new VisioAutomation.Core.Rectangle(0, 0, 4, 2));
+shape.Text = "Hello, Visio!";
+```
+
 C# (using the high-level scripting facade):
 
 ```csharp
@@ -23,9 +37,9 @@ var visio  = new Microsoft.Office.Interop.Visio.Application();
 var client = new VisioScripting.Client(visio);
 
 client.Document.NewDocument();
-client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto,
-                          new VisioAutomation.Core.Rectangle(0, 0, 4, 2));
-client.Text.SetShapeText(VisioScripting.TargetShapes.Auto, new[] { "Hello, Visio!" });
+var shape = client.Draw.DrawRectangle(VisioScripting.TargetPage.Auto,
+                                      new VisioAutomation.Core.Rectangle(0, 0, 4, 2));
+client.Text.SetShapeText(new VisioScripting.TargetShapes(shape), new[] { "Hello, Visio!" });
 ```
 
 PowerShell:
@@ -35,7 +49,8 @@ Import-Module Visio
 
 New-VisioApplication
 New-VisioDocument
-New-VisioShape -Rectangle -BoundingBox (New-VisioRectangle 0 0 4 2)
+$shape = New-VisioShape -Rectangle -BoundingBox (New-VisioRectangle 0 0 4 2)
+Set-VisioText "Hello, Visio!" -Shape $shape
 ```
 
 ## Documentation
