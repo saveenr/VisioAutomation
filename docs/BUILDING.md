@@ -110,4 +110,4 @@ Both release flows use Release binaries. Before triggering them, bump the artifa
 
 ## Samples
 
-`VSamples` is a WinForms application: select it as the startup project and run a sample against installed Visio. `VSamples.Docs` contains curated documentation examples. `DemoIronPython` holds standalone IronPython examples and loader instructions.
+`VSamples` is a WinForms application: select it as the startup project and run a sample against installed Visio. `VSamples.Docs` holds the C# code blocks from the .NET docs; it only needs to build, and a build failure there means a documented call no longer compiles (see its README). `DemoIronPython` holds standalone IronPython examples and loader instructions.
