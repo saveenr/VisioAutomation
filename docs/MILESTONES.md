@@ -73,7 +73,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 **Note on #163.** It was parked behind #164 (`PSCmdlet` versus `Cmdlet`) because its tests failed in the test runspace with `CommandTarget: application does not match doc.application`. That failure looks like the two-Client mismatch from #190, which no longer reproduces (#190 closed 2026-11-20). So #163 may be doable without #164; confirm that first, and if it still needs `ParameterSetName` detection, it goes back to CY27Q1 with #164.
 
 ### CY27Q1 &mdash; January&ndash;March 2027
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 2 closed early, 9 open on GitHub (after the identity items moved in, six items moved out to CY26Q4 and the layout research [#251](https://github.com/saveenr/VisioAutomation/issues/251) was filed, all on 2026-11-20).
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 2 closed early, 8 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
 
 **Theme:** The modernization unlock is done ([#171](https://github.com/saveenr/VisioAutomation/issues/171) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) shipped 2026-11-01). What remains is spike and audit work, the cmdlet-ergonomics follow-through that slipped from CY26Q3 (the `PSCmdlet` question), and the identity transition.
 
@@ -90,7 +90,6 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) (moved from CY26Q4) |
 | Research: .NET 10 file-based apps (`dotnet run file.cs`) for docs and samples | E | [#250](https://github.com/saveenr/VisioAutomation/issues/250) |
 | Directed graph XML format: remaining gaps | I | [#236](https://github.com/saveenr/VisioAutomation/issues/236) (needs a milestone) |
-| Research: other layout algorithms beyond our own and MSAGL | I | [#251](https://github.com/saveenr/VisioAutomation/issues/251) |
 
 ### CY27Q2 &mdash; April&ndash;June 2027
 [GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/5) &mdash; due 2027-06-30 &mdash; 3 open.
@@ -107,7 +106,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 ### Beyond CY27Q2
 
 Items pending but not yet semester-assigned:
-- **Experiments** (outside the plan; they happen only if something forces them or there is spare capacity): ShapeSheet query ergonomics, LINQ and other shapes ([#170](https://github.com/saveenr/VisioAutomation/issues/170), still milestoned CY27Q1 on GitHub), and the NetOffice investigation below.
+- **Experiments** (outside the plan; they happen only if something forces them or there is spare capacity): ShapeSheet query ergonomics, LINQ and other shapes ([#170](https://github.com/saveenr/VisioAutomation/issues/170), still milestoned CY27Q1 on GitHub), research into other layout algorithms beyond our own and MSAGL ([#251](https://github.com/saveenr/VisioAutomation/issues/251), no milestone), and the NetOffice investigation below.
 - **Long-term investigation: replace the Visio PIA with NetOffice / NetOfficeFw** ([#158](https://github.com/saveenr/VisioAutomation/issues/158), retitled and milestone removed 2026-11-20). Not part of the plan. It stays on the back burner until something forces it, for example the existing Visio PIA not working on modern .NET.
 - Documentation work past the CY26Q4 burst &mdash; continuous into 2027 as items come up.
 - Visio repo portfolio audit Phase H2 (per-repo retire / merge / maintain decisions). Opportunistic.
