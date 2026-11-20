@@ -90,7 +90,6 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Phase 5b: in-repo URL rewrite (single commit after #146 + #147 land) | A | (no issue; one-shot commit) |
 | Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (moved from CY26Q4) |
 | Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) (moved from CY26Q4) |
-| Research: .NET 10 file-based apps (`dotnet run file.cs`) for docs and samples | E | [#250](https://github.com/saveenr/VisioAutomation/issues/250) |
 | Directed graph XML format: remaining gaps | I | [#236](https://github.com/saveenr/VisioAutomation/issues/236) (needs a milestone) |
 
 ### CY27Q2 &mdash; April&ndash;June 2027
@@ -108,7 +107,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 ### Beyond CY27Q2
 
 Items pending but not yet semester-assigned:
-- **Experiments** (outside the plan; they happen only if something forces them or there is spare capacity): ShapeSheet query ergonomics, LINQ and other shapes ([#170](https://github.com/saveenr/VisioAutomation/issues/170), still milestoned CY27Q1 on GitHub), research into other layout algorithms beyond our own and MSAGL ([#251](https://github.com/saveenr/VisioAutomation/issues/251), no milestone), whether MCP support is worth adding ([#255](https://github.com/saveenr/VisioAutomation/issues/255), no milestone), and the NetOffice investigation below.
+- **Experiments** (outside the plan; they happen only if something forces them or there is spare capacity): ShapeSheet query ergonomics, LINQ and other shapes ([#170](https://github.com/saveenr/VisioAutomation/issues/170), still milestoned CY27Q1 on GitHub), research into other layout algorithms beyond our own and MSAGL ([#251](https://github.com/saveenr/VisioAutomation/issues/251), no milestone), whether MCP support is worth adding ([#255](https://github.com/saveenr/VisioAutomation/issues/255), no milestone), whether single-file `.cs` apps (`dotnet run file.cs`) could carry the doc samples ([#250](https://github.com/saveenr/VisioAutomation/issues/250), no milestone; a 2026-11-20 probe showed it works with limits, so it is parked for a later experiment), and the NetOffice investigation below.
 - **Long-term investigation: replace the Visio PIA with NetOffice / NetOfficeFw** ([#158](https://github.com/saveenr/VisioAutomation/issues/158), retitled and milestone removed 2026-11-20). Not part of the plan. It stays on the back burner until something forces it, for example the existing Visio PIA not working on modern .NET.
 - Documentation work past the CY26Q4 burst &mdash; continuous into 2027 as items come up.
 - Visio repo portfolio audit Phase H2 (per-repo retire / merge / maintain decisions). Opportunistic.
