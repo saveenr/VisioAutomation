@@ -21,3 +21,4 @@ Decisions are immutable once accepted. To change one, write a new decision file 
 - [tests-need-visio.md](tests-need-visio.md) &mdash; The test suite drives a real Visio instance via COM; no mock layer.
 - [form-page-model-internal.md](form-page-model-internal.md) &mdash; The form page model is internal to VisioScripting, not public Models API.
 - [developer-commands-removed.md](developer-commands-removed.md) &mdash; The `client.Developer` self-documenting command group is removed.
+- [box-layout-removed.md](box-layout-removed.md) &mdash; The Box layout (a geometry-only nested rectangle packer with no entry point) is removed.
