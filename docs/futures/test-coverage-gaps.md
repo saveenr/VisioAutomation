@@ -28,7 +28,7 @@ The ~211 enumerated method count is slightly under the 215-test runtime count fr
 
 4. **`Cells` record classes (`*Cells.cs` deriving from `CellRecord`) are exercised indirectly but rarely directly.** ~17 cell-record types across `VisioAutomation/Shapes/`, `VisioAutomation/Pages/`, `VisioAutomation/Text/`. None have round-trip-through-formula-and-back tests at the type level. They are validated transitively whenever a helper reads/writes them, which is most of the time, so the gap is real but lower priority.
 
-5. **The `Documents/Forms/` package in `VisioAutomation.Models` has no tests.** `FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock`, `PageMargin` — no entries in `VTest.Models`. The Tier 3 doc audit added a Forms gitbook page on 2026-05-07 (`models/forms`) with a working snippet adapted from sample code, but no test pinned that snippet. This is the only sub-package of `VisioAutomation.Models` with zero direct coverage.
+5. **The form page model has no direct tests.** It was made internal and moved to `VisioScripting/Helpers/Forms/` on 2026-11-20 ([#220](https://github.com/saveenr/VisioAutomation/issues/220), [`decisions/form-page-model-internal.md`](decisions/form-page-model-internal.md)). Its one working caller, `client.Developer.DrawInteropEnumDocumentation()`, now has a smoke test (`DevTests.DrawInteropEnumDocumentation_NewDocument_HasPagesWithShapes`); the types themselves are still not tested directly.
 
 ## Well-covered areas (no gap)
 
@@ -84,9 +84,9 @@ Public command-set classes consumed by cmdlets, no dedicated `Scripting_*Tests.c
 - `UserDefinedCellCommands` — `VisioAutomation.Shapes.UserDefinedCellHelper` is well tested; the scripting-layer wrapper that aggregates over `TargetShapes` is not.
 - `ViewCommands` — zoom / view-mode scripting; surface is small but unguarded.
 
-### `VisioAutomation.Models.Documents.Forms` (whole sub-package)
+### `VisioScripting.Helpers.Forms` (internal; was `VisioAutomation.Models.Documents.Forms`)
 
-`FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock`, `PageMargin`. No tests in `VTest.Models`. Suggested: one round-trip test that builds a small `FormDocument`, calls `InteractiveRenderer`, and asserts the rendered shape count and page bounds.
+`FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock`, `PageMargin`. Internal since 2026-11-20 ([#220](https://github.com/saveenr/VisioAutomation/issues/220)); only the caller `DrawInteropEnumDocumentation` has a smoke test. Lower priority now that it is not public API. If wanted: one round-trip test that builds a small `FormDocument`, calls `InteractiveRenderer`, and asserts the rendered shape count and page bounds.
 
 ### `VisioAutomation.Application.AlertResponseScope` and `UserInterfaceHelper`
 
@@ -187,6 +187,6 @@ If this list is pulled into actual test-writing work, the highest leverage cuts 
 
 1. **PowerShell cmdlet binding tests for `Lock-`, `Unlock-`, `Export-VisioShape`, `New-VisioShape`, and `Connect-VisioShape`.** Five cmdlets, ~10 tests, directly guards the regression class that shipped in 4.6.1 and unblocks closing [#163](https://github.com/saveenr/VisioAutomation/issues/163) once [#164](https://github.com/saveenr/VisioAutomation/issues/164) is decided.
 2. **A `LockTests.cs` and `LayerTests.cs` in `VTest.Scripting`.** Two new files at the same shape as the existing 19, ~5 tests total, covers two of the eight fully-untested command sets and reinforces (1).
-3. **A `VTest.Models\FormsTests.cs`.** Closes the only sub-package of `VisioAutomation.Models` with zero coverage and pins the gitbook `models/forms` snippet.
+3. ~~**A `VTest.Models\FormsTests.cs`.**~~ Dropped on 2026-11-20: the form page model is now internal ([#220](https://github.com/saveenr/VisioAutomation/issues/220)), so there is no public API to pin. The `DrawInteropEnumDocumentation` smoke test covers its one working caller.
 
 The remainder of the list is hygiene: each item is small but the aggregate is open-ended. Any follow-up implementation issue should pick a cap (e.g. "add 30-50 tests targeting the high-priority list") rather than chase the whole audit.

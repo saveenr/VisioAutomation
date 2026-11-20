@@ -1,15 +1,15 @@
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.Documents.Forms
+namespace VisioScripting.Helpers.Forms
 {
-    public class TextBlock
+    internal class TextBlock
     {
         public VisioAutomation.Core.Size Size;
         public string Font = "SegoeUI";
         public VisioAutomation.Text.TextBlockCells TextBlockCells;
         public VisioAutomation.Text.ParagraphCells ParagraphCells;
-        public Shapes.ShapeFormatCells ShapeFormatCells;
+        public VisioAutomation.Shapes.ShapeFormatCells ShapeFormatCells;
         public VisioAutomation.Text.CharacterCells CharacterCells;
         public string Text;
         public IVisio.Shape VisioShape;
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.Documents.Forms
             this.Size = size;
             this.TextBlockCells = new VisioAutomation.Text.TextBlockCells();
             this.ParagraphCells = new VisioAutomation.Text.ParagraphCells();
-            this.ShapeFormatCells = new Shapes.ShapeFormatCells();
+            this.ShapeFormatCells = new VisioAutomation.Shapes.ShapeFormatCells();
             this.CharacterCells = new VisioAutomation.Text.CharacterCells();
         }
 

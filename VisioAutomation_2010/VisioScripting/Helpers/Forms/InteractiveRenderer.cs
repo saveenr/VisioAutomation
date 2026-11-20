@@ -3,9 +3,9 @@ using VisioAutomation.Extensions;
 using VisioAutomation.ShapeSheet.Writers;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.Documents.Forms
+namespace VisioScripting.Helpers.Forms
 {
-    public class InteractiveRenderer
+    internal class InteractiveRenderer
     {
         private readonly IVisio.Pages _visio_pages;
         private double _current_line_height;
@@ -32,11 +32,11 @@ namespace VisioAutomation.Models.Documents.Forms
             var pagesheet = this._page.PageSheet;
             var writer = new SrcWriter();
 
-            var page_fmt_cells = new Pages.PageFormatCells();
+            var page_fmt_cells = new VisioAutomation.Pages.PageFormatCells();
             page_fmt_cells.Width = formpage.Size.Width;
             page_fmt_cells.Height = formpage.Size.Height;
 
-            var page_print_cells = new Pages.PagePrintCells();
+            var page_print_cells = new VisioAutomation.Pages.PagePrintCells();
             page_print_cells.LeftMargin = formpage.PageMargin.Left;
             page_print_cells.RightMargin = formpage.PageMargin.Right;
             page_print_cells.TopMargin = formpage.PageMargin.Top;
@@ -45,7 +45,7 @@ namespace VisioAutomation.Models.Documents.Forms
             writer.SetValues(page_fmt_cells);
             writer.SetValues(page_print_cells);
 
-            writer.Commit(pagesheet, Core.CellValueType.Formula);
+            writer.Commit(pagesheet, VisioAutomation.Core.CellValueType.Formula);
 
             this.Reset();
             return this._page;
@@ -109,7 +109,7 @@ namespace VisioAutomation.Models.Documents.Forms
                 writer.SetValues((short)block.VisioShapeID, block.CharacterCells, 0);
             }
 
-            writer.Commit(this._page, Core.CellValueType.Formula);
+            writer.Commit(this._page, VisioAutomation.Core.CellValueType.Formula);
         }
 
         private void _adjust_insertion_point(VisioAutomation.Core.Size size)

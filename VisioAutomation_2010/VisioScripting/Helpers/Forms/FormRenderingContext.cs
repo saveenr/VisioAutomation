@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.Documents.Forms
+namespace VisioScripting.Helpers.Forms
 {
     internal class FormRenderingContext
     {
