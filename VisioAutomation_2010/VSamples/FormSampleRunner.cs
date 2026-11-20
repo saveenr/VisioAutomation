@@ -30,10 +30,6 @@ namespace VSamples
             var methods = new List<SampleMethod>();
 
 
-            methods.Add(new Samples.Developer.DiagramVAClasses());
-            methods.Add(new Samples.Developer.DiagramVANamespaces());
-            methods.Add(new Samples.Developer.DocumentScriptingAPI());
-            methods.Add(new Samples.Developer.DocumentVisioInterop());
             methods.Add(new Samples.Layouts.BoxLayoutSimple());
             methods.Add(new Samples.Layouts.BoxLayoutTwoLevelGrouping());
             methods.Add(new Samples.Layouts.ColorGrid());
@@ -48,7 +44,6 @@ namespace VSamples
             methods.Add(new Samples.Misc.BezierSimple());
             methods.Add(new Samples.Misc.GradientTransparencies());
             methods.Add(new Samples.Misc.GridOfMasters());
-            methods.Add(new Samples.Misc.MonitorResolutions());
             methods.Add(new Samples.Misc.Nurbs1());
             methods.Add(new Samples.Misc.Nurbs2());
             methods.Add(new Samples.Misc.ProgressBar());
