@@ -151,6 +151,59 @@ namespace VTest.PowerShell
             MUT.Assert.IsTrue(results[2] > 0, "the new document should contain the chart's shapes");
         }
 
+        // Draws a two-node directed graph with Out-VisioApplication and returns how many shapes were made from the
+        // given master. "styling_setup" runs before the draw; "out_arguments" is added to the Out-VisioApplication call.
+        // Like the org chart test, this closes every document first and afterward, because the graph is drawn in a new document.
+        private static int count_shapes_from_master_after_drawing_a_graph(string styling_setup, string out_arguments, string master_name)
+        {
+            var results = DocumentWindowCmdletBindingTests.Session.InvokeScriptStrict<int>(
+                "$app = Get-VisioApplication; " +
+                "foreach ($d in @($app.Documents)) { $d.Saved = $true; $d.Close() }; " +
+                "try { " +
+                "$layout = New-Object VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphLayout; " +
+                "$a = $layout.AddNode('n0', 'A', 'basic_u.vss', 'Rectangle'); " +
+                "$b = $layout.AddNode('n1', 'B', 'basic_u.vss', 'Rectangle'); " +
+                "$null = $layout.AddEdge('c0', $a, $b, '', [VisioAutomation.Models.ConnectorType]::Curved); " +
+                "$dgdoc = New-Object VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphDocument; " +
+                "$dgdoc.Layouts.Add($layout); " +
+                styling_setup + " " +
+                "$dgdoc | Out-VisioApplication " + out_arguments + "; " +
+                "(Get-VisioShape | Where-Object { $_.Master -ne $null -and $_.Master.NameU -eq '" + master_name + "' } | Measure-Object).Count " +
+                "} finally { foreach ($d in @($app.Documents)) { try { $d.Saved = $true; $d.Close() } catch { } } }");
+            return results.Single();
+        }
+
+        [MUT.TestMethod]
+        public void OutVisioApplication_DirectedGraphWithoutStyling_UsesTheDefaultConnector()
+        {
+            int count = DocumentWindowCmdletBindingTests.count_shapes_from_master_after_drawing_a_graph("", "", "Dynamic Connector");
+            MUT.Assert.AreEqual(1, count, "the one edge should use the default Dynamic Connector master");
+        }
+
+        [MUT.TestMethod]
+        public void OutVisioApplication_DirectedGraphStyling_ChangesTheConnectorMaster()
+        {
+            int count = DocumentWindowCmdletBindingTests.count_shapes_from_master_after_drawing_a_graph(
+                "$styling = New-Object VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphStyling; $styling.EdgeMasterName = 'Line-curve connector';",
+                "-DirectedGraphStyling $styling",
+                "Line-curve connector");
+            MUT.Assert.AreEqual(1, count, "the one edge should use the connector master named in the styling");
+        }
+
+        [MUT.TestMethod]
+        public void OutVisioApplication_DirectedGraphStylingWithAnOrgChart_FailsToBind()
+        {
+            // -DirectedGraphStyling belongs to the directed graph parameter set only.
+            var ex = DocumentWindowCmdletBindingTests.Session.ExpectFailureInNewDocument(
+                "$styling = New-Object VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphStyling; " +
+                "$chart = New-Object VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument; " +
+                "$chart | Out-VisioApplication -DirectedGraphStyling $styling");
+            string message = CmdletScriptExtensions.MessageOf(ex);
+            MUT.Assert.IsTrue(
+                message.Contains("Parameter set cannot be resolved") || message.Contains("cannot be bound"),
+                "expected a binding error, got: " + message);
+        }
+
         [MUT.TestMethod]
         public void OutVisioApplication_PipedStringIsNotAModel_FailsToBind()
         {

@@ -22,6 +22,9 @@ namespace VisioPowerShell.Commands.VisioApplication
         [SMA.Parameter(Position = 0, Mandatory = true, ValueFromPipeline = true, ParameterSetName = "systemxmldoc")]
         public MODELS.Data.XmlModel XmlModel;
 
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "directedgraph")]
+        public MODELS.Layouts.DirectedGraph.DirectedGraphStyling DirectedGraphStyling { get; set; }
+
         protected override void ProcessRecord()
         {
             var app = this.Client.Application.GetApplication();
@@ -36,7 +39,7 @@ namespace VisioPowerShell.Commands.VisioApplication
 
             if (this.DirectedGraphDocument != null)
             {
-                var dgstyline = new DirectedGraphStyling();
+                var dgstyline = this.DirectedGraphStyling ?? new DirectedGraphStyling();
                 this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphDocument, dgstyline);
             }
             else if (this.OrgChart != null)
