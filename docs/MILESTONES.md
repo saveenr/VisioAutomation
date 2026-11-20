@@ -52,17 +52,12 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) | CY27Q1 |
 
 ### CY26Q4 &mdash; October&ndash;December 2026 *(current)*
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/1) &mdash; due 2026-12-31 &mdash; 1 closed ([#190](https://github.com/saveenr/VisioAutomation/issues/190), 2026-11-20), 5 open.
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/1) &mdash; due 2026-12-31 &mdash; 1 closed ([#190](https://github.com/saveenr/VisioAutomation/issues/190), 2026-11-20), 2 open on GitHub ([#172](https://github.com/saveenr/VisioAutomation/issues/172), [#238](https://github.com/saveenr/VisioAutomation/issues/238)); the other items below are proposed moves into this quarter.
 
-**Theme:** Identity transition push, plus settling the public Models and facade API before more docs are written against it. The identity items are owner tasks rather than code.
+**Theme:** Improve the current line as much as possible before the end of the year: docs, testing, and settling the public Models and facade API before more docs are written against it. The identity transition (repo and gitbook moves, retiring the old PSGallery account, the NuGet support case) moved to CY27Q1 on 2026-11-20.
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| Migrate GitHub repo to SevenPens-owned account | A | [#146](https://github.com/saveenr/VisioAutomation/issues/146) |
-| Migrate gitbook spaces to SevenPens-owned hosting | A | [#147](https://github.com/saveenr/VisioAutomation/issues/147) |
-| Phase 5b: in-repo URL rewrite (single commit after #146 + #147 land) | A | (no issue; one-shot commit) |
-| Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (needs a milestone) |
-| Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) |
 | New logo (refresh, XAR to SVG); [#80](https://github.com/saveenr/VisioAutomation/issues/80) ruled that branding belongs here | A | [#196](https://github.com/saveenr/VisioAutomation/issues/196) (needs a milestone) |
 | Decide Box layout, form page model and `ContainerLayout` together | I | [#218](https://github.com/saveenr/VisioAutomation/issues/218), [#220](https://github.com/saveenr/VisioAutomation/issues/220), [#221](https://github.com/saveenr/VisioAutomation/issues/221) (need milestones) |
 | Revise user-facing gitbook docs for accuracy | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
@@ -71,7 +66,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Cmdlet-binding test coverage, next slice | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) (moved from CY26Q3) |
 
 ### CY27Q1 &mdash; January&ndash;March 2027
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 2 closed early, 4 open.
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 2 closed early, 9 open on GitHub (after the identity items moved in on 2026-11-20).
 
 **Theme:** The modernization unlock is done ([#171](https://github.com/saveenr/VisioAutomation/issues/171) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) shipped 2026-11-01). What remains is spike and audit work, the cmdlet-ergonomics follow-through that slipped from CY26Q3, and the Models design discussions that do not need a decision this year.
 
@@ -82,6 +77,11 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | `VisioScripting` dead-method removal (re-verify zero callers first) | B | [#183](https://github.com/saveenr/VisioAutomation/issues/183) |
 | `PSCmdlet` investigation, then `Connect-VisioShape` pipeline set | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164), [#163](https://github.com/saveenr/VisioAutomation/issues/163) (moved from CY26Q3) |
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) (moved from CY26Q3) |
+| Migrate GitHub repo to SevenPens-owned account | A | [#146](https://github.com/saveenr/VisioAutomation/issues/146) (moved from CY26Q4) |
+| Migrate gitbook spaces to SevenPens-owned hosting | A | [#147](https://github.com/saveenr/VisioAutomation/issues/147) (moved from CY26Q4) |
+| Phase 5b: in-repo URL rewrite (single commit after #146 + #147 land) | A | (no issue; one-shot commit) |
+| Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (moved from CY26Q4) |
+| Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) (moved from CY26Q4) |
 | Doc-sample-as-test linkage | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) (moved from CY26Q3) |
 | Research: .NET 10 file-based apps (`dotnet run file.cs`) for docs and samples | E | [#250](https://github.com/saveenr/VisioAutomation/issues/250) |
 | `client.Model` draw method consistency; directed graph XML gaps; single directed graph on the current page | I | [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#236](https://github.com/saveenr/VisioAutomation/issues/236), [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) (need milestones) |
@@ -117,7 +117,7 @@ The semester schedule above is the *when*. The themed milestones below are the *
 
 **User impact:** Old hosting URLs keep resolving via redirects; new canonical URLs live under `SevenPens`-owned hosting. No broken bookmarks, no consumer disruption.
 
-**Semesters:** CY26Q4 (target window).
+**Semesters:** CY27Q1 (moved from CY26Q4 on 2026-11-20 so 2026 can go to improving the current line). The new logo ([#196](https://github.com/saveenr/VisioAutomation/issues/196)) is still planned for CY26Q4; [#80](https://github.com/saveenr/VisioAutomation/issues/80) tied branding to this milestone, so revisit that if the logo slips too.
 
 **Items:** see CY26Q4 schedule above. Detail in [`futures/identity.md`](futures/identity.md).
 

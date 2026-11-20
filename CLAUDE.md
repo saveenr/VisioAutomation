@@ -197,7 +197,7 @@ Roughly in the order worth doing. Pick from the top.
 **Calendar-bound**
 
 - **Done 2026-11-01:** the Windows 10 LTSB 2016 sunset passed on 2026-10-13 and the net472 bump ([#174](https://github.com/saveenr/VisioAutomation/issues/174)) shipped in 4.0.0 / 5.0.0.
-- **CY26Q4:** the SevenPens moves ([#146](https://github.com/saveenr/VisioAutomation/issues/146) repo, [#147](https://github.com/saveenr/VisioAutomation/issues/147) gitbook spaces), [#148](https://github.com/saveenr/VisioAutomation/issues/148) retire the unused PSGallery co-owner account, and [#179](https://github.com/saveenr/VisioAutomation/issues/179) the NuGet support case for the `saveenr` account. These are owner tasks, not code.
+- **CY27Q1 (moved from CY26Q4 on 2026-11-20):** the SevenPens moves ([#146](https://github.com/saveenr/VisioAutomation/issues/146) repo, [#147](https://github.com/saveenr/VisioAutomation/issues/147) gitbook spaces), [#148](https://github.com/saveenr/VisioAutomation/issues/148) retire the unused PSGallery co-owner account, and [#179](https://github.com/saveenr/VisioAutomation/issues/179) the NuGet support case for the `saveenr` account. These are owner tasks, not code.
 - Everything else by quarter: [`docs/MILESTONES.md`](docs/MILESTONES.md).
 
 ## Other docs in this repo
