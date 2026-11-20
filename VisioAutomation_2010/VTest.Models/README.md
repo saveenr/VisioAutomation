@@ -9,7 +9,7 @@ Current verified counts and environment are recorded in [HANDOVER.md](../../docs
 | Area | Files |
 |---|---|
 | DOM (declarative shape construction) | `DomTests.cs`, `DomTextTests.cs` |
-| Layout primitives (boxes, containers) | `BoxLayoutTests.cs`, `ContainerLayoutTests.cs` |
+| Layout primitives (containers) | `ContainerLayoutTests.cs` |
 | Geometry / math | `BezierTests.cs`, `BoundingBoxHelperTests.cs` |
 | Tree algorithms (used by orgchart) | `TreeTests.cs` |
 | Drawing scenarios | `DirectedGraphDrawModelTests.cs`, `OrgChartDrawModelTests.cs`, `GridDrawModelTests.cs`, `DataTableDrawModelTests.cs` |

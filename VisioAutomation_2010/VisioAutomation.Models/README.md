@@ -11,7 +11,7 @@ Built into the [`VisioAutomation2010`](https://www.nuget.org/packages/VisioAutom
 ## Folder layout
 
 - `Dom/` — the core declarative model: `Document` → `PageList` → `Page` → `ShapeList` → `Shape` / `Connector` / `Line` / `Rectangle` / `Oval` / `PolyLine` / `BezierCurve`. Each node has a `Render()` that emits Visio operations. `RenderContext` caches Visio shapes by ID during rendering.
-- `Layouts/` — pre-built layouts (Tree, DirectedGraph, Grid, Container, Box) and renderers (`MsaglRenderer`, `VisioLayoutRenderer`) that map graph layouts to a Visio page.
+- `Layouts/` — pre-built layouts (Tree, DirectedGraph, Grid, Container) and renderers (`MsaglRenderer`, `VisioLayoutRenderer`) that map graph layouts to a Visio page.
 - `LayoutStyles/` — layout strategy types: hierarchy, flowchart, circular, compact tree, radial.
 - `Documents/OrgCharts/` — `OrgChartDocument`, a turn-key org-chart generator.
 - `Geometry/` — geometry primitives (`ArcSegment`, `BezierSegment`, `LineSegment`, `BezierCurve`, `BoundingBoxBuilder`).

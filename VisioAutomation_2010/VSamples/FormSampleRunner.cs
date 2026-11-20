@@ -30,10 +30,7 @@ namespace VSamples
             var methods = new List<SampleMethod>();
 
 
-            methods.Add(new Samples.Layouts.BoxLayoutSimple());
-            methods.Add(new Samples.Layouts.BoxLayoutTwoLevelGrouping());
             methods.Add(new Samples.Layouts.ColorGrid());
-            methods.Add(new Samples.Layouts.CompareFonts());
             methods.Add(new Samples.Layouts.Container1());
             methods.Add(new Samples.Layouts.DirectedGraphViaMsagl());
             methods.Add(new Samples.Layouts.DirectedGraphViaVisio());

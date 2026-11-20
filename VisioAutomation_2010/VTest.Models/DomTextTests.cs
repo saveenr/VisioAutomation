@@ -1,6 +1,5 @@
 ﻿using VTest.Framework;
 using MUT=Microsoft.VisualStudio.TestTools.UnitTesting;
-using VABOX = VisioAutomation.Models.Layouts.Box;
 using VA=VisioAutomation;
 
 namespace VTest.Models
@@ -8,6 +7,11 @@ namespace VTest.Models
     [MUT.TestClass]
     public class DomTextTests : Framework.VTest
     {
+        // Visio's paragraph horizontal alignment values (the HorzAlign cell).
+        private const int ParagraphAlignLeft = 0;
+        private const int ParagraphAlignCenter = 1;
+        private const int ParagraphAlignRight = 2;
+
         [MUT.TestMethod]
         public void CharacterFormatting()
         {
@@ -175,7 +179,7 @@ namespace VTest.Models
         private void ParagraphLeft()
         {
             var m = new VisioAutomation.Models.Text.Element("{LeftHAlign}");
-            m.ParagraphFormatting.HorizontalAlign = (int)VABOX.AlignmentHorizontal.Left;
+            m.ParagraphFormatting.HorizontalAlign = ParagraphAlignLeft;
             var page1 = this.GetNewPage(new VisioAutomation.Core.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -184,7 +188,7 @@ namespace VTest.Models
             var parafmt = textfmt.ParagraphFormats;
             MUT.Assert.AreEqual(1, parafmt.Count);
 
-            MUT.Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Left).ToString(), parafmt[0].HorizontalAlign.Value);
+            MUT.Assert.AreEqual((ParagraphAlignLeft).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }
@@ -192,7 +196,7 @@ namespace VTest.Models
         private void ParagraphCenter()
         {
             var m = new VisioAutomation.Models.Text.Element("{CenterHAlign}");
-            m.ParagraphFormatting.HorizontalAlign = (int)VABOX.AlignmentHorizontal.Center;
+            m.ParagraphFormatting.HorizontalAlign = ParagraphAlignCenter;
             var page1 = this.GetNewPage(new VisioAutomation.Core.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -201,7 +205,7 @@ namespace VTest.Models
             var parafmt = textfmt.ParagraphFormats;
             MUT.Assert.AreEqual(1, parafmt.Count);
 
-            MUT.Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Center).ToString(), parafmt[0].HorizontalAlign.Value);
+            MUT.Assert.AreEqual((ParagraphAlignCenter).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }
@@ -209,7 +213,7 @@ namespace VTest.Models
         private void ParagraphRight()
         {
             var m = new VisioAutomation.Models.Text.Element("{RightHAlign}");
-            m.ParagraphFormatting.HorizontalAlign = (int)VABOX.AlignmentHorizontal.Right;
+            m.ParagraphFormatting.HorizontalAlign = ParagraphAlignRight;
             var page1 = this.GetNewPage(new VisioAutomation.Core.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -218,7 +222,7 @@ namespace VTest.Models
             var parafmt = textfmt.ParagraphFormats;
             MUT.Assert.AreEqual(1, parafmt.Count);
 
-            MUT.Assert.AreEqual(((int)VABOX.AlignmentHorizontal.Right).ToString(), parafmt[0].HorizontalAlign.Value);
+            MUT.Assert.AreEqual((ParagraphAlignRight).ToString(), parafmt[0].HorizontalAlign.Value);
 
             page1.Delete(0);
         }
