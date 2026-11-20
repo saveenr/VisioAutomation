@@ -79,7 +79,6 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 |---|---|---|
 | Spike: does the existing Visio PIA work for COM interop on .NET 11? (time-boxed, throwaway branch; no NetOffice) | C | [#249](https://github.com/saveenr/VisioAutomation/issues/249) |
 | Audit: identify Visio-2010-only paths in the codebase | G | [#159](https://github.com/saveenr/VisioAutomation/issues/159) |
-| ShapeSheet query ergonomics spike (LINQ and other shapes) | F | [#170](https://github.com/saveenr/VisioAutomation/issues/170) |
 | `VisioScripting` dead-method removal (re-verify zero callers first) | B | [#183](https://github.com/saveenr/VisioAutomation/issues/183) |
 | `PSCmdlet` investigation, then `Connect-VisioShape` pipeline set | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164), [#163](https://github.com/saveenr/VisioAutomation/issues/163) (moved from CY26Q3) |
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) (moved from CY26Q3) |
@@ -101,6 +100,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 ### Beyond CY27Q2
 
 Items pending but not yet semester-assigned:
+- **Experiments** (outside the plan; they happen only if something forces them or there is spare capacity): ShapeSheet query ergonomics, LINQ and other shapes ([#170](https://github.com/saveenr/VisioAutomation/issues/170), still milestoned CY27Q1 on GitHub), and the NetOffice investigation below.
 - **Long-term investigation: replace the Visio PIA with NetOffice / NetOfficeFw** ([#158](https://github.com/saveenr/VisioAutomation/issues/158), retitled and milestone removed 2026-11-20). Not part of the plan. It stays on the back burner until something forces it, for example the existing Visio PIA not working on modern .NET.
 - Documentation work past the CY26Q4 burst &mdash; continuous into 2027 as items come up.
 - Visio repo portfolio audit Phase H2 (per-repo retire / merge / maintain decisions). Opportunistic.
@@ -132,7 +132,7 @@ The semester schedule above is the *when*. The themed milestones below are the *
 **Items:** see CY27Q1 schedule above. Detail in [`futures/build-and-code.md`](futures/build-and-code.md) and [`futures/releases.md`](futures/releases.md).
 
 ### Milestone C &mdash; Modern .NET (multi-target)
-**Theme:** Move to .NET 11 and add a PowerShell 7 module, after the feature, test and docs work on the current line. Direction set 2026-11-20, prompted by Microsoft's announcement that PowerShell 7 will ship with the next release of Windows. Replacing the Visio PIA with NetOffice / NetOfficeFw is **not** part of this milestone; it is a long-term investigation (see "Beyond CY27Q2").
+**Theme:** Move to .NET 11 and add a PowerShell 7 module, after the feature, test and docs work on the current line. Direction set 2026-11-20, prompted by Microsoft's announcement that PowerShell 7 will ship with the next release of Windows. Replacing the Visio PIA with NetOffice / NetOfficeFw is **not** part of this milestone; it is a long-term investigation (see "Beyond CY27Q2"). C# 14 features are also held back until the libraries target modern .NET (decision 2026-11-20), so none are adopted in 2026.
 
 **User impact:** Modern C# features and better modern-.NET performance become available. Existing `net472` consumers are unaffected if the libraries multi-target. Windows PowerShell 5.1 users of VisioPS keep the `net472` build; PowerShell 7+ users get the .NET 11 build. If multi-targeting turns out not to work, the fallback is a separate new line with a maintenance branch for the current one. Windows PowerShell 5.1 stays in use for a long time, so the current line keeps getting bug fixes.
 
