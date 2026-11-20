@@ -12,7 +12,8 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+### Changed
+- `Out-VisioApplication -OrgChart` no longer needs an open document and page. It needs only an attached Visio application, like `-DirectedGraphDocument`. Before, it failed with an error when nothing was open (the library looked for an active page and found none), even though the chart is always drawn in a new document. The cmdlet's parameters are unchanged. (The library method behind it is renamed `Client.Model.DrawOrgChartDocument`; see the [NuGet changelog](../../NuGet/CHANGELOG.md).)
 
 ## [5.0.0] - 2026-11-01
 

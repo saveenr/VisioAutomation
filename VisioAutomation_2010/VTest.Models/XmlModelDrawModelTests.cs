@@ -17,7 +17,7 @@ namespace VTest.Models
 
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, model);
+            client.Model.DrawXmlModelIntoPage(VisioScripting.TargetPage.Auto, model);
 
             var labels = this.GetVisioApplication().ActivePage.Shapes.Cast<IVisio.Shape>()
                 .Select(s => s.Text)
@@ -43,7 +43,7 @@ namespace VTest.Models
             var page = this.GetVisioApplication().ActivePage;
             int shapes_before = page.Shapes.Count;
 
-            client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, model);
+            client.Model.DrawXmlModelIntoPage(VisioScripting.TargetPage.Auto, model);
             MUT.Assert.IsTrue(page.Shapes.Count > shapes_before, "the model should have drawn shapes");
 
             client.Undo.UndoLastAction();
@@ -63,7 +63,7 @@ namespace VTest.Models
             client.Document.NewDocument();
 
             MUT.Assert.ThrowsExactly<System.ArgumentException>(
-                () => client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, model));
+                () => client.Model.DrawXmlModelIntoPage(VisioScripting.TargetPage.Auto, model));
 
             client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
         }

@@ -128,6 +128,30 @@ namespace VTest.PowerShell
         }
 
         [MUT.TestMethod]
+        public void OutVisioApplication_PipedOrgChart_WithNoDocumentOpen_DrawsTheChartInANewDocument()
+        {
+            // The org chart is drawn in a new document, so it must not need a document or page to already be open.
+            // This does not use RunInNewDocument, which would open a document first.
+            var results = DocumentWindowCmdletBindingTests.Session.InvokeScriptStrict<int>(
+                "$app = Get-VisioApplication; " +
+                "foreach ($d in @($app.Documents)) { $d.Saved = $true; $d.Close() }; " +
+                "try { " +
+                "$drawings = { @($app.Documents | Where-Object { $_.Type -eq 1 }).Count }; " + // 1 = a drawing; the Documents collection also holds stencils
+                "$before = & $drawings; " +
+                "$chart = New-Object VisioAutomation.Models.Documents.OrgCharts.OrgChartDocument; " +
+                "$node = New-Object VisioAutomation.Models.Documents.OrgCharts.Node -ArgumentList 'A'; " +
+                "$chart.OrgCharts.Add($node); " +
+                "$chart | Out-VisioApplication; " +
+                "$before; & $drawings; (Get-VisioShape | Measure-Object).Count " +
+                "} finally { foreach ($d in @($app.Documents)) { try { $d.Saved = $true; $d.Close() } catch { } } }");
+
+            MUT.Assert.AreEqual(3, results.Count, "the script writes the drawing count before, the drawing count after, and the shape count");
+            MUT.Assert.AreEqual(0, results[0], "the test needs Visio attached with no drawing open");
+            MUT.Assert.AreEqual(1, results[1], "the chart should be drawn in one new drawing");
+            MUT.Assert.IsTrue(results[2] > 0, "the new document should contain the chart's shapes");
+        }
+
+        [MUT.TestMethod]
         public void OutVisioApplication_PipedStringIsNotAModel_FailsToBind()
         {
             var ex = DocumentWindowCmdletBindingTests.Session.ExpectFailureInNewDocument("'not a model' | Out-VisioApplication");

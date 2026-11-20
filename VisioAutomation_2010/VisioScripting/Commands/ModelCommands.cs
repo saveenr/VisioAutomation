@@ -16,7 +16,7 @@ namespace VisioScripting.Commands
 
         }
 
-        public List<IVisio.Shape> DrawDataTable( VisioScripting.TargetPage targetpage, 
+        internal List<IVisio.Shape> _draw_data_table(VisioScripting.TargetPage targetpage,
             System.Data.DataTable datatable,
             IList<double> widths,
             IList<double> heights,
@@ -85,7 +85,7 @@ namespace VisioScripting.Commands
                 }
             }
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawDataTable)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawDataTableModelIntoPage)))
             {
                 layout.Render(targetpage.Page);
                 targetpage.Page.ResizeToFitContents();
@@ -95,35 +95,35 @@ namespace VisioScripting.Commands
             return shapes;
         }
 
-        public void DrawGrid(VisioScripting.TargetPage targetpage, GRID.GridLayout layout)
+        public void DrawGridIntoPage(VisioScripting.TargetPage targetpage, GRID.GridLayout layout)
         {
             targetpage = targetpage.ResolveToPage(this._client);
             layout.PerformLayout();
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawGrid)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawGridIntoPage)))
             {
                 layout.Render(targetpage.Page);
             }
         }
 
-        public void DrawDataTableModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.DataTableModel dt_model)
+        public void DrawDataTableModelIntoPage(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.DataTableModel dt_model)
         {
             targetpage = targetpage.ResolveToPage(this._client);
 
             var widths = Enumerable.Repeat<double>(dt_model.CellWidth, dt_model.DataTable.Columns.Count).ToList();
             var heights = Enumerable.Repeat<double>(dt_model.CellHeight, dt_model.DataTable.Rows.Count).ToList();
             var spacing = new VisioAutomation.Core.Size(dt_model.CellSpacing, dt_model.CellSpacing);
-            var shapes = this._client.Model.DrawDataTable(targetpage, dt_model.DataTable, widths, heights, spacing);
+            this._draw_data_table(targetpage, dt_model.DataTable, widths, heights, spacing);
         }
 
-        public void DrawXmlModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.XmlModel xmlmodel)
+        public void DrawXmlModelIntoPage(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.XmlModel xmlmodel)
         {
             targetpage = targetpage.ResolveToPage(this._client);
 
             var tree_drawing = new VisioAutomation.Models.Layouts.Tree.Drawing();
             this._build_from_xml_doc(xmlmodel.XmlDocument, tree_drawing);
 
-            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawXmlModel)))
+            using (var undoscope = this._client.Undo.NewUndoScope(nameof(DrawXmlModelIntoPage)))
             {
                 tree_drawing.Render(targetpage.Page);
             }
@@ -159,15 +159,14 @@ namespace VisioScripting.Commands
             }
         }
 
-        public void DrawOrgChart(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
+        public void DrawOrgChartDocument(ORG.OrgChartDocument chartdocument)
         {
-            targetpage = targetpage.ResolveToPage(this._client);
+            var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
             this._client.Output.WriteVerbose("Start OrgChart Rendering");
 
             // The chart is rendered into a new document, and each of its pages is sized by the render itself.
-            // The target page is only used to find the application and is left unchanged.
-            var application = targetpage.Page.Application;
+            var application = cmdtarget.Application;
             chartdocument.Render(application);
 
             this._client.Output.WriteVerbose("Finished OrgChart Rendering");
@@ -218,6 +217,30 @@ namespace VisioScripting.Commands
 
             this._client.Output.WriteVerbose("Finished rendering all pages");
             this._client.Output.WriteVerbose("Finished rendering directed graph.");
+        }
+
+        [System.Obsolete("Renamed to DrawGridIntoPage. This name will be removed in a later release.")]
+        public void DrawGrid(VisioScripting.TargetPage targetpage, GRID.GridLayout layout)
+        {
+            this.DrawGridIntoPage(targetpage, layout);
+        }
+
+        [System.Obsolete("Renamed to DrawDataTableModelIntoPage. This name will be removed in a later release.")]
+        public void DrawDataTableModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.DataTableModel dt_model)
+        {
+            this.DrawDataTableModelIntoPage(targetpage, dt_model);
+        }
+
+        [System.Obsolete("Renamed to DrawOrgChartDocument, which no longer takes a TargetPage (the application comes from the client). This name will be removed in a later release.")]
+        public void DrawOrgChart(VisioScripting.TargetPage targetpage, ORG.OrgChartDocument chartdocument)
+        {
+            this.DrawOrgChartDocument(chartdocument);
+        }
+
+        [System.Obsolete("Renamed to DrawXmlModelIntoPage. This name will be removed in a later release.")]
+        public void DrawXmlModel(VisioScripting.TargetPage targetpage, VisioAutomation.Models.Data.XmlModel xmlmodel)
+        {
+            this.DrawXmlModelIntoPage(targetpage, xmlmodel);
         }
 
         public GRAPH.DirectedGraphDocument LoadDirectedGraphFromXml(SXL.XDocument xmldoc)

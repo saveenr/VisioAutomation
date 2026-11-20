@@ -43,7 +43,7 @@ namespace VTest.Models
             // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
 
-            var shapes = client.Model.DrawDataTable(VisioScripting.TargetPage.Auto, dt, widths, heights, cellspacing);
+            var shapes = client.Model._draw_data_table(VisioScripting.TargetPage.Auto, dt, widths, heights, cellspacing);
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
@@ -60,7 +60,7 @@ namespace VTest.Models
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
 
-            var shapes = client.Model.DrawDataTable(
+            var shapes = client.Model._draw_data_table(
                 VisioScripting.TargetPage.Auto,
                 dt,
                 new[] { 2.0, 1.5 },
@@ -82,7 +82,7 @@ namespace VTest.Models
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
 
-            var shapes = client.Model.DrawDataTable(
+            var shapes = client.Model._draw_data_table(
                 VisioScripting.TargetPage.Auto,
                 dt,
                 new[] { 2.0 },
@@ -104,7 +104,7 @@ namespace VTest.Models
             client.Document.NewDocument();
 
             MUT.Assert.ThrowsExactly<System.ArgumentOutOfRangeException>(
-                () => client.Model.DrawDataTable(
+                () => client.Model._draw_data_table(
                     VisioScripting.TargetPage.Auto,
                     dt,
                     new[] { 0.0, 1.0 },
@@ -125,7 +125,7 @@ namespace VTest.Models
 
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, model);
+            client.Model.DrawDataTableModelIntoPage(VisioScripting.TargetPage.Auto, model);
 
             var shapes = this.GetVisioApplication().ActivePage.Shapes.Cast<IVisio.Shape>().ToList();
             MUT.Assert.AreEqual(4, shapes.Count);
@@ -146,7 +146,7 @@ namespace VTest.Models
 
             var client = this.GetScriptingClient();
             client.Document.NewDocument();
-            client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, model);
+            client.Model.DrawDataTableModelIntoPage(VisioScripting.TargetPage.Auto, model);
 
             var shapes = this.GetVisioApplication().ActivePage.Shapes.Cast<IVisio.Shape>().ToList();
             MUT.Assert.AreEqual(2, shapes.Count);
@@ -172,7 +172,7 @@ namespace VTest.Models
             var page_b = client.Page.NewPage(VisioScripting.TargetDocument.Auto, new VisioAutomation.Core.Size(8.5, 11), false);
             app.ActiveWindow.Page = page_a;
 
-            client.Model.DrawDataTableModel(new VisioScripting.TargetPage(page_b), model);
+            client.Model.DrawDataTableModelIntoPage(new VisioScripting.TargetPage(page_b), model);
 
             MUT.Assert.AreEqual(4, page_b.Shapes.Count, "the table should be on the target page");
             MUT.Assert.AreEqual(0, page_a.Shapes.Count, "the active page should be untouched");

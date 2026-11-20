@@ -41,19 +41,19 @@ namespace VisioPowerShell.Commands.VisioApplication
             }
             else if (this.OrgChart != null)
             {
-                this.Client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, this.OrgChart);
+                this.Client.Model.DrawOrgChartDocument(this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                this.Client.Model.DrawGrid(VisioScripting.TargetPage.Auto, this.GridLayout);
+                this.Client.Model.DrawGridIntoPage(VisioScripting.TargetPage.Auto, this.GridLayout);
             }
             else if (this.DataTableModel != null)
             {
-                this.Client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, this.DataTableModel);
+                this.Client.Model.DrawDataTableModelIntoPage(VisioScripting.TargetPage.Auto, this.DataTableModel);
             }
             else if (this.XmlModel != null)
             {
-                this.Client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, this.XmlModel);
+                this.Client.Model.DrawXmlModelIntoPage(VisioScripting.TargetPage.Auto, this.XmlModel);
             }
             else
             {
