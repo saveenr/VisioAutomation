@@ -77,7 +77,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| Spike: NetOffice / NetOfficeFw as a Visio PIA replacement | C | [#158](https://github.com/saveenr/VisioAutomation/issues/158) |
+| Spike: does the existing Visio PIA work for COM interop on .NET 11? (time-boxed, throwaway branch; no NetOffice) | C | (no issue yet) |
 | Audit: identify Visio-2010-only paths in the codebase | G | [#159](https://github.com/saveenr/VisioAutomation/issues/159) |
 | ShapeSheet query ergonomics spike (LINQ and other shapes) | F | [#170](https://github.com/saveenr/VisioAutomation/issues/170) |
 | `VisioScripting` dead-method removal (re-verify zero callers first) | B | [#183](https://github.com/saveenr/VisioAutomation/issues/183) |
@@ -93,6 +93,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 
 | Item | Themed milestone | Issue |
 |---|---|---|
+| Move the libraries to .NET 11 and add a PowerShell 7 module (multi-target alongside net472 if the CY27Q1 spike allows); retitle [#175](https://github.com/saveenr/VisioAutomation/issues/175), which still says ".NET 10 and C# 14" | C | [#175](https://github.com/saveenr/VisioAutomation/issues/175) |
 | Decide: Visio 2013 baseline branding | G | [#160](https://github.com/saveenr/VisioAutomation/issues/160) |
 | Visio 2013 baseline migration implementation (gated on #160) | G | (no issue yet) |
 | Decide: consolidate Visio-PIAs source into this repo | H | [#180](https://github.com/saveenr/VisioAutomation/issues/180) |
@@ -100,7 +101,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 ### Beyond CY27Q2
 
 Items pending but not yet semester-assigned:
-- **Move the libraries to modern .NET 10** ([#175](https://github.com/saveenr/VisioAutomation/issues/175), currently milestoned CY27Q2). CLAUDE.md records this as deliberately deferred ("not planned for a long time; stay on .NET Framework 4.7.2"), which conflicts with a CY27Q2 date. Proposed: remove the milestone, or retitle the issue to the Visio PIA replacement decision that [#158](https://github.com/saveenr/VisioAutomation/issues/158) informs.
+- **Long-term investigation: replace the Visio PIA with NetOffice / NetOfficeFw** ([#158](https://github.com/saveenr/VisioAutomation/issues/158), currently milestoned CY27Q1). Not part of the plan. It stays on the back burner until something forces it, for example the existing Visio PIA not working on modern .NET. Proposed: remove its CY27Q1 milestone.
 - Documentation work past the CY26Q4 burst &mdash; continuous into 2027 as items come up.
 - Visio repo portfolio audit Phase H2 (per-repo retire / merge / maintain decisions). Opportunistic.
 
@@ -131,11 +132,11 @@ The semester schedule above is the *when*. The themed milestones below are the *
 **Items:** see CY27Q1 schedule above. Detail in [`futures/build-and-code.md`](futures/build-and-code.md) and [`futures/releases.md`](futures/releases.md).
 
 ### Milestone C &mdash; Modern .NET (multi-target)
-**Theme:** Add `net10.0-windows` (or current .NET 10 TFM) alongside `net48`. Decide whether to replace the Visio PIA with NetOffice / NetOfficeFw.
+**Theme:** Move to .NET 11 and add a PowerShell 7 module, after the feature, test and docs work on the current line. Direction set 2026-11-20, prompted by Microsoft's announcement that PowerShell 7 will ship with the next release of Windows. Replacing the Visio PIA with NetOffice / NetOfficeFw is **not** part of this milestone; it is a long-term investigation (see "Beyond CY27Q2").
 
-**User impact:** Modern C# features (extension members, etc.) and better .NET 10 perf become available. Existing `net48` consumers unaffected (multi-target). Windows PowerShell 5.1 users of VisioPS get the `net48` build; PowerShell 7+ users get the .NET 10 build.
+**User impact:** Modern C# features and better modern-.NET performance become available. Existing `net472` consumers are unaffected if the libraries multi-target. Windows PowerShell 5.1 users of VisioPS keep the `net472` build; PowerShell 7+ users get the .NET 11 build. If multi-targeting turns out not to work, the fallback is a separate new line with a maintenance branch for the current one. Windows PowerShell 5.1 stays in use for a long time, so the current line keeps getting bug fixes.
 
-**Semesters:** CY27Q1 (spike) &rarr; CY27Q2 (implementation begins). Sequenced after Milestone B.
+**Semesters:** CY27Q1 (a time-boxed spike on whether the existing Visio PIA works for COM interop on .NET 11) &rarr; CY27Q2 (implementation begins). Sequenced after Milestone B.
 
 **Items:** see CY27Q1 and CY27Q2 schedules above. Detail in [`futures/build-and-code.md`](futures/build-and-code.md).
 
