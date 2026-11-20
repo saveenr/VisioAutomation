@@ -77,7 +77,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| Spike: does the existing Visio PIA work for COM interop on .NET 11? (time-boxed, throwaway branch; no NetOffice) | C | (no issue yet) |
+| Spike: does the existing Visio PIA work for COM interop on .NET 11? (time-boxed, throwaway branch; no NetOffice) | C | [#249](https://github.com/saveenr/VisioAutomation/issues/249) |
 | Audit: identify Visio-2010-only paths in the codebase | G | [#159](https://github.com/saveenr/VisioAutomation/issues/159) |
 | ShapeSheet query ergonomics spike (LINQ and other shapes) | F | [#170](https://github.com/saveenr/VisioAutomation/issues/170) |
 | `VisioScripting` dead-method removal (re-verify zero callers first) | B | [#183](https://github.com/saveenr/VisioAutomation/issues/183) |
@@ -93,7 +93,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| Move the libraries to .NET 11 and add a PowerShell 7 module (multi-target alongside net472 if the CY27Q1 spike allows); retitle [#175](https://github.com/saveenr/VisioAutomation/issues/175), which still says ".NET 10 and C# 14" | C | [#175](https://github.com/saveenr/VisioAutomation/issues/175) |
+| Move the libraries to .NET 11 and add a PowerShell 7 module (multi-target alongside net472 if the CY27Q1 spike allows); [#175](https://github.com/saveenr/VisioAutomation/issues/175) was retitled for this on 2026-11-20 | C | [#175](https://github.com/saveenr/VisioAutomation/issues/175) |
 | Decide: Visio 2013 baseline branding | G | [#160](https://github.com/saveenr/VisioAutomation/issues/160) |
 | Visio 2013 baseline migration implementation (gated on #160) | G | (no issue yet) |
 | Decide: consolidate Visio-PIAs source into this repo | H | [#180](https://github.com/saveenr/VisioAutomation/issues/180) |
@@ -101,7 +101,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 ### Beyond CY27Q2
 
 Items pending but not yet semester-assigned:
-- **Long-term investigation: replace the Visio PIA with NetOffice / NetOfficeFw** ([#158](https://github.com/saveenr/VisioAutomation/issues/158), currently milestoned CY27Q1). Not part of the plan. It stays on the back burner until something forces it, for example the existing Visio PIA not working on modern .NET. Proposed: remove its CY27Q1 milestone.
+- **Long-term investigation: replace the Visio PIA with NetOffice / NetOfficeFw** ([#158](https://github.com/saveenr/VisioAutomation/issues/158), retitled and milestone removed 2026-11-20). Not part of the plan. It stays on the back burner until something forces it, for example the existing Visio PIA not working on modern .NET.
 - Documentation work past the CY26Q4 burst &mdash; continuous into 2027 as items come up.
 - Visio repo portfolio audit Phase H2 (per-repo retire / merge / maintain decisions). Opportunistic.
 
