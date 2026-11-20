@@ -174,7 +174,7 @@ All test projects use **MSTest** (`MSTest.TestFramework` 4.2.2) and **require a 
 | Project | What it is |
 |---|---|
 | [`VSamples`](../VisioAutomation_2010/VSamples/) | WinForms sample runner (.NET 4.0). ~30 samples grouped under `Samples/Layouts`, `Samples/Text`, `Samples/Misc`, `Samples/Developer` — e.g., `OrgChart1`, `Container1`, `TextMarkup1`, `BezierCircle`, `PathAnalysis`, `SendConnectorsToBack`. Picks samples in a `FormSampleRunner` UI and runs them against a live Visio instance. |
-| [`VSamples.Docs`](../VisioAutomation_2010/VSamples.Docs/) | Minimal console project (.NET 4.0) holding a small number of canonical examples used in the public documentation. Distinct from `VSamples` in that it is curated for docs, not for exploration. |
+| [`VSamples.Docs`](../VisioAutomation_2010/VSamples.Docs/) | Console project (net472) that holds the C# code blocks from the .NET docs, one method per block, so every documented call is compiled on each build. See its README for the layout and the check script. Distinct from `VSamples` in that it is tied to the docs, not for exploration. |
 | [`DemoIronPython`](../VisioAutomation_2010/DemoIronPython/) | Loose IronPython scripts (`visio.py`, `demo_01_basics.py`, `demo_02_draw_grid.py`, `demo_03_shapesheet.py`) showing the libraries called from Python through CLR interop. Not a csproj. |
 
 ---

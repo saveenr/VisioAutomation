@@ -1,0 +1,10 @@
+analyzers#03	analyzers.md	53	API outline: declarations shown for reference, not code to run
+models/box-geometry#01	models/box-geometry.md	21	Documents the Box layout, removed in PR 259 (docs/decisions/box-layout-removed.md). The page is to be deleted from the docs for the next release.
+models/data-table#02	models/data-table.md	62	Calls client.Model.DrawDataTable, which became internal in this unreleased version (PR 256). The page still describes the released API; it is waiting for the docs update for the next release (published in the next variant).
+models/forms#01	models/forms.md	23	Documents the form page model, removed in PR 254 (docs/decisions/form-page-model-internal.md). The page is to be deleted from the docs for the next release.
+models/forms#02	models/forms.md	68	Documents the form page model, removed in PR 254 (docs/decisions/form-page-model-internal.md). The page is to be deleted from the docs for the next release.
+models/forms#03	models/forms.md	85	Documents the form page model, removed in PR 254 (docs/decisions/form-page-model-internal.md). The page is to be deleted from the docs for the next release.
+text/tab-stops#01	text/tab-stops.md	9	API outline: declarations shown for reference, not code to run
+visio-scripting/developer#01	visio-scripting/developer.md	30	Documents client.Developer, removed in PR 254 (docs/decisions/developer-commands-removed.md). The page is to be deleted from the docs for the next release.
+visio-scripting/model#01	visio-scripting/model.md	22	Calls client.Model.DrawDataTable, which became internal in this unreleased version (PR 256). The page still describes the released API; it is waiting for the docs update for the next release (published in the next variant).
+visio-scripting#04	visio-scripting.md	91	API outline: declarations shown for reference, not code to run
