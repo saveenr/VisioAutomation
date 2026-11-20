@@ -111,7 +111,7 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    CmdletBindingTests.Session.InvokeScript<object>(
+                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
                         "Export-VisioShape -Filename $f -Shape $s",
                         ("f", export_path),
                         ("s", new[] { (IVisio.Shape)shape }));
@@ -189,7 +189,7 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    CmdletBindingTests.Session.InvokeScript<object>(
+                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
                         "New-VisioShape -Polyline -Points $p",
                         ("p", new[] { new VisioAutomation.Core.Point(1.0, 1.0) }));
                 }
@@ -219,7 +219,7 @@ namespace VTest.PowerShell
                 bool threw = false;
                 try
                 {
-                    CmdletBindingTests.Session.InvokeScript<object>(
+                    CmdletBindingTests.Session.InvokeScriptStrict<object>(
                         "New-VisioShape -Bezier -Points $p",
                         ("p", new[]
                         {
