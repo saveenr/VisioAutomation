@@ -79,9 +79,13 @@ The harness registers the exact test-build assembly before opening the runspace 
 
 #### When to use which `InvokeScript` variant
 
-`InvokeScript<T>` is the default. Cmdlets report validation failures with `ThrowTerminatingError` (through `VisioCmdlet.ThrowError`, [#191](https://github.com/saveenr/VisioAutomation/issues/191)), which always propagates as a `CmdletInvocationException` regardless of `$ErrorActionPreference`, so a `try`/`catch` around `InvokeScript<T>` sees it. The original exception is `InnerException`, and `ex.ErrorRecord.FullyQualifiedErrorId` starts with the cmdlet's stable error ID (for example `VisioAutomation.NewVisioShape.PolylineNeeds2Points,`; PowerShell appends the cmdlet type name).
+`InvokeScriptStrict<T>` is `InvokeScript<T>` with `$ErrorActionPreference = 'Stop'` prepended. **Use it for every test that expects a cmdlet to throw**, and for any test that wants a non-fatal record a cmdlet writes to the error stream (`WriteError`) to fail the test instead of being silently dropped. The script-driven helpers below use it for that reason.
 
-`InvokeScriptStrict<T>` is `InvokeScript<T>` with `$ErrorActionPreference = 'Stop'` prepended. It is now a niche escalation tool: use it when a test wants any non-fatal record a cmdlet writes to the error stream (`WriteError`) to fail the test instead of being silently dropped. The script-driven helpers below use it for that reason.
+Plain `InvokeScript<T>` is for scripts that are expected to succeed. A cmdlet failure inside it does not reach a `try`/`catch` in the test: it lands on the error stream and `Invoke` returns normally. Cmdlets report validation failures with `ThrowTerminatingError` (through `VisioCmdlet.ThrowError`, [#191](https://github.com/saveenr/VisioAutomation/issues/191)), but that is still only a statement-terminating error when it runs inside a script.
+
+**Beware the shared runspace.** `$ErrorActionPreference = 'Stop'` set by `InvokeScriptStrict` persists in the session after the call returns. A plain `InvokeScript<T>` throw test therefore passes whenever an earlier test happened to use `InvokeScriptStrict`, and fails when it runs alone or first. `ExportVisioShape_TargetExists_NoOverwrite_Throws` and the two `NewVisioShape_*_Throws` tests hid exactly this ([#190](https://github.com/saveenr/VisioAutomation/issues/190)). When you add a throw test, run it by itself as well as with its class.
+
+With `InvokeScriptStrict<T>` the exception reaches the test's `try`/`catch`. The original exception is `InnerException`, and `ex.ErrorRecord.FullyQualifiedErrorId` starts with the cmdlet's stable error ID (for example `VisioAutomation.NewVisioShape.PolylineNeeds2Points,`; PowerShell appends the cmdlet type name).
 
 #### Script-driven tests: `RunInNewDocument` and `ExpectFailureInNewDocument`
 
