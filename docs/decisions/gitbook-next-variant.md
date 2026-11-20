@@ -1,6 +1,6 @@
 # Docs for unreleased changes go in a "Next (unreleased)" GitBook variant
 
-**Status:** Accepted (2026-11-20; see [#238](https://github.com/saveenr/VisioAutomation/issues/238) for the discussion). Adopted after a working trial; the public undraft is not yet tested (see Consequences).
+**Status:** Accepted (2026-11-20; see [#238](https://github.com/saveenr/VisioAutomation/issues/238) for the discussion). Adopted after a working trial; the variant is public (see Consequences).
 
 ## Context
 
@@ -34,7 +34,7 @@ Pages that describe unreleased behavior still say so ("Unreleased: added after N
 
 - **Verified on 2026-11-20:** a PR merged into `next` appeared in the Next variant after sync; the released site still showed the old page. While the variant is in Draft the public site shows no variant picker.
 - **PR previews work (verified 2026-11-20):** a throwaway PR against `next` got a GitBook status check linking to a diff in the Next space (opening it needs a GitBook account, as with the PowerShell docs).
-- **Not yet tested:** what readers see after the variant is undrafted (picker, which variant is the default); whether the site plan (Basic, downgraded from Essential) keeps variants available publicly. Draft state hiding the variant from the public site is observed behavior, not documented by GitBook.
+- **Undrafted and public (2026-11-20):** the variant is live at `saveenr.gitbook.io/visioautomation/next-unreleased/` with the unreleased text; the released pages are unchanged and the plan (Basic) still serves it. No variant picker appeared on the released site (checked at 1280px), so readers reach it by URL only; whether the site search mixes in unreleased pages is not tested. Look for a Customize or Layout setting that shows the picker. Draft state hiding the variant from the public site is observed behavior, not documented by GitBook.
 - **The variant slug is `next-unreleased`.** Change it if a plain `next` is wanted.
 - **Release step added:** merging `next` into `main` becomes part of the release checklist, after the NuGet and module releases.
 - **Only the .NET docs have a variant so far.** The PowerShell docs (`VisioPowerShellDocs`) publish from version-pinned branches and need their own decision.
@@ -47,6 +47,6 @@ Pages that describe unreleased behavior still say so ("Unreleased: added after N
 
 ## Reconsider when
 
-- The public undraft shows readers the wrong variant by default.
+- Search shows unreleased pages to readers of the released docs, or a picker cannot be enabled.
 - GitBook plan or pricing changes remove variants from our plan.
 - Keeping `next` level with `main` becomes a recurring chore.
