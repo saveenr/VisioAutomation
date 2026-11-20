@@ -12,6 +12,12 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+_No consumer-visible changes yet._
+
+## [5.0.0] - 2026-11-20
+
+A major release. Four public types and members that nothing in the library or the PowerShell module used are removed: the Box layout, the form page model, `Client.Developer` and the public `Client.Model.DrawDataTable`. The `Client.Model` draw methods are renamed so each name says where the output goes; the old names still work and are marked `[Obsolete]`. A directed graph layout's page border now takes effect when you draw a document. Code that does not use the removed members needs no changes.
+
 ### Added
 - `MsaglOptions.IsPageBorderWidthSet` reports whether `PageBorderWidth` has been assigned on that instance.
 - **Directed graph XML: a page can set its own margin.** The `<renderoptions>` element of a `<page>` accepts optional `borderwidth` and `borderheight` attributes, in inches, like the ones on `<documentoptions>`. A page that sets either one uses its own margin instead of the document's; a side it leaves out follows the document's border size. Pages that set neither are unchanged. This is how XML and `Out-VisioApplication` users reach the per-page margin.
