@@ -27,7 +27,7 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
-        public void DrawOrgChart_DrawsInANewDocumentAndLeavesTheTargetPageAlone()
+        public void DrawOrgChartDocument_DrawsInANewDocumentAndLeavesTheActivePageAlone()
         {
             var orgchart = new VAORGCHART.OrgChartDocument();
             orgchart.OrgCharts.Add(new VAORGCHART.Node("A"));
@@ -41,11 +41,11 @@ namespace VTest.Models
             double width_before = target_page.PageSheet.CellsU["PageWidth"].ResultIU;
             double height_before = target_page.PageSheet.CellsU["PageHeight"].ResultIU;
 
-            client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
+            client.Model.DrawOrgChartDocument(orgchart);
 
             MUT.Assert.AreNotEqual(target_doc.ID, app.ActiveDocument.ID, "the chart should be drawn in a new document");
-            MUT.Assert.AreEqual(width_before, target_page.PageSheet.CellsU["PageWidth"].ResultIU, 1e-9, "the target page width should not change");
-            MUT.Assert.AreEqual(height_before, target_page.PageSheet.CellsU["PageHeight"].ResultIU, 1e-9, "the target page height should not change");
+            MUT.Assert.AreEqual(width_before, target_page.PageSheet.CellsU["PageWidth"].ResultIU, 1e-9, "the active page width should not change");
+            MUT.Assert.AreEqual(height_before, target_page.PageSheet.CellsU["PageHeight"].ResultIU, 1e-9, "the active page height should not change");
 
             app.ActiveDocument.Close(true);
             target_doc.Close(true);
@@ -56,7 +56,7 @@ namespace VTest.Models
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = client.Model.LoadOrgChartFromXml(xmldoc);
 
-            client.Model.DrawOrgChart(VisioScripting.TargetPage.Auto, orgchart);
+            client.Model.DrawOrgChartDocument(orgchart);
         }
 
         [MUT.TestMethod]
