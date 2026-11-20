@@ -32,12 +32,12 @@ Pages that describe unreleased behavior still say so ("Unreleased: added after N
 
 ## Consequences
 
-- **Verified on 2026-11-20:** a PR merged into `next` appeared in the Next variant after sync; the released site still showed the old page. While the variant is in Draft the public site shows no variant picker.
+- **Verified on 2026-11-20:** a PR merged into `next` appeared in the Next variant after sync; the released site still showed the old page. While the variant is in Draft it is not listed in the variant picker.
 - **PR previews work (verified 2026-11-20):** a throwaway PR against `next` got a GitBook status check linking to a diff in the Next space (opening it needs a GitBook account, as with the PowerShell docs).
-- **Undrafted and public (2026-11-20):** the variant is live at `saveenr.gitbook.io/visioautomation/next-unreleased/` with the unreleased text; the released pages are unchanged and the plan (Basic) still serves it. No variant picker appears on the released site (checked at 1280px, again after the CDN had time to refresh), and Customize > Layout has no setting for one, so readers reach it by URL only. Site search is scoped to the current variant by default ("All content" is opt-in), so unreleased pages do not show up in normal searches. A header link under Layout > Navigation could point readers at the variant; decided against it (2026-11-20), so the variant stays URL-only. Draft state hiding the variant from the public site is observed behavior, not documented by GitBook.
+- **Undrafted and public (2026-11-20):** the variant is live at `saveenr.gitbook.io/visioautomation/next-unreleased/` with the unreleased text; the released pages are unchanged and the plan (Basic) still serves it. The variant picker is the breadcrumb link above the page title (it shows the current variant name); clicking it lists "Next (unreleased)" alongside the released variant. An earlier version of this record said there was no picker; that was wrong, because only the header and sidebar had been checked. Site search is scoped to the current variant by default ("All content" is opt-in), so unreleased pages do not show up in normal searches. No separate header link is added (decided 2026-11-20); the breadcrumb picker is enough. Draft state hiding the variant from the public site is observed behavior, not documented by GitBook.
 - **The variant slug is `next-unreleased`.** Change it if a plain `next` is wanted.
 - **Release step added:** merging `next` into `main` becomes part of the release checklist, after the NuGet and module releases.
-- **Only the .NET docs have a variant so far.** The PowerShell docs (`VisioPowerShellDocs`) publish from version-pinned branches and need their own decision.
+- **The PowerShell docs use the same approach (2026-11-20).** `VisioPowerShellDocs` got a `next` branch cut from `visiops_v4_docs` (the branch behind the published "Version 4" variant; `master` is not used for publishing) and a "Next (unreleased)" variant on the VisioPowerShell site, with Git Sync from `next` set up GitHub to GitBook on a new blank space. That site already had Version 3 and Version 4 variants, and the picker lists all three. Release step there: merge `next` into the new version-pinned branch (or `visiops_v4_docs` for a same-major release), then start the next `next` from it. A new major version also needs a new variant, as before.
 - **Account dependency:** the site and its Git Sync belong to `saveenr`, not `SevenPens`; the identity moves (#146, #147) must carry this over.
 
 ## Cross-references
@@ -47,6 +47,6 @@ Pages that describe unreleased behavior still say so ("Unreleased: added after N
 
 ## Reconsider when
 
-- Readers need a way to find the variant and a header link is not enough, or GitBook changes search scoping.
+- Readers do not find the breadcrumb picker, or GitBook changes search scoping.
 - GitBook plan or pricing changes remove variants from our plan.
 - Keeping `next` level with `main` becomes a recurring chore.
