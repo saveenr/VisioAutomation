@@ -83,6 +83,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | `PSCmdlet` investigation, then `Connect-VisioShape` pipeline set | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164), [#163](https://github.com/saveenr/VisioAutomation/issues/163) (moved from CY26Q3) |
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) (moved from CY26Q3) |
 | Doc-sample-as-test linkage | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) (moved from CY26Q3) |
+| Research: .NET 10 file-based apps (`dotnet run file.cs`) for docs and samples | E | [#250](https://github.com/saveenr/VisioAutomation/issues/250) |
 | `client.Model` draw method consistency; directed graph XML gaps; single directed graph on the current page | I | [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#236](https://github.com/saveenr/VisioAutomation/issues/236), [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) (need milestones) |
 
 ### CY27Q2 &mdash; April&ndash;June 2027
