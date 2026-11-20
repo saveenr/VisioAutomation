@@ -14,7 +14,6 @@ Built into the [`VisioAutomation2010`](https://www.nuget.org/packages/VisioAutom
 - `Layouts/` — pre-built layouts (Tree, DirectedGraph, Grid, Container, Box) and renderers (`MsaglRenderer`, `VisioLayoutRenderer`) that map graph layouts to a Visio page.
 - `LayoutStyles/` — layout strategy types: hierarchy, flowchart, circular, compact tree, radial.
 - `Documents/OrgCharts/` — `OrgChartDocument`, a turn-key org-chart generator.
-- `Documents/Forms/` — `FormDocument` / `FormPage` / `InteractiveRenderer` for form-style pages.
 - `Geometry/` — geometry primitives (`ArcSegment`, `BezierSegment`, `LineSegment`, `BezierCurve`, `BoundingBoxBuilder`).
 - `Color/` — `ColorRgb`, `ColorHsl`.
 - `Text/` — rich text model (`Element`, `Literal`, `Field`, character/paragraph formatting, regions).

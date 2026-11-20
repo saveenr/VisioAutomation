@@ -19,3 +19,4 @@ Decisions are immutable once accepted. To change one, write a new decision file 
 ## Index
 
 - [tests-need-visio.md](tests-need-visio.md) &mdash; The test suite drives a real Visio instance via COM; no mock layer.
+- [form-page-model-internal.md](form-page-model-internal.md) &mdash; The form page model is internal to VisioScripting, not public Models API.

@@ -94,7 +94,6 @@ A higher-level **declarative document model**. Build a tree of plain objects des
 | `Layouts/` | Pre-built layouts (Tree, DirectedGraph, Grid, Container, Box) and renderers (`MsaglRenderer`, `VisioLayoutRenderer`) that map graph layouts to a Visio page. |
 | `LayoutStyles/` | Layout strategy types: hierarchy, flowchart, circular, compact tree, radial. |
 | `Documents/OrgCharts/` | `OrgChartDocument` — turn-key org-chart generator. |
-| `Documents/Forms/` | `FormDocument`/`FormPage`/`InteractiveRenderer` for form-style pages. |
 | `Geometry/` | Geometry primitives — `ArcSegment`, `BezierSegment`, `LineSegment`, `BezierCurve`, `BoundingBoxBuilder`. |
 | `Color/` | `ColorRgb`, `ColorHsl`. |
 | `Text/` | Rich text model — `Element`, `Literal`, `Field`, character/paragraph formatting, regions. |

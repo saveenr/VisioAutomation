@@ -1,6 +1,6 @@
-﻿namespace VisioAutomation.Models.Documents.Forms
+﻿namespace VisioScripting.Helpers.Forms
 {
-    public struct PageMargin
+    internal struct PageMargin
     {
         public double Left { get; }
         public double Bottom { get; }

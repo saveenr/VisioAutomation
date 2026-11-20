@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.Documents.Forms
+namespace VisioScripting.Helpers.Forms
 {
-    public class FormDocument
+    internal class FormDocument
     {
         public string Subject ;
         public string Title ;

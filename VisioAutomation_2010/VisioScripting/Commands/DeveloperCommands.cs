@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VADOC=VisioAutomation.Models.Documents;
+using VSFORMS = VisioScripting.Helpers.Forms;
 using VADOM=VisioAutomation.Models.Dom;
 using VATREE=VisioAutomation.Models.Layouts.Tree;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -37,7 +37,7 @@ namespace VisioScripting.Commands
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
 
-            var formdoc = new VADOC.Forms.FormDocument();
+            var formdoc = new VSFORMS.FormDocument();
             formdoc.Subject = "VisioAutomation.Scripting Documentation";
             formdoc.Title = "VisioAutomation.Scripting Documentation";
             formdoc.Creator = "";
@@ -81,12 +81,12 @@ namespace VisioScripting.Commands
                 helpstr.Length = 0;
                 VisioScripting.Helpers.TextHelper.Join(helpstr,"\r\n",lines);
 
-                var formpage = new VADOC.Forms.FormPage();
+                var formpage = new VSFORMS.FormPage();
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
                 formpage.Size = new VisioAutomation.Core.Size(8.5, 11);
-                formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
+                formpage.PageMargin = new VSFORMS.PageMargin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
             }
@@ -103,7 +103,7 @@ namespace VisioScripting.Commands
         {
             var cmdtarget = this._client.GetCommandTarget(CommandTargetFlags.RequireApplication);
 
-            var formdoc = new VADOC.Forms.FormDocument();
+            var formdoc = new VSFORMS.FormDocument();
 
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
@@ -123,9 +123,9 @@ namespace VisioScripting.Commands
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
                     }
 
-                    var formpage = new VADOC.Forms.FormPage();
+                    var formpage = new VSFORMS.FormPage();
                     formpage.Size = new VisioAutomation.Core.Size(8.5, 11);
-                    formpage.PageMargin = new VADOC.Forms.PageMargin(0.5, 0.5, 0.5, 0.5);
+                    formpage.PageMargin = new VSFORMS.PageMargin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)

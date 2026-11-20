@@ -1,8 +1,8 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Models.Documents.Forms
+namespace VisioScripting.Helpers.Forms
 {
-    public class FormPage
+    internal class FormPage
     {
         public string Name;
         public VisioAutomation.Core.Size Size;
