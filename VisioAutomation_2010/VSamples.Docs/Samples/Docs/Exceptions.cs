@@ -28,7 +28,7 @@ namespace VSamples.Docs.Samples.Docs
             {
                 var stencil = doc.Application.Documents.OpenStencil("missing.vss");
             }
-            catch (VisioAutomation.Exceptions.VisioOperationException ex)
+            catch (VisioAutomation.Exceptions.VisioOperationException)
             {
                 // The stencil could not be opened.
             }

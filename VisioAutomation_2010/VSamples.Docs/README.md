@@ -35,7 +35,7 @@ Docs for unreleased changes live on the docs repository's `next` branch (see `do
 
 ## Blocks that are not compiled
 
-`Samples\Docs\exempt.tsv` lists each docs block that has no sample, with the reason: id, docs page, line, reason. Today these are API outlines (declarations shown for reference), blocks on pages for APIs that were removed, and blocks for an API change that is not released yet. An exempt block is not checked by the compiler, so keep the list short.
+`Samples\Docs\exempt.tsv` lists each docs block that has no sample, with the reason: id, docs page, line, reason. Today these are API outlines (declarations shown for reference). An exempt block is not checked by the compiler, so keep the list short.
 
 ## Limits
 

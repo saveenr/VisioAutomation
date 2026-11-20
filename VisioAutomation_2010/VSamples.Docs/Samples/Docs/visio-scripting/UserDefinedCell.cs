@@ -10,7 +10,7 @@ namespace VSamples.Docs.Samples.Docs
         {
             // <sample id="visio-scripting/user-defined-cell#01" doc="visio-scripting/user-defined-cell.md" line="26">
             var udc = new VisioAutomation.Shapes.UserDefinedCellCells();
-            udc.Value = "\"42\"";          // formula, hence escaped quotes
+            udc.Formula = "\"42\"";          // formula, hence escaped quotes
             udc.Prompt = "\"Answer\"";
 
             // Set user-defined cell "answer" on every selected shape
@@ -25,7 +25,7 @@ namespace VSamples.Docs.Samples.Docs
             {
                 foreach (var entry in kv.Value)
                 {
-                    System.Console.WriteLine("{0}.{1} = {2}", kv.Key.Name, entry.Key, entry.Value.Value);
+                    System.Console.WriteLine("{0}.{1} = {2}", kv.Key.Name, entry.Key, entry.Value.Formula);
                 }
             }
             // </sample>

@@ -10,7 +10,7 @@ namespace VSamples.Docs.Samples.Docs
         {
             // <sample id="visio-scripting/custom-property#01" doc="visio-scripting/custom-property.md" line="26">
             var cp = new VisioAutomation.Shapes.CustomPropertyCells();
-            cp.Value = "\"Hello\"";       // values are formulas, hence the escaped quotes
+            cp.Formula = "\"Hello\"";       // values are formulas, hence the escaped quotes
             cp.Label = "\"Greeting\"";
             cp.Type = "0";                 // string
 
@@ -26,7 +26,7 @@ namespace VSamples.Docs.Samples.Docs
             {
                 foreach (var entry in kv.Value)
                 {
-                    System.Console.WriteLine("{0}.{1} = {2}", kv.Key.Name, entry.Key, entry.Value.Value);
+                    System.Console.WriteLine("{0}.{1} = {2}", kv.Key.Name, entry.Key, entry.Value.Formula);
                 }
             }
             // </sample>

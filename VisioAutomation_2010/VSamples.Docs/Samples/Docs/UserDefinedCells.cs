@@ -15,7 +15,7 @@ namespace VSamples.Docs.Samples.Docs
 
             foreach (var kv in udcells)
             {
-                System.Console.WriteLine("{0} = {1}", kv.Key, kv.Value.Value);
+                System.Console.WriteLine("{0} = {1}", kv.Key, kv.Value.Formula);
             }
             // </sample>
         }
