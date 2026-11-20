@@ -71,6 +71,63 @@ namespace VTest.Models
             MUT.Assert.AreEqual(1.0, dg.BorderSize.Height);
         }
 
+        // ---- <renderoptions> page border ----
+
+        [MUT.TestMethod]
+        public void Loader_RenderOptions_BorderAttributes_SetThePageBorderWidth()
+        {
+            var dg = this.load(this.build_xml(render_attrs: "borderwidth='0.25' borderheight='0.75'"));
+            var options = dg.Layouts[0].LayoutOptions;
+            MUT.Assert.IsTrue(options.IsPageBorderWidthSet);
+            MUT.Assert.AreEqual(0.25, options.PageBorderWidth.Width);
+            MUT.Assert.AreEqual(0.75, options.PageBorderWidth.Height);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_RenderOptions_NoBorderAttributes_LeavesThePageBorderWidthUnset()
+        {
+            var dg = this.load(this.build_xml(root_children: "<documentoptions borderwidth='3' borderheight='4' />"));
+            MUT.Assert.IsFalse(dg.Layouts[0].LayoutOptions.IsPageBorderWidthSet, "the page should follow the document's border size");
+        }
+
+        [MUT.TestMethod]
+        public void Loader_RenderOptions_OneBorderAttribute_TheOtherSideFollowsTheDocumentBorder()
+        {
+            var dg = this.load(this.build_xml(
+                root_children: "<documentoptions borderwidth='3' borderheight='4' />",
+                render_attrs: "borderwidth='2'"));
+            var options = dg.Layouts[0].LayoutOptions;
+            MUT.Assert.IsTrue(options.IsPageBorderWidthSet);
+            MUT.Assert.AreEqual(2.0, options.PageBorderWidth.Width);
+            MUT.Assert.AreEqual(4.0, options.PageBorderWidth.Height, "the side the page leaves out should follow the document's border");
+        }
+
+        [MUT.TestMethod]
+        public void Loader_RenderOptions_OneBorderAttribute_WithoutDocumentOptions_TheOtherSideFollowsTheDocumentDefault()
+        {
+            var dg = this.load(this.build_xml(render_attrs: "borderheight='0.1'"));
+            var options = dg.Layouts[0].LayoutOptions;
+            MUT.Assert.AreEqual(1.0, options.PageBorderWidth.Width, "the document's default border is 1.0");
+            MUT.Assert.AreEqual(0.1, options.PageBorderWidth.Height);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_RenderOptions_Border_DoesNotChangeTheDocumentBorderSize()
+        {
+            var dg = this.load(this.build_xml(
+                root_children: "<documentoptions borderwidth='3' borderheight='4' />",
+                render_attrs: "borderwidth='0.25' borderheight='0.25'"));
+            MUT.Assert.AreEqual(3.0, dg.BorderSize.Width);
+            MUT.Assert.AreEqual(4.0, dg.BorderSize.Height);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_RenderOptions_NonNumericBorder_Throws()
+        {
+            MUT.Assert.ThrowsExactly<System.FormatException>(
+                () => this.load(this.build_xml(render_attrs: "borderwidth='wide'")));
+        }
+
         // ---- <shape> ----
 
         [MUT.TestMethod]
