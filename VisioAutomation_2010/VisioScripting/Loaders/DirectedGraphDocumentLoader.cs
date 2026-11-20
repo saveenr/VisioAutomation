@@ -53,6 +53,9 @@ namespace VisioScripting.Loaders
             public List<Models.DgShapeInfo> ShapeInfos;
             public List<Models.DgConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
+            // Optional per-page border, from the borderwidth and borderheight attributes of <renderoptions>
+            public double? PageBorderWidth;
+            public double? PageBorderHeight;
         }
 
         public const string RootElementName = "directedgraph";
@@ -140,6 +143,7 @@ namespace VisioScripting.Loaders
             var dgdoc = new DirectedGraphDocument();
             var pagedatas = DirectedGraphDocumentLoader._load_page_data_from_xml(client, xmldoc);
             DirectedGraphDocumentLoader._get_document_options_from_xml(xmldoc.Root.Element("documentoptions"), dgdoc);
+            DirectedGraphDocumentLoader._apply_page_borders(pagedatas, dgdoc);
 
             // STOP IF ANY ERRORS
             int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();
@@ -231,6 +235,23 @@ namespace VisioScripting.Loaders
             return dgdoc;
         }
 
+        // A page that sets borderwidth or borderheight gets its own PageBorderWidth, which wins over the document's
+        // BorderSize when the page is drawn. A side the page leaves out follows the document's border size.
+        private static void _apply_page_borders(List<PageData> pagedatas, DirectedGraphDocument dgdoc)
+        {
+            foreach (var pagedata in pagedatas)
+            {
+                if (!pagedata.PageBorderWidth.HasValue && !pagedata.PageBorderHeight.HasValue)
+                {
+                    continue;
+                }
+
+                double width = pagedata.PageBorderWidth ?? dgdoc.BorderSize.Width;
+                double height = pagedata.PageBorderHeight ?? dgdoc.BorderSize.Height;
+                pagedata.DirectedGraph.LayoutOptions.PageBorderWidth = new VisioAutomation.Core.Size(width, height);
+            }
+        }
+
         private static void _get_document_options_from_xml(SXL.XElement el, DirectedGraphDocument dgdoc)
         {
             // <documentoptions> is optional, and so is each of its attributes
@@ -282,6 +303,13 @@ namespace VisioScripting.Loaders
             double label_box_width = el.GetAttributeValue("edgelabelboxwidth", layoutoptions.EdgeLabelBoxSize.Width, DoubleParse);
             double label_box_height = el.GetAttributeValue("edgelabelboxheight", layoutoptions.EdgeLabelBoxSize.Height, DoubleParse);
             layoutoptions.EdgeLabelBoxSize = new VisioAutomation.Core.Size(label_box_width, label_box_height);
+
+            // Optional per-page margin. If either attribute is present, this page uses its own border instead of the
+            // document's BorderSize, and a side that is left out follows the document (see _apply_page_borders).
+            var border_width_attr = el.Attribute("borderwidth");
+            var border_height_attr = el.Attribute("borderheight");
+            pagedata.PageBorderWidth = border_width_attr != null ? (double?)DoubleParse(border_width_attr.Value) : null;
+            pagedata.PageBorderHeight = border_height_attr != null ? (double?)DoubleParse(border_height_attr.Value) : null;
         }
     }
 }

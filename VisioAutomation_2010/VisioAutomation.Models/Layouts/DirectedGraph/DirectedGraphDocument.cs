@@ -6,6 +6,7 @@ namespace VisioAutomation.Models.Layouts.DirectedGraph
     {
         public readonly List<DirectedGraphLayout> Layouts;
         public string Template;
+        /// <summary>Margin around the drawing on each page. A layout whose LayoutOptions.PageBorderWidth has been set uses that instead.</summary>
         public VisioAutomation.Core.Size BorderSize;
 
         public DirectedGraphDocument()

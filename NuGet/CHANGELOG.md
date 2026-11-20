@@ -12,6 +12,13 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Added
+- `MsaglOptions.IsPageBorderWidthSet` reports whether `PageBorderWidth` has been assigned on that instance.
+- **Directed graph XML: a page can set its own margin.** The `<renderoptions>` element of a `<page>` accepts optional `borderwidth` and `borderheight` attributes, in inches, like the ones on `<documentoptions>`. A page that sets either one uses its own margin instead of the document's; a side it leaves out follows the document's border size. Pages that set neither are unchanged. This is how XML and `Out-VisioApplication` users reach the per-page margin.
+
+### Changed
+- **Behavior change: a directed graph layout's `LayoutOptions.PageBorderWidth` now applies when you draw with `Client.Model.DrawDirectedGraphDocument`.** A layout that sets it gets that margin on its page. A layout that does not set it uses the document's `BorderSize` (1.0 by default, or the `borderwidth` and `borderheight` attributes of an XML document), exactly as before, so existing documents come out the same. Before, the document's `BorderSize` silently overrode `PageBorderWidth` on this path, so setting it had no effect. Setting it to 0.5, the value an unset layout reads as, now counts as set and also takes effect, and a document with several layouts can use a different margin on each page. Drawing with `MsaglRenderer` directly is unchanged. Related to [#223](https://github.com/saveenr/VisioAutomation/issues/223).
+
 ### Deprecated
 - **`Client.Model` draw methods are renamed so the name says where the output goes.** `DrawGrid` is now `DrawGridIntoPage`, `DrawDataTableModel` is now `DrawDataTableModelIntoPage`, `DrawXmlModel` is now `DrawXmlModelIntoPage`, and `DrawOrgChart` is now `DrawOrgChartDocument`, which also drops the `TargetPage` parameter and uses the application attached to the client, like `DrawDirectedGraphDocument` (the chart is drawn into a new document, and the page you passed was only used to find the application). The old names still work and forward to the new ones (the old `DrawOrgChart` ignores its `TargetPage`), but are marked `[Obsolete]` and will be removed in a later release. The Undo entries for the grid, data table and XML model draws carry the new names. `Out-VisioApplication` is unchanged. Related to [#223](https://github.com/saveenr/VisioAutomation/issues/223).
 

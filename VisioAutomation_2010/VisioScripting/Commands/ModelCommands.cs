@@ -206,9 +206,13 @@ namespace VisioScripting.Commands
                 }
                 renderer.Render(page, dg_layout);
 
-                var targetpages = new VisioScripting.TargetPages(page);
-
-                this._client.Page.ResizePageToFitContents(targetpages, dgdoc.BorderSize);
+                // A page border set on this layout wins, and the renderer has already applied it.
+                // Otherwise the document's border size applies.
+                if (!dg_layout.LayoutOptions.IsPageBorderWidthSet)
+                {
+                    var targetpages = new VisioScripting.TargetPages(page);
+                    this._client.Page.ResizePageToFitContents(targetpages, dgdoc.BorderSize);
+                }
                 this._client.View.SetZoomToObject(VisioScripting.TargetWindow.Auto, VisioScripting.Models.ZoomToObject.Page);
                 this._client.Output.WriteVerbose("Finished rendering page");
 
