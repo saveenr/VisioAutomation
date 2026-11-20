@@ -44,7 +44,6 @@ namespace VSamples
             methods.Add(new Samples.Misc.BezierSimple());
             methods.Add(new Samples.Misc.GradientTransparencies());
             methods.Add(new Samples.Misc.GridOfMasters());
-            methods.Add(new Samples.Misc.MonitorResolutions());
             methods.Add(new Samples.Misc.Nurbs1());
             methods.Add(new Samples.Misc.Nurbs2());
             methods.Add(new Samples.Misc.ProgressBar());

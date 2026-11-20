@@ -18,7 +18,7 @@ Who used it:
 
 Remove it: `DeveloperCommands`, the `Client.Developer` property, `InteropHelper`, `VisioScripting.Models.EnumType` and `EnumValue` (public, and used nowhere else), the five `VSamples` developer samples and their registrations, and the three developer tests. `Client` now has 24 command groups.
 
-Left in place: `ReflectionHelper` (still used by `Command.cs`) and the form page model under `VisioScripting/Helpers/Forms/`. Its two `client.Developer` callers are gone, so the only remaining consumer is the `MonitorResolutions` sample. What to do with it is a separate decision.
+The form page model (`VisioScripting/Helpers/Forms/`, made internal earlier the same day under [`form-page-model-internal.md`](form-page-model-internal.md)) is removed too. Its two `client.Developer` callers were gone, and its only other consumer was the `MonitorResolutions` sample, which is removed with it, along with the `InternalsVisibleTo("VSamples")` grant that existed only for that sample. Left in place: `ReflectionHelper`, which `Command.cs` still uses.
 
 The group was not marked `[Obsolete]` for a release first. Like the earlier internalizations (see [`visioscripting-public-api.md`](visioscripting-public-api.md)), no outside callers are known, and a deprecation window for something nobody is known to use only delays the cleanup.
 

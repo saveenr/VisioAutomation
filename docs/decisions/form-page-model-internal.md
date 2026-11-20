@@ -1,7 +1,7 @@
 
 # The form page model is internal to VisioScripting
 
-**Status:** Accepted (2026-11-20; see [#220](https://github.com/saveenr/VisioAutomation/issues/220) for the discussion). Partly superseded the same day by [`developer-commands-removed.md`](developer-commands-removed.md): the two `client.Developer` callers described below were removed, so the only remaining consumer of the form types is the `MonitorResolutions` sample.
+**Status:** Accepted (2026-11-20; see [#220](https://github.com/saveenr/VisioAutomation/issues/220) for the discussion). Superseded the same day by [`developer-commands-removed.md`](developer-commands-removed.md): the two `client.Developer` callers described below were removed, and the form types were then deleted along with their last consumer, the `MonitorResolutions` sample. The reasoning below is kept as history.
 
 ## Context
 
