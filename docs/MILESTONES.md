@@ -24,7 +24,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 - **Releases since this doc was last updated (2026-05-08):** NuGet 3.2.0 and Visio PowerShell 4.8.0 on 2026-10-01; NuGet 4.0.0 and Visio PowerShell 5.0.0 on 2026-11-01. Both 2026-11-01 releases raise the minimum runtime to .NET Framework 4.7.2. The version-number policy question was re-evaluated in May and resolved as "stay divergent" ([`futures/releases.md`](futures/releases.md)).
 - **Milestone B (modernization unlock) landed early.** [#171](https://github.com/saveenr/VisioAutomation/issues/171) (VS 2026) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) (net472) closed on 2026-11-01, after the Windows 10 LTSB 2016 sunset on 2026-10-13. They were scheduled for CY27Q1.
 - **CY26Q3 is past due.** Seven of its issues are still open: [#133](https://github.com/saveenr/VisioAutomation/issues/133), [#155](https://github.com/saveenr/VisioAutomation/issues/155), [#157](https://github.com/saveenr/VisioAutomation/issues/157), [#162](https://github.com/saveenr/VisioAutomation/issues/162), [#163](https://github.com/saveenr/VisioAutomation/issues/163), [#164](https://github.com/saveenr/VisioAutomation/issues/164), [#173](https://github.com/saveenr/VisioAutomation/issues/173). The proposal below re-homes each.
-- **A new class of work appeared that this doc never planned for:** about 20 Models and facade defects (#197 through #232) were fixed and closed on 2026-10-01, and the design questions they exposed remain open as [#218](https://github.com/saveenr/VisioAutomation/issues/218), [#220](https://github.com/saveenr/VisioAutomation/issues/220), [#221](https://github.com/saveenr/VisioAutomation/issues/221), [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) and [#236](https://github.com/saveenr/VisioAutomation/issues/236). They are now Milestone I below.
+- **A new class of work appeared that this doc never planned for:** about 20 Models and facade defects (#197 through #232) were fixed and closed on 2026-10-01, and the design questions they exposed remain open as [#218](https://github.com/saveenr/VisioAutomation/issues/218), [#221](https://github.com/saveenr/VisioAutomation/issues/221), [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) and [#236](https://github.com/saveenr/VisioAutomation/issues/236). They are now Milestone I below.
 - **Open issues:** 28, of which 9 have no milestone.
 
 ---
@@ -52,39 +52,45 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) | CY27Q1 |
 
 ### CY26Q4 &mdash; October&ndash;December 2026 *(current)*
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/1) &mdash; due 2026-12-31 &mdash; 1 closed ([#190](https://github.com/saveenr/VisioAutomation/issues/190), 2026-11-20), 5 open.
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/1) &mdash; due 2026-12-31 &mdash; 1 closed ([#190](https://github.com/saveenr/VisioAutomation/issues/190), 2026-11-20), 8 open on GitHub ([#172](https://github.com/saveenr/VisioAutomation/issues/172), [#238](https://github.com/saveenr/VisioAutomation/issues/238), [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199), [#155](https://github.com/saveenr/VisioAutomation/issues/155), [#163](https://github.com/saveenr/VisioAutomation/issues/163), [#183](https://github.com/saveenr/VisioAutomation/issues/183)); the other items below are proposed moves into this quarter. With about six weeks left in the year this is a lot; expect some to slip.
 
-**Theme:** Identity transition push, plus settling the public Models and facade API before more docs are written against it. The identity items are owner tasks rather than code.
+**Theme:** Improve the current line as much as possible before the end of the year: docs, testing, and settling the public Models and facade API before more docs are written against it. The identity transition (repo and gitbook moves, retiring the old PSGallery account, the NuGet support case) moved to CY27Q1 on 2026-11-20.
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| Migrate GitHub repo to SevenPens-owned account | A | [#146](https://github.com/saveenr/VisioAutomation/issues/146) |
-| Migrate gitbook spaces to SevenPens-owned hosting | A | [#147](https://github.com/saveenr/VisioAutomation/issues/147) |
-| Phase 5b: in-repo URL rewrite (single commit after #146 + #147 land) | A | (no issue; one-shot commit) |
-| Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (needs a milestone) |
-| Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) |
 | New logo (refresh, XAR to SVG); [#80](https://github.com/saveenr/VisioAutomation/issues/80) ruled that branding belongs here | A | [#196](https://github.com/saveenr/VisioAutomation/issues/196) (needs a milestone) |
-| Decide Box layout, form page model and `ContainerLayout` together | I | [#218](https://github.com/saveenr/VisioAutomation/issues/218), [#220](https://github.com/saveenr/VisioAutomation/issues/220), [#221](https://github.com/saveenr/VisioAutomation/issues/221) (need milestones) |
+| Decide Box layout and `ContainerLayout` | I | [#218](https://github.com/saveenr/VisioAutomation/issues/218), [#221](https://github.com/saveenr/VisioAutomation/issues/221) (need milestones) |
+| ~~Decide the form page model~~ Decided 2026-11-20: make it internal ([`decisions/form-page-model-internal.md`](decisions/form-page-model-internal.md)); implemented in PR [#252](https://github.com/saveenr/VisioAutomation/pull/252). The GitBook pages still need updating before the release that ships it | I | [#220](https://github.com/saveenr/VisioAutomation/issues/220) |
 | Revise user-facing gitbook docs for accuracy | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
 | Investigate an unreleased (`next`) docs variant | E | [#238](https://github.com/saveenr/VisioAutomation/issues/238) |
 | Troubleshooting page and docs-location decision | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133), [#157](https://github.com/saveenr/VisioAutomation/issues/157) (moved from CY26Q3) |
 | Cmdlet-binding test coverage, next slice | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) (moved from CY26Q3) |
+| `client.Model` draw method consistency | I | [#223](https://github.com/saveenr/VisioAutomation/issues/223) (moved from CY27Q1 on 2026-11-20) |
+| Draw a single directed graph onto the current page; `Out-VisioApplication` takes one graph layout | I | [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) (moved from CY27Q1) |
+| Doc-sample-as-test linkage | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) (moved from CY26Q3; follows #157) |
+| `Connect-VisioShape` pipeline parameter set | D | [#163](https://github.com/saveenr/VisioAutomation/issues/163) (moved from CY26Q3; was blocked by #164, see the note below) |
+| `VisioScripting` dead-method removal (re-verify zero callers first; per [#184](https://github.com/saveenr/VisioAutomation/issues/184), mark `[Obsolete]` one minor release before deleting) | B | [#183](https://github.com/saveenr/VisioAutomation/issues/183) (moved from CY27Q1 on 2026-11-20) |
+
+**Note on #163.** It was parked behind #164 (`PSCmdlet` versus `Cmdlet`) because its tests failed in the test runspace with `CommandTarget: application does not match doc.application`. That failure looks like the two-Client mismatch from #190, which no longer reproduces (#190 closed 2026-11-20). So #163 may be doable without #164; confirm that first, and if it still needs `ParameterSetName` detection, it goes back to CY27Q1 with #164.
 
 ### CY27Q1 &mdash; January&ndash;March 2027
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 2 closed early, 4 open.
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 2 closed early, 8 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
 
-**Theme:** The modernization unlock is done ([#171](https://github.com/saveenr/VisioAutomation/issues/171) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) shipped 2026-11-01). What remains is spike and audit work, the cmdlet-ergonomics follow-through that slipped from CY26Q3, and the Models design discussions that do not need a decision this year.
+**Theme:** The modernization unlock is done ([#171](https://github.com/saveenr/VisioAutomation/issues/171) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) shipped 2026-11-01). What remains is spike and audit work, the cmdlet-ergonomics follow-through that slipped from CY26Q3 (the `PSCmdlet` question), and the identity transition.
 
 | Item | Themed milestone | Issue |
 |---|---|---|
-| Spike: NetOffice / NetOfficeFw as a Visio PIA replacement | C | [#158](https://github.com/saveenr/VisioAutomation/issues/158) |
+| Spike: does the existing Visio PIA work for COM interop on .NET 11? (time-boxed, throwaway branch; no NetOffice) | C | [#249](https://github.com/saveenr/VisioAutomation/issues/249) |
 | Audit: identify Visio-2010-only paths in the codebase | G | [#159](https://github.com/saveenr/VisioAutomation/issues/159) |
-| ShapeSheet query ergonomics spike (LINQ and other shapes) | F | [#170](https://github.com/saveenr/VisioAutomation/issues/170) |
-| `VisioScripting` dead-method removal (re-verify zero callers first) | B | [#183](https://github.com/saveenr/VisioAutomation/issues/183) |
-| `PSCmdlet` investigation, then `Connect-VisioShape` pipeline set | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164), [#163](https://github.com/saveenr/VisioAutomation/issues/163) (moved from CY26Q3) |
+| `PSCmdlet` investigation (`Connect-VisioShape` [#163](https://github.com/saveenr/VisioAutomation/issues/163) moved to CY26Q4) | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164) (moved from CY26Q3) |
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) (moved from CY26Q3) |
-| Doc-sample-as-test linkage | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) (moved from CY26Q3) |
-| `client.Model` draw method consistency; directed graph XML gaps; single directed graph on the current page | I | [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#236](https://github.com/saveenr/VisioAutomation/issues/236), [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) (need milestones) |
+| Migrate GitHub repo to SevenPens-owned account | A | [#146](https://github.com/saveenr/VisioAutomation/issues/146) (moved from CY26Q4) |
+| Migrate gitbook spaces to SevenPens-owned hosting | A | [#147](https://github.com/saveenr/VisioAutomation/issues/147) (moved from CY26Q4) |
+| Phase 5b: in-repo URL rewrite (single commit after #146 + #147 land) | A | (no issue; one-shot commit) |
+| Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (moved from CY26Q4) |
+| Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) (moved from CY26Q4) |
+| Research: .NET 10 file-based apps (`dotnet run file.cs`) for docs and samples | E | [#250](https://github.com/saveenr/VisioAutomation/issues/250) |
+| Directed graph XML format: remaining gaps | I | [#236](https://github.com/saveenr/VisioAutomation/issues/236) (needs a milestone) |
 
 ### CY27Q2 &mdash; April&ndash;June 2027
 [GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/5) &mdash; due 2027-06-30 &mdash; 3 open.
@@ -93,6 +99,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 
 | Item | Themed milestone | Issue |
 |---|---|---|
+| Move the libraries to .NET 11 and add a PowerShell 7 module (multi-target alongside net472 if the CY27Q1 spike allows); [#175](https://github.com/saveenr/VisioAutomation/issues/175) was retitled for this on 2026-11-20 | C | [#175](https://github.com/saveenr/VisioAutomation/issues/175) |
 | Decide: Visio 2013 baseline branding | G | [#160](https://github.com/saveenr/VisioAutomation/issues/160) |
 | Visio 2013 baseline migration implementation (gated on #160) | G | (no issue yet) |
 | Decide: consolidate Visio-PIAs source into this repo | H | [#180](https://github.com/saveenr/VisioAutomation/issues/180) |
@@ -100,7 +107,8 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 ### Beyond CY27Q2
 
 Items pending but not yet semester-assigned:
-- **Move the libraries to modern .NET 10** ([#175](https://github.com/saveenr/VisioAutomation/issues/175), currently milestoned CY27Q2). CLAUDE.md records this as deliberately deferred ("not planned for a long time; stay on .NET Framework 4.7.2"), which conflicts with a CY27Q2 date. Proposed: remove the milestone, or retitle the issue to the Visio PIA replacement decision that [#158](https://github.com/saveenr/VisioAutomation/issues/158) informs.
+- **Experiments** (outside the plan; they happen only if something forces them or there is spare capacity): ShapeSheet query ergonomics, LINQ and other shapes ([#170](https://github.com/saveenr/VisioAutomation/issues/170), still milestoned CY27Q1 on GitHub), research into other layout algorithms beyond our own and MSAGL ([#251](https://github.com/saveenr/VisioAutomation/issues/251), no milestone), and the NetOffice investigation below.
+- **Long-term investigation: replace the Visio PIA with NetOffice / NetOfficeFw** ([#158](https://github.com/saveenr/VisioAutomation/issues/158), retitled and milestone removed 2026-11-20). Not part of the plan. It stays on the back burner until something forces it, for example the existing Visio PIA not working on modern .NET.
 - Documentation work past the CY26Q4 burst &mdash; continuous into 2027 as items come up.
 - Visio repo portfolio audit Phase H2 (per-repo retire / merge / maintain decisions). Opportunistic.
 
@@ -115,7 +123,7 @@ The semester schedule above is the *when*. The themed milestones below are the *
 
 **User impact:** Old hosting URLs keep resolving via redirects; new canonical URLs live under `SevenPens`-owned hosting. No broken bookmarks, no consumer disruption.
 
-**Semesters:** CY26Q4 (target window).
+**Semesters:** CY27Q1 (moved from CY26Q4 on 2026-11-20 so 2026 can go to improving the current line). The new logo ([#196](https://github.com/saveenr/VisioAutomation/issues/196)) is still planned for CY26Q4; [#80](https://github.com/saveenr/VisioAutomation/issues/80) tied branding to this milestone, so revisit that if the logo slips too.
 
 **Items:** see CY26Q4 schedule above. Detail in [`futures/identity.md`](futures/identity.md).
 
@@ -131,11 +139,11 @@ The semester schedule above is the *when*. The themed milestones below are the *
 **Items:** see CY27Q1 schedule above. Detail in [`futures/build-and-code.md`](futures/build-and-code.md) and [`futures/releases.md`](futures/releases.md).
 
 ### Milestone C &mdash; Modern .NET (multi-target)
-**Theme:** Add `net10.0-windows` (or current .NET 10 TFM) alongside `net48`. Decide whether to replace the Visio PIA with NetOffice / NetOfficeFw.
+**Theme:** Move to .NET 11 and add a PowerShell 7 module, after the feature, test and docs work on the current line. Direction set 2026-11-20, prompted by Microsoft's announcement that PowerShell 7 will ship with the next release of Windows. Replacing the Visio PIA with NetOffice / NetOfficeFw is **not** part of this milestone; it is a long-term investigation (see "Beyond CY27Q2"). C# 14 features are also held back until the libraries target modern .NET (decision 2026-11-20), so none are adopted in 2026.
 
-**User impact:** Modern C# features (extension members, etc.) and better .NET 10 perf become available. Existing `net48` consumers unaffected (multi-target). Windows PowerShell 5.1 users of VisioPS get the `net48` build; PowerShell 7+ users get the .NET 10 build.
+**User impact:** Modern C# features and better modern-.NET performance become available. Existing `net472` consumers are unaffected if the libraries multi-target. Windows PowerShell 5.1 users of VisioPS keep the `net472` build; PowerShell 7+ users get the .NET 11 build. If multi-targeting turns out not to work, the fallback is a separate new line with a maintenance branch for the current one. Windows PowerShell 5.1 stays in use for a long time, so the current line keeps getting bug fixes.
 
-**Semesters:** CY27Q1 (spike) &rarr; CY27Q2 (implementation begins). Sequenced after Milestone B.
+**Semesters:** CY27Q1 (a time-boxed spike on whether the existing Visio PIA works for COM interop on .NET 11) &rarr; CY27Q2 (implementation begins). Sequenced after Milestone B.
 
 **Items:** see CY27Q1 and CY27Q2 schedules above. Detail in [`futures/build-and-code.md`](futures/build-and-code.md).
 
@@ -205,7 +213,7 @@ The semester schedule above is the *when*. The themed milestones below are the *
 ### Milestone I &mdash; Models and facade API cleanup *(new, 2026-11-20)*
 **Theme:** Settle the public surface of `VisioAutomation.Models` and the `client.Model` draw methods. About 20 defects in this area were fixed on 2026-10-01 (#197 through #232); the questions they exposed are design decisions, not bugs, and several docs pages describe behavior that a decision may change.
 
-**User impact:** Consumers of the diagram models get a smaller, consistent surface. Some outcomes may remove or reshape public types ([#218](https://github.com/saveenr/VisioAutomation/issues/218) Box layout, [#220](https://github.com/saveenr/VisioAutomation/issues/220) form page model, [#221](https://github.com/saveenr/VisioAutomation/issues/221) `ContainerLayout`), which is a compatibility decision under the [`VisioScripting` public-API contract](decisions/visioscripting-public-api.md) and the changelog rules.
+**User impact:** Consumers of the diagram models get a smaller, consistent surface. Some outcomes may remove or reshape public types ([#218](https://github.com/saveenr/VisioAutomation/issues/218) Box layout, [#221](https://github.com/saveenr/VisioAutomation/issues/221) `ContainerLayout`; [#220](https://github.com/saveenr/VisioAutomation/issues/220), the form page model, was made internal on 2026-11-20), which is a compatibility decision under the [`VisioScripting` public-API contract](decisions/visioscripting-public-api.md) and the changelog rules.
 
 **Semesters:** CY26Q4 for the three type decisions, which should be taken together (the docs side of each is listed in [`futures/docs.md`](futures/docs.md)); CY27Q1 for [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#236](https://github.com/saveenr/VisioAutomation/issues/236), [#198](https://github.com/saveenr/VisioAutomation/issues/198) and [#199](https://github.com/saveenr/VisioAutomation/issues/199).
 
