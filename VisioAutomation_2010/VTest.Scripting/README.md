@@ -20,7 +20,6 @@ One file per VisioScripting subsystem under test:
 | ShapeSheet | `ShapeSheetTests.cs` |
 | Drop / draw | `DrawManualShapesTests.cs`, `DropContainerTests.cs`, `DropMasterTests.cs` |
 | Export | `ExportTests.cs` |
-| Developer-mode toggles | `DevTests.cs` |
 
 ## Test pattern
 

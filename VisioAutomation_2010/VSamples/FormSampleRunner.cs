@@ -30,10 +30,6 @@ namespace VSamples
             var methods = new List<SampleMethod>();
 
 
-            methods.Add(new Samples.Developer.DiagramVAClasses());
-            methods.Add(new Samples.Developer.DiagramVANamespaces());
-            methods.Add(new Samples.Developer.DocumentScriptingAPI());
-            methods.Add(new Samples.Developer.DocumentVisioInterop());
             methods.Add(new Samples.Layouts.BoxLayoutSimple());
             methods.Add(new Samples.Layouts.BoxLayoutTwoLevelGrouping());
             methods.Add(new Samples.Layouts.ColorGrid());

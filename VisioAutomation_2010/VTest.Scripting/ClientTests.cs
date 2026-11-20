@@ -6,30 +6,6 @@ namespace VTest.Scripting
     public class ClientTests : Framework.VTest
     {
         [MUT.TestMethod]
-        public void Developer_DrawScriptingAndNamespaceDiagrams_DoesNotThrow()
-        {
-            var client = this.GetScriptingClient();
-            this.DrawVAScriptingAPIDiagram();
-            this.DrawVANamespaceDiagram();
-        }
-
-        private void DrawVAScriptingAPIDiagram()
-        {
-            var client = this.GetScriptingClient();
-            var doc = client.Developer.DrawScriptingDocumentation();
-
-            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
-        }
-
-        private void DrawVANamespaceDiagram()
-        {
-            var client = this.GetScriptingClient();
-            var doc = client.Developer.DrawNamespaces();
-
-            client.Document.CloseDocument(VisioScripting.TargetDocuments.Auto);
-        }
-
-        [MUT.TestMethod]
         public void Document_CloseAllDocumentsWithoutSaving_NewDocStartsWithNoSelection()
         {
             var client = this.GetScriptingClient();

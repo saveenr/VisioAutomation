@@ -28,7 +28,7 @@ The ~211 enumerated method count is slightly under the 215-test runtime count fr
 
 4. **`Cells` record classes (`*Cells.cs` deriving from `CellRecord`) are exercised indirectly but rarely directly.** ~17 cell-record types across `VisioAutomation/Shapes/`, `VisioAutomation/Pages/`, `VisioAutomation/Text/`. None have round-trip-through-formula-and-back tests at the type level. They are validated transitively whenever a helper reads/writes them, which is most of the time, so the gap is real but lower priority.
 
-5. **The form page model has no direct tests.** It was made internal and moved to `VisioScripting/Helpers/Forms/` on 2026-11-20 ([#220](https://github.com/saveenr/VisioAutomation/issues/220), [`decisions/form-page-model-internal.md`](decisions/form-page-model-internal.md)). Its one working caller, `client.Developer.DrawInteropEnumDocumentation()`, now has a smoke test (`DevTests.DrawInteropEnumDocumentation_NewDocument_HasPagesWithShapes`); the types themselves are still not tested directly.
+5. **The form page model has no direct tests.** It was made internal and moved to `VisioScripting/Helpers/Forms/` on 2026-11-20 ([#220](https://github.com/saveenr/VisioAutomation/issues/220), [`decisions/form-page-model-internal.md`](decisions/form-page-model-internal.md)). Its two `client.Developer` callers (and their tests) were removed the same day ([`decisions/developer-commands-removed.md`](decisions/developer-commands-removed.md)); the only remaining consumer is the `MonitorResolutions` sample, so the types are not tested at all.
 
 ## Well-covered areas (no gap)
 
@@ -86,7 +86,7 @@ Public command-set classes consumed by cmdlets, no dedicated `Scripting_*Tests.c
 
 ### `VisioScripting.Helpers.Forms` (internal; was `VisioAutomation.Models.Documents.Forms`)
 
-`FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock`, `PageMargin`. Internal since 2026-11-20 ([#220](https://github.com/saveenr/VisioAutomation/issues/220)); only the caller `DrawInteropEnumDocumentation` has a smoke test. Lower priority now that it is not public API. If wanted: one round-trip test that builds a small `FormDocument`, calls `InteractiveRenderer`, and asserts the rendered shape count and page bounds.
+`FormDocument`, `FormPage`, `InteractiveRenderer`, `TextBlock`, `PageMargin`. Internal since 2026-11-20 ([#220](https://github.com/saveenr/VisioAutomation/issues/220)); its only consumer is now the `MonitorResolutions` sample. Lower priority now that it is not public API. If wanted: one round-trip test that builds a small `FormDocument`, calls `InteractiveRenderer`, and asserts the rendered shape count and page bounds.
 
 ### `VisioAutomation.Application.AlertResponseScope` and `UserInterfaceHelper`
 
@@ -171,7 +171,7 @@ Tested only when their parent type is tested:
 - `VisioAutomation.Core.BasicList<T>` — base class; tested transitively by every consumer.
 - `VisioAutomation.Exceptions.{AutomationException, VisioOperationException, InternalAssertionException}` — exception types with no custom logic.
 - `VisioAutomation.Models.Data.XmlModel` — used internally by `DataTableModel`; tested transitively.
-- `VisioScripting/Helpers/{InteropHelper, ReflectionHelper, SelectionHelper}` — small reflection/coercion helpers; tested transitively. `ReflectionHelper.NamingOptions` is consumed by `DeveloperCommands` which has 1 test.
+- `VisioScripting/Helpers/{ReflectionHelper, SelectionHelper}` — small reflection/coercion helpers; tested transitively. (`InteropHelper` and `DeveloperCommands` were removed 2026-11-20.)
 - `VisioScripting/Models/{EnumType, EnumValue, ShapeSheetReader, ShapeSheetWriter, PageDimensions, ShapeDimensions}` — `ShapeSheetReader` / `ShapeSheetWriter` are non-trivial; tested transitively via `ShapeSheetTests`.
 - `VisioScripting/Loaders/{OrgChartDocumentLoader, DirectedGraphDocumentLoader}` — covered transitively by `VTest.Models.OrgChartDrawModelTests` (5) and `DirectedGraphDrawModelTests` (22).
 - `VisioAutomation.ShapeSheet.Streams.{StreamArray, StreamType}` — covered transitively by writer tests.

@@ -22,7 +22,7 @@ Hybrid (option 3).
 
 ### Public-stable (documented; breaking changes treated as breaking)
 
-- `VisioScripting.Client` &mdash; the type, both constructors, and the 25 group properties.
+- `VisioScripting.Client` &mdash; the type, both constructors, and the 24 group properties (25 until `Client.Developer` was removed on 2026-11-20; see [`developer-commands-removed.md`](developer-commands-removed.md)).
 - The public method signatures on each `*Commands` class. Adding methods is non-breaking; renaming or removing methods is breaking.
 - `Target*` types at the namespace root (`TargetDocument`, `TargetDocuments`, `TargetPage`, `TargetPages`, `TargetSelection`, `TargetShapes`, `TargetWindow`). Forced &mdash; they appear in `*Commands` method signatures.
 - `VisioScripting.Models.*` types referenced from public signatures (enums like `PageOrientation`, `ZoomToObject`, `ShapeSelectionOperation`; data carriers like `PageDimensions`, `ShapeDimensions`, `ShapeSheetReader`, `ShapeSheetWriter`).
