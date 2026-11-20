@@ -12,6 +12,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Added
+- `Out-VisioApplication -DirectedGraphStyling` lets you choose how a directed graph is styled. It takes a `VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphStyling` object (set its `EdgeMasterName` and `EdgeStencilName` to change the connector) and applies only when you draw a directed graph; passing it with any other model is a parameter binding error. If you leave it out, the default styling is used, exactly as before. Previously PowerShell could not change the styling at all.
+
 ### Changed
 - `Out-VisioApplication -OrgChart` no longer needs an open document and page. It needs only an attached Visio application, like `-DirectedGraphDocument`. Before, it failed with an error when nothing was open (the library looked for an active page and found none), even though the chart is always drawn in a new document. The cmdlet's parameters are unchanged. (The library method behind it is renamed `Client.Model.DrawOrgChartDocument`; see the [NuGet changelog](../../NuGet/CHANGELOG.md).)
 
