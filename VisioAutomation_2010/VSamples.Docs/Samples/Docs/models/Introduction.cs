@@ -14,7 +14,7 @@ namespace VSamples.Docs.Samples.Docs
             model.DataTable = dataTable;
 
             // 2. Render it.
-            client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, model);
+            client.Model.DrawDataTableModelIntoPage(VisioScripting.TargetPage.Auto, model);
             // </sample>
         }
     }

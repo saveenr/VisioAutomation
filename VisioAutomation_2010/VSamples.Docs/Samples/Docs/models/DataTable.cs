@@ -23,7 +23,7 @@ namespace VSamples.Docs.Samples.Docs
             model.CellHeight = 0.5;
             model.CellSpacing = 0.1;
 
-            client.Model.DrawDataTableModel(VisioScripting.TargetPage.Auto, model);
+            client.Model.DrawDataTableModelIntoPage(VisioScripting.TargetPage.Auto, model);
             // </sample>
         }
     }

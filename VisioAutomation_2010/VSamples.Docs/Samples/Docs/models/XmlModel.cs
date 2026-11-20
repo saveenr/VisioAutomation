@@ -16,7 +16,7 @@ namespace VSamples.Docs.Samples.Docs
             var model = new VAMODELS.Data.XmlModel();
             model.XmlDocument = xml;
 
-            client.Model.DrawXmlModel(VisioScripting.TargetPage.Auto, model);
+            client.Model.DrawXmlModelIntoPage(VisioScripting.TargetPage.Auto, model);
             // </sample>
         }
     }
