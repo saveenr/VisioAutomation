@@ -78,13 +78,12 @@ Backlog of documentation items, both in-repo developer docs and the user-facing 
 - **How to apply:** when filing real bug reports / issues, tag those that are environmental ("works on my machine"-class) for inclusion. Build the page reactively from accumulated cases rather than upfront.
 - **Effort:** S–M once there's enough real material to justify it.
 
-### Revise user-facing documentation for accuracy
-- **What:** Audit the public gitbook docs ([VisioAutomation](https://saveenr.gitbook.io/visioautomation/) and [Visio PowerShell](https://saveenr.gitbook.io/visiopowershell/), source repo: [VisioAutomation_GitBook_Docs](https://github.com/saveenr/VisioAutomation_GitBook_Docs)) against the current API surface. Update or remove anything that no longer matches the code, and fill in coverage for cmdlets / APIs that have been added since the docs were last touched.
-- **Why:** The docs have not been refreshed alongside recent changes; users hitting a stale example as their first impression is the worst kind of regression.
-- **Approach (suggested):**
-  - Start with the **PowerShell module** since it has the most cmdlet-by-cmdlet documentation surface and is the most user-facing.
-  - For each cmdlet, verify it still exists, parameters still match, and the example still runs.
-  - Do the C# library docs second.
-  - Use the new [`docs/ARCHITECTURE.md`](../ARCHITECTURE.md) and [`docs/GLOSSARY.md`](../GLOSSARY.md) as the source of truth for terminology and structure.
-- **Cross-refs:** Related to but distinct from *Decide where docs live long-term* — that item is about the gitbook-vs-in-repo *policy*; this item is about *accuracy of the existing user-facing content*.
-- **Effort:** L (the cmdlet inventory alone is substantial).
+### Check the PowerShell cmdlet docs against the module
+- **What:** Build a repeatable check that the [Visio PowerShell docs](https://saveenr.gitbook.io/visiopowershell/) (source repo: [VisioPowerShellDocs](https://github.com/saveenr/VisioPowerShellDocs)) match the current module. Tracked as [#172](https://github.com/saveenr/VisioAutomation/issues/172), narrowed on 2026-11-20 from "revise all user-facing docs for accuracy".
+  - **Inventory check:** compare `Get-Command -Module Visio` (cmdlets and parameters) with the cmdlet pages: every cmdlet has a page, every documented parameter exists, every parameter has a row. Needs no live Visio.
+  - **Code-block check:** run, or at least parse, the PowerShell code blocks. Find out first whether the 2026-05 runtime-failure script was kept.
+  - **Where it runs:** likely a local script that takes a docs checkout path, like `Check-DocsSamples.ps1`, plus a release-checklist step in [`HANDOVER.md`](../HANDOVER.md).
+- **Why:** The original audit is done: every cmdlet page was aligned with module 4.6.1 in 2026-05, the .NET docs got Tier 1 to 4 coverage, and the 3.2.0 / 4.8.0 and 5.0.0 / 5.1.0 release sweeps are merged. What was never automated is catching drift between releases on the PowerShell side; the .NET C# blocks already have one ([`decisions/doc-sample-checking.md`](../decisions/doc-sample-checking.md)).
+- **Approach:** Scope how much of the two checks can be scripted, then decide whether to build it.
+- **Cross-refs:** Distinct from *Decide where docs live long-term* (policy) and *Models docs follow-ups* (pages tied to open design issues).
+- **Effort:** M.
