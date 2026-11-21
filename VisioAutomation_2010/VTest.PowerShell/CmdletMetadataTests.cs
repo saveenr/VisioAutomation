@@ -127,7 +127,7 @@ namespace VTest.PowerShell
         // when its issue is fixed: Cmdlets_KnownPositionClashes_StillExist fails once an entry is stale.
         private static readonly Dictionary<string, string> KnownPositionClashes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            { "Format-VisioWindow", "#290" },
+            // (none at the moment: Format-VisioWindow, #290, was fixed.)
         };
 
         private static List<string> PositionClashes(Type t)
