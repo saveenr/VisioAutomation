@@ -13,7 +13,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 ## [Unreleased]
 
 ### Changed
-- The module folder and release zip no longer contain a reference-only `System.Management.Automation.dll`. It was a build artifact that did nothing at runtime (Windows PowerShell uses its own copy). No cmdlet is affected. ([#283](https://github.com/saveenr/VisioAutomation/issues/283))
+- The module folder and release zip no longer contain a reference-only `System.Management.Automation.dll`. It was a build artifact that did nothing at runtime (Windows PowerShell uses its own copy). No cmdlet is affected, and `Import-Module Visio` works as before. ([#283](https://github.com/saveenr/VisioAutomation/issues/283))
+  - If a script explicitly loaded the old path (`Add-Type -Path` or `[Reflection.Assembly]::LoadFrom` on the module folder's `System.Management.Automation.dll`), remove that call, or use `[System.Management.Automation.PSObject].Assembly` to get the running host's assembly. The load now fails with a file-not-found error.
+  - If a build compiled against the old path (for example `csc /r:<module folder>\System.Management.Automation.dll`), reference PowerShell's assemblies from your own build instead. For Windows PowerShell 5.1 the matching compile reference is the NuGet package `Microsoft.PowerShell.3.ReferenceAssemblies` 1.0.0 (add `<ExcludeAssets>runtime</ExcludeAssets>`; PowerShell supplies the implementation at runtime). The old file was byte-identical to that package's assembly.
 
 ## [5.1.0] - 2026-11-20
 
