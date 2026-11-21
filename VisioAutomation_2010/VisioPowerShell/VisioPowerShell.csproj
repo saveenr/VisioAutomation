@@ -26,7 +26,11 @@
       <EmbedInteropTypes>false</EmbedInteropTypes>
       <PrivateAssets>none</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.PowerShell.3.ReferenceAssemblies" />
+    <PackageReference Include="Microsoft.PowerShell.3.ReferenceAssemblies">
+      <!-- Compile-time reference only. Without this, the reference-only System.Management.Automation.dll is copied
+           into the module folder and the release zip. Windows PowerShell supplies the real one. -->
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net472">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
