@@ -106,6 +106,78 @@ namespace VTest.PowerShell
             MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "Cannot bind parameter 'ZoomTo'");
         }
 
+        [MUT.TestMethod]
+        public void FormatVisioWindow_ZoomAndZoomRelative_FailToResolveAParameterSet()
+        {
+            var ex = DocumentWindowCmdletBindingTests.Session.ExpectFailureInNewDocument("Format-VisioWindow -Zoom 1 -ZoomRelative 1");
+            MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "Parameter set cannot be resolved");
+        }
+
+        // The window rectangle (#290). Each script reads the rectangle of the Visio application window as
+        // "X|Y|Width|Height" and puts the original rectangle back afterward, because the test Visio is shared.
+        private static string windowRect(string body)
+        {
+            return
+                "$w = (Get-VisioApplication).Window; " +
+                "$r0 = [VisioAutomation.Extensions.WindowMethods]::GetWindowRect($w); " +
+                "function Get-Rect { $r = [VisioAutomation.Extensions.WindowMethods]::GetWindowRect($w); \"$($r.X)|$($r.Y)|$($r.Width)|$($r.Height)\" } " +
+                "try { " + body + " } finally { [VisioAutomation.Extensions.WindowMethods]::SetWindowRect($w, $r0) }";
+        }
+
+        [MUT.TestMethod]
+        public void FormatVisioWindow_WidthAndHeightWithoutAZoom_ResizesTheWindow()
+        {
+            // Regression for #290: every parameter set used to require a zoom parameter.
+            var rect = DocumentWindowCmdletBindingTests.Session.RunInNewDocument<string>(
+                windowRect("Format-VisioWindow -X 40 -Y 50 -Width 900 -Height 700; Get-Rect"));
+            MUT.Assert.AreEqual("40|50|900|700", rect.Single());
+        }
+
+        [MUT.TestMethod]
+        public void FormatVisioWindow_XAndYOnly_MovesTheWindowWithoutResizingIt()
+        {
+            // Regression for #290: with no Width or Height the rectangle used to be skipped entirely.
+            var rect = DocumentWindowCmdletBindingTests.Session.RunInNewDocument<string>(
+                windowRect("Format-VisioWindow -X 40 -Y 50 -Width 900 -Height 700; Format-VisioWindow -X 80 -Y 90; Get-Rect"));
+            MUT.Assert.AreEqual("80|90|900|700", rect.Single());
+        }
+
+        [MUT.TestMethod]
+        public void FormatVisioWindow_ZoomWithWidthAndHeight_SetsTheZoomAndTheSize()
+        {
+            var results = DocumentWindowCmdletBindingTests.Session.RunInNewDocument<string>(
+                windowRect("Format-VisioWindow -Zoom 0.5 -X 40 -Y 50 -Width 800 -Height 600; \"$((Get-VisioApplication).ActiveWindow.Zoom)|$(Get-Rect)\""));
+            MUT.Assert.AreEqual("0.5|40|50|800|600", results.Single());
+        }
+
+        [MUT.TestMethod]
+        public void FormatVisioWindow_RectangleValuesFollowTheZoomPositionally()
+        {
+            // The cmdlet page documents: Format-VisioWindow [-ZoomTo] <ZoomToObject> [[-Width] <Int32>] [[-Height] <Int32>] ...
+            var rect = DocumentWindowCmdletBindingTests.Session.RunInNewDocument<string>(
+                windowRect("Format-VisioWindow -X 40 -Y 50; Format-VisioWindow Page 700 500; Get-Rect"));
+            MUT.Assert.AreEqual("40|50|700|500", rect.Single());
+        }
+
+        [MUT.TestMethod]
+        public void FormatVisioWindow_BareNumbers_AreNotTakenAsAWindowSize()
+        {
+            // Width and Height are named in the rectangle-only set, so a bare number cannot silently resize the window.
+            var ex = DocumentWindowCmdletBindingTests.Session.ExpectFailureInNewDocument("Format-VisioWindow 900 700");
+            MUT.StringAssert.Contains(CmdletScriptExtensions.MessageOf(ex), "Parameter set cannot be resolved");
+        }
+
+        [MUT.TestMethod]
+        public void FormatVisioWindow_EveryParameterSetCanSetTheRectangle()
+        {
+            var results = DocumentWindowCmdletBindingTests.Session.RunInNewDocument<string>(
+                "$cmd = Get-Command Format-VisioWindow; " +
+                "$bad = foreach ($set in $cmd.ParameterSets) { " +
+                "  foreach ($p in 'Width','Height','X','Y') { if (-not ($set.Parameters | Where-Object Name -eq $p)) { \"$($set.Name):$p\" } } }; " +
+                "\"$(($cmd.ParameterSets | Measure-Object).Count)|$($cmd.DefaultParameterSet)|$(@($bad).Count)\"");
+            MUT.Assert.AreEqual("4|rect|0", results.Single());
+        }
+
         // -- Out-VisioApplication: the parameter set is chosen by the type of the piped object ----
 
         [MUT.TestMethod]

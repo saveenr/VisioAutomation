@@ -12,6 +12,9 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
+### Fixed
+- `Format-VisioWindow` can now set the window rectangle on its own. `Format-VisioWindow -Width 900 -Height 700` (and `-X`, `-Y`) used to fail with "Parameter set cannot be resolved" because every parameter set required a zoom parameter; there is now a rectangle-only parameter set, which is the default. `-X` and `-Y` on their own used to be ignored and now move the window. In the zoom forms the rectangle values come after the zoom parameter by position (`Format-VisioWindow Page 700 500`), as the cmdlet page documents; `-Width` previously lost its position to the zoom parameter and was missing from `Get-Command Format-VisioWindow -Syntax`. Bare numbers are never taken as a window size (`Format-VisioWindow 900 700` still fails), and `Format-VisioWindow` with no arguments now does nothing instead of failing. ([#290](https://github.com/saveenr/VisioAutomation/issues/290))
+
 ### Changed
 - The module folder and release zip no longer contain a reference-only `System.Management.Automation.dll`. It was a build artifact that did nothing at runtime (Windows PowerShell uses its own copy). No cmdlet is affected, and `Import-Module Visio` works as before. ([#283](https://github.com/saveenr/VisioAutomation/issues/283))
   - If a script explicitly loaded the old path (`Add-Type -Path` or `[Reflection.Assembly]::LoadFrom` on the module folder's `System.Management.Automation.dll`), remove that call, or use `[System.Management.Automation.PSObject].Assembly` to get the running host's assembly. The load now fails with a file-not-found error.
