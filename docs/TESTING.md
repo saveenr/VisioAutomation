@@ -92,6 +92,14 @@ With `InvokeScriptStrict<T>` the exception reaches the test's `try`/`catch`. The
 The second slice of binding tests ([#173](https://github.com/saveenr/VisioAutomation/issues/173): `PageCmdletBindingTests`, `ShapeCmdletBindingTests` and `DocumentWindowCmdletBindingTests`) builds everything inside one script and returns plain values (counts, strings, numbers) so that no COM objects cross between the script and the test. The extension methods in [`CmdletScriptExtensions`](../VisioAutomation_2010/VTest.PowerShell/CmdletScriptExtensions.cs) support that: `RunInNewDocument<T>(body)` creates a document, runs the body through `InvokeScriptStrict`, and closes the document without a save prompt; `ExpectFailureInNewDocument(body)` returns the exception from a body that must fail, and `MessageOf` flattens its message chain so a test can look for a phrase such as `Parameter set cannot be resolved` or `Cannot bind parameter 'Orientation'`. Two things these tests rely on: a script run in this runspace never prompts for a missing mandatory parameter (it fails with a binding error instead), and `New-Object` in a script only finds assemblies that are already loaded, so a test class that creates model types touches the assembly in `ClassInitialize`.
 
 
+#### Metadata tests: `CmdletMetadataTests`
+
+[`CmdletMetadataTests`](../VisioAutomation_2010/VTest.PowerShell/CmdletMetadataTests.cs) checks invariants of **every** cmdlet by reflection, with no Visio and no runspace: all derive from `VisioCmdlet`, all use an approved verb, names are unique, no two parameters in a set share a position number, default parameter sets name a real set. It is the cheap breadth check for the cmdlets that have no behavior tests yet. A cmdlet with a known problem goes in `KnownPositionClashes` with the issue that will fix it; a companion test fails when the entry is no longer needed, so the list cannot go stale. (It found `Format-VisioWindow`, [#290](https://github.com/saveenr/VisioAutomation/issues/290).)
+
+#### Removers and cell setters: `RemoverAndCellsCmdletBindingTests`
+
+The first group of the third slice ([#263](https://github.com/saveenr/VisioAutomation/issues/263)): the cmdlets that remove or overwrite data (`Remove-Visio*`, `Set-VisioShapeCells`, `Set-VisioPageCells`) and their builders. Same script-driven pattern as above. Read results back from Visio inside the script; Visio row names are stable, so after deleting a control row the survivor keeps its original name.
+
 ## Quality gates
 
 ### MSTEST0030 enforced as error
