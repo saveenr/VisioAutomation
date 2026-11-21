@@ -62,7 +62,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Decide `ContainerLayout` | I | [#221](https://github.com/saveenr/VisioAutomation/issues/221) (needs a milestone) |
 | ~~Decide the Box layout~~ Decided 2026-11-20: removed ([`decisions/box-layout-removed.md`](decisions/box-layout-removed.md)). The GitBook pages still need updating before the release that ships it | I | [#218](https://github.com/saveenr/VisioAutomation/issues/218) |
 | ~~Decide the form page model~~ Decided 2026-11-20: make it internal ([`decisions/form-page-model-internal.md`](decisions/form-page-model-internal.md), PR [#252](https://github.com/saveenr/VisioAutomation/pull/252)), then removed with the `client.Developer` group and its last sample (PR [#254](https://github.com/saveenr/VisioAutomation/pull/254), [`decisions/developer-commands-removed.md`](decisions/developer-commands-removed.md)). The GitBook pages still need updating before the release that ships it | I | [#220](https://github.com/saveenr/VisioAutomation/issues/220) |
-| Revise user-facing gitbook docs for accuracy | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
+| Automated drift check for the PowerShell cmdlet docs (narrowed 2026-11-20) | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
 | Investigate an unreleased (`next`) docs variant | E | [#238](https://github.com/saveenr/VisioAutomation/issues/238) |
 | Troubleshooting page and docs-location decision | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133), [#157](https://github.com/saveenr/VisioAutomation/issues/157) (moved from CY26Q3) |
 | Cmdlet-binding test coverage, next slice | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) (moved from CY26Q3) |
