@@ -23,7 +23,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 - **CY26Q2 is complete.** All 14 issues in the milestone are closed.
 - **Releases since this doc was last updated (2026-05-08):** NuGet 3.2.0 and Visio PowerShell 4.8.0 on 2026-10-01; NuGet 4.0.0 and Visio PowerShell 5.0.0 on 2026-11-01. Both 2026-11-01 releases raise the minimum runtime to .NET Framework 4.7.2. The version-number policy question was re-evaluated in May and resolved as "stay divergent" ([`futures/releases.md`](futures/releases.md)).
 - **Milestone B (modernization unlock) landed early.** [#171](https://github.com/saveenr/VisioAutomation/issues/171) (VS 2026) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) (net472) closed on 2026-11-01, after the Windows 10 LTSB 2016 sunset on 2026-10-13. They were scheduled for CY27Q1.
-- **CY26Q3 is past due.** Six of its issues are still open: [#133](https://github.com/saveenr/VisioAutomation/issues/133), [#157](https://github.com/saveenr/VisioAutomation/issues/157), [#162](https://github.com/saveenr/VisioAutomation/issues/162), [#163](https://github.com/saveenr/VisioAutomation/issues/163), [#164](https://github.com/saveenr/VisioAutomation/issues/164), [#173](https://github.com/saveenr/VisioAutomation/issues/173). The proposal below re-homes each.
+- **CY26Q3 is past due.** Five of its issues are still open: [#133](https://github.com/saveenr/VisioAutomation/issues/133), [#162](https://github.com/saveenr/VisioAutomation/issues/162), [#163](https://github.com/saveenr/VisioAutomation/issues/163), [#164](https://github.com/saveenr/VisioAutomation/issues/164), [#173](https://github.com/saveenr/VisioAutomation/issues/173). The proposal below re-homes each.
 - **A new class of work appeared that this doc never planned for:** about 20 Models and facade defects (#197 through #232) were fixed and closed on 2026-10-01, and the design questions they exposed remain open as [#218](https://github.com/saveenr/VisioAutomation/issues/218), [#221](https://github.com/saveenr/VisioAutomation/issues/221), [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) and [#236](https://github.com/saveenr/VisioAutomation/issues/236). They are now Milestone I below.
 - **Open issues:** 28, of which 9 have no milestone.
 
@@ -44,7 +44,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Open item | Themed milestone | Issue | Proposed new home |
 |---|---|---|---|
 | Add troubleshooting page to .NET gitbook | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133) | CY26Q4 |
-| Decide: long-term docs location | E | [#157](https://github.com/saveenr/VisioAutomation/issues/157) | CY26Q4 (gates the docs restructure) |
+| Decide: long-term docs location | E | [#157](https://github.com/saveenr/VisioAutomation/issues/157) | CY27Q1 (moved 2026-11-20; the docs restructure waits for it) |
 | Discussion: doc-sample-as-test linkage mechanism | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) | Decided 2026-11-20: compile-only checking is sufficient ([`decisions/doc-sample-checking.md`](decisions/doc-sample-checking.md)) |
 | Cmdlet-binding test coverage | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) | CY26Q4 (continuing; about 40 cmdlets still untested) |
 | Investigate switching `VisioCmdlet` to `PSCmdlet` | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164) | CY27Q1 |
@@ -64,7 +64,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | ~~Decide the form page model~~ Decided 2026-11-20: make it internal ([`decisions/form-page-model-internal.md`](decisions/form-page-model-internal.md), PR [#252](https://github.com/saveenr/VisioAutomation/pull/252)), then removed with the `client.Developer` group and its last sample (PR [#254](https://github.com/saveenr/VisioAutomation/pull/254), [`decisions/developer-commands-removed.md`](decisions/developer-commands-removed.md)). The GitBook pages still need updating before the release that ships it | I | [#220](https://github.com/saveenr/VisioAutomation/issues/220) |
 | Automated drift check for the PowerShell cmdlet docs (narrowed 2026-11-20) | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
 | Investigate an unreleased (`next`) docs variant | E | [#238](https://github.com/saveenr/VisioAutomation/issues/238) |
-| Troubleshooting page and docs-location decision | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133), [#157](https://github.com/saveenr/VisioAutomation/issues/157) (moved from CY26Q3) |
+| Troubleshooting page | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133) (moved from CY26Q3) |
 | Cmdlet-binding test coverage, next slice | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) (moved from CY26Q3) |
 | `client.Model` draw method consistency | I | [#223](https://github.com/saveenr/VisioAutomation/issues/223) (moved from CY27Q1 on 2026-11-20) |
 | Draw a single directed graph onto the current page; `Out-VisioApplication` takes one graph layout | I | [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) (moved from CY27Q1) |
@@ -85,6 +85,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Audit: identify Visio-2010-only paths in the codebase | G | [#159](https://github.com/saveenr/VisioAutomation/issues/159) |
 | `PSCmdlet` investigation (`Connect-VisioShape` [#163](https://github.com/saveenr/VisioAutomation/issues/163) moved to CY26Q4) | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164) (moved from CY26Q3) |
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) (moved from CY26Q3) |
+| Decide: long-term docs location (gates the docs restructure) | E | [#157](https://github.com/saveenr/VisioAutomation/issues/157) (moved from CY26Q3 on 2026-11-20) |
 | Migrate GitHub repo to SevenPens-owned account | A | [#146](https://github.com/saveenr/VisioAutomation/issues/146) (moved from CY26Q4) |
 | Migrate gitbook spaces to SevenPens-owned hosting | A | [#147](https://github.com/saveenr/VisioAutomation/issues/147) (moved from CY26Q4) |
 | Phase 5b: in-repo URL rewrite (single commit after #146 + #147 land) | A | (no issue; one-shot commit) |
