@@ -53,7 +53,7 @@ The net40-to-net452 change is consumer-visible and needs an explicit release/ver
 |---|---|---|
 | Libraries, module, tests, samples, CI | `VisioAutomation`, development branch `master` | Repository administration and workflow access |
 | .NET user guide | Sibling `VisioAutomation_GitBook_Docs`, branch `main` | Repository and GitBook publishing access |
-| PowerShell user guide | Sibling `VisioPowerShellDocs`, branch `visiops_v4_docs` | Repository and GitBook publishing access; preserve the correct docs branch |
+| PowerShell user guide | Sibling `VisioPowerShellDocs`, branch `visiops_v4_docs` (published as the "Version 5" variant; the branch name is historical) | Repository and GitBook publishing access; preserve the correct docs branch |
 | Standalone VDX generator and font tool | Sibling `VisioAutomation.VDX`, branch `master` | Repository administration, CI access, and ownership of the separate `VisioAutomation.VDX` NuGet package |
 | NuGet package | `NuGet/VisioAutomation2010.nuspec`; `release-nuget.yml` then `publish-nuget.yml` | Package ownership and `NUGET_API_KEY` |
 | PowerShell Gallery module | `VisioAutomation_2010/VisioPowerShell/Visio.psd1`; `release-psmodule.yml` then `publish-psmodule.yml` | Module ownership and `PSGALLERY_API_KEY` |
