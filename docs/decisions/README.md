@@ -22,4 +22,5 @@ Decisions are immutable once accepted. To change one, write a new decision file 
 - [form-page-model-internal.md](form-page-model-internal.md) &mdash; The form page model is internal to VisioScripting, not public Models API.
 - [developer-commands-removed.md](developer-commands-removed.md) &mdash; The `client.Developer` self-documenting command group is removed.
 - [box-layout-removed.md](box-layout-removed.md) &mdash; The Box layout (a geometry-only nested rectangle packer with no entry point) is removed.
+- [doc-sample-checking.md](doc-sample-checking.md) &mdash; Doc samples are checked by compiling (`VSamples.Docs`), not by running them.
 - [gitbook-next-variant.md](gitbook-next-variant.md) &mdash; Docs for unreleased changes go in a "Next (unreleased)" GitBook variant synced to a `next` branch.
