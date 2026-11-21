@@ -75,7 +75,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 **Note on #163.** It was parked behind #164 (`PSCmdlet` versus `Cmdlet`) because its tests failed in the test runspace with `CommandTarget: application does not match doc.application`. That failure looks like the two-Client mismatch from #190, which no longer reproduces (#190 closed 2026-11-20). So #163 may be doable without #164; confirm that first, and if it still needs `ParameterSetName` detection, it goes back to CY27Q1 with #164.
 
 ### CY27Q1 &mdash; January&ndash;March 2027
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 2 closed early, 10 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 3 closed early, 9 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
 
 **Theme:** The modernization unlock is done ([#171](https://github.com/saveenr/VisioAutomation/issues/171) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) shipped 2026-11-01). What remains is spike and audit work, the cmdlet-ergonomics follow-through that slipped from CY26Q3 (the `PSCmdlet` question), and the identity transition.
 
@@ -84,7 +84,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Spike: does the existing Visio PIA work for COM interop on .NET 11? (time-boxed, throwaway branch; no NetOffice) | C | [#249](https://github.com/saveenr/VisioAutomation/issues/249) |
 | Audit: identify Visio-2010-only paths in the codebase | G | [#159](https://github.com/saveenr/VisioAutomation/issues/159) |
 | Decide which .NET and PowerShell versions the next module line supports (net10 vs net11, keep Windows PowerShell 5.1?); shapes the rest of #175. From the PowerShell 7 experiment ([`futures/powershell7-experiment.md`](futures/powershell7-experiment.md)) | C | [#279](https://github.com/saveenr/VisioAutomation/issues/279) |
-| Stop copying a stand-in `System.Management.Automation.dll` into the module folder (can be fixed on the current line) | C | [#283](https://github.com/saveenr/VisioAutomation/issues/283) |
+| ~~Stop copying a stand-in `System.Management.Automation.dll` into the module folder~~ Done 2026-11-21 in [PR #285](https://github.com/saveenr/VisioAutomation/pull/285); an independent review found two low-severity compatibility cases (scripts that load the file by path, builds that compiled against it) and kept the change, with a migration note in the changelog ([PR #287](https://github.com/saveenr/VisioAutomation/pull/287), review on [#286](https://github.com/saveenr/VisioAutomation/issues/286)) | C | [#283](https://github.com/saveenr/VisioAutomation/issues/283) |
 | `PSCmdlet` investigation (`Connect-VisioShape` [#163](https://github.com/saveenr/VisioAutomation/issues/163) moved to CY26Q4) | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164) (moved from CY26Q3) |
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) (moved from CY26Q3) |
 | Decide: long-term docs location (gates the docs restructure) | E | [#157](https://github.com/saveenr/VisioAutomation/issues/157) (moved from CY26Q3 on 2026-11-20) |
