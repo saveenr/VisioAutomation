@@ -59,7 +59,6 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Item | Themed milestone | Issue |
 |---|---|---|
 | New logo (refresh, XAR to SVG); [#80](https://github.com/saveenr/VisioAutomation/issues/80) ruled that branding belongs here | A | [#196](https://github.com/saveenr/VisioAutomation/issues/196) (needs a milestone) |
-| Decide `ContainerLayout` | I | [#221](https://github.com/saveenr/VisioAutomation/issues/221) (needs a milestone) |
 | ~~Decide the Box layout~~ Decided 2026-11-20: removed ([`decisions/box-layout-removed.md`](decisions/box-layout-removed.md)). The GitBook pages still need updating before the release that ships it | I | [#218](https://github.com/saveenr/VisioAutomation/issues/218) |
 | ~~Decide the form page model~~ Decided 2026-11-20: make it internal ([`decisions/form-page-model-internal.md`](decisions/form-page-model-internal.md), PR [#252](https://github.com/saveenr/VisioAutomation/pull/252)), then removed with the `client.Developer` group and its last sample (PR [#254](https://github.com/saveenr/VisioAutomation/pull/254), [`decisions/developer-commands-removed.md`](decisions/developer-commands-removed.md)). The GitBook pages still need updating before the release that ships it | I | [#220](https://github.com/saveenr/VisioAutomation/issues/220) |
 | Automated drift check for the PowerShell cmdlet docs (narrowed 2026-11-20) | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
@@ -75,7 +74,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 **Note on #163.** It was parked behind #164 (`PSCmdlet` versus `Cmdlet`) because its tests failed in the test runspace with `CommandTarget: application does not match doc.application`. That failure looks like the two-Client mismatch from #190, which no longer reproduces (#190 closed 2026-11-20). So #163 may be doable without #164; confirm that first, and if it still needs `ParameterSetName` detection, it goes back to CY27Q1 with #164.
 
 ### CY27Q1 &mdash; January&ndash;March 2027
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 3 closed early, 9 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 3 closed early, 10 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
 
 **Theme:** The modernization unlock is done ([#171](https://github.com/saveenr/VisioAutomation/issues/171) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) shipped 2026-11-01). What remains is spike and audit work, the cmdlet-ergonomics follow-through that slipped from CY26Q3 (the `PSCmdlet` question), and the identity transition.
 
@@ -94,6 +93,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (moved from CY26Q4) |
 | Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) (moved from CY26Q4) |
 | Directed graph XML format: remaining gaps | I | [#236](https://github.com/saveenr/VisioAutomation/issues/236) (needs a milestone) |
+| Decide `ContainerLayout` (draws plain rectangles; the `ContainerMaster` option is never read) | I | [#221](https://github.com/saveenr/VisioAutomation/issues/221) (moved from CY26Q4 on 2026-11-21) |
 
 ### CY27Q2 &mdash; April&ndash;June 2027
 [GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/5) &mdash; due 2027-06-30 &mdash; 6 open.
