@@ -46,13 +46,13 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Add troubleshooting page to .NET gitbook | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133) | CY26Q4 |
 | Decide: long-term docs location | E | [#157](https://github.com/saveenr/VisioAutomation/issues/157) | CY27Q1 (moved 2026-11-20; the docs restructure waits for it) |
 | Discussion: doc-sample-as-test linkage mechanism | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) | Decided 2026-11-20: compile-only checking is sufficient ([`decisions/doc-sample-checking.md`](decisions/doc-sample-checking.md)) |
-| Cmdlet-binding test coverage | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) | CY26Q4 (continuing; about 40 cmdlets still untested) |
+| Cmdlet-binding test coverage | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) | CY26Q4 (first group of the remaining 34 done; the rest in CY27Q1) |
 | Investigate switching `VisioCmdlet` to `PSCmdlet` | D | [#164](https://github.com/saveenr/VisioAutomation/issues/164) | CY27Q1 |
 | Pipeline parameter set on `Connect-VisioShape` | D | [#163](https://github.com/saveenr/VisioAutomation/issues/163) | CY27Q1 (blocked by #164) |
 | Phase A scoping: PSVA candidate cmdlets | D | [#162](https://github.com/saveenr/VisioAutomation/issues/162) | CY27Q1 |
 
 ### CY26Q4 &mdash; October&ndash;December 2026 *(current)*
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/1) &mdash; due 2026-12-31 &mdash; 4 closed ([#190](https://github.com/saveenr/VisioAutomation/issues/190), [#238](https://github.com/saveenr/VisioAutomation/issues/238) and [#267](https://github.com/saveenr/VisioAutomation/issues/267) on 2026-11-20; [#155](https://github.com/saveenr/VisioAutomation/issues/155) on 2026-11-21), 5 open on GitHub ([#172](https://github.com/saveenr/VisioAutomation/issues/172), [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#163](https://github.com/saveenr/VisioAutomation/issues/163), [#183](https://github.com/saveenr/VisioAutomation/issues/183), [#263](https://github.com/saveenr/VisioAutomation/issues/263)); the other items below are proposed moves into this quarter. With about six weeks left in the year this is a lot; expect some to slip.
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/1) &mdash; due 2026-12-31 &mdash; 5 closed ([#190](https://github.com/saveenr/VisioAutomation/issues/190), [#238](https://github.com/saveenr/VisioAutomation/issues/238) and [#267](https://github.com/saveenr/VisioAutomation/issues/267) on 2026-11-20; [#155](https://github.com/saveenr/VisioAutomation/issues/155) and [#263](https://github.com/saveenr/VisioAutomation/issues/263) on 2026-11-21), 5 open on GitHub ([#172](https://github.com/saveenr/VisioAutomation/issues/172), [#223](https://github.com/saveenr/VisioAutomation/issues/223), [#163](https://github.com/saveenr/VisioAutomation/issues/163), [#183](https://github.com/saveenr/VisioAutomation/issues/183), [#290](https://github.com/saveenr/VisioAutomation/issues/290)); the other items below are proposed moves into this quarter. With about six weeks left in the year this is a lot; expect some to slip.
 
 **Theme:** Improve the current line as much as possible before the end of the year: docs, testing, and settling the public Models and facade API before more docs are written against it. The identity transition (repo and gitbook moves, retiring the old PSGallery account, the NuGet support case) moved to CY27Q1 on 2026-11-20.
 
@@ -64,7 +64,8 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Automated drift check for the PowerShell cmdlet docs (narrowed 2026-11-20) | E | [#172](https://github.com/saveenr/VisioAutomation/issues/172) |
 | Investigate an unreleased (`next`) docs variant | E | [#238](https://github.com/saveenr/VisioAutomation/issues/238) |
 | Troubleshooting page | E | [#133](https://github.com/saveenr/VisioAutomation/issues/133) (moved from CY26Q3) |
-| Cmdlet-binding test coverage, next slice | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173) (moved from CY26Q3) |
+| ~~Cmdlet-binding test coverage, next slice~~ First group done 2026-11-21 (removers and cell setters, 45 tests, [PR #292](https://github.com/saveenr/VisioAutomation/pull/292)); the other 24 cmdlets are in CY27Q1 as #293 to #295 | F | [#173](https://github.com/saveenr/VisioAutomation/issues/173), [#263](https://github.com/saveenr/VisioAutomation/issues/263) |
+| `Format-VisioWindow`: the window rectangle cannot be set without a zoom, and `-Width` loses its position (found by the new metadata test) | D | [#290](https://github.com/saveenr/VisioAutomation/issues/290) |
 | `client.Model` draw method consistency | I | [#223](https://github.com/saveenr/VisioAutomation/issues/223) (moved from CY27Q1 on 2026-11-20) |
 | Doc-sample-as-test linkage | E | [#155](https://github.com/saveenr/VisioAutomation/issues/155) (decided 2026-11-20, no work planned; see [`decisions/doc-sample-checking.md`](decisions/doc-sample-checking.md)) |
 | `Connect-VisioShape` pipeline parameter set | D | [#163](https://github.com/saveenr/VisioAutomation/issues/163) (moved from CY26Q3; was blocked by #164, see the note below) |
@@ -73,7 +74,7 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 **Note on #163.** It was parked behind #164 (`PSCmdlet` versus `Cmdlet`) because its tests failed in the test runspace with `CommandTarget: application does not match doc.application`. That failure looks like the two-Client mismatch from #190, which no longer reproduces (#190 closed 2026-11-20). So #163 may be doable without #164; confirm that first, and if it still needs `ParameterSetName` detection, it goes back to CY27Q1 with #164.
 
 ### CY27Q1 &mdash; January&ndash;March 2027
-[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 3 closed early, 12 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
+[GitHub milestone](https://github.com/saveenr/VisioAutomation/milestone/4) &mdash; due 2027-03-31 &mdash; 3 closed early, 16 open on GitHub (after the identity items moved in and six items moved out to CY26Q4 on 2026-11-20).
 
 **Theme:** The modernization unlock is done ([#171](https://github.com/saveenr/VisioAutomation/issues/171) and [#174](https://github.com/saveenr/VisioAutomation/issues/174) shipped 2026-11-01). What remains is spike and audit work, the cmdlet-ergonomics follow-through that slipped from CY26Q3 (the `PSCmdlet` question), and the identity transition.
 
@@ -92,6 +93,10 @@ This principle drives the semester sequencing below. **2026 (CY26Q2 through CY26
 | Retire unused `VisioAutomation` PSGallery co-owner account | A | [#148](https://github.com/saveenr/VisioAutomation/issues/148) (moved from CY26Q4) |
 | Open NuGet support case to declassify the `saveenr` account | A | [#179](https://github.com/saveenr/VisioAutomation/issues/179) (moved from CY26Q4) |
 | Directed graph XML format: remaining gaps | I | [#236](https://github.com/saveenr/VisioAutomation/issues/236) (needs a milestone) |
+| Cmdlet-binding tests: shape operations (`Copy`, `Split`, `Join`, `Test`, `Measure`, `New-VisioContainer`, `Set-VisioText`) | F | [#293](https://github.com/saveenr/VisioAutomation/issues/293) |
+| Cmdlet-binding tests: page operations (`Copy`, `Export`, `Measure`, `Select`) | F | [#294](https://github.com/saveenr/VisioAutomation/issues/294) |
+| Cmdlet-binding tests: application and document lifecycle (13 cmdlets), plus `LockCommands` and `LayerCommands` tests | F | [#295](https://github.com/saveenr/VisioAutomation/issues/295) |
+| `New-VisioShapeCells` / `New-VisioPageCells` `-Count` return one `List`, not an array as documented (docs fix is the safe option) | D | [#291](https://github.com/saveenr/VisioAutomation/issues/291) |
 | Decide `ContainerLayout` (draws plain rectangles; the `ContainerMaster` option is never read) | I | [#221](https://github.com/saveenr/VisioAutomation/issues/221) (moved from CY26Q4 on 2026-11-21) |
 | Draw a single directed graph onto the current page; `Out-VisioApplication` takes one graph layout | I | [#198](https://github.com/saveenr/VisioAutomation/issues/198), [#199](https://github.com/saveenr/VisioAutomation/issues/199) (moved from CY26Q4 on 2026-11-21) |
 
