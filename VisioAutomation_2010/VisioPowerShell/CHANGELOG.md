@@ -12,7 +12,8 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+### Changed
+- The module folder and release zip no longer contain a reference-only `System.Management.Automation.dll`. It was a build artifact that did nothing at runtime (Windows PowerShell uses its own copy). No cmdlet is affected. ([#283](https://github.com/saveenr/VisioAutomation/issues/283))
 
 ## [5.1.0] - 2026-11-20
 
