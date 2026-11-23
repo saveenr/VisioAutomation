@@ -71,6 +71,31 @@ namespace VTest.Models
             MUT.Assert.AreEqual(1.0, dg.BorderSize.Height);
         }
 
+        [MUT.TestMethod]
+        public void Loader_DocumentOptions_ConnectorMasterAndStencilBecomeTheDocumentStyling()
+        {
+            var dg = this.load(this.build_xml(root_children: "<documentoptions connectormaster='Line-curve connector' connectorstencil='connec_u.vss' />"));
+            MUT.Assert.IsNotNull(dg.Styling);
+            MUT.Assert.AreEqual("Line-curve connector", dg.Styling.EdgeMasterName);
+            MUT.Assert.AreEqual("connec_u.vss", dg.Styling.EdgeStencilName);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_DocumentOptions_WithoutConnectorAttributesLeavesStylingNull()
+        {
+            MUT.Assert.IsNull(this.load(this.build_xml()).Styling);
+            MUT.Assert.IsNull(this.load(this.build_xml(root_children: "<documentoptions borderwidth='2' />")).Styling);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_DocumentOptions_OnlyOneOfConnectorMasterAndStencil_ThrowsArgumentException()
+        {
+            MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load(this.build_xml(root_children: "<documentoptions connectormaster='Line-curve connector' />")));
+            MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load(this.build_xml(root_children: "<documentoptions connectorstencil='connec_u.vss' />")));
+        }
+
         // ---- <renderoptions> page border ----
 
         [MUT.TestMethod]
@@ -330,6 +355,31 @@ namespace VTest.Models
             MUT.StringAssert.Contains(ex1.Message, "c1");
             MUT.Assert.ThrowsExactly<System.ArgumentException>(
                 () => this.load(this.build_xml(connector_attrs: "stencil='connec_u.vss'")));
+        }
+
+        [MUT.TestMethod]
+        public void Draw_DocumentStylingFromXml_ChoosesTheConnectorMasterEvenWhenTheCallPassesTheDefaultStyling()
+        {
+            // the draw helper passes new DirectedGraphStyling(), the pattern the docs show; the document's styling still wins
+            var dgdoc = this.draw(this.build_xml(root_children: "<documentoptions connectormaster='Line-curve connector' connectorstencil='connec_u.vss' />"));
+            var doc = this.GetVisioApplication().ActiveDocument;
+
+            MUT.Assert.AreEqual("Line-curve connector", dgdoc.Layouts[0].Edges["c1"].VisioShape.Master.NameU);
+
+            doc.Close(true);
+        }
+
+        [MUT.TestMethod]
+        public void Draw_EdgeMasterAndStencil_WinOverTheDocumentStyling()
+        {
+            var dgdoc = this.draw(this.build_xml(
+                root_children: "<documentoptions connectormaster='Line-curve connector' connectorstencil='connec_u.vss' />",
+                connector_attrs: "master='Dynamic connector' stencil='connec_u.vss'"));
+            var doc = this.GetVisioApplication().ActiveDocument;
+
+            MUT.Assert.AreEqual("Dynamic connector", dgdoc.Layouts[0].Edges["c1"].VisioShape.Master.NameU);
+
+            doc.Close(true);
         }
 
         [MUT.TestMethod]
