@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Shapes;
@@ -165,6 +165,24 @@ namespace VisioScripting.Models
             return true;
         }
 
+        private static bool ParseHyperlinkBool(SXL.XElement hl_el, string attr_name)
+        {
+            string text = hl_el.GetAttributeValue(attr_name, null);
+            if (text == null)
+            {
+                return false;
+            }
+            bool value;
+            if (!bool.TryParse(text, out value))
+            {
+                string msg = string.Format(_culture,
+                    "hyperlink \"{0}\": attribute \"{1}\" must be true or false, not \"{2}\".",
+                    hl_el.Attribute("name").Value, attr_name, text);
+                throw new System.ArgumentException(msg);
+            }
+            return value;
+        }
+
         public static List<Hyperlink> ParseHyperlinks(SXL.XElement shape_el)
         {
             var list = new List<Hyperlink>();
@@ -173,6 +191,12 @@ namespace VisioScripting.Models
                 var hl = new Hyperlink(hl_el.Attribute("name").Value, hl_el.Attribute("address").Value);
                 hl.SubAddress = hl_el.GetAttributeValue("subaddress", null);
                 hl.Description = hl_el.GetAttributeValue("description", null);
+                hl.ExtraInfo = hl_el.GetAttributeValue("extrainfo", null);
+                hl.Frame = hl_el.GetAttributeValue("frame", null);
+                hl.SortKey = hl_el.GetAttributeValue("sortkey", null);
+                hl.NewWindow = ParseHyperlinkBool(hl_el, "newwindow");
+                hl.Default = ParseHyperlinkBool(hl_el, "default");
+                hl.Invisible = ParseHyperlinkBool(hl_el, "invisible");
                 list.Add(hl);
             }
             return list;
