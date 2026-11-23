@@ -307,6 +307,44 @@ namespace VTest.Models
         }
 
         [MUT.TestMethod]
+        public void Loader_ConnectorMasterAndStencil_FromXml()
+        {
+            var dg = this.load(this.build_xml(connector_attrs: "master='Dynamic connector' stencil='connec_u.vss'"));
+            MUT.Assert.AreEqual("Dynamic connector", dg.Layouts[0].Edges["c1"].MasterName);
+            MUT.Assert.AreEqual("connec_u.vss", dg.Layouts[0].Edges["c1"].StencilName);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ConnectorWithoutMasterAndStencil_LeavesThemNull()
+        {
+            var dg = this.load(this.build_xml());
+            MUT.Assert.IsNull(dg.Layouts[0].Edges["c1"].MasterName);
+            MUT.Assert.IsNull(dg.Layouts[0].Edges["c1"].StencilName);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ConnectorWithOnlyOneOfMasterAndStencil_ThrowsArgumentException()
+        {
+            var ex1 = MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load(this.build_xml(connector_attrs: "master='Dynamic connector'")));
+            MUT.StringAssert.Contains(ex1.Message, "c1");
+            MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load(this.build_xml(connector_attrs: "stencil='connec_u.vss'")));
+        }
+
+        [MUT.TestMethod]
+        public void Draw_ConnectorMasterAndStencilFromXml_ChooseTheConnectorMaster()
+        {
+            var dgdoc = this.draw(this.build_xml(connector_attrs: "master='Line-curve connector' stencil='connec_u.vss'"));
+            var doc = this.GetVisioApplication().ActiveDocument;
+
+            var shape = dgdoc.Layouts[0].Edges["c1"].VisioShape;
+            MUT.Assert.AreEqual("Line-curve connector", shape.Master.NameU);
+
+            doc.Close(true);
+        }
+
+        [MUT.TestMethod]
         public void Loader_ConnectorCells_WinOverTheColorAndWeightDefaults()
         {
             var dg = this.load(this.build_xml(

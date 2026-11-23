@@ -13,6 +13,7 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 ## [Unreleased]
 
 ### Added
+- **Directed graph XML: per-edge `master` and `stencil`.** A `<connector>` accepts optional `master` and `stencil` attributes that choose the connector master for that edge instead of the page-wide `Dynamic connector` from `connec_u.vss`. Set both or neither; setting only one raises `ArgumentException` naming the connector. They apply to dynamic connectors (`usedynamicconnectors="true"`); with `false` the edges are drawn from the routing geometry instead and the attributes have no effect. Related to [#236](https://github.com/saveenr/VisioAutomation/issues/236), [#299](https://github.com/saveenr/VisioAutomation/issues/299).
 - **Directed graph XML: more `<hyperlink>` attributes.** A `<hyperlink>` accepts optional `extrainfo`, `frame`, `sortkey`, `newwindow`, `default` and `invisible` attributes. The three switches must be `true` or `false`; anything else raises `ArgumentException` naming the attribute. Related to [#236](https://github.com/saveenr/VisioAutomation/issues/236), [#303](https://github.com/saveenr/VisioAutomation/issues/303).
 
 ### Fixed
