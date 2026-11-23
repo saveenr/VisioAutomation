@@ -12,7 +12,11 @@ The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/
 
 ## [Unreleased]
 
-_No consumer-visible changes yet._
+### Added
+- **Directed graph XML: more `<hyperlink>` attributes.** A `<hyperlink>` accepts optional `extrainfo`, `frame`, `sortkey`, `newwindow`, `default` and `invisible` attributes. The three switches must be `true` or `false`; anything else raises `ArgumentException` naming the attribute. Related to [#236](https://github.com/saveenr/VisioAutomation/issues/236), [#303](https://github.com/saveenr/VisioAutomation/issues/303).
+
+### Fixed
+- **`Dom.Hyperlink` `SortKey`, `NewWindow`, `Default` and `Invisible` were ignored when a model was drawn.** The renderer had those four assignments commented out, so setting them on a `Dom.Hyperlink` (and on a `DirectedGraph` node's `Hyperlinks`) had no effect. They are now written to the hyperlink's ShapeSheet cells. [#303](https://github.com/saveenr/VisioAutomation/issues/303).
 
 ## [5.0.0] - 2026-11-20
 

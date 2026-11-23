@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -181,6 +181,66 @@ namespace VTest.Models
             var dg = this.load(this.build_xml(shape_attrs: "url='https://example.com/only'"));
             MUT.Assert.IsNull(dg.Layouts[0].Nodes["n1"].Hyperlinks);
             MUT.Assert.AreEqual("https://example.com/only", dg.Layouts[0].Nodes["n1"].Url);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ShapeHyperlinks_AllAttributes()
+        {
+            var dg = this.load(this.build_xml(shape_children:
+                "<hyperlink name='Docs' address='https://example.com' extrainfo='x=1,y=2' frame='main' sortkey='5' newwindow='true' default='true' invisible='true' />"));
+            var link = dg.Layouts[0].Nodes["n1"].Hyperlinks[0];
+            MUT.Assert.AreEqual("x=1,y=2", link.ExtraInfo);
+            MUT.Assert.AreEqual("main", link.Frame);
+            MUT.Assert.AreEqual("5", link.SortKey);
+            MUT.Assert.IsTrue(link.NewWindow);
+            MUT.Assert.IsTrue(link.Default);
+            MUT.Assert.IsTrue(link.Invisible);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ShapeHyperlinks_NewAttributesDefaultToUnset()
+        {
+            var dg = this.load(this.build_xml(shape_children: "<hyperlink name='Docs' address='https://example.com' />"));
+            var link = dg.Layouts[0].Nodes["n1"].Hyperlinks[0];
+            MUT.Assert.IsNull(link.ExtraInfo);
+            MUT.Assert.IsNull(link.Frame);
+            MUT.Assert.IsNull(link.SortKey);
+            MUT.Assert.IsFalse(link.NewWindow);
+            MUT.Assert.IsFalse(link.Default);
+            MUT.Assert.IsFalse(link.Invisible);
+        }
+
+        [MUT.TestMethod]
+        public void Loader_ShapeHyperlinks_BadBoolean_ThrowsArgumentException()
+        {
+            var ex = MUT.Assert.ThrowsExactly<System.ArgumentException>(
+                () => this.load(this.build_xml(shape_children: "<hyperlink name='Docs' address='https://example.com' newwindow='yes' />")));
+            MUT.StringAssert.Contains(ex.Message, "newwindow");
+        }
+
+        [MUT.TestMethod]
+        public void Draw_ShapeHyperlinkAttributesFromXml_AreWrittenToTheShapeSheet()
+        {
+            var dgdoc = this.draw(this.build_xml(shape_children:
+                "<hyperlink name='Docs' address='https://example.com' extrainfo='x=1' frame='main' sortkey='5' newwindow='true' default='true' invisible='true' />" +
+                "<hyperlink name='Plain' address='https://example.com/plain' />"));
+            var doc = this.GetVisioApplication().ActiveDocument;
+
+            var shape = dgdoc.Layouts[0].Nodes["n1"].VisioShape;
+            MUT.Assert.AreEqual(2, shape.Hyperlinks.Count);
+            var cells = VA.Shapes.HyperlinkCells.GetCells(shape, VA.Core.CellValueType.Formula);
+            MUT.Assert.AreEqual(2, cells.Count);
+            MUT.Assert.AreEqual("Docs", shape.Hyperlinks[0].Name);
+            MUT.Assert.AreEqual("Plain", shape.Hyperlinks[1].Name);
+            MUT.Assert.AreEqual("\"5\"", cells[0].SortKey.Value, "the sort key is stored as quoted text, which Visio evaluates as the number 5");
+            MUT.Assert.AreEqual("main", shape.Hyperlinks[0].Frame);
+            MUT.Assert.AreEqual("x=1", shape.Hyperlinks[0].ExtraInfo);
+            MUT.Assert.AreEqual("TRUE", cells[0].NewWindow.Value.ToUpperInvariant());
+            MUT.Assert.AreEqual("TRUE", cells[0].Default.Value.ToUpperInvariant());
+            MUT.Assert.AreEqual("TRUE", cells[0].Invisible.Value.ToUpperInvariant());
+            MUT.Assert.AreEqual("FALSE", cells[1].NewWindow.Value.ToUpperInvariant());
+
+            doc.Close(true);
         }
 
         [MUT.TestMethod]

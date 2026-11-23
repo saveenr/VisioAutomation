@@ -68,17 +68,20 @@ namespace VisioAutomation.Models.Dom
                 var vshape = context.GetShape(shape.VisioShapeID);
                 foreach (var hyperlink in shape.Hyperlinks)
                 {
-	                var h = vshape.Hyperlinks.Add();
-                    h.Name = hyperlink.Name; // Name of Hyperlink
-                    h.Description = hyperlink.Description;
-                    h.Address = hyperlink.Address; // Address of Hyperlink
-                    h.SubAddress = hyperlink.SubAddress;
-                    h.ExtraInfo = hyperlink.ExtraInfo;
-                    h.Frame = hyperlink.Frame;
-                    //h.SortKey = hyperlink.SortKey;
-                    //h.NewWindow = hyperlink.NewWindow;
-                    //h.IsDefaultLink = hyperlink.Default;
-                    //h.Invisible = hyperlink.Invisible;
+                    var cells = new HyperlinkCells();
+                    cells.Address = hyperlink.Address;
+                    cells.Description = hyperlink.Description;
+                    cells.SubAddress = hyperlink.SubAddress;
+                    cells.ExtraInfo = hyperlink.ExtraInfo;
+                    cells.Frame = hyperlink.Frame;
+                    cells.SortKey = hyperlink.SortKey;
+                    // the model's booleans default to false, which is also Visio's default, so only true is written
+                    if (hyperlink.NewWindow) { cells.NewWindow = true; }
+                    if (hyperlink.Default) { cells.Default = true; }
+                    if (hyperlink.Invisible) { cells.Invisible = true; }
+                    int row = HyperlinkHelper.Add(vshape, cells);
+                    // the helper does not set the row name; Hyperlinks.Item is 0-based, like the section rows
+                    vshape.Hyperlinks[row].Name = hyperlink.Name;
                 }
             }
         }
