@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using VisioPowerShell.Commands.VisioApplication;
 using MUT = Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -260,6 +260,27 @@ namespace VTest.PowerShell
                 "-DirectedGraphStyling $styling",
                 "Line-curve connector");
             MUT.Assert.AreEqual(1, count, "the one edge should use the connector master named in the styling");
+        }
+
+        [MUT.TestMethod]
+        public void OutVisioApplication_DocumentStyling_ChangesTheConnectorMaster()
+        {
+            // no -DirectedGraphStyling: the styling carried by the document is used
+            int count = DocumentWindowCmdletBindingTests.count_shapes_from_master_after_drawing_a_graph(
+                "$dgdoc.Styling = New-Object VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphStyling; $dgdoc.Styling.EdgeMasterName = 'Line-curve connector';",
+                "",
+                "Line-curve connector");
+            MUT.Assert.AreEqual(1, count, "the one edge should use the connector master from the document's styling");
+        }
+
+        [MUT.TestMethod]
+        public void OutVisioApplication_DocumentStyling_WinsOverTheDirectedGraphStylingParameter()
+        {
+            int count = DocumentWindowCmdletBindingTests.count_shapes_from_master_after_drawing_a_graph(
+                "$dgdoc.Styling = New-Object VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphStyling; $dgdoc.Styling.EdgeMasterName = 'Line-curve connector'; $param = New-Object VisioAutomation.Models.Layouts.DirectedGraph.DirectedGraphStyling;",
+                "-DirectedGraphStyling $param",
+                "Line-curve connector");
+            MUT.Assert.AreEqual(1, count, "the document's styling takes priority over the parameter");
         }
 
         [MUT.TestMethod]

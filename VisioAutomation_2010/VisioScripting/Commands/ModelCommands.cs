@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using ORG = VisioAutomation.Models.Documents.OrgCharts;
@@ -200,9 +200,11 @@ namespace VisioScripting.Commands
 
                 var renderer = new GRAPH.MsaglRenderer();
                 renderer.LayoutOptions = dg_layout.LayoutOptions;
-                if (dgstyling != null)
+                // styling carried by the document wins over the styling passed in, which acts as the fallback
+                var styling = dgdoc.Styling ?? dgstyling;
+                if (styling != null)
                 {
-                    renderer.Styling = dgstyling;
+                    renderer.Styling = styling;
                 }
                 renderer.Render(page, dg_layout);
 

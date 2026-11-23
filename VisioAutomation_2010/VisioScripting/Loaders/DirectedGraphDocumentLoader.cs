@@ -273,6 +273,18 @@ namespace VisioScripting.Loaders
 
             dgdoc.Template = el.GetAttributeValue("template", dgdoc.Template);
 
+            // the connector master and its stencil go together: with neither, the default styling applies
+            string con_master = el.GetAttributeValue("connectormaster", null);
+            string con_stencil = el.GetAttributeValue("connectorstencil", null);
+            if ((con_master == null) != (con_stencil == null))
+            {
+                throw new System.ArgumentException("<documentoptions> sets only one of \"connectormaster\" and \"connectorstencil\". Set both, or neither.");
+            }
+            if (con_master != null)
+            {
+                dgdoc.Styling = new DirectedGraphStyling { EdgeMasterName = con_master, EdgeStencilName = con_stencil };
+            }
+
             var border = Models.DgXml.GetOptionalSizePair(el, "borderwidth", "borderheight", dgdoc.BorderSize);
             if (border.HasValue)
             {

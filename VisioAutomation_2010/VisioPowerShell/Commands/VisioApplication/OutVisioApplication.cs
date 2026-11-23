@@ -1,4 +1,4 @@
-using VisioAutomation.Models.Layouts.DirectedGraph;
+﻿using VisioAutomation.Models.Layouts.DirectedGraph;
 using SMA = System.Management.Automation;
 using MODELS = VisioAutomation.Models;
 
@@ -39,8 +39,8 @@ namespace VisioPowerShell.Commands.VisioApplication
 
             if (this.DirectedGraphDocument != null)
             {
-                var dgstyline = this.DirectedGraphStyling ?? new DirectedGraphStyling();
-                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphDocument, dgstyline);
+                // null is fine: the draw falls back to the document's own styling and then to the default
+                this.Client.Model.DrawDirectedGraphDocument(this.DirectedGraphDocument, this.DirectedGraphStyling);
             }
             else if (this.OrgChart != null)
             {
