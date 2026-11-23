@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Models.Dom;
 using VisioAutomation.Models.Layouts.DirectedGraph;
@@ -206,6 +206,17 @@ namespace VisioScripting.Loaders
                     var def_end_arrow = 2;
                     var con_type = con_info.Element.GetAttributeValue("connectortype", pagedata.ConnectorType, Models.DgXml.ParseConnectorType);
                     var dg_connector = pagedata.DirectedGraph.AddEdge(con_info.ID, from_shape, to_shape, con_info.Label, con_type);
+
+                    // master and stencil go together: with neither, the page-wide connector master is used
+                    string con_master = con_info.Element.GetAttributeValue("master", null);
+                    string con_stencil = con_info.Element.GetAttributeValue("stencil", null);
+                    if ((con_master == null) != (con_stencil == null))
+                    {
+                        string msg = string.Format("Connector \"{0}\" sets only one of \"master\" and \"stencil\". Set both, or neither.", con_info.ID);
+                        throw new System.ArgumentException(msg);
+                    }
+                    dg_connector.MasterName = con_master;
+                    dg_connector.StencilName = con_stencil;
 
                     dg_connector.Cells = new ShapeCells();
                     dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
